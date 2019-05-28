@@ -1,0 +1,41 @@
+<div class='nav-container vwidth-100'>
+  <nav class="vwidth-100 height-30 bg-accent">
+    <logo-anime class='ui-button'></logo-anime>
+    <h4 class="nav-container__subheader">A {{language}} online verb conjugator</h4>
+    <div class="nav-container__content">
+      <ul class="navbar navbar-nav">
+        <li class="navbar__item" [routerLinkActive]="['navbar__item--active']">
+          <a class="navbar__link" routerLink="wordmaker">Word Maker</a>
+        </li>
+        <li class="navbar__item" [routerLinkActive]="['navbar__item--active']">
+          <a class="navbar__link" routerLink="tableviewer">Table Viewer</a>
+        </li>
+        <li class="navbar__item" [routerLinkActive]="['navbar__item--active']">
+          <a class="navbar__link" routerLink="info">Info</a>
+        </li>
+        <li class="navbar__item" [routerLinkActive]="['navbar__item--active']">
+          <a class="navbar__link" routerLink="about">About</a>
+        </li>
+        <li class="navbar__item">
+          <a class="navbar__link" (click)="openSettings()">Settings</a>
+        </li>
+      </ul>
+    </div>
+    <button class="nav-container__content--mobile" mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon aria-label="Show toolbar">menu</mat-icon>
+    </button>
+  </nav>
+</div>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item routerLink="wordmaker">Word Maker</button>
+  <button mat-menu-item routerLink="tableviewer">Table Viewer</button>
+  <button mat-menu-item routerLink="info">Info</button>
+  <button mat-menu-item routerLink="about">About</button>
+  <button mat-menu-item (click)="openSettings()">Settings</button>
+</mat-menu>
+<header class='bg-img'>
+  <page-info *ngIf="router.url === '/info'"></page-info>
+  <page-tableviewer *ngIf="router.url === '/tableviewer'"></page-tableviewer>
+  <page-wordmaker *ngIf="router.url === '/wordmaker'"></page-wordmaker>
+  <page-about *ngIf="router.url === '/about'"></page-about>
+</header>

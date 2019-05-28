@@ -1,0 +1,65 @@
+<div class="margin-top-20 panel centered full-width">
+  <mat-toolbar class="progress">
+    <mat-toolbar-row class='progress__row--tools'>
+      <p class='color-white margin-0 font-sm'>{{ message }}</p>
+      <button mat-icon-button class='ui-button right-5 abs color-white' (click)="goBack()">
+        <mat-icon aria-label="go back">arrow_back</mat-icon>
+      </button>
+    </mat-toolbar-row>
+    <mat-toolbar-row class='progress__row--previous'>
+      <h6 class="previous color-white font-sm">Previously selected:</h6>
+      <span class='margin-right-5'></span>
+      <mat-chip class="margin-left-5 bg-white border-accent">
+        <span class="centered color-black">{{wordmaker.selectedVerb.gloss}}</span>
+        <mat-icon class="icon-sm margin-left-5"
+          [ngClass]="wordmaker.selectedVerb?.thematic_relation ? 'color-' + wordmaker.selectedVerb?.thematic_relation : ''">
+          brightness_1</mat-icon>
+      </mat-chip>
+      <mat-chip *ngIf="wordmaker.selectedPers.hasOwnProperty('agent')" class="bg-white border-accent color-black">
+        {{wordmaker.selectedPers['agent'].obj_gloss}}
+        <mat-icon class="margin-left-5 color-red icon-md">person
+        </mat-icon>
+      </mat-chip>
+      <mat-chip *ngIf="wordmaker.selectedPers.hasOwnProperty('patient')" class="bg-white border-accent color-black">
+        {{wordmaker.selectedPers['patient'].obj_gloss}}
+        <mat-icon class="margin-left-5 color-blue icon-md">person
+        </mat-icon>
+      </mat-chip>
+    </mat-toolbar-row>
+    <mat-toolbar-row class='progress__row--header'>
+      <h4 class="font-xl color-white">Just like <b>that</b> you made a word!</h4>
+      <button id='start-over' mat-button (click)="goBack('start')">Start over</button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div class="conj margin-left-100 margin-top-50" *ngFor="let conj of word$ | async">
+    <h3>
+      <span *ngFor="let item of conj['main']" class="{{item['classes']}}"
+        [ngClass]='{"highlight" : settings?.highlight[item["type"]] || settings?.highlight[item["classes"]]}'>{{item["value"]}}</span>
+    </h3>
+    <h4 *ngIf="settings?.level.breakdown_tier">
+      <span *ngFor="let item of conj['main']" class="{{item['classes']}}"
+        [ngClass]='{"highlight" : settings?.highlight[item["type"]] || settings?.highlight[item["classes"]]}'>{{item["value"]}}
+        <span *ngIf="conj['main'].indexOf(item) < conj['main'].length - 1">-</span>
+      </span>
+    </h4>
+    <h4 *ngIf="settings?.level.gloss_tier">
+      <span *ngFor="let item of conj['secondary']" class="{{item['classes']}}"
+        [ngClass]='{"highlight" : settings?.highlight[item["type"]] || settings?.highlight[item["classes"]]}'>{{item["value"]
+        | decapitalize}}
+        <span *ngIf="conj['secondary'].indexOf(item) < conj['secondary'].length - 1">-</span>
+      </span>
+    </h4>
+    <h4 *ngIf="settings?.level.english_tier">
+      <span *ngFor="let item of conj['ternary']" class="{{item['classes']}}"
+        [ngClass]='{"highlight" : settings?.highlight[item["type"]] || settings?.highlight[item["classes"]]}'>{{item["value"]
+        | decapitalize }}
+        <span *ngIf="conj['ternary'].indexOf(item) < conj['ternary'].length - 1">-</span>
+      </span>
+    </h4>
+    <h4 *ngIf="settings?.level.translation_tier">
+      <span>{{ conj['translation'] }}
+      </span>
+    </h4>
+  </div>
+
+</div>

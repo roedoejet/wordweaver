@@ -1,0 +1,118 @@
+@charset 'utf-8';
+
+// ==========================================================================
+// Sassy Starter by Mina Markham
+// A SMACSS-based starter toolkit for SCSS projects
+//
+// The toolkit uses recommendations from Scalable and Modular Architecture for CSS (SMACSS)
+// @link http://smacss.com/book
+//
+// Site:    https://minamarkham.github.io/sassy-starter
+// Author:  Mina Markham
+// Email:   mina@mina.codes
+// Date:    10/25/15
+// ==========================================================================
+
+// CSS Debugging
+//
+// Toggle layout debugging with CSS Pesticide.
+//
+// $pesticide-debug-outline - {boolean} adds outlines to all elements.
+// $pesticide-debug-depth - {boolean} adds shadows to all elements.
+// @source - http://pesticide.io/
+
+$pesticide-debug-outline: false;
+$pesticide-debug-depth: false;
+
+// ==========================================================================
+// $Libs
+// ==========================================================================
+@import 'libs/index';
+
+// ==========================================================================
+// $Utilities
+// ==========================================================================
+@import 'utilities/index';
+
+// ==========================================================================
+// $Base
+// ==========================================================================
+@import 'base/index';
+
+// ==========================================================================
+// $Layout
+// ==========================================================================
+@import 'layout/index';
+
+// ==========================================================================
+// $Angular Material
+// ==========================================================================
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+// @mixin mat-checkbox-typography($config) {
+//     .mat-checkbox {
+//       font-family: mat-font-family($config);
+//     }
+//     .mat-checkbox-label { // NEW
+//       white-space: initial; // NEW
+//     } // NEW
+//     // TODO(kara): Remove this style when fixing vertical baseline
+//     .mat-checkbox-layout .mat-checkbox-label {
+//       line-height: mat-line-height($config, body-2);
+//     }
+//   }
+
+
+@include mat-core();
+
+// Customize Angular Material theme with palettes from color-primary and color-secondary. Use http://mcg.mbitson.com to generate palette and add palettes to _palettes partial
+
+$mohawk-app-primary: mat-palette($md-primary);
+$mohawk-app-accent: mat-palette($md-accent, 400);
+
+$mohawk-app-theme: mat-light-theme($mohawk-app-primary, $mohawk-app-accent);
+
+$mohawk-app-dark-theme: mat-dark-theme($mohawk-app-primary, $mohawk-app-accent);
+
+@include angular-material-theme($mohawk-app-theme);
+
+// ==========================================================================
+// $Modules
+// ==========================================================================
+@import 'modules/index';
+
+// ==========================================================================
+// $States
+// ==========================================================================
+@import 'states/index';
+
+// ==========================================================================
+// $Overrides
+// ==========================================================================
+@import 'overrides/index';
+
+// ==========================================================================
+// $Print
+// ==========================================================================
+@import 'states/print';
+
+// ==========================================================================
+// $Fonts
+// ==========================================================================
+@import 'utilities/fonts';
+
+// ==========================================================================
+// $Shame
+// ==========================================================================
+@import 'shame';
+
+
+
+
+
+
+
+

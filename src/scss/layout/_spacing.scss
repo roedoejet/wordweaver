@@ -1,0 +1,170 @@
+%full-width {
+    max-width: 100%;
+    min-width: 100%;
+    width: 100%;
+}
+
+%full-height {
+    height: 100%;
+    max-height: 100%;
+    min-height: 100%;
+}
+
+
+// view margin
+$space: 5;
+@while $space <= 50 {
+    .vmargin-top-#{$space} {
+        margin-top: #{$space}vh;
+    }
+    .vmargin-bottom-#{$space} {
+        margin-bottom: #{$space}vh;
+    }
+    .vmargin-left-#{$space} {
+        margin-left: #{$space}vw;
+    }
+    .vmargin-right-#{$space} {
+        margin-right: #{$space}vw;
+    }
+    $space: $space + 5;
+}
+
+// tiny margins/padding top/bottom/left/right
+$space: 0;
+@while $space <= 25 {
+    .margin-#{$space} {
+        margin: em($space);
+        &--centered {
+            margin: em($space) auto;
+        }
+    }
+    .padding-#{$space} {
+        padding: em($space);
+    }
+    .margin-top-#{$space} {
+        margin-top: em($space);
+    }
+    .margin-bottom-#{$space} {
+        margin-bottom: em($space);
+    }
+    .margin-left-#{$space} {
+        margin-left: em($space);
+    }
+    .margin-right-#{$space} {
+        margin-right: em($space);
+    }
+    .top-#{$space} {
+        top: em($space);
+    }
+    .bottom-#{$space} {
+        bottom: em($space);
+    }
+    .left-#{$space} {
+        left: em($space);
+    }
+    .right-#{$space} {
+        right: em($space);
+    }
+    $space: $space + 1;
+}
+
+// larger margins/padding top/bottom/left/right
+$space: 25;
+@while $space <= 100 {
+    .margin-#{$space} {
+        margin: em($space);
+        &--centered {
+            margin: em($space) auto;
+        }
+    }
+    .padding-#{$space} {
+        padding: em($space);
+    }
+    .margin-top-#{$space} {
+        margin-top: em($space);
+    }
+    .margin-bottom-#{$space} {
+        margin-bottom: em($space);
+    }
+    .margin-left-#{$space} {
+        margin-left: em($space);
+    }
+    .margin-right-#{$space} {
+        margin-right: em($space);
+    }
+    .top-#{$space} {
+        top: em($space);
+    }
+    .bottom-#{$space} {
+        bottom: em($space);
+    }
+    .left-#{$space} {
+        left: em($space);
+    }
+    .right-#{$space} {
+        right: em($space);
+    }
+    $space: $space + 5;
+}
+
+// height/width in pixels
+$size: 5;
+@while $size <= 100 {
+    .height-#{$size} {
+        height: em($size);
+    }
+    .width-#{$size} {
+        width: em($size);
+    }
+    $size: $size + 5;
+}
+
+// view height/width
+$size: 5;
+@while $size <= 100 {
+    .vheight-#{$size} {
+        height: #{$size}vh;
+    }
+    .vwidth-#{$size} {
+        width: #{$size}vw;
+        &--desktop {
+            @include mq(em(map-get($breakpoints, medium))) {
+                width: #{$size}vw;
+            }
+        }
+        &--mobile {
+            @include mq(em(map-get($breakpoints, medium)), 'max-width') {
+                width: #{$size}vw;
+            }
+        }
+    }
+    .pheight-#{$size} {
+        height: percentage($size/100);
+    }
+    .pwidth-#{$size} {
+        width: percentage($size/100);
+        &--desktop {
+            @include mq(em(map-get($breakpoints, medium))) {
+                width: percentage($size/100);
+            }
+        }
+        &--mobile {
+            @include mq(em(map-get($breakpoints, medium)), 'max-width') {
+                width: percentage($size/100);
+            }
+        }
+    }
+    $size: $size + 5;
+}
+
+.width-fit {
+    width: fit-content;
+}
+
+.full-width {
+ @extend %full-width;
+}
+
+.full-height {
+ @extend %full-height;
+}

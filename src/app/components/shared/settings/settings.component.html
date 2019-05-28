@@ -1,0 +1,48 @@
+<h1 mat-dialog-title>Settings</h1>
+<div mat-dialog-content class="container">
+  <h3>Highlighting</h3>
+  <mat-list #highlighting>
+    <mat-checkbox class="pronouns" [(ngModel)]="settings.highlight.pronoun" (ngModelChange)="update(settings)">
+      Pronouns
+    </mat-checkbox>
+    <mat-checkbox class="root" [(ngModel)]="settings.highlight.root" (ngModelChange)="update(settings)">
+      Verb
+    </mat-checkbox>
+    <h5>Affixes</h5>
+    <mat-list #affixes>
+      <mat-checkbox class="aspect" [(ngModel)]="settings.highlight.aspect" (ngModelChange)="update(settings)">
+        Aspect
+      </mat-checkbox>
+      <mat-checkbox class="prepronominal_prefix" [(ngModel)]="settings.highlight.prepronominal_prefix" (ngModelChange)="update(settings)">
+        Required
+      </mat-checkbox>
+      <mat-checkbox class="tmp_affix" [(ngModel)]="settings.highlight.tmp_affix" (ngModelChange)="update(settings)">
+        Temp
+      </mat-checkbox>
+      <mat-checkbox class="post_aspectual_suffix" [(ngModel)]="settings.highlight.post_aspectual_suffix" (ngModelChange)="update(settings)">
+        Post Aspectual Suffix
+      </mat-checkbox>
+    </mat-list>
+  </mat-list>
+  <h3>Tiers</h3>
+  <mat-list #tiers>
+    <mat-checkbox [(ngModel)]="settings.level.breakdown_tier" (ngModelChange)="update(settings)">
+      Breakdown Tier
+    </mat-checkbox>
+    <mat-checkbox [(ngModel)]="settings.level.english_tier" (ngModelChange)="update(settings)">
+      English Tier
+    </mat-checkbox>
+    <mat-checkbox [(ngModel)]="settings.level.translation_tier" (ngModelChange)="update(settings)">
+        Translation Tier
+      </mat-checkbox>
+    <mat-checkbox [(ngModel)]="settings.level.gloss_tier" (ngModelChange)="update(settings)">
+      Gloss Tier
+    </mat-checkbox>
+  </mat-list>
+</div>
+<hr>
+<h3>Advanced</h3>
+<mat-slide-toggle [(ngModel)]="settings.test_api">Use Test API</mat-slide-toggle>
+<div mat-dialog-actions>
+  <button mat-button (click)="close()">OK</button>
+</div>

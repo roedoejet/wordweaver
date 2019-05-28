@@ -1,0 +1,18 @@
+<div class="panel">
+  <div class="panel__header">
+    <h3 class="panel__title">Time</h3>
+    <div class="panel__toolbar toolbar">
+      <button *ngIf="!selectAll" class="toolbar__tool" mat-icon-button (click)="toggleSelectAll()">
+        <mat-icon aria-label="Select all">done_all</mat-icon>
+      </button>
+      <button *ngIf="selectAll" class="toolbar__tool bg-accent margin-right-15 color-white" mat-icon-button (click)="toggleSelectAll()">
+        <mat-icon aria-label="Select all">done_all</mat-icon>
+      </button>
+    </div>
+  </div>
+  <mat-list role="list" class="list panel__list">
+    <div [formGroup]="checkboxGroup" *ngFor="let value of checkboxPossibleValues | async ">
+      <mat-checkbox [formControlName]="value.tag">{{ value.gloss }}</mat-checkbox>
+    </div>
+  </mat-list>
+</div>
