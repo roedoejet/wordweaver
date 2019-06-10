@@ -70,14 +70,14 @@ $pesticide-debug-depth: false;
 
 // Customize Angular Material theme with palettes from color-primary and color-secondary. Use http://mcg.mbitson.com to generate palette and add palettes to _palettes partial
 
-$mohawk-app-primary: mat-palette($md-primary);
-$mohawk-app-accent: mat-palette($md-accent, 400);
+$wordweaver-primary: mat-palette($md-primary);
+$wordweaver-accent: mat-palette($md-accent, 400);
 
-$mohawk-app-theme: mat-light-theme($mohawk-app-primary, $mohawk-app-accent);
+$wordweaver-theme: mat-light-theme($wordweaver-primary, $wordweaver-accent);
 
-$mohawk-app-dark-theme: mat-dark-theme($mohawk-app-primary, $mohawk-app-accent);
+$wordweaver-dark-theme: mat-dark-theme($wordweaver-primary, $wordweaver-accent);
 
-@include angular-material-theme($mohawk-app-theme);
+@include angular-material-theme($wordweaver-theme);
 
 // ==========================================================================
 // $Modules
