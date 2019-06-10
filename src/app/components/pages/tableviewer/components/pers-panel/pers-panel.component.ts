@@ -29,7 +29,7 @@ export class PersPanel implements OnInit {
   )
   patCheckedValues: string[] = []
   chosenPro;
-  role = 'patient';
+  role = 'agent';
   limit: number = 8;
   selectAllAg = false;
   selectAllPat = false;

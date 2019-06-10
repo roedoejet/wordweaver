@@ -45,6 +45,7 @@ export class WordmakerVerbPanel implements OnInit {
       debounceTime(100),
       switchMap(term => this.verbService.verbs$.pipe(
         map(verbs => {
+          console.log(verbs);
           let new_verbs = verbs.filter(v =>
             (v.gloss.toLowerCase().indexOf(term.toLowerCase()) > -1 || v.display.toLowerCase().indexOf(term.toLowerCase()) > -1))
           this.chartService.returnChoiceAllData('verbs', this.chartService.returnBasicDataFrom(new_verbs), 1).subscribe(r => {
