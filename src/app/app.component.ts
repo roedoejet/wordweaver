@@ -63,7 +63,9 @@ export class MainApp {
 
   openSettings(): void {
     let dialogRef = this.dialog.open(SettingsComponent, {
-      width: '450px'
+      width: '50vw',
+      maxWidth: '550px',
+      height: '60vh',
     });
 
     dialogRef.afterClosed().subscribe(result => {

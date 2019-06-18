@@ -1,5 +1,5 @@
 <h1 mat-dialog-title>Settings</h1>
-<div mat-dialog-content class="container">
+<div mat-dialog-content class="settings__container">
   <h3>Highlighting</h3>
   <mat-list #highlighting>
     <mat-checkbox class="pronouns" [(ngModel)]="settings.highlight.pronoun" (ngModelChange)="update(settings)">
@@ -27,20 +27,22 @@
     </mat-list>
   </mat-list>
   <h3>Tiers</h3>
-  <mat-list #tiers id='tiersSetting'>
-    <mat-checkbox [(ngModel)]="settings.level.breakdown_tier" (ngModelChange)="update(settings)">
-      Breakdown Tier
-    </mat-checkbox>
-    <mat-checkbox [(ngModel)]="settings.level.gloss_tier" (ngModelChange)="update(settings)">
-      Gloss Tier
-    </mat-checkbox>
-    <mat-checkbox [(ngModel)]="settings.level.english_tier" (ngModelChange)="update(settings)">
-      English Tier
-    </mat-checkbox>
-    <mat-checkbox [(ngModel)]="settings.level.translation_tier" (ngModelChange)="update(settings)">
-      Translation Tier
-    </mat-checkbox>
-  </mat-list>
+  <div class='setting__container'>
+    <mat-list #tiers id='tiersSetting'>
+      <mat-checkbox [(ngModel)]="settings.level.breakdown_tier" (ngModelChange)="update(settings)">
+        Breakdown Tier
+      </mat-checkbox>
+      <mat-checkbox [(ngModel)]="settings.level.gloss_tier" (ngModelChange)="update(settings)">
+        Gloss Tier
+      </mat-checkbox>
+      <mat-checkbox [(ngModel)]="settings.level.english_tier" (ngModelChange)="update(settings)">
+        English Tier
+      </mat-checkbox>
+      <mat-checkbox [(ngModel)]="settings.level.translation_tier" (ngModelChange)="update(settings)">
+        Translation Tier
+      </mat-checkbox>
+    </mat-list>
+  </div>
 </div>
 <hr>
 <h3>Advanced</h3>
