@@ -68,13 +68,13 @@ export class ConjugationService {
         return this.http.get(path, { params: params })
             .pipe(
                 catchError(err => {
-                    this.snackBar.openFromComponent(ErrorSnackComponent, {
-                        data: { 'message': err.error.message, 'action': 'OK' },
-                        horizontalPosition: "center",
-                        verticalPosition: 'top',
-                        duration: 3000
-                    })
-                    return of(false);
+                    // this.snackBar.openFromComponent(ErrorSnackComponent, {
+                    //     data: { 'message': err.error.message, 'action': 'OK' },
+                    //     horizontalPosition: "center",
+                    //     verticalPosition: 'top',
+                    //     duration: 3000
+                    // })
+                    return of(err.error.message);
                 }
                 )
             )
@@ -83,7 +83,14 @@ export class ConjugationService {
     conjugateTable(tableargs, test?) {
         return this.conjugate(tableargs, test = test)
             .pipe(
-                map(res => this.tierService.createTiers(res))
+                map(res => {
+                    if (typeof (res) === 'string') {
+                        // return error as string
+                        return res
+                    } else {
+                        return this.tierService.createTiers(res)
+                    }
+                })
             )
     }
 

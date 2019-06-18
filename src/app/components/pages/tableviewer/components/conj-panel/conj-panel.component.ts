@@ -42,16 +42,20 @@ export class ConjPanel implements OnInit {
     this.loading = true;
     if (!this.showExplorer) {
       this.response$ = this.conjugationService.conjugateTable(this.selectionService.selection)
+      console.log(this.response$)
+      this.response$.subscribe(x => console.log(x))
       return this.response$
     } else {
       let order = "PT"
       if (this.order) {
-          order = "TP"
+        order = "TP"
       }
       this.chart_response$ = this.chartService.createChart(this.selectionService.selection, order, this.depth)
       this.chart_response$.subscribe(r => this.chart_response = r)
     }
   }
+
+  isString(val) { return typeof val === 'string'; }
 
   toggleExplorer() {
     this.showExplorer = !this.showExplorer
