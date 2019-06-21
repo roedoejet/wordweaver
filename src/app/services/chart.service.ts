@@ -125,7 +125,7 @@ export class ChartService {
     }
 
     returnChoiceAllData(datatype, selected: any = false, depth: number = 0) {
-        return this.http.get(environment.base + environment.prefix + '/' + datatype).pipe(
+        return this.http.get(environment.base + environment.prefix + datatype).pipe(
             map((data: Object[]) => {
                 // prevent too many nodes
                 if (selected) {

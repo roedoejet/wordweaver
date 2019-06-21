@@ -40,7 +40,7 @@ export class TierService {
     // Return 'agent' or 'patient' or both
     determinePNType(conjugation, verb_role) {
         let pn_roles = []
-    
+
         if (verb_role === 'red') {
             pn_roles.push("agent")
         } else if (verb_role === 'blue') {
@@ -63,8 +63,13 @@ export class TierService {
                     { 'keys': ['value'], 'seperator': '' }),
 
                 'secondary': this.createTier(conjugation,
-                    { 'keys': ['verb'], 'seperator': '' },
-                    { 'keys': ["pronoun"], 'seperator': '' },
+                    { 'keys': [' root'], 'seperator': '' },
+                    {
+                        'keys': [
+                            'agent',
+                            'patient'],
+                        'seperator': ' > '
+                    },
                     { 'keys': ['gloss'], 'seperator': '' }),
 
                 'ternary': this.createTier(conjugation,
@@ -102,6 +107,8 @@ export class TierService {
         let pronoun_value;
         if (pronoun_role.length > 1) {
             pronoun_value = pn_keys.map(key => {
+                console.log(key)
+                console.log(conjugation.pronoun)
                 return conjugation.pronoun[key]
             }).join(pn_key_obj['seperator']);
         } else {
@@ -113,7 +120,7 @@ export class TierService {
         }
         let pronoun_role_css = pronoun_role
         console.log(conjugation)
-        if (verb_role === 'red' && conjugation['affixes'].filter(x=>x.tag === 'perf').length > 0){
+        if (verb_role === 'red' && conjugation['affixes'].filter(x => x.tag === 'perf').length > 0) {
             pronoun_role_css = ['patient']
         }
 
