@@ -107,12 +107,10 @@ export class TierService {
         let pronoun_value;
         if (pronoun_role.length > 1) {
             pronoun_value = pn_keys.map(key => {
-                console.log(key)
-                console.log(conjugation.pronoun)
                 return conjugation.pronoun[key]
             }).join(pn_key_obj['seperator']);
         } else {
-            if (conjugation.pronoun[pn_keys[0]]) {
+            if (conjugation.pronoun.hasOwnProperty(pn_keys[0])) {
                 pronoun_value = conjugation.pronoun[pn_keys[0]]
             } else {
                 pronoun_value = pn_keys[0]
@@ -131,7 +129,7 @@ export class TierService {
         conjugation.root['gloss'] = this.verbService.getVerb(conjugation.root['tag'])['gloss']
         let verb_value = verb_key_obj['keys'].map(key => {
             // if the key exists in the conjugation provided, return the value
-            if (conjugation.root[key]) {
+            if (conjugation.root.hasOwnProperty(key)) {
                 return conjugation.root[key]
                 // else return the key
             } else {
@@ -181,7 +179,7 @@ export class TierService {
             if (affix.value != null && affix.value != '') {
                 let aff_value = aff_key_obj['keys'].map(key => {
                     // if the key exists in the conjugation provided, return the value
-                    if (affix[key]) {
+                    if (affix.hasOwnProperty(key)) {
                         return affix[key]
                         // else return the key
                     } else {
