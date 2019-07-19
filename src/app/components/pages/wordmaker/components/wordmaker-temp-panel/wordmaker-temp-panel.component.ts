@@ -45,22 +45,21 @@ export class WordmakerTempPanel implements OnInit {
   onChartClick(ev) {
     const term = ev['data']['name'];
     this.temps$.pipe(
-      switchMap(ts =>
-        this.affixService.affoptions$.pipe(
+      switchMap(ts => {
+        return this.affixService.affoptions$.pipe(
           map(affopts => {
             const picked_ao = affopts.filter(ao => ao['gloss'] === term)[0];
-            return ts.filter(t => t['affopt'] === picked_ao['tag'])[0];
+            return ts.values.filter(t => t['affopt'] === picked_ao['tag'])[0];
           })
-        )
+        );
+      }
       )).subscribe(t => this.select(t));
   }
 
   select(temp) {
-    console.log(temp)
-    console.log(this.when)
     this.chartService.returnChoiceAllData('aff-options',
       [{ 'name': temp['translation'] }], 1).subscribe(r => this.when = r);
-    this.selectedTemp.emit(temp['values']);
+    this.selectedTemp.emit(temp.values);
   }
 
 
