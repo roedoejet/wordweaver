@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class='nav-container vwidth-100'>\n  <nav class=\"vwidth-100 height-30 bg-accent\">\n    <logo-anime class='ui-button'></logo-anime>\n    <h4 class=\"nav-container__subheader\">A {{language}} online verb conjugator</h4>\n    <div class=\"nav-container__content\">\n      <ul class=\"navbar navbar-nav\">\n        <li class=\"navbar__item\" [routerLinkActive]=\"['navbar__item--active']\">\n          <a class=\"navbar__link\" routerLink=\"wordmaker\">Word Maker</a>\n        </li>\n        <li class=\"navbar__item\" [routerLinkActive]=\"['navbar__item--active']\">\n          <a class=\"navbar__link\" routerLink=\"tableviewer\">Table Viewer</a>\n        </li>\n        <li class=\"navbar__item\" [routerLinkActive]=\"['navbar__item--active']\">\n          <a class=\"navbar__link\" routerLink=\"info\">Info</a>\n        </li>\n        <li class=\"navbar__item\" [routerLinkActive]=\"['navbar__item--active']\">\n          <a class=\"navbar__link\" routerLink=\"about\">About</a>\n        </li>\n        <li class=\"navbar__item\">\n          <a class=\"navbar__link\" (click)=\"openSettings()\">Settings</a>\n        </li>\n      </ul>\n    </div>\n    <button class=\"nav-container__content--mobile\" mat-icon-button [matMenuTriggerFor]=\"menu\">\n      <mat-icon aria-label=\"Show toolbar\">menu</mat-icon>\n    </button>\n  </nav>\n</div>\n<mat-menu #menu=\"matMenu\">\n  <button mat-menu-item routerLink=\"wordmaker\">Word Maker</button>\n  <button mat-menu-item routerLink=\"tableviewer\">Table Viewer</button>\n  <button mat-menu-item routerLink=\"info\">Info</button>\n  <button mat-menu-item routerLink=\"about\">About</button>\n  <button mat-menu-item (click)=\"openSettings()\">Settings</button>\n</mat-menu>\n<header class='bg-img'>\n  <page-info *ngIf=\"router.url === '/info'\"></page-info>\n  <page-tableviewer *ngIf=\"router.url === '/tableviewer'\"></page-tableviewer>\n  <page-wordmaker *ngIf=\"router.url === '/wordmaker'\"></page-wordmaker>\n  <page-about *ngIf=\"router.url === '/about'\"></page-about>\n</header>"
+module.exports = "<div class='nav-container vwidth-100'>\n  <nav class=\"vwidth-100 height-30 bg-accent\">\n    <logo-anime class='ui-button'></logo-anime>\n    <h4 class=\"nav-container__subheader\" i18n=\"Subheader|Subheader message@@subheaderMessage\">A {{language}} online verb conjugator</h4>\n    <div class=\"nav-container__content\">\n      <ul class=\"navbar navbar-nav\">\n        <li class=\"navbar__item\" [routerLinkActive]=\"['navbar__item--active']\">\n          <a class=\"navbar__link\" routerLink=\"wordmaker\" i18n=\"word maker|Title of word maker page@@wordMaker\">Word Maker</a>\n        </li>\n        <li class=\"navbar__item\" [routerLinkActive]=\"['navbar__item--active']\">\n          <a class=\"navbar__link\" routerLink=\"tableviewer\" i18n=\"table viewer|Title of table viewer page@@tableViewer\">Table Viewer</a>\n        </li>\n        <li class=\"navbar__item\" [routerLinkActive]=\"['navbar__item--active']\">\n          <a class=\"navbar__link\" routerLink=\"info\" i18n=\"info page|Title of info page@@infoPage\">Info</a>\n        </li>\n        <li class=\"navbar__item\" [routerLinkActive]=\"['navbar__item--active']\">\n          <a class=\"navbar__link\" routerLink=\"about\" i18n=\"about page|Title of about page@@aboutPage\">About</a>\n        </li>\n        <li class=\"navbar__item\">\n          <a class=\"navbar__link\" (click)=\"openSettings()\" i18n=\"Settings|Title of settings@@settings\">Settings</a>\n        </li>\n      </ul>\n    </div>\n    <button class=\"nav-container__content--mobile\" mat-icon-button [matMenuTriggerFor]=\"menu\">\n      <mat-icon aria-label=\"Show toolbar\" i18n=\"Settings|Title of settings@@settings\">menu</mat-icon>\n    </button>\n  </nav>\n</div>\n<mat-menu #menu=\"matMenu\">\n  <button mat-menu-item routerLink=\"wordmaker\" i18n=\"word maker|Title of word maker page@@wordMaker\">Word Maker</button>\n  <button mat-menu-item routerLink=\"tableviewer\" i18n=\"table viewer|Title of table viewer page@@tableViewer\">Table Viewer</button>\n  <button mat-menu-item routerLink=\"info\" i18n=\"info page|Title of info page@@infoPage\">Info</button>\n  <button mat-menu-item routerLink=\"about\" i18n=\"about page|Title of about page@@infoPage\">About</button>\n  <button mat-menu-item (click)=\"openSettings()\" i18n=\"Settings|Title of settings@@settings\">Settings</button>\n</mat-menu>\n<header class='bg-img'>\n  <page-info *ngIf=\"router.url === '/info'\"></page-info>\n  <page-tableviewer *ngIf=\"router.url === '/tableviewer'\"></page-tableviewer>\n  <page-wordmaker *ngIf=\"router.url === '/wordmaker'\"></page-wordmaker>\n  <page-about *ngIf=\"router.url === '/about'\"></page-about>\n</header>"
 
 /***/ }),
 
@@ -116,7 +116,9 @@ var MainApp = /** @class */ (function () {
     };
     MainApp.prototype.openSettings = function () {
         var dialogRef = this.dialog.open(_components_shared_settings_settings_component__WEBPACK_IMPORTED_MODULE_4__["SettingsComponent"], {
-            width: '450px'
+            width: '50vw',
+            maxWidth: '550px',
+            height: '60vh',
         });
         dialogRef.afterClosed().subscribe(function (result) {
             console.log('The dialog was closed');
@@ -442,7 +444,7 @@ module.exports = "<div class=\"overlay page__content vmargin-right-20 vmargin-le
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".echart {\n  height: 100%;\n  min-height: 800px;\n  width: 100%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9waW5lYS93b3Jkd2VhdmVyLWd1aS9zcmMvYXBwL2NvbXBvbmVudHMvcGFnZXMvaW5mby9pbmZvLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxZQUFZO0VBQ1osaUJBQWlCO0VBQ2pCLFdBQVcsRUFBQSIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvcGFnZXMvaW5mby9pbmZvLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuZWNoYXJ0IHtcbiAgICBoZWlnaHQ6IDEwMCU7XG4gICAgbWluLWhlaWdodDogODAwcHg7XG4gICAgd2lkdGg6IDEwMCU7XG59Il19 */"
+module.exports = ".echart {\n  height: 100%;\n  min-height: 800px;\n  width: 100%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9waW5lYS93b3Jkd2VhdmVyLUdVSS9zcmMvYXBwL2NvbXBvbmVudHMvcGFnZXMvaW5mby9pbmZvLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxZQUFZO0VBQ1osaUJBQWlCO0VBQ2pCLFdBQVcsRUFBQSIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvcGFnZXMvaW5mby9pbmZvLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuZWNoYXJ0IHtcbiAgICBoZWlnaHQ6IDEwMCU7XG4gICAgbWluLWhlaWdodDogODAwcHg7XG4gICAgd2lkdGg6IDEwMCU7XG59Il19 */"
 
 /***/ }),
 
@@ -506,7 +508,7 @@ var InfoPage = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class='panel'>\n  <div *ngIf=\"show_toolbar\" class='panel__header'>\n    <h3 class=\"panel__title\">Conjugation toolbar</h3>\n    <div class='panel__toolbar toolbar'>\n      <button class=\"conjugate mat-accent\" mat-raised-button (click)=\"conjugate()\">Conjugate</button>\n      <select *ngIf=\"showExplorer\" [(ngModel)]=\"depth\" (ngModelChange)=\"conjugate()\" class=\"toolbar__tool ui-button\" matTooltip=\"Select how many nodes to display\"\n        [matTooltipShowDelay]=\"showDelay.value\" [matTooltipHideDelay]=\"hideDelay.value\" [matTooltipPosition]=\"tooltipPosition\">\n        <option value=\"0\">0</option>\n        <option value=\"1\">1</option>\n        <option value=\"2\">2</option>\n        <option value=\"3\">3</option>\n      </select>\n      <button *ngIf=\"showExplorer\" class=\"toolbar__tool ui-button\" mat-icon-button (click)=\"order = !order; conjugate()\" matTooltip=\"Switch pronoun and tense nodes\"\n        [matTooltipShowDelay]=\"showDelay.value\" [matTooltipHideDelay]=\"hideDelay.value\" [matTooltipPosition]=\"tooltipPosition\">\n        <mat-icon aria-label=\"Switch pronoun and temp\">cached</mat-icon>\n      </button>\n      <button class=\"ui-button toolbar__tool\" mat-icon-button (click)=\"toggleExplorer()\" matTooltip=\"Switch between grid and tree views\"\n        [matTooltipShowDelay]=\"showDelay.value\" [matTooltipHideDelay]=\"hideDelay.value\" [matTooltipPosition]=\"tooltipPosition\">\n        <mat-icon *ngIf=\"!showExplorer\" aria-label=\"Conjugate\">create</mat-icon>\n        <mat-icon *ngIf=\"showExplorer\" aria-label=\"Conjugate\">grid_on</mat-icon>\n      </button>\n      <button (click)=\"download()\" *ngIf=\"!showExplorer\" class=\"ui-button toolbar__tool\" mat-icon-button matTooltip=\"Download conjugations as file\"\n        [matTooltipShowDelay]=\"showDelay.value\" [matTooltipHideDelay]=\"hideDelay.value\" [matTooltipPosition]=\"tooltipPosition\">\n        <mat-icon aria-label=\"Download conjugations\">file_copy</mat-icon>\n      </button>\n      <button (click)=\"show_toolbar = !show_toolbar\" class=\"ui-button toolbar__tool\" mat-icon-button matTooltip=\"Hide toolbar\"\n        [matTooltipShowDelay]=\"showDelay.value\" [matTooltipHideDelay]=\"hideDelay.value\" [matTooltipPosition]=\"tooltipPosition\">\n        <mat-icon aria-label=\"Hide toolbar\">cancel</mat-icon>\n      </button>\n    </div>\n  </div>\n  <div class=\"panel__underline height-5\">\n    <hr *ngIf=\"show_toolbar\" />\n    <button *ngIf=\"!show_toolbar\" (click)=\"show_toolbar = !show_toolbar\" class=\"float-right ui-button toolbar__tool\" mat-icon-button\n      matTooltip=\"Show toolbar\" [matTooltipShowDelay]=\"showDelay.value\" [matTooltipHideDelay]=\"hideDelay.value\" [matTooltipPosition]=\"tooltipPosition\">\n      <mat-icon aria-label=\"Show toolbar\">add_circle</mat-icon>\n    </button>\n  </div>\n  <div class=\"panel__content\">\n    <div>\n      <h3 class=\"desktop-only center-text margin-top-100 padding-20\" *ngIf=\"!response$ && !showExplorer\">Please select one or more boxes from the <b>Person</b>, <b>Time</b> and <b>Verb</b> panels\n        and then press the\n        enter key or conjugate button to see your selection</h3>\n      <h3 class=\"mobile-only padding-15 center-text\" *ngIf=\"!response$ && !showExplorer\">Please select one or more boxes from the 'Person', 'Time' and 'Verb' panels.\n        <br> and then press the button above to conjugate!</h3>\n      <ng-template #spinner>\n        <ng-container *ngIf='loading && !(response$ | async)'>\n          <mat-spinner class='centered margin-top-100'></mat-spinner>\n        </ng-container>\n      </ng-template>\n    </div>\n\n    <div *ngIf=\"showExplorer\" class=\"full-width full-height\">\n      <div *ngIf=\"chart_response\">\n        <div #explorer echarts [options]=\"chart_response\" class=\"demo-chart\"></div>\n      </div>\n    </div>\n\n    <div *ngIf=\"!showExplorer\">\n      <div id=\"table-container\" class='rel' *ngIf=\"response$ | async as response; else spinner\">\n        <table class='full-width abs'>\n          <thead>\n            <tr>\n              <th>\n                <h3>{{ language }}</h3>\n              </th>\n              <th *ngIf=\"settings?.level.english_tier || settings?.level.translation_tier\">\n                <h3>English</h3>\n              </th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr class='b--bottom' *ngFor=\"let conj of response\">\n              <td class='center-text'>\n                <h3 id=\"main\">\n                  <span *ngFor=\"let item of conj['main']\" class=\"{{item['classes']}} no-padding header-text\" [ngClass]='{\"highlight\" : settings?.highlight[item[\"type\"]] || settings?.highlight[item[\"classes\"]]}'>{{item[\"value\"]}}</span>\n                </h3>\n                <h5 id=\"main\" *ngIf=\"settings?.level.breakdown_tier\">\n                  <span *ngFor=\"let item of conj['main']\" class=\"{{item['classes']}} no-padding header-text\" [ngClass]='{\"highlight\" : settings?.highlight[item[\"type\"]] || settings?.highlight[item[\"classes\"]]}'>{{item[\"value\"]}}\n                    <span class=\"gloss-dividers header-text\" *ngIf=\"conj['main'].indexOf(item) < conj['main'].length - 1\">-</span>\n                  </span>\n                </h5>\n                <h5 id=\"main\" *ngIf=\"settings?.level.gloss_tier\">\n                  <span *ngFor=\"let item of conj['secondary']\" class=\"{{item['classes']}} no-padding header-text\" [ngClass]='{\"highlight\" : settings?.highlight[item[\"type\"]] || settings?.highlight[item[\"classes\"]]}'>{{item[\"value\"]\n                    | decapitalize}}\n                    <span class=\"gloss-dividers header-text\" *ngIf=\"conj['secondary'].indexOf(item) < conj['secondary'].length - 1\">-</span>\n                  </span>\n                </h5>\n              </td>\n              <td class='center-text'>\n                <h4 id=\"main\" *ngIf=\"settings?.level.translation_tier\" class=\"no-padding header-text\">\n                  <span class='translation'>{{ conj['translation'] }}</span>\n                </h4>\n                <h5 id=\"main\" *ngIf=\"settings?.level.english_tier\">\n                  <span *ngFor=\"let item of conj['ternary']\" class=\"{{item['classes']}} no-padding header-text\" [ngClass]='{\"highlight\" : settings?.highlight[item[\"type\"]] || settings?.highlight[item[\"classes\"]]}'>{{item[\"value\"]\n                    | decapitalize }}\n                    <span class=\"gloss-dividers header-text\" *ngIf=\"conj['ternary'].indexOf(item) < conj['ternary'].length - 1\">-</span>\n                  </span>\n                </h5>\n              </td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n    </div>\n  </div>\n\n</div>"
+module.exports = "<div class='panel'>\n  <div *ngIf=\"show_toolbar\" class='panel__header'>\n    <h3 class=\"panel__title\">Conjugation toolbar</h3>\n    <div class='panel__toolbar toolbar'>\n      <button class=\"conjugate mat-accent\" mat-raised-button (click)=\"conjugate()\">Conjugate</button>\n      <select *ngIf=\"showExplorer\" [(ngModel)]=\"depth\" (ngModelChange)=\"conjugate()\" class=\"toolbar__tool ui-button\"\n        matTooltip=\"Select how many nodes to display\" [matTooltipShowDelay]=\"showDelay.value\"\n        [matTooltipHideDelay]=\"hideDelay.value\" [matTooltipPosition]=\"tooltipPosition\">\n        <option value=\"0\">0</option>\n        <option value=\"1\">1</option>\n        <option value=\"2\">2</option>\n        <option value=\"3\">3</option>\n      </select>\n      <button *ngIf=\"showExplorer\" class=\"toolbar__tool ui-button\" mat-icon-button (click)=\"order = !order; conjugate()\"\n        matTooltip=\"Switch pronoun and tense nodes\" [matTooltipShowDelay]=\"showDelay.value\"\n        [matTooltipHideDelay]=\"hideDelay.value\" [matTooltipPosition]=\"tooltipPosition\">\n        <mat-icon aria-label=\"Switch pronoun and temp\">cached</mat-icon>\n      </button>\n      <button class=\"ui-button toolbar__tool\" mat-icon-button (click)=\"toggleExplorer()\"\n        matTooltip=\"Switch between grid and tree views\" [matTooltipShowDelay]=\"showDelay.value\"\n        [matTooltipHideDelay]=\"hideDelay.value\" [matTooltipPosition]=\"tooltipPosition\">\n        <mat-icon *ngIf=\"!showExplorer\" aria-label=\"Conjugate\">create</mat-icon>\n        <mat-icon *ngIf=\"showExplorer\" aria-label=\"Conjugate\">grid_on</mat-icon>\n      </button>\n      <button (click)=\"download()\" *ngIf=\"!showExplorer\" class=\"ui-button toolbar__tool\" mat-icon-button\n        matTooltip=\"Download conjugations as file\" [matTooltipShowDelay]=\"showDelay.value\"\n        [matTooltipHideDelay]=\"hideDelay.value\" [matTooltipPosition]=\"tooltipPosition\">\n        <mat-icon aria-label=\"Download conjugations\">file_copy</mat-icon>\n      </button>\n      <button (click)=\"show_toolbar = !show_toolbar\" class=\"ui-button toolbar__tool\" mat-icon-button\n        matTooltip=\"Hide toolbar\" [matTooltipShowDelay]=\"showDelay.value\" [matTooltipHideDelay]=\"hideDelay.value\"\n        [matTooltipPosition]=\"tooltipPosition\">\n        <mat-icon aria-label=\"Hide toolbar\">cancel</mat-icon>\n      </button>\n    </div>\n  </div>\n  <div class=\"panel__underline height-5\">\n    <hr *ngIf=\"show_toolbar\" />\n    <button *ngIf=\"!show_toolbar\" (click)=\"show_toolbar = !show_toolbar\" class=\"float-right ui-button toolbar__tool\"\n      mat-icon-button matTooltip=\"Show toolbar\" [matTooltipShowDelay]=\"showDelay.value\"\n      [matTooltipHideDelay]=\"hideDelay.value\" [matTooltipPosition]=\"tooltipPosition\">\n      <mat-icon aria-label=\"Show toolbar\">add_circle</mat-icon>\n    </button>\n  </div>\n  <div class=\"panel__content\">\n    <div>\n      <h3 class=\"desktop-only center-text margin-top-100 padding-20\" *ngIf=\"!response$ && !showExplorer\">Please select\n        one or more boxes from the <b>Person</b>, <b>Time</b> and <b>Verb</b> panels\n        and then press the\n        enter key or conjugate button to see your selection</h3>\n      <h3 class=\"mobile-only padding-15 center-text\" *ngIf=\"!response$ && !showExplorer\">Please select one or more boxes\n        from the 'Person', 'Time' and 'Verb' panels.\n        <br> and then press the button above to conjugate!</h3>\n      <ng-template #spinner>\n        <ng-container *ngIf='loading && !(response$ | async)'>\n          <mat-spinner class='centered margin-top-100'></mat-spinner>\n        </ng-container>\n      </ng-template>\n    </div>\n\n    <div *ngIf=\"showExplorer\" class=\"full-width full-height\">\n      <div *ngIf=\"chart_response\">\n        <div #explorer echarts [options]=\"chart_response\" class=\"demo-chart\"></div>\n      </div>\n    </div>\n\n    <div *ngIf=\"!showExplorer\">\n      <div id=\"table-container\" class='rel' *ngIf=\"response$ | async as response; else spinner\">\n        <div class='error__container' *ngIf=\"isString(response)\">\n          <h3 class=\"error__header\">Error</h3>\n          <p class=\"error__message\">{{response}}</p>\n          <p class=\"error__message\">Please remove some of the checked options described above and try again.</p>\n        </div>\n        <table class='full-width abs' *ngIf=\"!isString(response)\">\n          <thead>\n            <tr>\n              <th>\n                <h3>{{ language }}</h3>\n              </th>\n              <th *ngIf=\"settings?.level.english_tier || settings?.level.translation_tier\">\n                <h3>English</h3>\n              </th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr class='b--bottom' *ngFor=\"let conj of response\">\n              <td class='center-text'>\n                <h3 id=\"main\">\n                  <span *ngFor=\"let item of conj['main']\" class=\"{{item['classes']}} no-padding header-text\"\n                    [ngClass]='{\"highlight\" : settings?.highlight[item[\"type\"]] || settings?.highlight[item[\"classes\"]]}'>{{item[\"value\"]}}</span>\n                </h3>\n                <h5 id=\"main\" *ngIf=\"settings?.level.breakdown_tier\">\n                  <span *ngFor=\"let item of conj['main']\" class=\"{{item['classes']}} no-padding header-text\"\n                    [ngClass]='{\"highlight\" : settings?.highlight[item[\"type\"]] || settings?.highlight[item[\"classes\"]]}'>{{item[\"value\"]}}\n                    <span class=\"gloss-dividers header-text\"\n                      *ngIf=\"conj['main'].indexOf(item) < conj['main'].length - 1\">-</span>\n                  </span>\n                </h5>\n                <h5 id=\"main\" *ngIf=\"settings?.level.gloss_tier\">\n                  <span *ngFor=\"let item of conj['secondary']\" class=\"{{item['classes']}} no-padding header-text\"\n                    [ngClass]='{\"highlight\" : settings?.highlight[item[\"type\"]] || settings?.highlight[item[\"classes\"]]}'>{{item[\"value\"]\n                    | decapitalize}}\n                    <span class=\"gloss-dividers header-text\"\n                      *ngIf=\"conj['secondary'].indexOf(item) < conj['secondary'].length - 1\">-</span>\n                  </span>\n                </h5>\n              </td>\n              <td class='center-text'>\n                <h4 id=\"main\" *ngIf=\"settings?.level.translation_tier\" class=\"no-padding header-text\">\n                  <span class='translation'>{{ conj['translation'] }}</span>\n                </h4>\n                <h5 id=\"main\" *ngIf=\"settings?.level.english_tier\">\n                  <span *ngFor=\"let item of conj['ternary']\" class=\"{{item['classes']}} no-padding header-text\"\n                    [ngClass]='{\"highlight\" : settings?.highlight[item[\"type\"]] || settings?.highlight[item[\"classes\"]]}'>{{item[\"value\"]\n                    | decapitalize }}\n                    <span class=\"gloss-dividers header-text\"\n                      *ngIf=\"conj['ternary'].indexOf(item) < conj['ternary'].length - 1\">-</span>\n                  </span>\n                </h5>\n              </td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n    </div>\n  </div>\n\n</div>"
 
 /***/ }),
 
@@ -517,7 +519,7 @@ module.exports = "<div class='panel'>\n  <div *ngIf=\"show_toolbar\" class='pane
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "button.conjugate {\n  line-height: 1.875em !important;\n  padding: 0 1em !important;\n  margin-right: 1em; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9waW5lYS93b3Jkd2VhdmVyLWd1aS9zcmMvYXBwL2NvbXBvbmVudHMvcGFnZXMvdGFibGV2aWV3ZXIvY29tcG9uZW50cy9jb25qLXBhbmVsL2NvbmotcGFuZWwuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSwrQkFBK0I7RUFDL0IseUJBQXlCO0VBQ3pCLGlCQUFpQixFQUFBIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9wYWdlcy90YWJsZXZpZXdlci9jb21wb25lbnRzL2NvbmotcGFuZWwvY29uai1wYW5lbC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImJ1dHRvbi5jb25qdWdhdGUge1xuICAgIGxpbmUtaGVpZ2h0OiAxLjg3NWVtICFpbXBvcnRhbnQ7XG4gICAgcGFkZGluZzogMCAxZW0gIWltcG9ydGFudDtcbiAgICBtYXJnaW4tcmlnaHQ6IDFlbTtcbn0iXX0= */"
+module.exports = "button.conjugate {\n  line-height: 1.875em !important;\n  padding: 0 1em !important;\n  margin-right: 1em; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9waW5lYS93b3Jkd2VhdmVyLUdVSS9zcmMvYXBwL2NvbXBvbmVudHMvcGFnZXMvdGFibGV2aWV3ZXIvY29tcG9uZW50cy9jb25qLXBhbmVsL2NvbmotcGFuZWwuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSwrQkFBK0I7RUFDL0IseUJBQXlCO0VBQ3pCLGlCQUFpQixFQUFBIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9wYWdlcy90YWJsZXZpZXdlci9jb21wb25lbnRzL2NvbmotcGFuZWwvY29uai1wYW5lbC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImJ1dHRvbi5jb25qdWdhdGUge1xuICAgIGxpbmUtaGVpZ2h0OiAxLjg3NWVtICFpbXBvcnRhbnQ7XG4gICAgcGFkZGluZzogMCAxZW0gIWltcG9ydGFudDtcbiAgICBtYXJnaW4tcmlnaHQ6IDFlbTtcbn0iXX0= */"
 
 /***/ }),
 
@@ -568,17 +570,20 @@ var ConjPanel = /** @class */ (function () {
         this.loading = true;
         if (!this.showExplorer) {
             this.response$ = this.conjugationService.conjugateTable(this.selectionService.selection);
+            console.log(this.response$);
+            this.response$.subscribe(function (x) { return console.log(x); });
             return this.response$;
         }
         else {
-            var order = "PT";
+            var order = 'PT';
             if (this.order) {
-                order = "TP";
+                order = 'TP';
             }
             this.chart_response$ = this.chartService.createChart(this.selectionService.selection, order, this.depth);
             this.chart_response$.subscribe(function (r) { return _this.chart_response = r; });
         }
     };
+    ConjPanel.prototype.isString = function (val) { return typeof val === 'string'; };
     ConjPanel.prototype.toggleExplorer = function () {
         this.showExplorer = !this.showExplorer;
         this.conjugate();
@@ -586,7 +591,7 @@ var ConjPanel = /** @class */ (function () {
     ConjPanel.prototype.download = function () {
         console.log('test');
         var query_args = this.conjugationService.createRequestUrl(this.selectionService.selection, [{ 'param': 'docx', 'value': 'true' }]).toString();
-        var url = this.conjugationService.path + "?" + query_args;
+        var url = this.conjugationService.path + '?' + query_args;
         window.location.href = url;
     };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -599,7 +604,8 @@ var ConjPanel = /** @class */ (function () {
             template: __webpack_require__(/*! ./conj-panel.component.html */ "./src/app/components/pages/tableviewer/components/conj-panel/conj-panel.component.html"),
             styles: [__webpack_require__(/*! ./conj-panel.component.scss */ "./src/app/components/pages/tableviewer/components/conj-panel/conj-panel.component.scss"), __webpack_require__(/*! ../../tableviewer.scss */ "./src/app/components/pages/tableviewer/tableviewer.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services__WEBPACK_IMPORTED_MODULE_3__["SettingsService"], _services__WEBPACK_IMPORTED_MODULE_3__["ConjugationService"], _services__WEBPACK_IMPORTED_MODULE_3__["SelectionService"], _services__WEBPACK_IMPORTED_MODULE_3__["ChartService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services__WEBPACK_IMPORTED_MODULE_3__["SettingsService"], _services__WEBPACK_IMPORTED_MODULE_3__["ConjugationService"],
+            _services__WEBPACK_IMPORTED_MODULE_3__["SelectionService"], _services__WEBPACK_IMPORTED_MODULE_3__["ChartService"]])
     ], ConjPanel);
     return ConjPanel;
 }());
@@ -615,7 +621,7 @@ var ConjPanel = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class='panel'>\n  <div class='panel__header'>\n    <h3 class='panel__title'>Person</h3>\n    <!-- <hr class='panel__underline'> -->\n    <div class='panel__toolbar--right toolbar'>\n      <mat-button-toggle-group class=\"toolbar__tool\" name=\"fontStyle\" aria-label=\"Font Style\" [(ngModel)]=\"role\" (ngModelChange)=\"checkRole()\">\n        <mat-button-toggle value=\"agent\" class=\"bg-red\" [class.color-white]=\"role !== 'patient'\" [class.faded]=\"role === 'patient'\">Agent</mat-button-toggle>\n        <mat-button-toggle value=\"patient\" class=\"bg-blue\" [class.color-white]=\"role !== 'agent'\" [class.faded]=\"role === 'agent'\">Patient</mat-button-toggle>\n      </mat-button-toggle-group>\n      <button *ngIf=\"!selectAllAg && role === 'agent'\" class=\"toolbar__tool\" mat-icon-button (click)=\"toggleSelectAll()\">\n        <mat-icon aria-label=\"Select all\">done_all</mat-icon>\n      </button>\n      <button *ngIf=\"selectAllAg && role === 'agent'\" class=\"toolbar__tool bg-red color-white\" mat-icon-button (click)=\"toggleSelectAll()\">\n        <mat-icon aria-label=\"Select all\">done_all</mat-icon>\n      </button>\n      <button *ngIf=\"!selectAllPat && role === 'patient'\" class=\"toolbar__tool\" mat-icon-button (click)=\"toggleSelectAll()\">\n        <mat-icon aria-label=\"Select all\">done_all</mat-icon>\n      </button>\n      <button *ngIf=\"selectAllPat && role === 'patient'\" class=\"toolbar__tool bg-blue color-white\" mat-icon-button (click)=\"toggleSelectAll()\">\n        <mat-icon aria-label=\"Select all\">done_all</mat-icon>\n      </button>\n    </div>\n  </div>\n\n  <div class='panel__content'>\n    <mat-list [formGroup]=\"agCheckboxGroup\" class=\"panel__list pro one\" role=\"list\" *ngIf=\"role === 'agent'\">\n      <div *ngFor=\"let value of agCheckboxPossibleValues | async | slice:0:limit \">\n        <mat-checkbox [color]=\"'red'\" [formControlName]=\"value.tag\">{{ value.gloss }}</mat-checkbox>\n      </div>\n    </mat-list>\n    <mat-list [formGroup]=\"agCheckboxGroup\" class=\"panel__list pro two\" role=\"list\" *ngIf=\"role === 'agent'\">\n      <div *ngFor=\"let value of agCheckboxPossibleValues | async | slice:limit \">\n        <mat-checkbox [color]=\"'red'\" [formControlName]=\"value.tag\">{{ value.gloss }}</mat-checkbox>\n      </div>\n    </mat-list>\n    <mat-list [formGroup]=\"patCheckboxGroup\" class=\"panel__list pro one\" role=\"list\" *ngIf=\"role === 'patient'\">\n      <div *ngFor=\"let value of patCheckboxPossibleValues | async  | slice:0:limit \">\n        <mat-checkbox [color]=\"'blue'\" [formControlName]=\"value.tag\">{{ value.gloss }}</mat-checkbox>\n      </div>\n    </mat-list>\n    <mat-list [formGroup]=\"patCheckboxGroup\" class=\"panel__list pro two\" role=\"list\" *ngIf=\"role === 'patient'\">\n      <div *ngFor=\"let value of patCheckboxPossibleValues | async  | slice:limit \">\n        <mat-checkbox [color]=\"'blue'\" [formControlName]=\"value.tag\">{{ value.gloss }}</mat-checkbox>\n      </div>\n    </mat-list>\n  </div>\n</div>"
+module.exports = "<div class='panel'>\n  <div class='panel__header'>\n    <h3 class='panel__title'>Person</h3>\n    <!-- <hr class='panel__underline'> -->\n    <div class='panel__toolbar--right toolbar'>\n      <mat-button-toggle-group class=\"toolbar__tool\" name=\"fontStyle\" aria-label=\"Font Style\" [(ngModel)]=\"role\" (ngModelChange)=\"checkRole()\">\n        <mat-button-toggle value=\"agent\" class=\"bg-red\" [class.color-white]=\"role !== 'patient'\" [class.faded]=\"role === 'patient'\">Do-er</mat-button-toggle>\n        <mat-button-toggle value=\"patient\" class=\"bg-blue\" [class.color-white]=\"role !== 'agent'\" [class.faded]=\"role === 'agent'\">Do-ee</mat-button-toggle>\n      </mat-button-toggle-group>\n      <button *ngIf=\"!selectAllAg && role === 'agent'\" class=\"toolbar__tool\" mat-icon-button (click)=\"toggleSelectAll()\">\n        <mat-icon aria-label=\"Select all\">done_all</mat-icon>\n      </button>\n      <button *ngIf=\"selectAllAg && role === 'agent'\" class=\"toolbar__tool bg-red color-white\" mat-icon-button (click)=\"toggleSelectAll()\">\n        <mat-icon aria-label=\"Select all\">done_all</mat-icon>\n      </button>\n      <button *ngIf=\"!selectAllPat && role === 'patient'\" class=\"toolbar__tool\" mat-icon-button (click)=\"toggleSelectAll()\">\n        <mat-icon aria-label=\"Select all\">done_all</mat-icon>\n      </button>\n      <button *ngIf=\"selectAllPat && role === 'patient'\" class=\"toolbar__tool bg-blue color-white\" mat-icon-button (click)=\"toggleSelectAll()\">\n        <mat-icon aria-label=\"Select all\">done_all</mat-icon>\n      </button>\n    </div>\n  </div>\n\n  <div class='panel__content'>\n    <mat-list [formGroup]=\"agCheckboxGroup\" class=\"panel__list pro one\" role=\"list\" *ngIf=\"role === 'agent'\">\n      <div *ngFor=\"let value of agCheckboxPossibleValues | async | slice:0:limit \">\n        <mat-checkbox [color]=\"'red'\" [formControlName]=\"value.tag\">{{ value.gloss }}</mat-checkbox>\n      </div>\n    </mat-list>\n    <mat-list [formGroup]=\"agCheckboxGroup\" class=\"panel__list pro two\" role=\"list\" *ngIf=\"role === 'agent'\">\n      <div *ngFor=\"let value of agCheckboxPossibleValues | async | slice:limit \">\n        <mat-checkbox [color]=\"'red'\" [formControlName]=\"value.tag\">{{ value.gloss }}</mat-checkbox>\n      </div>\n    </mat-list>\n    <mat-list [formGroup]=\"patCheckboxGroup\" class=\"panel__list pro one\" role=\"list\" *ngIf=\"role === 'patient'\">\n      <div *ngFor=\"let value of patCheckboxPossibleValues | async  | slice:0:limit \">\n        <mat-checkbox [color]=\"'blue'\" [formControlName]=\"value.tag\">{{ value.gloss }}</mat-checkbox>\n      </div>\n    </mat-list>\n    <mat-list [formGroup]=\"patCheckboxGroup\" class=\"panel__list pro two\" role=\"list\" *ngIf=\"role === 'patient'\">\n      <div *ngFor=\"let value of patCheckboxPossibleValues | async  | slice:limit \">\n        <mat-checkbox [color]=\"'blue'\" [formControlName]=\"value.tag\">{{ value.gloss }}</mat-checkbox>\n      </div>\n    </mat-list>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -667,7 +673,7 @@ var PersPanel = /** @class */ (function () {
             return values;
         }));
         this.patCheckedValues = [];
-        this.role = 'patient';
+        this.role = 'agent';
         this.limit = 8;
         this.selectAllAg = false;
         this.selectAllPat = false;
@@ -1401,7 +1407,7 @@ module.exports = "<div class=\"margin-top-20 full-width centered panel\">\n  <di
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".flex-display {\n  display: flex; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9waW5lYS93b3Jkd2VhdmVyLWd1aS9zcmMvYXBwL2NvbXBvbmVudHMvcGFnZXMvd29yZG1ha2VyL2NvbXBvbmVudHMvd29yZG1ha2VyLXZlcmItcGFuZWwvd29yZG1ha2VyLXZlcmItcGFuZWwuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxhQUFhLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL3BhZ2VzL3dvcmRtYWtlci9jb21wb25lbnRzL3dvcmRtYWtlci12ZXJiLXBhbmVsL3dvcmRtYWtlci12ZXJiLXBhbmVsLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmZsZXgtZGlzcGxheSB7XG4gICAgZGlzcGxheTogZmxleDtcbn0iXX0= */"
+module.exports = ".flex-display {\n  display: flex; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9waW5lYS93b3Jkd2VhdmVyLUdVSS9zcmMvYXBwL2NvbXBvbmVudHMvcGFnZXMvd29yZG1ha2VyL2NvbXBvbmVudHMvd29yZG1ha2VyLXZlcmItcGFuZWwvd29yZG1ha2VyLXZlcmItcGFuZWwuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxhQUFhLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL3BhZ2VzL3dvcmRtYWtlci9jb21wb25lbnRzL3dvcmRtYWtlci12ZXJiLXBhbmVsL3dvcmRtYWtlci12ZXJiLXBhbmVsLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmZsZXgtZGlzcGxheSB7XG4gICAgZGlzcGxheTogZmxleDtcbn0iXX0= */"
 
 /***/ }),
 
@@ -1458,6 +1464,7 @@ var WordmakerVerbPanel = /** @class */ (function () {
     WordmakerVerbPanel.prototype.ngOnInit = function () {
         var _this = this;
         this.search$ = this.searchField.valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["debounceTime"])(100), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["switchMap"])(function (term) { return _this.verbService.verbs$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (verbs) {
+            console.log(verbs);
             var new_verbs = verbs.filter(function (v) {
                 return (v.gloss.toLowerCase().indexOf(term.toLowerCase()) > -1 || v.display.toLowerCase().indexOf(term.toLowerCase()) > -1);
             });
@@ -1576,7 +1583,7 @@ module.exports = "<div class=\"centered page__content vwidth-90 rel\">\n  <div c
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "mat-toolbar {\n  width: -webkit-fit-content;\n  width: -moz-fit-content;\n  width: fit-content; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9waW5lYS93b3Jkd2VhdmVyLWd1aS9zcmMvYXBwL2NvbXBvbmVudHMvcGFnZXMvd29yZG1ha2VyL3dvcmRtYWtlci5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksMEJBQWtCO0VBQWxCLHVCQUFrQjtFQUFsQixrQkFBa0IsRUFBQSIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvcGFnZXMvd29yZG1ha2VyL3dvcmRtYWtlci5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsibWF0LXRvb2xiYXIge1xuICAgIHdpZHRoOiBmaXQtY29udGVudDtcbn1cblxuIl19 */"
+module.exports = "mat-toolbar {\n  width: -webkit-fit-content;\n  width: -moz-fit-content;\n  width: fit-content; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9waW5lYS93b3Jkd2VhdmVyLUdVSS9zcmMvYXBwL2NvbXBvbmVudHMvcGFnZXMvd29yZG1ha2VyL3dvcmRtYWtlci5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksMEJBQWtCO0VBQWxCLHVCQUFrQjtFQUFsQixrQkFBa0IsRUFBQSIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvcGFnZXMvd29yZG1ha2VyL3dvcmRtYWtlci5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsibWF0LXRvb2xiYXIge1xuICAgIHdpZHRoOiBmaXQtY29udGVudDtcbn1cblxuIl19 */"
 
 /***/ }),
 
@@ -2007,7 +2014,7 @@ module.exports = "<div id=\"lineDrawing\">\n    <svg width=\"281.7\" height=\"35
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#lineDrawing {\n  position: absolute;\n  top: 40px;\n  left: 25px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9waW5lYS93b3Jkd2VhdmVyLWd1aS9zcmMvYXBwL2NvbXBvbmVudHMvc2hhcmVkL2xvZ28vbG9nby5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksa0JBQWtCO0VBQ2xCLFNBQVM7RUFDVCxVQUFVLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL3NoYXJlZC9sb2dvL2xvZ28uc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIiNsaW5lRHJhd2luZyB7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIHRvcDogNDBweDtcbiAgICBsZWZ0OiAyNXB4O1xufSJdfQ== */"
+module.exports = "#lineDrawing {\n  position: absolute;\n  top: 40px;\n  left: 25px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9waW5lYS93b3Jkd2VhdmVyLUdVSS9zcmMvYXBwL2NvbXBvbmVudHMvc2hhcmVkL2xvZ28vbG9nby5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksa0JBQWtCO0VBQ2xCLFNBQVM7RUFDVCxVQUFVLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL3NoYXJlZC9sb2dvL2xvZ28uc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIiNsaW5lRHJhd2luZyB7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIHRvcDogNDBweDtcbiAgICBsZWZ0OiAyNXB4O1xufSJdfQ== */"
 
 /***/ }),
 
@@ -2069,7 +2076,7 @@ var LogoAnime = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1 mat-dialog-title>Settings</h1>\n<div mat-dialog-content class=\"container\">\n  <h3>Highlighting</h3>\n  <mat-list #highlighting>\n    <mat-checkbox class=\"pronouns\" [(ngModel)]=\"settings.highlight.pronoun\" (ngModelChange)=\"update(settings)\">\n      Pronouns\n    </mat-checkbox>\n    <mat-checkbox class=\"root\" [(ngModel)]=\"settings.highlight.root\" (ngModelChange)=\"update(settings)\">\n      Verb\n    </mat-checkbox>\n    <h5>Affixes</h5>\n    <mat-list #affixes>\n      <mat-checkbox class=\"aspect\" [(ngModel)]=\"settings.highlight.aspect\" (ngModelChange)=\"update(settings)\">\n        Aspect\n      </mat-checkbox>\n      <mat-checkbox class=\"prepronominal_prefix\" [(ngModel)]=\"settings.highlight.prepronominal_prefix\" (ngModelChange)=\"update(settings)\">\n        Required\n      </mat-checkbox>\n      <mat-checkbox class=\"tmp_affix\" [(ngModel)]=\"settings.highlight.tmp_affix\" (ngModelChange)=\"update(settings)\">\n        Temp\n      </mat-checkbox>\n      <mat-checkbox class=\"post_aspectual_suffix\" [(ngModel)]=\"settings.highlight.post_aspectual_suffix\" (ngModelChange)=\"update(settings)\">\n        Post Aspectual Suffix\n      </mat-checkbox>\n    </mat-list>\n  </mat-list>\n  <h3>Tiers</h3>\n  <mat-list #tiers>\n    <mat-checkbox [(ngModel)]=\"settings.level.breakdown_tier\" (ngModelChange)=\"update(settings)\">\n      Breakdown Tier\n    </mat-checkbox>\n    <mat-checkbox [(ngModel)]=\"settings.level.english_tier\" (ngModelChange)=\"update(settings)\">\n      English Tier\n    </mat-checkbox>\n    <mat-checkbox [(ngModel)]=\"settings.level.translation_tier\" (ngModelChange)=\"update(settings)\">\n        Translation Tier\n      </mat-checkbox>\n    <mat-checkbox [(ngModel)]=\"settings.level.gloss_tier\" (ngModelChange)=\"update(settings)\">\n      Gloss Tier\n    </mat-checkbox>\n  </mat-list>\n</div>\n<hr>\n<h3>Advanced</h3>\n<mat-slide-toggle [(ngModel)]=\"settings.test_api\">Use Test API</mat-slide-toggle>\n<div mat-dialog-actions>\n  <button mat-button (click)=\"close()\">OK</button>\n</div>"
+module.exports = "<h1 mat-dialog-title>Settings</h1>\n<div mat-dialog-content class=\"settings__container\">\n  <h3>Highlighting</h3>\n  <mat-list #highlighting>\n    <mat-checkbox class=\"pronouns\" [(ngModel)]=\"settings.highlight.pronoun\" (ngModelChange)=\"update(settings)\">\n      Pronouns\n    </mat-checkbox>\n    <mat-checkbox class=\"root\" [(ngModel)]=\"settings.highlight.root\" (ngModelChange)=\"update(settings)\">\n      Verb\n    </mat-checkbox>\n    <h5>Affixes</h5>\n    <mat-list #affixes>\n      <mat-checkbox class=\"aspect\" [(ngModel)]=\"settings.highlight.aspect\" (ngModelChange)=\"update(settings)\">\n        Aspect\n      </mat-checkbox>\n      <mat-checkbox class=\"prepronominal_prefix\" [(ngModel)]=\"settings.highlight.prepronominal_prefix\"\n        (ngModelChange)=\"update(settings)\">\n        Required\n      </mat-checkbox>\n      <mat-checkbox class=\"tmp_affix\" [(ngModel)]=\"settings.highlight.tmp_affix\" (ngModelChange)=\"update(settings)\">\n        Temp\n      </mat-checkbox>\n      <mat-checkbox class=\"post_aspectual_suffix\" [(ngModel)]=\"settings.highlight.post_aspectual_suffix\"\n        (ngModelChange)=\"update(settings)\">\n        Post Aspectual Suffix\n      </mat-checkbox>\n    </mat-list>\n  </mat-list>\n  <h3>Tiers</h3>\n  <div class='setting__container'>\n    <mat-list #tiers id='tiersSetting'>\n      <mat-checkbox [(ngModel)]=\"settings.level.breakdown_tier\" (ngModelChange)=\"update(settings)\">\n        Breakdown Tier\n      </mat-checkbox>\n      <mat-checkbox [(ngModel)]=\"settings.level.gloss_tier\" (ngModelChange)=\"update(settings)\">\n        Gloss Tier\n      </mat-checkbox>\n      <mat-checkbox [(ngModel)]=\"settings.level.english_tier\" (ngModelChange)=\"update(settings)\">\n        English Tier\n      </mat-checkbox>\n      <mat-checkbox [(ngModel)]=\"settings.level.translation_tier\" (ngModelChange)=\"update(settings)\">\n        Translation Tier\n      </mat-checkbox>\n    </mat-list>\n  </div>\n</div>\n<hr>\n<h3>Advanced</h3>\n<mat-slide-toggle [(ngModel)]=\"settings.test_api\">Use Test API</mat-slide-toggle>\n<div mat-dialog-actions>\n  <button mat-button (click)=\"close()\">OK</button>\n</div>"
 
 /***/ }),
 
@@ -2080,7 +2087,7 @@ module.exports = "<h1 mat-dialog-title>Settings</h1>\n<div mat-dialog-content cl
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "mat-list {\n  text-align: left; }\n\nmat-checkbox {\n  margin: 10px; }\n\nhr {\n  margin-top: 40px; }\n\n.container {\n  overflow-y: hidden; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9waW5lYS93b3Jkd2VhdmVyLWd1aS9zcmMvYXBwL2NvbXBvbmVudHMvc2hhcmVkL3NldHRpbmdzL3NldHRpbmdzLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksZ0JBQWdCLEVBQUE7O0FBR3BCO0VBQ0ksWUFBWSxFQUFBOztBQUdoQjtFQUNJLGdCQUFnQixFQUFBOztBQUdwQjtFQUNJLGtCQUFrQixFQUFBIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9zaGFyZWQvc2V0dGluZ3Mvc2V0dGluZ3MuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJtYXQtbGlzdCB7XG4gICAgdGV4dC1hbGlnbjogbGVmdDtcbn1cblxubWF0LWNoZWNrYm94IHtcbiAgICBtYXJnaW46IDEwcHg7XG59XG5cbmhyIHtcbiAgICBtYXJnaW4tdG9wOiA0MHB4O1xufVxuXG4uY29udGFpbmVyIHtcbiAgICBvdmVyZmxvdy15OiBoaWRkZW47XG59Il19 */"
+module.exports = "mat-list {\n  text-align: left; }\n\nmat-checkbox {\n  margin: 10px; }\n\nhr {\n  margin-top: 40px; }\n\n.settings__container {\n  overflow-y: hidden; }\n\n#tiersSetting {\n  display: grid; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9waW5lYS93b3Jkd2VhdmVyLUdVSS9zcmMvYXBwL2NvbXBvbmVudHMvc2hhcmVkL3NldHRpbmdzL3NldHRpbmdzLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksZ0JBQWdCLEVBQUE7O0FBR3BCO0VBQ0ksWUFBWSxFQUFBOztBQUdoQjtFQUNJLGdCQUFnQixFQUFBOztBQUdwQjtFQUNJLGtCQUFrQixFQUFBOztBQUd0QjtFQUNJLGFBQWEsRUFBQSIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvc2hhcmVkL3NldHRpbmdzL3NldHRpbmdzLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsibWF0LWxpc3Qge1xuICAgIHRleHQtYWxpZ246IGxlZnQ7XG59XG5cbm1hdC1jaGVja2JveCB7XG4gICAgbWFyZ2luOiAxMHB4O1xufVxuXG5ociB7XG4gICAgbWFyZ2luLXRvcDogNDBweDtcbn1cblxuLnNldHRpbmdzX19jb250YWluZXIge1xuICAgIG92ZXJmbG93LXk6IGhpZGRlbjtcbn1cblxuI3RpZXJzU2V0dGluZyB7XG4gICAgZGlzcGxheTogZ3JpZDtcbn0iXX0= */"
 
 /***/ }),
 
@@ -2575,7 +2582,7 @@ var ChartService = /** @class */ (function () {
         var _this = this;
         if (selected === void 0) { selected = false; }
         if (depth === void 0) { depth = 0; }
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].base + _environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].prefix + '/' + datatype).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (data) {
+        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].base + _environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].prefix + datatype).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (data) {
             // prevent too many nodes
             if (selected) {
                 data = selected;
@@ -2782,15 +2789,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var _tier_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./tier.service */ "./src/app/services/tier.service.ts");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
-/* harmony import */ var _components_shared_error_error_snack__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/shared/error/error.snack */ "./src/app/components/shared/error/error.snack.ts");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _verb_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./verb.service */ "./src/app/services/verb.service.ts");
-/* harmony import */ var _pronoun_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./pronoun.service */ "./src/app/services/pronoun.service.ts");
-/* harmony import */ var _settings_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./settings.service */ "./src/app/services/settings.service.ts");
-
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _verb_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./verb.service */ "./src/app/services/verb.service.ts");
+/* harmony import */ var _pronoun_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./pronoun.service */ "./src/app/services/pronoun.service.ts");
+/* harmony import */ var _settings_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./settings.service */ "./src/app/services/settings.service.ts");
 
 
 
@@ -2849,7 +2854,6 @@ var ConjugationService = /** @class */ (function () {
         return params;
     };
     ConjugationService.prototype.conjugate = function (tableargs, optional) {
-        var _this = this;
         var params = this.createRequestUrl(tableargs, optional);
         var path = this.path;
         if (this.settingsService.settings.value['test_api']) {
@@ -2857,34 +2861,36 @@ var ConjugationService = /** @class */ (function () {
             path = this.test_path;
         }
         return this.http.get(path, { params: params })
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["catchError"])(function (err) {
-            _this.snackBar.openFromComponent(_components_shared_error_error_snack__WEBPACK_IMPORTED_MODULE_6__["ErrorSnackComponent"], {
-                data: { 'message': err.error.message, 'action': 'OK' },
-                horizontalPosition: "center",
-                verticalPosition: 'top',
-                duration: 3000
-            });
-            return Object(rxjs__WEBPACK_IMPORTED_MODULE_7__["of"])(false);
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["catchError"])(function (err) {
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_6__["of"])(err.error.message);
         }));
     };
     ConjugationService.prototype.conjugateTable = function (tableargs, test) {
         var _this = this;
         return this.conjugate(tableargs, test = test)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["map"])(function (res) { return _this.tierService.createTiers(res); }));
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["map"])(function (res) {
+            if (typeof (res) === 'string') {
+                // return error as string
+                return res;
+            }
+            else {
+                return _this.tierService.createTiers(res);
+            }
+        }));
     };
     ConjugationService.prototype.returnAffopts = function (res) {
         var affopts = [];
-        res.forEach(function (conj) {
+        res['values'].forEach(function (conj) {
             affopts.push(conj.affopt);
         });
-        affopts = Object(lodash__WEBPACK_IMPORTED_MODULE_9__["uniq"])(affopts);
+        affopts = Object(lodash__WEBPACK_IMPORTED_MODULE_8__["uniq"])(affopts);
         affopts = affopts.map(function (a) { return { "name": a }; });
         return affopts;
     };
     ConjugationService.prototype.returnPros = function (res, v) {
         var _this = this;
         var pronouns = [];
-        res.forEach(function (conj) {
+        res.values.forEach(function (conj) {
             if (conj.root['tag'] === v) {
                 var vb = _this.verbService.getVerb(v);
                 if (vb['thematic_relation'] === 'red') {
@@ -2894,12 +2900,13 @@ var ConjugationService = /** @class */ (function () {
                     pronouns.push(_this.pronounService.getPronoun(conj.pronoun['patient'])['gloss']);
                 }
                 else {
-                    pronouns.push(_this.pronounService.getPronoun(conj.pronoun['agent'])['gloss'] + " > " + _this.pronounService.getPronoun(conj.pronoun['patient'])['obj_gloss']);
+                    pronouns.push(_this.pronounService.getPronoun(conj.pronoun['agent'])['gloss'] + ' > ' +
+                        _this.pronounService.getPronoun(conj.pronoun['patient'])['obj_gloss']);
                 }
             }
         });
-        pronouns = Object(lodash__WEBPACK_IMPORTED_MODULE_9__["uniq"])(pronouns);
-        pronouns = pronouns.map(function (a) { return { "name": a }; });
+        pronouns = Object(lodash__WEBPACK_IMPORTED_MODULE_8__["uniq"])(pronouns);
+        pronouns = pronouns.map(function (a) { return { 'name': a }; });
         return pronouns;
     };
     ConjugationService.prototype.returnValue = function (conj) {
@@ -2907,11 +2914,13 @@ var ConjugationService = /** @class */ (function () {
         morphemes = morphemes.sort(function (a, b) {
             return a.position - b.position;
         });
-        return morphemes.map(function (m) { return m.value; }).join("");
+        return morphemes.map(function (m) { return m.value; }).join('');
     };
     ConjugationService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"], _tier_service__WEBPACK_IMPORTED_MODULE_4__["TierService"], _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatSnackBar"], _verb_service__WEBPACK_IMPORTED_MODULE_10__["VerbService"], _pronoun_service__WEBPACK_IMPORTED_MODULE_11__["PronounService"], _settings_service__WEBPACK_IMPORTED_MODULE_12__["SettingsService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"], _tier_service__WEBPACK_IMPORTED_MODULE_4__["TierService"], _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatSnackBar"],
+            _verb_service__WEBPACK_IMPORTED_MODULE_9__["VerbService"], _pronoun_service__WEBPACK_IMPORTED_MODULE_10__["PronounService"],
+            _settings_service__WEBPACK_IMPORTED_MODULE_11__["SettingsService"]])
     ], ConjugationService);
     return ConjugationService;
 }());
@@ -3252,16 +3261,15 @@ var TierService = /** @class */ (function () {
         this.http = http;
         this.settingsService = settingsService;
         this.snackBar = snackBar;
-        this.errorTier = "Oh no! We couldn't conjugate this. Please make sure you're connected to the internet and try again. If the problem keeps happening, please contact us!";
+        this.errorTier = "Oh no! We couldn't conjugate this. \n                      Please make sure you're connected to the internet and try again.\n                      If the problem keeps happening, please contact us!";
     }
-    TierService.prototype.ngOnInit = function () {
-    };
     // Determine if object is null or has any null properties. Intended for Agent and Patient
     TierService.prototype.hasNull = function (target) {
         if (target) {
             for (var member in target) {
-                if (target[member] == null)
+                if (target[member] == null) {
                     return true;
+                }
             }
             return false;
         }
@@ -3273,13 +3281,13 @@ var TierService = /** @class */ (function () {
     TierService.prototype.determinePNType = function (conjugation, verb_role) {
         var pn_roles = [];
         if (verb_role === 'red') {
-            pn_roles.push("agent");
+            pn_roles.push('agent');
         }
         else if (verb_role === 'blue') {
             pn_roles.push('patient');
         }
         else {
-            pn_roles.push("agent");
+            pn_roles.push('agent');
             pn_roles.push('patient');
         }
         return pn_roles;
@@ -3288,20 +3296,28 @@ var TierService = /** @class */ (function () {
     TierService.prototype.createTiers = function (conjugations) {
         var _this = this;
         return conjugations.map(function (conjugation) {
+            var index = conjugations.indexOf(conjugation);
+            var values = conjugation.values;
             return {
-                'main': _this.createTier(conjugation, { 'keys': ['value'], 'seperator': '' }, { 'keys': ['value'], 'seperator': '' }, { 'keys': ['value'], 'seperator': '' }),
-                'secondary': _this.createTier(conjugation, { 'keys': ['verb'], 'seperator': '' }, { 'keys': ["pronoun"], 'seperator': '' }, { 'keys': ['gloss'], 'seperator': '' }),
-                'ternary': _this.createTier(conjugation, { 'keys': ['gloss'], 'seperator': '' }, {
+                'main': _this.createTier(values, { 'keys': ['value'], 'seperator': '' }, { 'keys': ['value'], 'seperator': '' }, { 'keys': ['value'], 'seperator': '' }),
+                'secondary': _this.createTier(values, { 'keys': [' root'], 'seperator': '' }, {
+                    'keys': [
+                        'agent',
+                        'patient'
+                    ],
+                    'seperator': ' > '
+                }, { 'keys': ['gloss'], 'seperator': '' }),
+                'ternary': _this.createTier(values, { 'keys': ['gloss'], 'seperator': '' }, {
                     'keys': [
                         'gloss',
                         'obj_gloss'
                     ],
                     'seperator': ' > '
                 }, { 'keys': ['gloss'], 'seperator': '' }),
-                'translation': conjugation['translation'],
+                'translation': conjugations[index]['translation'],
                 'error': _this.errorTier,
-                'affopt': conjugation['affopt'],
-                'pronoun': conjugation['pronoun']
+                'affopt': values['affopt'],
+                'pronoun': values['pronoun']
             };
         });
     };
@@ -3330,7 +3346,7 @@ var TierService = /** @class */ (function () {
             }).join(pn_key_obj['seperator']);
         }
         else {
-            if (conjugation.pronoun[pn_keys[0]]) {
+            if (conjugation.pronoun.hasOwnProperty(pn_keys[0])) {
                 pronoun_value = conjugation.pronoun[pn_keys[0]];
             }
             else {
@@ -3338,17 +3354,19 @@ var TierService = /** @class */ (function () {
             }
         }
         var pronoun_role_css = pronoun_role;
-        console.log(conjugation);
         if (verb_role === 'red' && conjugation['affixes'].filter(function (x) { return x.tag === 'perf'; }).length > 0) {
             pronoun_role_css = ['patient'];
         }
         // But it should give Agent if it's there, else Patient
-        var pronoun_obj = { 'position': conjugation['pronoun']['position'], 'value': pronoun_value, 'classes': [pronoun_role_css.join(' '), "pronoun"].join(' '), 'type': 'pronoun' };
+        var pronoun_obj = {
+            'position': conjugation['pronoun']['position'],
+            'value': pronoun_value, 'classes': [pronoun_role_css.join(' '), 'pronoun'].join(' '), 'type': 'pronoun'
+        };
         // Verb
         conjugation.root['gloss'] = this.verbService.getVerb(conjugation.root['tag'])['gloss'];
         var verb_value = verb_key_obj['keys'].map(function (key) {
             // if the key exists in the conjugation provided, return the value
-            if (conjugation.root[key]) {
+            if (conjugation.root.hasOwnProperty(key)) {
                 return conjugation.root[key];
                 // else return the key
             }
@@ -3356,10 +3374,12 @@ var TierService = /** @class */ (function () {
                 return key;
             }
         }).join(verb_key_obj['seperator']);
-        var verb_root_obj = { 'position': conjugation['root']["position"], 'value': verb_value, 'classes': ['root'].join(' '), 'type': 'root' };
+        var verb_root_obj = {
+            'position': conjugation['root']['position'],
+            'value': verb_value, 'classes': ['root'].join(' '), 'type': 'root'
+        };
         // Affixes
         var affixes = [];
-        console.log(conjugation);
         conjugation.affixes.forEach(function (morpheme) {
             if (morpheme != null) {
                 morpheme['class'] = morpheme['type'];
@@ -3367,34 +3387,13 @@ var TierService = /** @class */ (function () {
                 affixes.push(morpheme);
             }
         });
-        // if (conjugation.aspect != null) {
-        //     let morpheme = conjugation.aspect;
-        //     morpheme['class'] = 'aspect';
-        //     morpheme['gloss'] = this.affixService.getAffix(morpheme['tag'])['gloss']
-        //     morpheme['type'] = 'asp'
-        //     affixes.push(morpheme);
-        // }
-        // if (conjugation.tmp_affix != null) {
-        //     conjugation.tmp_affix.forEach((morpheme) => { if (morpheme != null) { morpheme['class'] = 'tmp'; morpheme['gloss'] = this.affixService.getAffix(morpheme['tag'])['gloss']; morpheme['type'] = 'tmp'; affixes.push(morpheme) } })
-        // }
-        // if (conjugation.post_aspect != null) {
-        //     conjugation.post_aspect.forEach((morpheme) => { if (morpheme != null) { morpheme['class'] = 'post_aspect'; morpheme['gloss'] = this.affixService.getAffix(morpheme['tag'])['gloss']; morpheme['type'] = 'post_aspect'; affixes.push(morpheme) } })
-        // }
-        // if (Array.isArray(conjugation["required_affixes"]) && conjugation["required_affixes"].length) {
-        //     conjugation["required_affixes"].forEach((morpheme) => {
-        //         if (morpheme != null) {
-        //             morpheme['gloss'] = this.affixService.getAffix(morpheme['tag'])['gloss']
-        //             morpheme['class'] = 'req'; morpheme['type'] = 'req'; affixes.push(morpheme)
-        //         }
-        //     })
-        // }
         // Add non-null affix html to affixes_html_arr
         var affixes_obj_arr = [];
         affixes.forEach(function (affix) {
-            if (affix.value != null && affix.value != '') {
+            if (affix.value != null && affix.value !== '') {
                 var aff_value = aff_key_obj['keys'].map(function (key) {
                     // if the key exists in the conjugation provided, return the value
-                    if (affix[key]) {
+                    if (affix.hasOwnProperty(key)) {
                         return affix[key];
                         // else return the key
                     }
@@ -3402,7 +3401,10 @@ var TierService = /** @class */ (function () {
                         return key;
                     }
                 }).join(aff_key_obj['seperator']);
-                affixes_obj_arr.push({ "position": affix.position, "value": aff_value, "classes": [affix["class"]].join(' '), "type": affix["type"] });
+                affixes_obj_arr.push({
+                    'position': affix.position, 'value': aff_value,
+                    'classes': [affix['class']].join(' '), 'type': affix['type']
+                });
             }
         });
         // Sort elements
@@ -3413,7 +3415,8 @@ var TierService = /** @class */ (function () {
     TierService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])(),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_affix_service__WEBPACK_IMPORTED_MODULE_3__["AffixService"], _pronoun_service__WEBPACK_IMPORTED_MODULE_4__["PronounService"],
-            _verb_service__WEBPACK_IMPORTED_MODULE_6__["VerbService"], _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"], _settings_service__WEBPACK_IMPORTED_MODULE_5__["SettingsService"], _angular_material__WEBPACK_IMPORTED_MODULE_7__["MatSnackBar"]])
+            _verb_service__WEBPACK_IMPORTED_MODULE_6__["VerbService"], _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"],
+            _settings_service__WEBPACK_IMPORTED_MODULE_5__["SettingsService"], _angular_material__WEBPACK_IMPORTED_MODULE_7__["MatSnackBar"]])
     ], TierService);
     return TierService;
 }());
@@ -3549,7 +3552,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/pinea/wordweaver-gui/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/pinea/wordweaver-GUI/src/main.ts */"./src/main.ts");
 
 
 /***/ })
