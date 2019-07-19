@@ -14,24 +14,25 @@ import { EChartOption } from 'echarts';
 })
 export class ConjPanel implements OnInit {
   chart_response$: Observable<EChartOption>;
-  chart_response: EChartOption
-  response$: Observable<Conjugation[]>;
+  chart_response: EChartOption;
+  response$: any;
   @ViewChild('explorer') explorer;
   showDelay = new FormControl(1000);
   hideDelay = new FormControl(200);
-  tooltipPosition = 'above'
+  tooltipPosition = 'above';
   settings: Settings;
-  language = MetaData.language
-  showExplorer: boolean = false;
-  loading: boolean = false;
-  show_toolbar: boolean = true;
-  order: boolean = true
-  depth: number = 1;
-  constructor(private settingsService: SettingsService, private conjugationService: ConjugationService, private selectionService: SelectionService, private chartService: ChartService) {
+  language = MetaData.language;
+  showExplorer = false;
+  loading = false;
+  show_toolbar = true;
+  order = true;
+  depth = 1;
+  constructor(private settingsService: SettingsService, private conjugationService: ConjugationService,
+    private selectionService: SelectionService, private chartService: ChartService) {
   }
 
   ngOnInit() {
-    this.settingsService.settings.subscribe((settings: Settings) => { this.settings = settings })
+    this.settingsService.settings.subscribe((settings: Settings) => { this.settings = settings; });
   }
 
   ngOnChanges() {
@@ -41,32 +42,33 @@ export class ConjPanel implements OnInit {
   conjugate() {
     this.loading = true;
     if (!this.showExplorer) {
-      this.response$ = this.conjugationService.conjugateTable(this.selectionService.selection)
-      console.log(this.response$)
-      this.response$.subscribe(x => console.log(x))
-      return this.response$
+      this.response$ = this.conjugationService.conjugateTable(this.selectionService.selection);
+      console.log(this.response$);
+      this.response$.subscribe(x => console.log(x));
+      return this.response$;
     } else {
-      let order = "PT"
+      let order = 'PT';
       if (this.order) {
-        order = "TP"
+        order = 'TP';
       }
       this.chart_response$ = this.chartService.createChart(this.selectionService.selection, order, this.depth)
-      this.chart_response$.subscribe(r => this.chart_response = r)
+      this.chart_response$.subscribe(r => this.chart_response = r);
     }
   }
 
   isString(val) { return typeof val === 'string'; }
 
   toggleExplorer() {
-    this.showExplorer = !this.showExplorer
-    this.conjugate()
+    this.showExplorer = !this.showExplorer;
+    this.conjugate();
   }
 
   download() {
-    console.log('test')
-    let query_args = this.conjugationService.createRequestUrl(this.selectionService.selection, [{ 'param': 'docx', 'value': 'true' }]).toString()
-    let url = this.conjugationService.path + "?" + query_args
-    window.location.href = url
+    console.log('test');
+    const query_args = this.conjugationService.createRequestUrl(this.selectionService.selection,
+      [{ 'param': 'docx', 'value': 'true' }]).toString();
+    const url = this.conjugationService.path + '?' + query_args;
+    window.location.href = url;
   }
 
 }

@@ -1,17 +1,23 @@
-import { Verb } from './verb.model'
+export interface ResponseObject {
+    position: number;
+    value: string;
+    tag?: string;
+    type?: string;
+    agent?: string;
+    patient?: string;
+}
 
-// export interface Response {
-//     translation: String;
-//     verb: Verb;
-// }
-
-export interface responseObject {
-    position: Number,
-    value: string
+export interface ResponseValue {
+    affixes: ResponseObject;
+    pronoun: ResponseObject;
+    root: ResponseObject;
+    affopt: string;
 }
 
 export interface Response {
-    affixes: responseObject,
-    pronoun: responseObject,
-    root: responseObject,
+    values: ResponseValue[];
+    tag?: object;
+    marker?: string;
+    plain_text?: string;
+    translation?: string;
 }

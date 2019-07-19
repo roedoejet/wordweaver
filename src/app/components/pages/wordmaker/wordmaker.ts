@@ -35,7 +35,7 @@ export class WordmakerPage {
   selectedVerb: Verb;
   selectedPers: Pronoun;
   selectedTemp: AffOption;
-  word$: Observable<Conjugation>;
+  word$: any;
 
   @HostListener('document:keyup', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
