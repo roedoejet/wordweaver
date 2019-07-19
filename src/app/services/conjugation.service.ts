@@ -63,7 +63,6 @@ export class ConjugationService {
         const params = this.createRequestUrl(tableargs, optional);
         let path = this.path;
         if (this.settingsService.settings.value['test_api']) {
-            console.log('true')
             path = this.test_path;
         }
         return this.http.get(path, { params: params })
