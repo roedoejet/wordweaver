@@ -33,7 +33,7 @@ export class ChartService {
                     },
                     toolbox: {
                         feature: {
-                            saveAsImage: { title: "save", show: false }
+                            saveAsImage: { title: 'save', show: false }
                         }
                     },
                     series: [{
@@ -41,7 +41,7 @@ export class ChartService {
                         // label: {
                         //     color: "#fff"
                         // },
-                        name: "Kawennon:nis",
+                        name: 'Kawennon:nis',
                         data: data,
                         layout: 'radial',
                         top: '20%',
@@ -63,9 +63,9 @@ export class ChartService {
     returnBasicDataFrom(list_of_data) {
         if (list_of_data.length > 50) {
             let initial_letters = uniq(list_of_data.map(x => x['gloss'][0]))
-            list_of_data = initial_letters.map(l => { return { "name": l, "children": list_of_data.filter(x => x['gloss'][0] === l).map(x => { return { 'name': x['gloss'] } }) } })
+            list_of_data = initial_letters.map(l => { return { 'name': l, 'children': list_of_data.filter(x => x['gloss'][0] === l).map(x => { return { 'name': x['gloss'] } }) } })
         } else {
-            list_of_data = list_of_data.map(x => { return { "name": x['gloss'] } })
+            list_of_data = list_of_data.map(x => { return { 'name': x['gloss'] } })
         }
         return list_of_data
     }
@@ -75,13 +75,13 @@ export class ChartService {
             map(pns => {
                 let all_pns = [];
                 pns.forEach(ag_pn => {
-                    let ag_node = { "name": ag_pn['gloss'], "children": [] };
+                    let ag_node = { 'name': ag_pn['gloss'], 'children': [] };
                     pns.forEach(pat_pn => {
                         // prevent same person
                         if (ag_pn.person !== pat_pn.person) {
                             //prevent inclusive + second person
                             if (!(ag_pn.person === '2' && pat_pn.inclusivity === 'incl') && !(ag_pn.inclusivity === 'incl' && pat_pn.person === '2')) {
-                                ag_node['children'].push({ "name": pat_pn['obj_gloss'] })
+                                ag_node['children'].push({ 'name': pat_pn['obj_gloss'] })
                             }
                         };
                     })
@@ -96,7 +96,7 @@ export class ChartService {
                     },
                     toolbox: {
                         feature: {
-                            saveAsImage: { title: "save", show: false }
+                            saveAsImage: { title: 'save', show: false }
                         }
                     },
                     series: [{
@@ -105,7 +105,7 @@ export class ChartService {
                         //     color: "#fff"
                         // },
                         name: name,
-                        data: [{ "name": "Who", "children": all_pns }],
+                        data: [{ 'name': 'Who', 'children': all_pns }],
                         layout: 'radial',
                         orient: 'LR',
                         top: '30%',
@@ -135,7 +135,7 @@ export class ChartService {
                 }
                 let name = ''
                 if (datatype === 'verbs') {
-                    name = "What"
+                    name = 'What'
                 } else if (datatype === 'pronouns') {
                     name = 'Who'
                 } else if (datatype === 'aff-options') {
@@ -152,7 +152,7 @@ export class ChartService {
                     },
                     toolbox: {
                         feature: {
-                            saveAsImage: { title: "save", show: false }
+                            saveAsImage: { title: 'save', show: false }
                         }
                     },
                     series: [{
@@ -185,7 +185,7 @@ export class ChartService {
         morphemes = morphemes.sort(function (a, b) {
             return a.position - b.position
         })
-        return morphemes.map(m => m.value).join("")
+        return morphemes.map(m => m.value).join('')
     }
 
     createChartData(res, order, depth) {
@@ -199,7 +199,7 @@ export class ChartService {
             },
             toolbox: {
                 feature: {
-                    saveAsImage: { title: "save", show: false }
+                    saveAsImage: { title: 'save', show: false }
                 }
             },
             legend: {
@@ -212,42 +212,42 @@ export class ChartService {
             series: []
         }
         let node;
-        res.forEach(conj => {
-            let v = conj.root['tag']
-            let t = this.affixService.getAffOption(conj.affopt)['gloss']
-            let vb = this.verbService.getVerb(v)
+        for (let conj of res) {
+            conj = conj.values;
+            let v = conj.root['tag'];
+            let t = this.affixService.getAffOption(conj.affopt)['gloss'];
+            let vb = this.verbService.getVerb(v);
             let p;
             if (vb['thematic_relation'] === 'red') {
                 p = this.pronounService.getPronoun(conj.pronoun['agent'])['gloss']
             } else if (vb['thematic_relation'] === 'blue') {
                 p = this.pronounService.getPronoun(conj.pronoun['patient'])['gloss']
             } else {
-                p = this.pronounService.getPronoun(conj.pronoun['agent'])['gloss'] + " > " + this.pronounService.getPronoun(conj.pronoun['patient'])['obj_gloss']
+                p = this.pronounService.getPronoun(conj.pronoun['agent'])['gloss']
+                    + ' > ' + this.pronounService.getPronoun(conj.pronoun['patient'])['obj_gloss']
             }
-            let val = this.returnValue(conj)
+            const val = this.returnValue(conj);
 
-            if (order === "TP") {
-                node = merge(node, { [v]: { [t]: { [p]: val } } })
+            if (order === 'TP') {
+                node = merge(node, { [v]: { [t]: { [p]: val } } });
             } else {
-                node = merge(node, { [v]: { [p]: { [t]: val } } })
+                node = merge(node, { [v]: { [p]: { [t]: val } } });
             }
-        });
-
-        console.log(node)
-        for (let verb in node) {
-            verbs.push(verb)
-            let nv = { "name": verb, "children": [] }
-            for (let second in node[verb]) {
-                let ns = { "name": second, "children": [] }
-                for (let third in node[verb][second]) {
-                    let nt = { "name": third, "children": [{ "name": node[verb][second][third] }] }
-                    ns['children'].push(nt)
-                }
-                nv['children'].push(ns)
-            }
-            data.push(nv)
         }
 
+        for (const verb of Object.keys(node)) {
+            verbs.push(verb);
+            let nv = { 'name': verb, 'children': [] };
+            for (const second of Object.keys(node[verb])) {
+                const ns = { 'name': second, 'children': [] };
+                for (const third of Object.keys(node[verb][second])) {
+                    let nt = { 'name': third, 'children': [{ 'name': node[verb][second][third] }] };
+                    ns['children'].push(nt);
+                }
+                nv['children'].push(ns);
+            }
+            data.push(nv);
+        }
 
         let top = 0
         let initialTreeDepth = 0
@@ -255,7 +255,6 @@ export class ChartService {
             initialTreeDepth = depth
         } else {
             verbs.forEach(v => {
-                console.log(v)
                 chartOption.legend['data'].push({
                     name: v,
                     icon: 'rectangle'
@@ -266,7 +265,7 @@ export class ChartService {
             top += 20
             let ser = {
                 type: 'tree',
-                name: data[j]["name"],
+                name: data[j]['name'],
                 data: [data[j]],
                 top: top.toString() + '%',
                 left: '12%',
@@ -297,7 +296,6 @@ export class ChartService {
             }
             chartOption.series.push(ser)
         }
-        console.log(chartOption)
         return chartOption
     }
 
