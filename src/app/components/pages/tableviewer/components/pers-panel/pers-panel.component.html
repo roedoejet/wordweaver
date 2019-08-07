@@ -4,8 +4,8 @@
     <!-- <hr class='panel__underline'> -->
     <div class='panel__toolbar--right toolbar'>
       <mat-button-toggle-group class="toolbar__tool" name="fontStyle" aria-label="Font Style" [(ngModel)]="role" (ngModelChange)="checkRole()">
-        <mat-button-toggle value="agent" class="bg-red" [class.color-white]="role !== 'patient'" [class.faded]="role === 'patient'">Do-er</mat-button-toggle>
-        <mat-button-toggle value="patient" class="bg-blue" [class.color-white]="role !== 'agent'" [class.faded]="role === 'agent'">Do-ee</mat-button-toggle>
+        <mat-button-toggle value="agent" class="bg-red" [class.color-white]="role !== 'patient'" [class.faded]="role === 'patient'" i18n="agent|agent@@agent">Agent</mat-button-toggle>
+        <mat-button-toggle value="patient" class="bg-blue" [class.color-white]="role !== 'agent'" [class.faded]="role === 'agent'" i18n="patient|patient@@patient">Patient</mat-button-toggle>
       </mat-button-toggle-group>
       <button *ngIf="!selectAllAg && role === 'agent'" class="toolbar__tool" mat-icon-button (click)="toggleSelectAll()">
         <mat-icon aria-label="Select all">done_all</mat-icon>

@@ -25,7 +25,7 @@
         </mat-checkbox>
       </div>
     </mat-list>
-    <p class='margin-top-50 margin-30' *ngIf="searchField.value !== '' && searchField.value !== null && viewableVerbs?.length === 0">Sorry,
+    <p class='margin-top-50 margin-30' *ngIf="searchField.value !== '' && searchField.value !== null && viewableVerbs?.length === 0" i18n="verb error|verb not found@@verb-not-found">Sorry,
       we can't find any verbs that match '{{ searchField.value }}'</p>
   </div>
   

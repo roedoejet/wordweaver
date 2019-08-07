@@ -7,7 +7,7 @@
       </button>
     </mat-toolbar-row>
     <mat-toolbar-row class='progress__row--previous'>
-      <h6 class="previous color-white font-sm">Previously selected:</h6>
+      <h6 class="previous color-white font-sm" i18n="previous selection|Shows previous selection@@prev-selection">Previously selected:</h6>
       <span class='margin-right-5'></span>
       <mat-chip class="margin-left-5 bg-white border-accent">
         <span class="centered color-black">{{wordmaker.selectedVerb.gloss}}</span>
@@ -27,8 +27,8 @@
       </mat-chip>
     </mat-toolbar-row>
     <mat-toolbar-row class='progress__row--header'>
-      <h4 class="font-xl color-white">Just like <b>that</b> you made a word!</h4>
-      <button id='start-over' mat-button (click)="goBack('start')">Start over</button>
+      <h4 class="font-xl color-white" i18n="congratulations|Successful conjugation message@@congratulations">Just like <b>that</b> you made a word!</h4>
+      <button id='start-over' mat-button (click)="goBack('start')" i18n="start over|Message in button to start again@@start-over">Start over</button>
     </mat-toolbar-row>
   </mat-toolbar>
   <div class="conj margin-left-100 margin-top-50" *ngFor="let conj of word$ | async">

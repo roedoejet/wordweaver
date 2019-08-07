@@ -1,14 +1,14 @@
 <div class="centered page__content vwidth-90 rel">
   <div class="">
     <div id="welcome" class="centered vmargin-top-10" *ngIf="currentStep === 0">
-      <h3 class="font-xxl">Welcome to the {{ title }} Word Maker!</h3>
-      <p class="vmargin-top-5 font-md">There are three steps to make a word. We'll need to know <span class="font-weight--900" (mouseenter)="showExplorer('verbs')"
+      <h3 class="font-xxl" i18n="wordmaker welcome|Welcome message for wordmaker@@wm-welcome">Welcome to the {{ title }} Word Maker!</h3>
+      <p class="vmargin-top-5 font-md" i18n="wordmaker instructions|Instruction message for wordmaker@@wm-instructions">There are three steps to make a word. We'll need to know <span class="font-weight--900" (mouseenter)="showExplorer('verbs')"
           (mouseleave)="hideExplorer('verbs')">what</span> the action is, <span class="font-weight--900" (mouseenter)="showExplorer('who')"
           (mouseleave)="hideExplorer('who')">who</span> is doing it, and <span class="font-weight--900" (mouseenter)="showExplorer('when')"
           (mouseleave)="hideExplorer('when')">when</span> it's happening.</p>
-      <p class="font-md">You can press the <b>left</b> arrow key to go to the previous step and the <b>right</b> arrow key to go to the next step. </p>
-      <p>Let's get started!</p>
-      <button id="start" class='ui-button' mat-fab (click)="firstStep()">START</button>
+      <p class="font-md" i18n="wordmaker proceed message|Message for proceeding with wordmaker@@wm-proceed">You can press the <b>left</b> arrow key to go to the previous step and the <b>right</b> arrow key to go to the next step. </p>
+      <p i18n="get started|Message to get started@@get-started">Let's get started!</p>
+      <button id="start" class='ui-button' mat-fab (click)="firstStep()" i18n="start button|Wordmaker start button@@start">START</button>
       <div class="abs full-height desktop-only explorer--demo explorer--demo--right">
         <div *ngIf="who && showWho">
             <div #explorer1 echarts [options]="who" class="demo-chart"></div>

@@ -1,13 +1,13 @@
 <div class="margin-top-20 panel centered full-width">
   <mat-toolbar class='progress'>
     <mat-toolbar-row class='progress__row--tools'>
-      <p class='color-white margin-0 font-sm'>Step 2/3</p>
+      <p class='color-white margin-0 font-sm'><span i18n="step|Step@@step">Step</span> 2/3</p>
       <button mat-icon-button class='ui-button right-5 abs color-white' (click)="goBack()">
         <mat-icon aria-label="go back">arrow_back</mat-icon>
       </button>
     </mat-toolbar-row>
     <mat-toolbar-row class='progress__row--previous'>
-      <h6 class="color-white font-sm">Previously selected:</h6>
+      <h6 class="color-white font-sm" i18n="previous selection|Shows previous selection@@prev-selection">Previously selected:</h6>
       <span class='margin-right-5'></span>
       <mat-chip class="margin-5 bg-white border-accent">
         <span class="centered color-black">{{selectedVerb.gloss}}</span>
@@ -17,7 +17,7 @@
       </mat-chip>
     </mat-toolbar-row>
     <mat-toolbar-row class='progress__row--header'>
-      <h4 class="font-xl color-white"><b>Who</b> is involved?</h4>
+      <h4 class="font-xl color-white" i18n="who message|Explanation for 'the who'@@who-msg"><b>Who</b> is involved?</h4>
     </mat-toolbar-row>
   </mat-toolbar>
   <ng-template #loading>

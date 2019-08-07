@@ -38,6 +38,11 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
+              "outputPath": "dist/",
+              "i18nFile": "src/locale/messages.en.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "en",
+              "i18nMissingTranslation": "error",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -61,10 +66,32 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "outputPath": "dist/my-project-fr/",
+              "outputPath": "dist/ww-fr/",
               "i18nFile": "src/locale/messages.fr.xlf",
               "i18nFormat": "xlf",
               "i18nLocale": "fr",
+              "i18nMissingTranslation": "error"
+            },
+            "production-alt": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/ww-alt/",
+              "i18nFile": "src/locale/messages.alt.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "en-CA",
               "i18nMissingTranslation": "error"
             },
             "fr": {
