@@ -39,10 +39,6 @@
               "vendorChunk": false,
               "buildOptimizer": true,
               "outputPath": "dist/",
-              "i18nFile": "src/locale/messages.en.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "en",
-              "i18nMissingTranslation": "error",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
