@@ -121,7 +121,12 @@ export class TierService {
             }
         }
         let pronoun_role_css = pronoun_role;
-        if (verb_role === 'red' && conjugation['affixes'].filter(x => x.tag === 'perf').length > 0) {
+
+        // This should be pulled out into the API. This is Kawennonnis-specific.
+        if (
+            (verb_role === 'red' && conjugation['affixes'].filter(x => x.tag === 'perf').length > 0)
+            || (conjugation['affixes'].filter(x => x.tag === 'stative').length > 0 && conjugation['root']['tag'].endsWith('perf-r'))
+        ) {
             pronoun_role_css = ['patient'];
         }
 
