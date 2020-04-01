@@ -57,7 +57,6 @@ export class WordmakerTempPanel implements OnInit {
   onChartClick(ev) {
     const term = ev["data"]["name"];
     this.returnAffoptFromGloss$(term).subscribe(t => {
-      console.log(t);
       this.chartService
         .returnChoiceAllData("aff-options", [{ name: t["gloss"] }], 1)
         .subscribe(r => (this.when = r));
@@ -67,7 +66,6 @@ export class WordmakerTempPanel implements OnInit {
 
   onChipClick(tag) {
     this.returnAffoptFromTag$(tag).subscribe(t => {
-      console.log(t);
       this.chartService
         .returnChoiceAllData("aff-options", [{ name: t["gloss"] }], 1)
         .subscribe(r => (this.when = r));
@@ -79,7 +77,6 @@ export class WordmakerTempPanel implements OnInit {
     return this.affixService.affoptions$.pipe(
       map(affopts => {
         const picked_ao = affopts.filter(ao => ao["tag"] === tag)[0];
-        console.log(picked_ao);
         return picked_ao;
       })
     );
@@ -89,7 +86,6 @@ export class WordmakerTempPanel implements OnInit {
     return this.affixService.affoptions$.pipe(
       map(affopts => {
         const picked_ao = affopts.filter(ao => ao["gloss"] === gloss)[0];
-        console.log(picked_ao);
         return picked_ao;
       })
     );
