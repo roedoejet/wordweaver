@@ -15,6 +15,17 @@
     "build-toy": "ng build --outputPath ./dist_toy"
   },
   "private": true,
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
   "dependencies": {
     "@angular/animations": "7.2.3",
     "@angular/cdk": "5.0.3",
