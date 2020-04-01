@@ -4,7 +4,7 @@ import {
   ConjugationService,
   ChartService
 } from "../../../../../services";
-import { AffOption } from "../../../../../models";
+import { AffOption, Conjugation } from "../../../../../models";
 import { Observable } from "rxjs";
 import { distinctUntilChanged, map, switchMap } from "rxjs/operators";
 import { EChartOption } from "echarts";
@@ -56,56 +56,42 @@ export class WordmakerTempPanel implements OnInit {
 
   onChartClick(ev) {
     const term = ev["data"]["name"];
-    this.temps$
-      .pipe(
-        switchMap(ts => {
-          return this.affixService.affoptions$.pipe(
-            map(affopts => {
-              const picked_ao = affopts.filter(ao => ao["gloss"] === term)[0];
-              return ts.filter(t => t.values["affopt"] === picked_ao["tag"])[0];
-            })
-          );
-        })
-      )
-      .subscribe(t => {
-        this.select(t);
-      });
+    this.returnAffoptFromGloss$(term).subscribe(t => {
+      console.log(t);
+      this.chartService
+        .returnChoiceAllData("aff-options", [{ name: t["gloss"] }], 1)
+        .subscribe(r => (this.when = r));
+      this.selectedTemp.emit(t);
+    });
   }
 
-  // onChartClick(ev) {
-  //   let term = ev['data']['name']
-  //   // If not final, change pool of verbs
-  //   if (ev['data']['children']) {
-  //     let clicked_verb_glosses = ev['data']['children'].map(x => x['name'])
-  //     this.cached_clicked_verbs$ = this.cached_clicked_verbs$.pipe(
-  //       map(cached_clicked_verbs => {
-  //         // if verbs exist in pool already, remove them
-  //         if (cached_clicked_verbs.some(v => clicked_verb_glosses.indexOf(v) > -1)) {
-  //           return cached_clicked_verbs.filter(v => clicked_verb_glosses.indexOf(v) < 0)
-  //           // otherwise add them
-  //         } else {
-  //           return cached_clicked_verbs.concat(clicked_verb_glosses)
-  //         }
-  //       })
-  //     )
-  //   } else {
-  //     this.verbService.verbs$.subscribe(verbs => verbs.filter(v => {
-  //       if (v.gloss === term) {
-  //         this.select(v)
-  //       }
-  //     }))
-  //   }
-  //   this.cached_clicked_verbs$.pipe(
-  //     switchMap(glosses => this.verbService.verbs$.pipe(
-  //       map(verbs => verbs.filter(v => glosses.indexOf(v['gloss']) > -1))
-  //     ))
-  //   ).subscribe(x => this.verbs$.next(x))
-  // }
+  onChipClick(tag) {
+    this.returnAffoptFromTag$(tag).subscribe(t => {
+      console.log(t);
+      this.chartService
+        .returnChoiceAllData("aff-options", [{ name: t["gloss"] }], 1)
+        .subscribe(r => (this.when = r));
+      this.selectedTemp.emit(t);
+    });
+  }
 
-  select(temp) {
-    this.chartService
-      .returnChoiceAllData("aff-options", [{ name: temp["translation"] }], 1)
-      .subscribe(r => (this.when = r));
-    this.selectedTemp.emit(temp.values);
+  returnAffoptFromTag$(tag) {
+    return this.affixService.affoptions$.pipe(
+      map(affopts => {
+        const picked_ao = affopts.filter(ao => ao["tag"] === tag)[0];
+        console.log(picked_ao);
+        return picked_ao;
+      })
+    );
+  }
+
+  returnAffoptFromGloss$(gloss) {
+    return this.affixService.affoptions$.pipe(
+      map(affopts => {
+        const picked_ao = affopts.filter(ao => ao["gloss"] === gloss)[0];
+        console.log(picked_ao);
+        return picked_ao;
+      })
+    );
   }
 }

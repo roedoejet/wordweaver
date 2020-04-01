@@ -52,6 +52,7 @@ export class WordmakerPage {
 
   tempSelected(temp: AffOption) {
     this.selectedTemp = temp;
+    console.log(temp);
     this.finalStep();
   }
 
@@ -352,7 +353,7 @@ export class WordmakerPage {
       pat_tag.push(this.selectedPers["patient"]["tag"]);
     }
     let vb_tag = this.selectedVerb["tag"];
-    let ao_tag = this.selectedTemp["affopt"];
+    let ao_tag = this.selectedTemp["tag"];
     let table_args = {
       agent: ag_tag,
       patient: pat_tag,
