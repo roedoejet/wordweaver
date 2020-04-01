@@ -2,28 +2,29 @@
   <div class="panel__header">
     <mat-toolbar class="progress">
       <mat-toolbar-row class='progress__row--tools progress__row--previous'>
-        <p class='color-white margin-0 font-sm'><span i18n="step|Step@@step">Step</span> 1/3</p>
-        <button mat-icon-button class='ui-button right-5 abs color-white' (click)="goBack()">
+        <p class='margin-0 font-sm'><span i18n="step|Step@@step">Step</span> 1/3</p>
+        <button mat-icon-button class='ui-button right-5 abs' (click)="goBack()">
           <mat-icon aria-label="go back">arrow_back</mat-icon>
         </button>
       </mat-toolbar-row>
       <mat-toolbar-row class='progress__row--header'>
-        <h4 class='vmargin-bottom-10 panel__title font-xl color-white' i18n="what message|Explanation for 'the what'@@what-msg">So, <b>what</b> action do you want to choose?
-        </h4>
+        <p class='progress__text font-sm' i18n="what message|Explanation for 'the what'@@what-msg">So,
+          <b>what</b> action do you want to choose?
+        </p>
+        <form class="margin-left-25 margin-top-20 font-sm">
+          <mat-form-field class="margin-bottom-20" [formGroup]="verbForm">
+            <input autocomplete="off" type="text" placeholder="Search for a verb" value="" aria-label="Number" matInput
+              formControlName="search">
+          </mat-form-field>
+        </form>
         <p *ngIf="explorer_click$ | async as exp">{{ exp?.seriesType }}</p>
 
       </mat-toolbar-row>
 
     </mat-toolbar>
   </div>
-  <div class='vheight-50 flex-display'>
+  <div class='vheight-40 flex-display'>
     <div class='vwidth-45--desktop vwidth-90--mobile'>
-      <form class="margin-left-20">
-        <mat-form-field class="margin-bottom-20" [formGroup]="verbForm">
-          <input autocomplete="off" type="text" placeholder="Search for a verb" value="" aria-label="Number" matInput
-            formControlName="search">
-        </mat-form-field>
-      </form>
       <ng-template #loading>
         <mat-spinner class="centered"></mat-spinner>
       </ng-template>
@@ -37,9 +38,10 @@
         </mat-chip>
       </mat-chip-list>
     </div>
-    <div *ngIf="showExplorer" class="vwidth-45 full-height desktop-only">
+    <div *ngIf="showExplorer" class="vwidth-45 full-height desktop-only progress-echart">
       <div *ngIf="chart_response">
-        <div #explorer echarts [options]="chart_response" class="demo-chart" (chartClick)="onChartClick($event)"></div>
+        <div #explorer echarts [options]="chart_response" class="demo-chart" (chartClick)="onChartClick($event)">
+        </div>
       </div>
     </div>
   </div>

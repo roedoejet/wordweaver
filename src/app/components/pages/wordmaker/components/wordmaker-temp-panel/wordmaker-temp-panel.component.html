@@ -1,13 +1,14 @@
 <div class='margin-top-20 panel centered full-width'>
   <mat-toolbar class="progress">
     <mat-toolbar-row class='progress__row--tools'>
-      <p class='color-white margin-0 font-sm'><span i18n="step|Step@@step">Step</span> 3/3</p>
-      <button mat-icon-button class='ui-button right-5 abs color-white' (click)="goBack()">
+      <p class='margin-0 font-sm'><span i18n="step|Step@@step">Step</span> 3/3</p>
+      <button mat-icon-button class='ui-button right-5 abs' (click)="goBack()">
         <mat-icon aria-label="go back">arrow_back</mat-icon>
       </button>
     </mat-toolbar-row>
     <mat-toolbar-row class='progress__row--previous'>
-      <h6 class="previous color-white font-sm" i18n="previous selection|Shows previous selection@@prev-selection">Previously selected:</h6>
+      <p class="previous font-sm" i18n="previous selection|Shows previous selection@@prev-selection">Previously
+        selected:</p>
       <span class='margin-right-5'></span>
       <mat-chip class="margin-left-5 bg-white border-accent">
         <span class="centered color-black">{{wordmaker.selectedVerb.gloss}}</span>
@@ -26,10 +27,12 @@
         </mat-icon>
       </mat-chip>
     </mat-toolbar-row>
-    <mat-toolbar-row class='progress__row--header'>
-      <h4 class="font-xl color-white" i18n="when message|Explanation for 'the when'@@when-msg"><b>When</b>  is the action happening?</h4>
-    </mat-toolbar-row>
+    <!-- <mat-toolbar-row class='progress__row--header'>
+    </mat-toolbar-row> -->
   </mat-toolbar>
+
+  <p class="font-lg margin-left-5" i18n="when message|Explanation for 'the when'@@when-msg"><b>When</b> is the action
+    happening?</p>
   <div class="pwidth-50--desktop pwidth-100--mobile">
     <ng-template #loading>
       <mat-spinner class="centered"></mat-spinner>
@@ -39,7 +42,7 @@
         {{temp.translation}}</mat-chip>
     </mat-chip-list>
   </div>
-  <div class="abs full-height desktop-only explorer--demo explorer--demo--right">
+  <div class="abs full-height desktop-only explorer--demo progress-echart">
     <div *ngIf="when">
       <div echarts [options]="when" class="demo-chart" (chartClick)="onChartClick($event)"></div>
     </div>

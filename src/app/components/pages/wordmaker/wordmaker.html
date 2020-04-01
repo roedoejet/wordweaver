@@ -1,6 +1,6 @@
 <div class="centered page__content vwidth-90 rel">
   <div class="">
-    <div id="welcome" class="centered vmargin-top-10" *ngIf="currentStep === 0">
+    <div id="welcome" class="centered center-text vmargin-top-10" *ngIf="currentStep === 0">
       <h3 class="font-xxl" i18n="wordmaker welcome|Welcome message for wordmaker@@wm-welcome">Welcome to the {{ title }} Word Maker!</h3>
       <p class="vmargin-top-5 font-md" i18n="wordmaker instructions|Instruction message for wordmaker@@wm-instructions">There are three steps to make a word. We'll need to know <span class="font-weight--900" (mouseenter)="showExplorer('verbs')"
           (mouseleave)="hideExplorer('verbs')">what</span> the action is, <span class="font-weight--900" (mouseenter)="showExplorer('who')"

@@ -53,6 +53,12 @@
     cursor: pointer;
 }
 
+.mat-chip.selected {
+    color: $color-accent;
+    margin: em(5);
+    cursor: pointer;
+}
+
 .mat-chip:not(.mat-basic-chip)+.mat-chip:not(.mat-basic-chip) {
     margin: em(5) !important;
 }

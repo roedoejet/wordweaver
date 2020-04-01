@@ -1,13 +1,13 @@
 <div class="margin-top-20 panel centered full-width">
   <mat-toolbar class='progress'>
     <mat-toolbar-row class='progress__row--tools'>
-      <p class='color-white margin-0 font-sm'><span i18n="step|Step@@step">Step</span> 2/3</p>
-      <button mat-icon-button class='ui-button right-5 abs color-white' (click)="goBack()">
+      <p class='margin-0 font-sm'><span i18n="step|Step@@step">Step</span> 2/3</p>
+      <button mat-icon-button class='ui-button right-5 abs' (click)="goBack()">
         <mat-icon aria-label="go back">arrow_back</mat-icon>
       </button>
     </mat-toolbar-row>
     <mat-toolbar-row class='progress__row--previous'>
-      <h6 class="color-white font-sm" i18n="previous selection|Shows previous selection@@prev-selection">Previously selected:</h6>
+      <p class="font-sm" i18n="previous selection|Shows previous selection@@prev-selection">Previously selected:</p>
       <span class='margin-right-5'></span>
       <mat-chip class="margin-5 bg-white border-accent">
         <span class="centered color-black">{{selectedVerb.gloss}}</span>
@@ -16,10 +16,11 @@
         </mat-icon>
       </mat-chip>
     </mat-toolbar-row>
-    <mat-toolbar-row class='progress__row--header'>
-      <h4 class="font-xl color-white" i18n="who message|Explanation for 'the who'@@who-msg"><b>Who</b> is involved?</h4>
-    </mat-toolbar-row>
+    <!-- <mat-toolbar-row class='progress__row--header'>
+    </mat-toolbar-row> -->
   </mat-toolbar>
+
+  <p class="font-lg margin-left-5" i18n="who message|Explanation for 'the who'@@who-msg"><b>Who</b> is involved?</p>
   <ng-template #loading>
     <mat-spinner class="centered"></mat-spinner>
   </ng-template>
@@ -61,7 +62,7 @@
       </mat-chip-list>
     </div>
   </div>
-  <div class="abs desktop-only full-height explorer--demo explorer--demo--right">
+  <div class="abs desktop-only full-height explorer--demo explorer--demo--right progress-echart">
     <div *ngIf="pro_chart$ | async as pro_chart">
       <div #explorer1 echarts [options]="pro_chart" class="demo-chart" (chartClick)="onChartClick($event)"></div>
     </div>

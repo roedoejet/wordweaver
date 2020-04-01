@@ -17,8 +17,10 @@
         //     right: 35%;
         //     top: 45%;
         // }
+        top: 0;
+        right: 0;
         &--right {
-            top: 0;
+            // top: 0;
             @extend %right;
             &--below {
                 @extend %right;

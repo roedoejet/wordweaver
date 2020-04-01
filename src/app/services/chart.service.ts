@@ -157,9 +157,9 @@ export class ChartService {
                     },
                     series: [{
                         type: 'tree',
-                        // label: {
-                        //     color: "#fff"
-                        // },
+                        label: {
+                            fontSize: 14
+                        },
                         name: name,
                         data: data,
                         layout: 'radial',
@@ -168,7 +168,7 @@ export class ChartService {
                         // left: '0',
                         bottom: '40%',
                         // right: '0',
-                        symbolSize: 7,
+                        symbolSize: 10,
                         initialTreeDepth: depth,
                         expandAndCollapse: true,
                         roam: true,

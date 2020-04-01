@@ -1,13 +1,17 @@
 .progress {
-    width: fit-content !important;
+    min-width: 50%;
+    width: 50% !important;
+    // width: fit-content !important;
     max-width: 100%;
     margin-bottom: em(16);
-    background: map-get($ui-colors, accent);
+    // background: map-get($ui-colors, accent);
+    background: transparent;
+    border: em(1) solid map-get($ui-colors, black);
     border-radius: $border-radius-default;
     padding-bottom: em(5);
     &__row {
         overflow: auto;
-        height: em(36);
+        height: em(24);
         &--tools {
             position: relative;
         }
@@ -18,12 +22,18 @@
             margin-bottom: em(8);
         }
         &--header {
-            border-top: 1px solid #dedede;
+            // border-top: 1px solid #dedede;
         }
+    }
+    &__text {
+        font-size: em(12);
     }
 }
 #start-over {
-    border: 1px solid white;
-    color: white;
-    margin-left: 32px;
+    border: em(1) solid map-get($ui-colors, black);
+    // color: white;
+    margin-left: em(32);
+    height: em(36);
+    margin-top: em(16);
+    line-height: inherit;
 }

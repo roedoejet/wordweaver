@@ -1,13 +1,14 @@
 <div class="margin-top-20 panel centered full-width">
   <mat-toolbar class="progress">
     <mat-toolbar-row class='progress__row--tools'>
-      <p class='color-white margin-0 font-sm'>{{ message }}</p>
+      <p class='margin-0 font-lg'>{{ message }}</p>
       <button mat-icon-button class='ui-button right-5 abs color-white' (click)="goBack()">
         <mat-icon aria-label="go back">arrow_back</mat-icon>
       </button>
     </mat-toolbar-row>
     <mat-toolbar-row class='progress__row--previous'>
-      <h6 class="previous color-white font-sm" i18n="previous selection|Shows previous selection@@prev-selection">Previously selected:</h6>
+      <h6 class="previous font-sm" i18n="previous selection|Shows previous selection@@prev-selection">Previously
+        selected:</h6>
       <span class='margin-right-5'></span>
       <mat-chip class="margin-left-5 bg-white border-accent">
         <span class="centered color-black">{{wordmaker.selectedVerb.gloss}}</span>
@@ -26,12 +27,16 @@
         </mat-icon>
       </mat-chip>
     </mat-toolbar-row>
-    <mat-toolbar-row class='progress__row--header'>
-      <h4 class="font-xl color-white" i18n="congratulations|Successful conjugation message@@congratulations">Just like <b>that</b> you made a word!</h4>
-      <button id='start-over' mat-button (click)="goBack('start')" i18n="start over|Message in button to start again@@start-over">Start over</button>
-    </mat-toolbar-row>
+    <!-- <mat-toolbar-row class='progress__row--header'>
+    </mat-toolbar-row> -->
   </mat-toolbar>
-  <div class="conj margin-left-100 margin-top-50" *ngFor="let conj of word$ | async">
+  <div class='congratulations'>
+    <p class="font-lg" i18n="congratulations|Successful conjugation message@@congratulations">Just like <b>that</b> you
+      made a word!</p>
+    <button id='start-over' mat-button (click)="goBack('start')"
+      i18n="start over|Message in button to start again@@start-over">Start over</button>
+  </div>
+  <div id='conj-result' class="conj margin-left-100 margin-top-50" *ngFor="let conj of word$ | async">
     <h3>
       <span *ngFor="let item of conj['main']" class="{{item['classes']}}"
         [ngClass]='{"highlight" : settings?.highlight[item["type"]] || settings?.highlight[item["classes"]]}'>{{item["value"]}}</span>
