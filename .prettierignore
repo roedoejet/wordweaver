@@ -1,2 +1,3 @@
 *.min.*
 dist_toy
+*.html
