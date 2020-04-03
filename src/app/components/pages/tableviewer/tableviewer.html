@@ -4,9 +4,10 @@
       <pers-panel class='custom-scroll full-width full-height'></pers-panel>
     </mat-grid-tile>
     <mat-grid-tile class="b--top b--left bg-white" [colspan]="conjcolspan" [rowspan]="conjrowspan">
-      <conj-panel #conjPanel class="custom-scroll full-width full-height"></conj-panel>
+      <conjugation-panel #conjPanel class="custom-scroll full-width full-height"></conjugation-panel>
     </mat-grid-tile>
-    <mat-grid-tile [colspan]="3" [rowspan]="fullrowspan" class="br--tr br--br b--left b--right b--top b--bottom bg-white">
+    <mat-grid-tile [colspan]="3" [rowspan]="fullrowspan"
+      class="br--tr br--br b--left b--right b--top b--bottom bg-white">
       <verb-panel class='custom-scroll full-width full-height'></verb-panel>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="3" [rowspan]="halfrowspan" class="br--bl b--top b--left b--right b--bottom bg-white">

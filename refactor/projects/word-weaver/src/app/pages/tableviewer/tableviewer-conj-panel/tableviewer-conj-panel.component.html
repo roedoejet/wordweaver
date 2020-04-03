@@ -1,0 +1,143 @@
+<div class="panel" *ngIf="settings$ | async as settings">
+    <div *ngIf="show_toolbar" class="panel__header">
+        <h3 class="panel__title">Conjugation toolbar</h3>
+        <div class="panel__toolbar toolbar">
+            <button class="conjugate mat-accent" mat-raised-button (click)="conjugate()">
+                Conjugate
+            </button>
+            <select *ngIf="showExplorer" [(ngModel)]="depth" (ngModelChange)="conjugate()"
+                class="toolbar__tool ui-button" matTooltip="Select how many nodes to display"
+                [matTooltipShowDelay]="showDelay.value" [matTooltipHideDelay]="hideDelay.value"
+                [matTooltipPosition]="tooltipPosition">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            <button *ngIf="showExplorer" class="toolbar__tool ui-button" mat-icon-button
+                (click)="order = !order; conjugate()" matTooltip="Switch pronoun and tense nodes"
+                [matTooltipShowDelay]="showDelay.value" [matTooltipHideDelay]="hideDelay.value"
+                [matTooltipPosition]="tooltipPosition">
+                <mat-icon aria-label="Switch pronoun and temp">cached</mat-icon>
+            </button>
+            <button class="ui-button toolbar__tool" mat-icon-button (click)="toggleExplorer()"
+                matTooltip="Switch between grid and tree views" [matTooltipShowDelay]="showDelay.value"
+                [matTooltipHideDelay]="hideDelay.value" [matTooltipPosition]="tooltipPosition">
+                <mat-icon *ngIf="!showExplorer" aria-label="Conjugate">create</mat-icon>
+                <mat-icon *ngIf="showExplorer" aria-label="Conjugate">grid_on</mat-icon>
+            </button>
+            <button (click)="download()" *ngIf="!showExplorer" class="ui-button toolbar__tool" mat-icon-button
+                matTooltip="Download conjugations as file" [matTooltipShowDelay]="showDelay.value"
+                [matTooltipHideDelay]="hideDelay.value" [matTooltipPosition]="tooltipPosition">
+                <mat-icon aria-label="Download conjugations">get_app</mat-icon>
+            </button>
+            <button (click)="show_toolbar = !show_toolbar" class="ui-button toolbar__tool" mat-icon-button
+                matTooltip="Hide toolbar" [matTooltipShowDelay]="showDelay.value"
+                [matTooltipHideDelay]="hideDelay.value" [matTooltipPosition]="tooltipPosition">
+                <mat-icon aria-label="Hide toolbar">cancel</mat-icon>
+            </button>
+        </div>
+    </div>
+    <div class="panel__underline height-5">
+        <hr *ngIf="show_toolbar" />
+        <button *ngIf="!show_toolbar" (click)="show_toolbar = !show_toolbar" class="float-right ui-button toolbar__tool"
+            mat-icon-button matTooltip="Show toolbar" [matTooltipShowDelay]="showDelay.value"
+            [matTooltipHideDelay]="hideDelay.value" [matTooltipPosition]="tooltipPosition">
+            <mat-icon aria-label="Show toolbar">add_circle</mat-icon>
+        </button>
+    </div>
+    <div class="panel__content">
+        <div>
+            <h3 class="desktop-only center-text margin-top-100 padding-20" *ngIf="!response$ && !showExplorer">
+                Please select one or more boxes from the <b>Person</b>, <b>Time</b> and
+                <b>Verb</b> panels and then press the enter key or conjugate button to
+                see your selection
+            </h3>
+            <h3 class="mobile-only padding-15 center-text" *ngIf="!response$ && !showExplorer">
+                Please select one or more boxes from the 'Person', 'Time' and 'Verb'
+                panels. <br />
+                and then press the button above to conjugate!
+            </h3>
+            <ng-template #spinner>
+                <ng-container *ngIf="loading && !(response$ | async)">
+                    <mat-spinner class="centered margin-top-100"></mat-spinner>
+                </ng-container>
+            </ng-template>
+        </div>
+
+        <div *ngIf="showExplorer" class="full-width full-height">
+            <div *ngIf="chart_response">
+                <!-- <div #explorer echarts [options]="chart_response" class="demo-chart"></div> -->
+            </div>
+        </div>
+
+        <div *ngIf="!showExplorer">
+            <div id="table-container" class="rel" *ngIf="response$ | async as response; else spinner">
+                <div class="error__container" *ngIf="isString(response)">
+                    <h3 class="error__header">
+                        Error
+                    </h3>
+                    <p class="error__message">{{ response }}</p>
+                    <p class="error__message">
+                        Please remove some of the checked options described above and try
+                        again.
+                    </p>
+                </div>
+                <table class="full-width abs" *ngIf="!isString(response)">
+                    <thead>
+                        <tr>
+                            <th>
+                                <h3>{{ 'ww.language' | translate }}</h3>
+                            </th>
+                            <th *ngIf="settings?.level.english_tier || settings?.level.translation_tier">
+                                <h3>English</h3>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="b--bottom" *ngFor="let conjugation of response">
+                            <td class="center-text">
+                                <h3 id="main">
+                                    <span *ngFor="let item of conjugation['main']"
+                                        class="{{ item['classes'] }} no-padding header-text"
+                                        [ngClass]="{highlight: (settings?.highlight)[item['type']] || (settings?.highlight)[item['classes']]}">{{ item["value"] }}</span>
+                                </h3>
+                                <h5 id="main" *ngIf="settings?.level.breakdown_tier">
+                                    <span *ngFor="let item of conjugation['main']"
+                                        class="{{ item['classes'] }} no-padding header-text"
+                                        [ngClass]="{highlight: (settings?.highlight)[item['type']] || (settings?.highlight)[item['classes']]}">{{ item["value"] }}
+                                        <span class="gloss-dividers header-text"
+                                            *ngIf="conjugation['main'].indexOf(item) < conjugation['main'].length - 1">-</span>
+                                    </span>
+                                </h5>
+                                <h5 id="main" *ngIf="settings?.level.gloss_tier">
+                                    <span *ngFor="let item of conjugation['secondary']"
+                                        class="{{ item['classes'] }} no-padding header-text" [ngClass]="{
+                        highlight:
+                          (settings?.highlight)[item['type']] ||
+                          (settings?.highlight)[item['classes']]}">{{ item["value"] | decapitalize }}
+                                        <span class="gloss-dividers header-text"
+                                            *ngIf="conjugation['secondary'].indexOf(item) < conjugation['secondary'].length - 1">-</span>
+                                    </span>
+                                </h5>
+                            </td>
+                            <td class="center-text">
+                                <h4 id="main" *ngIf="settings?.level.translation_tier" class="no-padding header-text">
+                                    <span class="translation">{{ conjugation["translation"] }}</span>
+                                </h4>
+                                <h5 id="main" *ngIf="settings?.level.english_tier">
+                                    <span *ngFor="let item of conjugation['ternary']"
+                                        class="{{ item['classes'] }} no-padding header-text"
+                                        [ngClass]="{highlight: (settings?.highlight)[item['type']] || (settings?.highlight)[item['classes']] }">{{ item["value"] | decapitalize }}
+                                        <span class="gloss-dividers header-text"
+                                            *ngIf="conjugation['ternary'].indexOf(item) < conjugation['ternary'].length - 1">-</span>
+                                    </span>
+                                </h5>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

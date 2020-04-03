@@ -1,0 +1,36 @@
+.abs {
+  position: absolute !important;
+}
+
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
+
+.centered {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.rel {
+  position: relative;
+}
+
+.flex {
+  flex: 1 1 auto;
+}
+
+// z-indexing
+
+@each $name, $value in $zindex {
+  .#{$name} {
+    z-index: $value;
+  }
+}

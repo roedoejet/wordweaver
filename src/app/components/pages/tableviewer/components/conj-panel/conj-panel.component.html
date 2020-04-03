@@ -169,11 +169,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="b--bottom" *ngFor="let conj of response">
+            <tr class="b--bottom" *ngFor="let conjugation of response">
               <td class="center-text">
                 <h3 id="main">
                   <span
-                    *ngFor="let item of conj['main']"
+                    *ngFor="let item of conjugation['main']"
                     class="{{ item['classes'] }} no-padding header-text"
                     [ngClass]="{
                       highlight:
@@ -185,7 +185,7 @@
                 </h3>
                 <h5 id="main" *ngIf="settings?.level.breakdown_tier">
                   <span
-                    *ngFor="let item of conj['main']"
+                    *ngFor="let item of conjugation['main']"
                     class="{{ item['classes'] }} no-padding header-text"
                     [ngClass]="{
                       highlight:
@@ -196,7 +196,7 @@
                     <span
                       class="gloss-dividers header-text"
                       *ngIf="
-                        conj['main'].indexOf(item) < conj['main'].length - 1
+                        conjugation['main'].indexOf(item) < conjugation['main'].length - 1
                       "
                       >-</span
                     >
@@ -204,7 +204,7 @@
                 </h5>
                 <h5 id="main" *ngIf="settings?.level.gloss_tier">
                   <span
-                    *ngFor="let item of conj['secondary']"
+                    *ngFor="let item of conjugation['secondary']"
                     class="{{ item['classes'] }} no-padding header-text"
                     [ngClass]="{
                       highlight:
@@ -215,8 +215,8 @@
                     <span
                       class="gloss-dividers header-text"
                       *ngIf="
-                        conj['secondary'].indexOf(item) <
-                        conj['secondary'].length - 1
+                        conjugation['secondary'].indexOf(item) <
+                        conjugation['secondary'].length - 1
                       "
                       >-</span
                     >
@@ -229,11 +229,11 @@
                   *ngIf="settings?.level.translation_tier"
                   class="no-padding header-text"
                 >
-                  <span class="translation">{{ conj["translation"] }}</span>
+                  <span class="translation">{{ conjugation["translation"] }}</span>
                 </h4>
                 <h5 id="main" *ngIf="settings?.level.english_tier">
                   <span
-                    *ngFor="let item of conj['ternary']"
+                    *ngFor="let item of conjugation['ternary']"
                     class="{{ item['classes'] }} no-padding header-text"
                     [ngClass]="{
                       highlight:
@@ -244,8 +244,8 @@
                     <span
                       class="gloss-dividers header-text"
                       *ngIf="
-                        conj['ternary'].indexOf(item) <
-                        conj['ternary'].length - 1
+                        conjugation['ternary'].indexOf(item) <
+                        conjugation['ternary'].length - 1
                       "
                       >-</span
                     >

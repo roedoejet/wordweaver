@@ -14,9 +14,9 @@ import { EChartOption } from "echarts";
 import { ToastrService } from "ngx-toastr";
 
 @Component({
-  selector: "conj-panel",
-  templateUrl: "./conj-panel.component.html",
-  styleUrls: ["./conj-panel.component.scss", "../../tableviewer.scss"]
+  selector: "conjugation-panel",
+  templateUrl: "./conjugation-panel.component.html",
+  styleUrls: ["./conjugation-panel.component.scss", "../../tableviewer.scss"]
 })
 export class ConjPanel implements OnInit {
   chart_response$: Observable<EChartOption>;

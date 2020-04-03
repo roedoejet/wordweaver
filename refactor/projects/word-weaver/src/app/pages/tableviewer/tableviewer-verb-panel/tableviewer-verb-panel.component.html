@@ -1,0 +1,32 @@
+<div class='panel'>
+    <div class='panel__header'>
+      <h3 class="panel__title">Verb</h3>
+      <mat-chip-list class="panel__toolbar toolbar">
+        <mat-chip class='toolbar__tool' [ngClass]="'bg-' + verbService.getVerb(verb)['thematic_relation']" *ngFor="let verb of selectionService.selection.root"
+          [selectable]="true" [removable]="true" (removed)="remove(verb)">
+          {{verbService.getVerb(verb)['display']}}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+    <div class="panel__content">
+      <form class='margin-20'>
+        <div>
+          <mat-form-field [formGroup]="verbForm">
+            <input autocomplete="off" type="text" placeholder="Type a verb" aria-label="Number" matInput formControlName="search">
+          </mat-form-field>
+        </div>
+      </form>
+      <mat-list class='panel__list' role="list" *ngIf="viewableVerbs && searchField.value !== ''">
+        <div [formGroup]="checkboxGroup" *ngFor="let value of viewableVerbs">
+          <mat-checkbox class='margin-5' [formControlName]="value.tag" [disabled]="selectionService.selection.root.indexOf(value.tag) < 0 && selectionService.selection.root.length >= 3">{{
+            value.gloss + " - " }}
+            <span [ngClass]="'color-' + value.thematic_relation">{{value.display}}</span>
+          </mat-checkbox>
+        </div>
+      </mat-list>
+      <p class='margin-top-50 margin-30' *ngIf="searchField.value !== '' && searchField.value !== null && viewableVerbs?.length === 0">Sorry,
+        we can't find any verbs that match '{{ searchField.value }}'</p>
+    </div>
+    
+  </div>

@@ -1,0 +1,166 @@
+@charset 'utf-8';
+
+@import "~bootstrap/scss/bootstrap-reboot";
+@import "~bootstrap/scss/bootstrap-grid";
+@import "styles-reset";
+
+@import "~@angular/material/theming";
+
+@include mat-core();
+
+@import "./themes/default-theme";
+@import "./themes/light-theme";
+@import "./themes/black-theme";
+@import "./themes/nature-theme";
+
+@import "styles-reset.scss-theme";
+@import "./app/app/app.component.scss-theme";
+@import "./app/shared/big-input/big-input/big-input.component.scss-theme";
+@import "./app/pages/about/about/about.component.scss-theme";
+@import "./app/pages/examples/notifications/components/notifications.component.scss-theme";
+@import "./app/pages/examples/todos/components/todos-container.component.scss-theme";
+@import "./app/pages/examples/stock-market/components/stock-market-container.component.scss-theme";
+@import "./app/pages/examples/theming/parent/parent.component.scss-theme";
+@import "./app/pages/examples/theming/child/child.component.scss-theme";
+@import "./app/pages/examples/examples/examples.component.scss-theme";
+
+@mixin custom-components-theme($theme) {
+  @include ww-styles-reset-theme($theme);
+  @include ww-app-component-theme($theme);
+  @include ww-about-component-theme($theme);
+  @include ww-big-input-component-theme($theme);
+  @include ww-notifications-component-theme($theme);
+  @include ww-todos-container-component-theme($theme);
+  @include ww-stock-market-container-component-theme($theme);
+  @include ww-parent-component-theme($theme);
+  @include ww-child-component-theme($theme);
+  @include ww-examples-component-theme($theme);
+}
+
+// // Customize Angular Material theme with palettes from color-primary and color-secondary. Use http://mcg.mbitson.com to generate palette and add palettes to _palettes partial
+
+// $wordweaver-primary: mat-palette($md-primary);
+// $wordweaver-accent: mat-palette($md-accent, 400);
+
+// $wordweaver-theme: mat-light-theme($wordweaver-primary, $wordweaver-accent);
+
+// $wordweaver-dark-theme: mat-dark-theme($wordweaver-primary, $wordweaver-accent);
+
+// @include angular-material-theme($wordweaver-theme);
+
+.default-theme {
+  @include angular-material-theme($ww-theme);
+  @include custom-components-theme($ww-theme);
+}
+
+.light-theme {
+  @include angular-material-theme($ww-light-theme);
+  @include custom-components-theme($ww-light-theme);
+}
+
+.black-theme {
+  @include angular-material-theme($ww-black-theme);
+  @include custom-components-theme($ww-black-theme);
+}
+
+.nature-theme {
+  @include angular-material-theme($ww-nature-theme);
+  @include custom-components-theme($ww-nature-theme);
+}
+
+// ==========================================================================
+// Sassy Starter by Mina Markham
+// A SMACSS-based starter toolkit for SCSS projects
+//
+// The toolkit uses recommendations from Scalable and Modular Architecture for CSS (SMACSS)
+// @link http://smacss.com/book
+//
+// Site:    https://minamarkham.github.io/sassy-starter
+// Author:  Mina Markham
+// Email:   mina@mina.codes
+// Date:    10/25/15
+// ==========================================================================
+
+// CSS Debugging
+//
+// Toggle layout debugging with CSS Pesticide.
+//
+// $pesticide-debug-outline - {boolean} adds outlines to all elements.
+// $pesticide-debug-depth - {boolean} adds shadows to all elements.
+// @source - http://pesticide.io/
+
+$pesticide-debug-outline: false;
+$pesticide-debug-depth: false;
+
+// ==========================================================================
+// $Libs
+// ==========================================================================
+@import "scss/libs/index";
+
+// ==========================================================================
+// $Utilities
+// ==========================================================================
+@import "scss/utilities/index";
+
+// ==========================================================================
+// $Base
+// ==========================================================================
+@import "scss/base/index";
+
+// ==========================================================================
+// $Layout
+// ==========================================================================
+@import "scss/layout/index";
+
+// ==========================================================================
+// $Angular Material
+// ==========================================================================
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/theming";
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+// @mixin mat-checkbox-typography($config) {
+//     .mat-checkbox {
+//       font-family: mat-font-family($config);
+//     }
+//     .mat-checkbox-label { // NEW
+//       white-space: initial; // NEW
+//     } // NEW
+//     // TODO(kara): Remove this style when fixing vertical baseline
+//     .mat-checkbox-layout .mat-checkbox-label {
+//       line-height: mat-line-height($config, body-2);
+//     }
+//   }
+
+@include mat-core();
+
+// ==========================================================================
+// $Modules
+// ==========================================================================
+@import "scss/modules/index";
+
+// ==========================================================================
+// $States
+// ==========================================================================
+@import "scss/states/index";
+
+// ==========================================================================
+// $Overrides
+// ==========================================================================
+@import "scss/overrides/index";
+
+// ==========================================================================
+// $Print
+// ==========================================================================
+@import "scss/states/print";
+
+// ==========================================================================
+// $Fonts
+// ==========================================================================
+@import "scss/utilities/fonts";
+
+// ==========================================================================
+// $Shame
+// ==========================================================================
+@import "scss/shame";

@@ -1,0 +1,11 @@
+.desktop-only {
+  @include mq(em(map-get($breakpoints, medium)), "max-width") {
+    display: none;
+  }
+}
+
+.mobile-only {
+  @include mq(em(map-get($breakpoints, medium))) {
+    display: none;
+  }
+}

@@ -70,13 +70,13 @@
     </button>
   </div>
   <div
-    id="conj-result"
-    class="conj margin-left-100 margin-top-50"
-    *ngFor="let conj of word$ | async"
+    id="conjugation-result"
+    class="conjugation margin-left-100 margin-top-50"
+    *ngFor="let conjugation of word$ | async"
   >
     <h3>
       <span
-        *ngFor="let item of conj['main']"
+        *ngFor="let item of conjugation['main']"
         class="{{ item['classes'] }}"
         [ngClass]="{
           highlight:
@@ -88,7 +88,7 @@
     </h3>
     <h4 *ngIf="settings?.level.breakdown_tier">
       <span
-        *ngFor="let item of conj['main']"
+        *ngFor="let item of conjugation['main']"
         class="{{ item['classes'] }}"
         [ngClass]="{
           highlight:
@@ -96,14 +96,14 @@
             (settings?.highlight)[item['classes']]
         }"
         >{{ item["value"] }}
-        <span *ngIf="conj['main'].indexOf(item) < conj['main'].length - 1"
+        <span *ngIf="conjugation['main'].indexOf(item) < conjugation['main'].length - 1"
           >-</span
         >
       </span>
     </h4>
     <h4 *ngIf="settings?.level.gloss_tier">
       <span
-        *ngFor="let item of conj['secondary']"
+        *ngFor="let item of conjugation['secondary']"
         class="{{ item['classes'] }}"
         [ngClass]="{
           highlight:
@@ -112,14 +112,14 @@
         }"
         >{{ item["value"] | decapitalize }}
         <span
-          *ngIf="conj['secondary'].indexOf(item) < conj['secondary'].length - 1"
+          *ngIf="conjugation['secondary'].indexOf(item) < conjugation['secondary'].length - 1"
           >-</span
         >
       </span>
     </h4>
     <h4 *ngIf="settings?.level.english_tier">
       <span
-        *ngFor="let item of conj['ternary']"
+        *ngFor="let item of conjugation['ternary']"
         class="{{ item['classes'] }}"
         [ngClass]="{
           highlight:
@@ -127,13 +127,13 @@
             (settings?.highlight)[item['classes']]
         }"
         >{{ item["value"] | decapitalize }}
-        <span *ngIf="conj['ternary'].indexOf(item) < conj['ternary'].length - 1"
+        <span *ngIf="conjugation['ternary'].indexOf(item) < conjugation['ternary'].length - 1"
           >-</span
         >
       </span>
     </h4>
     <h4 *ngIf="settings?.level.translation_tier">
-      <span>{{ conj["translation"] }} </span>
+      <span>{{ conjugation["translation"] }} </span>
     </h4>
   </div>
 </div>

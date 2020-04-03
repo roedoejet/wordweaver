@@ -2,7 +2,7 @@
 import { Component, HostListener, ViewChild, OnInit } from "@angular/core";
 
 // Imports
-import { ConjPanel } from "./components/conj-panel/conj-panel.component";
+import { ConjPanel } from "./components/conjugation-panel/conjugation-panel.component";
 
 @Component({
   selector: "page-tableviewer",

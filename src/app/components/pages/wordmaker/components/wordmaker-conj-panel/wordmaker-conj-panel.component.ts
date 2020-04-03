@@ -5,9 +5,9 @@ import { Observable } from "rxjs";
 import { MetaData } from "../../../../../global";
 
 @Component({
-  selector: "wordmaker-conj-panel",
-  templateUrl: "./wordmaker-conj-panel.component.html",
-  styleUrls: ["./wordmaker-conj-panel.component.scss"]
+  selector: "wordmaker-conjugation-panel",
+  templateUrl: "./wordmaker-conjugation-panel.component.html",
+  styleUrls: ["./wordmaker-conjugation-panel.component.scss"]
 })
 export class WordmakerConjPanel implements OnInit {
   @Input()

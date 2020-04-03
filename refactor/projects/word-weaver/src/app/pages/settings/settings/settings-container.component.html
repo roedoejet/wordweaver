@@ -1,0 +1,123 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h1>{{ 'ww.settings.title' | translate }}</h1>
+    </div>
+  </div>
+  <br>
+  <ng-container *ngIf="settings$ | async as settings">
+    <div class='row'>
+      <div class='col-md-6 group' [ngClass]='routeAnimationsElements'>
+        <h2>{{ 'ww.settings.general.highlighting' | translate }}</h2>
+        <div class='icon-form-field checkboxes'>
+          <mat-checkbox class="pronouns" [checked]="settings.pronounHighlight" (change)="onPronounHighlightSelect($event)">
+            Pronouns
+          </mat-checkbox>
+          <mat-checkbox class="root" [checked]="settings.rootHighlight" (change)="onRootHighlightSelect($event)">
+            Verb
+          </mat-checkbox>
+          <mat-checkbox class="aspect" [checked]="settings.aspectHighlight" (change)="onAspectHighlightSelect($event)">
+            Aspect
+          </mat-checkbox>
+          <mat-checkbox class="prepronominal_prefix" [checked]="settings.prepronominalPrefixHighlight"
+            (change)="onPrepronominalPrefixHighlightHighlightSelect($event)">
+            Required
+          </mat-checkbox>
+          <mat-checkbox class="tmp_affix" [checked]="settings.tmpAffixHighlight" (change)="onTmpAffixHighlightSelect($event)">
+            Temp
+          </mat-checkbox>
+          <mat-checkbox class="post_aspectual_suffix" [checked]="settings.postAspectualSuffixHighlight"
+            (change)="onPostAspectualSuffixHighlightSelect($event)">
+            Post Aspectual Suffix
+          </mat-checkbox>
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class='row'>
+      <div class='col-md-6 group' [ngClass]='routeAnimationsElements'>
+        <h2>{{ 'ww.settings.general.tiers' | translate }}</h2>
+        <div class='icon-form-field checkboxes'>
+          <mat-checkbox [checked]="settings.glossLevel"  (change)="onGlossLevelSelect($event)">
+            Gloss Tier
+          </mat-checkbox>
+          <mat-checkbox [checked]="settings.breakdownLevel" (change)="onBreakdownLevelSelect($event)">
+            Breakdown Tier
+          </mat-checkbox>
+          <mat-checkbox [checked]="settings.breakdownTranslationLevel"
+            (change)="onBreakdownTranslationLevelSelect($event)">
+            Breakdown Translation Tier
+          </mat-checkbox>
+          <mat-checkbox [checked]="settings.translationLevel" (change)="onTranslationLevelSelect($event)">
+            Translation Tier
+          </mat-checkbox>
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class="row">
+      <div class="col-md-6 group" [ngClass]="routeAnimationsElements">
+        <h2>{{ 'ww.settings.general.title' | translate }}</h2>
+        <div class="icon-form-field">
+          <mat-icon color="accent">
+            <fa-icon icon="language" color="accent"></fa-icon>
+          </mat-icon>
+          <mat-form-field>
+            <mat-select [placeholder]="'ww.settings.general.placeholder' | translate" [ngModel]="settings.language"
+              (selectionChange)="onLanguageSelect($event)" name="language">
+              <mat-option *ngFor="let l of languages" [value]="l.value">
+                {{ 'ww.settings.general.language.' + l.label | translate }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="icon-form-field">
+          <mat-icon color="accent">
+            <fa-icon icon="bars" color="accent"></fa-icon>
+          </mat-icon>
+          <mat-placeholder>{{ 'ww.settings.themes.sticky-header' | translate }}
+          </mat-placeholder>
+          <mat-slide-toggle [checked]="settings.stickyHeader" (change)="onStickyHeaderToggle($event)">
+          </mat-slide-toggle>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 group" [ngClass]="routeAnimationsElements">
+        <h2>{{ 'ww.settings.themes.title' | translate }}</h2>
+        <div class="icon-form-field">
+          <mat-icon color="accent">
+            <fa-icon icon="paint-brush" color="accent"></fa-icon>
+          </mat-icon>
+          <mat-form-field>
+            <mat-select [placeholder]="'ww.settings.themes.placeholder' | translate" [ngModel]="settings.theme"
+              (selectionChange)="onThemeSelect($event)" name="themes">
+              <mat-option *ngFor="let t of themes" [value]="t.value">
+                {{ 'ww.settings.themes.' + t.label | translate }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="icon-form-field">
+          <mat-icon color="accent">
+            <fa-icon icon="lightbulb" color="accent"></fa-icon>
+          </mat-icon>
+          <mat-placeholder>{{ 'ww.settings.themes.night-mode' | translate }}
+          </mat-placeholder>
+          <mat-slide-toggle [checked]="settings.autoNightMode" (change)="onAutoNightModeToggle($event)">
+          </mat-slide-toggle>
+        </div>
+        <div class="icon-form-field">
+          <mat-placeholder>{{ 'ww.settings.advanced' | translate }}
+          </mat-placeholder>
+          <mat-slide-toggle [checked]="settings.test_api" (change)="onTestApiToggle($event)">
+            {{ 'ww.settings.testApi' | translate}}
+          </mat-slide-toggle>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

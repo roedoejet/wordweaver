@@ -32,5 +32,5 @@
   <wordmaker-verb-panel id="firstStep" *ngIf="currentStep === 1" (selectedVerb)="verbSelected($event)" (goBackTrigger)="triggeredPreviousStep()"></wordmaker-verb-panel>
   <wordmaker-pers-panel id="secondStep" *ngIf="currentStep === 2" [selectedVerb]="selectedVerb" (selectedPers)="persSelected($event)" (goBackTrigger)="triggeredPreviousStep()"></wordmaker-pers-panel>
   <wordmaker-temp-panel id="thirdStep" *ngIf="currentStep === 3" (selectedTemp)="tempSelected($event)" [wordmaker]="this" (goBackTrigger)="triggeredPreviousStep()"></wordmaker-temp-panel>
-  <wordmaker-conj-panel id="finalStep" *ngIf="currentStep === 4" [word$]="word$" [wordmaker]="this" (goBackTrigger)="triggeredPreviousStep($event)"></wordmaker-conj-panel>
+  <wordmaker-conjugation-panel id="finalStep" *ngIf="currentStep === 4" [word$]="word$" [wordmaker]="this" (goBackTrigger)="triggeredPreviousStep($event)"></wordmaker-conjugation-panel>
 </div>

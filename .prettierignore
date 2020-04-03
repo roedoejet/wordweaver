@@ -1,3 +1,4 @@
-*.min.*
-dist_toy
+package.json
+package-lock.json
 *.html
+refactor/dist/word-weaver/

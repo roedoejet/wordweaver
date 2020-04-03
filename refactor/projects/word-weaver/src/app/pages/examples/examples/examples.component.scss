@@ -1,0 +1,16 @@
+@import "../../../../scss/utilities/config";
+
+nav {
+  margin-bottom: 20px;
+
+  .mat-tab-link {
+    min-width: 120px;
+    padding: 0 15px;
+  }
+
+  @media (max-width: map-get($breakpoints, md)) {
+    .mat-tab-link {
+      min-width: 0;
+    }
+  }
+}

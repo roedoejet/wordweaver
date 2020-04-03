@@ -213,8 +213,10 @@ export class ChartService {
     );
   }
 
-  returnValue(conj) {
-    let morphemes = [conj.root, conj.pronoun].concat(conj.affixes);
+  returnValue(conjugation) {
+    let morphemes = [conjugation.root, conjugation.pronoun].concat(
+      conjugation.affixes
+    );
     morphemes = morphemes.sort(function(a, b) {
       return a.position - b.position;
     });
@@ -245,23 +247,31 @@ export class ChartService {
       series: []
     };
     let node;
-    for (let conj of res) {
-      conj = conj.values;
-      let v = conj.root["tag"];
-      let t = this.affixService.getAffOption(conj.affopt)["gloss"];
+    for (let conjugation of res) {
+      conjugation = conjugation.values;
+      let v = conjugation.root["tag"];
+      let t = this.affixService.getAffOption(conjugation.affopt)["gloss"];
       let vb = this.verbService.getVerb(v);
       let p;
       if (vb["thematic_relation"] === "red") {
-        p = this.pronounService.getPronoun(conj.pronoun["agent"])["gloss"];
+        p = this.pronounService.getPronoun(conjugation.pronoun["agent"])[
+          "gloss"
+        ];
       } else if (vb["thematic_relation"] === "blue") {
-        p = this.pronounService.getPronoun(conj.pronoun["patient"])["gloss"];
+        p = this.pronounService.getPronoun(conjugation.pronoun["patient"])[
+          "gloss"
+        ];
       } else {
         p =
-          this.pronounService.getPronoun(conj.pronoun["agent"])["gloss"] +
+          this.pronounService.getPronoun(conjugation.pronoun["agent"])[
+            "gloss"
+          ] +
           " > " +
-          this.pronounService.getPronoun(conj.pronoun["patient"])["obj_gloss"];
+          this.pronounService.getPronoun(conjugation.pronoun["patient"])[
+            "obj_gloss"
+          ];
       }
-      const val = this.returnValue(conj);
+      const val = this.returnValue(conjugation);
 
       if (order === "TP") {
         node = merge(node, { [v]: { [t]: { [p]: val } } });
