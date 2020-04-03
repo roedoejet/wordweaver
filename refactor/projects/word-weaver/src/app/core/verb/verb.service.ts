@@ -18,6 +18,7 @@ export class VerbService {
     })
   );
   constructor(private http: HttpClient) {
+    console.log("constructed verb service");
     this.verbs$.subscribe(verbs => (this.verbs = verbs));
   }
 
@@ -31,7 +32,7 @@ export class VerbService {
 
   searchEntries(terms: Observable<string>) {
     return terms.pipe(
-      debounceTime(100),
+      // debounceTime(100),
       distinctUntilChanged(),
       map(val =>
         this.verbs.filter(verb => {

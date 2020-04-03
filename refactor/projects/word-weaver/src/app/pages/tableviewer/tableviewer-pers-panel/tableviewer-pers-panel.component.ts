@@ -14,81 +14,41 @@ import { FormControl, FormGroup } from "@angular/forms";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableviewerPersPanelComponent implements OnInit {
-  agCheckboxGroup: FormGroup = new FormGroup({});
-  agCheckboxPossibleValues: Observable<
-    Pronoun[]
-  > = this.pnService.pronouns$.pipe(
-    map(values => {
-      values.forEach(value => {
-        this.agCheckboxGroup.addControl(
-          value["tag"],
-          new FormControl(this.agCheckedValues.indexOf(value["tag"]) !== -1)
-        );
-      });
-      return values;
-    })
-  );
-  agCheckedValues: string[] = [];
-  patCheckboxGroup: FormGroup = new FormGroup({});
-  patCheckboxPossibleValues: Observable<
-    Pronoun[]
-  > = this.pnService.pronouns$.pipe(
-    map(values => {
-      values.forEach(value => {
-        this.patCheckboxGroup.addControl(
-          value["tag"],
-          new FormControl(this.patCheckedValues.indexOf(value["tag"]) !== -1)
-        );
-      });
-      return values;
-    })
-  );
-  patCheckedValues: string[] = [];
-  chosenPro;
-  role = "agent";
-  limit = 8;
-  selectAllAg = false;
-  selectAllPat = false;
+  agent = new FormControl();
+  patient = new FormControl();
+  possiblePronouns$: Observable<Pronoun[]>;
   constructor(
-    private pnService: PronounService,
+    public pnService: PronounService,
     private selectionService: TableviewerSelectionService
-  ) {}
+  ) {
+    this.possiblePronouns$ = this.pnService.pronouns$;
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // TODO: Redux
+    this.agent.valueChanges.subscribe(pns => {
+      return this.pushAgChanges(pns.map(pn => pn.tag));
+    });
+    // TODO: Redux
+    this.patient.valueChanges.subscribe(pns => {
+      return this.pushPatChanges(pns.map(pn => pn.tag));
+    });
+  }
 
+  // TODO: Redux
   pushAgChanges(c) {
     this.selectionService.updateAgents(c);
   }
 
+  // TODO: Redux
   pushPatChanges(c) {
     this.selectionService.updatePatients(c);
   }
 
+  // TODO: Redux
   filterTrue(c) {
     return Object.keys(c).filter(k => {
       return c[k];
     });
-  }
-
-  toggleSelectAll() {
-    if (this.role === "agent") {
-      this.selectAllAg = !this.selectAllAg;
-      this.agCheckboxPossibleValues.subscribe(pns => {
-        pns.forEach(pn =>
-          this.agCheckboxGroup.controls[pn.tag].setValue(this.selectAllAg)
-        );
-      });
-    } else if (this.role === "patient") {
-      this.selectAllPat = !this.selectAllPat;
-      this.patCheckboxPossibleValues.subscribe(pns => {
-        pns.forEach(pn =>
-          this.patCheckboxGroup.controls[pn.tag].setValue(this.selectAllPat)
-        );
-      });
-    }
-  }
-
-  checkRole() {
-    console.log(this.role);
   }
 }

@@ -1,0 +1,17 @@
+.control {
+  width: 80%;
+  margin-left: 25px;
+  margin-top: -10px;
+}
+
+.panel {
+  top: 0;
+  position: absolute;
+}
+
+button.deselect {
+  padding: 0 1em !important;
+  height: 20px;
+  margin: 16px 8px;
+  line-height: 1;
+}

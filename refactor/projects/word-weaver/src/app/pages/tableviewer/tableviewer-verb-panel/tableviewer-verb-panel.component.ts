@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { Verb } from "../../../models/models";
 import { VerbService } from "../../../core/core.module";
 import { TableviewerSelectionService } from "../../../core/core.module";
-import { Observable, Subject } from "rxjs";
+import { Observable } from "rxjs";
 import { debounceTime, map } from "rxjs/operators";
 
 import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
@@ -18,45 +18,39 @@ export class TableviewerVerbPanelComponent implements OnInit {
   checkboxGroup: FormGroup = new FormGroup({});
   checkboxPossibleValues: Observable<Verb[]>;
   checkedValues: string[] = [];
-  settings;
   increment = 1000;
   bottomLimit = 0;
   topLimit: number;
-  viewableVerbs: Verb[];
+  viewableVerbs$: Observable<Verb[]>;
   selection = [];
   searchField: FormControl;
   verbForm: FormGroup;
-  verbSubscription;
   constructor(
     public verbService: VerbService,
     private fb: FormBuilder,
     public selectionService: TableviewerSelectionService
   ) {
-    // initialize form with list of checkboxes
-    this.verbSubscription = this.verbs$.subscribe(values => {
-      values.forEach(value => {
-        this.checkboxGroup.addControl(
-          value["tag"],
-          new FormControl(this.checkedValues.indexOf(value["tag"]) !== -1)
-        );
-      });
-      return values;
-    });
-
     // subscribe to search input
     this.searchField = new FormControl();
     this.verbForm = this.fb.group({ search: this.searchField });
-    this.searchField.valueChanges
-      .pipe(
-        debounceTime(100),
-        map(term => {
-          return this.getEntriesFrom(term);
-        })
-      )
-      .subscribe(result => {
-        this.viewableVerbs = result;
-      });
+    this.viewableVerbs$ = this.searchField.valueChanges.pipe(
+      debounceTime(200),
+      map(term => {
+        // Find matches
+        const matches = this.getEntriesFrom(term);
+        // Add controls
+        matches.forEach(value => {
+          this.checkboxGroup.addControl(
+            value["tag"],
+            new FormControl(this.checkedValues.indexOf(value["tag"]) !== -1)
+          );
+        });
+        // Return matches
+        return matches;
+      })
+    );
 
+    // TODO: Redux
     // create selection observable
     this.checkboxGroup.valueChanges.subscribe(c => {
       c = this.filterTrue(c);
@@ -68,14 +62,12 @@ export class TableviewerVerbPanelComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  ngOnDestroy() {
-    this.verbSubscription.unsubscribe();
-  }
-
+  // TODO: Redux
   pushChanges(c) {
     this.selectionService.updateVerbs(c);
   }
 
+  // TODO: Redux
   filterTrue(c) {
     return Object.keys(c).filter(k => {
       return c[k];
@@ -83,7 +75,7 @@ export class TableviewerVerbPanelComponent implements OnInit {
   }
 
   getEntriesFrom(term) {
-    let vbs = this.verbService.verbs
+    const vbs: Verb[] = this.verbService.verbs
       .filter(v => {
         return this.filterEntries(v, term);
       })
@@ -98,31 +90,9 @@ export class TableviewerVerbPanelComponent implements OnInit {
     );
   }
 
-  swipePrev() {
-    if (this.bottomLimit - this.increment > 0) {
-      this.bottomLimit -= this.increment;
-      // this.topLimit -= this.increment;
-      // this.viewableVerbs = this.verbs.slice(this.bottomLimit, this.topLimit)
-    } else {
-      this.bottomLimit = 0;
-      // this.topLimit = this.increment;
-      // this.viewableVerbs = this.verbs.slice(this.bottomLimit, this.topLimit)
-    }
-  }
-
-  swipeNext() {
-    if (this.bottomLimit + this.increment < this.topLimit) {
-      this.bottomLimit += this.increment;
-      // this.topLimit += this.increment;
-      // this.viewableVerbs = this.verbs.slice(this.bottomLimit, this.topLimit)
-    } else {
-      this.bottomLimit = this.topLimit - this.increment;
-      // this.topLimit = this.verbs.length;
-      // this.viewableVerbs = this.verbs.slice(this.bottomLimit, this.topLimit)
-    }
-  }
-
-  remove(verb) {
-    this.checkboxGroup.controls[verb].setValue(false);
+  remove() {
+    Object.keys(this.checkboxGroup.controls).forEach(k =>
+      this.checkboxGroup.controls[k].setValue(false)
+    );
   }
 }

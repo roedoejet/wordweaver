@@ -14,46 +14,30 @@ import { FormControl, FormGroup } from "@angular/forms";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableviewerTempPanelComponent implements OnInit {
-  checkboxGroup: FormGroup = new FormGroup({});
-  checkboxPossibleValues: Observable<
-    AffOption[]
-  > = this.affixService.affoptions$.pipe(
-    map(values => {
-      values.forEach(value => {
-        this.checkboxGroup.addControl(
-          value["tag"],
-          new FormControl(this.checkedValues.indexOf(value["tag"]) !== -1)
-        );
-      });
-      return values;
-    })
-  );
-  checkedValues: string[] = [];
-  chosenTimes = [];
-  selectAll = false;
+  times = new FormControl();
+  possibleTimes$: Observable<AffOption[]>;
   constructor(
     private affixService: AffixService,
     private selectionService: TableviewerSelectionService
-  ) {}
+  ) {
+    this.possibleTimes$ = this.affixService.affoptions$;
+  }
 
-  ngOnInit(): void {}
-
+  ngOnInit(): void {
+    // TODO: Redux
+    this.times.valueChanges.subscribe(affopts => {
+      return this.pushChanges(affopts.map(affopt => affopt.tag));
+    });
+  }
+  // TODO: Redux
   pushChanges(c) {
     this.selectionService.updateAffOptions(c);
   }
 
+  // TODO: Redux
   filterTrue(c) {
     return Object.keys(c).filter(k => {
       return c[k];
-    });
-  }
-
-  toggleSelectAll() {
-    this.selectAll = !this.selectAll;
-    this.checkboxPossibleValues.subscribe(ts => {
-      ts.forEach(t =>
-        this.checkboxGroup.controls[t.tag].setValue(this.selectAll)
-      );
     });
   }
 }

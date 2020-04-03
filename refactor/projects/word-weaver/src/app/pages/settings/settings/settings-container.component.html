@@ -49,7 +49,7 @@
           <mat-checkbox [checked]="settings.level.breakdown" (change)="onLevelSelect($event, 'breakdown')">
             Breakdown Tier
           </mat-checkbox>
-          <mat-checkbox [checked]="settings.level.breakdown-translation"
+          <mat-checkbox [checked]="settings.level['breakdown-translation']"
             (change)="onLevelSelect($event, 'breakdown-translation')">
             Breakdown Translation Tier
           </mat-checkbox>
