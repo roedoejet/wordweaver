@@ -9,16 +9,8 @@ import {
   actionSettingsChangeStickyHeader,
   actionSettingsChangeTestApi,
   actionSettingsChangeTheme,
-  actionSettingsChangeGlossLevel,
-  actionSettingsChangeBreakdownLevel,
-  actionSettingsChangeBreakdownTranslationLevel,
-  actionSettingsChangeTranslationLevel,
-  actionSettingsChangeAspectHighlight,
-  actionSettingsChangePostAspectualSuffixHighlight,
-  actionSettingsChangePrepronominalPrefixHighlight,
-  actionSettingsChangePronounHighlight,
-  actionSettingsChangeRootHighlight,
-  actionSettingsChangeTmpAffixHighlight
+  actionSettingsChangeLevel,
+  actionSettingsChangeHighlight
 } from "./settings.actions";
 import { Action, createReducer, on } from "@ngrx/store";
 
@@ -32,16 +24,20 @@ export const initialState: SettingsState = {
   pageAnimationsDisabled: false,
   elementsAnimations: true,
   testApi: false,
-  glossLevel: false,
-  breakdownLevel: false,
-  translationBreakdownLevel: false,
-  translationLevel: true,
-  rootHighlight: false,
-  pronounHighlight: true,
-  aspectHighlight: false,
-  postAspectualSuffix: false,
-  prepronominalPrefix: false,
-  tmpAffix: false,
+  level: {
+    gloss: false,
+    breakdown: false,
+    "translation-breakdown": false,
+    translation: true
+  },
+  highlight: {
+    root: false,
+    pronoun: true,
+    aspect: false,
+    post_aspectual_suffix: false,
+    prepronominal_prefix: false,
+    tmp_affix: false
+  },
   hour: 0
 };
 
@@ -56,16 +52,6 @@ const reducer = createReducer(
     actionSettingsChangeAnimationsPage,
     actionSettingsChangeAnimationsElements,
     actionSettingsChangeHour,
-    actionSettingsChangeGlossLevel,
-    actionSettingsChangeBreakdownLevel,
-    actionSettingsChangeBreakdownTranslationLevel,
-    actionSettingsChangeTranslationLevel,
-    actionSettingsChangeAspectHighlight,
-    actionSettingsChangePostAspectualSuffixHighlight,
-    actionSettingsChangePrepronominalPrefixHighlight,
-    actionSettingsChangePronounHighlight,
-    actionSettingsChangeRootHighlight,
-    actionSettingsChangeTmpAffixHighlight,
     (state, action) => ({ ...state, ...action })
   ),
   on(
@@ -75,7 +61,23 @@ const reducer = createReducer(
       pageAnimationsDisabled,
       pageAnimations: false
     })
-  )
+  ),
+  on(actionSettingsChangeHighlight, (state, action) => {
+    const newNestedState = {};
+    newNestedState[action.key] = action.checked;
+    return {
+      ...state,
+      highlight: { ...state.highlight, ...newNestedState }
+    };
+  }),
+  on(actionSettingsChangeLevel, (state, action) => {
+    const newNestedState = {};
+    newNestedState[action.key] = action.checked;
+    return {
+      ...state,
+      level: { ...state.level, ...newNestedState }
+    };
+  })
 );
 
 export function settingsReducer(

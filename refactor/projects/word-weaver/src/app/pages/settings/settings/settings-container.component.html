@@ -10,24 +10,27 @@
       <div class='col-md-6 group' [ngClass]='routeAnimationsElements'>
         <h2>{{ 'ww.settings.general.highlighting' | translate }}</h2>
         <div class='icon-form-field checkboxes'>
-          <mat-checkbox class="pronouns" [checked]="settings.pronounHighlight" (change)="onPronounHighlightSelect($event)">
+          <mat-checkbox class="pronouns" [checked]="settings.highlight.pronoun"
+            (change)="onHighlightSelect($event, 'pronoun')">
             Pronouns
           </mat-checkbox>
-          <mat-checkbox class="root" [checked]="settings.rootHighlight" (change)="onRootHighlightSelect($event)">
+          <mat-checkbox class="root" [checked]="settings.highlight.root" (change)="onHighlightSelect($event, 'root')">
             Verb
           </mat-checkbox>
-          <mat-checkbox class="aspect" [checked]="settings.aspectHighlight" (change)="onAspectHighlightSelect($event)">
+          <mat-checkbox class="aspect" [checked]="settings.highlight.aspect"
+            (change)="onHighlightSelect($event, 'aspect')">
             Aspect
           </mat-checkbox>
-          <mat-checkbox class="prepronominal_prefix" [checked]="settings.prepronominalPrefixHighlight"
-            (change)="onPrepronominalPrefixHighlightHighlightSelect($event)">
+          <mat-checkbox class="prepronominal_prefix" [checked]="settings.highlight.prepronominal_prefix"
+            (change)="onHighlightSelect($event, 'prepronominal_prefix')">
             Required
           </mat-checkbox>
-          <mat-checkbox class="tmp_affix" [checked]="settings.tmpAffixHighlight" (change)="onTmpAffixHighlightSelect($event)">
+          <mat-checkbox class="tmp_affix" [checked]="settings.highlight.tmp_affix"
+            (change)="onHighlightSelect($event, 'tmp_affix')">
             Temp
           </mat-checkbox>
-          <mat-checkbox class="post_aspectual_suffix" [checked]="settings.postAspectualSuffixHighlight"
-            (change)="onPostAspectualSuffixHighlightSelect($event)">
+          <mat-checkbox class="post_aspectual_suffix" [checked]="settings.highlight.post_aspectual_suffix"
+            (change)="onHighlightSelect($event, 'post_aspectual_suffix')">
             Post Aspectual Suffix
           </mat-checkbox>
         </div>
@@ -40,17 +43,17 @@
       <div class='col-md-6 group' [ngClass]='routeAnimationsElements'>
         <h2>{{ 'ww.settings.general.tiers' | translate }}</h2>
         <div class='icon-form-field checkboxes'>
-          <mat-checkbox [checked]="settings.glossLevel"  (change)="onGlossLevelSelect($event)">
+          <mat-checkbox [checked]="settings.level.gloss" (change)="onLevelSelect($event, 'gloss')">
             Gloss Tier
           </mat-checkbox>
-          <mat-checkbox [checked]="settings.breakdownLevel" (change)="onBreakdownLevelSelect($event)">
+          <mat-checkbox [checked]="settings.level.breakdown" (change)="onLevelSelect($event, 'breakdown')">
             Breakdown Tier
           </mat-checkbox>
-          <mat-checkbox [checked]="settings.breakdownTranslationLevel"
-            (change)="onBreakdownTranslationLevelSelect($event)">
+          <mat-checkbox [checked]="settings.level.breakdown-translation"
+            (change)="onLevelSelect($event, 'breakdown-translation')">
             Breakdown Translation Tier
           </mat-checkbox>
-          <mat-checkbox [checked]="settings.translationLevel" (change)="onTranslationLevelSelect($event)">
+          <mat-checkbox [checked]="settings.level.translation" (change)="onLevelSelect($event, 'translation')">
             Translation Tier
           </mat-checkbox>
         </div>

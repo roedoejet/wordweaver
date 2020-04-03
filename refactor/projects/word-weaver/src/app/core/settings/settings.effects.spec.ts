@@ -66,16 +66,20 @@ describe("SettingsEffects", () => {
         autoNightMode: false,
         stickyHeader: false,
         testApi: false,
-        glossLevel: false,
-        breakdownLevel: false,
-        translationBreakdownLevel: false,
-        translationLevel: true,
-        rootHighlight: false,
-        pronounHighlight: true,
-        aspectHighlight: false,
-        postAspectualSuffix: false,
-        prepronominalPrefix: false,
-        tmpAffix: false,
+        level: {
+          gloss: false,
+          breakdown: false,
+          "translation-breakdown": false,
+          translation: true
+        },
+        highlight: {
+          root: false,
+          pronoun: true,
+          aspect: false,
+          post_aspectual_suffix: false,
+          prepronominal_prefix: false,
+          tmp_affix: false
+        },
         pageAnimationsDisabled: true,
         hour: 12
       };

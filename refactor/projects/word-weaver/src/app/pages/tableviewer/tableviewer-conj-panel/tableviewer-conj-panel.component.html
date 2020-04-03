@@ -67,7 +67,8 @@
 
         <div *ngIf="showExplorer" class="full-width full-height">
             <div *ngIf="chart_response">
-                <!-- <div #explorer echarts [options]="chart_response" class="demo-chart"></div> -->
+                <p>echart here</p>
+                <div #explorer echarts [options]="chart_response" class="demo-chart"></div>
             </div>
         </div>
 
@@ -89,7 +90,7 @@
                             <th>
                                 <h3>{{ 'ww.language' | translate }}</h3>
                             </th>
-                            <th *ngIf="settings?.level.english_tier || settings?.level.translation_tier">
+                            <th *ngIf="settings.breakdownTranslationLevel || settings.translationLevel">
                                 <h3>English</h3>
                             </th>
                         </tr>
@@ -100,9 +101,10 @@
                                 <h3 id="main">
                                     <span *ngFor="let item of conjugation['main']"
                                         class="{{ item['classes'] }} no-padding header-text"
-                                        [ngClass]="{highlight: (settings?.highlight)[item['type']] || (settings?.highlight)[item['classes']]}">{{ item["value"] }}</span>
+                                        [ngClass]="{highlight: (settings?.highlight)[item['type']] || (settings?.highlight)[item['classes']]}">{{ item["value"] }}
+                                    </span>
                                 </h3>
-                                <h5 id="main" *ngIf="settings?.level.breakdown_tier">
+                                <h5 id="main" *ngIf="settings.breakdownLevel">
                                     <span *ngFor="let item of conjugation['main']"
                                         class="{{ item['classes'] }} no-padding header-text"
                                         [ngClass]="{highlight: (settings?.highlight)[item['type']] || (settings?.highlight)[item['classes']]}">{{ item["value"] }}
@@ -110,7 +112,7 @@
                                             *ngIf="conjugation['main'].indexOf(item) < conjugation['main'].length - 1">-</span>
                                     </span>
                                 </h5>
-                                <h5 id="main" *ngIf="settings?.level.gloss_tier">
+                                <h5 id="main" *ngIf="settings.glossLevel">
                                     <span *ngFor="let item of conjugation['secondary']"
                                         class="{{ item['classes'] }} no-padding header-text" [ngClass]="{
                         highlight:
@@ -122,10 +124,10 @@
                                 </h5>
                             </td>
                             <td class="center-text">
-                                <h4 id="main" *ngIf="settings?.level.translation_tier" class="no-padding header-text">
+                                <h4 id="main" *ngIf="settings.translationLevel" class="no-padding header-text">
                                     <span class="translation">{{ conjugation["translation"] }}</span>
                                 </h4>
-                                <h5 id="main" *ngIf="settings?.level.english_tier">
+                                <h5 id="main" *ngIf="settings.breakdownTranslationLevel">
                                     <span *ngFor="let item of conjugation['ternary']"
                                         class="{{ item['classes'] }} no-padding header-text"
                                         [ngClass]="{highlight: (settings?.highlight)[item['type']] || (settings?.highlight)[item['classes']] }">{{ item["value"] | decapitalize }}

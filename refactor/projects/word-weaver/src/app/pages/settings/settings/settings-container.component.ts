@@ -9,16 +9,8 @@ import {
   actionSettingsChangeAnimationsPage,
   actionSettingsChangeAutoNightMode,
   actionSettingsChangeLanguage,
-  actionSettingsChangeGlossLevel,
-  actionSettingsChangeBreakdownLevel,
-  actionSettingsChangeBreakdownTranslationLevel,
-  actionSettingsChangeTranslationLevel,
-  actionSettingsChangeAspectHighlight,
-  actionSettingsChangePostAspectualSuffixHighlight,
-  actionSettingsChangePrepronominalPrefixHighlight,
-  actionSettingsChangePronounHighlight,
-  actionSettingsChangeRootHighlight,
-  actionSettingsChangeTmpAffixHighlight,
+  actionSettingsChangeLevel,
+  actionSettingsChangeHighlight,
   actionSettingsChangeTestApi,
   actionSettingsChangeTheme,
   actionSettingsChangeStickyHeader
@@ -58,68 +50,12 @@ export class SettingsContainerComponent implements OnInit {
     this.store.dispatch(actionSettingsChangeLanguage({ language }));
   }
 
-  onGlossLevelSelect({ checked: glossLevel }) {
-    this.store.dispatch(actionSettingsChangeGlossLevel({ glossLevel }));
+  onLevelSelect({ checked }, key: string) {
+    this.store.dispatch(actionSettingsChangeLevel({ checked, key }));
   }
 
-  onBreakdownLevelSelect({ checked: breakdownLevel }) {
-    this.store.dispatch(actionSettingsChangeBreakdownLevel({ breakdownLevel }));
-  }
-
-  onBreakdownTranslationLevelSelect({ checked: breakdownTranslationLevel }) {
-    this.store.dispatch(
-      actionSettingsChangeBreakdownTranslationLevel({
-        breakdownTranslationLevel
-      })
-    );
-  }
-
-  onTranslationLevelSelect({ checked: translationLevel }) {
-    this.store.dispatch(
-      actionSettingsChangeTranslationLevel({ translationLevel })
-    );
-  }
-
-  onRootHighlightSelect({ checked: rootHighlight }) {
-    this.store.dispatch(actionSettingsChangeRootHighlight({ rootHighlight }));
-  }
-
-  onPronounHighlightSelect({ checked: pronounHighlight }) {
-    this.store.dispatch(
-      actionSettingsChangePronounHighlight({ pronounHighlight })
-    );
-  }
-
-  onAspectHighlightSelect({ checked: aspectHighlight }) {
-    this.store.dispatch(
-      actionSettingsChangeAspectHighlight({ aspectHighlight })
-    );
-  }
-
-  onPrepronominalPrefixHighlightHighlightSelect({
-    checked: prepronominalPrefixHighlight
-  }) {
-    this.store.dispatch(
-      actionSettingsChangePrepronominalPrefixHighlight({
-        prepronominalPrefixHighlight
-      })
-    );
-  }
-
-  onTmpAffixHighlightSelect({ checked: tmpAffixHighlight }) {
-    this.store.dispatch(
-      actionSettingsChangeTmpAffixHighlight({ tmpAffixHighlight })
-    );
-  }
-
-  onPostAspectualSuffixHighlightSelect({
-    checked: postAspectualSuffixHighlight
-  }) {
-    this.store.dispatch(
-      actionSettingsChangePostAspectualSuffixHighlight({
-        postAspectualSuffixHighlight
-      })
-    );
+  onHighlightSelect({ checked }, key: string) {
+    this.store.dispatch(actionSettingsChangeHighlight({ checked, key }));
   }
 
   onTestApiToggle({ checked: testApi }) {

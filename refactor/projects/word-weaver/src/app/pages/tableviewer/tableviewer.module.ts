@@ -6,6 +6,7 @@ import { TableviewerTempPanelComponent } from "./tableviewer-temp-panel/tablevie
 import { TableviewerVerbPanelComponent } from "./tableviewer-verb-panel/tableviewer-verb-panel.component";
 import { SharedModule } from "../../shared/shared.module";
 import { TableviewerRoutingModule } from "./tableviewer-routing.module";
+import { NgxEchartsModule } from "ngx-echarts";
 
 @NgModule({
   declarations: [
@@ -15,6 +16,6 @@ import { TableviewerRoutingModule } from "./tableviewer-routing.module";
     TableviewerTempPanelComponent,
     TableviewerVerbPanelComponent
   ],
-  imports: [SharedModule, TableviewerRoutingModule]
+  imports: [SharedModule, TableviewerRoutingModule, NgxEchartsModule]
 })
 export class TableviewerModule {}
