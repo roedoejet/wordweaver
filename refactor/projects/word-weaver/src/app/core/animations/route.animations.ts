@@ -91,7 +91,6 @@ export const stepperAnimation = trigger("specialAnimations", [
 const STEPS_NONE = [];
 const STEPS_PAGE = [STEPS_ALL[0], STEPS_ALL[2]];
 const STEPS_ELEMENTS = [STEPS_ALL[1], STEPS_ALL[3]];
-const STEPS_ZOOM = stepperAnimation;
 
 export const routeAnimations = trigger("routeAnimations", [
   transition(isRouteAnimationsAll, STEPS_ALL),
@@ -100,7 +99,7 @@ export const routeAnimations = trigger("routeAnimations", [
   transition(isRouteAnimationsElements, STEPS_ELEMENTS)
 ]);
 
-export const specialAnimations = [STEPS_ZOOM];
+export const specialAnimations = [stepperAnimation];
 
 export function isRouteAnimationsAll() {
   return AnimationsService.isRouteAnimationsType("ALL");
