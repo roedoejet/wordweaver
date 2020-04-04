@@ -9,6 +9,7 @@ import {
   authLogin,
   authLogout,
   routeAnimations,
+  specialAnimations,
   LocalStorageService,
   selectIsAuthenticated,
   selectSettingsStickyHeader,
@@ -24,7 +25,7 @@ import {
   selector: "ww-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"],
-  animations: [routeAnimations]
+  animations: [routeAnimations, specialAnimations]
 })
 export class AppComponent implements OnInit {
   isProd = env.production;
@@ -48,7 +49,6 @@ export class AppComponent implements OnInit {
   stickyHeader$: Observable<boolean>;
   language$: Observable<string>;
   theme$: Observable<string>;
-
   constructor(
     private store: Store,
     private storageService: LocalStorageService

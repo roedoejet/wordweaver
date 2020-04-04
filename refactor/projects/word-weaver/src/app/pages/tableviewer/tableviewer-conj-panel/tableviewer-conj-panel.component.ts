@@ -22,6 +22,8 @@ import {
   VerbService
 } from "../../../core/core.module";
 
+import { ROUTE_ANIMATIONS_ELEMENTS } from "../../../core/core.module";
+
 @Component({
   selector: "ww-tableviewer-conj-panel",
   templateUrl: "./tableviewer-conj-panel.component.html",
@@ -42,6 +44,7 @@ export class TableviewerConjPanelComponent implements OnInit {
   show_toolbar = true;
   order = true;
   depth = 1;
+  routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   constructor(
     private conjugationService: ConjugationService,
     private selectionService: TableviewerSelectionService,

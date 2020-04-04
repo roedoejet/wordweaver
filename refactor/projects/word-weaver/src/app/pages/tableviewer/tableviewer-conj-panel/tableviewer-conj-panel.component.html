@@ -48,7 +48,7 @@
     </div>
     <div class="panel__content">
         <div>
-            <h4 class="desktop-only center-text margin-top-100 padding-20" *ngIf="!response$ && !showExplorer">
+            <h4 class="desktop-only center-text margin-top-100 padding-20" *ngIf="!response$ && !showExplorer" [ngClass]="routeAnimationsElements">
                 Please select one or more boxes from the <b>Verb</b>, <b>Person</b>, and <b>Time</b> panels to the left
                 and then press the enter key or conjugate button to
                 see your selection

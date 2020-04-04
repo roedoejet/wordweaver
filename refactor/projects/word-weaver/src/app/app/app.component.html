@@ -42,7 +42,7 @@
             </button>
           </span>
 
-          <button mat-button mat-stroked-button color="accent" *ngIf="!(isAuthenticated$ | async)"
+          <!-- <button mat-button mat-stroked-button color="accent" *ngIf="!(isAuthenticated$ | async)"
             (click)="onLoginClick()">
             {{ 'ww.menu.login' | translate }}
           </button>
@@ -57,7 +57,7 @@
               </mat-icon>
               <span>{{ 'ww.menu.logout' | translate }}</span>
             </button>
-          </mat-menu>
+          </mat-menu> -->
 
           <button mat-icon-button routerLink="settings" class="d-none d-sm-inline">
             <fa-icon icon="cog"></fa-icon>
@@ -79,7 +79,8 @@
       </div>
 
       <div class="content"
-        [@routeAnimations]="o.isActivated && o.activatedRoute.routeConfig.data && o.activatedRoute.routeConfig.data.title">
+        [@routeAnimations]="o.isActivated && o.activatedRoute.routeConfig.data && o.activatedRoute.routeConfig.data.title"
+        [@specialAnimations]="o && o.isActivated && o.activatedRouteData && o.activatedRouteData['animation']">
         <router-outlet #o="outlet"></router-outlet>
       </div>
 
@@ -99,8 +100,12 @@
               <span>Youtube</span>
             </a>
           </div>
+
         </div>
         <div class="row">
+          <!-- <div class='col-sm-3 trim trim-left'>
+            <img src='assets/trim.png'>
+          </div> -->
           <div class="col-12 signature">
             &#169; <span class="year">{{year}}</span>
             <br class="d-block d-sm-none">
@@ -110,6 +115,9 @@
               {{version}} <span *ngIf="!isProd">[{{envName}}]</span>
             </a>
           </div>
+          <!-- <div class='col-sm-3 trim trim-right'>
+            <img src='assets/trim.png'>
+          </div> -->
         </div>
       </div>
 

@@ -25,7 +25,7 @@ const routes: Routes = [
   {
     path: "wordmaker",
     loadChildren: () =>
-      import("./pages/about/about.module").then(m => m.AboutModule)
+      import("./pages/wordmaker/wordmaker.module").then(m => m.WordmakerModule)
   },
   {
     path: "tableviewer",

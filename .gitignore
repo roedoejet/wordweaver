@@ -2,3 +2,4 @@ node_modules
 .DS_Store
 dist/*
 refactor/dist/word-weaver
+refactor/projects/word-weaver/src/assets/trim.*

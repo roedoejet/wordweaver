@@ -1,5 +1,6 @@
 import {
   animate,
+  group,
   query,
   style,
   transition,
@@ -59,9 +60,38 @@ const STEPS_ALL: any[] = [
     { optional: true }
   )
 ];
+
+export const stepperAnimation = trigger("specialAnimations", [
+  transition("Wordmaker => Stepper", [
+    query(":enter, :leave", style({ position: "fixed", width: "100%" }), {
+      optional: true
+    }),
+    group([
+      query(
+        ":enter",
+        [
+          style({ transform: "translateX(-100%)" }),
+          animate("0.5s ease-in-out", style({ transform: "translateX(0%)" }))
+        ],
+        { optional: true }
+      ),
+      query(
+        ":leave",
+        [
+          style({ transform: "translateX(0%)" }),
+          animate("0.5s ease-in-out", style({ transform: "translateX(100%)" }))
+        ],
+        { optional: true }
+      )
+    ])
+  ]),
+  transition("* => Wordmaker", [STEPS_ALL[0], STEPS_ALL[2]])
+]);
+
 const STEPS_NONE = [];
 const STEPS_PAGE = [STEPS_ALL[0], STEPS_ALL[2]];
 const STEPS_ELEMENTS = [STEPS_ALL[1], STEPS_ALL[3]];
+const STEPS_ZOOM = stepperAnimation;
 
 export const routeAnimations = trigger("routeAnimations", [
   transition(isRouteAnimationsAll, STEPS_ALL),
@@ -69,6 +99,8 @@ export const routeAnimations = trigger("routeAnimations", [
   transition(isRouteAnimationsPage, STEPS_PAGE),
   transition(isRouteAnimationsElements, STEPS_ELEMENTS)
 ]);
+
+export const specialAnimations = [STEPS_ZOOM];
 
 export function isRouteAnimationsAll() {
   return AnimationsService.isRouteAnimationsType("ALL");

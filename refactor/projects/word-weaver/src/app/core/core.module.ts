@@ -43,7 +43,8 @@ import { AuthGuardService } from "./auth/auth-guard.service";
 import { TitleService } from "./title/title.service";
 import {
   ROUTE_ANIMATIONS_ELEMENTS,
-  routeAnimations
+  routeAnimations,
+  specialAnimations
 } from "./animations/route.animations";
 import { AnimationsService } from "./animations/animations.service";
 import { AppErrorHandler } from "./error-handler/app-error-handler.service";
@@ -90,6 +91,7 @@ export {
   authLogin,
   authLogout,
   routeAnimations,
+  specialAnimations,
   AppState,
   LocalStorageService,
   selectIsAuthenticated,
