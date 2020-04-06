@@ -1,1 +1,38 @@
-<p>verb step</p>
+<div class="margin-top-20 full-width centered panel">
+    <div class="panel__header">
+        <!-- <mat-toolbar class="progress">
+            <mat-toolbar-row class='progress__row--header'> -->
+        <form class="margin-left-25 font-md">
+            <mat-form-field class="margin-bottom-20" [formGroup]="verbForm">
+                <input autocomplete="off" type="text" placeholder="Search for a verb" value="" aria-label="Number"
+                    matInput formControlName="search">
+            </mat-form-field>
+        </form>
+        <!-- </mat-toolbar-row>
+
+        </mat-toolbar> -->
+    </div>
+    <div class='instructions' [ngSwitch]='(viewableVerbs$ | async)?.length'>
+        <p *ngSwitchDefault>Select one of the {{ (viewableVerbs$ | async)?.length }} verbs
+            below:</p>
+        <p *ngSwitchCase='1'>Select the verb below:</p>
+        <p *ngSwitchCase='0'>Sorry, no verbs were found like that. Please adjust your search.</p>
+    </div>
+    <hr class='margin-bottom-50'>
+    <div class='panel__content'>
+        <ng-template #loading>
+            <mat-spinner class="centered"></mat-spinner>
+        </ng-template>
+        <mat-chip-list class="panel__list custom-scroll" *ngIf="viewableVerbs$ | async as verbs; else loading">
+            <p *ngIf="verbs.length === 0">Sorry, there are no verbs matching '{{ searchField.value }}'</p>
+            <mat-chip class="margin-5 bg-white border-accent" (click)="select(verb)" *ngFor="let verb of verbs">
+                <span class="centered color-black" *ngIf="display_language !== 'english'">{{verb.root}}</span>
+                <span class="centered color-black" *ngIf="display_language === 'english'">{{verb.gloss}}</span>
+                <mat-icon class="icon-sm margin-left-5"
+                    [ngClass]="verb?.thematic_relation ? 'color-' + verb?.thematic_relation : ''">brightness_1
+                </mat-icon>
+            </mat-chip>
+        </mat-chip-list>
+    </div>
+
+</div>

@@ -42,6 +42,7 @@
 
 .mat-chip-list-wrapper {
   @extend %scroll;
+  margin: 0 !important;
 }
 
 /* Mat Chip */

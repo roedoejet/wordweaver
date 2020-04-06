@@ -5,44 +5,54 @@ import { MatSnackBar, MatSnackBarConfig } from "@angular/material/snack-bar";
   providedIn: "root"
 })
 export class NotificationService {
+  config: object = { duration: 2000, verticalPosition: "top" };
   constructor(
     private readonly snackBar: MatSnackBar,
     private readonly zone: NgZone
   ) {}
 
   default(message: string) {
-    this.show(message, {
-      duration: 2000,
-      panelClass: "default-notification-overlay"
-    });
+    const config: object = {
+      ...this.config,
+      ...{ panelClass: "default-notification-overlay" }
+    };
+    this.show(message, config);
   }
 
   info(message: string) {
-    this.show(message, {
-      duration: 2000,
-      panelClass: "info-notification-overlay"
-    });
+    const config: object = {
+      ...this.config,
+      ...{ panelClass: "info-notification-overlay" }
+    };
+    this.show(message, config);
   }
 
   success(message: string) {
-    this.show(message, {
-      duration: 2000,
-      panelClass: "success-notification-overlay"
-    });
+    const config: object = {
+      ...this.config,
+      ...{ panelClass: "success-notification-overlay" }
+    };
+    this.show(message, config);
   }
 
   warn(message: string) {
-    this.show(message, {
-      duration: 2500,
-      panelClass: "warning-notification-overlay"
-    });
+    const config: object = {
+      ...this.config,
+      ...{ panelClass: "warning-notification-overlay" }
+    };
+    this.show(message, config);
   }
 
   error(message: string) {
-    this.show(message, {
-      duration: 3000,
-      panelClass: "error-notification-overlay"
-    });
+    const config: object = {
+      ...this.config,
+      ...{
+        panelClass: "error-notification-overlay",
+        duration: 3000,
+        verticalPosition: "bottom"
+      }
+    };
+    this.show(message, config);
   }
 
   private show(message: string, configuration: MatSnackBarConfig) {

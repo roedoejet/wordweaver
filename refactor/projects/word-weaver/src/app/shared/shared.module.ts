@@ -21,6 +21,7 @@ import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatStepperModule } from "@angular/material/stepper";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatSliderModule } from "@angular/material/slider";
+import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from "@angular/material/core";
 import { MatGridListModule } from "@angular/material/grid-list";
@@ -55,7 +56,6 @@ import { BigInputComponent } from "./big-input/big-input/big-input.component";
 import { BigInputActionComponent } from "./big-input/big-input-action/big-input-action.component";
 import { RtlSupportDirective } from "./rtl-support/rtl-support.directive";
 import { LogoComponent } from "./logo/logo.component";
-import { ToastrModule } from "ngx-toastr";
 import { AnimateOnlyPipe } from "./pipes/animate-only/animate-only";
 import { CapitalizePipe } from "./pipes/capitalize/capitalize";
 import { DecapitalizePipe } from "./pipes/decapitalize/decapitalize";
@@ -85,13 +85,9 @@ import { NgxEchartsModule } from "ngx-echarts";
     MatSnackBarModule,
     MatStepperModule,
     MatSlideToggleModule,
+    MatToolbarModule,
     MatDividerModule,
     NgxEchartsModule,
-    ToastrModule.forRoot({
-      maxOpened: 1,
-      autoDismiss: true,
-      positionClass: "toast-top-center"
-    }),
     FontAwesomeModule
   ],
   declarations: [
@@ -129,6 +125,7 @@ import { NgxEchartsModule } from "ngx-echarts";
     MatStepperModule,
     MatDividerModule,
     MatSliderModule,
+    MatToolbarModule,
     MatDatepickerModule,
     MatNativeDateModule,
 

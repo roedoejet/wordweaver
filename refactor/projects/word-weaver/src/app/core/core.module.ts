@@ -85,6 +85,8 @@ import { PronounService } from "./pronoun/pronoun.service";
 import { TableviewerSelectionService } from "./selection/tableviewer-selection.service";
 import { VerbService } from "./verb/verb.service";
 
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+
 export {
   TitleService,
   selectAuth,
@@ -126,6 +128,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     CommonModule,
     HttpClientModule,
     FormsModule,
+    BrowserAnimationsModule,
 
     // material
     MatSidenavModule,

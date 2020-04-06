@@ -2,14 +2,17 @@
     <mat-horizontal-stepper [linear]="isLinear" #stepper>
         <mat-step [stepControl]="verbFormGroup">
             <form [formGroup]="verbFormGroup">
-                <ng-template matStepLabel>What is the action?</ng-template>
-                <ww-wordmaker-verb-step></ww-wordmaker-verb-step>
+                <ng-template matStepLabel>{{ verbLabel | async }}</ng-template>
+                <div class='step-container'>
+                    <ww-wordmaker-verb-step (selectedVerb)='onVerbSelect($event)'></ww-wordmaker-verb-step>
+                </div>
                 <!-- <mat-form-field>
                     <mat-label>Name</mat-label>
                     <input matInput placeholder="Last name, First name" formControlName="verbCtrl" required>
                 </mat-form-field> -->
-                <div>
-                    <button mat-button matStepperNext>Next</button>
+                <div class='margin-top-30'>
+                    <button mat-raised-button class='mat-accent' matStepperNext
+                        (click)="selectRandomIfNull('verb')">Next</button>
                 </div>
             </form>
         </mat-step>

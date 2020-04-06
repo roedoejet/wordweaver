@@ -30,8 +30,7 @@
             ],
             "styles": [
               "projects/word-weaver/src/styles-app-loading.scss",
-              "projects/word-weaver/src/styles.scss",
-              "node_modules/ngx-toastr/toastr.css"
+              "projects/word-weaver/src/styles.scss"
             ],
             "scripts": ["node_modules/echarts/dist/echarts.min.js"]
           },
@@ -112,8 +111,7 @@
             ],
             "styles": [
               "projects/word-weaver/src/styles-app-loading.scss",
-              "projects/word-weaver/src/styles.scss",
-              "node_modules/ngx-toastr/toastr.css"
+              "projects/word-weaver/src/styles.scss"
             ],
             "scripts": ["node_modules/echarts/dist/echarts.min.js"]
           },
