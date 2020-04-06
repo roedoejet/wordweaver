@@ -11,22 +11,23 @@
                     <input matInput placeholder="Last name, First name" formControlName="verbCtrl" required>
                 </mat-form-field> -->
                 <div class='margin-top-30'>
-                    <button mat-raised-button class='mat-accent' matStepperNext
-                        (click)="selectRandomIfNull('verb')">Next</button>
+                    <button mat-raised-button class='mat-accent float-right' (click)="selectRandomIfNull('verb')"
+                        matStepperNext>Next</button>
                 </div>
             </form>
         </mat-step>
         <mat-step [stepControl]="persFormGroup">
             <form [formGroup]="persFormGroup">
-                <ng-template matStepLabel>Who is doing it?</ng-template>
-                <ww-wordmaker-pers-step></ww-wordmaker-pers-step>
+                <ng-template matStepLabel>{{ persLabel | async }}</ng-template>
+                <ww-wordmaker-pers-step [selectedVerb]="verbFormGroup.controls.verbCtrl.value" (selectedPers)='onPersSelect($event)'></ww-wordmaker-pers-step>
                 <!-- <mat-form-field>
                     <mat-label>Address</mat-label>
                     <input matInput formControlName="persCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
                 </mat-form-field> -->
-                <div>
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button matStepperNext>Next</button>
+                <div class='margin-top-30'>
+                    <button mat-raised-button class='mat-accent float-left' matStepperPrevious>Back</button>
+                    <button mat-raised-button class='mat-accent float-right' (click)="selectRandomIfNull('pers')"
+                        matStepperNext>Next</button>
                 </div>
             </form>
         </mat-step>
@@ -38,17 +39,20 @@
                     <mat-label>Address</mat-label>
                     <input matInput formControlName="persCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
                 </mat-form-field> -->
-                <div>
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button matStepperNext>Next</button>
+                <div class='margin-top-30'>
+                    <button mat-raised-button class='mat-accent float-left' matStepperPrevious>Back</button>
+                    <button mat-raised-button class='mat-accent float-right' (click)="selectRandomIfNull('temp')"
+                        matStepperNext>Next</button>
                 </div>
             </form>
         </mat-step>
         <mat-step>
             <ng-template matStepLabel>Done</ng-template>
             <ww-wordmaker-conj-step></ww-wordmaker-conj-step>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button (click)="stepper.reset()">Start over</button>
+            <div class='margin-top-30'>
+                <button mat-raised-button class='mat-accent float-left' matStepperPrevious>Back</button>
+                <button mat-raised-button class='mat-accent float-right' (click)="stepper.reset()">Start over</button>
+            </div>
         </mat-step>
     </mat-horizontal-stepper>
 </div>

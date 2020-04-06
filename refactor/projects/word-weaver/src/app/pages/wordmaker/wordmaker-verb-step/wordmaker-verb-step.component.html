@@ -1,22 +1,23 @@
 <div class="margin-top-20 full-width centered panel">
-    <div class="panel__header">
-        <!-- <mat-toolbar class="progress">
-            <mat-toolbar-row class='progress__row--header'> -->
-        <form class="margin-left-25 font-md">
-            <mat-form-field class="margin-bottom-20" [formGroup]="verbForm">
-                <input autocomplete="off" type="text" placeholder="Search for a verb" value="" aria-label="Number"
-                    matInput formControlName="search">
-            </mat-form-field>
-        </form>
-        <!-- </mat-toolbar-row>
-
-        </mat-toolbar> -->
-    </div>
-    <div class='instructions' [ngSwitch]='(viewableVerbs$ | async)?.length'>
-        <p *ngSwitchDefault>Select one of the {{ (viewableVerbs$ | async)?.length }} verbs
-            below:</p>
-        <p *ngSwitchCase='1'>Select the verb below:</p>
-        <p *ngSwitchCase='0'>Sorry, no verbs were found like that. Please adjust your search.</p>
+    <div class="panel__header container">
+        <div class="row">
+            <div class='col-sm-12'>
+                <form class="margin-left-25 font-md">
+                    <mat-form-field class="margin-bottom-20" [formGroup]="verbForm">
+                        <input autocomplete="off" type="text" placeholder="Search for a verb" value=""
+                            aria-label="Number" matInput formControlName="search">
+                    </mat-form-field>
+                </form>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='instructions col-sm-12' [ngSwitch]='(viewableVerbs$ | async)?.length'>
+                <p *ngSwitchDefault>Select one of the {{ (viewableVerbs$ | async)?.length }} verbs
+                    below:</p>
+                <p *ngSwitchCase='1'>Select the verb below:</p>
+                <p *ngSwitchCase='0'>Sorry, no verbs were found like that. Please adjust your search.</p>
+            </div>
+        </div>
     </div>
     <hr class='margin-bottom-50'>
     <div class='panel__content'>

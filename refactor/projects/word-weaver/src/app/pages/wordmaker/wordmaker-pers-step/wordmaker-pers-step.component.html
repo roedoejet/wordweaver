@@ -1,1 +1,67 @@
-<p>pers step</p>
+<div class="margin-top-20 panel centered full-width">
+    <ng-template #loading>
+        <mat-spinner class="centered"></mat-spinner>
+    </ng-template>
+    <div class='panel__header--small'>
+        <div class='container'>
+            <div *ngIf="selectedVerb.thematic_relation !== 'purple'" class='row'>
+                <br>
+            </div>
+            <div *ngIf="selectedVerb.thematic_relation !== 'purple'" class='row'>
+                <br>
+            </div>
+            <div class='row'>
+                <div class='instructions col-sm-12' [ngSwitch]='selectedVerb.thematic_relation'>
+                    <p *ngSwitchDefault>Select a pronoun below:</p>
+                    <p *ngSwitchCase='purple'>Select who is doing the action, and who is having the action done to them:
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class='margin-bottom-50'>
+    <div class='panel__content--large' *ngIf="pronouns$ | async as pronouns; else loading">
+        <div class="pwidth-50--desktop pwidth-100--mobile centered" *ngIf="selectedVerb.thematic_relation === 'blue'">
+            <mat-chip-list>
+                <mat-chip class="bg-white border-accent color-black" (click)="select('pat', pn, false)"
+                    *ngFor="let pn of pronouns">{{ pn.obj_gloss }}
+                    <mat-icon class="margin-left-5 color-blue icon-md">person</mat-icon>
+                </mat-chip>
+            </mat-chip-list>
+        </div>
+        <div class="pwidth-50--desktop pwidth-100--mobile centered" *ngIf="selectedVerb.thematic_relation === 'red'">
+            <mat-chip-list>
+                <mat-chip class="bg-white border-accent color-black" (click)="select('ag', pn, false)"
+                    *ngFor="let pn of pronouns">{{ pn.obj_gloss }}
+                    <mat-icon class="margin-left-5 color-red icon-md">person</mat-icon>
+                </mat-chip>
+            </mat-chip-list>
+        </div>
+        <div class="pwidth-50--desktop pwidth-100--mobile centered" *ngIf="selectedVerb.thematic_relation === 'purple'">
+            <h5>Do-er</h5>
+            <mat-chip-list>
+                <mat-chip class="border-accent" (click)="select('ag', pn, true)" *ngFor="let pn of pronouns" [ngClass]="
+              selectedAgent === pn ? 'color-white bg-red' : 'bg-white color-black'
+            ">{{ pn.gloss }}
+                    <mat-icon class="margin-left-5 icon-md"
+                        [ngClass]="selectedAgent === pn ? 'color-white' : 'color-red'">person
+                    </mat-icon>
+                </mat-chip>
+            </mat-chip-list>
+            <h5>Do-ee</h5>
+            <mat-chip-list>
+                <mat-chip class="bg-white border-accent" (click)="select('pat', pn, true)" *ngFor="let pn of pronouns"
+                    [ngClass]="
+              selectedPatient === pn
+                ? 'color-white bg-blue'
+                : 'bg-white color-black'
+            ">{{ pn.obj_gloss }}
+                    <mat-icon class="margin-left-5 icon-md"
+                        [ngClass]="selectedPatient === pn ? 'color-white' : 'color-blue'">
+                        person
+                    </mat-icon>
+                </mat-chip>
+            </mat-chip-list>
+        </div>
+    </div>
+</div>

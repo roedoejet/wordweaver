@@ -53,7 +53,15 @@ export class WordmakerComponent implements OnInit {
     });
     this.persFormGroup.controls.persCtrl.valueChanges.subscribe(x => {
       if (x) {
-        this.persLabel.next(x.gloss);
+        let label = "";
+        if ("agent" in x && "patient" in x) {
+          label = x.agent.gloss + " > " + x.patient.gloss;
+        } else if ("agent" in x) {
+          label = x.agent.gloss;
+        } else if ("patient" in x) {
+          label = x.patient.gloss;
+        }
+        this.persLabel.next(label);
       } else {
         this.persLabel.next("Who is doing it?");
       }
@@ -76,9 +84,32 @@ export class WordmakerComponent implements OnInit {
   }
 
   selectRandomIfNull(type) {
+    console.log(this.verbFormGroup.controls.verbCtrl.value);
     if (type === "verb" && !this.verbFormGroup.controls.verbCtrl.value) {
       this.onVerbSelect(this.randomX(this.verbService.verbs), true);
     } else if (type === "pers" && !this.persFormGroup.controls.persCtrl.value) {
+      if (
+        this.verbFormGroup.controls.verbCtrl.value.thematic_relation ===
+        "purple"
+      ) {
+        // TODO: Filter options
+        this.onPersSelect({
+          agent: this.randomX(this.pronounService.pronouns),
+          patient: this.randomX(this.pronounService.pronouns)
+        });
+      } else if (
+        this.verbFormGroup.controls.verbCtrl.value.thematic_relation === "red"
+      ) {
+        this.onPersSelect({
+          agent: this.randomX(this.pronounService.pronouns)
+        });
+      } else if (
+        this.verbFormGroup.controls.verbCtrl.value.thematic_relation === "blue"
+      ) {
+        this.onPersSelect({
+          patient: this.randomX(this.pronounService.pronouns)
+        });
+      }
     } else if (type === "temp" && !this.tempFormGroup.controls.tempCtrl.value) {
     }
   }
@@ -92,14 +123,46 @@ export class WordmakerComponent implements OnInit {
     } else {
       this.notificationService.success('Verb "' + $event.gloss + '" selected');
     }
+    this.persFormGroup.reset();
+    this.tempFormGroup.reset();
     this.stepper.next();
   }
 
   onPersSelect($event, random = false) {
-    console.log($event);
-    // this.persFormGroup.controls.persCtrl.setValue($event);
-    // this.notificationService.success('Person "' + $event.gloss + '" selected')
-    // this.stepper.next();
+    this.persFormGroup.controls.persCtrl.setValue($event);
+    let completed = false;
+    let start = 'Person "';
+    if (random) {
+      start = 'Random person "';
+    }
+    if ("agent" in $event && "patient" in $event) {
+      this.notificationService.success(
+        start + $event.agent.gloss + " > " + $event.patient.gloss + '" selected'
+      );
+      completed = true;
+    } else if ("agent" in $event) {
+      if (
+        this.verbFormGroup.controls.verbCtrl.value.thematic_relation === "red"
+      ) {
+        this.notificationService.success(
+          start + $event.agent.gloss + '" selected'
+        );
+        completed = true;
+      }
+    } else if ("patient" in $event) {
+      if (
+        this.verbFormGroup.controls.verbCtrl.value.thematic_relation !== "blue"
+      ) {
+        this.notificationService.success(
+          start + $event.patient.gloss + '" selected'
+        );
+        completed = true;
+      }
+    }
+    if (completed) {
+      this.tempFormGroup.reset();
+      this.stepper.next();
+    }
   }
 
   onTempSelect($event, random = false) {
