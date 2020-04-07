@@ -53,27 +53,37 @@ export class ConjugationService {
     const verbtags = tableargs["root"];
     if (agents) {
       agents.forEach(agent => {
-        params = params.append("agent", agent);
+        if (agent) {
+          params = params.append("agent", agent);
+        }
       });
     }
     if (patients) {
       patients.forEach(patient => {
-        params = params.append("patient", patient);
+        if (patient) {
+          params = params.append("patient", patient);
+        }
       });
     }
     if (afftags) {
       afftags.forEach(afftag => {
-        params = params.append("aff-option", afftag);
+        if (afftag) {
+          params = params.append("aff-option", afftag);
+        }
       });
     }
     if (verbtags) {
       verbtags.forEach(verbtag => {
-        params = params.append("root", verbtag);
+        if (verbtag) {
+          params = params.append("root", verbtag);
+        }
       });
     }
     if (optional) {
       optional.forEach(option => {
-        params = params.append(option["param"], option["value"]);
+        if (option) {
+          params = params.append(option["param"], option["value"]);
+        }
       });
     }
     return params;

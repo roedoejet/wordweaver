@@ -50,7 +50,7 @@ export class WordmakerPersStepComponent implements OnInit {
             patient: this.selectedPatient
           });
         } else {
-          this.selectedPers.emit({ patent: this.selectedPatient });
+          this.selectedPers.emit({ patient: this.selectedPatient });
         }
       }
     } else {

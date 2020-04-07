@@ -12,6 +12,7 @@ import {
   PronounService,
   VerbService
 } from "../../../core/core.module";
+import { WordmakerSelectionService } from "../../../core/core.module";
 
 @Component({
   selector: "ww-wordmaker",
@@ -33,7 +34,8 @@ export class WordmakerComponent implements OnInit {
     private notificationService: NotificationService,
     private affixService: AffixService,
     private pronounService: PronounService,
-    private verbService: VerbService
+    private verbService: VerbService,
+    private selectionService: WordmakerSelectionService
   ) {}
   ngOnInit(): void {
     // Step 1: Verb
@@ -46,6 +48,7 @@ export class WordmakerComponent implements OnInit {
       } else {
         this.verbLabel.next("What is the action?");
       }
+      this.selectionService.updateVerb(x);
     });
     // Step 2: Pronoun
     this.persFormGroup = this.formBuilder.group({
@@ -56,9 +59,13 @@ export class WordmakerComponent implements OnInit {
         let label = "";
         if ("agent" in x && "patient" in x) {
           label = x.agent.gloss + " > " + x.patient.gloss;
+          this.selectionService.updateAgent(x.agent);
+          this.selectionService.updatePatient(x.patient);
         } else if ("agent" in x) {
+          this.selectionService.updateAgent(x.agent);
           label = x.agent.gloss;
         } else if ("patient" in x) {
+          this.selectionService.updatePatient(x.patient);
           label = x.patient.gloss;
         }
         this.persLabel.next(label);
@@ -76,6 +83,7 @@ export class WordmakerComponent implements OnInit {
       } else {
         this.tempLabel.next("When is it happening?");
       }
+      this.selectionService.updateAffOption(x);
     });
   }
 
@@ -115,6 +123,12 @@ export class WordmakerComponent implements OnInit {
   }
 
   onVerbSelect($event, random = false) {
+    // Reset following steps
+    this.selectionService.updateAgent("");
+    this.selectionService.updatePatient("");
+    this.selectionService.updateAffOption("");
+    this.persFormGroup.reset();
+    this.tempFormGroup.reset();
     this.verbFormGroup.controls.verbCtrl.setValue($event);
     if (random) {
       this.notificationService.success(
@@ -123,18 +137,20 @@ export class WordmakerComponent implements OnInit {
     } else {
       this.notificationService.success('Verb "' + $event.gloss + '" selected');
     }
-    this.persFormGroup.reset();
-    this.tempFormGroup.reset();
     this.stepper.next();
   }
 
   onPersSelect($event, random = false) {
     this.persFormGroup.controls.persCtrl.setValue($event);
     let completed = false;
+    // Reset following step
+    this.selectionService.updateAffOption("");
+    this.tempFormGroup.reset();
     let start = 'Person "';
     if (random) {
       start = 'Random person "';
     }
+    console.log($event);
     if ("agent" in $event && "patient" in $event) {
       this.notificationService.success(
         start + $event.agent.gloss + " > " + $event.patient.gloss + '" selected'
@@ -151,7 +167,7 @@ export class WordmakerComponent implements OnInit {
       }
     } else if ("patient" in $event) {
       if (
-        this.verbFormGroup.controls.verbCtrl.value.thematic_relation !== "blue"
+        this.verbFormGroup.controls.verbCtrl.value.thematic_relation === "blue"
       ) {
         this.notificationService.success(
           start + $event.patient.gloss + '" selected'
@@ -160,12 +176,12 @@ export class WordmakerComponent implements OnInit {
       }
     }
     if (completed) {
-      this.tempFormGroup.reset();
       this.stepper.next();
     }
   }
 
   onTempSelect($event, random = false) {
+    console.log($event);
     this.tempFormGroup.controls.tempCtrl.setValue($event);
     if (random) {
       this.notificationService.success(

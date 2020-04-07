@@ -78,11 +78,10 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 import { AffixService } from "./affix/affix.service";
-// import { ChartService } from './chart/chart.service';
 import { ConjugationService } from "./conjugation/conjugation.service";
 import { PronounService } from "./pronoun/pronoun.service";
-// import { TierService } from './tier/tier.service';
-import { TableviewerSelectionService } from "./selection/tableviewer-selection.service";
+import { TableviewerSelectionService } from "./tableviewer-selection/tableviewer-selection.service";
+import { WordmakerSelectionService } from "./wordmaker-selection/wordmaker-selection.service";
 import { VerbService } from "./verb/verb.service";
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -106,11 +105,10 @@ export {
   selectSettingsLanguage,
   selectSettingsStickyHeader,
   AffixService,
-  // ChartService,
   ConjugationService,
   PronounService,
   TableviewerSelectionService,
-  // TierService,
+  WordmakerSelectionService,
   VerbService
 };
 

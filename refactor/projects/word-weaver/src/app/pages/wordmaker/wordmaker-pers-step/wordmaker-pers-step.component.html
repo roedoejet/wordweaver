@@ -11,9 +11,10 @@
                 <br>
             </div>
             <div class='row'>
-                <div class='instructions col-sm-12' [ngSwitch]='selectedVerb.thematic_relation'>
-                    <p *ngSwitchDefault>Select a pronoun below:</p>
-                    <p *ngSwitchCase='purple'>Select who is doing the action, and who is having the action done to them:
+                <div class='instructions col-sm-12'>
+                    <p *ngIf="selectedVerb.thematic_relation !== 'purple'">Select a pronoun below:</p>
+                    <p *ngIf="selectedVerb.thematic_relation === 'purple'">Select who is doing the action, and who is
+                        having the action done to them:
                     </p>
                 </div>
             </div>
@@ -40,9 +41,8 @@
         <div class="pwidth-50--desktop pwidth-100--mobile centered" *ngIf="selectedVerb.thematic_relation === 'purple'">
             <h5>Do-er</h5>
             <mat-chip-list>
-                <mat-chip class="border-accent" (click)="select('ag', pn, true)" *ngFor="let pn of pronouns" [ngClass]="
-              selectedAgent === pn ? 'color-white bg-red' : 'bg-white color-black'
-            ">{{ pn.gloss }}
+                <mat-chip class="border-accent" (click)="select('ag', pn, true)" *ngFor="let pn of pronouns"
+                    [ngClass]="selectedAgent === pn ? 'color-white bg-red' : 'bg-white color-black'">{{ pn.gloss }}
                     <mat-icon class="margin-left-5 icon-md"
                         [ngClass]="selectedAgent === pn ? 'color-white' : 'color-red'">person
                     </mat-icon>
@@ -51,11 +51,8 @@
             <h5>Do-ee</h5>
             <mat-chip-list>
                 <mat-chip class="bg-white border-accent" (click)="select('pat', pn, true)" *ngFor="let pn of pronouns"
-                    [ngClass]="
-              selectedPatient === pn
-                ? 'color-white bg-blue'
-                : 'bg-white color-black'
-            ">{{ pn.obj_gloss }}
+                    [ngClass]="selectedPatient === pn ? 'color-white bg-blue' : 'bg-white color-black'">
+                    {{ pn.obj_gloss }}
                     <mat-icon class="margin-left-5 icon-md"
                         [ngClass]="selectedPatient === pn ? 'color-white' : 'color-blue'">
                         person

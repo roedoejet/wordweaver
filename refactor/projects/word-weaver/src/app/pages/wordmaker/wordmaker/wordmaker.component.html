@@ -6,10 +6,6 @@
                 <div class='step-container'>
                     <ww-wordmaker-verb-step (selectedVerb)='onVerbSelect($event)'></ww-wordmaker-verb-step>
                 </div>
-                <!-- <mat-form-field>
-                    <mat-label>Name</mat-label>
-                    <input matInput placeholder="Last name, First name" formControlName="verbCtrl" required>
-                </mat-form-field> -->
                 <div class='margin-top-30'>
                     <button mat-raised-button class='mat-accent float-right' (click)="selectRandomIfNull('verb')"
                         matStepperNext>Next</button>
@@ -20,10 +16,6 @@
             <form [formGroup]="persFormGroup">
                 <ng-template matStepLabel>{{ persLabel | async }}</ng-template>
                 <ww-wordmaker-pers-step [selectedVerb]="verbFormGroup.controls.verbCtrl.value" (selectedPers)='onPersSelect($event)'></ww-wordmaker-pers-step>
-                <!-- <mat-form-field>
-                    <mat-label>Address</mat-label>
-                    <input matInput formControlName="persCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
-                </mat-form-field> -->
                 <div class='margin-top-30'>
                     <button mat-raised-button class='mat-accent float-left' matStepperPrevious>Back</button>
                     <button mat-raised-button class='mat-accent float-right' (click)="selectRandomIfNull('pers')"
@@ -33,12 +25,8 @@
         </mat-step>
         <mat-step [stepControl]="tempFormGroup">
             <form [formGroup]="persFormGroup">
-                <ng-template matStepLabel>When is it happening?</ng-template>
-                <ww-wordmaker-temp-step></ww-wordmaker-temp-step>
-                <!-- <mat-form-field>
-                    <mat-label>Address</mat-label>
-                    <input matInput formControlName="persCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
-                </mat-form-field> -->
+                <ng-template matStepLabel>{{ tempLabel | async }}</ng-template>
+                <ww-wordmaker-temp-step [selectedVerb]="verbFormGroup.controls.verbCtrl.value" [selectedPers]="persFormGroup.controls.persCtrl.value" (selectedTemp)='onTempSelect($event)'></ww-wordmaker-temp-step>
                 <div class='margin-top-30'>
                     <button mat-raised-button class='mat-accent float-left' matStepperPrevious>Back</button>
                     <button mat-raised-button class='mat-accent float-right' (click)="selectRandomIfNull('temp')"
