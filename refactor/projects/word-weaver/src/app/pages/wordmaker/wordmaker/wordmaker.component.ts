@@ -28,6 +28,7 @@ export class WordmakerComponent implements OnInit {
   verbFormGroup: FormGroup;
   persFormGroup: FormGroup;
   tempFormGroup: FormGroup;
+  currentStep;
   @ViewChild("stepper") private stepper;
   constructor(
     private formBuilder: FormBuilder,
@@ -38,6 +39,7 @@ export class WordmakerComponent implements OnInit {
     private selectionService: WordmakerSelectionService
   ) {}
   ngOnInit(): void {
+    // this.stepper.valueChanges.subscribe(x => console.log(x.selected))
     // Step 1: Verb
     this.verbFormGroup = this.formBuilder.group({
       verbCtrl: ["", Validators.required]

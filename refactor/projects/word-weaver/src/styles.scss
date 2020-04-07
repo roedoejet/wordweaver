@@ -15,26 +15,12 @@
 
 @import "styles-reset.scss-theme";
 @import "./app/app/app.component.scss-theme";
-@import "./app/shared/big-input/big-input/big-input.component.scss-theme";
 @import "./app/pages/about/about/about.component.scss-theme";
-@import "./app/pages/examples/notifications/components/notifications.component.scss-theme";
-@import "./app/pages/examples/todos/components/todos-container.component.scss-theme";
-@import "./app/pages/examples/stock-market/components/stock-market-container.component.scss-theme";
-@import "./app/pages/examples/theming/parent/parent.component.scss-theme";
-@import "./app/pages/examples/theming/child/child.component.scss-theme";
-@import "./app/pages/examples/examples/examples.component.scss-theme";
 
 @mixin custom-components-theme($theme) {
   @include ww-styles-reset-theme($theme);
   @include ww-app-component-theme($theme);
   @include ww-about-component-theme($theme);
-  @include ww-big-input-component-theme($theme);
-  @include ww-notifications-component-theme($theme);
-  @include ww-todos-container-component-theme($theme);
-  @include ww-stock-market-container-component-theme($theme);
-  @include ww-parent-component-theme($theme);
-  @include ww-child-component-theme($theme);
-  @include ww-examples-component-theme($theme);
 }
 
 // // Customize Angular Material theme with palettes from color-primary and color-secondary. Use http://mcg.mbitson.com to generate palette and add palettes to _palettes partial

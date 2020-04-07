@@ -32,6 +32,12 @@ $panel-adjustment: 0.1;
       max-height: em($panel-size * ($panel-header-size + $panel-adjustment));
       @extend %full-width;
     }
+
+    &--tableview {
+      justify-content: space-between;
+      display: inline-flex;
+      min-height: em(60);
+    }
   }
 
   &__title {

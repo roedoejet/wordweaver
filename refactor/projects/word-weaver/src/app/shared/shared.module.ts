@@ -7,7 +7,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatSelectModule } from "@angular/material/select";
-import { MatTabsModule } from "@angular/material/tabs";
+// import { MatTabsModule } from "@angular/material/tabs";
 import { MatInputModule } from "@angular/material/input";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatChipsModule } from "@angular/material/chips";
@@ -19,11 +19,11 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatStepperModule } from "@angular/material/stepper";
-import { MatDividerModule } from "@angular/material/divider";
-import { MatSliderModule } from "@angular/material/slider";
+// import { MatDividerModule } from "@angular/material/divider";
+// import { MatSliderModule } from "@angular/material/slider";
 import { MatToolbarModule } from "@angular/material/toolbar";
-import { MatDatepickerModule } from "@angular/material/datepicker";
-import { MatNativeDateModule } from "@angular/material/core";
+// import { MatDatepickerModule } from "@angular/material/datepicker";
+// import { MatNativeDateModule } from "@angular/material/core";
 import { MatGridListModule } from "@angular/material/grid-list";
 
 import {
@@ -52,8 +52,6 @@ import {
   faBook
 } from "@fortawesome/free-solid-svg-icons";
 import { faMediumM, faGithub } from "@fortawesome/free-brands-svg-icons";
-import { BigInputComponent } from "./big-input/big-input/big-input.component";
-import { BigInputActionComponent } from "./big-input/big-input-action/big-input-action.component";
 import { RtlSupportDirective } from "./rtl-support/rtl-support.directive";
 import { LogoComponent } from "./logo/logo.component";
 import { AnimateOnlyPipe } from "./pipes/animate-only/animate-only";
@@ -71,7 +69,7 @@ import { NgxEchartsModule } from "ngx-echarts";
     MatButtonModule,
     MatButtonToggleModule,
     MatSelectModule,
-    MatTabsModule,
+    // MatTabsModule,
     MatInputModule,
     MatProgressSpinnerModule,
     MatChipsModule,
@@ -86,13 +84,11 @@ import { NgxEchartsModule } from "ngx-echarts";
     MatStepperModule,
     MatSlideToggleModule,
     MatToolbarModule,
-    MatDividerModule,
+    // MatDividerModule,
     NgxEchartsModule,
     FontAwesomeModule
   ],
   declarations: [
-    BigInputComponent,
-    BigInputActionComponent,
     LogoComponent,
     RtlSupportDirective,
     AnimateOnlyPipe,
@@ -109,7 +105,7 @@ import { NgxEchartsModule } from "ngx-echarts";
     MatButtonModule,
     MatButtonToggleModule,
     MatMenuModule,
-    MatTabsModule,
+    // MatTabsModule,
     MatChipsModule,
     MatGridListModule,
     MatInputModule,
@@ -123,16 +119,14 @@ import { NgxEchartsModule } from "ngx-echarts";
     MatSnackBarModule,
     MatSlideToggleModule,
     MatStepperModule,
-    MatDividerModule,
-    MatSliderModule,
+    // MatDividerModule,
+    // MatSliderModule,
     MatToolbarModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
+    // MatDatepickerModule,
+    // MatNativeDateModule,
 
     FontAwesomeModule,
 
-    BigInputComponent,
-    BigInputActionComponent,
     LogoComponent,
     RtlSupportDirective,
 

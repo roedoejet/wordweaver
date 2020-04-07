@@ -1,5 +1,5 @@
 <div class="panel" *ngIf="settings$ | async as settings">
-    <div *ngIf="show_toolbar" class="panel__header">
+    <div *ngIf="show_toolbar" class="panel__header panel__header--tableview">
         <h5 class="panel__title">Conjugation toolbar</h5>
         <div class="panel__toolbar toolbar">
             <button class="conjugate mat-accent" mat-raised-button (click)="conjugate()">
