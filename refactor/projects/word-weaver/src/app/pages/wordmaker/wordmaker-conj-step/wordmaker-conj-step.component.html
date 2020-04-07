@@ -1,1 +1,60 @@
-<p>You are now done.</p>
+<div class="margin-top-20 panel centered full-width">
+    <div class='panel__header'>
+        <div class='container'>
+            <div class='row'>
+                <p class="margin-0 font-lg">Yoyánere!</p>
+            </div>
+            <div class='row'>
+                <br>
+            </div>
+            <div class='row'>
+                <div class='congratulations col-sm-12'>
+                    <p class="font-lg">
+                        Just like <b>that</b> you made a word!
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <hr class='margin-bottom-50'>
+    <div class='panel__content' *ngIf="settings$ | async as settings">
+        <div id="conjugation-result" class="conjugation center-text" *ngFor="let conjugation of word$ | async">
+            <h3>
+                <span *ngFor="let item of conjugation['main']" class="{{ item['classes'] }}"
+                    [ngClass]="{highlight: (settings?.highlight)[item['type']] || (settings?.highlight)[item['classes']]}">
+                    {{ item["value"] }}</span>
+            </h3>
+            <h4 *ngIf="settings?.level.breakdown">
+                <span *ngFor="let item of conjugation['main']" class="{{ item['classes'] }}" [ngClass]="{
+            highlight:
+              (settings?.highlight)[item['type']] ||
+              (settings?.highlight)[item['classes']]
+          }">{{ item["value"] }}
+                    <span *ngIf="conjugation['main'].indexOf(item) < conjugation['main'].length - 1">-</span>
+                </span>
+            </h4>
+            <h4 *ngIf="settings?.level.gloss">
+                <span *ngFor="let item of conjugation['secondary']" class="{{ item['classes'] }}" [ngClass]="{
+            highlight:
+              (settings?.highlight)[item['type']] ||
+              (settings?.highlight)[item['classes']]
+          }">{{ item["value"] | decapitalize }}
+                    <span *ngIf="conjugation['secondary'].indexOf(item) < conjugation['secondary'].length - 1">-</span>
+                </span>
+            </h4>
+            <h4 *ngIf="settings?.level['breakdown-translation']">
+                <span *ngFor="let item of conjugation['ternary']" class="{{ item['classes'] }}" [ngClass]="{
+            highlight:
+              (settings?.highlight)[item['type']] ||
+              (settings?.highlight)[item['classes']]
+          }">{{ item["value"] | decapitalize }}
+                    <span *ngIf="conjugation['ternary'].indexOf(item) < conjugation['ternary'].length - 1">-</span>
+                </span>
+            </h4>
+            <h4 *ngIf="settings?.level.translation">
+                <span>{{ conjugation["translation"] }} </span>
+            </h4>
+        </div>
+    </div>
+</div>

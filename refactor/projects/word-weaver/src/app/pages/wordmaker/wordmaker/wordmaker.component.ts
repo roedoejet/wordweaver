@@ -92,7 +92,6 @@ export class WordmakerComponent implements OnInit {
   }
 
   selectRandomIfNull(type) {
-    console.log(this.verbFormGroup.controls.verbCtrl.value);
     if (type === "verb" && !this.verbFormGroup.controls.verbCtrl.value) {
       this.onVerbSelect(this.randomX(this.verbService.verbs), true);
     } else if (type === "pers" && !this.persFormGroup.controls.persCtrl.value) {
@@ -119,6 +118,7 @@ export class WordmakerComponent implements OnInit {
         });
       }
     } else if (type === "temp" && !this.tempFormGroup.controls.tempCtrl.value) {
+      this.onTempSelect(this.randomX(this.affixService.affixoptions), true);
     }
   }
 
@@ -150,7 +150,6 @@ export class WordmakerComponent implements OnInit {
     if (random) {
       start = 'Random person "';
     }
-    console.log($event);
     if ("agent" in $event && "patient" in $event) {
       this.notificationService.success(
         start + $event.agent.gloss + " > " + $event.patient.gloss + '" selected'
@@ -181,7 +180,6 @@ export class WordmakerComponent implements OnInit {
   }
 
   onTempSelect($event, random = false) {
-    console.log($event);
     this.tempFormGroup.controls.tempCtrl.setValue($event);
     if (random) {
       this.notificationService.success(

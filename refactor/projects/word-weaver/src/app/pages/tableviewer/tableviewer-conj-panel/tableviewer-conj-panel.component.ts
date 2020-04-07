@@ -7,9 +7,11 @@ import {
 import { FormControl } from "@angular/forms";
 import { HttpClient, HttpResponse } from "@angular/common/http";
 import { ConjugationService } from "../../../core/core.module";
-import { TableviewerSelectionService } from "../../../core/core.module";
+import {
+  NotificationService,
+  TableviewerSelectionService
+} from "../../../core/core.module";
 import { EChartOption } from "echarts";
-import { ToastrService } from "ngx-toastr";
 import { Store, select } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
@@ -49,11 +51,11 @@ export class TableviewerConjPanelComponent implements OnInit {
     private conjugationService: ConjugationService,
     private selectionService: TableviewerSelectionService,
     private http: HttpClient,
-    private toastr: ToastrService,
     private store: Store<State>,
     private affixService: AffixService,
     private pronounService: PronounService,
-    private verbService: VerbService
+    private verbService: VerbService,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -66,8 +68,6 @@ export class TableviewerConjPanelComponent implements OnInit {
       this.response$ = this.conjugationService.conjugateTable(
         this.selectionService.selection
       );
-      console.log(this.response$);
-      this.response$.subscribe(x => console.log(x));
       return this.response$;
     } else {
       let order = "PT";
@@ -258,11 +258,10 @@ export class TableviewerConjPanelComponent implements OnInit {
 
   updateToast(success?, code = 200) {
     if (success) {
-      this.toastr.success("File succesfully downloaded");
+      this.notificationService.success("File succesfully downloaded");
     } else {
-      this.toastr.error(
-        "This file couldn't be downloaded. Please make sure your conjugation is valid.",
-        "Whoops!"
+      this.notificationService.error(
+        "Whoops! This file couldn't be downloaded. Please make sure your conjugation is valid."
       );
     }
   }
