@@ -1,0 +1,32 @@
+@import "../../../scss/utilities/colors";
+@import "~@angular/material/theming";
+
+@mixin ww-logo-component-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+
+  .animated {
+    animation: dash 2s;
+    -webkit-animation-fill-mode: forwards;
+  }
+
+  @keyframes dash {
+    0% {
+      // fill: transparent;
+    }
+
+    50% {
+      // fill: mat-color($accent);
+    }
+
+    100% {
+      // fill: mat-color($primary, default-contrast);
+    }
+  }
+
+  #svgGroup {
+    stroke: mat-color($accent, default-contrast);
+    fill: mat-color($accent);
+  }
+}

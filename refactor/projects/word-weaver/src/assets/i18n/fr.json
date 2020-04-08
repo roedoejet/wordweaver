@@ -1,71 +1,156 @@
 {
-  "ww.about.change-theme": "Changer le thème",
-  "ww.about.contributors.description1": "Voulez-vous commencer à contribuer à l'open source avec Angular?",
-  "ww.about.contributors.description2": "Laissez votre marque et rejoignez l’équipe croissante de contributeurs!",
-  "ww.about.contributors.description3": "Commencez par regarder les ",
-  "ww.about.contributors.description4": " et le ",
-  "ww.about.contributors.guide": "guide de contribution",
-  "ww.about.contributors.issues": "tâches ouvertes",
-  "ww.about.contributors.title": "Contributeurs",
-  "ww.about.get-notified.description": "un bot Twitter qui vous aide à rester à jour avec les versions des frameworks et bibliothèques Frontend populaires!",
-  "ww.about.get-notified.follow": "Suivez",
-  "ww.about.get-notified.title": "Soyez informé des nouvelles versions",
-  "ww.about.get-started": "Démarrage",
-  "ww.about.slogan": "Créez rapidement des histoires interactives en 5 étapes faciles",
-  "ww.about.step1": "Téléchargez ou enregistrez votre audio",
-  "ww.about.step2": "Téléchargez ou rédigez votre texte",
-  "ww.about.step3": "Choisissez votre langue",
-  "ww.about.step4": "Appuyez sur go",
-  "ww.about.step5": "Lisez!",
-  "ww.features.angular": "Modern powerful framework",
-  "ww.features.angular-cli": "Une interface en ligne de commande pour Angular",
-  "ww.features.angular-material": "Bibliothèque de composants material design",
-  "ww.features.bootstrap": "Bibliothèque d'interface utilisateur la plus connue au monde avec une mise en page réactive",
-  "ww.features.cypress": "Cypress est un outil de test de nouvelle génération conçu pour la bande moderne.",
-  "ww.features.documentation": "Documentation",
-  "ww.features.fontawesome": "Icônes vectorielles faciles à utiliser et logos sociaux",
-  "ww.features.guide": "Manuel",
-  "ww.features.lazyloading.description": "Temps de démarrage plus rapide avec des modules fonctionnels chargés à la demande",
-  "ww.features.lazyloading.title": "Chargement à la demande",
-  "ww.features.ngrx": "Flux de données à sens unique alimenté par les Observables RxJS",
-  "ww.features.ngxtranslate": "Une bibliothèque d'internationalisation pour Angular",
-  "ww.features.rxjs": "Programmation réactive avec des collections asynchrones à l'aide d'observables",
-  "ww.features.themes.description": "Prise en charge flexible du thème pour les composants fournis et personnalisés",
-  "ww.features.themes.title": "Thèmes",
-  "ww.features.title": "Fonctionnalités",
-  "ww.features.typescript": "Expérience de développement supérieure, achèvement du code, refactoring et réduction des bogues",
-  "ww.footer.changelog": "Afficher le journal des changements",
-  "ww.header.github": "Dépot Github",
-  "ww.menu.about": "À propos",
-  "ww.menu.audio": "Éditeur de Texte",
-  "ww.menu.login": "Connexion",
-  "ww.menu.logout": "Déconnexion",
-  "ww.menu.new": "Créer un nouveau projet",
-  "ww.menu.settings": "Paramètres",
-  "ww.menu.studio": "Studio",
-  "ww.menu.text": "Éditeur de Texte",
-  "ww.settings.animations.elements": "Les éléments de la page de navigation glissent vers le haut",
-  "ww.settings.animations.page": "Transition de la page entière lors de la navigation",
-  "ww.settings.animations.title": "Animations",
-  "ww.settings.general.language.en": "Anglais",
-  "ww.settings.general.language.fr": "Français",
-  "ww.settings.general.placeholder": "Langue",
-  "ww.settings.general.title": "Généraux",
-  "ww.settings.themes.blue": "Bleu",
-  "ww.settings.themes.dark": "Sombre",
-  "ww.settings.themes.light": "Clair",
-  "ww.settings.themes.nature": "Nature",
-  "ww.settings.themes.night-mode": "Mode nuit automatique (de 21h00 à 7h00)",
-  "ww.settings.themes.placeholder": "Thème de couleur",
-  "ww.settings.themes.saneago": "",
-  "ww.settings.themes.sticky-header": "Entête fixe",
-  "ww.settings.themes.title": "Thèmes",
-  "ww.settings.title": "Paramètres",
-  "ww.studio.audio": "Audio",
-  "ww.studio.done": "Fin",
-  "ww.studio.next": "suivant",
-  "ww.studio.text": "Texte",
-  "ww.studio.upload": "Télécharger",
-  "ww.title.long": "WordWeaver-UI",
-  "ww.title.short": "WordWeaver-UI"
+  "ww": {
+    "about": {
+      "slogan": "Créez rapidement des histoires interactives en 5 étapes faciles",
+      "text": "<p> Voici où devrait aller votre texte sur le projet. </p>"
+    },
+    "error": {
+      "dev": "",
+      "general": ""
+    },
+    "footer": {
+      "changelog": "Afficher le journal des changements"
+    },
+    "language": "Kanyen'kéha (échantillon)",
+    "menu": {
+      "about": "À propos",
+      "info": "Info",
+      "settings": "Paramètres",
+      "tableviewer": "Table Viewer",
+      "wordmaker": "Word Maker"
+    },
+    "settings": {
+      "advanced": "Avancée",
+      "general": {
+        "highlighting": {
+          "aspect": "Aspect",
+          "post-aspectual": "Suffixe post-aspectuel",
+          "pronouns": "Pronoms",
+          "required": "Obligatoire",
+          "temp": "Temporel",
+          "title": "Mise en évidence",
+          "verb": "Racine verbale"
+        },
+        "language": {
+          "en": "Anglais",
+          "fr": "Français"
+        },
+        "placeholder": "Langue",
+        "tiers": {
+          "breakdown": "Ventilation",
+          "breakdown-translation": "Traduction de ventilation",
+          "gloss": "Glossaire",
+          "title": "Niveaux",
+          "translation": "Traduction"
+        },
+        "title": "Généraux"
+      },
+      "testApi": "Modèle de langage de test",
+      "themes": {
+        "blue": "Bleu",
+        "dark": "Foncé",
+        "fun": "Amusement",
+        "light": "Lumière",
+        "nature": "Naturel",
+        "night-mode": "Mode nuit automatique (de 21h00 à 7h00)",
+        "placeholder": "Thème de couleur",
+        "sticky-header": "Entête fixe",
+        "title": "Thèmes"
+      },
+      "title": "Paramètres"
+    },
+    "tableviewer": {
+      "conj": {
+        "conjugate": "Conjuguer",
+        "depth-tip": "Changer la profondeur de l'arbre",
+        "error": {
+          "message": "Veuillez réessayer.",
+          "title": "Erreur"
+        },
+        "explorer-tip": "Basculer entre les vues «arborescence» et «grille»",
+        "hide-toolbar-tip": "Masquer la barre de tâches",
+        "instructions": "Veuillez sélectionner une ou plusieurs cases dans les panneaux <b> Verbe </b>, <b> Personne </b> et <b> Heure </b> à gauche, puis appuyez sur la touche Entrée ou sur le bouton conjugué pour voir votre sélection",
+        "instructions-mobile": "Veuillez sélectionner une ou plusieurs cases dans les panneaux \"Verbe\", \"Personne\" et \"Temps\" <br /> puis appuyez sur le bouton ci-dessus pour conjuguer!",
+        "order-tip": "Changer l'ordre des nœuds",
+        "show-toolbar-tip": "Afficher la barre d'outils",
+        "title": "Barre d'outils de conjugaison"
+      },
+      "notifications": {
+        "download": {
+          "error": "",
+          "success": ""
+        }
+      },
+      "pers": {
+        "select-agent": "Sélectionnez un agent",
+        "select-patient": "Sélectionnez un patient",
+        "title": "La personne"
+      },
+      "temp": {
+        "select": "Sélectionner",
+        "title": "Temps"
+      },
+      "verb": {
+        "deselect": "Tout déselectionner",
+        "no-matching-verb": "",
+        "placeholder": "Rechercher un verbe",
+        "title": "Verbe"
+      }
+    },
+    "title": "WordWeaver UI",
+    "title-short": "WordWeaver UI",
+    "translation-language": "Anglais",
+    "wordmaker": {
+      "conj": {
+        "congratulations-header": "Toutes nos félicitations!",
+        "congratulations-text": "Vous avez fait un mot <strong> juste </strong> comme ça."
+      },
+      "finished": "Terminé",
+      "home": {
+        "instructions": "<p> Il y a trois étapes pour faire un mot. Nous devons savoir <b> quelle </b> est l'action, <b> qui </b> la fait et <b> quand </b> elle se produit. </p> <p> Vous peut appuyer sur la touche fléchée gauche pour passer à l'étape précédente et sur la touche fléchée droite pour passer à l'étape suivante. </p> <p> Commençons! </p>",
+        "start": "DÉBUT",
+        "welcome": "Bienvenue dans WordWeaver-UI WordMaker"
+      },
+      "next": "Prochain",
+      "notifications": {
+        "random": {
+          "pers": {
+            "intransitive": "",
+            "transitive": ""
+          },
+          "temp": "",
+          "verb": ""
+        },
+        "selected": {
+          "pers": {
+            "intransitive": "",
+            "transitive": ""
+          },
+          "temp": "",
+          "verb": ""
+        }
+      },
+      "pers": {
+        "agent-informal": "Auteur",
+        "patient-informal": "Patient",
+        "question": "Qui la fait?",
+        "select-intransitive-pronoun": "Choisissez l'un des pronoms ci-dessous",
+        "select-transitive-pronoun": "Parmi les options ci-dessous, choisissez qui fait l'action et qui lui fait faire l'action"
+      },
+      "previous": "Arrière",
+      "restart": "Recommencer",
+      "temp": {
+        "question": "Quand est-ce qu'elle se produit?",
+        "select-temp": "Choisissez l'une des options ci-dessous"
+      },
+      "verb": {
+        "no-matching-verbs": "Désolé, aucun verbe correspondant correspondant à '{{value}}'",
+        "question": "Quelle est l'action?",
+        "search-placeholder": "Chercher",
+        "select-verb-multiple": "Sélectionnez l'un des {{number}} verbes ci-dessous",
+        "select-verb-single": "Sélectionnez le verbe ci-dessous",
+        "try-again": "Veuillez réessayer."
+      }
+    }
+  }
 }

@@ -8,30 +8,30 @@
   <ng-container *ngIf="settings$ | async as settings">
     <div class='row'>
       <div class='col-md-6 group' [ngClass]='routeAnimationsElements'>
-        <h2>{{ 'ww.settings.general.highlighting' | translate }}</h2>
+        <h2>{{ 'ww.settings.general.highlighting.title' | translate }}</h2>
         <div class='icon-form-field checkboxes'>
           <mat-checkbox class="pronouns" [checked]="settings.highlight.pronoun"
             (change)="onHighlightSelect($event, 'pronoun')">
-            Pronouns
+            {{ 'ww.settings.general.highlighting.pronouns' | translate }}
           </mat-checkbox>
           <mat-checkbox class="root" [checked]="settings.highlight.root" (change)="onHighlightSelect($event, 'root')">
-            Verb
+            {{ 'ww.settings.general.highlighting.verb' | translate }}
           </mat-checkbox>
           <mat-checkbox class="aspect" [checked]="settings.highlight.aspect"
             (change)="onHighlightSelect($event, 'aspect')">
-            Aspect
+            {{ 'ww.settings.general.highlighting.aspect' | translate }}
           </mat-checkbox>
           <mat-checkbox class="prepronominal_prefix" [checked]="settings.highlight.prepronominal_prefix"
             (change)="onHighlightSelect($event, 'prepronominal_prefix')">
-            Required
+            {{ 'ww.settings.general.highlighting.required' | translate }}
           </mat-checkbox>
           <mat-checkbox class="tmp_affix" [checked]="settings.highlight.tmp_affix"
             (change)="onHighlightSelect($event, 'tmp_affix')">
-            Temp
+            {{ 'ww.settings.general.highlighting.temp' | translate }}
           </mat-checkbox>
           <mat-checkbox class="post_aspectual_suffix" [checked]="settings.highlight.post_aspectual_suffix"
             (change)="onHighlightSelect($event, 'post_aspectual_suffix')">
-            Post Aspectual Suffix
+            {{ 'ww.settings.general.highlighting.post-aspectual' | translate }}
           </mat-checkbox>
         </div>
       </div>
@@ -41,20 +41,20 @@
     <br>
     <div class='row'>
       <div class='col-md-6 group' [ngClass]='routeAnimationsElements'>
-        <h2>{{ 'ww.settings.general.tiers' | translate }}</h2>
+        <h2>{{ 'ww.settings.general.tiers.title' | translate }}</h2>
         <div class='icon-form-field checkboxes'>
           <mat-checkbox [checked]="settings.level.gloss" (change)="onLevelSelect($event, 'gloss')">
-            Gloss Tier
+            {{ 'ww.settings.general.tiers.gloss' | translate }}
           </mat-checkbox>
           <mat-checkbox [checked]="settings.level.breakdown" (change)="onLevelSelect($event, 'breakdown')">
-            Breakdown Tier
+            {{ 'ww.settings.general.tiers.breakdown' | translate }}
           </mat-checkbox>
           <mat-checkbox [checked]="settings.level['breakdown-translation']"
             (change)="onLevelSelect($event, 'breakdown-translation')">
-            Breakdown Translation Tier
+            {{ 'ww.settings.general.tiers.breakdown-translation' | translate }}
           </mat-checkbox>
           <mat-checkbox [checked]="settings.level.translation" (change)="onLevelSelect($event, 'translation')">
-            Translation Tier
+            {{ 'ww.settings.general.tiers.translation' | translate }}
           </mat-checkbox>
         </div>
       </div>
@@ -72,7 +72,7 @@
             <mat-select [placeholder]="'ww.settings.general.placeholder' | translate" [ngModel]="settings.language"
               (selectionChange)="onLanguageSelect($event)" name="language">
               <mat-option *ngFor="let l of languages" [value]="l.value">
-                {{ 'ww.settings.general.language.' + l.label | translate }}
+                {{  l.label | translate }}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -99,7 +99,7 @@
             <mat-select [placeholder]="'ww.settings.themes.placeholder' | translate" [ngModel]="settings.theme"
               (selectionChange)="onThemeSelect($event)" name="themes">
               <mat-option *ngFor="let t of themes" [value]="t.value">
-                {{ 'ww.settings.themes.' + t.label | translate }}
+                {{ t.label | translate }}
               </mat-option>
             </mat-select>
           </mat-form-field>

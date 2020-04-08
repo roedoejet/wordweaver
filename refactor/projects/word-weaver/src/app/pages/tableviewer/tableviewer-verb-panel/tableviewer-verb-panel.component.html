@@ -1,16 +1,16 @@
 <div class='panel'>
   <div class='panel__header panel__header--tableview'>
-    <h5 class="panel__title">Verb</h5>
+    <h5 class="panel__title">{{ 'ww.tableviewer.verb.title' | translate }}</h5>
     <button *ngIf='selectionService.selection.root.length > 0' class="mat-accent conjugate deselect" mat-raised-button
       (click)="remove()">
-      Deselect all
+      {{ 'ww.tableviewer.verb.deselect' | translate }}
     </button>
   </div>
   <div class="panel__content">
     <form>
       <div>
         <mat-form-field class='control' [formGroup]="verbForm">
-          <input autocomplete="off" type="text" placeholder="Type a verb" aria-label="Number" matInput
+          <input autocomplete="off" type="text" [placeholder]="'ww.tableviewer.verb.placeholder' | translate" aria-label="Number" matInput
             formControlName="search">
         </mat-form-field>
       </div>
@@ -27,8 +27,7 @@
     </mat-list>
     <p class='unfound'
       *ngIf="searchField.value !== '' && searchField.value !== null && (viewableVerbs$ | async)?.length === 0">
-      <span><b class='centered'>Sorry</b></span><br>
-      We can't find any verbs that match '{{ searchField.value }}'</p>
+      <span>{{ 'ww.tableviewer.verb.no-matching-verb' | translate: { value: searchField.value } }}</span></p>
   </div>
 
 </div>

@@ -19,8 +19,8 @@ import { EChartOption } from "echarts";
 })
 export class WordmakerPersStepComponent implements OnInit {
   pronouns$: Observable<Pronoun[]>;
-  selectedAgent: string;
-  selectedPatient: string;
+  selectedAgent: Pronoun;
+  selectedPatient: Pronoun;
   @Input() selectedVerb: Verb;
   @Output() selectedPers = new EventEmitter<any>();
   constructor(private pronounService: PronounService) {}

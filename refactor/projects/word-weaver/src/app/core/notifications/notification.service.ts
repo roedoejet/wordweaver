@@ -1,5 +1,6 @@
 import { Injectable, NgZone } from "@angular/core";
 import { MatSnackBar, MatSnackBarConfig } from "@angular/material/snack-bar";
+import { TranslateService } from "@ngx-translate/core";
 
 @Injectable({
   providedIn: "root"
@@ -8,8 +9,34 @@ export class NotificationService {
   config: object = { duration: 2000, verticalPosition: "top" };
   constructor(
     private readonly snackBar: MatSnackBar,
-    private readonly zone: NgZone
+    private readonly zone: NgZone,
+    private translation: TranslateService
   ) {}
+
+  translated(
+    toTranslate: string,
+    data: object,
+    notificationType: "default" | "info" | "success" | "warn" | "error"
+  ) {
+    this.translation
+      .get(toTranslate, data)
+      .subscribe(translated => {
+        if (notificationType === "default") {
+          this.default(translated);
+        } else if (notificationType === "info") {
+          this.info(translated);
+        } else if (notificationType === "success") {
+          this.success(translated);
+        } else if (notificationType === "warn") {
+          this.warn(translated);
+        } else if (notificationType === "error") {
+          this.error(translated);
+        } else {
+          return false;
+        }
+      })
+      .unsubscribe();
+  }
 
   default(message: string) {
     const config: object = {

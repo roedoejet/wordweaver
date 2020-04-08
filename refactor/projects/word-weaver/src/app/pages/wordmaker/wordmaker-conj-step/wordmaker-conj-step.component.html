@@ -2,15 +2,14 @@
     <div class='panel__header'>
         <div class='container'>
             <div class='row'>
-                <p class="margin-0 font-lg">Yoyánere!</p>
+                <p class="margin-0 font-lg">{{ 'ww.wordmaker.conj.congratulations-header' | translate }}!</p>
             </div>
             <div class='row'>
                 <br>
             </div>
             <div class='row'>
                 <div class='congratulations col-sm-12'>
-                    <p class="font-lg">
-                        Just like <b>that</b> you made a word!
+                    <p class="font-lg" [innerHTML]="'ww.wordmaker.conj.congratulations-text' | translate">
                     </p>
                 </div>
             </div>

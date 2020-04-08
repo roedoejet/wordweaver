@@ -12,15 +12,20 @@
 @import "./themes/light-theme";
 @import "./themes/black-theme";
 @import "./themes/nature-theme";
+@import "./themes/monkey-theme.scss";
 
 @import "styles-reset.scss-theme";
 @import "./app/app/app.component.scss-theme";
 @import "./app/pages/about/about/about.component.scss-theme";
+@import "./app/pages/tableviewer/tableviewer/tableviewer.component.scss-theme.scss";
+@import "./app/shared/logo/logo.component.scss-theme.scss";
 
 @mixin custom-components-theme($theme) {
   @include ww-styles-reset-theme($theme);
   @include ww-app-component-theme($theme);
+  @include ww-logo-component-theme($theme);
   @include ww-about-component-theme($theme);
+  @include ww-tableviewer-component-theme($theme);
 }
 
 // // Customize Angular Material theme with palettes from color-primary and color-secondary. Use http://mcg.mbitson.com to generate palette and add palettes to _palettes partial
@@ -52,6 +57,11 @@
 .nature-theme {
   @include angular-material-theme($ww-nature-theme);
   @include custom-components-theme($ww-nature-theme);
+}
+
+.monkey-theme {
+  @include angular-material-theme($ww-monkey-theme);
+  @include custom-components-theme($ww-monkey-theme);
 }
 
 // ==========================================================================

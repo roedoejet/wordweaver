@@ -13,6 +13,8 @@ import {
   VerbService
 } from "../../../core/core.module";
 import { WordmakerSelectionService } from "../../../core/core.module";
+import { marker } from "@biesbjerg/ngx-translate-extract-marker";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "ww-wordmaker",
@@ -23,9 +25,9 @@ import { WordmakerSelectionService } from "../../../core/core.module";
 export class WordmakerComponent implements OnInit {
   loading;
   isLinear = true;
-  verbLabel = new BehaviorSubject<string>("What is the action?");
-  persLabel = new BehaviorSubject<string>("Who is doing it?");
-  tempLabel = new BehaviorSubject<string>("When is it happening?");
+  verbLabel = new BehaviorSubject<string>(marker("ww.wordmaker.verb.question"));
+  persLabel = new BehaviorSubject<string>(marker("ww.wordmaker.pers.question"));
+  tempLabel = new BehaviorSubject<string>(marker("ww.wordmaker.temp.question"));
   verbFormGroup: FormGroup;
   persFormGroup: FormGroup;
   tempFormGroup: FormGroup;
@@ -37,7 +39,8 @@ export class WordmakerComponent implements OnInit {
     private affixService: AffixService,
     private pronounService: PronounService,
     private verbService: VerbService,
-    private selectionService: WordmakerSelectionService
+    private selectionService: WordmakerSelectionService,
+    private translate: TranslateService
   ) {}
   ngOnInit(): void {
     // console.log(this.stepper.selectedIndex)
@@ -50,7 +53,7 @@ export class WordmakerComponent implements OnInit {
       if (x) {
         this.verbLabel.next(x.gloss);
       } else {
-        this.verbLabel.next("What is the action?");
+        this.verbLabel.next("ww.wordmaker.verb.question");
       }
       this.selectionService.updateVerb(x);
     });
@@ -74,7 +77,7 @@ export class WordmakerComponent implements OnInit {
         }
         this.persLabel.next(label);
       } else {
-        this.persLabel.next("Who is doing it?");
+        this.persLabel.next("ww.wordmaker.pers.question");
       }
     });
     // Step 3: Temporal
@@ -85,7 +88,7 @@ export class WordmakerComponent implements OnInit {
       if (x) {
         this.tempLabel.next(x.gloss);
       } else {
-        this.tempLabel.next("When is it happening?");
+        this.tempLabel.next("ww.wordmaker.temp.question");
       }
       this.selectionService.updateAffOption(x);
     });
@@ -140,11 +143,17 @@ export class WordmakerComponent implements OnInit {
     this.tempFormGroup.reset();
     this.verbFormGroup.controls.verbCtrl.setValue($event);
     if (random) {
-      this.notificationService.success(
-        'Random verb "' + $event.gloss + '" selected'
+      this.notificationService.translated(
+        marker("ww.wordmaker.notifications.random.verb"),
+        { value: $event.gloss },
+        "success"
       );
     } else {
-      this.notificationService.success('Verb "' + $event.gloss + '" selected');
+      this.notificationService.translated(
+        marker("ww.wordmaker.notifications.selected.verb"),
+        { value: $event.gloss },
+        "success"
+      );
     }
     this.stepper.next();
   }
@@ -155,31 +164,57 @@ export class WordmakerComponent implements OnInit {
     // Reset following step
     this.selectionService.updateAffOption("");
     this.tempFormGroup.reset();
-    let start = 'Person "';
-    if (random) {
-      start = 'Random person "';
-    }
     if ("agent" in $event && "patient" in $event) {
-      this.notificationService.success(
-        start + $event.agent.gloss + " > " + $event.patient.gloss + '" selected'
-      );
+      if (random) {
+        this.notificationService.translated(
+          marker("ww.wordmaker.notifications.random.pers.transitive"),
+          { agent: $event.agent.gloss, patient: $event.patient.gloss },
+          "success"
+        );
+      } else {
+        this.notificationService.translated(
+          marker("ww.wordmaker.notifications.selected.pers.transitive"),
+          { agent: $event.agent.gloss, patient: $event.patient.gloss },
+          "success"
+        );
+      }
       completed = true;
     } else if ("agent" in $event) {
       if (
         this.verbFormGroup.controls.verbCtrl.value.thematic_relation === "red"
       ) {
-        this.notificationService.success(
-          start + $event.agent.gloss + '" selected'
-        );
+        if (random) {
+          this.notificationService.translated(
+            marker("ww.wordmaker.notifications.random.pers.intransitive"),
+            { value: $event.agent.gloss },
+            "success"
+          );
+        } else {
+          this.notificationService.translated(
+            marker("ww.wordmaker.notifications.selected.pers.intransitive"),
+            { value: $event.agent.gloss },
+            "success"
+          );
+        }
         completed = true;
       }
     } else if ("patient" in $event) {
       if (
         this.verbFormGroup.controls.verbCtrl.value.thematic_relation === "blue"
       ) {
-        this.notificationService.success(
-          start + $event.patient.gloss + '" selected'
-        );
+        if (random) {
+          this.notificationService.translated(
+            marker("ww.wordmaker.notifications.random.pers.intransitive"),
+            { value: $event.patient.gloss },
+            "success"
+          );
+        } else {
+          this.notificationService.translated(
+            marker("ww.wordmaker.notifications.selected.pers.intransitive"),
+            { value: $event.patient.gloss },
+            "success"
+          );
+        }
         completed = true;
       }
     }
@@ -191,11 +226,17 @@ export class WordmakerComponent implements OnInit {
   onTempSelect($event, random = false) {
     this.tempFormGroup.controls.tempCtrl.setValue($event);
     if (random) {
-      this.notificationService.success(
-        'Random time "' + $event.gloss + '" selected'
+      this.notificationService.translated(
+        marker("ww.wordmaker.notifications.random.temp"),
+        { value: $event.gloss },
+        "success"
       );
     } else {
-      this.notificationService.success('Time "' + $event.gloss + '" selected');
+      this.notificationService.translated(
+        marker("ww.wordmaker.notifications.selected.temp"),
+        { value: $event.gloss },
+        "success"
+      );
     }
     this.stepper.next();
   }

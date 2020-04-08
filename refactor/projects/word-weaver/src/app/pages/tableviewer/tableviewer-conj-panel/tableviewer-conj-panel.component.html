@@ -1,38 +1,41 @@
 <div class="panel" *ngIf="settings$ | async as settings">
     <div *ngIf="show_toolbar" class="panel__header panel__header--tableview">
-        <h5 class="panel__title">Conjugation toolbar</h5>
+        <h5 class="panel__title">{{ 'ww.tableviewer.conj.title' | translate }}</h5>
         <div class="panel__toolbar toolbar">
             <button (click)='manualConjugation$.next("clicked")' class="conjugate mat-accent" mat-raised-button>
-                Conjugate
+                {{ 'ww.tableviewer.conj.conjugate' | translate }}
             </button>
-            <select *ngIf="showExplorer$ | async" (change)="depth$.next($event.target.selectedIndex)" class="toolbar__tool ui-button"
-                matTooltip="Select how many nodes to display" [matTooltipShowDelay]="showDelay.value"
-                [matTooltipHideDelay]="hideDelay.value" [matTooltipPosition]="tooltipPosition">
+            <select *ngIf="showExplorer$ | async" (change)="depth$.next($event.target.selectedIndex)"
+                class="toolbar__tool ui-button" [matTooltip]="'ww.tableviewer.conj.depth-tip' | translate"
+                [matTooltipShowDelay]="showDelay.value" [matTooltipHideDelay]="hideDelay.value"
+                [matTooltipPosition]="tooltipPosition">
                 <option value="0">0</option>
                 <option selected value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
             </select>
             <button *ngIf="showExplorer$ | async" class="toolbar__tool ui-button" mat-icon-button
-                (click)="order$.next(!order$.value)" matTooltip="Switch pronoun and tense nodes"
+                (click)="order$.next(!order$.value)" [matTooltip]="'ww.tableviewer.conj.order-tip' | translate"
                 [matTooltipShowDelay]="showDelay.value" [matTooltipHideDelay]="hideDelay.value"
                 [matTooltipPosition]="tooltipPosition">
                 <mat-icon aria-label="Switch pronoun and temp">swap_horiz</mat-icon>
             </button>
             <button class="ui-button toolbar__tool" mat-icon-button (click)="toggleExplorer()"
-                matTooltip="Switch between grid and tree views" [matTooltipShowDelay]="showDelay.value"
+                [matTooltip]="'ww.tableviewer.conj.explorer-tip' | translate" [matTooltipShowDelay]="showDelay.value"
                 [matTooltipHideDelay]="hideDelay.value" [matTooltipPosition]="tooltipPosition">
                 <mat-icon *ngIf="!(showExplorer$ | async)" aria-label="Conjugate">account_tree</mat-icon>
                 <mat-icon *ngIf="showExplorer$ | async" aria-label="Conjugate">grid_on</mat-icon>
             </button>
             <button (click)="download()" *ngIf="!(showExplorer$ | async)" class="ui-button toolbar__tool"
-                mat-icon-button matTooltip="Download conjugations as file" [matTooltipShowDelay]="showDelay.value"
-                [matTooltipHideDelay]="hideDelay.value" [matTooltipPosition]="tooltipPosition">
+                mat-icon-button matTooltip="'ww.tableviewer.conj.download-tip' | translate"
+                [matTooltipShowDelay]="showDelay.value" [matTooltipHideDelay]="hideDelay.value"
+                [matTooltipPosition]="tooltipPosition">
                 <mat-icon aria-label="Download conjugations">get_app</mat-icon>
             </button>
             <button (click)="show_toolbar = !show_toolbar" class="ui-button toolbar__tool" mat-icon-button
-                matTooltip="Hide toolbar" [matTooltipShowDelay]="showDelay.value"
-                [matTooltipHideDelay]="hideDelay.value" [matTooltipPosition]="tooltipPosition">
+                [matTooltip]="'ww.tableviewer.conj.hide-toolbar-tip' | translate"
+                [matTooltipShowDelay]="showDelay.value" [matTooltipHideDelay]="hideDelay.value"
+                [matTooltipPosition]="tooltipPosition">
                 <mat-icon aria-label="Hide toolbar">cancel</mat-icon>
             </button>
         </div>
@@ -40,23 +43,20 @@
     <div class="panel__underline height-5">
         <hr *ngIf="show_toolbar" />
         <button *ngIf="!show_toolbar" (click)="show_toolbar = !show_toolbar" class="float-right ui-button toolbar__tool"
-            mat-icon-button matTooltip="Show toolbar" [matTooltipShowDelay]="showDelay.value"
-            [matTooltipHideDelay]="hideDelay.value" [matTooltipPosition]="tooltipPosition">
+            mat-icon-button [matTooltip]="'ww.tableviewer.conj.show-toolbar-tip' | translate"
+            [matTooltipShowDelay]="showDelay.value" [matTooltipHideDelay]="hideDelay.value"
+            [matTooltipPosition]="tooltipPosition">
             <mat-icon aria-label="Show toolbar">add_circle</mat-icon>
         </button>
     </div>
     <div>
         <div>
             <h4 class="desktop-only center-text margin-top-100 padding-20"
-                *ngIf="!(response$ | async) && !(showExplorer$ | async)" [ngClass]="routeAnimationsElements">
-                Please select one or more boxes from the <b>Verb</b>, <b>Person</b>, and <b>Time</b> panels to the left
-                and then press the enter key or conjugate button to
-                see your selection
+                *ngIf="!(response$ | async) && !(showExplorer$ | async)" [ngClass]="routeAnimationsElements"
+                [innerHTML]="'ww.tableviewer.conj.instructions' | translate">
             </h4>
-            <h3 class="mobile-only padding-15 center-text" *ngIf="!(response$ | async) && !(showExplorer$ | async)">
-                Please select one or more boxes from the 'Verb', 'Person', and 'Time'
-                panels <br />
-                and then press the button above to conjugate!
+            <h3 class="mobile-only padding-15 center-text" *ngIf="!(response$ | async) && !(showExplorer$ | async)"
+                [innerHTML]="'ww.tableviewer.conj.instructions-mobile' | translate">
             </h3>
             <ng-template #spinner>
                 <ng-container *ngIf="loading && !(response$ | async)">
@@ -65,23 +65,22 @@
             </ng-template>
         </div>
 
-        <div *ngIf="chartResponse$ | async as response" [hidden]='!(showExplorer$ | async)'class="full-width full-height">
+        <div *ngIf="chartResponse$ | async as response" [hidden]='!(showExplorer$ | async)'
+            class="full-width full-height">
             <div>
-                <p>series</p>
                 <div #explorer echarts [options]="response" class="demo-chart"></div>
             </div>
         </div>
 
         <div *ngIf="response$ | async as response; else spinner" [hidden]="showExplorer$ | async">
-            <div id="table-container" class="rel" >
+            <div id="table-container" class="rel">
                 <div class="error__container" *ngIf="isString(response)">
                     <h3 class="error__header">
-                        Error
+                        {{ 'ww.tableviewer.conj.error.title' | translate }}
                     </h3>
                     <p class="error__message">{{ response }}</p>
                     <p class="error__message">
-                        Please remove some of the checked options described above and try
-                        again.
+                        {{ 'ww.tableviewer.conj.error.message' | translate }}
                     </p>
                 </div>
                 <table class="full-width abs" *ngIf="!isString(response)">
@@ -91,7 +90,7 @@
                                 <h3 class='center-text'>{{ 'ww.language' | translate }}</h3>
                             </th>
                             <th *ngIf="settings.level['breakdown-translation'] || settings.level.translation">
-                                <h3 class='center-text'>English</h3>
+                                <h3 class='center-text'>{{ 'ww.translation-language' | translate }}</h3>
                             </th>
                         </tr>
                     </thead>

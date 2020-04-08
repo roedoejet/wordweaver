@@ -2,6 +2,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { Store, select } from "@ngrx/store";
 import { Observable } from "rxjs";
 
+import { marker } from "@biesbjerg/ngx-translate-extract-marker";
+
 import { ROUTE_ANIMATIONS_ELEMENTS } from "../../../core/core.module";
 
 import {
@@ -29,15 +31,16 @@ export class SettingsContainerComponent implements OnInit {
   settings$: Observable<SettingsState>;
 
   themes = [
-    { value: "DEFAULT-THEME", label: "blue" },
-    { value: "LIGHT-THEME", label: "light" },
-    { value: "NATURE-THEME", label: "nature" },
-    { value: "BLACK-THEME", label: "dark" }
+    { value: "DEFAULT-THEME", label: marker("ww.settings.themes.blue") },
+    { value: "LIGHT-THEME", label: marker("ww.settings.themes.light") },
+    { value: "NATURE-THEME", label: marker("ww.settings.themes.nature") },
+    { value: "BLACK-THEME", label: marker("ww.settings.themes.dark") },
+    { value: "MONKEY-THEME", label: marker("ww.settings.themes.fun") }
   ];
 
   languages = [
-    { value: "en", label: "en" },
-    { value: "fr", label: "fr" }
+    { value: "en", label: marker("ww.settings.general.language.en") },
+    { value: "fr", label: marker("ww.settings.general.language.fr") }
   ];
 
   constructor(private store: Store<State>) {}

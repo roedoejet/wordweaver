@@ -1,71 +1,156 @@
 {
-  "ww.about.change-theme": "Change Theme",
-  "ww.about.contributors.description1": "Want to start contributing to open source with Angular?",
-  "ww.about.contributors.description2": "Leave your mark and join the growing team of contributors!",
-  "ww.about.contributors.description3": "Get started by having a look on ",
-  "ww.about.contributors.description4": " and ",
-  "ww.about.contributors.guide": "Contributor guide",
-  "ww.about.contributors.issues": "open issues",
-  "ww.about.contributors.title": "Contributors",
-  "ww.about.get-notified.description": "a Twitter bot that helps you to stay up to date with releases of popular frontend frameworks & libraries!",
-  "ww.about.get-notified.follow": "Follow",
-  "ww.about.get-notified.title": "Get notified about new releases",
-  "ww.about.get-started": "Get started",
-  "ww.about.slogan": "Quickly create interactive, media-rich stories in 5 easy steps",
-  "ww.about.step1": "Upload or record your audio",
-  "ww.about.step2": "Upload or write your text",
-  "ww.about.step3": "Select your language",
-  "ww.about.step4": "Press go",
-  "ww.about.step5": "Read along!",
-  "ww.features.angular": "Modern powerful framework",
-  "ww.features.angular-cli": "A command line interface for Angular",
-  "ww.features.angular-material": "Material design component library",
-  "ww.features.bootstrap": "Responsive layout from battle tested, world most famous UI library",
-  "ww.features.cypress": "Cypress is a next generation front end testing tool built for the modern web.",
-  "ww.features.documentation": "Docs",
-  "ww.features.fontawesome": "Easy to use vector icons and social logos",
-  "ww.features.guide": "Guide",
-  "ww.features.lazyloading.description": "Faster startup time with lazy loaded feature modules",
-  "ww.features.lazyloading.title": "Lazy loading",
-  "ww.features.ngrx": "One way data flow powered by RxJS Observables",
-  "ww.features.ngxtranslate": "An internationalization library for Angular",
-  "ww.features.rxjs": "Reactive programming with async collections using Observables",
-  "ww.features.themes.description": "Flexible theming support for provided and custom components",
-  "ww.features.themes.title": "Themes",
-  "ww.features.title": "Features",
-  "ww.features.typescript": "Superior developer experience, code completion, refactoring and less bugs",
-  "ww.footer.changelog": "Show changelog",
-  "ww.header.github": "Project Github Repository",
-  "ww.menu.about": "About",
-  "ww.menu.audio": "Audio Editor",
-  "ww.menu.login": "Sign in",
-  "ww.menu.logout": "Logout",
-  "ww.menu.new": "Create a new project",
-  "ww.menu.settings": "Settings",
-  "ww.menu.studio": "Studio",
-  "ww.menu.text": "Text Editor",
-  "ww.settings.animations.elements": "Navigation page elements slide up",
-  "ww.settings.animations.page": "Navigation whole page transition",
-  "ww.settings.animations.title": "Animations",
-  "ww.settings.general.language.en": "English",
-  "ww.settings.general.language.fr": "French",
-  "ww.settings.general.placeholder": "Language",
-  "ww.settings.general.title": "General",
-  "ww.settings.themes.blue": "Blue",
-  "ww.settings.themes.dark": "Dark",
-  "ww.settings.themes.light": "Light",
-  "ww.settings.themes.nature": "Nature",
-  "ww.settings.themes.night-mode": "Auto night mode (from 21:00 to 7:00)",
-  "ww.settings.themes.placeholder": "Color Theme",
-  "ww.settings.themes.saneago": "",
-  "ww.settings.themes.sticky-header": "Sticky header",
-  "ww.settings.themes.title": "Themes",
-  "ww.settings.title": "Settings",
-  "ww.studio.audio": "Audio",
-  "ww.studio.done": "Done",
-  "ww.studio.next": "next",
-  "ww.studio.text": "Text",
-  "ww.studio.upload": "Upload",
-  "ww.title.long": "WordWeaver-UI",
-  "ww.title.short": "WordWeaver-UI"
+  "ww": {
+    "about": {
+      "slogan": "WordWeaver UI weaves beautiful verb conjugation websites",
+      "text": "<p>Here is where your text about the project should go.</p>"
+    },
+    "error": {
+      "dev": "Hm, something went wrong, please check the console.",
+      "general": "Whoops, an error occured."
+    },
+    "footer": {
+      "changelog": "Show changelog"
+    },
+    "language": "Sample Kanyen'kéha",
+    "menu": {
+      "about": "About",
+      "info": "Info",
+      "settings": "Settings",
+      "tableviewer": "Table Viewer",
+      "wordmaker": "Word Maker"
+    },
+    "settings": {
+      "advanced": "Advanced",
+      "general": {
+        "highlighting": {
+          "aspect": "Aspect",
+          "post-aspectual": "Post-aspectual suffix",
+          "pronouns": "Pronouns",
+          "required": "Required",
+          "temp": "Temporal",
+          "title": "Highlighting",
+          "verb": "Verb root"
+        },
+        "language": {
+          "en": "English",
+          "fr": "French"
+        },
+        "placeholder": "Language",
+        "tiers": {
+          "breakdown": "Breakdown",
+          "breakdown-translation": "Breakdown translation",
+          "gloss": "Gloss",
+          "title": "Display Tiers",
+          "translation": "Translation"
+        },
+        "title": "General"
+      },
+      "testApi": "Test Language Model",
+      "themes": {
+        "blue": "Blue",
+        "dark": "Dark",
+        "fun": "Fun",
+        "light": "Light",
+        "nature": "Natural",
+        "night-mode": "Auto night mode (from 21:00 to 7:00)",
+        "placeholder": "Color Theme",
+        "sticky-header": "Sticky header",
+        "title": "Themes"
+      },
+      "title": "Settings"
+    },
+    "tableviewer": {
+      "conj": {
+        "conjugate": "Conjugate",
+        "depth-tip": "Change tree depth",
+        "error": {
+          "message": "Please try again.",
+          "title": "Error"
+        },
+        "explorer-tip": "Toggle 'tree' and 'grid' views",
+        "hide-toolbar-tip": "Hide toolbar",
+        "instructions": "Please select one or more boxes from the <b>Verb</b>, <b>Person</b>, and <b>Time</b> panels to the left and then press the enter key or conjugate button to see your selection",
+        "instructions-mobile": "Please select one or more boxes from the 'Verb', 'Person', and 'Time' panels <br /> and then press the button above to conjugate!",
+        "order-tip": "Switch order of nodes",
+        "show-toolbar-tip": "Show toolbar",
+        "title": "Conjugation Toolbar"
+      },
+      "notifications": {
+        "download": {
+          "error": "Whoops! Something went wrong and the file couldn't be downloaded. Please check your conjugation is valid and try again",
+          "success": "Success! Conjugations were downloaded"
+        }
+      },
+      "pers": {
+        "select-agent": "Select an Agent",
+        "select-patient": "Select a Patient",
+        "title": "Person"
+      },
+      "temp": {
+        "select": "Select",
+        "title": "Time"
+      },
+      "verb": {
+        "deselect": "Deselect all",
+        "no-matching-verb": "",
+        "placeholder": "Search for a verb",
+        "title": "Verb"
+      }
+    },
+    "title": "WordWeaver UI",
+    "title-short": "WordWeaver UI",
+    "translation-language": "English",
+    "wordmaker": {
+      "conj": {
+        "congratulations-header": "Congratulations!",
+        "congratulations-text": "You made a word <strong>just</strong> like that."
+      },
+      "finished": "Done",
+      "home": {
+        "instructions": "<p>There are three steps to make a word. We'll need to know <b>what</b> the action is, <b>who</b> is doing it, and <b>when</b> it's happening.</p><p>You can press the left arrow key to go to the previous step and the right arrow key to go to the next step. </p><p>Let's get started!</p>",
+        "start": "START",
+        "welcome": "Welcome to the WordWeaver-UI WordMaker"
+      },
+      "next": "Next",
+      "notifications": {
+        "random": {
+          "pers": {
+            "intransitive": "Random pronoun '{{ value }}' selected",
+            "transitive": "Random pronoun '{{ agent }} > {{ patient }}' selected"
+          },
+          "temp": "Random time '{{ value }}' selected",
+          "verb": "Random verb '{{ value }}' selected"
+        },
+        "selected": {
+          "pers": {
+            "intransitive": "Pronoun '{{ value }}' selected",
+            "transitive": "Pronoun '{{ agent }} > {{ patient }}' selected"
+          },
+          "temp": "Time '{{ value }}' selected",
+          "verb": "Verb '{{ value }}' selected"
+        }
+      },
+      "pers": {
+        "agent-informal": "Do-er",
+        "patient-informal": "Do-ee",
+        "question": "Who is doing it?",
+        "select-intransitive-pronoun": "Choose one of the pronouns below",
+        "select-transitive-pronoun": "From the options below, choose who is doing the action and who is having the action done to them"
+      },
+      "previous": "Back",
+      "restart": "Start over",
+      "temp": {
+        "question": "When is it happening?",
+        "select-temp": "Choose one of the options below"
+      },
+      "verb": {
+        "no-matching-verbs": "Sorry, no matching verbs matching '{{ value }}'",
+        "question": "What is the action?",
+        "search-placeholder": "Search",
+        "select-verb-multiple": "Select one of the {{ number }} verbs below",
+        "select-verb-single": "Select the verb below",
+        "try-again": "Please try again."
+      }
+    }
+  }
 }

@@ -9,11 +9,10 @@ mat-sidenav-container {
   height: 100%;
   width: 100%;
 
-  .toolbar {
+  .nav {
     position: fixed;
     width: 100%;
     display: flex;
-    z-index: 10;
 
     .nav-button {
       margin: 0 10px 0 0;

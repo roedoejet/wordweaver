@@ -1,0 +1,10 @@
+@import "palettes.scss";
+$ww-monkey-primary: mat-palette($mat-blue);
+$ww-monkey-accent: mat-palette($mat-yellow);
+$ww-monkey-warn: mat-palette($mat-pink, 600);
+
+$ww-monkey-theme: mat-dark-theme(
+  $ww-monkey-primary,
+  $ww-monkey-accent,
+  $ww-monkey-warn
+);

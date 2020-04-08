@@ -35,6 +35,7 @@ import {
 import { Response } from "../../../models/models";
 
 import { ROUTE_ANIMATIONS_ELEMENTS } from "../../../core/core.module";
+import { marker } from "@biesbjerg/ngx-translate-extract-marker";
 
 @Component({
   selector: "ww-tableviewer-conj-panel",
@@ -286,10 +287,16 @@ export class TableviewerConjPanelComponent implements OnInit {
 
   updateToast(success?, code = 200) {
     if (success) {
-      this.notificationService.success("File succesfully downloaded");
+      this.notificationService.translated(
+        marker("ww.tableviewer.notifications.download.success"),
+        {},
+        "success"
+      );
     } else {
-      this.notificationService.error(
-        "Whoops! This file couldn't be downloaded. Please make sure your conjugation is valid."
+      this.notificationService.translated(
+        marker("ww.tableviewer.notifications.download.error"),
+        {},
+        "error"
       );
     }
   }
