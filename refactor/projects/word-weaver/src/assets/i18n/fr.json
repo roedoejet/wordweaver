@@ -82,7 +82,7 @@
       },
       "verb": {
         "deselect": "Tout déselectionner",
-        "no-matching-verb": "",
+        "no-matching-verb": "Désolé, aucun verbe correspondant correspondant à '{{value}}'",
         "placeholder": "Rechercher un verbe",
         "title": "Verbe"
       },

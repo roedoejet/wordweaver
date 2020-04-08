@@ -17,7 +17,8 @@
                     {{ 'ww.wordmaker.verb.select-verb-multiple' | translate: { number: (viewableVerbs$ | async)?.length } }}
                 </p>
                 <p *ngSwitchCase='1'>{{ "ww.wordmaker.verb.select-verb-single" | translate }}</p>
-                <p *ngSwitchCase='0'>{{ "ww.wordmaker.verb.no-matching-verbs" | translate: { value: searchField.value } }}</p>
+                <p *ngSwitchCase='0'
+                    [innerHTML]="'ww.wordmaker.verb.no-matching-verbs' | translate: { value: searchField.value }"></p>
             </div>
         </div>
     </div>

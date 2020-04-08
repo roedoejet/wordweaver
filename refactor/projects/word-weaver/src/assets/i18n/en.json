@@ -92,7 +92,7 @@
       },
       "verb": {
         "deselect": "Deselect all",
-        "no-matching-verb": "",
+        "no-matching-verb": "Sorry, no verbs matching '{{ value }}'",
         "placeholder": "Search for a verb",
         "title": "Verb"
       }

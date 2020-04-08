@@ -119,15 +119,21 @@ export class WordmakerComponent implements OnInit {
       } else if (
         this.verbFormGroup.controls.verbCtrl.value.thematic_relation === "red"
       ) {
-        this.onPersSelect({
-          agent: this.randomX(this.pronounService.pronouns)
-        });
+        this.onPersSelect(
+          {
+            agent: this.randomX(this.pronounService.pronouns)
+          },
+          true
+        );
       } else if (
         this.verbFormGroup.controls.verbCtrl.value.thematic_relation === "blue"
       ) {
-        this.onPersSelect({
-          patient: this.randomX(this.pronounService.pronouns)
-        });
+        this.onPersSelect(
+          {
+            patient: this.randomX(this.pronounService.pronouns)
+          },
+          true
+        );
       }
     } else if (type === "temp" && !this.tempFormGroup.controls.tempCtrl.value) {
       this.onTempSelect(this.randomX(this.affixService.affixoptions), true);
