@@ -2,7 +2,8 @@ import {
   Component,
   OnInit,
   ChangeDetectionStrategy,
-  ViewChild
+  ViewChild,
+  ElementRef
 } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { HttpClient, HttpResponse } from "@angular/common/http";
@@ -13,9 +14,17 @@ import {
 } from "../../../core/core.module";
 import { EChartOption } from "echarts";
 import { Store, select } from "@ngrx/store";
-import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
-import { merge, uniq } from "lodash";
+import {
+  Observable,
+  BehaviorSubject,
+  Subject,
+  fromEvent,
+  of,
+  merge,
+  EMPTY
+} from "rxjs";
+import { map, switchMap, tap, finalize, skip } from "rxjs/operators";
+import { merge as _merge } from "lodash";
 import { SettingsState, State } from "../../../core/settings/settings.model";
 import { selectSettings } from "../../../core/settings/settings.selectors";
 import {
@@ -23,6 +32,7 @@ import {
   PronounService,
   VerbService
 } from "../../../core/core.module";
+import { Response } from "../../../models/models";
 
 import { ROUTE_ANIMATIONS_ELEMENTS } from "../../../core/core.module";
 
@@ -33,20 +43,25 @@ import { ROUTE_ANIMATIONS_ELEMENTS } from "../../../core/core.module";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableviewerConjPanelComponent implements OnInit {
+  // Basic config
   settings$: Observable<SettingsState>;
-  chart_response$: Observable<EChartOption>;
-  chart_response: EChartOption;
-  response$: any;
-  @ViewChild("explorer") explorer;
   showDelay = new FormControl(1000);
   hideDelay = new FormControl(200);
   tooltipPosition = "above";
-  showExplorer = false;
+  routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
+  // Non-reactive states
   loading = false;
   show_toolbar = true;
-  order = true;
-  depth = 1;
-  routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
+  // Reactive conjugation triggers
+  showExplorer$ = new BehaviorSubject<boolean>(false);
+  manualConjugation$ = new Subject<any>();
+  order$ = new BehaviorSubject<boolean>(true);
+  depth$ = new BehaviorSubject<number>(1);
+  conjugationTrigger$: Observable<any>;
+  chartResponse$: Observable<EChartOption | any>;
+  response$: Observable<Response | any>;
+  // Elements
+  @ViewChild("explorer") explorer;
   constructor(
     private conjugationService: ConjugationService,
     private selectionService: TableviewerSelectionService,
@@ -60,27 +75,44 @@ export class TableviewerConjPanelComponent implements OnInit {
 
   ngOnInit(): void {
     this.settings$ = this.store.pipe(select(selectSettings));
-  }
-
-  conjugate() {
-    this.loading = true;
-    if (!this.showExplorer) {
-      this.response$ = this.conjugationService.conjugateTable(
-        this.selectionService.selection
-      );
-      return this.response$;
-    } else {
-      let order = "PT";
-      if (this.order) {
-        order = "TP";
-      }
-      this.chart_response$ = this.createChart(
-        this.selectionService.selection,
-        order,
-        this.depth
-      );
-      this.chart_response$.subscribe(r => (this.chart_response = r));
-    }
+    this.conjugationTrigger$ = merge(
+      this.manualConjugation$,
+      this.showExplorer$.pipe(skip(1)),
+      this.depth$.pipe(skip(1)),
+      this.order$.pipe(skip(1))
+    );
+    this.response$ = this.conjugationTrigger$.pipe(
+      switchMap(triggered => this.showExplorer$),
+      switchMap(showExplorer => {
+        if (!showExplorer) {
+          return this.conjugationService.conjugateTable(
+            this.selectionService.selection
+          );
+        } else {
+          return EMPTY;
+        }
+      })
+    );
+    this.chartResponse$ = this.conjugationTrigger$.pipe(
+      switchMap(triggered => this.showExplorer$),
+      switchMap(showExplorer => {
+        if (showExplorer) {
+          let order = "PT";
+          if (this.order$.value) {
+            order = "TP";
+          }
+          return this.createChart(
+            this.selectionService.selection,
+            order,
+            this.depth$.value
+          );
+        } else {
+          return EMPTY;
+        }
+      })
+    );
+    this.response$.subscribe(x => console.log(x));
+    this.chartResponse$.subscribe(x => console.log(x));
   }
 
   createChartData(res, order, depth) {
@@ -134,9 +166,9 @@ export class TableviewerConjPanelComponent implements OnInit {
       const val = this.returnValue(conjugation);
 
       if (order === "TP") {
-        node = merge(node, { [v]: { [t]: { [p]: val } } });
+        node = _merge(node, { [v]: { [t]: { [p]: val } } });
       } else {
-        node = merge(node, { [v]: { [p]: { [t]: val } } });
+        node = _merge(node, { [v]: { [p]: { [t]: val } } });
       }
     }
 
@@ -162,12 +194,9 @@ export class TableviewerConjPanelComponent implements OnInit {
     if (verbs.length < 2) {
       initialTreeDepth = depth;
     } else {
-      // verbs.forEach(v => {
-      //   chartOption.legend['data'].push({
-      //     name: v,
-      //     icon: 'rectangle'
-      //   });
-      // });
+      verbs.forEach(v => {
+        chartOption.legend["data"].push(v);
+      });
     }
     for (var j = 0; j < data.length; j++) {
       top += 20;
@@ -228,8 +257,7 @@ export class TableviewerConjPanelComponent implements OnInit {
   }
 
   toggleExplorer() {
-    this.showExplorer = !this.showExplorer;
-    this.conjugate();
+    this.showExplorer$.next(!this.showExplorer$.value);
   }
 
   download() {

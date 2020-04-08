@@ -6,7 +6,7 @@ import {
 } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NotificationService } from "../../../core/core.module";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import {
   AffixService,
   PronounService,
@@ -21,6 +21,7 @@ import { WordmakerSelectionService } from "../../../core/core.module";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WordmakerComponent implements OnInit {
+  loading;
   isLinear = true;
   verbLabel = new BehaviorSubject<string>("What is the action?");
   persLabel = new BehaviorSubject<string>("Who is doing it?");
@@ -28,7 +29,7 @@ export class WordmakerComponent implements OnInit {
   verbFormGroup: FormGroup;
   persFormGroup: FormGroup;
   tempFormGroup: FormGroup;
-  currentStep;
+  currentStep$: Observable<number>;
   @ViewChild("stepper") private stepper;
   constructor(
     private formBuilder: FormBuilder,
@@ -39,6 +40,7 @@ export class WordmakerComponent implements OnInit {
     private selectionService: WordmakerSelectionService
   ) {}
   ngOnInit(): void {
+    // console.log(this.stepper.selectedIndex)
     // this.stepper.valueChanges.subscribe(x => console.log(x.selected))
     // Step 1: Verb
     this.verbFormGroup = this.formBuilder.group({
@@ -87,6 +89,11 @@ export class WordmakerComponent implements OnInit {
       }
       this.selectionService.updateAffOption(x);
     });
+  }
+
+  // tslint:disable-next-line: use-life-cycle-interface
+  ngAfterViewInit() {
+    this.currentStep$ = this.stepper.selectedIndex.valueChanges;
   }
 
   randomX(x) {

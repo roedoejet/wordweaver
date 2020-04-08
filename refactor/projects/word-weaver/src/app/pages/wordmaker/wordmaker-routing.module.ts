@@ -8,12 +8,12 @@ const routes: Routes = [
   {
     path: "stepper",
     component: WordmakerComponent,
-    data: { title: "ww.menu.wordmaker", animation: "Stepper" }
+    data: { title: "ww.menu.wordmaker.stepper" }
   },
   {
     path: "",
     component: WordmakerHomeComponent,
-    data: { title: "ww.menu.wordmaker", animation: "Wordmaker" }
+    data: { title: "ww.menu.wordmaker.home" }
   }
 ];
 

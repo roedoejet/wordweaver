@@ -1,10 +1,10 @@
-<div class='container page__content vwidth-90 centered'>
+<div class='container page__content vwidth-90 centered margin-bottom-50'>
     <mat-horizontal-stepper [linear]="isLinear" #stepper>
         <mat-step [stepControl]="verbFormGroup">
             <form [formGroup]="verbFormGroup">
                 <ng-template matStepLabel>{{ verbLabel | async }}</ng-template>
                 <div class='step-container'>
-                    <ww-wordmaker-verb-step (selectedVerb)='onVerbSelect($event)'></ww-wordmaker-verb-step>
+                    <ww-wordmaker-verb-step (selectedVerb)='onVerbSelect($event)' *ngIf='stepper.selectedIndex === 0; else loading'></ww-wordmaker-verb-step>
                 </div>
                 <div class='margin-top-30'>
                     <button mat-raised-button class='mat-accent float-right' (click)="selectRandomIfNull('verb')"
@@ -15,7 +15,7 @@
         <mat-step [stepControl]="persFormGroup">
             <form [formGroup]="persFormGroup">
                 <ng-template matStepLabel>{{ persLabel | async }}</ng-template>
-                <ww-wordmaker-pers-step [selectedVerb]="verbFormGroup.controls.verbCtrl.value" (selectedPers)='onPersSelect($event)'></ww-wordmaker-pers-step>
+                <ww-wordmaker-pers-step [selectedVerb]="verbFormGroup.controls.verbCtrl.value" (selectedPers)='onPersSelect($event)' *ngIf='stepper.selectedIndex === 1; else loading'></ww-wordmaker-pers-step>
                 <div class='margin-top-30'>
                     <button mat-raised-button class='mat-accent float-left' matStepperPrevious>Back</button>
                     <button mat-raised-button class='mat-accent float-right' (click)="selectRandomIfNull('pers')"
@@ -26,7 +26,7 @@
         <mat-step [stepControl]="tempFormGroup">
             <form [formGroup]="persFormGroup">
                 <ng-template matStepLabel>{{ tempLabel | async }}</ng-template>
-                <ww-wordmaker-temp-step [selectedVerb]="verbFormGroup.controls.verbCtrl.value" [selectedPers]="persFormGroup.controls.persCtrl.value" (selectedTemp)='onTempSelect($event)'></ww-wordmaker-temp-step>
+                <ww-wordmaker-temp-step *ngIf='stepper.selectedIndex === 2; else loading' [selectedVerb]="verbFormGroup.controls.verbCtrl.value" [selectedPers]="persFormGroup.controls.persCtrl.value" (selectedTemp)='onTempSelect($event)'></ww-wordmaker-temp-step>
                 <div class='margin-top-30'>
                     <button mat-raised-button class='mat-accent float-left' matStepperPrevious>Back</button>
                     <button mat-raised-button class='mat-accent float-right' (click)="selectRandomIfNull('temp')"
@@ -36,7 +36,7 @@
         </mat-step>
         <mat-step>
             <ng-template matStepLabel>Done</ng-template>
-            <ww-wordmaker-conj-step></ww-wordmaker-conj-step>
+            <ww-wordmaker-conj-step *ngIf='stepper.selectedIndex === 3; else loading'></ww-wordmaker-conj-step>
             <div class='margin-top-30'>
                 <button mat-raised-button class='mat-accent float-left' matStepperPrevious>Back</button>
                 <button mat-raised-button class='mat-accent float-right' (click)="stepper.reset()">Start over</button>

@@ -6,7 +6,7 @@
     <mat-label>Select Agent</mat-label>
     <mat-select [formControl]="agent" multiple>
       <mat-select-trigger>
-        {{agent.value ? agent.value[0].gloss : ''}}
+        {{agent.value ? agent?.value[0]?.gloss : ''}}
         <span *ngIf="agent.value?.length > 1" class="example-additional-selection">
           (+{{agent.value.length - 1}} {{agent.value?.length === 2 ? 'other' : 'others'}})
         </span>
@@ -18,7 +18,7 @@
     <mat-label>Select Patient</mat-label>
     <mat-select [formControl]="patient" multiple>
       <mat-select-trigger>
-        {{patient.value ? patient.value[0].gloss : ''}}
+        {{patient.value ? patient?.value[0]?.gloss : ''}}
         <span *ngIf="patient.value?.length > 1" class="example-additional-selection">
           (+{{patient.value.length - 1}} {{patient.value?.length === 2 ? 'other' : 'others'}})
         </span>

@@ -13,9 +13,9 @@
           routerLinkActive="active">
           {{item.label | translate}}
         </a>
-        <a mat-list-item href="https://github.com/roedoejet/wordweaver-UI" target="_blank">
+        <!-- <a mat-list-item href="https://github.com/roedoejet/wordweaver-UI" target="_blank">
           Github
-        </a>
+        </a> -->
       </mat-nav-list>
     </mat-sidenav>
 
@@ -58,15 +58,14 @@
               <span>{{ 'ww.menu.logout' | translate }}</span>
             </button>
           </mat-menu> -->
-
+          <span class='margin-right-20'>|</span>
           <button mat-icon-button routerLink="settings" class="d-none d-sm-inline">
             <fa-icon icon="cog"></fa-icon>
           </button>
-
-          <a [matTooltip]="'ww.header.github' | translate" matTooltipPosition="before" mat-icon-button
+          <!-- <a [matTooltip]="'ww.header.github' | translate" matTooltipPosition="before" mat-icon-button
             class="link d-none d-sm-inline" href="https://github.com/roedoejet/ReadAlong-Studio" target="_blank">
             <fa-icon [icon]="['fab','github']"></fa-icon>
-          </a>
+          </a> -->
 
           <span *ngIf="language$ | async as language">
             <mat-select [ngModel]="language" (selectionChange)="onLanguageSelect($event)">

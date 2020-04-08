@@ -82,6 +82,9 @@ mat-sidenav-container {
       flex: 0 0 auto;
       padding: 0 15px;
       text-align: center;
+      // position: fixed;
+      bottom: 0;
+      width: 100%;
 
       .row {
         padding: 10px 0;
