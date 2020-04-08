@@ -3,3 +3,5 @@ node_modules
 dist/*
 refactor/dist/word-weaver
 refactor/projects/word-weaver/src/assets/trim.*
+poeditor_api_token.txt
+scripts/*.json

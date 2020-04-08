@@ -4,10 +4,6 @@
       "slogan": "Créez rapidement des histoires interactives en 5 étapes faciles",
       "text": "<p> Voici où devrait aller votre texte sur le projet. </p>"
     },
-    "error": {
-      "dev": "",
-      "general": ""
-    },
     "footer": {
       "changelog": "Afficher le journal des changements"
     },
@@ -75,12 +71,6 @@
         "show-toolbar-tip": "Afficher la barre d'outils",
         "title": "Barre d'outils de conjugaison"
       },
-      "notifications": {
-        "download": {
-          "error": "",
-          "success": ""
-        }
-      },
       "pers": {
         "select-agent": "Sélectionnez un agent",
         "select-patient": "Sélectionnez un patient",
@@ -95,6 +85,12 @@
         "no-matching-verb": "",
         "placeholder": "Rechercher un verbe",
         "title": "Verbe"
+      },
+      "notifications": {
+        "download": {
+          "error": "Oups! Une erreur s'est produite et le fichier n'a pas pu être téléchargé. Veuillez vérifier que votre conjugaison est valide et réessayer",
+          "success": "Succès! Les conjugaisons ont été téléchargées"
+        }
       }
     },
     "title": "WordWeaver UI",
@@ -112,45 +108,49 @@
         "welcome": "Bienvenue dans WordWeaver-UI WordMaker"
       },
       "next": "Prochain",
-      "notifications": {
-        "random": {
-          "pers": {
-            "intransitive": "",
-            "transitive": ""
-          },
-          "temp": "",
-          "verb": ""
-        },
-        "selected": {
-          "pers": {
-            "intransitive": "",
-            "transitive": ""
-          },
-          "temp": "",
-          "verb": ""
-        }
-      },
       "pers": {
         "agent-informal": "Auteur",
         "patient-informal": "Patient",
-        "question": "Qui la fait?",
         "select-intransitive-pronoun": "Choisissez l'un des pronoms ci-dessous",
-        "select-transitive-pronoun": "Parmi les options ci-dessous, choisissez qui fait l'action et qui lui fait faire l'action"
+        "select-transitive-pronoun": "Parmi les options ci-dessous, choisissez qui fait l'action et qui lui fait faire l'action",
+        "question": "Qui la fait?"
       },
       "previous": "Arrière",
       "restart": "Recommencer",
       "temp": {
-        "question": "Quand est-ce qu'elle se produit?",
-        "select-temp": "Choisissez l'une des options ci-dessous"
+        "select-temp": "Choisissez l'une des options ci-dessous",
+        "question": "Quand est-ce qu'elle se produit?"
       },
       "verb": {
         "no-matching-verbs": "Désolé, aucun verbe correspondant correspondant à '{{value}}'",
-        "question": "Quelle est l'action?",
         "search-placeholder": "Chercher",
         "select-verb-multiple": "Sélectionnez l'un des {{number}} verbes ci-dessous",
         "select-verb-single": "Sélectionnez le verbe ci-dessous",
-        "try-again": "Veuillez réessayer."
+        "try-again": "Veuillez réessayer.",
+        "question": "Quelle est l'action?"
+      },
+      "notifications": {
+        "random": {
+          "pers": {
+            "intransitive": "Pronom aléatoire '{{value}}' sélectionné",
+            "transitive": "Pronom aléatoire '{{agent}}> {{patient}}' sélectionné"
+          },
+          "temp": "Temps aléatoire '{{value}}' sélectionnée",
+          "verb": "Verbe aléatoire '{{value}}' sélectionné"
+        },
+        "selected": {
+          "pers": {
+            "intransitive": "Pronom '{{value}}' sélectionné",
+            "transitive": "Pronom '{{agent}}> {{patient}}' sélectionné"
+          },
+          "temp": "Temps '{{value}}' sélectionnée",
+          "verb": "Verbe '{{value}}' sélectionné"
+        }
       }
+    },
+    "error": {
+      "dev": "Hm, quelque chose s'est mal passé, veuillez vérifier la console.",
+      "general": "Oups, une erreur s'est produite."
     }
   }
 }
