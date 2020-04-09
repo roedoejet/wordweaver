@@ -14,7 +14,7 @@ export const environment = {
     storageBucket: "//kawennonis.appspot.com",
     messagingSenderId: "711160847583"
   },
-  base: `//kawennonnis.nrc-cnrc.gc.ca`,
+  base: `//kawennonnis.herokuapp.com`,
   prefix: `/api/v1/`,
   test_prefix: `/api/v2/`,
   versions: {
