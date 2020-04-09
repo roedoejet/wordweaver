@@ -5,7 +5,7 @@ export const environment = {
   envName: "PROD",
   production: true,
   test: false,
-  i18nPrefix: "./",
+  i18nPrefix: "/wordweaver-UI",
   firebase: {
     apiKey: "AIzaSyB8Rh04f4p61cphLkDAIoOozvESbUrweAA",
     authDomain: "kawennonis.firebaseapp.com",
