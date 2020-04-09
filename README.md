@@ -1,6 +1,6 @@
 # WordWeaver-GUI
 
-[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/roedoejet/wordweaver-GUI)
+[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/roedoejet/wordweaver-UI)
 ![POEditor](https://img.shields.io/poeditor/progress/331037/en?token=611d3987e3a7e94e57b049c0df8de613)
 ![POEditor](https://img.shields.io/poeditor/progress/331037/fr?token=611d3987e3a7e94e57b049c0df8de613)
 
@@ -29,8 +29,8 @@ TBD
 If using with a new language, it is recommended to clone the repo.
 
 ```sh
-$ git clone https://github.com/roedoejet/wordweaver-GUI.git
-$ cd wordweaver-GUI
+$ git clone https://github.com/roedoejet/wordweaver-UI.git
+$ cd wordweaver-UI
 $ ng serve
 ```
 
@@ -40,7 +40,7 @@ Then, you can create a new repo on GitHub and reset the origin remote to your ne
 
 Then, add a new repo and set the url to this:
 
-`git remote add ww https://github.com/roedoejet/wordweaver-GUI.git`
+`git remote add ww https://github.com/roedoejet/wordweaver-UI.git`
 
 That way, you can make changes in your repo, push them to your origin, but still pull new changes to the gui using `git pull ww master`
 
@@ -54,7 +54,7 @@ TBD
 
 ## Contributing
 
-Feel free to dive in! [Open an issue](https://github.com/roedoejet/wordweaver-GUI/issues/new) or submit PRs.
+Feel free to dive in! [Open an issue](https://github.com/roedoejet/wordweaver-UI/issues/new) or submit PRs.
 
 This repo follows the [Contributor Covenant](http://contributor-covenant.org/version/1/3/0/) Code of Conduct.
 

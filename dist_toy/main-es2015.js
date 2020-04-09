@@ -2,7 +2,7 @@
 
 /***/ "../../package.json":
 /*!************************************************!*\
-  !*** /Users/pinea/wordweaver-GUI/package.json ***!
+  !*** /Users/pinea/wordweaver-UI/package.json ***!
   \************************************************/
 /*! exports provided: name, version, description, homepage, author, keywords, main, private, scripts, husky, commitlint, devDependencies, engines, dependencies, default */
 /***/ (function(module) {
@@ -343,7 +343,7 @@ class AppComponent {
     }
 }
 AppComponent.ɵfac = function AppComponent_Factory(t) { return new (t || AppComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_ngrx_store__WEBPACK_IMPORTED_MODULE_2__["Store"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_core_core_module__WEBPACK_IMPORTED_MODULE_5__["LocalStorageService"])); };
-AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: AppComponent, selectors: [["ww-root"]], decls: 51, vars: 30, consts: [["mode", "push"], ["sidenav", ""], [1, "branding"], ["mat-list-item", "", "routerLinkActive", "active", 3, "routerLink", "click", 4, "ngFor", "ngForOf"], [1, "wrapper"], [1, "nav"], ["color", "primary"], ["mat-icon-button", "", 1, "d-md-none", "mobile-only", 3, "click"], ["icon", "bars"], ["routerLink", "", 1, "branding", "spacer", "center", "d-inline", "d-sm-none"], ["routerLink", "", 1, "branding", "spacer", "center", "d-none", "d-sm-inline", "d-md-none"], ["routerLink", "", 1, "branding", "spacer", "d-none", "d-md-inline"], [1, "branding", "ui-button"], [1, "d-none", "d-md-inline"], ["mat-button", "", "class", "nav-button", "routerLinkActive", "active", 3, "routerLink", 4, "ngFor", "ngForOf"], [1, "margin-right-20"], ["mat-icon-button", "", "routerLink", "settings", 1, "d-none", "d-sm-inline"], ["icon", "cog"], [4, "ngIf"], [1, "content"], ["o", "outlet"], [1, "footer"], [1, "row"], [1, "col-sm-12", "links"], ["href", "https://www.github.com/roedoejet/wordweaver-GUI", "target", "_blank"], [3, "icon"], [1, "col-12", "signature"], [1, "year"], [1, "d-block", "d-sm-none"], ["matTooltipPosition", "before", "href", "https://github.com/roedoejet/ReadAlong-Studio/blob/master/CHANGELOG.md", 3, "matTooltip"], ["icon", "rocket"], ["mat-list-item", "", "routerLinkActive", "active", 3, "routerLink", "click"], ["mat-button", "", "routerLinkActive", "active", 1, "nav-button", 3, "routerLink"], [3, "ngModel", "selectionChange"], [3, "value", 4, "ngFor", "ngForOf"], [3, "value"]], template: function AppComponent_Template(rf, ctx) { if (rf & 1) {
+AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: AppComponent, selectors: [["ww-root"]], decls: 51, vars: 30, consts: [["mode", "push"], ["sidenav", ""], [1, "branding"], ["mat-list-item", "", "routerLinkActive", "active", 3, "routerLink", "click", 4, "ngFor", "ngForOf"], [1, "wrapper"], [1, "nav"], ["color", "primary"], ["mat-icon-button", "", 1, "d-md-none", "mobile-only", 3, "click"], ["icon", "bars"], ["routerLink", "", 1, "branding", "spacer", "center", "d-inline", "d-sm-none"], ["routerLink", "", 1, "branding", "spacer", "center", "d-none", "d-sm-inline", "d-md-none"], ["routerLink", "", 1, "branding", "spacer", "d-none", "d-md-inline"], [1, "branding", "ui-button"], [1, "d-none", "d-md-inline"], ["mat-button", "", "class", "nav-button", "routerLinkActive", "active", 3, "routerLink", 4, "ngFor", "ngForOf"], [1, "margin-right-20"], ["mat-icon-button", "", "routerLink", "settings", 1, "d-none", "d-sm-inline"], ["icon", "cog"], [4, "ngIf"], [1, "content"], ["o", "outlet"], [1, "footer"], [1, "row"], [1, "col-sm-12", "links"], ["href", "https://www.github.com/roedoejet/wordweaver-UI", "target", "_blank"], [3, "icon"], [1, "col-12", "signature"], [1, "year"], [1, "d-block", "d-sm-none"], ["matTooltipPosition", "before", "href", "https://github.com/roedoejet/ReadAlong-Studio/blob/master/CHANGELOG.md", 3, "matTooltip"], ["icon", "rocket"], ["mat-list-item", "", "routerLinkActive", "active", 3, "routerLink", "click"], ["mat-button", "", "routerLinkActive", "active", 1, "nav-button", 3, "routerLink"], [3, "ngModel", "selectionChange"], [3, "value", 4, "ngFor", "ngForOf"], [3, "value"]], template: function AppComponent_Template(rf, ctx) { if (rf & 1) {
         const _r226 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵgetCurrentView"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div");
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpipe"](1, "async");
@@ -2994,7 +2994,7 @@ _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__["platformBrowser"]().boot
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/pinea/wordweaver-GUI/projects/word-weaver/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/pinea/wordweaver-UI/projects/word-weaver/src/main.ts */"./src/main.ts");
 
 
 /***/ })

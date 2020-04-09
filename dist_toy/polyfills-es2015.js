@@ -2,7 +2,7 @@
 
 /***/ "../../node_modules/zone.js/dist/zone-evergreen.js":
 /*!*******************************************************************************!*\
-  !*** /Users/pinea/wordweaver-GUI/node_modules/zone.js/dist/zone-evergreen.js ***!
+  !*** /Users/pinea/wordweaver-UI/node_modules/zone.js/dist/zone-evergreen.js ***!
   \*******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -3030,7 +3030,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/pinea/wordweaver-GUI/projects/word-weaver/src/polyfills.ts */"./src/polyfills.ts");
+module.exports = __webpack_require__(/*! /Users/pinea/wordweaver-UI/projects/word-weaver/src/polyfills.ts */"./src/polyfills.ts");
 
 
 /***/ })
