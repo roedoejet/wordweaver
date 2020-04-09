@@ -1,5 +1,9 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
+import { SharedModule } from "../../../shared/shared.module";
+import { TranslateModule } from "@ngx-translate/core";
+import { NoopAnimationsModule } from "@angular/platform-browser/animations";
+
 import { WordmakerHomeComponent } from "./wordmaker-home.component";
 
 describe("WordmakerHomeComponent", () => {
@@ -8,7 +12,8 @@ describe("WordmakerHomeComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [WordmakerHomeComponent]
+      declarations: [WordmakerHomeComponent],
+      imports: [SharedModule, NoopAnimationsModule, TranslateModule.forRoot()]
     }).compileComponents();
   }));
 

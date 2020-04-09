@@ -4,12 +4,15 @@ import { NotificationService } from "./notification.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Overlay } from "@angular/cdk/overlay";
 
+import { TranslateModule } from "@ngx-translate/core";
+
 describe("NotificationsService", () => {
   let service: NotificationService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [NotificationService, MatSnackBar, Overlay]
+      providers: [NotificationService, MatSnackBar, Overlay],
+      imports: [TranslateModule.forRoot()]
     });
     service = TestBed.inject<NotificationService>(NotificationService);
   });

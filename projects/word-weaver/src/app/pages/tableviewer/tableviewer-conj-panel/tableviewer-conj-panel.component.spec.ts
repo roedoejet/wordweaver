@@ -1,5 +1,10 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
+import { SharedModule } from "../../../shared/shared.module";
+import { TranslateModule } from "@ngx-translate/core";
+import { NoopAnimationsModule } from "@angular/platform-browser/animations";
+import { provideMockStore } from "@ngrx/store/testing";
+
 import { TableviewerConjPanelComponent } from "./tableviewer-conj-panel.component";
 
 describe("TableviewerConjPanelComponent", () => {
@@ -8,7 +13,9 @@ describe("TableviewerConjPanelComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [TableviewerConjPanelComponent]
+      declarations: [TableviewerConjPanelComponent],
+      imports: [SharedModule, NoopAnimationsModule, TranslateModule.forRoot()],
+      providers: [provideMockStore()]
     }).compileComponents();
   }));
 

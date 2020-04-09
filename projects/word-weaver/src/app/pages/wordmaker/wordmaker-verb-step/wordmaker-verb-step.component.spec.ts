@@ -1,5 +1,10 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
+import { SharedModule } from "../../../shared/shared.module";
+import { TranslateModule } from "@ngx-translate/core";
+import { NoopAnimationsModule } from "@angular/platform-browser/animations";
+import { HttpClientModule } from "@angular/common/http";
+
 import { WordmakerVerbStepComponent } from "./wordmaker-verb-step.component";
 
 describe("WordmakerVerbStepComponent", () => {
@@ -8,7 +13,13 @@ describe("WordmakerVerbStepComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [WordmakerVerbStepComponent]
+      declarations: [WordmakerVerbStepComponent],
+      imports: [
+        SharedModule,
+        NoopAnimationsModule,
+        TranslateModule.forRoot(),
+        HttpClientModule
+      ]
     }).compileComponents();
   }));
 

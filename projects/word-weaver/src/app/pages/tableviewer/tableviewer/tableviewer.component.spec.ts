@@ -1,5 +1,10 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
+import { SharedModule } from "../../../shared/shared.module";
+import { TranslateModule } from "@ngx-translate/core";
+import { NoopAnimationsModule } from "@angular/platform-browser/animations";
+import { provideMockStore } from "@ngrx/store/testing";
+
 import { TableviewerComponent } from "./tableviewer.component";
 
 describe("TableviewerComponent", () => {
@@ -8,7 +13,9 @@ describe("TableviewerComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [TableviewerComponent]
+      declarations: [TableviewerComponent],
+      imports: [SharedModule, NoopAnimationsModule, TranslateModule.forRoot()],
+      providers: [provideMockStore()]
     }).compileComponents();
   }));
 

@@ -40,7 +40,6 @@ import { AuthEffects } from "./auth/auth.effects";
 import { selectIsAuthenticated, selectAuth } from "./auth/auth.selectors";
 import { authLogin, authLogout } from "./auth/auth.actions";
 import { AuthGuardService } from "./auth/auth-guard.service";
-import { TitleService } from "./title/title.service";
 import {
   ROUTE_ANIMATIONS_ELEMENTS,
   routeAnimations,
@@ -87,7 +86,6 @@ import { VerbService } from "./verb/verb.service";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 export {
-  TitleService,
   selectAuth,
   authLogin,
   authLogout,

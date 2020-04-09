@@ -9,8 +9,7 @@ import { of } from "rxjs";
 import {
   AnimationsService,
   AppState,
-  LocalStorageService,
-  TitleService
+  LocalStorageService
 } from "../core.module";
 
 import { SettingsEffects, SETTINGS_KEY } from "./settings.effects";
@@ -25,7 +24,6 @@ describe("SettingsEffects", () => {
   let router: any;
   let localStorageService: jasmine.SpyObj<LocalStorageService>;
   let overlayContainer: jasmine.SpyObj<OverlayContainer>;
-  let titleService: jasmine.SpyObj<TitleService>;
   let animationsService: jasmine.SpyObj<AnimationsService>;
   let translateService: jasmine.SpyObj<TranslateService>;
   let store: jasmine.SpyObj<Store<AppState>>;
@@ -45,7 +43,6 @@ describe("SettingsEffects", () => {
     overlayContainer = jasmine.createSpyObj("OverlayContainer", [
       "getContainerElement"
     ]);
-    titleService = jasmine.createSpyObj("TitleService", ["setTitle"]);
     animationsService = jasmine.createSpyObj("AnimationsService", [
       "updateRouteAnimationType"
     ]);
@@ -93,7 +90,6 @@ describe("SettingsEffects", () => {
         router,
         overlayContainer,
         localStorageService,
-        titleService,
         animationsService,
         translateService
       );

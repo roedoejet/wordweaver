@@ -17,7 +17,6 @@ import {
 import { selectSettingsState } from "../core.state";
 import { LocalStorageService } from "../local-storage/local-storage.service";
 import { AnimationsService } from "../animations/animations.service";
-import { TitleService } from "../title/title.service";
 
 import {
   actionSettingsChangeAnimationsElements,
@@ -52,7 +51,6 @@ export class SettingsEffects {
     private router: Router,
     private overlayContainer: OverlayContainer,
     private localStorageService: LocalStorageService,
-    private titleService: TitleService,
     private animationsService: AnimationsService,
     private translateService: TranslateService
   ) {}
@@ -140,22 +138,6 @@ export class SettingsEffects {
         select(selectSettingsLanguage),
         distinctUntilChanged(),
         tap(language => this.translateService.use(language))
-      ),
-    { dispatch: false }
-  );
-
-  setTitle = createEffect(
-    () =>
-      merge(
-        this.actions$.pipe(ofType(actionSettingsChangeLanguage)),
-        this.router.events.pipe(filter(event => event instanceof ActivationEnd))
-      ).pipe(
-        tap(() => {
-          this.titleService.setTitle(
-            this.router.routerState.snapshot.root,
-            this.translateService
-          );
-        })
       ),
     { dispatch: false }
   );
