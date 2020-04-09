@@ -7,9 +7,9 @@ describe("App", () => {
 
   beforeEach(() => (page = new AppPage()));
 
-  it('should redirect to "about" route', () => {
+  it('should redirect to "wordmaker" route', () => {
     page.navigateTo();
-    expect(getCurrentRouteUrl()).toEqual("about");
+    expect(getCurrentRouteUrl()).toEqual("wordmaker");
   });
 
   it("should display current year in the footer", () => {
@@ -17,10 +17,12 @@ describe("App", () => {
     expect(page.getCurrentYear()).toEqual(new Date().getFullYear().toString());
   });
 
-  it('should have "About", "Pages", "Examples" menus', () => {
+  it('should have "About", "Table Viewer", "Word Maker" menus', () => {
     page.navigateTo();
     page
       .getAllMenus()
-      .then(menus => expect(menus).toEqual(["About", "Pages", "Examples"]));
+      .then(menus =>
+        expect(menus).toEqual(["Word Maker", "Table Viewer", "About"])
+      );
   });
 });
