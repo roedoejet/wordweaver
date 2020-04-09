@@ -1,9 +1,0 @@
-.page {
-  min-height: em(644);
-  &__content {
-    margin-top: em(50);
-    @include mq(em(1920), "min-width") {
-      margin-top: 10vh;
-    }
-  }
-}

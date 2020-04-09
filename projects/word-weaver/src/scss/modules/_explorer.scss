@@ -1,0 +1,31 @@
+%explorer-demo {
+  width: em(450);
+  min-width: em(450);
+}
+%right {
+  right: 10%;
+}
+
+.explorer {
+  &--demo {
+    @extend %explorer-demo;
+    // &--1 {
+    //     // top: -5vw;
+    //     // right: -30vw;
+    // }
+    // &--2 {
+    //     right: 35%;
+    //     top: 45%;
+    // }
+    top: 0;
+    right: 0;
+    &--right {
+      // top: 0;
+      @extend %right;
+      &--below {
+        @extend %right;
+        top: 10%;
+      }
+    }
+  }
+}

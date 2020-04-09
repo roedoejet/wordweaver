@@ -1,0 +1,41 @@
+@import "../../../../scss/utilities/colors";
+@import "~@angular/material/theming";
+
+@mixin ww-tableviewer-component-theme-common($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+
+  .error__container {
+    background-color: mat-color($warn);
+  }
+
+  .error__header,
+  .error__message {
+    color: mat-color($warn, default-contrast);
+  }
+
+  ww-tableviewer-conj-panel {
+    background-color: mat-color($primary);
+  }
+}
+
+@mixin ww-tableviewer-component-theme-dark($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+
+  .mat-figure {
+    background-color: darken(mat-color($primary), 10%);
+  }
+}
+
+@mixin ww-tableviewer-component-theme-light($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+
+  .mat-figure {
+    background-color: lighten(mat-color($primary), 5%);
+  }
+}

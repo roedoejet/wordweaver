@@ -1,0 +1,156 @@
+{
+  "ww": {
+    "about": {
+      "slogan": "WordWeaver UI weaves beautiful verb conjugation websites",
+      "text": "<p>Here is where your text about the project should go.</p>"
+    },
+    "error": {
+      "dev": "Hm, something went wrong, please check the console.",
+      "general": "Whoops, an error occured."
+    },
+    "footer": {
+      "changelog": "Show changelog"
+    },
+    "language": "Sample Kanyen'kéha",
+    "menu": {
+      "about": "About",
+      "info": "Info",
+      "settings": "Settings",
+      "tableviewer": "Table Viewer",
+      "wordmaker": "Word Maker"
+    },
+    "settings": {
+      "advanced": "Advanced",
+      "general": {
+        "highlighting": {
+          "aspect": "Aspect",
+          "post-aspectual": "Post-aspectual suffix",
+          "pronouns": "Pronouns",
+          "required": "Required",
+          "temp": "Temporal",
+          "title": "Highlighting",
+          "verb": "Verb root"
+        },
+        "language": {
+          "en": "English",
+          "fr": "French"
+        },
+        "placeholder": "Language",
+        "tiers": {
+          "breakdown": "Breakdown",
+          "breakdown-translation": "Breakdown translation",
+          "gloss": "Gloss",
+          "title": "Display Tiers",
+          "translation": "Translation"
+        },
+        "title": "General"
+      },
+      "testApi": "Test Language Model",
+      "themes": {
+        "blue": "Blue",
+        "dark": "Dark",
+        "fun": "Fun",
+        "light": "Light",
+        "nature": "Natural",
+        "night-mode": "Auto night mode (from 21:00 to 7:00)",
+        "placeholder": "Color Theme",
+        "sticky-header": "Sticky header",
+        "title": "Themes"
+      },
+      "title": "Settings"
+    },
+    "tableviewer": {
+      "conj": {
+        "conjugate": "Conjugate",
+        "depth-tip": "Change tree depth",
+        "error": {
+          "message": "Please try again.",
+          "title": "Error"
+        },
+        "explorer-tip": "Toggle 'tree' and 'grid' views",
+        "hide-toolbar-tip": "Hide toolbar",
+        "instructions": "Please select one or more boxes from the <b>Verb</b>, <b>Person</b>, and <b>Time</b> panels to the left and then press the enter key or conjugate button to see your selection",
+        "instructions-mobile": "Please select one or more boxes from the 'Verb', 'Person', and 'Time' panels <br /> and then press the button above to conjugate!",
+        "order-tip": "Switch order of nodes",
+        "show-toolbar-tip": "Show toolbar",
+        "title": "Conjugation Toolbar"
+      },
+      "notifications": {
+        "download": {
+          "error": "Whoops! Something went wrong and the file couldn't be downloaded. Please check your conjugation is valid and try again",
+          "success": "Success! Conjugations were downloaded"
+        }
+      },
+      "pers": {
+        "select-agent": "Select an Agent",
+        "select-patient": "Select a Patient",
+        "title": "Person"
+      },
+      "temp": {
+        "select": "Select",
+        "title": "Time"
+      },
+      "verb": {
+        "deselect": "Deselect all",
+        "no-matching-verb": "Sorry, no verbs matching '{{ value }}'",
+        "placeholder": "Search for a verb",
+        "title": "Verb"
+      }
+    },
+    "title": "WordWeaver UI",
+    "title-short": "WordWeaver UI",
+    "translation-language": "English",
+    "wordmaker": {
+      "conj": {
+        "congratulations-header": "Congratulations!",
+        "congratulations-text": "You made a word <strong>just</strong> like that."
+      },
+      "finished": "Done",
+      "home": {
+        "instructions": "<p>There are three steps to make a word. We'll need to know <b>what</b> the action is, <b>who</b> is doing it, and <b>when</b> it's happening.</p><p>You can press the left arrow key to go to the previous step and the right arrow key to go to the next step. </p><p>Let's get started!</p>",
+        "start": "START",
+        "welcome": "Welcome to the WordWeaver-UI WordMaker"
+      },
+      "next": "Next",
+      "notifications": {
+        "random": {
+          "pers": {
+            "intransitive": "Random pronoun '{{ value }}' selected",
+            "transitive": "Random pronoun '{{ agent }} > {{ patient }}' selected"
+          },
+          "temp": "Random time '{{ value }}' selected",
+          "verb": "Random verb '{{ value }}' selected"
+        },
+        "selected": {
+          "pers": {
+            "intransitive": "Pronoun '{{ value }}' selected",
+            "transitive": "Pronoun '{{ agent }} > {{ patient }}' selected"
+          },
+          "temp": "Time '{{ value }}' selected",
+          "verb": "Verb '{{ value }}' selected"
+        }
+      },
+      "pers": {
+        "agent-informal": "Do-er",
+        "patient-informal": "Do-ee",
+        "question": "Who is doing it?",
+        "select-intransitive-pronoun": "Choose one of the pronouns below",
+        "select-transitive-pronoun": "From the options below, choose who is doing the action and who is having the action done to them"
+      },
+      "previous": "Back",
+      "restart": "Start over",
+      "temp": {
+        "question": "When is it happening?",
+        "select-temp": "Choose one of the options below"
+      },
+      "verb": {
+        "no-matching-verbs": "Sorry, no matching verbs matching '{{ value }}'",
+        "question": "What is the action?",
+        "search-placeholder": "Search",
+        "select-verb-multiple": "Select one of the {{ number }} verbs below",
+        "select-verb-single": "Select the verb below",
+        "try-again": "Please try again."
+      }
+    }
+  }
+}

@@ -1,4 +1,5 @@
 package.json
 package-lock.json
 *.html
-refactor/dist/word-weaver/
+dist/word-weaver/
+dist_toy/
