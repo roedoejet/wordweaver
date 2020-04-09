@@ -11,7 +11,7 @@
 @import "./themes/default-theme";
 @import "./themes/light-theme";
 @import "./themes/black-theme";
-@import "./themes/nature-theme";
+@import "./themes/purple-theme";
 @import "./themes/monkey-theme.scss";
 
 @import "styles-reset.scss-theme";
@@ -65,10 +65,16 @@
   @include custom-components-theme-dark($ww-black-theme);
 }
 
-.nature-theme {
-  @include angular-material-theme($ww-nature-theme);
-  @include custom-components-theme-common($ww-nature-theme);
-  @include custom-components-theme-light($ww-nature-theme);
+.purple-light-theme {
+  @include angular-material-theme($ww-purple-theme-light);
+  @include custom-components-theme-common($ww-purple-theme-light);
+  @include custom-components-theme-light($ww-purple-theme-light);
+}
+
+.purple-dark-theme {
+  @include angular-material-theme($ww-purple-theme-dark);
+  @include custom-components-theme-common($ww-purple-theme-dark);
+  @include custom-components-theme-dark($ww-purple-theme-dark);
 }
 
 .monkey-theme {

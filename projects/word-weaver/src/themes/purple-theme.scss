@@ -1,0 +1,17 @@
+@import "palettes.scss";
+$ww-purple-primary: mat-palette($mat-deep-purple, 400);
+// $ww-purple-primary: mat-palette($mat-deep-purple, 700, 400, 700);
+$ww-purple-accent: mat-palette($mat-amber, 600);
+$ww-purple-warn: mat-palette($mat-red, 200);
+
+$ww-purple-theme-light: mat-light-theme(
+  $ww-purple-primary,
+  $ww-purple-accent,
+  $ww-purple-warn
+);
+
+$ww-purple-theme-dark: mat-dark-theme(
+  $ww-purple-primary,
+  $ww-purple-accent,
+  $ww-purple-warn
+);
