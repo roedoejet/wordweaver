@@ -20,12 +20,20 @@
 @import "./app/pages/tableviewer/tableviewer/tableviewer.component.scss-theme.scss";
 @import "./app/shared/logo/logo.component.scss-theme.scss";
 
-@mixin custom-components-theme($theme) {
+@mixin custom-components-theme-common($theme) {
   @include ww-styles-reset-theme($theme);
   @include ww-app-component-theme($theme);
   @include ww-logo-component-theme($theme);
   @include ww-about-component-theme($theme);
-  @include ww-tableviewer-component-theme($theme);
+  @include ww-tableviewer-component-theme-common($theme);
+}
+
+@mixin custom-components-theme-light($theme) {
+  @include ww-tableviewer-component-theme-light($theme);
+}
+
+@mixin custom-components-theme-dark($theme) {
+  @include ww-tableviewer-component-theme-dark($theme);
 }
 
 // // Customize Angular Material theme with palettes from color-primary and color-secondary. Use http://mcg.mbitson.com to generate palette and add palettes to _palettes partial
@@ -41,27 +49,32 @@
 
 .default-theme {
   @include angular-material-theme($ww-theme);
-  @include custom-components-theme($ww-theme);
+  @include custom-components-theme-common($ww-theme);
+  @include custom-components-theme-light($ww-theme);
 }
 
 .light-theme {
   @include angular-material-theme($ww-light-theme);
-  @include custom-components-theme($ww-light-theme);
+  @include custom-components-theme-common($ww-light-theme);
+  @include custom-components-theme-light($ww-light-theme);
 }
 
 .black-theme {
   @include angular-material-theme($ww-black-theme);
-  @include custom-components-theme($ww-black-theme);
+  @include custom-components-theme-common($ww-black-theme);
+  @include custom-components-theme-dark($ww-black-theme);
 }
 
 .nature-theme {
   @include angular-material-theme($ww-nature-theme);
-  @include custom-components-theme($ww-nature-theme);
+  @include custom-components-theme-common($ww-nature-theme);
+  @include custom-components-theme-light($ww-nature-theme);
 }
 
 .monkey-theme {
   @include angular-material-theme($ww-monkey-theme);
-  @include custom-components-theme($ww-monkey-theme);
+  @include custom-components-theme-common($ww-monkey-theme);
+  @include custom-components-theme-dark($ww-monkey-theme);
 }
 
 // ==========================================================================

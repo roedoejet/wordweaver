@@ -1,14 +1,11 @@
 @import "../../../../scss/utilities/colors";
 @import "~@angular/material/theming";
 
-@mixin ww-tableviewer-component-theme($theme) {
+@mixin ww-tableviewer-component-theme-common($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
 
-  // .panel__title {
-  //     color: mat-color($accent) !important;
-  // }
   .error__container {
     background-color: mat-color($warn);
   }
@@ -20,96 +17,25 @@
 
   ww-tableviewer-conj-panel {
     background-color: mat-color($primary);
-
-    //     h4,
-    //     h5,
-    //     p,
-    //     b,
-    //     mat-label,
-    //     mat-option,
-    //     button:not(.mat-accent) span {
-    //         color: mat-color($primary, default-contrast);
-    //     }
   }
+}
+
+@mixin ww-tableviewer-component-theme-dark($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
 
   .mat-figure {
-    background-color: mat-color($primary, 400);
-
-    //     h4,
-    //     h5,
-    //     p,
-    //     b,
-    //     mat-label,
-    //     mat-option,
-    //     button:not(.mat-accent) span,
-    //     .mat-select-value,
-    //     .mat-form-field-label,
-    //     .mat-checkbox-label,
-    //     input {
-    //         color: mat-color($primary, default-contrast);
-    //     }
+    background-color: darken(mat-color($primary), 10%);
   }
+}
 
-  //   mat-sidenav-container {
-  //     mat-toolbar {
-  //       button {
-  //         &.active {
-  //           color: mat-color($accent, default-contrast);
-  //           background-color: mat-color($accent);
-  //         }
-  //       }
+@mixin ww-tableviewer-component-theme-light($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
 
-  //       .link {
-  //         color: mat-color($primary, default-contrast);
-  //       }
-  //     }
-
-  //     mat-sidenav {
-  //       .mat-list-item {
-  //         &.active {
-  //           color: mat-color($accent, default-contrast);
-  //           background-color: mat-color($accent) !important;
-
-  //           &:hover {
-  //             background-color: mat-color($accent, darker) !important;
-  //           }
-  //         }
-  //       }
-  //     }
-
-  //     .footer {
-  //       color: mat-color($primary, lighter);
-  //       background-color: mat-color($primary, darker);
-
-  //       .links,
-  //       .signature {
-  //         a {
-  //           color: mat-color($primary, lighter);
-  //           &:hover {
-  //             color: mat-color($accent);
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-
-  //   .error-notification-overlay {
-  //     color: mat-color($warn, default-contrast);
-  //     background-color: mat-color($warn);
-  //   }
-
-  //   .info-notification-overlay {
-  //     color: mat-color($accent, default-contrast);
-  //     background-color: mat-color($accent);
-  //   }
-
-  //   .success-notification-overlay {
-  //     color: mat-color($success-colors, default-contrast);
-  //     background-color: mat-color($success-colors);
-  //   }
-
-  //   .warning-notification-overlay {
-  //     color: mat-color($warning-colors, default-contrast);
-  //     background-color: mat-color($warning-colors);
-  //   }
+  .mat-figure {
+    background-color: lighten(mat-color($primary), 5%);
+  }
 }
