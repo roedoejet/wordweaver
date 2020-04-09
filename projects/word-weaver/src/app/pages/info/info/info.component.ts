@@ -26,7 +26,7 @@ export class InfoComponent implements OnInit {
       .pipe(
         map((data: any) => {
           data = data;
-          let chartOption: EChartOption = {
+          const chartOption: EChartOption = {
             tooltip: {
               show: false,
               trigger: "item",

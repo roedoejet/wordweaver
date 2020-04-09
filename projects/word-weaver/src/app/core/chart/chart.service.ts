@@ -31,7 +31,7 @@ export class ChartService {
       .pipe(
         map((data: any) => {
           data = data;
-          let chartOption: EChartOption = {
+          const chartOption: EChartOption = {
             tooltip: {
               show: false,
               trigger: "item",
@@ -115,7 +115,7 @@ export class ChartService {
           all_pns.push(ag_node);
         });
 
-        let chartOption: EChartOption = {
+        const chartOption: EChartOption = {
           tooltip: {
             show: false,
             trigger: "item",
@@ -174,7 +174,7 @@ export class ChartService {
 
         data = [{ name: name, children: data }];
 
-        let chartOption: EChartOption = {
+        const chartOption: EChartOption = {
           tooltip: {
             show: false,
             trigger: "item",
@@ -224,9 +224,9 @@ export class ChartService {
   }
 
   createChartData(res, order, depth) {
-    let data = [];
-    let verbs: any = [];
-    let chartOption: EChartOption = {
+    const data = [];
+    const verbs: any = [];
+    const chartOption: EChartOption = {
       tooltip: {
         show: false,
         trigger: "item",
@@ -249,9 +249,9 @@ export class ChartService {
     let node;
     for (let conjugation of res) {
       conjugation = conjugation.values;
-      let v = conjugation.root["tag"];
-      let t = this.affixService.getAffOption(conjugation.affopt)["gloss"];
-      let vb = this.verbService.getVerb(v);
+      const v = conjugation.root["tag"];
+      const t = this.affixService.getAffOption(conjugation.affopt)["gloss"];
+      const vb = this.verbService.getVerb(v);
       let p;
       if (vb["thematic_relation"] === "red") {
         p = this.pronounService.getPronoun(conjugation.pronoun["agent"])[
@@ -282,11 +282,11 @@ export class ChartService {
 
     for (const verb of Object.keys(node)) {
       verbs.push(verb);
-      let nv = { name: verb, children: [] };
+      const nv = { name: verb, children: [] };
       for (const second of Object.keys(node[verb])) {
         const ns = { name: second, children: [] };
         for (const third of Object.keys(node[verb][second])) {
-          let nt = {
+          const nt = {
             name: third,
             children: [{ name: node[verb][second][third] }]
           };
@@ -309,9 +309,9 @@ export class ChartService {
       //   });
       // });
     }
-    for (var j = 0; j < data.length; j++) {
+    for (let j = 0; j < data.length; j++) {
       top += 20;
-      let ser = {
+      const ser = {
         type: "tree",
         name: data[j]["name"],
         data: [data[j]],
