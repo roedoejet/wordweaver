@@ -26,7 +26,8 @@
             "aot": true,
             "assets": [
               "projects/word-weaver/src/favicon.ico",
-              "projects/word-weaver/src/assets"
+              "projects/word-weaver/src/assets",
+              "projects/word-weaver/src/manifest.webmanifest"
             ],
             "styles": [
               "projects/word-weaver/src/styles-app-loading.scss",
@@ -77,7 +78,9 @@
                   "type": "anyComponentStyle",
                   "maximumWarning": "6kb"
                 }
-              ]
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "projects/word-weaver/ngsw-config.json"
             }
           }
         },
@@ -107,7 +110,8 @@
             "karmaConfig": "projects/word-weaver/karma.conf.js",
             "assets": [
               "projects/word-weaver/src/favicon.ico",
-              "projects/word-weaver/src/assets"
+              "projects/word-weaver/src/assets",
+              "projects/word-weaver/src/manifest.webmanifest"
             ],
             "styles": [
               "projects/word-weaver/src/styles-app-loading.scss",
