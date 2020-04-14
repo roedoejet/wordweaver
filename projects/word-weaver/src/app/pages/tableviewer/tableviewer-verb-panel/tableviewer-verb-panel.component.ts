@@ -4,13 +4,7 @@ import { VerbService } from "../../../core/core.module";
 import { TableviewerSelectionService } from "../../../core/core.module";
 import { Store, select } from "@ngrx/store";
 import { Observable } from "rxjs";
-import {
-  debounceTime,
-  map,
-  tap,
-  distinctUntilChanged,
-  skipWhile
-} from "rxjs/operators";
+import { debounceTime, map, tap } from "rxjs/operators";
 
 import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 
@@ -57,9 +51,15 @@ export class TableviewerVerbPanelComponent implements OnInit {
         tap(x =>
           this.checkboxGroup.valueChanges
             .pipe(
+              // Filter checked checkboxes
               map(checkboxes =>
                 Object.keys(checkboxes).filter(k => checkboxes[k])
               ),
+              // Convert tag to full Verb
+              map(verbTags =>
+                verbTags.map(verbTag => this.verbService.getVerb(verbTag))
+              ),
+              // Dispatch action to store
               tap(selectedVerbs => this.onVerbSelect(selectedVerbs))
             )
             .subscribe()

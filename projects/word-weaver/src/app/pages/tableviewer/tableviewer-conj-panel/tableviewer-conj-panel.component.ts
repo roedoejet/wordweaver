@@ -25,7 +25,14 @@ import {
 } from "rxjs";
 import { map, switchMap, tap, finalize, skip } from "rxjs/operators";
 import { merge as _merge } from "lodash";
+import {
+  actionChangeTreeViewDepth,
+  actionToggleTreeViewOrder,
+  actionToggleGridView
+} from "../../../core/tableviewer-selection/tableviewer-selection.actions";
 import { SettingsState, State } from "../../../core/settings/settings.model";
+import { TableviewerState } from "../../../core/tableviewer-selection/tableviewer-selection.model";
+import { selectTableviewer } from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
 import { selectSettings } from "../../../core/settings/settings.selectors";
 import {
   AffixService,
@@ -46,6 +53,7 @@ import { marker } from "@biesbjerg/ngx-translate-extract-marker";
 export class TableviewerConjPanelComponent implements OnInit {
   // Basic config
   settings$: Observable<SettingsState>;
+  selection$: Observable<TableviewerState>;
   showDelay = new FormControl(1000);
   hideDelay = new FormControl(200);
   tooltipPosition = "above";
@@ -75,7 +83,9 @@ export class TableviewerConjPanelComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // populate with store's selection
     this.settings$ = this.store.pipe(select(selectSettings));
+    this.selection$ = this.store.pipe(select(selectTableviewer));
     this.conjugationTrigger$ = merge(
       this.manualConjugation$,
       this.showExplorer$.pipe(skip(1)),
@@ -113,6 +123,22 @@ export class TableviewerConjPanelComponent implements OnInit {
       })
     );
     this.selectionService.selection.subscribe(x => console.log(x));
+  }
+
+  onChangeTreeDepth(event) {
+    this.store.dispatch(
+      actionChangeTreeViewDepth({ treeDepth: event.target.selectedIndex })
+    );
+  }
+
+  onToggleTreeOrder() {
+    this.store.dispatch(
+      actionToggleTreeViewOrder({ name: "standardTreeOrder" })
+    );
+  }
+
+  onToggleGridView() {
+    this.store.dispatch(actionToggleGridView({ name: "gridView" }));
   }
 
   createChartData(res, order, depth) {

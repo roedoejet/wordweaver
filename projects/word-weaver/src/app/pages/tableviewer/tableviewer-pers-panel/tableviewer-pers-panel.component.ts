@@ -1,11 +1,16 @@
 import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
-import { TableviewerSelectionService } from "../../../core/core.module";
 import { Pronoun } from "../../../models/models";
 import { PronounService } from "../../../core/core.module";
 import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
+import { Store, select } from "@ngrx/store";
 
-import { FormControl, FormGroup } from "@angular/forms";
+import {
+  actionChangeAgents,
+  actionChangePatients
+} from "../../../core/tableviewer-selection/tableviewer-selection.actions";
+
+import { TableviewerState } from "../../../core/tableviewer-selection/tableviewer-selection.model";
+import { selectTableviewer } from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
 
 @Component({
   selector: "ww-tableviewer-pers-panel",
@@ -14,41 +19,21 @@ import { FormControl, FormGroup } from "@angular/forms";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableviewerPersPanelComponent implements OnInit {
-  agent = new FormControl();
-  patient = new FormControl();
   possiblePronouns$: Observable<Pronoun[]>;
-  constructor(
-    public pnService: PronounService,
-    private selectionService: TableviewerSelectionService
-  ) {
+  selection$: Observable<TableviewerState>;
+  constructor(public pnService: PronounService, private store: Store) {
     this.possiblePronouns$ = this.pnService.pronouns$;
   }
 
   ngOnInit(): void {
-    // TODO: Redux
-    this.agent.valueChanges.subscribe(pns => {
-      return this.pushAgChanges(pns.map(pn => pn.tag));
-    });
-    // TODO: Redux
-    this.patient.valueChanges.subscribe(pns => {
-      return this.pushPatChanges(pns.map(pn => pn.tag));
-    });
+    this.selection$ = this.store.pipe(select(selectTableviewer));
   }
 
-  // TODO: Redux
-  pushAgChanges(c) {
-    this.selectionService.updateAgents(c);
+  onAgentSelect(pns) {
+    this.store.dispatch(actionChangeAgents({ agent: pns.value }));
   }
 
-  // TODO: Redux
-  pushPatChanges(c) {
-    this.selectionService.updatePatients(c);
-  }
-
-  // TODO: Redux
-  filterTrue(c) {
-    return Object.keys(c).filter(k => {
-      return c[k];
-    });
+  onPatientSelect(pns) {
+    this.store.dispatch(actionChangePatients({ patient: pns.value }));
   }
 }

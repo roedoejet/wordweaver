@@ -1,35 +1,33 @@
 <div class="panel" *ngIf="settings$ | async as settings">
     <div *ngIf="show_toolbar" class="panel__header panel__header--tableview">
         <h5 class="panel__title">{{ 'ww.tableviewer.conj.title' | translate }}</h5>
-        <div class="panel__toolbar toolbar">
+        <div class="panel__toolbar toolbar" *ngIf="selection$ | async as selection">
             <button (click)='manualConjugation$.next("clicked")' class="conjugate mat-accent" mat-raised-button>
                 {{ 'ww.tableviewer.conj.conjugate' | translate }}
             </button>
-            <select *ngIf="showExplorer$ | async" (change)="depth$.next($event.target.selectedIndex)"
-                class="toolbar__tool ui-button" [matTooltip]="'ww.tableviewer.conj.depth-tip' | translate"
-                [matTooltipShowDelay]="showDelay.value" [matTooltipHideDelay]="hideDelay.value"
-                [matTooltipPosition]="tooltipPosition">
+            <select *ngIf="!selection.gridView" (change)="onChangeTreeDepth($event)" class="toolbar__tool ui-button"
+                [matTooltip]="'ww.tableviewer.conj.depth-tip' | translate" [matTooltipShowDelay]="showDelay.value"
+                [matTooltipHideDelay]="hideDelay.value" [matTooltipPosition]="tooltipPosition">
                 <option value="0">0</option>
                 <option selected value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
             </select>
-            <button *ngIf="showExplorer$ | async" class="toolbar__tool ui-button" mat-icon-button
-                (click)="order$.next(!order$.value)" [matTooltip]="'ww.tableviewer.conj.order-tip' | translate"
+            <button *ngIf="!selection.gridView" class="toolbar__tool ui-button" mat-icon-button
+                (click)="onToggleTreeOrder()" [matTooltip]="'ww.tableviewer.conj.order-tip' | translate"
                 [matTooltipShowDelay]="showDelay.value" [matTooltipHideDelay]="hideDelay.value"
                 [matTooltipPosition]="tooltipPosition">
                 <mat-icon aria-label="Switch pronoun and temp">swap_horiz</mat-icon>
             </button>
-            <button class="ui-button toolbar__tool" mat-icon-button (click)="toggleExplorer()"
+            <button class="ui-button toolbar__tool" mat-icon-button (click)="onToggleGridView()"
                 [matTooltip]="'ww.tableviewer.conj.explorer-tip' | translate" [matTooltipShowDelay]="showDelay.value"
                 [matTooltipHideDelay]="hideDelay.value" [matTooltipPosition]="tooltipPosition">
-                <mat-icon *ngIf="!(showExplorer$ | async)" aria-label="Conjugate">account_tree</mat-icon>
-                <mat-icon *ngIf="showExplorer$ | async" aria-label="Conjugate">grid_on</mat-icon>
+                <mat-icon *ngIf="selection.gridView" aria-label="Conjugate">account_tree</mat-icon>
+                <mat-icon *ngIf="!selection.gridView" aria-label="Conjugate">grid_on</mat-icon>
             </button>
-            <button (click)="download()" *ngIf="!(showExplorer$ | async)" class="ui-button toolbar__tool"
-                mat-icon-button matTooltip="'ww.tableviewer.conj.download-tip' | translate"
-                [matTooltipShowDelay]="showDelay.value" [matTooltipHideDelay]="hideDelay.value"
-                [matTooltipPosition]="tooltipPosition">
+            <button (click)="download()" *ngIf="!selection.gridView" class="ui-button toolbar__tool" mat-icon-button
+                matTooltip="'ww.tableviewer.conj.download-tip' | translate" [matTooltipShowDelay]="showDelay.value"
+                [matTooltipHideDelay]="hideDelay.value" [matTooltipPosition]="tooltipPosition">
                 <mat-icon aria-label="Download conjugations">get_app</mat-icon>
             </button>
             <button (click)="show_toolbar = !show_toolbar" class="ui-button toolbar__tool" mat-icon-button
@@ -49,13 +47,13 @@
             <mat-icon aria-label="Show toolbar">add_circle</mat-icon>
         </button>
     </div>
-    <div>
+    <div *ngIf="selection$ | async as selection">
         <div>
             <h4 class="desktop-only center-text margin-top-100 padding-20"
-                *ngIf="!(response$ | async) && !(showExplorer$ | async)" [ngClass]="routeAnimationsElements"
+                *ngIf="!(response$ | async) && selection.gridView" [ngClass]="routeAnimationsElements"
                 [innerHTML]="'ww.tableviewer.conj.instructions' | translate">
             </h4>
-            <h3 class="mobile-only padding-15 center-text" *ngIf="!(response$ | async) && !(showExplorer$ | async)"
+            <h3 class="mobile-only padding-15 center-text" *ngIf="!(response$ | async) && selection.gridView"
                 [innerHTML]="'ww.tableviewer.conj.instructions-mobile' | translate">
             </h3>
             <ng-template #spinner>
@@ -65,14 +63,13 @@
             </ng-template>
         </div>
 
-        <div *ngIf="chartResponse$ | async as response" [hidden]='!(showExplorer$ | async)'
-            class="full-width full-height">
+        <div *ngIf="chartResponse$ | async as response" [hidden]='selection.gridView' class="full-width full-height">
             <div>
                 <div #explorer echarts [options]="response" class="demo-chart"></div>
             </div>
         </div>
 
-        <div *ngIf="response$ | async as response; else spinner" [hidden]="showExplorer$ | async">
+        <div *ngIf="response$ | async as response; else spinner" [hidden]="!selection.gridView">
             <div id="table-container" class="rel">
                 <div class="error__container" *ngIf="isString(response)">
                     <h3 class="error__header">
