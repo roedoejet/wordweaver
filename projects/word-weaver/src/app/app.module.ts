@@ -10,6 +10,8 @@ import { SharedModule } from "./shared/shared.module";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { environment } from "../environments/environment";
 
+import { TableviewerSelectionService } from "./core/tableviewer-selection/tableviewer-selection.service";
+
 @NgModule({
   imports: [
     // angular
@@ -30,6 +32,7 @@ import { environment } from "../environments/environment";
     })
   ],
   declarations: [AppComponent],
+  providers: [TableviewerSelectionService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

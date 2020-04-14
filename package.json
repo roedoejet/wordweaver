@@ -35,6 +35,7 @@
     "format:test": "prettier projects/**/*.{ts,json,md,scss} --list-different",
     "ci": "npm run format:test && ng lint && npm run e2e && npm run build:prod -- --deploy-url /wordweaver-UI/ --base-href /wordweaver-UI/",
     "server": "node ./projects/server/server.js",
+    "analyze": "npm run build:prod -- --stats-json && webpack-bundle-analyzer ./dist/word-weaver/stats-es2015.json",
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate && node .all-contributors-html.js",
     "contributors:check": "all-contributors check",

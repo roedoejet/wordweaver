@@ -1,31 +1,32 @@
 import { Injectable } from "@angular/core";
 import { RequestParams } from "../../models/models";
+import { BehaviorSubject } from "rxjs";
 
 @Injectable({
   providedIn: "root"
 })
 export class TableviewerSelectionService {
-  selection: RequestParams = {
+  selection: BehaviorSubject<RequestParams> = new BehaviorSubject({
     root: [],
     "aff-option": [],
     patient: [],
     agent: []
-  };
+  });
   constructor() {}
 
   updateVerbs(v) {
-    this.selection["root"] = v;
+    this.selection.next({ ...this.selection.value, ...{ root: v } });
   }
 
   updateAgents(a) {
-    this.selection["agent"] = a;
+    this.selection.next({ ...this.selection.value, ...{ agent: a } });
   }
 
   updatePatients(p) {
-    this.selection["patient"] = p;
+    this.selection.next({ ...this.selection.value, ...{ patient: p } });
   }
 
   updateAffOptions(ao) {
-    this.selection["aff-option"] = ao;
+    this.selection.next({ ...this.selection.value, ...{ "aff-option": ao } });
   }
 }

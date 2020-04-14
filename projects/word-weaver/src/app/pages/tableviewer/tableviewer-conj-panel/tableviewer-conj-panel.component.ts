@@ -112,8 +112,7 @@ export class TableviewerConjPanelComponent implements OnInit {
         }
       })
     );
-    this.response$.subscribe(x => console.log(x));
-    this.chartResponse$.subscribe(x => console.log(x));
+    this.selectionService.selection.subscribe(x => console.log(x));
   }
 
   createChartData(res, order, depth) {

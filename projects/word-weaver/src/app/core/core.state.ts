@@ -14,11 +14,14 @@ import { authReducer } from "./auth/auth.reducer";
 import { RouterStateUrl } from "./router/router.state";
 import { settingsReducer } from "./settings/settings.reducer";
 import { SettingsState } from "./settings/settings.model";
+import { TableviewerState } from "./tableviewer-selection/tableviewer-selection.model";
+import { tableviewerReducer } from "./tableviewer-selection/tableviewer-selection.reducer";
 
 export const reducers: ActionReducerMap<AppState> = {
   auth: authReducer,
   settings: settingsReducer,
-  router: routerReducer
+  router: routerReducer,
+  tableviewer: tableviewerReducer
 };
 
 export const metaReducers: MetaReducer<AppState>[] = [
@@ -40,6 +43,11 @@ export const selectSettingsState = createFeatureSelector<
   SettingsState
 >("settings");
 
+export const selectTableviewerState = createFeatureSelector<
+  AppState,
+  TableviewerState
+>("tableviewer");
+
 export const selectRouterState = createFeatureSelector<
   AppState,
   RouterReducerState<RouterStateUrl>
@@ -49,4 +57,5 @@ export interface AppState {
   auth: AuthState;
   settings: SettingsState;
   router: RouterReducerState<RouterStateUrl>;
+  tableviewer: TableviewerState;
 }

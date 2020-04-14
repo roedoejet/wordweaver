@@ -2,10 +2,24 @@ import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { Verb } from "../../../models/models";
 import { VerbService } from "../../../core/core.module";
 import { TableviewerSelectionService } from "../../../core/core.module";
+import { Store, select } from "@ngrx/store";
 import { Observable } from "rxjs";
-import { debounceTime, map } from "rxjs/operators";
+import {
+  debounceTime,
+  map,
+  tap,
+  distinctUntilChanged,
+  skipWhile
+} from "rxjs/operators";
 
 import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
+
+import { actionChangeVerbs } from "../../../core/tableviewer-selection/tableviewer-selection.actions";
+import {
+  TableviewerState,
+  State
+} from "../../../core/tableviewer-selection/tableviewer-selection.model";
+import { selectTableviewer } from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
 
 @Component({
   selector: "ww-tableviewer-verb-panel",
@@ -16,70 +30,60 @@ import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 export class TableviewerVerbPanelComponent implements OnInit {
   verbs$: Observable<Verb[]> = this.verbService.verbs$;
   checkboxGroup: FormGroup = new FormGroup({});
-  checkboxPossibleValues: Observable<Verb[]>;
-  checkedValues: string[] = [];
-  increment = 1000;
-  bottomLimit = 0;
-  topLimit: number;
   viewableVerbs$: Observable<Verb[]>;
-  selection = [];
+  selection$: Observable<TableviewerState>;
   searchField: FormControl;
   verbForm: FormGroup;
   constructor(
     public verbService: VerbService,
     private fb: FormBuilder,
-    public selectionService: TableviewerSelectionService
-  ) {
-    // subscribe to search input
+    public selectionService: TableviewerSelectionService,
+    private store: Store<State>
+  ) {}
+
+  ngOnInit(): void {
     this.searchField = new FormControl();
     this.verbForm = this.fb.group({ search: this.searchField });
-    this.viewableVerbs$ = this.searchField.valueChanges.pipe(
-      debounceTime(200),
-      map(term => {
-        // Find matches
-        const matches = this.getEntriesFrom(term);
-        // Add controls
-        matches.forEach(value => {
-          this.checkboxGroup.addControl(
-            value["tag"],
-            new FormControl(this.checkedValues.indexOf(value["tag"]) !== -1)
-          );
-        });
-        // Return matches
-        return matches;
-      })
-    );
-
-    // TODO: Redux
-    // create selection observable
-    this.checkboxGroup.valueChanges.subscribe(c => {
-      c = this.filterTrue(c);
-      if (c) {
-        this.pushChanges(c);
-      }
-    });
+    // Get Verbs
+    this.verbs$
+      .pipe(
+        // Create checkbox group
+        tap(verbs =>
+          verbs.map(verb =>
+            this.checkboxGroup.addControl(verb["tag"], new FormControl(false))
+          )
+        ),
+        // Subscribe to checkbox valuechanges
+        tap(x =>
+          this.checkboxGroup.valueChanges
+            .pipe(
+              map(checkboxes =>
+                Object.keys(checkboxes).filter(k => checkboxes[k])
+              ),
+              tap(selectedVerbs => this.onVerbSelect(selectedVerbs))
+            )
+            .subscribe()
+        )
+      )
+      .subscribe(x => {
+        // change viewable verbs
+        this.viewableVerbs$ = this.searchField.valueChanges.pipe(
+          debounceTime(200),
+          map(term => this.getEntriesFrom(term))
+        );
+      });
+    // populate with store's selection
+    this.selection$ = this.store.pipe(select(selectTableviewer));
   }
 
-  ngOnInit(): void {}
-
-  // TODO: Redux
-  pushChanges(c) {
-    this.selectionService.updateVerbs(c);
-  }
-
-  // TODO: Redux
-  filterTrue(c) {
-    return Object.keys(c).filter(k => {
-      return c[k];
-    });
+  onVerbSelect(verbs) {
+    this.store.dispatch(actionChangeVerbs({ root: verbs }));
   }
 
   getEntriesFrom(term) {
-    const vbs: Verb[] = this.verbService.verbs
-      .filter(v => {
-        return this.filterEntries(v, term);
-      })
-      .slice(this.bottomLimit, this.increment);
+    const vbs: Verb[] = this.verbService.verbs.filter(v => {
+      return this.filterEntries(v, term);
+    });
     return vbs;
   }
 
@@ -87,12 +91,6 @@ export class TableviewerVerbPanelComponent implements OnInit {
     return (
       v.gloss.toLowerCase().indexOf(term.toLowerCase()) > -1 ||
       v.tag.toLowerCase().indexOf(term.toLowerCase()) > -1
-    );
-  }
-
-  remove() {
-    Object.keys(this.checkboxGroup.controls).forEach(k =>
-      this.checkboxGroup.controls[k].setValue(false)
     );
   }
 }
