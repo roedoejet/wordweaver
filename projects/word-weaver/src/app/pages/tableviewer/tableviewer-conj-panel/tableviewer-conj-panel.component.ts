@@ -282,10 +282,6 @@ export class TableviewerConjPanelComponent implements OnInit {
     return typeof val === "string";
   }
 
-  toggleExplorer() {
-    this.showExplorer$.next(!this.showExplorer$.value);
-  }
-
   download() {
     const query_args = this.conjugationService
       .createRequestUrl(this.selectionService.selection)
