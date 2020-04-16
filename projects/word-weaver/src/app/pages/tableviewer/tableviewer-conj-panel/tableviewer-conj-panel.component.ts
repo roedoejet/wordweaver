@@ -7,10 +7,7 @@ import {
 import { FormControl } from "@angular/forms";
 import { HttpClient } from "@angular/common/http";
 import { ConjugationService } from "../../../core/core.module";
-import {
-  NotificationService,
-  TableviewerSelectionService
-} from "../../../core/core.module";
+import { NotificationService } from "../../../core/core.module";
 import { EChartOption } from "echarts";
 import { Store, select } from "@ngrx/store";
 import { Observable, BehaviorSubject, Subject } from "rxjs";
@@ -64,13 +61,7 @@ export class TableviewerConjPanelComponent implements OnInit {
   // Elements
   @ViewChild("explorer") explorer;
   constructor(
-    private conjugationService: ConjugationService,
-    private selectionService: TableviewerSelectionService,
-    private http: HttpClient,
     private store: Store<State>,
-    private affixService: AffixService,
-    private pronounService: PronounService,
-    private verbService: VerbService,
     private notificationService: NotificationService
   ) {}
 

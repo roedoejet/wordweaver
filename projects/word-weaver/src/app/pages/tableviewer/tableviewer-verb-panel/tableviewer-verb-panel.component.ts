@@ -1,7 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { Verb } from "../../../models/models";
 import { VerbService } from "../../../core/core.module";
-import { TableviewerSelectionService } from "../../../core/core.module";
 import { Store, select } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { debounceTime, map, tap } from "rxjs/operators";
@@ -31,7 +30,6 @@ export class TableviewerVerbPanelComponent implements OnInit {
   constructor(
     public verbService: VerbService,
     private fb: FormBuilder,
-    public selectionService: TableviewerSelectionService,
     private store: Store<State>
   ) {}
 

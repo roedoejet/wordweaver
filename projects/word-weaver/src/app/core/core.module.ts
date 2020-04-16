@@ -80,7 +80,6 @@ import {
 import { AffixService } from "./affix/affix.service";
 import { ConjugationService } from "./conjugation/conjugation.service";
 import { PronounService } from "./pronoun/pronoun.service";
-import { TableviewerSelectionService } from "./tableviewer-selection/tableviewer-selection.service";
 import { WordmakerSelectionService } from "./wordmaker-selection/wordmaker-selection.service";
 import { VerbService } from "./verb/verb.service";
 
@@ -106,7 +105,6 @@ export {
   AffixService,
   ConjugationService,
   PronounService,
-  TableviewerSelectionService,
   WordmakerSelectionService,
   VerbService
 };

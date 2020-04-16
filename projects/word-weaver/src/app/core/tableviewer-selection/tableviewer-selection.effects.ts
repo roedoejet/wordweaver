@@ -53,6 +53,7 @@ export class TableviewerEffects {
     private http: HttpClient
   ) {}
 
+  // TODO: persist
   // persistSelection = createEffect(
   //   () =>
   //     this.actions$.pipe(
