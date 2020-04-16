@@ -28,7 +28,6 @@ import {
   actionToggleTreeViewOrder
 } from "./tableviewer-selection.actions";
 import { HttpClient, HttpParams } from "@angular/common/http";
-import { NotificationService } from "../core.module";
 import { marker } from "@biesbjerg/ngx-translate-extract-marker";
 
 export const TABLEVIEWER_SELECTION_KEY = "TABLEVIEWER";
@@ -51,7 +50,6 @@ export class TableviewerEffects {
     private actions$: Actions,
     private store: Store<State>,
     private localStorageService: LocalStorageService,
-    private notificationService: NotificationService,
     private http: HttpClient
   ) {}
 
@@ -98,12 +96,6 @@ export class TableviewerEffects {
                   actionChangeConjugations({ conjugations: conj })
                 );
               });
-          } else {
-            this.notificationService.translated(
-              marker("ww.tableviewer.notifications.error.emptyselection"),
-              {},
-              "success"
-            );
           }
         })
       ),
