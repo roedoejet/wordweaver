@@ -49,12 +49,14 @@
     </div>
     <div *ngIf="selection$ | async as selection">
         <div>
-            <h4 class="desktop-only center-text margin-top-100 padding-20"
-                *ngIf="!selection.loading && !(gridData$ | async) && selection.gridView"
+            <h3 class='center-text margin-top-50' *ngIf='selection.gridView && selection.conjugations.length === 0' [innerHTML]="'ww.tableviewer.conj.gridview' | translate"></h3>
+            <h3 class='center-text margin-top-50' *ngIf='!selection.gridView && selection.conjugations.length === 0' [innerHTML]="'ww.tableviewer.conj.treeview' | translate"></h3>
+            <h4 class="desktop-only center-text margin-top-50 padding-20"
+                *ngIf="!selection.loading && selection.conjugations.length === 0"
                 [ngClass]="routeAnimationsElements" [innerHTML]="'ww.tableviewer.conj.instructions' | translate">
             </h4>
             <h3 class="mobile-only padding-15 center-text"
-                *ngIf="!selection.loading && !(gridData$ | async) && selection.gridView"
+                *ngIf="!selection.loading && selection.conjugations.length === 0"
                 [innerHTML]="'ww.tableviewer.conj.instructions-mobile' | translate">
             </h3>
             <mat-spinner [color]="'accent'" *ngIf="selection.loading" class="centered margin-top-100"></mat-spinner>

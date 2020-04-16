@@ -90,14 +90,15 @@ export class ConjugationTreeComponent implements OnInit {
   }
 
   createChartData(tvState: TableviewerState) {
-    const chartOption = Object.assign(this.defaultChartOption, {});
+    const chartOption = Object.assign({}, this.defaultChartOption);
+    // Initialize series each time
+    chartOption.series = [];
     const conjugations = tvState.conjugations;
     const order = tvState.standardTreeOrder;
     const depth = tvState.treeDepth;
     const data = [];
     const rootNodes = [];
     let node;
-
     // Populate and merge object node
     conjugations.forEach(conjugation => {
       const v = conjugation.input.root;
@@ -133,7 +134,6 @@ export class ConjugationTreeComponent implements OnInit {
       });
       data.push(firstNode);
     });
-
     let top = 0;
     let initialTreeDepth = 0;
     if (rootNodes.length < 2) {
@@ -143,17 +143,15 @@ export class ConjugationTreeComponent implements OnInit {
         chartOption.legend["data"].push(v);
       });
     }
-    // Populate data series
     for (let j = 0; j < data.length; j++) {
       top += 20;
-      const ser = this.defaultSeries;
+      const ser = Object.assign({}, this.defaultSeries);
       ser.name = data[j]["name"];
       ser.data = [data[j]];
       ser.top = top.toString() + "%";
       ser.initialTreeDepth = initialTreeDepth;
       chartOption.series.push(ser);
     }
-    console.log(chartOption);
     return chartOption;
   }
 

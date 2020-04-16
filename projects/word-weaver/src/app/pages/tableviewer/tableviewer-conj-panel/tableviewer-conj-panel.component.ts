@@ -2,11 +2,10 @@ import {
   Component,
   OnInit,
   ChangeDetectionStrategy,
-  ViewChild,
-  ElementRef
+  ViewChild
 } from "@angular/core";
 import { FormControl } from "@angular/forms";
-import { HttpClient, HttpResponse } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { ConjugationService } from "../../../core/core.module";
 import {
   NotificationService,
@@ -14,23 +13,8 @@ import {
 } from "../../../core/core.module";
 import { EChartOption } from "echarts";
 import { Store, select } from "@ngrx/store";
-import {
-  Observable,
-  BehaviorSubject,
-  Subject,
-  fromEvent,
-  of,
-  merge,
-  EMPTY
-} from "rxjs";
-import {
-  map,
-  switchMap,
-  tap,
-  finalize,
-  skip,
-  catchError
-} from "rxjs/operators";
+import { Observable, BehaviorSubject, Subject } from "rxjs";
+import { map, tap } from "rxjs/operators";
 import { merge as _merge } from "lodash";
 import {
   actionConjugationEvent,
@@ -47,14 +31,7 @@ import {
   PronounService,
   VerbService
 } from "../../../core/core.module";
-import {
-  Response,
-  ResponseMorpheme,
-  Tier,
-  TIERS,
-  TierOptions,
-  Conjugation
-} from "../../../models/models";
+import { Response, Tier, TIERS } from "../../../models/models";
 
 import { ROUTE_ANIMATIONS_ELEMENTS } from "../../../core/core.module";
 import { marker } from "@biesbjerg/ngx-translate-extract-marker";

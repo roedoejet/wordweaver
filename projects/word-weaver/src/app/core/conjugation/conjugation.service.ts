@@ -19,7 +19,7 @@ import { selectSettings } from "../settings/settings.selectors";
 import {
   Conjugation,
   ResponseObject,
-  ResponseValue,
+  // ResponseValue,
   Response
 } from "../../models/models";
 
@@ -119,17 +119,17 @@ export class ConjugationService {
     );
   }
 
-  returnAffopts(res: Response) {
-    let affopts = [];
-    res["values"].forEach(conjugation => {
-      affopts.push(conjugation.affopt);
-    });
-    affopts = uniq(affopts);
-    affopts = affopts.map(a => {
-      return { name: a };
-    });
-    return affopts;
-  }
+  // returnAffopts(res: Response) {
+  //   let affopts = [];
+  //   res["values"].forEach(conjugation => {
+  //     affopts.push(conjugation.affopt);
+  //   });
+  //   affopts = uniq(affopts);
+  //   affopts = affopts.map(a => {
+  //     return { name: a };
+  //   });
+  //   return affopts;
+  // }
 
   returnPros(res: any, v) {
     let pronouns = [];
@@ -168,15 +168,15 @@ export class ConjugationService {
     return pronouns;
   }
 
-  returnValue(conjugation: ResponseValue) {
-    let morphemes = [conjugation.root, conjugation.pronoun].concat(
-      conjugation.affixes
-    );
-    morphemes = morphemes.sort(function(a: ResponseObject, b: ResponseObject) {
-      return a.position - b.position;
-    });
-    return morphemes.map(m => m.value).join("");
-  }
+  // returnValue(conjugation: ResponseValue) {
+  //   let morphemes = [conjugation.root, conjugation.pronoun].concat(
+  //     conjugation.affixes
+  //   );
+  //   morphemes = morphemes.sort(function(a: ResponseObject, b: ResponseObject) {
+  //     return a.position - b.position;
+  //   });
+  //   return morphemes.map(m => m.value).join("");
+  // }
 
   // Determine if object is null or has any null properties. Intended for Agent and Patient
   hasNull(target: object): boolean {
@@ -193,7 +193,7 @@ export class ConjugationService {
   }
 
   // Return 'agent' or 'patient' or both
-  determinePNType(conjugation: ResponseValue, verb_role: string): string[] {
+  determinePNType(conjugation, verb_role: string): string[] {
     const pn_roles = [];
 
     if (verb_role === "red") {

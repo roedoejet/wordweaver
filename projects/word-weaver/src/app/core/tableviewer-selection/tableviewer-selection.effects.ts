@@ -75,12 +75,7 @@ export class TableviewerEffects {
   conjugate = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(
-          actionToggleGridView,
-          actionChangeTreeViewDepth,
-          actionToggleTreeViewOrder,
-          actionConjugationEvent
-        ),
+        ofType(actionConjugationEvent),
         withLatestFrom(this.store.pipe(select(selectTableviewerState))),
         tap(([action, selection]) => {
           const queryArgs = createRequestQueryArgs(selection);
