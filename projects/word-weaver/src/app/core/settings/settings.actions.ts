@@ -27,6 +27,11 @@ export const actionSettingsChangeTheme = createAction(
   props<{ theme: string }>()
 );
 
+export const actionSettingsChangeBaseUrl = createAction(
+  "[Settings] Change Base Url",
+  props<{ baseUrl: string }>()
+);
+
 export const actionSettingsChangeAutoNightMode = createAction(
   "[Settings] Change Auto Night Mode",
   props<{ autoNightMode: boolean }>()

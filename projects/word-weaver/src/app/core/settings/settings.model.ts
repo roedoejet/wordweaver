@@ -33,6 +33,7 @@ export interface SettingsState {
   level: Level;
   highlight: Highlight;
   hour: number;
+  baseUrl: string;
 }
 
 export interface State extends AppState {

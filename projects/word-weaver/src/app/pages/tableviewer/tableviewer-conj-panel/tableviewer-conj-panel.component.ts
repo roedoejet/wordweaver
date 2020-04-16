@@ -23,9 +23,17 @@ import {
   merge,
   EMPTY
 } from "rxjs";
-import { map, switchMap, tap, finalize, skip } from "rxjs/operators";
+import {
+  map,
+  switchMap,
+  tap,
+  finalize,
+  skip,
+  catchError
+} from "rxjs/operators";
 import { merge as _merge } from "lodash";
 import {
+  actionConjugationEvent,
   actionChangeTreeViewDepth,
   actionToggleTreeViewOrder,
   actionToggleGridView
@@ -39,7 +47,14 @@ import {
   PronounService,
   VerbService
 } from "../../../core/core.module";
-import { Response } from "../../../models/models";
+import {
+  Response,
+  ResponseMorpheme,
+  Tier,
+  TIERS,
+  TierOptions,
+  Conjugation
+} from "../../../models/models";
 
 import { ROUTE_ANIMATIONS_ELEMENTS } from "../../../core/core.module";
 import { marker } from "@biesbjerg/ngx-translate-extract-marker";
@@ -68,7 +83,7 @@ export class TableviewerConjPanelComponent implements OnInit {
   depth$ = new BehaviorSubject<number>(1);
   conjugationTrigger$: Observable<any>;
   chartResponse$: Observable<EChartOption | any>;
-  response$: Observable<Response | any>;
+  gridData$: Observable<any>;
   // Elements
   @ViewChild("explorer") explorer;
   constructor(
@@ -86,43 +101,52 @@ export class TableviewerConjPanelComponent implements OnInit {
     // populate with store's selection
     this.settings$ = this.store.pipe(select(selectSettings));
     this.selection$ = this.store.pipe(select(selectTableviewer));
-    this.conjugationTrigger$ = merge(
-      this.manualConjugation$,
-      this.showExplorer$.pipe(skip(1)),
-      this.depth$.pipe(skip(1)),
-      this.order$.pipe(skip(1))
-    );
-    this.response$ = this.conjugationTrigger$.pipe(
-      switchMap(triggered => this.showExplorer$),
-      switchMap(showExplorer => {
-        if (!showExplorer) {
-          return this.conjugationService.conjugateTable(
-            this.selectionService.selection
-          );
+
+    this.gridData$ = this.selection$.pipe(
+      map(selection => {
+        if (selection.gridView && selection.conjugations.length > 0) {
+          return this.createTiers(selection.conjugations);
         } else {
-          return EMPTY;
+          return false;
         }
       })
     );
-    this.chartResponse$ = this.conjugationTrigger$.pipe(
-      switchMap(triggered => this.showExplorer$),
-      switchMap(showExplorer => {
-        if (showExplorer) {
-          let order = "PT";
-          if (this.order$.value) {
-            order = "TP";
-          }
-          return this.createChart(
-            this.selectionService.selection,
-            order,
-            this.depth$.value
-          );
-        } else {
-          return EMPTY;
-        }
-      })
-    );
-    this.selectionService.selection.subscribe(x => console.log(x));
+  }
+
+  // Return span of either value or separator with supplied classes
+  createSpan(value: string | string[] | number, classes: string[]) {
+    let joinedClasses = "";
+    if (classes) {
+      joinedClasses = classes.join(" ");
+    }
+    if (typeof value === "string") {
+      return `<span class='${joinedClasses}'>${value}</span>`;
+    }
+  }
+
+  // Create Tiers based on API
+  createTiers(conjugations: Response, tiers: Tier[] = TIERS) {
+    return conjugations.map(conjugation => {
+      const tieredConjugation = [];
+      tiers.forEach(tier => {
+        tieredConjugation.push({
+          name: tier.name,
+          options: tier.options,
+          html: conjugation.output
+            // filter empty
+            .filter(x => x[tier.key])
+            // sort by position
+            .sort(function(a, b) {
+              return a.position - b.position;
+            })
+            // create spans
+            .map(x => this.createSpan(x[tier.key], x["type"]))
+            // join 'em
+            .join(this.createSpan(tier.separator, ["separator"]))
+        });
+      });
+      return tieredConjugation;
+    });
   }
 
   onChangeTreeDepth(event) {
@@ -141,169 +165,53 @@ export class TableviewerConjPanelComponent implements OnInit {
     this.store.dispatch(actionToggleGridView({ name: "gridView" }));
   }
 
-  createChartData(res, order, depth) {
-    const data = [];
-    const verbs: any = [];
-    const chartOption: EChartOption = {
-      tooltip: {
-        show: false,
-        trigger: "item",
-        triggerOn: "mousemove"
-      },
-      toolbox: {
-        feature: {
-          saveAsImage: { title: "save", show: false }
-        }
-      },
-      legend: {
-        top: "2%",
-        left: "3%",
-        orient: "vertical",
-        data: [],
-        borderColor: "#c23531"
-      },
-      series: []
-    };
-    let node;
-    for (let conjugation of res) {
-      conjugation = conjugation.values;
-      const v = conjugation.root["tag"];
-      const t = this.affixService.getAffOption(conjugation.affopt)["gloss"];
-      const vb = this.verbService.getVerb(v);
-      let p;
-      if (vb["thematic_relation"] === "red") {
-        p = this.pronounService.getPronoun(conjugation.pronoun["agent"])[
-          "gloss"
-        ];
-      } else if (vb["thematic_relation"] === "blue") {
-        p = this.pronounService.getPronoun(conjugation.pronoun["patient"])[
-          "gloss"
-        ];
-      } else {
-        p =
-          this.pronounService.getPronoun(conjugation.pronoun["agent"])[
-            "gloss"
-          ] +
-          " > " +
-          this.pronounService.getPronoun(conjugation.pronoun["patient"])[
-            "obj_gloss"
-          ];
-      }
-      const val = this.returnValue(conjugation);
-
-      if (order === "TP") {
-        node = _merge(node, { [v]: { [t]: { [p]: val } } });
-      } else {
-        node = _merge(node, { [v]: { [p]: { [t]: val } } });
-      }
-    }
-
-    for (const verb of Object.keys(node)) {
-      verbs.push(verb);
-      const nv = { name: verb, children: [] };
-      for (const second of Object.keys(node[verb])) {
-        const ns = { name: second, children: [] };
-        for (const third of Object.keys(node[verb][second])) {
-          const nt = {
-            name: third,
-            children: [{ name: node[verb][second][third] }]
-          };
-          ns["children"].push(nt);
-        }
-        nv["children"].push(ns);
-      }
-      data.push(nv);
-    }
-
-    let top = 0;
-    let initialTreeDepth = 0;
-    if (verbs.length < 2) {
-      initialTreeDepth = depth;
-    } else {
-      verbs.forEach(v => {
-        chartOption.legend["data"].push(v);
-      });
-    }
-    for (let j = 0; j < data.length; j++) {
-      top += 20;
-      const ser = {
-        type: "tree",
-        name: data[j]["name"],
-        data: [data[j]],
-        top: top.toString() + "%",
-        left: "12%",
-        bottom: "25%",
-        right: "20%",
-        symbolSize: 7,
-        initialTreeDepth: initialTreeDepth,
-        label: {
-          normal: {
-            position: "bottom",
-            verticalAlign: "middle",
-            align: "middle"
-          }
-        },
-        leaves: {
-          label: {
-            normal: {
-              position: "top",
-              verticalAlign: "middle",
-              align: "middle"
-            }
-          }
-        },
-        expandAndCollapse: true,
-        roam: true,
-        animationDuration: 550,
-        animationDurationUpdate: 750
-      };
-      chartOption.series.push(ser);
-    }
-    return chartOption;
+  onManualConjugation(event) {
+    this.store.dispatch(actionConjugationEvent(event));
   }
 
-  returnValue(conjugation) {
-    let morphemes = [conjugation.root, conjugation.pronoun].concat(
-      conjugation.affixes
-    );
-    morphemes = morphemes.sort(function(a, b) {
-      return a.position - b.position;
-    });
-    return morphemes.map(m => m.value).join("");
-  }
-
-  createChart(tableargs, order, depth) {
-    return this.conjugationService
-      .conjugate(tableargs)
-      .pipe(map(res => this.createChartData(res, order, depth)));
-  }
-
+  // TODO: This is currently used for determining whether gridData is an error. This is fragile, and errors should be handled differently.
   isString(val) {
     return typeof val === "string";
   }
 
+  // TODO: ngrx
   download() {
-    const query_args = this.conjugationService
-      .createRequestUrl(this.selectionService.selection)
-      .toString();
-    const query_args_docx = this.conjugationService
-      .createRequestUrl(this.selectionService.selection, [
-        { param: "docx", value: "true" }
-      ])
-      .toString();
-    const url = this.conjugationService.path + "?" + query_args;
-    const docx_url = this.conjugationService.path + "?" + query_args_docx;
-    this.http.get(url).subscribe(
-      data => {
-        console.log(data);
-        window.location.href = docx_url;
-        this.updateToast(data);
-      },
-      error => {
-        console.log(error);
-        this.updateToast(false, error.status);
-      }
-    );
+    this.selection$
+      .pipe(
+        tap(selection => console.log(selection))
+        // Make args
+        // map(selection => this.conjugationService.createRequestUrl(selection).toString()),
+        // // Get Request
+        // switchMap(httpargs => {
+        //   const url = this.conjugationService.path + '?' + httpargs;
+        //   return this.http.get(url).pipe(
+        //     catchError((err) => { this.updateToast(false, err.status); return of(err) })
+        //   )
+        // }),
+        // tap(url => { window.location.href = url + '&docx=true'; this.updateToast(true) })
+      )
+      .subscribe();
+    // const query_args = this.conjugationService
+    //   .createRequestUrl(this.selectionService.selection)
+    //   .toString();
+    // const query_args_docx = this.conjugationService
+    //   .createRequestUrl(this.selectionService.selection, [
+    //     { param: "docx", value: "true" }
+    //   ])
+    //   .toString();
+    // const url = this.conjugationService.path + "?" + query_args;
+    // const docx_url = this.conjugationService.path + "?" + query_args_docx;
+    // this.http.get(url).subscribe(
+    //   data => {
+    //     console.log(data);
+    //     window.location.href = docx_url;
+    //     this.updateToast(data);
+    //   },
+    //   error => {
+    //     console.log(error);
+    //     this.updateToast(false, error.status);
+    //   }
+    // );
   }
 
   updateToast(success?, code = 200) {

@@ -5,6 +5,7 @@ import { Actions, getEffectsMetadata } from "@ngrx/effects";
 import { TestScheduler } from "rxjs/testing";
 import { Store } from "@ngrx/store";
 import { of } from "rxjs";
+import { environment } from "../../../environments/environment";
 
 import {
   AnimationsService,
@@ -62,6 +63,7 @@ describe("SettingsEffects", () => {
         nightTheme: "default",
         autoNightMode: false,
         stickyHeader: false,
+        baseUrl: environment.base + environment.prefix,
         testApi: false,
         level: {
           gloss: false,

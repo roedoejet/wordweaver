@@ -2,7 +2,7 @@
     <div *ngIf="show_toolbar" class="panel__header panel__header--tableview">
         <h5 class="panel__title">{{ 'ww.tableviewer.conj.title' | translate }}</h5>
         <div class="panel__toolbar toolbar" *ngIf="selection$ | async as selection">
-            <button (click)='manualConjugation$.next("clicked")' class="conjugate mat-accent" mat-raised-button>
+            <button (click)='onManualConjugation($event)' class="conjugate mat-accent" mat-raised-button>
                 {{ 'ww.tableviewer.conj.conjugate' | translate }}
             </button>
             <select *ngIf="!selection.gridView" (change)="onChangeTreeDepth($event)" class="toolbar__tool ui-button"
@@ -19,16 +19,16 @@
                 [matTooltipPosition]="tooltipPosition">
                 <mat-icon aria-label="Switch pronoun and temp">swap_horiz</mat-icon>
             </button>
+            <button (click)="download()" *ngIf="selection.gridView" class="ui-button toolbar__tool" mat-icon-button
+                [matTooltip]="'ww.tableviewer.conj.download-tip' | translate" [matTooltipShowDelay]="showDelay.value"
+                [matTooltipHideDelay]="hideDelay.value" [matTooltipPosition]="tooltipPosition">
+                <mat-icon aria-label="Download conjugations">get_app</mat-icon>
+            </button>
             <button class="ui-button toolbar__tool" mat-icon-button (click)="onToggleGridView()"
                 [matTooltip]="'ww.tableviewer.conj.explorer-tip' | translate" [matTooltipShowDelay]="showDelay.value"
                 [matTooltipHideDelay]="hideDelay.value" [matTooltipPosition]="tooltipPosition">
                 <mat-icon *ngIf="selection.gridView" aria-label="Conjugate">account_tree</mat-icon>
                 <mat-icon *ngIf="!selection.gridView" aria-label="Conjugate">grid_on</mat-icon>
-            </button>
-            <button (click)="download()" *ngIf="!selection.gridView" class="ui-button toolbar__tool" mat-icon-button
-                matTooltip="'ww.tableviewer.conj.download-tip' | translate" [matTooltipShowDelay]="showDelay.value"
-                [matTooltipHideDelay]="hideDelay.value" [matTooltipPosition]="tooltipPosition">
-                <mat-icon aria-label="Download conjugations">get_app</mat-icon>
             </button>
             <button (click)="show_toolbar = !show_toolbar" class="ui-button toolbar__tool" mat-icon-button
                 [matTooltip]="'ww.tableviewer.conj.hide-toolbar-tip' | translate"
@@ -50,37 +50,33 @@
     <div *ngIf="selection$ | async as selection">
         <div>
             <h4 class="desktop-only center-text margin-top-100 padding-20"
-                *ngIf="!(response$ | async) && selection.gridView" [ngClass]="routeAnimationsElements"
-                [innerHTML]="'ww.tableviewer.conj.instructions' | translate">
+                *ngIf="!selection.loading && !(gridData$ | async) && selection.gridView"
+                [ngClass]="routeAnimationsElements" [innerHTML]="'ww.tableviewer.conj.instructions' | translate">
             </h4>
-            <h3 class="mobile-only padding-15 center-text" *ngIf="!(response$ | async) && selection.gridView"
+            <h3 class="mobile-only padding-15 center-text"
+                *ngIf="!selection.loading && !(gridData$ | async) && selection.gridView"
                 [innerHTML]="'ww.tableviewer.conj.instructions-mobile' | translate">
             </h3>
-            <ng-template #spinner>
-                <ng-container *ngIf="loading && !(response$ | async)">
-                    <mat-spinner class="centered margin-top-100"></mat-spinner>
-                </ng-container>
-            </ng-template>
+            <mat-spinner [color]="'accent'" *ngIf="selection.loading" class="centered margin-top-100"></mat-spinner>
         </div>
 
-        <div *ngIf="chartResponse$ | async as response" [hidden]='selection.gridView' class="full-width full-height">
-            <div>
-                <div #explorer echarts [options]="response" class="demo-chart"></div>
-            </div>
+        <div *ngIf="!selection.gridView && selection.conjugations" [hidden]='selection.gridView'
+            class="full-width full-height">
+            <ww-conjugation-tree></ww-conjugation-tree>
         </div>
 
-        <div *ngIf="response$ | async as response; else spinner" [hidden]="!selection.gridView">
+        <div *ngIf="!selection.loading && (gridData$ | async) as gridData;" [hidden]="!selection.gridView">
             <div id="table-container" class="rel">
-                <div class="error__container" *ngIf="isString(response)">
+                <div class="error__container" *ngIf="isString(gridData)">
                     <h3 class="error__header">
                         {{ 'ww.tableviewer.conj.error.title' | translate }}
                     </h3>
-                    <p class="error__message">{{ response }}</p>
+                    <p class="error__message">{{ gridData }}</p>
                     <p class="error__message">
                         {{ 'ww.tableviewer.conj.error.message' | translate }}
                     </p>
                 </div>
-                <table class="full-width abs" *ngIf="!isString(response)">
+                <table class="full-width abs" *ngIf="!isString(gridData)">
                     <thead>
                         <tr>
                             <th>
@@ -92,43 +88,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="b--bottom" *ngFor="let conjugation of response">
-                            <td class="center-text">
-                                <h3 id="main">
-                                    <span *ngFor="let item of conjugation['main']"
-                                        class="{{ item['classes'] }} no-padding header-text"
-                                        [ngClass]="{highlight: (settings?.highlight)[item['type']] || (settings?.highlight)[item['classes']]}">{{ item["value"] }}</span>
-                                </h3>
-                                <h5 id="main" *ngIf="settings.level.breakdown">
-                                    <span *ngFor="let item of conjugation['main']"
-                                        class="{{ item['classes'] }} no-padding header-text"
-                                        [ngClass]="{highlight: (settings?.highlight)[item['type']] || (settings?.highlight)[item['classes']]}">{{ item["value"] }}<span
-                                            class="gloss-dividers header-text"
-                                            *ngIf="conjugation['main'].indexOf(item) < conjugation['main'].length - 1">-</span>
-                                    </span>
-                                </h5>
-                                <h5 id="main" *ngIf="settings.level.gloss">
-                                    <span *ngFor="let item of conjugation['secondary']"
-                                        class="{{ item['classes'] }} no-padding header-text" [ngClass]="{
-                        highlight:
-                          (settings?.highlight)[item['type']] ||
-                          (settings?.highlight)[item['classes']]}">{{ item["value"] | decapitalize }}<span
-                                            class="gloss-dividers header-text"
-                                            *ngIf="conjugation['secondary'].indexOf(item) < conjugation['secondary'].length - 1">-</span>
-                                    </span>
-                                </h5>
+                        <tr class="b--bottom" *ngFor="let conjugation of gridData">
+                            <td class='center-text'>
+                                <div *ngFor="let tier of conjugation; let i = index">
+                                    <h3 *ngIf='tier.options.language === "L1" && i === 0' [innerHTML]='tier.html'></h3>
+                                    <h5 *ngIf='settings.level[tier.name] && tier.options.language === "L1" && i !== 0'
+                                        [innerHTML]='tier.html'></h5>
+                                </div>
                             </td>
-                            <td class="center-text">
-                                <h4 id="main" *ngIf="settings.level.translation" class="no-padding header-text">
-                                    <span class="translation">{{ conjugation["translation"] }}</span></h4>
-                                <h5 id="main" *ngIf="settings.level['breakdown-translation']">
-                                    <span *ngFor="let item of conjugation['ternary']"
-                                        class="{{ item['classes'] }} no-padding header-text"
-                                        [ngClass]="{highlight: (settings?.highlight)[item['type']] || (settings?.highlight)[item['classes']] }">{{ item["value"] | decapitalize }}
-                                        <span class="gloss-dividers header-text"
-                                            *ngIf="conjugation['ternary'].indexOf(item) < conjugation['ternary'].length - 1">-</span>
-                                    </span>
-                                </h5>
+                            <td class='center-text'
+                                *ngIf="settings.level['breakdown-translation'] || settings.level.translation">
+                                <div *ngFor="let tier of conjugation; let i = index">
+                                    <h3 *ngIf='settings.level[tier.name] && tier.options.language === "L2" && i === 0'
+                                        [innerHTML]='tier.html'></h3>
+                                    <h5 *ngIf='settings.level[tier.name] && tier.options.language === "L2" && i !== 0'
+                                        [innerHTML]='tier.html'></h5>
+                                </div>
                             </td>
                         </tr>
                     </tbody>

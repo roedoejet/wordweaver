@@ -7,6 +7,7 @@ import { TableviewerVerbPanelComponent } from "./tableviewer-verb-panel/tablevie
 import { SharedModule } from "../../shared/shared.module";
 import { TableviewerRoutingModule } from "./tableviewer-routing.module";
 import { NgxEchartsModule } from "ngx-echarts";
+import { ConjugationTreeComponent } from "./conjugation-tree/conjugation-tree.component";
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { NgxEchartsModule } from "ngx-echarts";
     TableviewerConjPanelComponent,
     TableviewerPersPanelComponent,
     TableviewerTempPanelComponent,
-    TableviewerVerbPanelComponent
+    TableviewerVerbPanelComponent,
+    ConjugationTreeComponent
   ],
   imports: [SharedModule, TableviewerRoutingModule, NgxEchartsModule]
 })

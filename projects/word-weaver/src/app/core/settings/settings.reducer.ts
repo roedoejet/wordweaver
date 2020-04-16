@@ -10,9 +10,11 @@ import {
   actionSettingsChangeTestApi,
   actionSettingsChangeTheme,
   actionSettingsChangeLevel,
-  actionSettingsChangeHighlight
+  actionSettingsChangeHighlight,
+  actionSettingsChangeBaseUrl
 } from "./settings.actions";
 import { Action, createReducer, on } from "@ngrx/store";
+import { environment } from "../../../environments/environment";
 
 export const initialState: SettingsState = {
   language: "en",
@@ -23,6 +25,7 @@ export const initialState: SettingsState = {
   pageAnimations: true,
   pageAnimationsDisabled: false,
   elementsAnimations: true,
+  baseUrl: environment.base + environment.prefix,
   testApi: false,
   level: {
     gloss: false,
@@ -52,6 +55,7 @@ const reducer = createReducer(
     actionSettingsChangeAnimationsPage,
     actionSettingsChangeAnimationsElements,
     actionSettingsChangeHour,
+    actionSettingsChangeBaseUrl,
     (state, action) => ({ ...state, ...action })
   ),
   on(

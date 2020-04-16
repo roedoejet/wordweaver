@@ -49,7 +49,7 @@ export class ConjugationService {
     let params = new HttpParams();
     const agents = tableargs["agent"];
     const patients = tableargs["patient"];
-    const afftags = tableargs["aff-option"];
+    const afftags = tableargs["affopt"];
     const verbtags = tableargs["root"];
     if (agents) {
       agents.forEach(agent => {
@@ -208,7 +208,7 @@ export class ConjugationService {
   }
 
   // This is an old recycled function and is very awkward. Should be changed.
-  createTiers(conjugations: Response[]) {
+  createTiers(conjugations) {
     return conjugations.map(conjugation => {
       const index = conjugations.indexOf(conjugation);
       const values = conjugation.values;
@@ -248,7 +248,7 @@ export class ConjugationService {
   }
 
   createTier(conjugation, verb_key_obj, pn_key_obj, aff_key_obj) {
-    // console.log(conjugation)
+    console.log(conjugation);
     // use key_obj whose condition key is true
     const verb_role = this.verbService.getVerb(conjugation["root"]["tag"])[
       "thematic_relation"

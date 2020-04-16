@@ -1,3 +1,5 @@
+import { Level } from "../core/settings/settings.model";
+
 export interface Affix {
   gloss: string;
   morphemes: { value: string; position: Number }[];
@@ -43,6 +45,13 @@ export interface OptionalParam {
   value: string;
 }
 
+export interface ConjugationInput {
+  root: string;
+  "aff-option": string;
+  agent: string;
+  patient: string;
+}
+
 export interface RequestParams {
   root: string[];
   "aff-option": string[];
@@ -51,34 +60,68 @@ export interface RequestParams {
   optional?: OptionalParam[];
 }
 
-export interface ResponseObject {
+export interface ResponseMorpheme {
   position: number;
   value: string;
-  tag?: string;
-  type?: string;
-  agent?: string;
-  patient?: string;
+  gloss: string;
+  english: string;
+  type: string[];
 }
 
-export interface ResponseValue {
-  affixes: ResponseObject;
-  pronoun: ResponseObject;
-  root: ResponseObject;
-  affopt: string;
+// Tier name must be either the display (default) tier, or one of the toggleable levels in the settings
+export type TierNames = "display" | keyof Level;
+
+export interface Tier {
+  name: TierNames;
+  separator: string;
+  key: keyof ResponseMorpheme;
+  position: number;
+  options: TierOptions;
 }
 
-export interface Response {
-  values: ResponseValue[];
-  tag?: object;
-  marker?: string;
-  plain_text?: string;
-  translation?: string;
+export interface TierOptions {
+  language: "L1" | "L2";
+  showName?: boolean;
 }
 
-export interface Conjugation extends Object {
-  affixes: Affix[];
-  aff_option: AffOption;
-  agent: Pronoun | null;
-  patient: Pronoun | null;
-  verb: Verb;
+const _defaultOptions: TierOptions = { language: "L1", showName: false };
+
+export const TIERS: Tier[] = [
+  {
+    name: "display",
+    key: "value",
+    position: 0,
+    separator: "",
+    options: _defaultOptions
+  },
+  {
+    name: "breakdown",
+    key: "value",
+    position: 1,
+    separator: "-",
+    options: _defaultOptions
+  },
+  {
+    name: "gloss",
+    key: "gloss",
+    position: 2,
+    separator: "-",
+    options: _defaultOptions
+  },
+  {
+    name: "translation",
+    key: "english",
+    position: 3,
+    separator: "",
+    options: { language: "L2", showName: false }
+  }
+];
+
+export type Conjugation = ResponseMorpheme[];
+
+export interface ResponseObject {
+  input: ConjugationInput;
+  output: Conjugation;
 }
+
+export type Response = ResponseObject[];

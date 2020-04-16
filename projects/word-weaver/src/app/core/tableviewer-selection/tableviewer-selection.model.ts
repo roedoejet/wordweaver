@@ -1,4 +1,4 @@
-import { AffOption, Conjugation, Pronoun, Verb } from "../../models/models";
+import { AffOption, Pronoun, Verb, Response } from "../../models/models";
 import { AppState } from "../core.module";
 
 export interface TableviewerState {
@@ -9,7 +9,8 @@ export interface TableviewerState {
   gridView: boolean;
   treeDepth: TableviewerTreeDepth;
   standardTreeOrder: boolean;
-  conjugations: Conjugation[];
+  conjugations: Response;
+  loading: boolean;
 }
 
 export interface State extends AppState {

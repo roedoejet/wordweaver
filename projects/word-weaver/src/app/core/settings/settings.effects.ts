@@ -29,7 +29,8 @@ import {
   actionSettingsChangeTestApi,
   actionSettingsChangeTheme,
   actionSettingsChangeStickyHeader,
-  actionSettingsChangeHour
+  actionSettingsChangeHour,
+  actionSettingsChangeBaseUrl
 } from "./settings.actions";
 import {
   selectEffectiveTheme,
@@ -38,6 +39,7 @@ import {
   selectElementsAnimations
 } from "./settings.selectors";
 import { State } from "./settings.model";
+import { environment } from "../../../environments/environment";
 
 export const SETTINGS_KEY = "SETTINGS";
 
@@ -45,6 +47,8 @@ const INIT = of("ww-init-effect-trigger");
 
 @Injectable()
 export class SettingsEffects {
+  defaultBaseUrl = environment.base + environment.prefix;
+  testBaseUrl = environment.base + environment.test_prefix;
   constructor(
     private actions$: Actions,
     private store: Store<State>,
@@ -82,6 +86,27 @@ export class SettingsEffects {
         tap(([action, settings]) =>
           this.localStorageService.setItem(SETTINGS_KEY, settings)
         )
+      ),
+    { dispatch: false }
+  );
+
+  updateBaseUrl = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(actionSettingsChangeTestApi),
+        withLatestFrom(this.store.pipe(select(selectSettingsState))),
+        tap(([action, settings]) => {
+          console.log(settings.testApi);
+          if (settings.testApi) {
+            this.store.dispatch(
+              actionSettingsChangeBaseUrl({ baseUrl: this.testBaseUrl })
+            );
+          } else {
+            this.store.dispatch(
+              actionSettingsChangeBaseUrl({ baseUrl: this.defaultBaseUrl })
+            );
+          }
+        })
       ),
     { dispatch: false }
   );
