@@ -13,7 +13,7 @@ import { Action, createReducer, on, ActionReducer } from "@ngrx/store";
 import { TableviewerState } from "./tableviewer-selection.model";
 
 export const initialState: TableviewerState = {
-  "aff-option": [],
+  option: [],
   agent: [],
   patient: [],
   root: [],

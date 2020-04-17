@@ -24,7 +24,7 @@ export const actionChangePatient = createAction(
 
 export const actionChangeAffOption = createAction(
   "[Wordmaker] Change Selected Affix Option",
-  props<{ "aff-option": AffOption }>()
+  props<{ option: AffOption }>()
 );
 
 export const actionConjugationEvent = createAction(

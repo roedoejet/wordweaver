@@ -20,7 +20,7 @@ export const environment = {
     messagingSenderId: "568985112547",
     appId: "1:568985112547:web:525d184b31008b60"
   },
-  base: `//localhost:5000`,
+  base: `//localhost:5200`,
   prefix: `/api/v1/`,
   test_prefix: `/api/v2/`,
   versions: {

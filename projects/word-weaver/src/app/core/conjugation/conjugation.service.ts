@@ -49,7 +49,7 @@ export class ConjugationService {
     let params = new HttpParams();
     const agents = tableargs["agent"];
     const patients = tableargs["patient"];
-    const afftags = tableargs["affopt"];
+    const afftags = tableargs["option"];
     const verbtags = tableargs["root"];
     if (agents) {
       agents.forEach(agent => {
@@ -68,7 +68,7 @@ export class ConjugationService {
     if (afftags) {
       afftags.forEach(afftag => {
         if (afftag) {
-          params = params.append("aff-option", afftag);
+          params = params.append("option", afftag);
         }
       });
     }
@@ -122,7 +122,7 @@ export class ConjugationService {
   // returnAffopts(res: Response) {
   //   let affopts = [];
   //   res["values"].forEach(conjugation => {
-  //     affopts.push(conjugation.affopt);
+  //     affopts.push(conjugation.option);
   //   });
   //   affopts = uniq(affopts);
   //   affopts = affopts.map(a => {
@@ -241,7 +241,7 @@ export class ConjugationService {
         ),
         translation: conjugations[index]["translation"],
         error: this.errorTier,
-        affopt: values["affopt"],
+        option: values["option"],
         pronoun: values["pronoun"]
       };
     });

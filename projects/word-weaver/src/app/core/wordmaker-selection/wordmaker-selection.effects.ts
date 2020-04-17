@@ -31,7 +31,7 @@ export const WORDMAKER_SELECTION_KEY = "WORDMAKER";
 
 export function createRequestQueryArgs(selection) {
   const params = new URLSearchParams();
-  ["aff-option", "agent", "patient", "root"].forEach(x => {
+  ["option", "agent", "patient", "root"].forEach(x => {
     selection[x].forEach(y => {
       if (y.tag) {
         params.append(x, y.tag);

@@ -18,7 +18,7 @@
     <div class='panel__content--large' *ngIf="temps$ | async as temps">
         <div class="pwidth-50--desktop pwidth-100--mobile centered" *ngIf='temps.length > 0'>
             <mat-chip-list>
-                <mat-chip (click)="onChipClick(temp.values.affopt)" class="bg-white color-black border-accent"
+                <mat-chip (click)="onChipClick(temp.values.option)" class="bg-white color-black border-accent"
                     *ngFor="let temp of temps">{{ temp.translation }}</mat-chip>
             </mat-chip-list>
         </div>

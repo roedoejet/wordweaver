@@ -2,7 +2,7 @@ import { AffOption, Pronoun, Verb, Response } from "../../models/models";
 import { AppState } from "../core.module";
 
 export interface TableviewerState {
-  "aff-option": AffOption[];
+  option: AffOption[];
   agent: Pronoun[];
   patient: Pronoun[];
   root: Verb[];

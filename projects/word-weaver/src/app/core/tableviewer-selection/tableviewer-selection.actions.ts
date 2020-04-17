@@ -26,7 +26,7 @@ export const actionChangePatients = createAction(
 
 export const actionChangeAffOptions = createAction(
   "[Tableviewer] Change Selected Affix Options",
-  props<{ "aff-option": AffOption[] }>()
+  props<{ option: AffOption[] }>()
 );
 
 export const actionToggleGridView = createAction(

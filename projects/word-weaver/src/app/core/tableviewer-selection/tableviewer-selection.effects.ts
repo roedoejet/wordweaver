@@ -34,7 +34,7 @@ export const TABLEVIEWER_SELECTION_KEY = "TABLEVIEWER";
 
 export function createRequestQueryArgs(selection) {
   const params = new URLSearchParams();
-  ["aff-option", "agent", "patient", "root"].forEach(x => {
+  ["option", "agent", "patient", "root"].forEach(x => {
     selection[x].forEach(y => {
       if (y.tag) {
         params.append(x, y.tag);
@@ -83,6 +83,7 @@ export class TableviewerEffects {
             this.store
               .pipe(
                 select(selectSettingsState),
+                tap(x => console.log(x.baseUrl)),
                 switchMap(settings =>
                   this.http
                     .get(

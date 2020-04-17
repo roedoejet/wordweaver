@@ -102,7 +102,7 @@ export class ConjugationTreeComponent implements OnInit {
     // Populate and merge object node
     conjugations.forEach(conjugation => {
       const v = conjugation.input.root;
-      const t = this.affixService.getAffOption(conjugation.input["aff-option"])[
+      const t = this.affixService.getAffOption(conjugation.input["option"])[
         "gloss"
       ];
       const p = conjugation.output

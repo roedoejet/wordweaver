@@ -10,7 +10,7 @@ import { AffOption, Affix } from "../../models/models";
 })
 export class AffixService {
   allAffixCombos = new Observable<AffOption[]>();
-  path = environment.base + environment.prefix + `aff-options`;
+  path = environment.base + environment.prefix + `options`;
   affix_path = environment.base + environment.prefix + `affixes`;
   affixes;
   affixoptions;

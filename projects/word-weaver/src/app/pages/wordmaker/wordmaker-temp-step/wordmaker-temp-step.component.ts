@@ -48,7 +48,7 @@ export class WordmakerTempStepComponent implements OnInit {
             (a, [k, v]) => (v == null ? a : { ...a, [k]: [v.tag] }),
             {}
           );
-          args["aff-option"] = [];
+          args["option"] = [];
           return this.conjugationService.conjugate(args);
         } else {
           return EMPTY;

@@ -10,7 +10,7 @@ import { Action, createReducer, on, ActionReducer } from "@ngrx/store";
 import { WordmakerState } from "./wordmaker-selection.model";
 
 export const initialState: WordmakerState = {
-  "aff-option": null,
+  option: null,
   agent: null,
   patient: null,
   root: null,

@@ -4,7 +4,7 @@ import { BehaviorSubject } from "rxjs";
 
 interface WordMakerSelection {
   root: Verb;
-  "aff-option": AffOption;
+  option: AffOption;
   patient: Pronoun;
   agent: Pronoun;
 }
@@ -15,10 +15,10 @@ interface WordMakerSelection {
 export class WordmakerSelectionService {
   selection: {
     root: Verb;
-    "aff-option": AffOption;
+    option: AffOption;
     patient: Pronoun;
     agent: Pronoun;
-  } = { root: null, "aff-option": null, patient: null, agent: null };
+  } = { root: null, option: null, patient: null, agent: null };
   selection$ = new BehaviorSubject(this.selection);
   constructor() {}
 
@@ -38,7 +38,7 @@ export class WordmakerSelectionService {
   }
 
   updateAffOption(ao) {
-    this.selection["aff-option"] = ao;
+    this.selection["option"] = ao;
     this.selection$.next(this.selection);
   }
 }

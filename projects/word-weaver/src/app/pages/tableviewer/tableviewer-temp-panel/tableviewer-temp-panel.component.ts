@@ -28,8 +28,6 @@ export class TableviewerTempPanelComponent implements OnInit {
   }
 
   onAffOptionSelect(affoptions) {
-    this.store.dispatch(
-      actionChangeAffOptions({ "aff-option": affoptions.value })
-    );
+    this.store.dispatch(actionChangeAffOptions({ option: affoptions.value }));
   }
 }

@@ -47,14 +47,14 @@ export interface OptionalParam {
 
 export interface ConjugationInput {
   root: string;
-  "aff-option": string;
+  option: string;
   agent: string;
   patient: string;
 }
 
 export interface RequestParams {
   root: string[];
-  "aff-option": string[];
+  option: string[];
   agent: string[];
   patient: string[];
   optional?: OptionalParam[];
