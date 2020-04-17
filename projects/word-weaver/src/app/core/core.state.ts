@@ -16,12 +16,15 @@ import { settingsReducer } from "./settings/settings.reducer";
 import { SettingsState } from "./settings/settings.model";
 import { TableviewerState } from "./tableviewer-selection/tableviewer-selection.model";
 import { tableviewerReducer } from "./tableviewer-selection/tableviewer-selection.reducer";
+import { WordmakerState } from "./wordmaker-selection/wordmaker-selection.model";
+import { wordmakerReducer } from "./wordmaker-selection/wordmaker-selection.reducer";
 
 export const reducers: ActionReducerMap<AppState> = {
   auth: authReducer,
   settings: settingsReducer,
   router: routerReducer,
-  tableviewer: tableviewerReducer
+  tableviewer: tableviewerReducer,
+  wordmaker: wordmakerReducer
 };
 
 export const metaReducers: MetaReducer<AppState>[] = [
@@ -48,6 +51,11 @@ export const selectTableviewerState = createFeatureSelector<
   TableviewerState
 >("tableviewer");
 
+export const selectWordmakerState = createFeatureSelector<
+  AppState,
+  WordmakerState
+>("wordmaker");
+
 export const selectRouterState = createFeatureSelector<
   AppState,
   RouterReducerState<RouterStateUrl>
@@ -58,4 +66,5 @@ export interface AppState {
   settings: SettingsState;
   router: RouterReducerState<RouterStateUrl>;
   tableviewer: TableviewerState;
+  wordmaker: WordmakerState;
 }

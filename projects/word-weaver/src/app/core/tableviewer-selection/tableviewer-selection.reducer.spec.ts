@@ -10,7 +10,7 @@ import {
   actionChangeVerbs
 } from "./tableviewer-selection.actions";
 
-describe("SettingsReducer", () => {
+describe("TableviewerReducer", () => {
   it("should return default state", () => {
     const action = {} as any;
     const state = tableviewerReducer(undefined, action);
