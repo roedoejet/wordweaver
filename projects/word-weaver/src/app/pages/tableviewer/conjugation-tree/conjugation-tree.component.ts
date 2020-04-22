@@ -13,6 +13,7 @@ import { map, switchMap, tap, distinctUntilChanged } from "rxjs/operators";
 import { TableviewerState } from "../../../core/tableviewer-selection/tableviewer-selection.model";
 import { AffixService } from "../../../core/affix/affix.service";
 import { merge as _merge } from "lodash";
+import { selectThemeColors } from "../../../core/settings/settings.selectors";
 
 @Component({
   selector: "ww-conjugation-tree",
@@ -25,7 +26,6 @@ export class ConjugationTreeComponent implements OnInit {
   defaultChartOption: EChartOption;
   defaultSeries: any;
   selection$: Observable<TableviewerState>;
-  @Input() color$: Observable<any>;
   constructor(private store: Store, private affixService: AffixService) {}
 
   ngOnInit(): void {
@@ -94,7 +94,8 @@ export class ConjugationTreeComponent implements OnInit {
     this.options$ = this.selection$.pipe(
       switchMap(selection => {
         if (selection.conjugations.length > 0) {
-          return this.color$.pipe(
+          return this.store.select(selectThemeColors).pipe(
+            tap(color => console.log(color)),
             map(color =>
               this.createChartData(selection, {
                 primary: this.rgbToHex(color.primary),

@@ -34,6 +34,10 @@ export interface SettingsState {
   highlight: Highlight;
   hour: number;
   baseUrl: string;
+  colors: {
+    primary: string;
+    accent: string;
+  };
 }
 
 export interface State extends AppState {

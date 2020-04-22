@@ -66,13 +66,13 @@
                 *ngIf="!selection.loading && selection.conjugations.length === 0"
                 [innerHTML]="'ww.tableviewer.conj.instructions-mobile' | translate">
             </h3>
-            <mat-spinner [color]="'accent'" *ngIf="selection.loading" class="centered margin-top-100"></mat-spinner>
+            <mat-spinner [color]="'accent'" *ngIf="selection.loading && selection.gridView" class="centered margin-top-100"></mat-spinner>
         </div>
 
         <div class='panel__tree__container'>
             <div *ngIf="!selection.gridView && selection.conjugations" [hidden]='selection.gridView'
                 class="full-width full-height">
-                <ww-conjugation-tree [color$]='chartColor$'></ww-conjugation-tree>
+                <ww-conjugation-tree></ww-conjugation-tree>
             </div>
         </div>
 

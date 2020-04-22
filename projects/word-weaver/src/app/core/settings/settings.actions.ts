@@ -27,6 +27,11 @@ export const actionSettingsChangeTheme = createAction(
   props<{ theme: string }>()
 );
 
+export const actionSettingsChangeThemeColors = createAction(
+  "[Settings] Change Theme Colors",
+  props<{ primary: string; accent: string }>()
+);
+
 export const actionSettingsChangeBaseUrl = createAction(
   "[Settings] Change Base Url",
   props<{ baseUrl: string }>()

@@ -33,6 +33,7 @@ import { Response, Tier, TIERS } from "../../../models/models";
 
 import { ROUTE_ANIMATIONS_ELEMENTS } from "../../../core/core.module";
 import { marker } from "@biesbjerg/ngx-translate-extract-marker";
+import { actionSettingsChangeThemeColors } from "../../../core/settings/settings.actions";
 
 @Component({
   selector: "ww-tableviewer-conj-panel",
@@ -59,10 +60,6 @@ export class TableviewerConjPanelComponent implements OnInit {
   conjugationTrigger$: Observable<any>;
   chartResponse$: Observable<EChartOption | any>;
   gridData$: Observable<any>;
-  chartColor$: BehaviorSubject<object> = new BehaviorSubject<object>({
-    primary: "rgb(255, 255, 255)",
-    accent: "rgb(255, 255, 255)"
-  });
   // Elements
   @ViewChild("header") header;
   @ViewChild("conjugate") conjugateBtn;
@@ -91,14 +88,13 @@ export class TableviewerConjPanelComponent implements OnInit {
   ngAfterViewInit() {
     // Extremely hacky way of getting ngx-echarts to style graph nodes and edges properly with themes.
     // This should be changed once ngx-echarts is updated to handle this internally.
-    this.chartColor$.next({
-      primary: getComputedStyle(this.header.nativeElement).getPropertyValue(
-        "color"
-      ),
-      accent: getComputedStyle(
-        this.conjugateBtn._elementRef.nativeElement
-      ).getPropertyValue("background-color")
-    });
+    const primary = getComputedStyle(
+      this.header.nativeElement
+    ).getPropertyValue("color");
+    const accent = getComputedStyle(
+      this.conjugateBtn._elementRef.nativeElement
+    ).getPropertyValue("background-color");
+    this.store.dispatch(actionSettingsChangeThemeColors({ primary, accent }));
   }
 
   // Return span of either value or separator with supplied classes

@@ -23,6 +23,11 @@ export const selectTheme = createSelector(
   settings => settings.theme
 );
 
+export const selectThemeColors = createSelector(
+  selectSettings,
+  settings => settings.colors
+);
+
 export const selectPageAnimations = createSelector(
   selectSettings,
   settings => settings.pageAnimations

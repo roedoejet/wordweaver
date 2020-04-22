@@ -11,7 +11,8 @@ import {
   actionSettingsChangeTheme,
   actionSettingsChangeLevel,
   actionSettingsChangeHighlight,
-  actionSettingsChangeBaseUrl
+  actionSettingsChangeBaseUrl,
+  actionSettingsChangeThemeColors
 } from "./settings.actions";
 import { Action, createReducer, on } from "@ngrx/store";
 import { environment } from "../../../environments/environment";
@@ -27,6 +28,10 @@ export const initialState: SettingsState = {
   elementsAnimations: true,
   baseUrl: environment.base + environment.prefix,
   testApi: false,
+  colors: {
+    primary: "rgb(255, 255, 255)",
+    accent: "rgb(255, 255, 255)"
+  },
   level: {
     gloss: false,
     breakdown: false,
@@ -66,6 +71,15 @@ const reducer = createReducer(
       pageAnimations: false
     })
   ),
+  on(actionSettingsChangeThemeColors, (state, action) => {
+    return {
+      ...state,
+      colors: {
+        ...state.colors,
+        ...{ primary: action.primary, accent: action.accent }
+      }
+    };
+  }),
   on(actionSettingsChangeHighlight, (state, action) => {
     const newNestedState = {};
     newNestedState[action.key] = action.checked;
