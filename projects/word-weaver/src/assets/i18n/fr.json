@@ -4,13 +4,16 @@
       "slogan": "Créez rapidement des histoires interactives en 5 étapes faciles",
       "text": "<p> Voici où devrait aller votre texte sur le projet. </p>"
     },
+    "error": {
+      "dev": "Hm, quelque chose s'est mal passé, veuillez vérifier la console.",
+      "general": "Oups, une erreur s'est produite."
+    },
     "footer": {
       "changelog": "Afficher le journal des changements"
     },
     "language": "Kanyen'kéha (échantillon)",
     "menu": {
       "about": "À propos",
-      "info": "Info",
       "settings": "Paramètres",
       "tableviewer": "Table Viewer",
       "wordmaker": "Word Maker"
@@ -47,10 +50,10 @@
         "dark": "Foncé",
         "fun": "Amusement",
         "light": "Lumière",
-        "purple-light": "Violet clair",
-        "purple-dark": "Violet foncé",
         "night-mode": "Mode nuit automatique (de 21h00 à 7h00)",
         "placeholder": "Thème de couleur",
+        "purple-dark": "Violet foncé",
+        "purple-light": "Violet clair",
         "sticky-header": "Entête fixe",
         "title": "Thèmes"
       },
@@ -60,17 +63,26 @@
       "conj": {
         "conjugate": "Conjuguer",
         "depth-tip": "Changer la profondeur de l'arbre",
+        "download-tip": "",
         "error": {
           "message": "Veuillez réessayer.",
           "title": "Erreur"
         },
         "explorer-tip": "Basculer entre les vues «arborescence» et «grille»",
+        "gridview": "",
         "hide-toolbar-tip": "Masquer la barre de tâches",
         "instructions": "Veuillez sélectionner une ou plusieurs cases dans les panneaux <b> Verbe </b>, <b> Personne </b> et <b> Heure </b> à gauche, puis appuyez sur la touche Entrée ou sur le bouton conjugué pour voir votre sélection",
         "instructions-mobile": "Veuillez sélectionner une ou plusieurs cases dans les panneaux \"Verbe\", \"Personne\" et \"Temps\" <br /> puis appuyez sur le bouton ci-dessus pour conjuguer!",
         "order-tip": "Changer l'ordre des nœuds",
         "show-toolbar-tip": "Afficher la barre d'outils",
-        "title": "Barre d'outils de conjugaison"
+        "title": "Barre d'outils de conjugaison",
+        "treeview": ""
+      },
+      "notifications": {
+        "download": {
+          "error": "Oups! Une erreur s'est produite et le fichier n'a pas pu être téléchargé. Veuillez vérifier que votre conjugaison est valide et réessayer",
+          "success": "Succès! Les conjugaisons ont été téléchargées"
+        }
       },
       "pers": {
         "select-agent": "Sélectionnez un agent",
@@ -86,12 +98,6 @@
         "no-matching-verb": "Désolé, aucun verbe correspondant correspondant à '{{value}}'",
         "placeholder": "Rechercher un verbe",
         "title": "Verbe"
-      },
-      "notifications": {
-        "download": {
-          "error": "Oups! Une erreur s'est produite et le fichier n'a pas pu être téléchargé. Veuillez vérifier que votre conjugaison est valide et réessayer",
-          "success": "Succès! Les conjugaisons ont été téléchargées"
-        }
       }
     },
     "title": "WordWeaver UI",
@@ -109,27 +115,6 @@
         "welcome": "Bienvenue dans WordWeaver-UI WordMaker"
       },
       "next": "Prochain",
-      "pers": {
-        "agent-informal": "Auteur",
-        "patient-informal": "Patient",
-        "select-intransitive-pronoun": "Choisissez l'un des pronoms ci-dessous",
-        "select-transitive-pronoun": "Parmi les options ci-dessous, choisissez qui fait l'action et qui lui fait faire l'action",
-        "question": "Qui la fait?"
-      },
-      "previous": "Arrière",
-      "restart": "Recommencer",
-      "temp": {
-        "select-temp": "Choisissez l'une des options ci-dessous",
-        "question": "Quand est-ce qu'elle se produit?"
-      },
-      "verb": {
-        "no-matching-verbs": "Désolé, aucun verbe correspondant correspondant à '{{value}}'",
-        "search-placeholder": "Chercher",
-        "select-verb-multiple": "Sélectionnez l'un des {{number}} verbes ci-dessous",
-        "select-verb-single": "Sélectionnez le verbe ci-dessous",
-        "try-again": "Veuillez réessayer.",
-        "question": "Quelle est l'action?"
-      },
       "notifications": {
         "random": {
           "pers": {
@@ -147,11 +132,28 @@
           "temp": "Temps '{{value}}' sélectionnée",
           "verb": "Verbe '{{value}}' sélectionné"
         }
+      },
+      "pers": {
+        "agent-informal": "Auteur",
+        "patient-informal": "Patient",
+        "question": "Qui la fait?",
+        "select-intransitive-pronoun": "Choisissez l'un des pronoms ci-dessous",
+        "select-transitive-pronoun": "Parmi les options ci-dessous, choisissez qui fait l'action et qui lui fait faire l'action"
+      },
+      "previous": "Arrière",
+      "restart": "Recommencer",
+      "temp": {
+        "question": "Quand est-ce qu'elle se produit?",
+        "select-temp": "Choisissez l'une des options ci-dessous"
+      },
+      "verb": {
+        "no-matching-verbs": "Désolé, aucun verbe correspondant correspondant à '{{value}}'",
+        "question": "Quelle est l'action?",
+        "search-placeholder": "Chercher",
+        "select-verb-multiple": "Sélectionnez l'un des {{number}} verbes ci-dessous",
+        "select-verb-single": "Sélectionnez le verbe ci-dessous",
+        "try-again": "Veuillez réessayer."
       }
-    },
-    "error": {
-      "dev": "Hm, quelque chose s'est mal passé, veuillez vérifier la console.",
-      "general": "Oups, une erreur s'est produite."
     }
   }
 }

@@ -14,7 +14,6 @@
     "language": "Sample Kanyen'kéha",
     "menu": {
       "about": "About",
-      "info": "Info",
       "settings": "Settings",
       "tableviewer": "Table Viewer",
       "wordmaker": "Word Maker"
@@ -51,10 +50,10 @@
         "dark": "Dark",
         "fun": "Fun",
         "light": "Light",
-        "purple-light": "Light Purple",
-        "purple-dark": "Dark Purple",
         "night-mode": "Auto night mode (from 21:00 to 7:00)",
         "placeholder": "Color Theme",
+        "purple-dark": "Dark Purple",
+        "purple-light": "Light Purple",
         "sticky-header": "Sticky header",
         "title": "Themes"
       },
@@ -64,17 +63,20 @@
       "conj": {
         "conjugate": "Conjugate",
         "depth-tip": "Change tree depth",
+        "download-tip": "",
         "error": {
           "message": "Please try again.",
           "title": "Error"
         },
         "explorer-tip": "Toggle 'tree' and 'grid' views",
+        "gridview": "",
         "hide-toolbar-tip": "Hide toolbar",
         "instructions": "Please select one or more boxes from the <b>Verb</b>, <b>Person</b>, and <b>Time</b> panels to the left and then press the enter key or conjugate button to see your selection",
         "instructions-mobile": "Please select one or more boxes from the 'Verb', 'Person', and 'Time' panels <br /> and then press the button above to conjugate!",
         "order-tip": "Switch order of nodes",
         "show-toolbar-tip": "Show toolbar",
-        "title": "Conjugation Toolbar"
+        "title": "Conjugation Toolbar",
+        "treeview": ""
       },
       "notifications": {
         "download": {

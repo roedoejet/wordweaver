@@ -13,6 +13,7 @@ import {
   filter
 } from "rxjs/operators";
 import { of } from "rxjs";
+import { WordmakerState } from "./wordmaker-selection.model";
 import { selectWordmakerState, selectSettingsState } from "../core.state";
 import { LocalStorageService } from "../local-storage/local-storage.service";
 import {
@@ -21,8 +22,9 @@ import {
   actionChangeAffOption,
   actionChangePatient,
   actionChangeVerb,
+  actionChangeStep,
   actionChangeLoading,
-  actionChangeConjugation
+  actionChangeConjugations
 } from "./wordmaker-selection.actions";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { marker } from "@biesbjerg/ngx-translate-extract-marker";
@@ -32,11 +34,9 @@ export const WORDMAKER_SELECTION_KEY = "WORDMAKER";
 export function createRequestQueryArgs(selection) {
   const params = new URLSearchParams();
   ["option", "agent", "patient", "root"].forEach(x => {
-    selection[x].forEach(y => {
-      if (y.tag) {
-        params.append(x, y.tag);
-      }
-    });
+    if (selection[x]) {
+      params.append(x, selection[x].tag);
+    }
   });
   return params;
 }
@@ -68,6 +68,35 @@ export class WordmakerEffects {
   //   { dispatch: false }
   // );
 
+  changeStep = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(actionChangeStep),
+        withLatestFrom(this.store.pipe(select(selectWordmakerState))),
+        tap(([action, selection]) => {
+          console.log(selection);
+          switch (selection.step) {
+            case 0: {
+              console.log("step 0");
+              break;
+            }
+            case 1: {
+              console.log("step 1");
+              break;
+            }
+            case 2: {
+              this.store.dispatch(actionConjugationEvent({}));
+              break;
+            }
+            case 3: {
+              this.store.dispatch(actionConjugationEvent({}));
+            }
+          }
+        })
+      ),
+    { dispatch: false }
+  );
+
   conjugate = createEffect(
     () =>
       this.actions$.pipe(
@@ -91,7 +120,7 @@ export class WordmakerEffects {
               .subscribe(conj => {
                 this.store.dispatch(actionChangeLoading({ loading: false }));
                 this.store.dispatch(
-                  actionChangeConjugation({ conjugation: conj })
+                  actionChangeConjugations({ conjugations: conj })
                 );
               });
           }

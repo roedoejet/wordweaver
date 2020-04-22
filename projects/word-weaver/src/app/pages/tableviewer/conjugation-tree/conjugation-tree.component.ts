@@ -9,7 +9,7 @@ import { Conjugation, Response, Tier, TIERS } from "../../../models/models";
 import { Store, select } from "@ngrx/store";
 import { selectTableviewer } from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
 import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
+import { map, switchMap, tap, distinctUntilChanged } from "rxjs/operators";
 import { TableviewerState } from "../../../core/tableviewer-selection/tableviewer-selection.model";
 import { AffixService } from "../../../core/affix/affix.service";
 import { merge as _merge } from "lodash";
@@ -25,6 +25,7 @@ export class ConjugationTreeComponent implements OnInit {
   defaultChartOption: EChartOption;
   defaultSeries: any;
   selection$: Observable<TableviewerState>;
+  @Input() color$: Observable<any>;
   constructor(private store: Store, private affixService: AffixService) {}
 
   ngOnInit(): void {
@@ -59,12 +60,19 @@ export class ConjugationTreeComponent implements OnInit {
       right: "20%",
       symbolSize: 7,
       initialTreeDepth: 0,
+      lineStyle: {
+        color: "#fff"
+      },
       label: {
         normal: {
           position: "bottom",
           verticalAlign: "middle",
-          align: "middle"
+          align: "middle",
+          color: "#fff"
         }
+      },
+      itemStyle: {
+        borderColor: "#fff"
       },
       leaves: {
         label: {
@@ -73,6 +81,9 @@ export class ConjugationTreeComponent implements OnInit {
             verticalAlign: "middle",
             align: "middle"
           }
+        },
+        itemStyle: {
+          borderColor: "#fff"
         }
       },
       expandAndCollapse: true,
@@ -81,15 +92,38 @@ export class ConjugationTreeComponent implements OnInit {
       animationDurationUpdate: 750
     };
     this.options$ = this.selection$.pipe(
-      map(selection => {
+      switchMap(selection => {
         if (selection.conjugations.length > 0) {
-          return this.createChartData(selection);
+          return this.color$.pipe(
+            map(color =>
+              this.createChartData(selection, {
+                primary: this.rgbToHex(color.primary),
+                accent: this.rgbToHex(color.accent)
+              })
+            ),
+            distinctUntilChanged()
+          );
         }
       })
     );
   }
 
-  createChartData(tvState: TableviewerState) {
+  rgbToHex = function(rgb) {
+    const pattern = /\d+/g;
+    const matches = rgb.match(pattern).slice(0, 3);
+    const hex = "#";
+    const hexMatches = matches.map(match => {
+      match = parseInt(match);
+      let matchHex = Number(match).toString(16);
+      if (matchHex.length < 2) {
+        matchHex = "0" + matchHex;
+      }
+      return matchHex;
+    });
+    return hex + hexMatches.join("");
+  };
+
+  createChartData(tvState: TableviewerState, color) {
     const chartOption = Object.assign({}, this.defaultChartOption);
     // Initialize series each time
     chartOption.series = [];
@@ -149,6 +183,10 @@ export class ConjugationTreeComponent implements OnInit {
       ser.name = data[j]["name"];
       ser.data = [data[j]];
       ser.top = top.toString() + "%";
+      ser.lineStyle.color = color.primary;
+      ser.label.normal.color = color.primary;
+      ser.leaves.itemStyle.borderColor = color.accent;
+      ser.itemStyle.borderColor = color.accent;
       ser.initialTreeDepth = initialTreeDepth;
       chartOption.series.push(ser);
     }

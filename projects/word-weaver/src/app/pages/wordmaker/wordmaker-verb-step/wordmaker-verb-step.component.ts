@@ -10,11 +10,20 @@ import { Verb } from "../../../models/models";
 import { Subject } from "rxjs";
 import { debounceTime, tap } from "rxjs/operators";
 import { sortBy } from "lodash";
+import { Store, select } from "@ngrx/store";
 import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
+import {
+  WordmakerState,
+  State
+} from "../../../core/wordmaker-selection/wordmaker-selection.model";
 import {
   fadeAnimation,
   listAnimation
 } from "../../../core/animations/value.animations";
+import {
+  actionChangeVerb,
+  actionChangeStep
+} from "../../../core/wordmaker-selection/wordmaker-selection.actions";
 
 @Component({
   selector: "ww-wordmaker-verb-step",
@@ -31,7 +40,11 @@ export class WordmakerVerbStepComponent implements OnInit {
   searchField: FormControl;
   verbForm: FormGroup;
   @Output() selectedVerb = new EventEmitter<Verb>();
-  constructor(private verbService: VerbService, private fb: FormBuilder) {
+  constructor(
+    private verbService: VerbService,
+    private fb: FormBuilder,
+    private store: Store<State>
+  ) {
     // subscribe to search input
     this.searchField = new FormControl();
     this.verbForm = this.fb.group({ search: this.searchField });
@@ -41,9 +54,9 @@ export class WordmakerVerbStepComponent implements OnInit {
     this.verbService.verbs$.subscribe(x => this.viewableVerbs$.next(x));
     this.searchField.valueChanges
       .pipe(
-        tap(x => console.log(x)),
         debounceTime(200),
-        tap(term => this.viewableVerbs$.next(this.filterEntries(term)))
+        tap(term => this.viewableVerbs$.next(this.filterEntries(term))),
+        tap(x => console.log(this.filterEntries(x)))
       )
       .subscribe();
   }
@@ -56,7 +69,10 @@ export class WordmakerVerbStepComponent implements OnInit {
     );
   }
 
-  select(verb) {
+  onVerbSelect(verb) {
+    // Update store
+    this.store.dispatch(actionChangeVerb({ root: verb }));
+    // Update parent component
     this.selectedVerb.emit(verb);
   }
 

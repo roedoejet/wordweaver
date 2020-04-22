@@ -21,7 +21,7 @@
           [disabled]="(selection$ | async).root.indexOf(value.tag) < 0 && (selection$ | async).root.length >= 3"
           [formControlName]="value.tag">{{
             value.gloss + " - " }}
-          <span [ngClass]="'color-' + value.thematic_relation">{{value.display}}</span>
+          <span>{{value.display}}</span>
         </mat-checkbox>
       </div>
     </mat-list>

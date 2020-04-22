@@ -2,9 +2,11 @@ import { createAction, props } from "@ngrx/store";
 
 import { AffOption, Pronoun, Response, Verb } from "../../models/models";
 
-export const actionChangeConjugation = createAction(
-  "[Wordmaker] Change Conjugation",
-  props<{ conjugation: Response }>()
+import { Step } from "./wordmaker-selection.model";
+
+export const actionChangeConjugations = createAction(
+  "[Wordmaker] Change Conjugations",
+  props<{ conjugations: Response }>()
 );
 
 export const actionChangeVerb = createAction(
@@ -35,4 +37,9 @@ export const actionConjugationEvent = createAction(
 export const actionChangeLoading = createAction(
   "[Wordmaker] Toggle Loading",
   props<{ loading: boolean }>()
+);
+
+export const actionChangeStep = createAction(
+  "[Wordmaker] Change Step",
+  props<{ step: Step }>()
 );

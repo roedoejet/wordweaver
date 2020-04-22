@@ -1,41 +1,32 @@
 @import "../../../../scss/utilities/colors";
 @import "~@angular/material/theming";
 
-@mixin ww-tableviewer-component-theme-common($theme) {
+@mixin ww-tableviewer-conj-panel-component-theme-common($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
 
-  .error__container {
-    background-color: mat-color($warn);
+  .panel__header__container {
+    background-color: mat-color($primary);
   }
-
-  .error__header,
-  .error__message {
-    color: mat-color($warn, default-contrast);
-  }
-
-  // ww-tableviewer-conj-panel {
-  //   background-color: mat-color($primary);
-  // }
 }
 
-@mixin ww-tableviewer-component-theme-dark($theme) {
+@mixin ww-tableviewer-conj-panel-component-theme-dark($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
 
-  .mat-figure {
+  .panel__header__container {
     background-color: darken(mat-color($primary), 10%);
   }
 }
 
-@mixin ww-tableviewer-component-theme-light($theme) {
+@mixin ww-tableviewer-conj-panel-component-theme-light($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
 
-  .mat-figure {
+  .panel__header__container {
     background-color: lighten(mat-color($primary), 5%);
   }
 }

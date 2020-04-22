@@ -6,15 +6,37 @@ import {
   Output,
   ChangeDetectionStrategy
 } from "@angular/core";
-import { AffOption, Pronoun, Verb } from "../../../models/models";
+import {
+  AffOption,
+  Pronoun,
+  Verb,
+  ResponseObject,
+  Conjugation
+} from "../../../models/models";
 import {
   AffixService,
   ConjugationService,
   WordmakerSelectionService
 } from "../../../core/core.module";
-import { Observable, empty, EMPTY } from "rxjs";
-import { distinctUntilChanged, map, switchMap } from "rxjs/operators";
-import { select } from "@ngrx/store";
+import { Observable, empty, EMPTY, of } from "rxjs";
+import {
+  distinctUntilChanged,
+  map,
+  switchMap,
+  catchError
+} from "rxjs/operators";
+import { Store, select } from "@ngrx/store";
+import { actionChangeAffOption } from "../../../core/wordmaker-selection/wordmaker-selection.actions";
+import {
+  WordmakerState,
+  State
+} from "../../../core/wordmaker-selection/wordmaker-selection.model";
+import { selectWordmaker } from "../../../core/wordmaker-selection/wordmaker-selection.selectors";
+import { HttpClient, HttpParams } from "@angular/common/http";
+import { environment } from "../../../../environments/environment";
+import { SettingsState } from "../../../core/settings/settings.model";
+import { selectSettings } from "../../../core/settings/settings.selectors";
+import { selectSettingsState } from "../../../core/core.state";
 
 @Component({
   selector: "ww-wordmaker-temp-step",
@@ -23,43 +45,26 @@ import { select } from "@ngrx/store";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WordmakerTempStepComponent implements OnInit {
-  temps$: Observable<any>;
-  @Input() selectedVerb: Verb;
-  @Input() selectedPers: any;
+  selection$: Observable<WordmakerState>;
   @Output() selectedTemp = new EventEmitter<AffOption>();
   constructor(
     private affixService: AffixService,
-    private conjugationService: ConjugationService,
-    private selectionService: WordmakerSelectionService
+    private store: Store<State>,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
-    this.temps$ = this.selectionService.selection$.pipe(
-      switchMap(selection => {
-        if (
-          selection.root &&
-          ((selection.root.thematic_relation === "purple" &&
-            selection.agent &&
-            selection.patient) ||
-            (selection.root.thematic_relation === "red" && selection.agent) ||
-            (selection.root.thematic_relation === "blue" && selection.patient))
-        ) {
-          const args = Object.entries(selection).reduce(
-            (a, [k, v]) => (v == null ? a : { ...a, [k]: [v.tag] }),
-            {}
-          );
-          args["option"] = [];
-          return this.conjugationService.conjugate(args);
-        } else {
-          return EMPTY;
-        }
-      })
-    );
+    this.selection$ = this.store.pipe(select(selectWordmaker));
+  }
+
+  onAffOptSelect(ao) {
+    this.store.dispatch(actionChangeAffOption({ option: ao }));
+    this.selectedTemp.emit(ao);
   }
 
   onChipClick(tag) {
     this.returnAffoptFromTag$(tag).subscribe(t => {
-      this.selectedTemp.emit(t);
+      this.onAffOptSelect(t);
     });
   }
 

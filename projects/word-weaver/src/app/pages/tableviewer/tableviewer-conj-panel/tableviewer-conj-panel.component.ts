@@ -2,7 +2,8 @@ import {
   Component,
   OnInit,
   ChangeDetectionStrategy,
-  ViewChild
+  ViewChild,
+  Renderer2
 } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { HttpClient } from "@angular/common/http";
@@ -58,11 +59,17 @@ export class TableviewerConjPanelComponent implements OnInit {
   conjugationTrigger$: Observable<any>;
   chartResponse$: Observable<EChartOption | any>;
   gridData$: Observable<any>;
+  chartColor$: BehaviorSubject<object> = new BehaviorSubject<object>({
+    primary: "rgb(255, 255, 255)",
+    accent: "rgb(255, 255, 255)"
+  });
   // Elements
-  @ViewChild("explorer") explorer;
+  @ViewChild("header") header;
+  @ViewChild("conjugate") conjugateBtn;
   constructor(
     private store: Store<State>,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private renderer: Renderer2
   ) {}
 
   ngOnInit(): void {
@@ -79,6 +86,19 @@ export class TableviewerConjPanelComponent implements OnInit {
         }
       })
     );
+  }
+
+  ngAfterViewInit() {
+    // Extremely hacky way of getting ngx-echarts to style graph nodes and edges properly with themes.
+    // This should be changed once ngx-echarts is updated to handle this internally.
+    this.chartColor$.next({
+      primary: getComputedStyle(this.header.nativeElement).getPropertyValue(
+        "color"
+      ),
+      accent: getComputedStyle(
+        this.conjugateBtn._elementRef.nativeElement
+      ).getPropertyValue("background-color")
+    });
   }
 
   // Return span of either value or separator with supplied classes

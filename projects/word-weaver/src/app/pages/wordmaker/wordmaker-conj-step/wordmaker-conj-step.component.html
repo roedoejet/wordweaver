@@ -18,7 +18,7 @@
     </div>
     <hr class='margin-bottom-50'>
     <div class='panel__content' *ngIf="settings$ | async as settings">
-        <div id="conjugation-result" class="conjugation center-text" *ngFor="let conjugation of word$ | async">
+        <div id="conjugation-result" class="conjugation center-text" *ngFor="let conjugation of (selection$ | async).conjugations">
             <h3>
                 <span *ngFor="let item of conjugation['main']" class="{{ item['classes'] }}"
                     [ngClass]="{highlight: (settings?.highlight)[item['type']] || (settings?.highlight)[item['classes']]}">

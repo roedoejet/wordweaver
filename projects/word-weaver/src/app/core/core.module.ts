@@ -54,6 +54,7 @@ import { GoogleAnalyticsEffects } from "./google-analytics/google-analytics.effe
 import { NotificationService } from "./notifications/notification.service";
 import { SettingsEffects } from "./settings/settings.effects";
 import { TableviewerEffects } from "./tableviewer-selection/tableviewer-selection.effects";
+import { WordmakerEffects } from "./wordmaker-selection/wordmaker-selection.effects";
 import {
   selectSettingsLanguage,
   selectEffectiveTheme,
@@ -143,7 +144,8 @@ export function HttpLoaderFactory(http: HttpClient) {
       AuthEffects,
       SettingsEffects,
       GoogleAnalyticsEffects,
-      TableviewerEffects
+      TableviewerEffects,
+      WordmakerEffects
     ]),
     environment.production
       ? []

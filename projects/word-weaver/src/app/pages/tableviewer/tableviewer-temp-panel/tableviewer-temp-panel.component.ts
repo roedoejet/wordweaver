@@ -6,7 +6,10 @@ import { Observable } from "rxjs";
 
 import { actionChangeAffOptions } from "../../../core/tableviewer-selection/tableviewer-selection.actions";
 
-import { TableviewerState } from "../../../core/tableviewer-selection/tableviewer-selection.model";
+import {
+  TableviewerState,
+  State
+} from "../../../core/tableviewer-selection/tableviewer-selection.model";
 import { selectTableviewer } from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
 
 @Component({
@@ -18,7 +21,7 @@ import { selectTableviewer } from "../../../core/tableviewer-selection/tableview
 export class TableviewerTempPanelComponent implements OnInit {
   possibleTimes$: Observable<AffOption[]>;
   selection$: Observable<TableviewerState>;
-  constructor(private affixService: AffixService, private store: Store) {
+  constructor(private affixService: AffixService, private store: Store<State>) {
     this.possibleTimes$ = this.affixService.affoptions$;
   }
 

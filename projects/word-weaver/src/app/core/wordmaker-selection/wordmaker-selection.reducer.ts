@@ -3,8 +3,9 @@ import {
   actionChangeAffOption,
   actionChangePatient,
   actionChangeVerb,
-  actionChangeConjugation,
-  actionChangeLoading
+  actionChangeConjugations,
+  actionChangeLoading,
+  actionChangeStep
 } from "./wordmaker-selection.actions";
 import { Action, createReducer, on, ActionReducer } from "@ngrx/store";
 import { WordmakerState } from "./wordmaker-selection.model";
@@ -14,7 +15,7 @@ export const initialState: WordmakerState = {
   agent: null,
   patient: null,
   root: null,
-  conjugations: null,
+  conjugations: [],
   step: 0,
   loading: false
 };
@@ -27,8 +28,9 @@ const reducer = createReducer(
     actionChangeAffOption,
     actionChangePatient,
     actionChangeVerb,
-    actionChangeConjugation,
+    actionChangeConjugations,
     actionChangeLoading,
+    actionChangeStep,
     (state, action) => ({ ...state, ...action })
   )
 );

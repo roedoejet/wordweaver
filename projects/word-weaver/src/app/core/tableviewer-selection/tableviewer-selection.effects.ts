@@ -83,7 +83,6 @@ export class TableviewerEffects {
             this.store
               .pipe(
                 select(selectSettingsState),
-                tap(x => console.log(x.baseUrl)),
                 switchMap(settings =>
                   this.http
                     .get(
