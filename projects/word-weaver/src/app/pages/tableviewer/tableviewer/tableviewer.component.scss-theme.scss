@@ -15,6 +15,14 @@
     color: mat-color($warn, default-contrast);
   }
 
+  .mat-option.mat-selected {
+    color: mat-color($accent) !important;
+  }
+
+  .mat-pseudo-checkbox-checked {
+    background: mat-color($accent) !important;
+  }
+
   // ww-tableviewer-conj-panel {
   //   background-color: mat-color($primary);
   // }
