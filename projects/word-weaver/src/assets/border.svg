@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" 
+    xmlns="http://www.w3.org/2000/svg" 
+    xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="0 0 640 640" width="640" height="640">
+    <defs>
+        <path d="M103.91 316.55C103.91 331.78 91.55 344.14 76.32 344.14C61.1 344.14 48.74 331.78 48.74 316.55C48.74 301.33 61.1 288.97 76.32 288.97C91.55 288.97 103.91 301.33 103.91 316.55Z" id="b15zSWniy2"></path>
+        <path d="M173.33 316.55C173.33 331.78 160.97 344.14 145.75 344.14C130.52 344.14 118.16 331.78 118.16 316.55C118.16 301.33 130.52 288.97 145.75 288.97C160.97 288.97 173.33 301.33 173.33 316.55Z" id="a4nAB0Lam"></path>
+        <path d="M245.06 316.55C245.06 331.78 232.7 344.14 217.47 344.14C202.25 344.14 189.89 331.78 189.89 316.55C189.89 301.33 202.25 288.97 217.47 288.97C232.7 288.97 245.06 301.33 245.06 316.55Z" id="iPIO7iqTA"></path>
+        <path d="M314.48 316.55C314.48 331.78 302.12 344.14 286.9 344.14C271.67 344.14 259.31 331.78 259.31 316.55C259.31 301.33 271.67 288.97 286.9 288.97C302.12 288.97 314.48 301.33 314.48 316.55Z" id="c1x9mhRJDL"></path>
+        <path d="M386.21 316.55C386.21 331.78 373.85 344.14 358.62 344.14C343.4 344.14 331.03 331.78 331.03 316.55C331.03 301.33 343.4 288.97 358.62 288.97C373.85 288.97 386.21 301.33 386.21 316.55Z" id="e3xbraZo5D"></path>
+        <path d="M455.86 316.55C455.86 331.78 443.5 344.14 428.28 344.14C413.05 344.14 400.69 331.78 400.69 316.55C400.69 301.33 413.05 288.97 428.28 288.97C443.5 288.97 455.86 301.33 455.86 316.55Z" id="a2E8xUN4g4"></path>
+        <path d="M525.29 316.55C525.29 331.78 512.93 344.14 497.7 344.14C482.48 344.14 470.11 331.78 470.11 316.55C470.11 301.33 482.48 288.97 497.7 288.97C512.93 288.97 525.29 301.33 525.29 316.55Z" id="aaPnJkP4"></path>
+        <path d="M597.01 316.55C597.01 331.78 584.65 344.14 569.43 344.14C554.2 344.14 541.84 331.78 541.84 316.55C541.84 301.33 554.2 288.97 569.43 288.97C584.65 288.97 597.01 301.33 597.01 316.55Z" id="dQxmNMvg7"></path>
+    </defs>
+    <g>
+        <g>
+            <g>
+                <use xlink:href="#b15zSWniy2" opacity="1" fill="#d3de87" fill-opacity="1"></use>
+            </g>
+            <g>
+                <use xlink:href="#a4nAB0Lam" opacity="1" fill="#d3de87" fill-opacity="1"></use>
+            </g>
+            <g>
+                <use xlink:href="#iPIO7iqTA" opacity="1" fill="#d3de87" fill-opacity="1"></use>
+            </g>
+            <g>
+                <use xlink:href="#c1x9mhRJDL" opacity="1" fill="#d3de87" fill-opacity="1"></use>
+            </g>
+            <g>
+                <use xlink:href="#e3xbraZo5D" opacity="1" fill="#d3de87" fill-opacity="1"></use>
+            </g>
+            <g>
+                <use xlink:href="#a2E8xUN4g4" opacity="1" fill="#d3de87" fill-opacity="1"></use>
+            </g>
+            <g>
+                <use xlink:href="#aaPnJkP4" opacity="1" fill="#d3de87" fill-opacity="1"></use>
+            </g>
+            <g>
+                <use xlink:href="#dQxmNMvg7" opacity="1" fill="#d3de87" fill-opacity="1"></use>
+            </g>
+        </g>
+    </g>
+</svg>
