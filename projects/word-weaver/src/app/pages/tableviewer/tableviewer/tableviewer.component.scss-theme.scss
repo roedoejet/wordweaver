@@ -23,9 +23,35 @@
     background: mat-color($accent) !important;
   }
 
-  // ww-tableviewer-conj-panel {
-  //   background-color: mat-color($primary);
-  // }
+  ww-tableviewer {
+    .mat-drawer-container {
+      color: mat-color($primary, default-contrast) !important;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    span {
+      color: mat-color($primary, default-contrast);
+    }
+
+    .mat-accent {
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p,
+      span {
+        color: mat-color($accent, default-contrast);
+      }
+    }
+  }
 }
 
 @mixin ww-tableviewer-component-theme-dark($theme) {
