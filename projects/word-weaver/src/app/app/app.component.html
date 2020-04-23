@@ -69,8 +69,8 @@
 
           <span *ngIf="language$ | async as language">
             <mat-select [ngModel]="language" (selectionChange)="onLanguageSelect($event)">
-              <mat-option *ngFor="let l of languages" [value]="l">
-                {{ l.toUpperCase() }}
+              <mat-option *ngFor="let l of languages" [value]="l.value">
+                {{ l.label.toUpperCase() }}
               </mat-option>
             </mat-select>
           </span>

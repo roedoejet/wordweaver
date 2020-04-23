@@ -34,7 +34,10 @@ export class AppComponent implements OnInit {
   version = env.versions.app;
   year = new Date().getFullYear();
   logo = require("../../assets/logo.png");
-  languages = ["en", "fr"];
+  languages = [
+    { label: "en", value: "en" },
+    { label: "fr", value: "fr" }
+  ];
   navigation = [
     { link: "wordmaker", label: marker("ww.menu.wordmaker") },
     { link: "tableviewer", label: marker("ww.menu.tableviewer") },
