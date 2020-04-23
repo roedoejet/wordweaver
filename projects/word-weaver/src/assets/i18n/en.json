@@ -63,7 +63,7 @@
       "conj": {
         "conjugate": "Conjugate",
         "depth-tip": "Change tree depth",
-        "download-tip": "",
+        "download-tip": "Download conjugations",
         "error": {
           "message": "Please try again.",
           "title": "Error"

@@ -10,20 +10,14 @@ import { Verb } from "../../../models/models";
 import { Subject } from "rxjs";
 import { debounceTime, tap } from "rxjs/operators";
 import { sortBy } from "lodash";
-import { Store, select } from "@ngrx/store";
+import { Store } from "@ngrx/store";
 import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
-import {
-  WordmakerState,
-  State
-} from "../../../core/wordmaker-selection/wordmaker-selection.model";
+import { State } from "../../../core/wordmaker-selection/wordmaker-selection.model";
 import {
   fadeAnimation,
   listAnimation
 } from "../../../core/animations/value.animations";
-import {
-  actionChangeVerb,
-  actionChangeStep
-} from "../../../core/wordmaker-selection/wordmaker-selection.actions";
+import { actionChangeVerb } from "../../../core/wordmaker-selection/wordmaker-selection.actions";
 
 @Component({
   selector: "ww-wordmaker-verb-step",

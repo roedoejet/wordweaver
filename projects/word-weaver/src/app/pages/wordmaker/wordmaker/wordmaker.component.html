@@ -7,7 +7,7 @@
                     <ww-wordmaker-verb-step (selectedVerb)="onVerbSelect($event)" *ngIf='stepper.selectedIndex === 0; else loading'></ww-wordmaker-verb-step>
                 </div>
                 <div class='margin-top-30'>
-                    <button mat-raised-button class='mat-accent float-right' (click)="selectRandomIfNull('verb')"
+                    <button mat-raised-button class='mat-accent float-right'
                         matStepperNext>{{ 'ww.wordmaker.next' | translate }}</button>
                 </div>
             </form>
@@ -18,7 +18,7 @@
                 <ww-wordmaker-pers-step (selectedAgent)="onAgentSelect($event)" (selectedPatient)="onPatientSelect($event)" *ngIf='stepper.selectedIndex === 1; else loading'></ww-wordmaker-pers-step>
                 <div class='margin-top-30'>
                     <button mat-raised-button class='mat-accent float-left' matStepperPrevious>{{ 'ww.wordmaker.previous' | translate }}</button>
-                    <button mat-raised-button class='mat-accent float-right' (click)="selectRandomIfNull('pers')"
+                    <button mat-raised-button class='mat-accent float-right'
                         matStepperNext>{{ 'ww.wordmaker.next' | translate }}</button>
                 </div>
             </form>
@@ -29,7 +29,7 @@
                 <ww-wordmaker-temp-step (selectedTemp)="onTempSelect($event)" *ngIf='stepper.selectedIndex === 2; else loading'></ww-wordmaker-temp-step>
                 <div class='margin-top-30'>
                     <button mat-raised-button class='mat-accent float-left' matStepperPrevious>{{ 'ww.wordmaker.previous' | translate }}</button>
-                    <button mat-raised-button class='mat-accent float-right' (click)="selectRandomIfNull('temp')"
+                    <button mat-raised-button class='mat-accent float-right'
                         matStepperNext>{{ 'ww.wordmaker.next' | translate }}</button>
                 </div>
             </form>

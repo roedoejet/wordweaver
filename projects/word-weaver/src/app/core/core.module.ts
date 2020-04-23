@@ -81,6 +81,7 @@ import {
 import { AffixService } from "./affix/affix.service";
 import { ConjugationService } from "./conjugation/conjugation.service";
 import { PronounService } from "./pronoun/pronoun.service";
+import { TierService } from "./tier/tier.service";
 import { WordmakerSelectionService } from "./wordmaker-selection/wordmaker-selection.service";
 import { VerbService } from "./verb/verb.service";
 
@@ -106,6 +107,7 @@ export {
   AffixService,
   ConjugationService,
   PronounService,
+  TierService,
   WordmakerSelectionService,
   VerbService
 };
@@ -150,7 +152,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     environment.production
       ? []
       : StoreDevtoolsModule.instrument({
-          name: "Angular NgRx Material Starter"
+          name: "Word Weaver"
         }),
 
     // 3rd party

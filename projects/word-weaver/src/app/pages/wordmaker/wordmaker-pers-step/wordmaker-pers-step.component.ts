@@ -2,14 +2,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
-  Input,
   OnInit,
   Output
 } from "@angular/core";
 import { PronounService } from "../../../core/core.module";
-import { Pronoun, Verb } from "../../../models/models";
+import { Pronoun } from "../../../models/models";
 import { Observable } from "rxjs";
-import { EChartOption } from "echarts";
 import {
   actionChangeAgent,
   actionChangePatient

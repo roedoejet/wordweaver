@@ -18,42 +18,11 @@
     </div>
     <hr class='margin-bottom-50'>
     <div class='panel__content' *ngIf="settings$ | async as settings">
-        <div id="conjugation-result" class="conjugation center-text" *ngFor="let conjugation of (selection$ | async).conjugations">
-            <h3>
-                <span *ngFor="let item of conjugation['main']" class="{{ item['classes'] }}"
-                    [ngClass]="{highlight: (settings?.highlight)[item['type']] || (settings?.highlight)[item['classes']]}">
-                    {{ item["value"] }}</span>
-            </h3>
-            <h4 *ngIf="settings?.level.breakdown">
-                <span *ngFor="let item of conjugation['main']" class="{{ item['classes'] }}" [ngClass]="{
-            highlight:
-              (settings?.highlight)[item['type']] ||
-              (settings?.highlight)[item['classes']]
-          }">{{ item["value"] }}
-                    <span *ngIf="conjugation['main'].indexOf(item) < conjugation['main'].length - 1">-</span>
-                </span>
-            </h4>
-            <h4 *ngIf="settings?.level.gloss">
-                <span *ngFor="let item of conjugation['secondary']" class="{{ item['classes'] }}" [ngClass]="{
-            highlight:
-              (settings?.highlight)[item['type']] ||
-              (settings?.highlight)[item['classes']]
-          }">{{ item["value"] | decapitalize }}
-                    <span *ngIf="conjugation['secondary'].indexOf(item) < conjugation['secondary'].length - 1">-</span>
-                </span>
-            </h4>
-            <h4 *ngIf="settings?.level['breakdown-translation']">
-                <span *ngFor="let item of conjugation['ternary']" class="{{ item['classes'] }}" [ngClass]="{
-            highlight:
-              (settings?.highlight)[item['type']] ||
-              (settings?.highlight)[item['classes']]
-          }">{{ item["value"] | decapitalize }}
-                    <span *ngIf="conjugation['ternary'].indexOf(item) < conjugation['ternary'].length - 1">-</span>
-                </span>
-            </h4>
-            <h4 *ngIf="settings?.level.translation">
-                <span>{{ conjugation["translation"] }} </span>
-            </h4>
+        <div id="conjugation-result" class="conjugation center-text"
+            *ngFor="let tier of (conjugation$ | async); let i = index">
+            <h3 *ngIf='i === 0' [innerHTML]='tier.html'></h3>
+            <h5 *ngIf='settings.level[tier.name] && i !== 0' [innerHTML]='tier.html'>
+            </h5>
         </div>
     </div>
 </div>

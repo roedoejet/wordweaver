@@ -15,11 +15,11 @@
         </div>
     </div>
     <hr class='margin-bottom-50'>
-    <div class='panel__content--large' *ngIf="selection$ | async as selection">
-        <div class="pwidth-50--desktop pwidth-100--mobile centered" *ngIf='selection.conjugations.length > 0'>
+    <div class='panel__content--large' *ngIf="options$ | async as options">
+        <div class="pwidth-50--desktop pwidth-100--mobile centered" *ngIf='options.length > 0'>
             <mat-chip-list>
                 <mat-chip (click)="onChipClick(conjugation.input.option)" class="bg-white color-black border-accent"
-                    *ngFor="let conjugation of selection.conjugations">{{ conjugation.input.option }}</mat-chip>
+                    *ngFor="let conjugation of options" [innerHTML]="returnTranslation([conjugation])"></mat-chip>
             </mat-chip-list>
         </div>
     </div>

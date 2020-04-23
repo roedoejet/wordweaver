@@ -24,12 +24,7 @@ import { SettingsState, State } from "../../../core/settings/settings.model";
 import { TableviewerState } from "../../../core/tableviewer-selection/tableviewer-selection.model";
 import { selectTableviewer } from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
 import { selectSettings } from "../../../core/settings/settings.selectors";
-import {
-  AffixService,
-  PronounService,
-  VerbService
-} from "../../../core/core.module";
-import { Response, Tier, TIERS } from "../../../models/models";
+import { TierService } from "../../../core/core.module";
 
 import { ROUTE_ANIMATIONS_ELEMENTS } from "../../../core/core.module";
 import { marker } from "@biesbjerg/ngx-translate-extract-marker";
@@ -45,7 +40,7 @@ export class TableviewerConjPanelComponent implements OnInit {
   // Basic config
   settings$: Observable<SettingsState>;
   selection$: Observable<TableviewerState>;
-  showDelay = new FormControl(1000);
+  showDelay = new FormControl(600);
   hideDelay = new FormControl(200);
   tooltipPosition = "above";
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
@@ -66,7 +61,7 @@ export class TableviewerConjPanelComponent implements OnInit {
   constructor(
     private store: Store<State>,
     private notificationService: NotificationService,
-    private renderer: Renderer2
+    private tierService: TierService
   ) {}
 
   ngOnInit(): void {
@@ -77,7 +72,8 @@ export class TableviewerConjPanelComponent implements OnInit {
     this.gridData$ = this.selection$.pipe(
       map(selection => {
         if (selection.gridView && selection.conjugations.length > 0) {
-          return this.createTiers(selection.conjugations);
+          console.log(this.tierService.createTiers(selection.conjugations));
+          return this.tierService.createTiers(selection.conjugations);
         } else {
           return false;
         }
@@ -95,42 +91,6 @@ export class TableviewerConjPanelComponent implements OnInit {
       this.conjugateBtn._elementRef.nativeElement
     ).getPropertyValue("background-color");
     this.store.dispatch(actionSettingsChangeThemeColors({ primary, accent }));
-  }
-
-  // Return span of either value or separator with supplied classes
-  createSpan(value: string | string[] | number, classes: string[]) {
-    let joinedClasses = "";
-    if (classes) {
-      joinedClasses = classes.join(" ");
-    }
-    if (typeof value === "string") {
-      return `<span class='${joinedClasses}'>${value}</span>`;
-    }
-  }
-
-  // Create Tiers based on API
-  createTiers(conjugations: Response, tiers: Tier[] = TIERS) {
-    return conjugations.map(conjugation => {
-      const tieredConjugation = [];
-      tiers.forEach(tier => {
-        tieredConjugation.push({
-          name: tier.name,
-          options: tier.options,
-          html: conjugation.output
-            // filter empty
-            .filter(x => x[tier.key])
-            // sort by position
-            .sort(function(a, b) {
-              return a.position - b.position;
-            })
-            // create spans
-            .map(x => this.createSpan(x[tier.key], x["type"]))
-            // join 'em
-            .join(this.createSpan(tier.separator, ["separator"]))
-        });
-      });
-      return tieredConjugation;
-    });
   }
 
   onChangeTreeDepth(event) {

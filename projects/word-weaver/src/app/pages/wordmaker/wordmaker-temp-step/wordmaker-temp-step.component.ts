@@ -1,30 +1,14 @@
 import {
   Component,
   EventEmitter,
-  Input,
   OnInit,
   Output,
   ChangeDetectionStrategy
 } from "@angular/core";
-import {
-  AffOption,
-  Pronoun,
-  Verb,
-  ResponseObject,
-  Conjugation
-} from "../../../models/models";
-import {
-  AffixService,
-  ConjugationService,
-  WordmakerSelectionService
-} from "../../../core/core.module";
-import { Observable, empty, EMPTY, of } from "rxjs";
-import {
-  distinctUntilChanged,
-  map,
-  switchMap,
-  catchError
-} from "rxjs/operators";
+import { AffOption, Conjugation, Response } from "../../../models/models";
+import { AffixService, TierService } from "../../../core/core.module";
+import { Observable } from "rxjs";
+import { map, switchMap, withLatestFrom } from "rxjs/operators";
 import { Store, select } from "@ngrx/store";
 import { actionChangeAffOption } from "../../../core/wordmaker-selection/wordmaker-selection.actions";
 import {
@@ -32,11 +16,7 @@ import {
   State
 } from "../../../core/wordmaker-selection/wordmaker-selection.model";
 import { selectWordmaker } from "../../../core/wordmaker-selection/wordmaker-selection.selectors";
-import { HttpClient, HttpParams } from "@angular/common/http";
-import { environment } from "../../../../environments/environment";
-import { SettingsState } from "../../../core/settings/settings.model";
-import { selectSettings } from "../../../core/settings/settings.selectors";
-import { selectSettingsState } from "../../../core/core.state";
+import { createRequestQueryArgs } from "../../../core/tableviewer-selection/tableviewer-selection.effects";
 
 @Component({
   selector: "ww-wordmaker-temp-step",
@@ -47,14 +27,29 @@ import { selectSettingsState } from "../../../core/core.state";
 export class WordmakerTempStepComponent implements OnInit {
   selection$: Observable<WordmakerState>;
   @Output() selectedTemp = new EventEmitter<AffOption>();
+  options$: Observable<any>;
   constructor(
     private affixService: AffixService,
     private store: Store<State>,
-    private http: HttpClient
+    private tierService: TierService
   ) {}
 
   ngOnInit(): void {
     this.selection$ = this.store.pipe(select(selectWordmaker));
+    this.options$ = this.selection$.pipe(
+      // See all options, despite selection
+      map(selection => {
+        const newSelection = { ...selection, ...{ option: null } };
+        return newSelection;
+      }),
+      switchMap(selection => this.tierService.conjugate$(selection))
+    );
+  }
+
+  returnTranslation(conjugations: Response) {
+    return this.tierService.createTiers(conjugations, [
+      this.tierService.TIERS[3]
+    ])[0][0]["html"];
   }
 
   onAffOptSelect(ao) {
