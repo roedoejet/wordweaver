@@ -1,9 +1,14 @@
-import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy
+} from "@angular/core";
 import { Verb } from "../../../models/models";
 import { VerbService } from "../../../core/core.module";
 import { Store, select } from "@ngrx/store";
-import { Observable } from "rxjs";
-import { debounceTime, map, tap } from "rxjs/operators";
+import { Observable, Subject } from "rxjs";
+import { debounceTime, map, tap, takeUntil } from "rxjs/operators";
 
 import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 
@@ -20,13 +25,14 @@ import { selectTableviewer } from "../../../core/tableviewer-selection/tableview
   styleUrls: ["./tableviewer-verb-panel.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TableviewerVerbPanelComponent implements OnInit {
+export class TableviewerVerbPanelComponent implements OnDestroy, OnInit {
   verbs$: Observable<Verb[]> = this.verbService.verbs$;
   checkboxGroup: FormGroup = new FormGroup({});
   viewableVerbs$: Observable<Verb[]>;
   selection$: Observable<TableviewerState>;
   searchField: FormControl;
   verbForm: FormGroup;
+  unsubscribe$ = new Subject<void>();
   constructor(
     public verbService: VerbService,
     private fb: FormBuilder,
@@ -39,6 +45,7 @@ export class TableviewerVerbPanelComponent implements OnInit {
     // Get Verbs
     this.verbs$
       .pipe(
+        takeUntil(this.unsubscribe$),
         // Create checkbox group
         tap(verbs =>
           verbs.map(verb =>
@@ -49,6 +56,7 @@ export class TableviewerVerbPanelComponent implements OnInit {
         tap(x =>
           this.checkboxGroup.valueChanges
             .pipe(
+              takeUntil(this.unsubscribe$),
               // Filter checked checkboxes
               map(checkboxes =>
                 Object.keys(checkboxes).filter(k => checkboxes[k])
@@ -66,12 +74,21 @@ export class TableviewerVerbPanelComponent implements OnInit {
       .subscribe(x => {
         // change viewable verbs
         this.viewableVerbs$ = this.searchField.valueChanges.pipe(
+          takeUntil(this.unsubscribe$),
           debounceTime(200),
           map(term => this.getEntriesFrom(term))
         );
       });
     // populate with store's selection
-    this.selection$ = this.store.pipe(select(selectTableviewer));
+    this.selection$ = this.store.pipe(
+      takeUntil(this.unsubscribe$),
+      select(selectTableviewer)
+    );
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   onVerbSelect(verbs) {

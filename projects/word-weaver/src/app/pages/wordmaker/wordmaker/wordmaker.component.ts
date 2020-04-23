@@ -1,11 +1,13 @@
 import {
+  AfterViewInit,
   Component,
+  OnDestroy,
   OnInit,
   ChangeDetectionStrategy,
   ViewChild
 } from "@angular/core";
 import { NotificationService } from "../../../core/core.module";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject, Observable, Subject, Subscription } from "rxjs";
 import { selectWordmaker } from "../../../core/wordmaker-selection/wordmaker-selection.selectors";
 import {
   WordmakerState,
@@ -14,7 +16,7 @@ import {
 import { Store, select } from "@ngrx/store";
 import { marker } from "@biesbjerg/ngx-translate-extract-marker";
 import { actionChangeStep } from "../../../core/wordmaker-selection/wordmaker-selection.actions";
-import { distinctUntilKeyChanged, take } from "rxjs/operators";
+import { distinctUntilKeyChanged, take, takeUntil } from "rxjs/operators";
 
 @Component({
   selector: "ww-wordmaker",
@@ -22,20 +24,24 @@ import { distinctUntilKeyChanged, take } from "rxjs/operators";
   styleUrls: ["./wordmaker.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WordmakerComponent implements OnInit {
+export class WordmakerComponent implements OnDestroy, OnInit, AfterViewInit {
   loading;
   isLinear = true;
   verbLabel = new BehaviorSubject<string>(marker("ww.wordmaker.verb.question"));
   persLabel = new BehaviorSubject<string>(marker("ww.wordmaker.pers.question"));
   tempLabel = new BehaviorSubject<string>(marker("ww.wordmaker.temp.question"));
   selection$: Observable<WordmakerState>;
+  unsubscribe$ = new Subject<void>();
   @ViewChild("stepper") private stepper;
   constructor(
     private notificationService: NotificationService,
     private store: Store<State>
   ) {}
   ngOnInit(): void {
-    this.selection$ = this.store.pipe(select(selectWordmaker));
+    this.selection$ = this.store.pipe(
+      takeUntil(this.unsubscribe$),
+      select(selectWordmaker)
+    );
     // Step 1: Labels
     this.selection$.subscribe(x => {
       if (x.root) {
@@ -68,15 +74,21 @@ export class WordmakerComponent implements OnInit {
   }
 
   onStepChange(s) {
-    console.log(s);
     this.store.dispatch(actionChangeStep({ step: s }));
   }
 
-  // tslint:disable-next-line: use-life-cycle-interface
   ngAfterViewInit() {
     this.stepper.selectionChange
-      .pipe(distinctUntilKeyChanged("selectedIndex"))
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        distinctUntilKeyChanged("selectedIndex")
+      )
       .subscribe(x => this.onStepChange(x.selectedIndex));
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   randomX(x) {
@@ -84,7 +96,6 @@ export class WordmakerComponent implements OnInit {
   }
 
   onVerbSelect($event) {
-    console.log(this.stepper);
     this.stepper.next(1);
   }
 

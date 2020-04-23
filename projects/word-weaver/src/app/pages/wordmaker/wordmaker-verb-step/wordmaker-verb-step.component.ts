@@ -2,13 +2,14 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  OnDestroy,
   OnInit,
   Output
 } from "@angular/core";
 import { VerbService } from "../../../core/core.module";
 import { Verb } from "../../../models/models";
 import { Subject } from "rxjs";
-import { debounceTime, tap } from "rxjs/operators";
+import { debounceTime, tap, takeUntil } from "rxjs/operators";
 import { sortBy } from "lodash";
 import { Store } from "@ngrx/store";
 import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
@@ -26,13 +27,14 @@ import { actionChangeVerb } from "../../../core/wordmaker-selection/wordmaker-se
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeAnimation, listAnimation]
 })
-export class WordmakerVerbStepComponent implements OnInit {
+export class WordmakerVerbStepComponent implements OnDestroy, OnInit {
   viewableVerbs$ = new Subject<Verb[]>();
   loading;
   language = "ww.language";
   display_language = "english";
   searchField: FormControl;
   verbForm: FormGroup;
+  unsubscribe$ = new Subject<void>();
   @Output() selectedVerb = new EventEmitter<Verb>();
   constructor(
     private verbService: VerbService,
@@ -45,14 +47,22 @@ export class WordmakerVerbStepComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.verbService.verbs$.subscribe(x => this.viewableVerbs$.next(x));
+    this.verbService.verbs$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(x => this.viewableVerbs$.next(x));
     this.searchField.valueChanges
       .pipe(
+        takeUntil(this.unsubscribe$),
         debounceTime(200),
         tap(term => this.viewableVerbs$.next(this.filterEntries(term))),
         tap(x => console.log(this.filterEntries(x)))
       )
       .subscribe();
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   filterEntries(term) {

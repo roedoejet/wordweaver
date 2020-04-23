@@ -1,14 +1,15 @@
 import {
   Component,
   EventEmitter,
+  OnDestroy,
   OnInit,
   Output,
   ChangeDetectionStrategy
 } from "@angular/core";
 import { AffOption, Conjugation, Response } from "../../../models/models";
 import { AffixService, TierService } from "../../../core/core.module";
-import { Observable } from "rxjs";
-import { map, switchMap, withLatestFrom } from "rxjs/operators";
+import { Observable, Subject } from "rxjs";
+import { map, switchMap, withLatestFrom, takeUntil } from "rxjs/operators";
 import { Store, select } from "@ngrx/store";
 import { actionChangeAffOption } from "../../../core/wordmaker-selection/wordmaker-selection.actions";
 import {
@@ -24,8 +25,9 @@ import { createRequestQueryArgs } from "../../../core/tableviewer-selection/tabl
   styleUrls: ["./wordmaker-temp-step.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WordmakerTempStepComponent implements OnInit {
+export class WordmakerTempStepComponent implements OnDestroy, OnInit {
   selection$: Observable<WordmakerState>;
+  unsubscribe$ = new Subject<void>();
   @Output() selectedTemp = new EventEmitter<AffOption>();
   options$: Observable<any>;
   constructor(
@@ -35,8 +37,12 @@ export class WordmakerTempStepComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.selection$ = this.store.pipe(select(selectWordmaker));
+    this.selection$ = this.store.pipe(
+      takeUntil(this.unsubscribe$),
+      select(selectWordmaker)
+    );
     this.options$ = this.selection$.pipe(
+      takeUntil(this.unsubscribe$),
       // See all options, despite selection
       map(selection => {
         const newSelection = { ...selection, ...{ option: null } };
@@ -44,6 +50,11 @@ export class WordmakerTempStepComponent implements OnInit {
       }),
       switchMap(selection => this.tierService.conjugate$(selection))
     );
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   returnTranslation(conjugations: Response) {

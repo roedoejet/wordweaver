@@ -1,5 +1,6 @@
 import {
   Component,
+  AfterViewInit,
   OnInit,
   ChangeDetectionStrategy,
   ViewChild,
@@ -12,7 +13,7 @@ import { NotificationService } from "../../../core/core.module";
 import { EChartOption } from "echarts";
 import { Store, select } from "@ngrx/store";
 import { Observable, BehaviorSubject, Subject } from "rxjs";
-import { map, tap } from "rxjs/operators";
+import { map, tap, take } from "rxjs/operators";
 import { merge as _merge } from "lodash";
 import {
   actionConjugationEvent,
@@ -36,7 +37,7 @@ import { actionSettingsChangeThemeColors } from "../../../core/settings/settings
   styleUrls: ["./tableviewer-conj-panel.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TableviewerConjPanelComponent implements OnInit {
+export class TableviewerConjPanelComponent implements AfterViewInit, OnInit {
   // Basic config
   settings$: Observable<SettingsState>;
   selection$: Observable<TableviewerState>;
@@ -122,6 +123,7 @@ export class TableviewerConjPanelComponent implements OnInit {
   download() {
     this.selection$
       .pipe(
+        take(1),
         tap(selection => console.log(selection))
         // Make args
         // map(selection => this.conjugationService.createRequestUrl(selection).toString()),
