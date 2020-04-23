@@ -68,7 +68,8 @@ import {
   faPowerOff,
   faUserCircle,
   faMusic,
-  faPlayCircle
+  faPlayCircle,
+  faBed
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faGithub,
@@ -202,6 +203,7 @@ export class CoreModule {
       throw new Error("CoreModule is already loaded. Import only in AppModule");
     }
     faIconLibrary.addIcons(
+      faBed,
       faCog,
       faBars,
       faRocket,
