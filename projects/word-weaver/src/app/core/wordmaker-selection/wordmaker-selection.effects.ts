@@ -32,6 +32,7 @@ import { NotificationService } from "../notifications/notification.service";
 import { VerbService } from "../verb/verb.service";
 import { OptionService } from "../option/option.service";
 import { PronounService } from "../pronoun/pronoun.service";
+import { ValidationService } from "../validation/validation.service";
 
 export const WORDMAKER_SELECTION_KEY = "WORDMAKER";
 
@@ -59,7 +60,8 @@ export class WordmakerEffects {
     private notificationService: NotificationService,
     private verbService: VerbService,
     private optionService: OptionService,
-    private pronounService: PronounService
+    private pronounService: PronounService,
+    private validationService: ValidationService
   ) {}
 
   // TODO: persist
@@ -114,16 +116,60 @@ export class WordmakerEffects {
             // Temp Selection Step
             case 2: {
               // Notify random selection
-              // TODO: This should be made language independent
+              const pronoun = {
+                agent: selection.agent,
+                patient: selection.patient
+              };
+              console.log("agent selection:");
+              console.log(
+                this.validationService.validate(
+                  "validation",
+                  "selection",
+                  "agents",
+                  selection
+                )
+              );
+              console.log("agent display:");
+              console.log(
+                this.validationService.validate(
+                  "display",
+                  "categories",
+                  "agents",
+                  selection
+                )
+              );
+              console.log("patient selection:");
+              console.log(
+                this.validationService.validate(
+                  "validation",
+                  "selection",
+                  "patients",
+                  selection
+                )
+              );
+              console.log("patient display:");
+              console.log(
+                this.validationService.validate(
+                  "validation",
+                  "selection",
+                  "patients",
+                  selection
+                )
+              );
               if (
-                selection.root.thematic_relation === "purple" &&
-                (!selection.agent || !selection.patient)
+                !this.validationService.validate(
+                  "validation",
+                  "selection",
+                  "agents",
+                  selection
+                ) &&
+                this.validationService.validate(
+                  "display",
+                  "categories",
+                  "agents",
+                  selection
+                )
               ) {
-                // TODO: This should filter invalid combinations
-                const pronoun = {
-                  agent: selection.agent,
-                  patient: selection.patient
-                };
                 if (!selection.agent) {
                   const randomAgent = randomX(this.pronounService.pronouns);
                   this.store.dispatch(
@@ -131,6 +177,21 @@ export class WordmakerEffects {
                   );
                   pronoun.agent = randomAgent;
                 }
+              }
+              if (
+                !this.validationService.validate(
+                  "validation",
+                  "selection",
+                  "patients",
+                  selection
+                ) &&
+                this.validationService.validate(
+                  "display",
+                  "categories",
+                  "patients",
+                  selection
+                )
+              ) {
                 if (!selection.patient) {
                   const randomPatient = randomX(this.pronounService.pronouns);
                   this.store.dispatch(
@@ -138,6 +199,8 @@ export class WordmakerEffects {
                   );
                   pronoun.patient = randomPatient;
                 }
+              }
+              if (pronoun.agent && pronoun.patient) {
                 this.notificationService.translated(
                   marker("ww.wordmaker.notifications.random.pers.transitive"),
                   {
@@ -146,28 +209,16 @@ export class WordmakerEffects {
                   },
                   "success"
                 );
-              } else if (
-                selection.root.thematic_relation === "blue" &&
-                !selection.patient
-              ) {
-                const randomPatient = randomX(this.pronounService.pronouns);
-                this.store.dispatch(
-                  actionChangePatient({ patient: randomPatient })
-                );
-                this.notificationService.translated(
-                  marker("ww.wordmaker.notifications.random.pers.transitive"),
-                  { value: randomPatient.gloss },
-                  "success"
-                );
-              } else if (
-                selection.root.thematic_relation === "red" &&
-                !selection.agent
-              ) {
-                const randomAgent = randomX(this.pronounService.pronouns);
-                this.store.dispatch(actionChangeAgent({ agent: randomAgent }));
+              } else if (pronoun.agent) {
                 this.notificationService.translated(
                   marker("ww.wordmaker.notifications.random.pers.intransitive"),
-                  { value: randomAgent.gloss },
+                  { value: pronoun.agent.gloss },
+                  "success"
+                );
+              } else if (pronoun.patient) {
+                this.notificationService.translated(
+                  marker("ww.wordmaker.notifications.random.pers.intransitive"),
+                  { value: pronoun.patient.gloss },
                   "success"
                 );
               }

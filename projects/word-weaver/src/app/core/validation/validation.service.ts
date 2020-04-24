@@ -32,7 +32,6 @@ export class ValidationService {
           )
         );
       } else {
-        console.log(condition);
         let method = item;
         if (condition["method"] === "selection") {
           method = selection;

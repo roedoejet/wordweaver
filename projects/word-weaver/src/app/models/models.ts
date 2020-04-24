@@ -36,7 +36,6 @@ export interface Verb {
   display: string;
   tag: string;
   classes: string[];
-  thematic_relation: string;
 }
 
 export interface OptionalParam {
