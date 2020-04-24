@@ -30,10 +30,9 @@
         <mat-chip-list class="panel__list custom-scroll" *ngIf="viewableVerbs$ | async as verbs; else loading">
             <p *ngIf="verbs.length === 0">{{ "ww.wordmaker.verb.try-again" | translate }}</p>
             <mat-chip class="margin-5 bg-white border-accent" (click)="onVerbSelect(verb)" *ngFor="let verb of verbs">
-                <span class="centered color-black" *ngIf="display_language !== 'english'">{{verb.display}}</span>
-                <span class="centered color-black" *ngIf="display_language === 'english'">{{verb.gloss}}</span>
+                <span class="centered color-black">{{verb.gloss}}</span>
                 <mat-icon class="icon-sm margin-left-5"
-                    [ngClass]="verb?.thematic_relation ? 'color-' + verb?.thematic_relation : ''">brightness_1
+                    [ngClass]="verb?.classes">brightness_1
                 </mat-icon>
             </mat-chip>
         </mat-chip-list>

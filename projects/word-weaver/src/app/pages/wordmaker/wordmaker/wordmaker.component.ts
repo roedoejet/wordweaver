@@ -6,7 +6,7 @@ import {
   ChangeDetectionStrategy,
   ViewChild
 } from "@angular/core";
-import { NotificationService } from "../../../core/core.module";
+import { ValidationService } from "../../../core/core.module";
 import { BehaviorSubject, Observable, Subject, Subscription } from "rxjs";
 import { selectWordmaker } from "../../../core/wordmaker-selection/wordmaker-selection.selectors";
 import {
@@ -34,8 +34,8 @@ export class WordmakerComponent implements OnDestroy, OnInit, AfterViewInit {
   unsubscribe$ = new Subject<void>();
   @ViewChild("stepper") private stepper;
   constructor(
-    private notificationService: NotificationService,
-    private store: Store<State>
+    private store: Store<State>,
+    private validationService: ValidationService
   ) {}
   ngOnInit(): void {
     this.selection$ = this.store.pipe(
@@ -52,11 +52,11 @@ export class WordmakerComponent implements OnDestroy, OnInit, AfterViewInit {
       // TODO: This needs to be refactored to be language agnostic
       if (x.agent || x.patient) {
         let label = "";
-        if (x.root.thematic_relation === "purple" && x.agent && x.patient) {
+        if (x.agent && x.patient) {
           label = x.agent.gloss + " > " + x.patient.gloss;
-        } else if (x.root.thematic_relation === "red") {
+        } else if (x.agent) {
           label = x.agent.gloss;
-        } else if (x.root.thematic_relation === "blue") {
+        } else if (x.patient) {
           label = x.patient.gloss;
         } else {
           label = "ww.wordmaker.pers.question";
@@ -101,8 +101,14 @@ export class WordmakerComponent implements OnDestroy, OnInit, AfterViewInit {
 
   onPatientSelect($event) {
     this.selection$.pipe(take(1)).subscribe(selection => {
-      // TODO: This should be made language independent
-      if (selection.agent || selection.root.thematic_relation === "blue") {
+      if (
+        this.validationService.validate(
+          "validation",
+          "selection",
+          "patients",
+          selection
+        )
+      ) {
         this.stepper.next();
       }
     });
@@ -110,8 +116,14 @@ export class WordmakerComponent implements OnDestroy, OnInit, AfterViewInit {
 
   onAgentSelect($event) {
     this.selection$.pipe(take(1)).subscribe(selection => {
-      // TODO: This should be made language independent
-      if (selection.patient || selection.root.thematic_relation === "red") {
+      if (
+        this.validationService.validate(
+          "validation",
+          "selection",
+          "agents",
+          selection
+        )
+      ) {
         this.stepper.next();
       }
     });

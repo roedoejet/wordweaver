@@ -11,7 +11,7 @@ import { selectTableviewer } from "../../../core/tableviewer-selection/tableview
 import { Observable } from "rxjs";
 import { map, switchMap, tap, distinctUntilChanged } from "rxjs/operators";
 import { TableviewerState } from "../../../core/tableviewer-selection/tableviewer-selection.model";
-import { AffixService } from "../../../core/affix/affix.service";
+import { OptionService } from "../../../core/option/option.service";
 import { merge as _merge } from "lodash";
 import { selectThemeColors } from "../../../core/settings/settings.selectors";
 
@@ -26,7 +26,7 @@ export class ConjugationTreeComponent implements OnInit {
   defaultChartOption: EChartOption;
   defaultSeries: any;
   selection$: Observable<TableviewerState>;
-  constructor(private store: Store, private affixService: AffixService) {}
+  constructor(private store: Store, private optionService: OptionService) {}
 
   ngOnInit(): void {
     this.selection$ = this.store.pipe(select(selectTableviewer));
@@ -137,7 +137,7 @@ export class ConjugationTreeComponent implements OnInit {
     // Populate and merge object node
     conjugations.forEach(conjugation => {
       const v = conjugation.input.root;
-      const t = this.affixService.getAffOption(conjugation.input["option"])[
+      const t = this.optionService.getOption(conjugation.input["option"])[
         "gloss"
       ];
       const p = conjugation.output

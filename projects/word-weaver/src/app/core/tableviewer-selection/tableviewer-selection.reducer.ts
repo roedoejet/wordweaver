@@ -1,6 +1,6 @@
 import {
   actionChangeAgents,
-  actionChangeAffOptions,
+  actionChangeOptions,
   actionChangePatients,
   actionChangeVerbs,
   actionToggleTreeViewOrder,
@@ -29,7 +29,7 @@ const reducer = createReducer(
   // Basic updates
   on(
     actionChangeAgents,
-    actionChangeAffOptions,
+    actionChangeOptions,
     actionChangePatients,
     actionChangeVerbs,
     actionChangeTreeViewDepth,

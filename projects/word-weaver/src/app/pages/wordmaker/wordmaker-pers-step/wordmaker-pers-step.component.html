@@ -4,16 +4,22 @@
     </ng-template>
     <div class='panel__header--small'>
         <div class='container'>
-            <div *ngIf="selection.root.thematic_relation !== 'purple'" class='row'>
+            <div *ngIf="(!(validationService.validate('display', 'categories', 'patients', selection)) || !(validationService.validate('display', 'categories', 'patients', selection)))"
+                class='row'>
                 <br>
             </div>
-            <div *ngIf="selection.root.thematic_relation !== 'purple'" class='row'>
+            <div *ngIf="(!(validationService.validate('display', 'categories', 'patients', selection)) || !(validationService.validate('display', 'categories', 'patients', selection)))"
+                class='row'>
                 <br>
             </div>
             <div class='row'>
                 <div class='instructions col-sm-12'>
-                    <p *ngIf="selection.root.thematic_relation !== 'purple'">{{ "ww.wordmaker.pers.select-intransitive-pronoun" | translate }}</p>
-                    <p *ngIf="selection.root.thematic_relation === 'purple'">{{ "ww.wordmaker.pers.select-transitive-pronoun" | translate }}
+                    <p
+                        *ngIf="(!(validationService.validate('display', 'categories', 'patients', selection)) || !(validationService.validate('display', 'categories', 'patients', selection)))">
+                        {{ "ww.wordmaker.pers.select-intransitive-pronoun" | translate }}</p>
+                    <p
+                        *ngIf="((validationService.validate('display', 'categories', 'patients', selection)) && (validationService.validate('display', 'categories', 'patients', selection)))">
+                        {{ "ww.wordmaker.pers.select-transitive-pronoun" | translate }}
                     </p>
                 </div>
             </div>
@@ -21,43 +27,36 @@
     </div>
     <hr class='margin-bottom-50'>
     <div class='panel__content--large' *ngIf="pronouns$ | async as pronouns; else loading">
-        <div class="pwidth-50--desktop pwidth-100--mobile centered" *ngIf="selection.root.thematic_relation === 'blue'">
-            <mat-chip-list>
-                <mat-chip class="bg-white border-accent color-black" (click)="onPatientSelect(pn)"
-                    *ngFor="let pn of pronouns">{{ pn.obj_gloss }}
-                    <mat-icon class="margin-left-5 color-blue icon-md">person</mat-icon>
-                </mat-chip>
-            </mat-chip-list>
-        </div>
-        <div class="pwidth-50--desktop pwidth-100--mobile centered" *ngIf="selection.root.thematic_relation === 'red'">
-            <mat-chip-list>
-                <mat-chip class="bg-white border-accent color-black" (click)="onAgentSelect(pn)"
-                    *ngFor="let pn of pronouns">{{ pn.obj_gloss }}
-                    <mat-icon class="margin-left-5 color-red icon-md">person</mat-icon>
-                </mat-chip>
-            </mat-chip-list>
-        </div>
-        <div class="pwidth-50--desktop pwidth-100--mobile centered" *ngIf="selection.root.thematic_relation === 'purple'">
-            <h5>{{ "ww.wordmaker.pers.patient-informal" | translate }}</h5>
-            <mat-chip-list>
-                <mat-chip class="border-accent" (click)="onAgentSelect(pn)" *ngFor="let pn of pronouns"
-                    [ngClass]="selection.agent === pn ? 'color-white bg-red' : 'bg-white color-black'">{{ pn.gloss }}
-                    <mat-icon class="margin-left-5 icon-md"
-                        [ngClass]="selection.agent === pn ? 'color-white' : 'color-red'">person
-                    </mat-icon>
-                </mat-chip>
-            </mat-chip-list>
-            <h5>{{ "ww.wordmaker.pers.agent-informal" | translate }}</h5>
-            <mat-chip-list>
-                <mat-chip class="bg-white border-accent" (click)="onPatientSelect(pn)" *ngFor="let pn of pronouns"
-                    [ngClass]="selection.patient === pn ? 'color-white bg-blue' : 'bg-white color-black'">
-                    {{ pn.obj_gloss }}
-                    <mat-icon class="margin-left-5 icon-md"
-                        [ngClass]="selection.patient === pn ? 'color-white' : 'color-blue'">
-                        person
-                    </mat-icon>
-                </mat-chip>
-            </mat-chip-list>
+        <div class="pwidth-50--desktop pwidth-100--mobile centered">
+            <div *ngIf="validationService.validate('display', 'categories', 'agents', selection)">
+                <h5
+                    *ngIf="((validationService.validate('display', 'categories', 'patients', selection)) && (validationService.validate('display', 'categories', 'patients', selection)))">
+                    {{ "ww.wordmaker.pers.agent-informal" | translate }}</h5>
+                <mat-chip-list>
+                    <mat-chip class="border-accent" (click)="onAgentSelect(pn)" *ngFor="let pn of pronouns"
+                        [ngClass]="selection.agent === pn ? 'color-white bg-red' : 'bg-white color-black'">
+                        {{ pn.gloss }}
+                        <mat-icon class="margin-left-5 icon-md"
+                            [ngClass]="selection.agent === pn ? 'color-white' : 'color-red'">person
+                        </mat-icon>
+                    </mat-chip>
+                </mat-chip-list>
+            </div>
+            <div *ngIf="validationService.validate('display', 'categories', 'patients', selection)">
+                <h5
+                    *ngIf="((validationService.validate('display', 'categories', 'patients', selection)) && (validationService.validate('display', 'categories', 'patients', selection)))">
+                    {{ "ww.wordmaker.pers.patient-informal" | translate }}</h5>
+                <mat-chip-list>
+                    <mat-chip class="bg-white border-accent" (click)="onPatientSelect(pn)" *ngFor="let pn of pronouns"
+                        [ngClass]="selection.patient === pn ? 'color-white bg-blue' : 'bg-white color-black'">
+                        {{ pn.obj_gloss }}
+                        <mat-icon class="margin-left-5 icon-md"
+                            [ngClass]="selection.patient === pn ? 'color-white' : 'color-blue'">
+                            person
+                        </mat-icon>
+                    </mat-chip>
+                </mat-chip-list>
+            </div>
         </div>
     </div>
 </div>

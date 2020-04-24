@@ -1,10 +1,10 @@
 import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
-import { AffOption } from "../../../models/models";
-import { AffixService } from "../../../core/core.module";
+import { Option } from "../../../models/models";
+import { OptionService } from "../../../core/core.module";
 import { Store, select } from "@ngrx/store";
 import { Observable } from "rxjs";
 
-import { actionChangeAffOptions } from "../../../core/tableviewer-selection/tableviewer-selection.actions";
+import { actionChangeOptions } from "../../../core/tableviewer-selection/tableviewer-selection.actions";
 
 import {
   TableviewerState,
@@ -19,10 +19,13 @@ import { selectTableviewer } from "../../../core/tableviewer-selection/tableview
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableviewerTempPanelComponent implements OnInit {
-  possibleTimes$: Observable<AffOption[]>;
+  possibleTimes$: Observable<Option[]>;
   selection$: Observable<TableviewerState>;
-  constructor(private affixService: AffixService, private store: Store<State>) {
-    this.possibleTimes$ = this.affixService.affoptions$;
+  constructor(
+    private optionService: OptionService,
+    private store: Store<State>
+  ) {
+    this.possibleTimes$ = this.optionService.options$;
   }
 
   ngOnInit(): void {
@@ -30,7 +33,7 @@ export class TableviewerTempPanelComponent implements OnInit {
     this.selection$ = this.store.pipe(select(selectTableviewer));
   }
 
-  onAffOptionSelect(affoptions) {
-    this.store.dispatch(actionChangeAffOptions({ option: affoptions.value }));
+  onOptionSelect(Options) {
+    this.store.dispatch(actionChangeOptions({ option: Options.value }));
   }
 }

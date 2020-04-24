@@ -4,7 +4,7 @@ import {
 } from "./tableviewer-selection.reducer";
 
 import {
-  actionChangeAffOptions,
+  actionChangeOptions,
   actionChangeAgents,
   actionChangePatients,
   actionChangeVerbs

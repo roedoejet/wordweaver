@@ -31,7 +31,6 @@ export class WordmakerVerbStepComponent implements OnDestroy, OnInit {
   viewableVerbs$ = new Subject<Verb[]>();
   loading;
   language = "ww.language";
-  display_language = "english";
   searchField: FormControl;
   verbForm: FormGroup;
   unsubscribe$ = new Subject<void>();
@@ -81,10 +80,6 @@ export class WordmakerVerbStepComponent implements OnDestroy, OnInit {
   }
 
   sortVerbs(verbs) {
-    if (this.display_language === "english") {
-      return sortBy(verbs, ["gloss"]);
-    } else {
-      return sortBy(verbs, ["display"]);
-    }
+    return sortBy(verbs, ["gloss"]);
   }
 }

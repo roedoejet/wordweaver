@@ -1,7 +1,7 @@
 import { initialState, wordmakerReducer } from "./wordmaker-selection.reducer";
 
 import {
-  actionChangeAffOption,
+  actionChangeOption,
   actionChangeAgent,
   actionChangePatient,
   actionChangeVerb

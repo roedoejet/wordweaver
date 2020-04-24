@@ -1,6 +1,6 @@
 import { createAction, props } from "@ngrx/store";
 
-import { AffOption, Pronoun, Response, Verb } from "../../models/models";
+import { Option, Pronoun, Response, Verb } from "../../models/models";
 
 import { Step } from "./wordmaker-selection.model";
 
@@ -24,9 +24,9 @@ export const actionChangePatient = createAction(
   props<{ patient: Pronoun }>()
 );
 
-export const actionChangeAffOption = createAction(
+export const actionChangeOption = createAction(
   "[Wordmaker] Change Selected Affix Option",
-  props<{ option: AffOption }>()
+  props<{ option: Option }>()
 );
 
 export const actionConjugationEvent = createAction(

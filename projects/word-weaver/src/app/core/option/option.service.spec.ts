@@ -2,17 +2,17 @@ import { TestBed } from "@angular/core/testing";
 
 import { HttpClientModule } from "@angular/common/http";
 
-import { AffixService } from "./affix.service";
+import { OptionService } from "./option.service";
 
-describe("AffixService", () => {
-  let service: AffixService;
+describe("OptionService", () => {
+  let service: OptionService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AffixService],
+      providers: [OptionService],
       imports: [HttpClientModule]
     });
-    service = TestBed.inject(AffixService);
+    service = TestBed.inject(OptionService);
   });
 
   it("should be created", () => {

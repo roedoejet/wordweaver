@@ -2,7 +2,7 @@ import { createAction, props } from "@ngrx/store";
 
 import { TableviewerTreeDepth } from "./tableviewer-selection.model";
 
-import { AffOption, Pronoun, Response, Verb } from "../../models/models";
+import { Option, Pronoun, Response, Verb } from "../../models/models";
 
 export const actionChangeConjugations = createAction(
   "[Tableviewer] Change Conjugations",
@@ -24,9 +24,9 @@ export const actionChangePatients = createAction(
   props<{ patient: Pronoun[] }>()
 );
 
-export const actionChangeAffOptions = createAction(
+export const actionChangeOptions = createAction(
   "[Tableviewer] Change Selected Affix Options",
-  props<{ option: AffOption[] }>()
+  props<{ option: Option[] }>()
 );
 
 export const actionToggleGridView = createAction(

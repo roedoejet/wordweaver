@@ -19,7 +19,7 @@ import { LocalStorageService } from "../local-storage/local-storage.service";
 import {
   actionConjugationEvent,
   actionChangeAgent,
-  actionChangeAffOption,
+  actionChangeOption,
   actionChangePatient,
   actionChangeVerb,
   actionChangeStep,
@@ -30,7 +30,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { marker } from "@biesbjerg/ngx-translate-extract-marker";
 import { NotificationService } from "../notifications/notification.service";
 import { VerbService } from "../verb/verb.service";
-import { AffixService } from "../affix/affix.service";
+import { OptionService } from "../option/option.service";
 import { PronounService } from "../pronoun/pronoun.service";
 
 export const WORDMAKER_SELECTION_KEY = "WORDMAKER";
@@ -58,7 +58,7 @@ export class WordmakerEffects {
     private http: HttpClient,
     private notificationService: NotificationService,
     private verbService: VerbService,
-    private affixService: AffixService,
+    private optionService: OptionService,
     private pronounService: PronounService
   ) {}
 
@@ -68,7 +68,7 @@ export class WordmakerEffects {
   //     this.actions$.pipe(
   //       ofType(
   //         actionChangeAgents,
-  //         actionChangeAffOptions,
+  //         actionChangeOptions,
   //         actionChangeVerbs,
   //         actionChangePatients
   //       ),
@@ -92,7 +92,7 @@ export class WordmakerEffects {
               // Reset following choices
               this.store.dispatch(actionChangeAgent({ agent: null }));
               this.store.dispatch(actionChangePatient({ patient: null }));
-              this.store.dispatch(actionChangeAffOption({ option: null }));
+              this.store.dispatch(actionChangeOption({ option: null }));
               break;
             }
             // Pronoun Selection Step
@@ -108,7 +108,7 @@ export class WordmakerEffects {
                 );
               }
               // Reset following choice
-              this.store.dispatch(actionChangeAffOption({ option: null }));
+              this.store.dispatch(actionChangeOption({ option: null }));
               break;
             }
             // Temp Selection Step
@@ -176,8 +176,8 @@ export class WordmakerEffects {
             case 3: {
               // Notify random selection
               if (!selection.option) {
-                const random = randomX(this.affixService.affixoptions);
-                this.store.dispatch(actionChangeAffOption({ option: random }));
+                const random = randomX(this.optionService.options);
+                this.store.dispatch(actionChangeOption({ option: random }));
                 this.notificationService.translated(
                   marker("ww.wordmaker.notifications.random.temp"),
                   { value: random.gloss },

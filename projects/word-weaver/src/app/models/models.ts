@@ -12,8 +12,8 @@ export interface Affix {
     | "tmp_affix";
 }
 
-export interface AffOption {
-  affixes: Affix[];
+export interface Option {
+  classes: Affix[];
   gloss: string;
   tag: string;
 }
@@ -33,11 +33,10 @@ export interface Pronoun {
 
 export interface Verb {
   gloss: string;
-  required_affixes: Affix[];
   display: string;
   tag: string;
+  classes: string[];
   thematic_relation: string;
-  position?: Number;
 }
 
 export interface OptionalParam {

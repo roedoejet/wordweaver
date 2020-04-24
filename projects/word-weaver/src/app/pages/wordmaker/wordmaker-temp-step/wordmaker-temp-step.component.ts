@@ -6,12 +6,12 @@ import {
   Output,
   ChangeDetectionStrategy
 } from "@angular/core";
-import { AffOption, Conjugation, Response } from "../../../models/models";
-import { AffixService, TierService } from "../../../core/core.module";
+import { Option, Conjugation, Response } from "../../../models/models";
+import { OptionService, TierService } from "../../../core/core.module";
 import { Observable, Subject } from "rxjs";
 import { map, switchMap, withLatestFrom, takeUntil } from "rxjs/operators";
 import { Store, select } from "@ngrx/store";
-import { actionChangeAffOption } from "../../../core/wordmaker-selection/wordmaker-selection.actions";
+import { actionChangeOption } from "../../../core/wordmaker-selection/wordmaker-selection.actions";
 import {
   WordmakerState,
   State
@@ -28,10 +28,10 @@ import { createRequestQueryArgs } from "../../../core/tableviewer-selection/tabl
 export class WordmakerTempStepComponent implements OnDestroy, OnInit {
   selection$: Observable<WordmakerState>;
   unsubscribe$ = new Subject<void>();
-  @Output() selectedTemp = new EventEmitter<AffOption>();
+  @Output() selectedTemp = new EventEmitter<Option>();
   options$: Observable<any>;
   constructor(
-    private affixService: AffixService,
+    private optionService: OptionService,
     private store: Store<State>,
     private tierService: TierService
   ) {}
@@ -64,7 +64,7 @@ export class WordmakerTempStepComponent implements OnDestroy, OnInit {
   }
 
   onAffOptSelect(ao) {
-    this.store.dispatch(actionChangeAffOption({ option: ao }));
+    this.store.dispatch(actionChangeOption({ option: ao }));
     this.selectedTemp.emit(ao);
   }
 
@@ -75,7 +75,7 @@ export class WordmakerTempStepComponent implements OnDestroy, OnInit {
   }
 
   returnAffoptFromTag$(tag) {
-    return this.affixService.affoptions$.pipe(
+    return this.optionService.options$.pipe(
       map(affopts => {
         const picked_ao = affopts.filter(ao => ao["tag"] === tag)[0];
         return picked_ao;
@@ -84,7 +84,7 @@ export class WordmakerTempStepComponent implements OnDestroy, OnInit {
   }
 
   returnAffoptFromGloss$(gloss) {
-    return this.affixService.affoptions$.pipe(
+    return this.optionService.options$.pipe(
       map(affopts => {
         const picked_ao = affopts.filter(ao => ao["gloss"] === gloss)[0];
         return picked_ao;

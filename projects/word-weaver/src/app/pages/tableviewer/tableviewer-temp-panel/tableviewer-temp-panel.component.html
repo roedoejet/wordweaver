@@ -5,7 +5,7 @@
   <mat-form-field class='control'>
     <mat-label>{{ 'ww.tableviewer.temp.select' | translate }}</mat-label>
     <mat-select *ngIf="selection$ | async as selection" [ngModel]="selection['option']" multiple
-      (selectionChange)="onAffOptionSelect($event)">
+      (selectionChange)="onOptionSelect($event)">
       <mat-select-trigger>
         {{selection['option'].length ? selection['option'][0].gloss : ''}}
         <span *ngIf="selection['option'].length > 1" class="example-additional-selection">

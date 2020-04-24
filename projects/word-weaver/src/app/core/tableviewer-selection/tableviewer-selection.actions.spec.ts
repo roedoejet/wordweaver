@@ -1,6 +1,6 @@
 import {
   actionChangeAgents,
-  actionChangeAffOptions,
+  actionChangeOptions,
   actionChangePatients,
   actionChangeVerbs
 } from "./tableviewer-selection.actions";

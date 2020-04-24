@@ -8,7 +8,6 @@ import {
 } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { HttpClient } from "@angular/common/http";
-import { ConjugationService } from "../../../core/core.module";
 import { NotificationService } from "../../../core/core.module";
 import { EChartOption } from "echarts";
 import { Store, select } from "@ngrx/store";

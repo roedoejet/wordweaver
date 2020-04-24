@@ -79,12 +79,12 @@ import {
   faYoutube
 } from "@fortawesome/free-brands-svg-icons";
 
-import { AffixService } from "./affix/affix.service";
-import { ConjugationService } from "./conjugation/conjugation.service";
+import { OptionService } from "./option/option.service";
 import { PronounService } from "./pronoun/pronoun.service";
 import { TierService } from "./tier/tier.service";
 import { WordmakerSelectionService } from "./wordmaker-selection/wordmaker-selection.service";
 import { VerbService } from "./verb/verb.service";
+import { ValidationService } from "./validation/validation.service";
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
@@ -105,11 +105,11 @@ export {
   selectEffectiveTheme,
   selectSettingsLanguage,
   selectSettingsStickyHeader,
-  AffixService,
-  ConjugationService,
+  OptionService,
   PronounService,
   TierService,
   WordmakerSelectionService,
+  ValidationService,
   VerbService
 };
 

@@ -6,7 +6,7 @@ import {
   OnInit,
   Output
 } from "@angular/core";
-import { PronounService } from "../../../core/core.module";
+import { PronounService, ValidationService } from "../../../core/core.module";
 import { Pronoun } from "../../../models/models";
 import { Observable, Subject } from "rxjs";
 import {
@@ -35,7 +35,8 @@ export class WordmakerPersStepComponent implements OnDestroy, OnInit {
   @Output() selectedPatient = new EventEmitter<Pronoun>();
   constructor(
     private pronounService: PronounService,
-    private store: Store<State>
+    private store: Store<State>,
+    public validationService: ValidationService
   ) {}
 
   ngOnInit(): void {

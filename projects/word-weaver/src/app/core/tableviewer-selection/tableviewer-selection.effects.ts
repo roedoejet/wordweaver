@@ -18,7 +18,7 @@ import { LocalStorageService } from "../local-storage/local-storage.service";
 import {
   actionConjugationEvent,
   actionChangeAgents,
-  actionChangeAffOptions,
+  actionChangeOptions,
   actionChangePatients,
   actionChangeVerbs,
   actionChangeLoading,
@@ -59,7 +59,7 @@ export class TableviewerEffects {
   //     this.actions$.pipe(
   //       ofType(
   //         actionChangeAgents,
-  //         actionChangeAffOptions,
+  //         actionChangeOptions,
   //         actionChangeVerbs,
   //         actionChangePatients
   //       ),

@@ -1,10 +1,10 @@
-import { AffOption, Pronoun, Verb, Response } from "../../models/models";
+import { Option, Pronoun, Verb, Response } from "../../models/models";
 import { AppState } from "../core.module";
 
 export type Step = 0 | 1 | 2 | 3;
 
 export interface WordmakerState {
-  option: AffOption;
+  option: Option;
   agent: Pronoun;
   patient: Pronoun;
   root: Verb;

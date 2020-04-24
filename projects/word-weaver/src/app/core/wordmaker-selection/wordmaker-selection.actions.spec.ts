@@ -1,6 +1,6 @@
 import {
   actionChangeAgent,
-  actionChangeAffOption,
+  actionChangeOption,
   actionChangePatient,
   actionChangeVerb
 } from "./wordmaker-selection.actions";

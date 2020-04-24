@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
-import { AffOption, Pronoun, RequestParams, Verb } from "../../models/models";
+import { Option, Pronoun, RequestParams, Verb } from "../../models/models";
 import { BehaviorSubject } from "rxjs";
 
 interface WordMakerSelection {
   root: Verb;
-  option: AffOption;
+  option: Option;
   patient: Pronoun;
   agent: Pronoun;
 }
@@ -15,7 +15,7 @@ interface WordMakerSelection {
 export class WordmakerSelectionService {
   selection: {
     root: Verb;
-    option: AffOption;
+    option: Option;
     patient: Pronoun;
     agent: Pronoun;
   } = { root: null, option: null, patient: null, agent: null };
@@ -37,7 +37,7 @@ export class WordmakerSelectionService {
     this.selection$.next(this.selection);
   }
 
-  updateAffOption(ao) {
+  updateOption(ao) {
     this.selection["option"] = ao;
     this.selection$.next(this.selection);
   }

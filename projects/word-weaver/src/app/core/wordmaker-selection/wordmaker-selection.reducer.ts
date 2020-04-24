@@ -1,6 +1,6 @@
 import {
   actionChangeAgent,
-  actionChangeAffOption,
+  actionChangeOption,
   actionChangePatient,
   actionChangeVerb,
   actionChangeConjugations,
@@ -25,7 +25,7 @@ const reducer = createReducer(
   // Basic updates
   on(
     actionChangeAgent,
-    actionChangeAffOption,
+    actionChangeOption,
     actionChangePatient,
     actionChangeVerb,
     actionChangeConjugations,
