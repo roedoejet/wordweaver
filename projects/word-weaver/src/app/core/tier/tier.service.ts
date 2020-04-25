@@ -71,6 +71,7 @@ export class TierService {
     return conjugations.map(conjugation => {
       const tieredConjugation = [];
       tiers.forEach(tier => {
+        console.log(tier);
         tieredConjugation.push({
           name: tier.name,
           options: tier.options,

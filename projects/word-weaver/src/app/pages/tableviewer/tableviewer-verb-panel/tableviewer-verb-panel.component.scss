@@ -1,6 +1,11 @@
 .panel__content {
   position: absolute;
   top: 40px;
+  width: 100%;
+}
+
+mat-list {
+  width: 90%;
 }
 
 .control {

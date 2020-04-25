@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { Pronoun } from "../../../models/models";
-import { PronounService } from "../../../core/core.module";
+import { PronounService, ValidationService } from "../../../core/core.module";
 import { Observable } from "rxjs";
 import { Store, select } from "@ngrx/store";
 
@@ -21,7 +21,11 @@ import { selectTableviewer } from "../../../core/tableviewer-selection/tableview
 export class TableviewerPersPanelComponent implements OnInit {
   possiblePronouns$: Observable<Pronoun[]>;
   selection$: Observable<TableviewerState>;
-  constructor(public pnService: PronounService, private store: Store) {
+  constructor(
+    public pnService: PronounService,
+    private store: Store,
+    public validationService: ValidationService
+  ) {
     this.possiblePronouns$ = this.pnService.pronouns$;
   }
 

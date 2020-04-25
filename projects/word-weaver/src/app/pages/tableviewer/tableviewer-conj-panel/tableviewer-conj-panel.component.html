@@ -90,7 +90,7 @@
                 <table class="full-width abs" *ngIf="!isString(gridData)">
                     <thead>
                         <tr>
-                            <th>
+                            <th *ngIf="settings.level['breakdown-translation'] || settings.level.translation">
                                 <h3 class='center-text'>{{ 'ww.language' | translate }}</h3>
                             </th>
                             <th *ngIf="settings.level['breakdown-translation'] || settings.level.translation">
