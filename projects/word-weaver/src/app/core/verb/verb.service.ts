@@ -1,4 +1,5 @@
 import { Observable } from "rxjs";
+import { shareReplay } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Affix, Verb } from "../../models/models";
@@ -11,15 +12,16 @@ import { debounceTime, distinctUntilChanged, map } from "rxjs/operators";
 export class VerbService {
   verbs: Verb[];
   path = environment.base + environment.prefix + `verbs`;
-  verbs$ = this.http.get<Verb[]>(this.path);
-  random$ = this.verbs$.pipe(
-    map(res => {
-      return this.getRandomOption(res);
-    })
-  );
+  verbs$: Observable<Verb[]>;
+  random$: Observable<Verb>;
   constructor(private http: HttpClient) {
-    console.log("constructed verb service");
+    this.verbs$ = this.http.get<Verb[]>(this.path).pipe(shareReplay(1));
     this.verbs$.subscribe(verbs => (this.verbs = verbs));
+    this.random$ = this.verbs$.pipe(
+      map(res => {
+        return this.getRandomOption(res);
+      })
+    );
   }
 
   getRandomOption(options: Verb[]): Verb {

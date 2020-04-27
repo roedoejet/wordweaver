@@ -8,8 +8,8 @@ import {
 } from "@angular/core";
 import { VerbService } from "../../../core/core.module";
 import { Verb } from "../../../models/models";
-import { Subject } from "rxjs";
-import { debounceTime, tap, takeUntil } from "rxjs/operators";
+import { Subject, ReplaySubject } from "rxjs";
+import { debounceTime, tap, takeUntil, shareReplay } from "rxjs/operators";
 import { sortBy } from "lodash";
 import { Store } from "@ngrx/store";
 import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
@@ -28,7 +28,7 @@ import { actionChangeVerb } from "../../../core/wordmaker-selection/wordmaker-se
   animations: [fadeAnimation, listAnimation]
 })
 export class WordmakerVerbStepComponent implements OnDestroy, OnInit {
-  viewableVerbs$ = new Subject<Verb[]>();
+  viewableVerbs$ = new ReplaySubject<Verb[]>();
   loading;
   language = "ww.language";
   searchField: FormControl;
@@ -53,8 +53,7 @@ export class WordmakerVerbStepComponent implements OnDestroy, OnInit {
       .pipe(
         takeUntil(this.unsubscribe$),
         debounceTime(200),
-        tap(term => this.viewableVerbs$.next(this.filterEntries(term))),
-        tap(x => console.log(this.filterEntries(x)))
+        tap(term => this.viewableVerbs$.next(this.filterEntries(term)))
       )
       .subscribe();
   }

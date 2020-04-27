@@ -1,5 +1,5 @@
 import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
+import { map, shareReplay } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../../environments/environment";
@@ -11,9 +11,11 @@ import { Option } from "../../models/models";
 export class OptionService {
   path = environment.base + environment.prefix + `options`;
   options;
-  options$ = this.http.get<Option[]>(this.path);
-  random$ = this.options$.pipe(map(res => this.getRandomOption(res)));
+  options$: Observable<Option[]>;
+  random$: Observable<Option>;
   constructor(private http: HttpClient) {
+    this.options$ = this.http.get<Option[]>(this.path).pipe(shareReplay(1));
+    this.random$ = this.options$.pipe(map(res => this.getRandomOption(res)));
     this.options$.subscribe(o => (this.options = o));
   }
 
