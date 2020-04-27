@@ -1,17 +1,13 @@
-import { HttpClient } from "@angular/common/http";
 import { Injectable, ɵALLOW_MULTIPLE_PLATFORMS } from "@angular/core";
 import { environment } from "../../../environments/environment";
+import { Validation } from "../../models/models";
 
 @Injectable({
   providedIn: "root"
 })
 export class ValidationService {
-  path = environment.base + environment.prefix + `validation`;
-  validation$ = this.http.get<any>(this.path);
-  validation;
-  constructor(private http: HttpClient) {
-    this.validation$.subscribe(v => (this.validation = v));
-  }
+  validation: Validation = environment.config.validation;
+  constructor() {}
 
   validateConditions(
     conditions: any[],

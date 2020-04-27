@@ -82,39 +82,6 @@ export interface TierOptions {
   showName?: boolean;
 }
 
-const _defaultOptions: TierOptions = { language: "L1", showName: false };
-
-export const TIERS: Tier[] = [
-  {
-    name: "display",
-    key: "value",
-    position: 0,
-    separator: "",
-    options: _defaultOptions
-  },
-  {
-    name: "breakdown",
-    key: "value",
-    position: 1,
-    separator: "-",
-    options: _defaultOptions
-  },
-  {
-    name: "gloss",
-    key: "gloss",
-    position: 2,
-    separator: "-",
-    options: _defaultOptions
-  },
-  {
-    name: "translation",
-    key: "english",
-    position: 3,
-    separator: "",
-    options: { language: "L2", showName: false }
-  }
-];
-
 export type Conjugation = ResponseMorpheme[];
 
 export interface ResponseObject {
@@ -123,3 +90,23 @@ export interface ResponseObject {
 }
 
 export type Response = ResponseObject[];
+
+export interface Validation {
+  display: {
+    categories: {
+      agents: boolean;
+      conjugations: boolean;
+      options: boolean;
+      patients: boolean;
+      verbs: boolean;
+    };
+  };
+  validation: {
+    selection: {
+      agents: boolean;
+      options: boolean;
+      patients: boolean;
+      verbs: boolean;
+    };
+  };
+}

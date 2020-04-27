@@ -5,13 +5,13 @@ import {
   Input
 } from "@angular/core";
 import { EChartOption, EChartsSeriesType } from "echarts";
-import { Conjugation, Response, Tier, TIERS } from "../../../models/models";
+import { Conjugation, Response, Tier } from "../../../models/models";
 import { Store, select } from "@ngrx/store";
 import { selectTableviewer } from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
 import { Observable } from "rxjs";
 import { map, switchMap, tap, distinctUntilChanged } from "rxjs/operators";
 import { TableviewerState } from "../../../core/tableviewer-selection/tableviewer-selection.model";
-import { OptionService } from "../../../core/option/option.service";
+import { OptionService, TierService } from "../../../core/core.module";
 import { merge as _merge } from "lodash";
 import { selectThemeColors } from "../../../core/settings/settings.selectors";
 
@@ -26,7 +26,11 @@ export class ConjugationTreeComponent implements OnInit {
   defaultChartOption: EChartOption;
   defaultSeries: any;
   selection$: Observable<TableviewerState>;
-  constructor(private store: Store, private optionService: OptionService) {}
+  constructor(
+    private store: Store,
+    private optionService: OptionService,
+    private tierService: TierService
+  ) {}
 
   ngOnInit(): void {
     this.selection$ = this.store.pipe(select(selectTableviewer));
@@ -194,7 +198,10 @@ export class ConjugationTreeComponent implements OnInit {
     return chartOption;
   }
 
-  returnTierValue(conjugation: Conjugation, tier: Tier = TIERS[0]) {
+  returnTierValue(
+    conjugation: Conjugation,
+    tier: Tier = this.tierService.TIERS[0]
+  ) {
     return (
       conjugation
         // filter empty

@@ -1,8 +1,15 @@
+import { TIERS } from "../config/tiers";
+import { VALIDATION } from "../config/validation";
+
 const packageJson = require("../../../../package.json");
 
 export const environment = {
   appName: "WordWeaver-UI",
   envName: "TEST",
+  config: {
+    tiers: TIERS,
+    validation: VALIDATION
+  },
   production: false,
   test: true,
   i18nPrefix: "",

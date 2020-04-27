@@ -2,12 +2,18 @@
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
+import { TIERS } from "../config/tiers";
+import { VALIDATION } from "../config/validation";
 
 const packageJson = require("../../../../package.json");
 
 export const environment = {
   appName: "WordWeaver-UI",
   envName: "DEV",
+  config: {
+    tiers: TIERS,
+    validation: VALIDATION
+  },
   production: false,
   test: false,
   i18nPrefix: "",

@@ -3,7 +3,7 @@ import { map, switchMap, catchError } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../../environments/environment";
-import { Response, Tier, TIERS } from "../../models/models";
+import { Response, Tier } from "../../models/models";
 import { TableviewerState } from "../tableviewer-selection/tableviewer-selection.model";
 import { WordmakerState } from "../wordmaker-selection/wordmaker-selection.model";
 import { select, Store } from "@ngrx/store";
@@ -15,14 +15,9 @@ import { SettingsState } from "../settings/settings.model";
   providedIn: "root"
 })
 export class TierService {
-  tiers$ = new Observable<Tier[]>();
   path = environment.base + environment.prefix + `tiers`;
-  TIERS = TIERS;
-  random$ = this.tiers$.pipe(map(res => this.getRandomOption(res)));
-  constructor(private http: HttpClient, private store: Store) {
-    this.tiers$ = this.http.get<Tier[]>(this.path);
-    this.tiers$.subscribe(d => (this.TIERS = d));
-  }
+  TIERS = environment.config.tiers;
+  constructor(private http: HttpClient, private store: Store) {}
 
   getTier(index) {
     return this.TIERS.filter(a => a.position === index)[0];
