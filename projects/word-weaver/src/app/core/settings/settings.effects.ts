@@ -2,7 +2,7 @@ import { ActivationEnd, Router } from "@angular/router";
 import { Injectable } from "@angular/core";
 import { OverlayContainer } from "@angular/cdk/overlay";
 import { select, Store } from "@ngrx/store";
-import { Actions, createEffect, ofType } from "@ngrx/effects";
+import { Actions, createEffect, ofType, Effect } from "@ngrx/effects";
 import { TranslateService } from "@ngx-translate/core";
 import { combineLatest, interval, merge, of } from "rxjs";
 import {
@@ -60,7 +60,10 @@ export class SettingsEffects {
   ) {}
 
   changeHour = createEffect(() =>
-    interval(60_000).pipe(
+    merge(
+      interval(60_000),
+      this.actions$.pipe(ofType(actionSettingsChangeAutoNightMode))
+    ).pipe(
       mapTo(new Date().getHours()),
       distinctUntilChanged(),
       map(hour => actionSettingsChangeHour({ hour }))

@@ -46,7 +46,7 @@ export const initialState: SettingsState = {
     prepronominal_prefix: false,
     tmp_affix: false
   },
-  hour: 0
+  hour: new Date().getHours()
 };
 
 const reducer = createReducer(
