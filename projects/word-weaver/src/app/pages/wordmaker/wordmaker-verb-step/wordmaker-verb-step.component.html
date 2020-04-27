@@ -2,7 +2,7 @@
     <div class="panel__header container">
         <div class="row">
             <div class='col-sm-12'>
-                <form class="margin-left-25 font-md">
+                <form class="margin-left-25 font-md" *ngIf="viewableVerbs$ | async">
                     <mat-form-field class="margin-bottom-20" [formGroup]="verbForm">
                         <input autocomplete="off" type="text"
                             [placeholder]="'ww.wordmaker.verb.search-placeholder' | translate" value=""
@@ -22,7 +22,7 @@
             </div>
         </div>
     </div>
-    <hr class='margin-bottom-50'>
+    <hr *ngIf="viewableVerbs$ | async" class='margin-bottom-50'>
     <div class='panel__content'>
         <ng-template #loading>
             <mat-spinner class="centered"></mat-spinner>
@@ -31,8 +31,7 @@
             <p *ngIf="verbs.length === 0">{{ "ww.wordmaker.verb.try-again" | translate }}</p>
             <mat-chip class="margin-5 bg-white border-accent" (click)="onVerbSelect(verb)" *ngFor="let verb of verbs">
                 <span class="centered color-black">{{verb.gloss}}</span>
-                <mat-icon class="icon-sm margin-left-5"
-                    [ngClass]="verb?.classes">brightness_1
+                <mat-icon class="icon-sm margin-left-5" [ngClass]="verb?.classes">brightness_1
                 </mat-icon>
             </mat-chip>
         </mat-chip-list>

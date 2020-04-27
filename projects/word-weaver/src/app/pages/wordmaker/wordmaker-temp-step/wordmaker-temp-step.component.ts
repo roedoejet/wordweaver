@@ -58,9 +58,17 @@ export class WordmakerTempStepComponent implements OnDestroy, OnInit {
   }
 
   returnTranslation(conjugations: Response) {
-    return this.tierService.createTiers(conjugations, [
-      this.tierService.TIERS[3]
-    ])[0][0]["html"];
+    let translationTier = this.tierService.TIERS.filter(
+      x => x.name === "translation"
+    );
+    if (translationTier.length === 0) {
+      translationTier = [
+        this.tierService.TIERS[this.tierService.TIERS.length - 1]
+      ];
+    }
+    return this.tierService.createTiers(conjugations, translationTier)[0][0][
+      "html"
+    ];
   }
 
   onAffOptSelect(ao) {

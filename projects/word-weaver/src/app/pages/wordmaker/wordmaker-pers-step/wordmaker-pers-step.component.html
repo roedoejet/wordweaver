@@ -26,8 +26,8 @@
         </div>
     </div>
     <hr class='margin-bottom-50'>
-    <div class='panel__content--large' *ngIf="pronouns$ | async as pronouns; else loading">
-        <div class="pwidth-50--desktop pwidth-100--mobile centered">
+    <div class='panel__content--large'>
+        <div class="pwidth-50--desktop pwidth-100--mobile centered" *ngIf="pronouns$ | async as pronouns; else loading">
             <div *ngIf="validationService.validate('display', 'categories', 'agents', selection)">
                 <h5
                     *ngIf="((validationService.validate('display', 'categories', 'patients', selection)) && (validationService.validate('display', 'categories', 'patients', selection)))">

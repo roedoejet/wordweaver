@@ -15,8 +15,11 @@
         </div>
     </div>
     <hr class='margin-bottom-50'>
-    <div class='panel__content--large' *ngIf="options$ | async as options">
-        <div class="pwidth-50--desktop pwidth-100--mobile centered" *ngIf='options.length > 0'>
+    <div class='panel__content--large'>
+        <ng-template #loading>
+            <mat-spinner class="centered"></mat-spinner>
+        </ng-template>
+        <div class="pwidth-50--desktop pwidth-100--mobile centered" *ngIf="options$ | async as options; else loading">
             <mat-chip-list>
                 <mat-chip (click)="onChipClick(conjugation.input.option)" class="bg-white color-black border-accent"
                     *ngFor="let conjugation of options" [innerHTML]="returnTranslation([conjugation])"></mat-chip>
