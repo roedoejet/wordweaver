@@ -27,6 +27,7 @@ import { selectSettings } from "../../../core/settings/settings.selectors";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SettingsContainerComponent implements OnInit {
+  objectkeys = Object.keys;
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   settings$: Observable<SettingsState>;
 

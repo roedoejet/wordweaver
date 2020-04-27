@@ -2,8 +2,7 @@
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
-import { TIERS } from "../config/tiers";
-import { VALIDATION } from "../config/validation";
+import { HIGHLIGHTS, LEVELS, TIERS, VALIDATION } from "../config/config";
 
 const packageJson = require("../../../../package.json");
 
@@ -12,7 +11,9 @@ export const environment = {
   envName: "DEV",
   config: {
     tiers: TIERS,
-    validation: VALIDATION
+    validation: VALIDATION,
+    highlight: HIGHLIGHTS,
+    level: LEVELS
   },
   production: false,
   test: false,

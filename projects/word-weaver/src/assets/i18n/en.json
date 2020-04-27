@@ -23,12 +23,13 @@
       "general": {
         "highlighting": {
           "aspect": "Aspect",
-          "post-aspectual": "Post-aspectual suffix",
-          "pronouns": "Pronouns",
-          "required": "Required",
-          "temp": "Temporal",
+          "ending": "Ending",
+          "post_aspectual_suffix": "Post-aspectual suffix",
+          "pronoun": "Pronouns",
+          "prepronominal_prefix": "Required",
+          "tmp_affix": "Temporal",
           "title": "Highlighting",
-          "verb": "Verb root"
+          "root": "Verb root"
         },
         "language": {
           "en": "English",

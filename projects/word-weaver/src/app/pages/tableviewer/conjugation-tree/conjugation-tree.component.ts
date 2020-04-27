@@ -5,7 +5,8 @@ import {
   Input
 } from "@angular/core";
 import { EChartOption, EChartsSeriesType } from "echarts";
-import { Conjugation, Response, Tier } from "../../../models/models";
+import { Conjugation, Response } from "../../../models/models";
+import { Tier } from "../../../../config/models";
 import { Store, select } from "@ngrx/store";
 import { selectTableviewer } from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
 import { Observable } from "rxjs";
@@ -144,10 +145,13 @@ export class ConjugationTreeComponent implements OnInit {
       const t = this.optionService.getOption(conjugation.input["option"])[
         "gloss"
       ];
-      const p = conjugation.output
+      let p = conjugation.output
         .filter(x => x.type && x.type.indexOf("pronoun") > -1)
         .map(x => x.gloss)
         .join();
+      if (!p) {
+        p = conjugation.input.agent; // This is a hack for French - should be changed
+      }
       const val = this.returnTierValue(conjugation.output);
       if (order) {
         node = _merge(node, { [v]: { [t]: { [p]: val } } });

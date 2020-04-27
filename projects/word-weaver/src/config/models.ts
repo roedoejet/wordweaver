@@ -1,12 +1,46 @@
-// export interface Tier:
+import { ResponseMorpheme } from "../app/models/models";
 
-// class TierOptions(BaseModel):
-//     language: str = 'L1'
-//     showName: bool = False
+export interface Highlight {
+  root: boolean;
+  ending: boolean;
+}
 
-// class Tier(BaseModel):
-//     name: str = ''
-//     separator: str = ''
-//     position: int = 0
-//     key: str = ''           # Must be key in ResponseMorpheme
-//     options: TierOptions
+// Tier name must be either the display (default) tier, or one of the toggleable levels in the settings
+export type TierNames = "display" | keyof Level;
+
+export interface Level {
+  breakdown: boolean;
+}
+
+export interface Tier {
+  name: TierNames;
+  separator: string;
+  key: keyof ResponseMorpheme;
+  position: number;
+  options: TierOptions;
+}
+
+export interface TierOptions {
+  language: "L1" | "L2";
+  showName?: boolean;
+}
+
+export interface Validation {
+  display: {
+    categories: {
+      agents: boolean;
+      conjugations: boolean;
+      options: boolean;
+      patients: boolean;
+      verbs: boolean;
+    };
+  };
+  validation: {
+    selection: {
+      agents: boolean;
+      options: boolean;
+      patients: boolean;
+      verbs: boolean;
+    };
+  };
+}

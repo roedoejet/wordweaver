@@ -32,20 +32,8 @@ export const initialState: SettingsState = {
     primary: "rgb(255, 255, 255)",
     accent: "rgb(255, 255, 255)"
   },
-  level: {
-    gloss: false,
-    breakdown: false,
-    "translation-breakdown": false,
-    translation: true
-  },
-  highlight: {
-    root: false,
-    pronoun: true,
-    aspect: false,
-    post_aspectual_suffix: false,
-    prepronominal_prefix: false,
-    tmp_affix: false
-  },
+  level: environment.config.level,
+  highlight: environment.config.highlight,
   hour: new Date().getHours()
 };
 

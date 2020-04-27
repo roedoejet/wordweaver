@@ -1,5 +1,4 @@
-import { TIERS } from "../config/tiers";
-import { VALIDATION } from "../config/validation";
+import { HIGHLIGHTS, LEVELS, TIERS, VALIDATION } from "../config/config";
 
 const packageJson = require("../../../../package.json");
 
@@ -8,7 +7,9 @@ export const environment = {
   envName: "TEST",
   config: {
     tiers: TIERS,
-    validation: VALIDATION
+    validation: VALIDATION,
+    highlight: HIGHLIGHTS,
+    level: LEVELS
   },
   production: false,
   test: true,

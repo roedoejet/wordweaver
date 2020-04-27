@@ -23,12 +23,13 @@
       "general": {
         "highlighting": {
           "aspect": "Aspect",
-          "post-aspectual": "Suffixe post-aspectuel",
-          "pronouns": "Pronoms",
-          "required": "Obligatoire",
-          "temp": "Temporel",
+          "ending": "Terminaison",
+          "post_aspectual_suffix": "Suffixe post-aspectuel",
+          "pronoun": "Pronoms",
+          "prepronominal_prefix": "Obligatoire",
+          "tmp_affix": "Temporel",
           "title": "Mise en évidence",
-          "verb": "Racine verbale"
+          "root": "Racine verbale"
         },
         "language": {
           "en": "Anglais",
