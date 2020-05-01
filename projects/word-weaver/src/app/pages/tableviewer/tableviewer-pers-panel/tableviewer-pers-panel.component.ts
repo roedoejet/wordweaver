@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
-import { Pronoun } from "../../../models/models";
+import { Pronoun } from "../../../../config/config";
 import { PronounService, ValidationService } from "../../../core/core.module";
 import { Observable } from "rxjs";
 import { Store, select } from "@ngrx/store";

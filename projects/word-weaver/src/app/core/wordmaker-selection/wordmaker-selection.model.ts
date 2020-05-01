@@ -1,4 +1,4 @@
-import { Option, Pronoun, Verb, Response } from "../../models/models";
+import { Option, Pronoun, Verb, Response } from "../../../config/config";
 import { AppState } from "../core.module";
 
 export type Step = 0 | 1 | 2 | 3;

@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 import { map, shareReplay } from "rxjs/operators";
-import { Pronoun } from "../../models/models";
+import { Pronoun } from "../../../config/config";
 import { Observable } from "rxjs";
 
 @Injectable({

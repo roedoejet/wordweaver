@@ -1,6 +1,6 @@
 import { createAction, props } from "@ngrx/store";
 
-import { Option, Pronoun, Response, Verb } from "../../models/models";
+import { Option, Pronoun, Response, Verb } from "../../../config/config";
 
 import { Step } from "./wordmaker-selection.model";
 

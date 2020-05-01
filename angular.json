@@ -41,10 +41,6 @@
                 {
                   "replace": "projects/word-weaver/src/config/config.ts",
                   "with": "projects/word-weaver/src/config/config.moh.ts"
-                },
-                {
-                  "replace": "projects/word-weaver/src/config/models.ts",
-                  "with": "projects/word-weaver/src/config/models.moh.ts"
                 }
               ]
             },
@@ -53,10 +49,6 @@
                 {
                   "replace": "projects/word-weaver/src/config/config.ts",
                   "with": "projects/word-weaver/src/config/config.fr.ts"
-                },
-                {
-                  "replace": "projects/word-weaver/src/config/models.ts",
-                  "with": "projects/word-weaver/src/config/models.fr.ts"
                 }
               ]
             },

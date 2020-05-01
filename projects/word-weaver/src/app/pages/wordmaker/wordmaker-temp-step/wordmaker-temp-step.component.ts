@@ -6,7 +6,7 @@ import {
   Output,
   ChangeDetectionStrategy
 } from "@angular/core";
-import { Option, Conjugation, Response } from "../../../models/models";
+import { Option, Conjugation, Response } from "../../../../config/config";
 import { OptionService, TierService } from "../../../core/core.module";
 import { Observable, Subject } from "rxjs";
 import { map, switchMap, withLatestFrom, takeUntil } from "rxjs/operators";

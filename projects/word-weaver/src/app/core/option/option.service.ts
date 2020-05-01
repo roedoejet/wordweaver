@@ -3,7 +3,7 @@ import { map, shareReplay } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../../environments/environment";
-import { Option } from "../../models/models";
+import { Option } from "../../../config/config";
 
 @Injectable({
   providedIn: "root"

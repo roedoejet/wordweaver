@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
-import { Option } from "../../../models/models";
+import { Option } from "../../../../config/config";
 import { OptionService } from "../../../core/core.module";
 import { Store, select } from "@ngrx/store";
 import { Observable } from "rxjs";

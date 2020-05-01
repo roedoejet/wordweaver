@@ -5,8 +5,8 @@ import {
   Input
 } from "@angular/core";
 import { EChartOption, EChartsSeriesType } from "echarts";
-import { Conjugation, Response } from "../../../models/models";
-import { Tier } from "../../../../config/models";
+import { Conjugation, Response } from "../../../../config/config";
+import { Tier } from "../../../../config/config";
 import { Store, select } from "@ngrx/store";
 import { selectTableviewer } from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
 import { Observable } from "rxjs";

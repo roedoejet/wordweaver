@@ -2,7 +2,7 @@ import { Observable } from "rxjs";
 import { shareReplay } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Verb } from "../../models/models";
+import { Verb } from "../../../config/config";
 import { environment } from "../../../environments/environment";
 import { debounceTime, distinctUntilChanged, map } from "rxjs/operators";
 

@@ -7,7 +7,7 @@ import {
   Output
 } from "@angular/core";
 import { VerbService } from "../../../core/core.module";
-import { Verb } from "../../../models/models";
+import { Verb } from "../../../../config/config";
 import { Subject, ReplaySubject } from "rxjs";
 import { debounceTime, tap, takeUntil, shareReplay } from "rxjs/operators";
 import { sortBy } from "lodash";

@@ -7,7 +7,7 @@ import {
   Output
 } from "@angular/core";
 import { PronounService, ValidationService } from "../../../core/core.module";
-import { Pronoun } from "../../../models/models";
+import { Pronoun } from "../../../../config/config";
 import { Observable, Subject } from "rxjs";
 import {
   actionChangeAgent,

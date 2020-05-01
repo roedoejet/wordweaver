@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from "@angular/core";
-import { Pronoun } from "../../../models/models";
+import { Pronoun } from "../../../../config/config";
 
 @Pipe({
   name: "animateOnly"

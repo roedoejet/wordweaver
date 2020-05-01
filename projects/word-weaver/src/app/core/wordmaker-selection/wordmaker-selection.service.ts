@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Option, Pronoun, RequestParams, Verb } from "../../models/models";
+import { Option, Pronoun, RequestParams, Verb } from "../../../config/config";
 import { BehaviorSubject } from "rxjs";
 
 interface WordMakerSelection {

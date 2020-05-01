@@ -1,5 +1,5 @@
 import { AppState } from "../core.module";
-import { Highlight, Level } from "../../../config/models";
+import { Highlight, Level } from "../../../config/config";
 
 export const NIGHT_MODE_THEME = "BLACK-THEME";
 

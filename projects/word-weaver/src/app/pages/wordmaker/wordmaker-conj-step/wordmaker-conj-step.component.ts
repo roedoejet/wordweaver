@@ -11,7 +11,7 @@ import { selectWordmaker } from "../../../core/wordmaker-selection/wordmaker-sel
 import { SettingsState, State } from "../../../core/settings/settings.model";
 import { Store, select } from "@ngrx/store";
 import { selectSettings } from "../../../core/settings/settings.selectors";
-import { Conjugation } from "../../../models/models";
+import { Conjugation } from "../../../../config/config";
 import { TierService } from "../../../core/core.module";
 
 @Component({

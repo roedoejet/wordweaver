@@ -4,7 +4,7 @@ import {
   OnInit,
   ChangeDetectionStrategy
 } from "@angular/core";
-import { Verb } from "../../../models/models";
+import { Verb } from "../../../../config/config";
 import { VerbService } from "../../../core/core.module";
 import { Store, select } from "@ngrx/store";
 import { Observable, Subject } from "rxjs";

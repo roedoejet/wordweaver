@@ -2,7 +2,7 @@ import { createAction, props } from "@ngrx/store";
 
 import { TableviewerTreeDepth } from "./tableviewer-selection.model";
 
-import { Option, Pronoun, Response, Verb } from "../../models/models";
+import { Option, Pronoun, Response, Verb } from "../../../config/config";
 
 export const actionChangeConjugations = createAction(
   "[Tableviewer] Change Conjugations",
