@@ -36,6 +36,30 @@
             "scripts": []
           },
           "configurations": {
+            "moh": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/word-weaver/src/config/config.ts",
+                  "with": "projects/word-weaver/src/config/config.moh.ts"
+                },
+                {
+                  "replace": "projects/word-weaver/src/config/models.ts",
+                  "with": "projects/word-weaver/src/config/models.moh.ts"
+                }
+              ]
+            },
+            "fr": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/word-weaver/src/config/config.ts",
+                  "with": "projects/word-weaver/src/config/config.fr.ts"
+                },
+                {
+                  "replace": "projects/word-weaver/src/config/models.ts",
+                  "with": "projects/word-weaver/src/config/models.fr.ts"
+                }
+              ]
+            },
             "production": {
               "fileReplacements": [
                 {
@@ -92,6 +116,12 @@
           "configurations": {
             "production": {
               "browserTarget": "word-weaver:build:production"
+            },
+            "moh": {
+              "browserTarget": "word-weaver:build:moh"
+            },
+            "fr": {
+              "browserTarget": "word-weaver:build:fr"
             }
           }
         },
