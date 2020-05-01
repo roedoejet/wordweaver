@@ -63,8 +63,12 @@ export interface ResponseObject {
 export type Response = ResponseObject[];
 
 export interface Highlight {
-  root: boolean;
-  ending: boolean;
+  aspect: boolean;
+  "post-aspectual": boolean;
+  pronouns: boolean;
+  required: boolean;
+  temp: boolean;
+  verb: boolean;
 }
 
 // Tier name must be either the display (default) tier, or one of the toggleable levels in the settings
@@ -122,8 +126,12 @@ export interface Validation {
 const _defaultOptions: TierOptions = { language: "L1", showName: false };
 
 export const HIGHLIGHTS: Highlight = {
-  root: true,
-  ending: true
+  aspect: false,
+  "post-aspectual": false,
+  pronouns: true,
+  required: false,
+  temp: false,
+  verb: true
 };
 
 export const LEVELS: Level = {
