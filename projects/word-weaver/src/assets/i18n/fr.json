@@ -22,7 +22,15 @@
       "advanced": "Avancée",
       "general": {
         "highlighting": {
-          "title": "Mise en évidence"
+          "aspect": "Aspect",
+          "ending": "Terminaison",
+          "post-aspectual": "Suffixe post-aspectuel",
+          "pronouns": "Pronoms",
+          "required": "Obligatoire",
+          "root": "Racine",
+          "temp": "Temps",
+          "title": "Mise en évidence",
+          "verb": "Racine"
         },
         "language": {
           "en": "Anglais",

@@ -22,7 +22,15 @@
       "advanced": "Advanced",
       "general": {
         "highlighting": {
-          "title": "Highlighting"
+          "aspect": "Aspect",
+          "ending": "Ending",
+          "post-aspectual": "Post Aspectual Suffix",
+          "pronouns": "Pronouns",
+          "required": "Required",
+          "root": "Root",
+          "temp": "Temporal Affix",
+          "title": "Highlighting",
+          "verb": "Root"
         },
         "language": {
           "en": "English",
