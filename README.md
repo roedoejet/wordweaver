@@ -8,11 +8,14 @@
 
 This is an Angular web application for visualizing data from WordWeaver.
 
+:warning: :construction: This repo is currently **under construction** :construction: :warning:
+
 ## Table of Contents
 
 - [WordWeaver-GUI](#wordweaver-gui)
   - [Table of Contents](#table-of-contents)
   - [Background](#background)
+    - [Features](#features)
   - [Install](#install)
   - [Usage](#usage)
   - [Maintainers](#maintainers)
@@ -22,7 +25,15 @@ This is an Angular web application for visualizing data from WordWeaver.
 
 ## Background
 
-TBD
+This is the front-end for the [WordWeaver](https://github.com/roedoejet/wwapi) tool.
+
+### Features
+
+- It is fully i18n compliant and customizable using ngx-translate and POEditor. The interface is already in English and French.
+- Functions offline (including your conjugation data!) thanks to PouchDB
+- Built for mobile (PWA support)
+- Totally themable
+- Configurable to match your data from [WordWeaver](https://github.com/roedoejet/wwapi)
 
 ## Install
 
@@ -31,7 +42,7 @@ If using with a new language, it is recommended to clone the repo.
 ```sh
 $ git clone https://github.com/roedoejet/wordweaver-UI.git
 $ cd wordweaver-UI
-$ ng serve
+$ npm install
 ```
 
 Then, you can create a new repo on GitHub and reset the origin remote to your new repo:
@@ -46,7 +57,11 @@ That way, you can make changes in your repo, push them to your origin, but still
 
 ## Usage
 
-TBD
+After installing, just start the app to run locally:
+
+```sh
+$ npm start
+```
 
 ## Maintainers
 
@@ -61,8 +76,6 @@ This repo follows the [Contributor Covenant](http://contributor-covenant.org/ver
 ### Contributors
 
 This project exists thanks to all the people who contribute.
-
-[@anna-ka](https://github.com/anna-ka).
 
 ## License
 
