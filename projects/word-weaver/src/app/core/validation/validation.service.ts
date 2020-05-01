@@ -31,8 +31,13 @@ export class ValidationService {
         let method = item;
         if (condition["method"] === "selection") {
           method = selection;
+          if (selection === null) {
+            return false;
+          }
         }
         if (condition["operator"] === "in") {
+          console.log(condition);
+          console.log(method);
           conditionsTruth.push(
             condition["value"].indexOf(
               method[condition["method_key"]][condition["item_key"]]
