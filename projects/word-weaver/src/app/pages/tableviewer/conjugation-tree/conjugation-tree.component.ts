@@ -119,7 +119,7 @@ export class ConjugationTreeComponent implements OnInit {
     const matches = rgb.match(pattern).slice(0, 3);
     const hex = "#";
     const hexMatches = matches.map(match => {
-      match = parseInt(match);
+      match = Number(match);
       let matchHex = Number(match).toString(16);
       if (matchHex.length < 2) {
         matchHex = "0" + matchHex;

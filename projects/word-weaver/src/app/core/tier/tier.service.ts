@@ -29,7 +29,7 @@ export class TierService {
   }
 
   createRequestQueryArgs(selection) {
-    let params = new URLSearchParams();
+    const params = new URLSearchParams();
     ["option", "agent", "patient", "root"].forEach(x => {
       if (selection[x]) {
         params.append(x, selection[x].tag);
