@@ -1,10 +1,12 @@
 import browser from "browser-detect";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { Store, select } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { marker } from "@biesbjerg/ngx-translate-extract-marker";
 
 import { environment as env } from "../../environments/environment";
+
+import { PwaService } from "../core/core.module";
 
 import {
   authLogin,
@@ -55,7 +57,8 @@ export class AppComponent implements OnInit {
   theme$: Observable<string>;
   constructor(
     private store: Store,
-    private storageService: LocalStorageService
+    private storageService: LocalStorageService,
+    public pwaService: PwaService
   ) {}
 
   private static isIEorEdgeOrSafari() {
@@ -76,6 +79,10 @@ export class AppComponent implements OnInit {
     this.stickyHeader$ = this.store.pipe(select(selectSettingsStickyHeader));
     this.language$ = this.store.pipe(select(selectSettingsLanguage));
     this.theme$ = this.store.pipe(select(selectEffectiveTheme));
+  }
+
+  installPwa() {
+    this.pwaService.promptEvent.prompt();
   }
 
   onLoginClick() {

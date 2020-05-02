@@ -13,6 +13,9 @@
           routerLinkActive="active">
           {{item.label | translate}}
         </a>
+        <a mat-list-item (click)="sidenav.close()" routerLinkActive="active" *ngIf="pwaService.promptEvent" (click)="installPwa()">
+          Install
+        </a>
         <!-- <a mat-list-item href="https://github.com/roedoejet/wordweaver-UI" target="_blank">
           Github
         </a> -->

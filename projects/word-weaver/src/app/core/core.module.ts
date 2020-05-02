@@ -81,6 +81,7 @@ import {
 
 import { OptionService } from "./option/option.service";
 import { PronounService } from "./pronoun/pronoun.service";
+import { PwaService } from "./pwa/pwa.service";
 import { TierService } from "./tier/tier.service";
 import { WordmakerSelectionService } from "./wordmaker-selection/wordmaker-selection.service";
 import { VerbService } from "./verb/verb.service";
@@ -107,6 +108,7 @@ export {
   selectSettingsStickyHeader,
   OptionService,
   PronounService,
+  PwaService,
   TierService,
   WordmakerSelectionService,
   ValidationService,
@@ -170,7 +172,8 @@ export function HttpLoaderFactory(http: HttpClient) {
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     { provide: ErrorHandler, useClass: AppErrorHandler },
-    { provide: RouterStateSerializer, useClass: CustomSerializer }
+    { provide: RouterStateSerializer, useClass: CustomSerializer },
+    PwaService
   ],
   exports: [
     // angular
