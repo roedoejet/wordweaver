@@ -22,7 +22,7 @@ export const environment = {
     storageBucket: "//kawennonis.appspot.com",
     messagingSenderId: "711160847583"
   },
-  base: `//li223-249.members.linode.com`,
+  base: `http://li223-249.members.linode.com`,
   prefix: `/api/v1/`,
   test_prefix: `/api/v2/`,
   versions: {
