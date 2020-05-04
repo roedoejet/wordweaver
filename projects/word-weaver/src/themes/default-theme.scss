@@ -1,6 +1,0 @@
-@import "palettes.scss";
-$ww-primary: mat-palette($md-blue);
-$ww-accent: mat-palette($md-yellow, 800);
-$ww-warn: mat-palette($mat-red);
-
-$ww-theme: mat-light-theme($ww-primary, $ww-accent, $ww-warn);

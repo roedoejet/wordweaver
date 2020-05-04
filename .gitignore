@@ -1,7 +1,1 @@
 node_modules
-.DS_Store
-dist/*
-dist/word-weaver
-projects/word-weaver/src/assets/trim.*
-scripts/poeditor_api_token.txt
-scripts/*.json
