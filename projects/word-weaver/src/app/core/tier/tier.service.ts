@@ -40,7 +40,6 @@ export class TierService {
 
   conjugate$(selection: TableviewerState | WordmakerState) {
     const queryArgs = this.createRequestQueryArgs(selection);
-    console.log(queryArgs);
     return this.store.pipe(
       select(selectSettingsState),
       switchMap((settings: SettingsState) =>
@@ -67,7 +66,6 @@ export class TierService {
     return conjugations.map(conjugation => {
       const tieredConjugation = [];
       tiers.forEach(tier => {
-        console.log(tier);
         tieredConjugation.push({
           name: tier.name,
           options: tier.options,
