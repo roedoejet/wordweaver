@@ -1,5 +1,6 @@
 import {
   Component,
+  OnDestroy,
   OnInit,
   ChangeDetectionStrategy,
   Input
@@ -9,8 +10,14 @@ import { Conjugation, Response } from "../../../../config/config";
 import { Tier } from "../../../../config/config";
 import { Store, select } from "@ngrx/store";
 import { selectTableviewer } from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
-import { Observable } from "rxjs";
-import { map, switchMap, tap, distinctUntilChanged } from "rxjs/operators";
+import { Observable, Subject } from "rxjs";
+import {
+  map,
+  switchMap,
+  tap,
+  distinctUntilChanged,
+  takeUntil
+} from "rxjs/operators";
 import { TableviewerState } from "../../../core/tableviewer-selection/tableviewer-selection.model";
 import { OptionService, TierService } from "../../../core/core.module";
 import { merge as _merge } from "lodash";
@@ -22,11 +29,12 @@ import { selectThemeColors } from "../../../core/settings/settings.selectors";
   styleUrls: ["./conjugation-tree.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ConjugationTreeComponent implements OnInit {
+export class ConjugationTreeComponent implements OnDestroy, OnInit {
   options$: Observable<EChartOption>;
   defaultChartOption: EChartOption;
   defaultSeries: any;
   selection$: Observable<TableviewerState>;
+  unsubscribe$ = new Subject<void>();
   constructor(
     private store: Store,
     private optionService: OptionService,
@@ -34,7 +42,10 @@ export class ConjugationTreeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.selection$ = this.store.pipe(select(selectTableviewer));
+    this.selection$ = this.store.pipe(
+      takeUntil(this.unsubscribe$),
+      select(selectTableviewer)
+    );
     this.defaultChartOption = {
       tooltip: {
         show: false,
@@ -97,6 +108,7 @@ export class ConjugationTreeComponent implements OnInit {
       animationDurationUpdate: 750
     };
     this.options$ = this.selection$.pipe(
+      takeUntil(this.unsubscribe$),
       switchMap(selection => {
         if (selection.conjugations.length > 0) {
           return this.store.select(selectThemeColors).pipe(
@@ -112,6 +124,11 @@ export class ConjugationTreeComponent implements OnInit {
         }
       })
     );
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   rgbToHex = function(rgb) {

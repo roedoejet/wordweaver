@@ -1,7 +1,13 @@
-import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy
+} from "@angular/core";
 import { Pronoun } from "../../../../config/config";
 import { PronounService, ValidationService } from "../../../core/core.module";
-import { Observable } from "rxjs";
+import { Observable, Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 import { Store, select } from "@ngrx/store";
 
 import {
@@ -18,9 +24,10 @@ import { selectTableviewer } from "../../../core/tableviewer-selection/tableview
   styleUrls: ["./tableviewer-pers-panel.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TableviewerPersPanelComponent implements OnInit {
+export class TableviewerPersPanelComponent implements OnDestroy, OnInit {
   possiblePronouns$: Observable<Pronoun[]>;
   selection$: Observable<TableviewerState>;
+  unsubscribe$ = new Subject<void>();
   constructor(
     public pnService: PronounService,
     private store: Store,
@@ -30,7 +37,15 @@ export class TableviewerPersPanelComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.selection$ = this.store.pipe(select(selectTableviewer));
+    this.selection$ = this.store.pipe(
+      takeUntil(this.unsubscribe$),
+      select(selectTableviewer)
+    );
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   onAgentSelect(pns) {
