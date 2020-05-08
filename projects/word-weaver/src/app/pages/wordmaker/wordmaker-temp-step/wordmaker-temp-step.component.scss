@@ -1,0 +1,14 @@
+.default-container {
+  height: 350px;
+  overflow: auto;
+}
+
+.default-type {
+  &__container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+  }
+  margin: 0 50px;
+  width: 250px;
+}

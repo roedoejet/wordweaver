@@ -124,6 +124,10 @@ export interface Validation {
   };
 }
 
+export interface Meta {
+  wordmakerTempView: "default" | TierNames;
+}
+
 const _defaultOptions: TierOptions = { language: "L1", showName: false };
 
 export const HIGHLIGHTS: Highlight = {
@@ -316,4 +320,8 @@ export const VALIDATION: Validation = {
       verbs: true
     }
   }
+};
+
+export const META: Meta = {
+  wordmakerTempView: "translation"
 };

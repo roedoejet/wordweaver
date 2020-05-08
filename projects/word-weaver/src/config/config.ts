@@ -2,14 +2,13 @@ export interface Option {
   classes: string[];
   gloss: string;
   tag: string;
-  type: string;
+  type?: string;
 }
 
 export interface Pronoun {
-  gender: "M" | "F" | "FZ" | "N" | "";
+  gender: "M" | "F" | "N" | "";
   gloss: string;
-  inclusivity: "incl" | "excl" | "";
-  number: "SG" | "DL" | "PL";
+  number: "SG" | "PL";
   role: "agent" | "patient" | "";
   obj_gloss: string;
   person: "1" | "2" | "3";
@@ -117,6 +116,10 @@ export interface Validation {
   };
 }
 
+export interface Meta {
+  wordmakerTempView: "default" | TierNames;
+}
+
 const _defaultOptions: TierOptions = { language: "L1", showName: false };
 
 export const HIGHLIGHTS: Highlight = {
@@ -163,4 +166,8 @@ export const VALIDATION: Validation = {
       verbs: true
     }
   }
+};
+
+export const META: Meta = {
+  wordmakerTempView: "default"
 };

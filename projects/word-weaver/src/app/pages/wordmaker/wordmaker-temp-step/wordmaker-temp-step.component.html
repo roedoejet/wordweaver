@@ -19,11 +19,30 @@
         <ng-template #loading>
             <mat-spinner class="centered"></mat-spinner>
         </ng-template>
-        <div class="pwidth-50--desktop pwidth-100--mobile centered" *ngIf="options$ | async as options; else loading">
-            <mat-chip-list>
-                <mat-chip (click)="onChipClick(conjugation.input.option)" class="bg-white color-black border-accent"
-                    *ngFor="let conjugation of options" [innerHTML]="returnTranslation([conjugation])"></mat-chip>
-            </mat-chip-list>
+        <div class="centered">
+            <div *ngIf='displayTier !== "default"' class='pwidth-50--desktop pwidth-100--mobile'>
+                <mat-chip-list *ngIf="conjugatedOptions$ | async as options; else loading">
+                    <mat-chip (click)="onChipClick(conjugation.input.option)" class="bg-white color-black border-accent"
+                        *ngFor="let conjugation of options" [innerHTML]="returnOptionText([conjugation])"></mat-chip>
+                </mat-chip-list>
+            </div>
+            <div *ngIf='displayTier === "default"' class='default-container pwidth-100'>
+                <div *ngIf='optionService.optionsUseType$()' class='default-type__container'>
+                    <div class='default-type' *ngFor="let option of possibleOptionsByType$ | async as options">
+                        <h3>{{ option.type | translate }}</h3>
+                        <mat-chip-list>
+                            <mat-chip (click)="onChipClick(opt.tag)" class="bg-white color-black border-accent"
+                                *ngFor="let opt of option.options">{{ opt.gloss | translate }}</mat-chip>
+                        </mat-chip-list>
+                    </div>
+                </div>
+                <div *ngIf='!optionService.optionsUseType$()'>
+                    <mat-chip-list *ngIf="possibleOptions$ | async as options; else loading">
+                        <mat-chip (click)="onChipClick(option.tag)" class="bg-white color-black border-accent"
+                            *ngFor="let option of options">{{ option.gloss | translate }}</mat-chip>
+                    </mat-chip-list>
+                </div>
+            </div>
         </div>
     </div>
 </div>

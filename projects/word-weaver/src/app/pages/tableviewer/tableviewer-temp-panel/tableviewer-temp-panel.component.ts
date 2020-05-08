@@ -30,7 +30,7 @@ export class TableviewerTempPanelComponent implements OnDestroy, OnInit {
   selection$: Observable<TableviewerState>;
   unsubscribe$ = new Subject<void>();
   constructor(
-    private optionService: OptionService,
+    public optionService: OptionService,
     private store: Store<State>
   ) {}
 
@@ -38,21 +38,8 @@ export class TableviewerTempPanelComponent implements OnDestroy, OnInit {
     this.possibleOptions$ = this.optionService.options$.pipe(
       takeUntil(this.unsubscribe$)
     );
-    this.possibleOptionsByType$ = this.possibleOptions$.pipe(
-      takeUntil(this.unsubscribe$),
-      map(options => {
-        const optionTypes = [...new Set(options.map(x => x.type))];
-        const optionsByType = [];
-        optionTypes
-          .filter(x => x)
-          .forEach(x =>
-            optionsByType.push({
-              type: x,
-              options: options.filter(y => y.type === x)
-            })
-          );
-        return optionsByType;
-      })
+    this.possibleOptionsByType$ = this.optionService.optionsByType$.pipe(
+      takeUntil(this.unsubscribe$)
     );
     // populate with store's selection
     this.selection$ = this.store.pipe(
@@ -64,12 +51,6 @@ export class TableviewerTempPanelComponent implements OnDestroy, OnInit {
   ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
-  }
-
-  optionsUseType$(): Observable<boolean> {
-    return this.possibleOptions$.pipe(
-      map(options => options.some(option => option.type))
-    );
   }
 
   onOptionSelect(Options) {

@@ -17,7 +17,7 @@ import {
   State
 } from "../../../core/wordmaker-selection/wordmaker-selection.model";
 import { selectWordmaker } from "../../../core/wordmaker-selection/wordmaker-selection.selectors";
-import { createRequestQueryArgs } from "../../../core/tableviewer-selection/tableviewer-selection.effects";
+import { META } from "../../../../config/config";
 
 @Component({
   selector: "ww-wordmaker-temp-step",
@@ -29,9 +29,12 @@ export class WordmakerTempStepComponent implements OnDestroy, OnInit {
   selection$: Observable<WordmakerState>;
   unsubscribe$ = new Subject<void>();
   @Output() selectedTemp = new EventEmitter<Option>();
-  options$: Observable<any>;
+  conjugatedOptions$: Observable<any>;
+  possibleOptions$: Observable<Option[]>;
+  possibleOptionsByType$: Observable<object>;
+  displayTier: string = META.wordmakerTempView;
   constructor(
-    private optionService: OptionService,
+    public optionService: OptionService,
     private store: Store<State>,
     private tierService: TierService
   ) {}
@@ -41,7 +44,13 @@ export class WordmakerTempStepComponent implements OnDestroy, OnInit {
       takeUntil(this.unsubscribe$),
       select(selectWordmaker)
     );
-    this.options$ = this.selection$.pipe(
+    this.possibleOptions$ = this.optionService.options$.pipe(
+      takeUntil(this.unsubscribe$)
+    );
+    this.possibleOptionsByType$ = this.optionService.optionsByType$.pipe(
+      takeUntil(this.unsubscribe$)
+    );
+    this.conjugatedOptions$ = this.selection$.pipe(
       takeUntil(this.unsubscribe$),
       // See all options, despite selection
       map(selection => {
@@ -57,11 +66,11 @@ export class WordmakerTempStepComponent implements OnDestroy, OnInit {
     this.unsubscribe$.complete();
   }
 
-  returnTranslation(conjugations: Response) {
-    const translationTier = [
-      this.tierService.TIERS[this.tierService.TIERS.length - 1]
-    ];
-    return this.tierService.createTiers(conjugations, translationTier)[0][0][
+  returnOptionText(conjugations: Response) {
+    const selectedTier = this.tierService.TIERS.filter(
+      x => x.name === this.displayTier
+    );
+    return this.tierService.createTiers(conjugations, selectedTier)[0][0][
       "html"
     ];
   }
