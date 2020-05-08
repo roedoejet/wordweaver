@@ -1,9 +1,14 @@
-import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy
+} from "@angular/core";
 import { Option } from "../../../../config/config";
 import { OptionService } from "../../../core/core.module";
 import { Store, select } from "@ngrx/store";
-import { Observable } from "rxjs";
-import { map, distinct } from "rxjs/operators";
+import { Observable, Subject } from "rxjs";
+import { map, takeUntil } from "rxjs/operators";
 
 import { actionChangeOptions } from "../../../core/tableviewer-selection/tableviewer-selection.actions";
 
@@ -19,32 +24,52 @@ import { selectTableviewer } from "../../../core/tableviewer-selection/tableview
   styleUrls: ["./tableviewer-temp-panel.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TableviewerTempPanelComponent implements OnInit {
+export class TableviewerTempPanelComponent implements OnDestroy, OnInit {
   possibleOptions$: Observable<Option[]>;
   possibleOptionsByType$: Observable<object>;
   selection$: Observable<TableviewerState>;
+  unsubscribe$ = new Subject<void>();
   constructor(
     private optionService: OptionService,
     private store: Store<State>
   ) {}
 
   ngOnInit(): void {
-    this.possibleOptions$ = this.optionService.options$;
+    this.possibleOptions$ = this.optionService.options$.pipe(
+      takeUntil(this.unsubscribe$)
+    );
     this.possibleOptionsByType$ = this.possibleOptions$.pipe(
+      takeUntil(this.unsubscribe$),
       map(options => {
         const optionTypes = [...new Set(options.map(x => x.type))];
         const optionsByType = [];
-        optionTypes.forEach(x =>
-          optionsByType.push({
-            type: x,
-            options: options.filter(y => y.type === x)
-          })
-        );
+        optionTypes
+          .filter(x => x)
+          .forEach(x =>
+            optionsByType.push({
+              type: x,
+              options: options.filter(y => y.type === x)
+            })
+          );
         return optionsByType;
       })
     );
     // populate with store's selection
-    this.selection$ = this.store.pipe(select(selectTableviewer));
+    this.selection$ = this.store.pipe(
+      takeUntil(this.unsubscribe$),
+      select(selectTableviewer)
+    );
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
+  optionsUseType$(): Observable<boolean> {
+    return this.possibleOptions$.pipe(
+      map(options => options.some(option => option.type))
+    );
   }
 
   onOptionSelect(Options) {

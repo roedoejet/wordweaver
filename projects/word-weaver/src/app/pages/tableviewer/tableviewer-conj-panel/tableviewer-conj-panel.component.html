@@ -66,7 +66,8 @@
                 *ngIf="!selection.loading && selection.conjugations.length === 0"
                 [innerHTML]="'ww.tableviewer.conj.instructions-mobile' | translate">
             </h3>
-            <mat-spinner [color]="'accent'" *ngIf="selection.loading && selection.gridView" class="centered margin-top-100"></mat-spinner>
+            <mat-spinner [color]="'accent'" *ngIf="selection.loading && selection.gridView"
+                class="centered margin-top-100"></mat-spinner>
         </div>
 
         <div class='panel__tree__container'>
@@ -90,10 +91,10 @@
                 <table class="full-width abs" *ngIf="!isString(gridData)">
                     <thead>
                         <tr>
-                            <th *ngIf="settings.level['breakdown-translation'] || settings.level.translation">
+                            <th *ngIf="isL2Showing(settings.level)">
                                 <h3 class='center-text'>{{ 'ww.language' | translate }}</h3>
                             </th>
-                            <th *ngIf="settings.level['breakdown-translation'] || settings.level.translation">
+                            <th *ngIf="isL2Showing(settings.level)">
                                 <h3 class='center-text'>{{ 'ww.translation-language' | translate }}</h3>
                             </th>
                         </tr>
@@ -107,8 +108,7 @@
                                         [innerHTML]='tier.html'></h5>
                                 </div>
                             </td>
-                            <td class='center-text'
-                                *ngIf="settings.level['breakdown-translation'] || settings.level.translation">
+                            <td class='center-text' *ngIf="isL2Showing(settings.level)">
                                 <div *ngFor="let tier of conjugation; let i = index">
                                     <h3 *ngIf='settings.level[tier.name] && tier.options.language === "L2" && i === 0'
                                         [innerHTML]='tier.html'></h3>

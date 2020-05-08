@@ -7,17 +7,23 @@
     <mat-select *ngIf="selection$ | async as selection" [ngModel]="selection['option']" multiple
       (selectionChange)="onOptionSelect($event)">
       <mat-select-trigger>
-        {{selection['option'].length ? selection['option'][0].type + ' ' + selection['option'][0].gloss : ''}}
+        <span *ngIf='optionsUseType$() | async'>
+          {{selection['option'].length ? selection['option'][0].type + ' ' + selection['option'][0].gloss : ''}}
+        </span>
+        <span *ngIf='!(optionsUseType$() | async)'>
+          {{selection['option'].length ? selection['option'][0].gloss : ''}}
+        </span>
         <span *ngIf="selection['option'].length > 1" class="example-additional-selection">
           (+{{selection['option'].length - 1}} {{selection['option'].length === 2 ? 'other' : 'others'}})
         </span>
       </mat-select-trigger>
-      <div *ngIf='!(possibleOptionsByType$ | async)'>
+      <div *ngIf='!(optionsUseType$() | async)'>
         <mat-option *ngFor="let option of possibleOptions$ | async" [value]="option">{{option.gloss}}</mat-option>
       </div>
       <div *ngIf="possibleOptionsByType$ | async as optionsByType">
         <mat-optgroup *ngFor="let type of optionsByType" [label]="type.type">
-          <mat-option class='margin-left-25' *ngFor="let option of type.options" [value]="option">{{option.gloss}}</mat-option>
+          <mat-option class='margin-left-25' *ngFor="let option of type.options" [value]="option">{{option.gloss}}
+          </mat-option>
         </mat-optgroup>
       </div>
     </mat-select>

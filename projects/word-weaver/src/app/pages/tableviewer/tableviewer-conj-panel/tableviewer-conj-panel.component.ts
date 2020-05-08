@@ -25,6 +25,7 @@ import { TableviewerState } from "../../../core/tableviewer-selection/tableviewe
 import { selectTableviewer } from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
 import { selectSettings } from "../../../core/settings/settings.selectors";
 import { TierService } from "../../../core/core.module";
+import { TIERS } from "../../../../config/config";
 
 import { ROUTE_ANIMATIONS_ELEMENTS } from "../../../core/core.module";
 import { marker } from "@biesbjerg/ngx-translate-extract-marker";
@@ -111,6 +112,11 @@ export class TableviewerConjPanelComponent implements AfterViewInit, OnInit {
 
   onManualConjugation(event) {
     this.store.dispatch(actionConjugationEvent(event));
+  }
+
+  isL2Showing(levels): boolean {
+    const L2Tiers = TIERS.filter(x => x.options.language === "L2");
+    return L2Tiers && L2Tiers.some(x => levels[x.name]);
   }
 
   // TODO: This is currently used for determining whether gridData is an error. This is fragile, and errors should be handled differently.
