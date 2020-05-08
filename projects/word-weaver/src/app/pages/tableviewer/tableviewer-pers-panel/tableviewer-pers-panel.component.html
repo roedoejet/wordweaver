@@ -4,8 +4,7 @@
   </div>
   <mat-form-field class='control' *ngIf="validationService.validate('display', 'categories', 'agents')">
     <mat-label>{{ 'ww.tableviewer.pers.select-agent' | translate }}</mat-label>
-    <mat-select [ngModel]="selection.agent" multiple
-      (selectionChange)="onAgentSelect($event)">
+    <mat-select [ngModel]="selection.agent" multiple (selectionChange)="onAgentSelect($event)">
       <mat-select-trigger>
         {{selection.agent ? selection.agent[0]?.gloss : ''}}
         <span *ngIf="selection.agent.length > 1" class="example-additional-selection">
@@ -17,8 +16,7 @@
   </mat-form-field>
   <mat-form-field class='control' *ngIf="validationService.validate('display', 'categories', 'patients')">
     <mat-label>{{ 'ww.tableviewer.pers.select-patient' | translate }}</mat-label>
-    <mat-select [ngModel]="selection.patient" multiple
-      (selectionChange)="onPatientSelect($event)">
+    <mat-select [ngModel]="selection.patient" multiple (selectionChange)="onPatientSelect($event)">
       <mat-select-trigger>
         {{selection.patient ? selection.patient[0]?.gloss : ''}}
         <span *ngIf="selection.patient.length > 1" class="example-additional-selection">

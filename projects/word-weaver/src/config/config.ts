@@ -2,6 +2,7 @@ export interface Option {
   classes: string[];
   gloss: string;
   tag: string;
+  type: string;
 }
 
 export interface Pronoun {
