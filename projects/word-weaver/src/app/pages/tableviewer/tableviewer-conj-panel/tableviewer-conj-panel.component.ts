@@ -31,6 +31,9 @@ import { ROUTE_ANIMATIONS_ELEMENTS } from "../../../core/core.module";
 import { marker } from "@biesbjerg/ngx-translate-extract-marker";
 import { actionSettingsChangeThemeColors } from "../../../core/settings/settings.actions";
 
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+import { DownloadDialogComponent } from "../../../shared/download-dialog/download-dialog.component";
+
 @Component({
   selector: "ww-tableviewer-conj-panel",
   templateUrl: "./tableviewer-conj-panel.component.html",
@@ -62,7 +65,8 @@ export class TableviewerConjPanelComponent implements AfterViewInit, OnInit {
   constructor(
     private store: Store<State>,
     private notificationService: NotificationService,
-    private tierService: TierService
+    private tierService: TierService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -126,43 +130,11 @@ export class TableviewerConjPanelComponent implements AfterViewInit, OnInit {
 
   // TODO: ngrx
   download() {
-    this.selection$
-      .pipe(
-        take(1),
-        tap(selection => console.log(selection))
-        // Make args
-        // map(selection => this.conjugationService.createRequestUrl(selection).toString()),
-        // // Get Request
-        // switchMap(httpargs => {
-        //   const url = this.conjugationService.path + '?' + httpargs;
-        //   return this.http.get(url).pipe(
-        //     catchError((err) => { this.updateToast(false, err.status); return of(err) })
-        //   )
-        // }),
-        // tap(url => { window.location.href = url + '&docx=true'; this.updateToast(true) })
-      )
-      .subscribe();
-    // const query_args = this.conjugationService
-    //   .createRequestUrl(this.selectionService.selection)
-    //   .toString();
-    // const query_args_docx = this.conjugationService
-    //   .createRequestUrl(this.selectionService.selection, [
-    //     { param: "docx", value: "true" }
-    //   ])
-    //   .toString();
-    // const url = this.conjugationService.path + "?" + query_args;
-    // const docx_url = this.conjugationService.path + "?" + query_args_docx;
-    // this.http.get(url).subscribe(
-    //   data => {
-    //     console.log(data);
-    //     window.location.href = docx_url;
-    //     this.updateToast(data);
-    //   },
-    //   error => {
-    //     console.log(error);
-    //     this.updateToast(false, error.status);
-    //   }
-    // );
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.minWidth = "30vw";
+    this.dialog.open(DownloadDialogComponent, dialogConfig);
   }
 
   updateToast(success?, code = 200) {

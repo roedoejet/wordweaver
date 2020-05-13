@@ -1,0 +1,53 @@
+<div class='dialog__container'>
+
+    <h2 mat-dialog-title>{{ "ww.download.dialog.title" | translate }}</h2>
+    <div mat-dialog-content>
+        <div class='form-container' [formGroup]='form' *ngIf="settings$ | async as settings">
+            <mat-form-field class='form-control'>
+                <mat-label>{{ "ww.download.dialog.settings.filetype" | translate}}</mat-label>
+                <mat-select [formControlName]="'ftype'">
+                    <mat-option *ngFor="let ftype of fileTypes" [value]="ftype">
+                        {{ftype}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width form-control"
+                *ngIf='form.controls.ftype.value === "docx" || form.controls.ftype.value ==="latex"'>
+                <mat-label>{{ "ww.download.dialog.settings.header" | translate }}</mat-label>
+                <input [formControlName]="'heading'" matInput>
+            </mat-form-field>
+
+            <mat-checkbox [formControlName]="'headers'" class='form-control'
+                *ngIf='form.controls.ftype.value === "csv"'>
+                {{ "ww.download.dialog.settings.headers" | translate }}</mat-checkbox>
+
+            <div class='form-control group' *ngIf='objectkeys(settings.level).length > 0'>
+                <h4>{{ 'ww.settings.general.tiers.title' | translate }}</h4>
+                <div class='icon-form-field checkboxes'>
+                    <mat-checkbox *ngFor="let key of objectkeys(settings.level)" [checked]="settings.level[key]"
+                        (change)="onLevelSelect($event, key)">
+                        {{ ('ww.settings.general.tiers.' + key) | translate}}
+                    </mat-checkbox>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <mat-dialog-actions>
+
+        <div class='centered dialog__buttons__container'>
+            <button class="mat-raised-button mat-primary dialog__buttons" (click)="download()"
+                [matTooltip]="'ww.download.dialog.exit' | translate" [matTooltipShowDelay]="showDelay.value"
+                [matTooltipHideDelay]="hideDelay.value"
+                [matTooltipPosition]="tooltipPosition">{{"ww.download.dialog.download" | translate }}</button>
+            <button (click)="exit()" class="exit-button dialog__buttons" mat-raised-button
+                [matTooltip]="'ww.download.dialog.exit' | translate" [matTooltipShowDelay]="showDelay.value"
+                [matTooltipHideDelay]="hideDelay.value" [matTooltipPosition]="tooltipPosition">
+                {{ "ww.download.dialog.exit" | translate }}
+            </button>
+        </div>
+    </mat-dialog-actions>
+
+</div>

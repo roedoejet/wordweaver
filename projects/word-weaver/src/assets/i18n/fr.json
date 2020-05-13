@@ -4,6 +4,18 @@
       "slogan": "Créez rapidement des histoires interactives en 5 étapes faciles",
       "text": "<p> Voici où devrait aller votre texte sur le projet. </p>"
     },
+    "download": {
+      "dialog": {
+        "download": "Téléchargé",
+        "exit": "Fermé",
+        "settings": {
+          "filetype": "Type de fichier",
+          "header": "Titre",
+          "headers": "Afficher les en-têtes"
+        },
+        "title": "Paramètres"
+      }
+    },
     "error": {
       "dev": "Hm, quelque chose s'est mal passé, veuillez vérifier la console.",
       "general": "Oups, une erreur s'est produite."
@@ -72,14 +84,12 @@
           "title": "Erreur"
         },
         "explorer-tip": "Basculer entre les vues «arborescence» et «grille»",
-        "gridview": "Tableaux",
         "hide-toolbar-tip": "Masquer la barre de tâches",
         "instructions": "Veuillez sélectionner une ou plusieurs cases dans les panneaux <b> Verbe </b>, <b> Personne </b> et <b> Heure </b> à gauche, puis appuyez sur la touche Entrée ou sur le bouton conjugué pour voir votre sélection",
         "instructions-mobile": "Veuillez sélectionner une ou plusieurs cases dans les panneaux \"Verbe\", \"Personne\" et \"Temps\" <br /> puis appuyez sur le bouton ci-dessus pour conjuguer!",
         "order-tip": "Changer l'ordre des nœuds",
         "show-toolbar-tip": "Afficher la barre d'outils",
-        "title": "Barre d'outils de conjugaison",
-        "treeview": "Racines"
+        "title": "Barre d'outils de conjugaison"
       },
       "notifications": {
         "download": {

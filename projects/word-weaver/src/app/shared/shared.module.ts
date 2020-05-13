@@ -13,6 +13,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatChipsModule } from "@angular/material/chips";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatCardModule } from "@angular/material/card";
+import { MatDialogModule } from "@angular/material/dialog";
 import { MatListModule } from "@angular/material/list";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTooltipModule } from "@angular/material/tooltip";
@@ -58,12 +59,13 @@ import { AnimateOnlyPipe } from "./pipes/animate-only/animate-only";
 import { CapitalizePipe } from "./pipes/capitalize/capitalize";
 import { DecapitalizePipe } from "./pipes/decapitalize/decapitalize";
 import { NgxEchartsModule } from "ngx-echarts";
+import { DownloadDialogComponent } from "./download-dialog/download-dialog.component";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-
+    ReactiveFormsModule,
     TranslateModule,
 
     MatButtonModule,
@@ -75,6 +77,7 @@ import { NgxEchartsModule } from "ngx-echarts";
     MatChipsModule,
     MatCardModule,
     MatCheckboxModule,
+    MatDialogModule,
     MatGridListModule,
     MatListModule,
     MatMenuModule,
@@ -93,7 +96,8 @@ import { NgxEchartsModule } from "ngx-echarts";
     RtlSupportDirective,
     AnimateOnlyPipe,
     CapitalizePipe,
-    DecapitalizePipe
+    DecapitalizePipe,
+    DownloadDialogComponent
   ],
   exports: [
     CommonModule,
@@ -112,6 +116,7 @@ import { NgxEchartsModule } from "ngx-echarts";
     MatProgressSpinnerModule,
     MatCheckboxModule,
     MatCardModule,
+    MatDialogModule,
     MatListModule,
     MatSelectModule,
     MatIconModule,
@@ -127,6 +132,7 @@ import { NgxEchartsModule } from "ngx-echarts";
 
     FontAwesomeModule,
 
+    DownloadDialogComponent,
     LogoComponent,
     RtlSupportDirective,
 

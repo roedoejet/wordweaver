@@ -4,6 +4,18 @@
       "slogan": "WordWeaver UI weaves beautiful verb conjugation websites",
       "text": "<p>Here is where your text about the project should go.</p>"
     },
+    "download": {
+      "dialog": {
+        "download": "Download",
+        "exit": "Exit",
+        "settings": {
+          "filetype": "Filetype",
+          "header": "Document Title",
+          "headers": "Keep Headers"
+        },
+        "title": "Download Settings"
+      }
+    },
     "error": {
       "dev": "Hm, something went wrong, please check the console.",
       "general": "Whoops, an error occured."
@@ -72,14 +84,12 @@
           "title": "Error"
         },
         "explorer-tip": "Toggle 'tree' and 'grid' views",
-        "gridview": "Grid View",
         "hide-toolbar-tip": "Hide toolbar",
         "instructions": "Please select one or more boxes from the <b>Verb</b>, <b>Person</b>, and <b>Time</b> panels to the left and then press the enter key or conjugate button to see your selection",
         "instructions-mobile": "Please select one or more boxes from the 'Verb', 'Person', and 'Time' panels <br /> and then press the button above to conjugate!",
         "order-tip": "Switch order of nodes",
         "show-toolbar-tip": "Show toolbar",
-        "title": "Conjugation Toolbar",
-        "treeview": "Tree View"
+        "title": "Conjugation Toolbar"
       },
       "notifications": {
         "download": {

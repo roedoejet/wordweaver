@@ -69,7 +69,7 @@ export class WordmakerComponent implements OnDestroy, OnInit, AfterViewInit {
         if ("type" in x.option) {
           this.tempLabel.next(x.option.type + " " + x.option.gloss);
         } else {
-          this.tempLabel.next(x.option.gloss);
+          // this.tempLabel.next(x.option.gloss);
         }
       } else {
         this.tempLabel.next("ww.wordmaker.temp.question");
