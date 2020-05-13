@@ -10,8 +10,11 @@
         "exit": "Exit",
         "settings": {
           "filetype": "Filetype",
-          "header": "Document Title",
-          "headers": "Keep Headers"
+          "headers": "Keep Headers",
+          "heading": {
+            "placeholder": "My Conjugations",
+            "title": "Document Title"
+          }
         },
         "title": "Download Settings"
       }

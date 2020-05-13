@@ -22,7 +22,7 @@ import {
 } from "../../../core/tableviewer-selection/tableviewer-selection.actions";
 import { SettingsState, State } from "../../../core/settings/settings.model";
 import { TableviewerState } from "../../../core/tableviewer-selection/tableviewer-selection.model";
-import { selectTableviewer } from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
+import { selectTableviewerState } from "../../../core/core.state";
 import { selectSettings } from "../../../core/settings/settings.selectors";
 import { TierService } from "../../../core/core.module";
 import { TIERS } from "../../../../config/config";
@@ -72,7 +72,7 @@ export class TableviewerConjPanelComponent implements AfterViewInit, OnInit {
   ngOnInit(): void {
     // populate with store's selection
     this.settings$ = this.store.pipe(select(selectSettings));
-    this.selection$ = this.store.pipe(select(selectTableviewer));
+    this.selection$ = this.store.pipe(select(selectTableviewerState));
 
     this.gridData$ = this.selection$.pipe(
       map(selection => {
@@ -128,7 +128,6 @@ export class TableviewerConjPanelComponent implements AfterViewInit, OnInit {
     return typeof val === "string";
   }
 
-  // TODO: ngrx
   download() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;

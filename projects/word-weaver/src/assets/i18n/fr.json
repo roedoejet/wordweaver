@@ -10,8 +10,11 @@
         "exit": "Fermé",
         "settings": {
           "filetype": "Type de fichier",
-          "header": "Titre",
-          "headers": "Afficher les en-têtes"
+          "headers": "Afficher les en-têtes",
+          "heading": {
+            "placeholder": "Mes Conjugaisons",
+            "title": "Titre"
+          }
         },
         "title": "Paramètres"
       }

@@ -14,7 +14,7 @@
 
             <mat-form-field class="example-full-width form-control"
                 *ngIf='form.controls.ftype.value === "docx" || form.controls.ftype.value ==="latex"'>
-                <mat-label>{{ "ww.download.dialog.settings.header" | translate }}</mat-label>
+                <mat-label>{{ "ww.download.dialog.settings.heading.title" | translate }}</mat-label>
                 <input [formControlName]="'heading'" matInput>
             </mat-form-field>
 
@@ -37,8 +37,9 @@
 
     <mat-dialog-actions>
 
-        <div class='centered dialog__buttons__container'>
-            <button class="mat-raised-button mat-primary dialog__buttons" (click)="download()"
+        <div class='centered dialog__buttons__container'  *ngIf="selection$ | async as selection">
+            <mat-spinner *ngIf='selection.loading'></mat-spinner>
+            <button *ngIf='!selection.loading' class="mat-raised-button mat-primary dialog__buttons" (click)="download()"
                 [matTooltip]="'ww.download.dialog.exit' | translate" [matTooltipShowDelay]="showDelay.value"
                 [matTooltipHideDelay]="hideDelay.value"
                 [matTooltipPosition]="tooltipPosition">{{"ww.download.dialog.download" | translate }}</button>
