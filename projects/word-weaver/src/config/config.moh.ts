@@ -1,3 +1,5 @@
+import { SettingsState } from "../app/core/settings/settings.model";
+
 export interface Option {
   classes: string[];
   gloss: string;
@@ -324,4 +326,10 @@ export const VALIDATION: Validation = {
 
 export const META: Meta = {
   wordmakerTempView: "translation"
+};
+
+export const initialSettings: Partial<SettingsState> = {
+  language: "en",
+  theme: "PURPLE-LIGHT-THEME",
+  autoNightMode: true
 };

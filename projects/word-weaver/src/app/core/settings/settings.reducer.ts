@@ -1,4 +1,5 @@
 import { SettingsState, NIGHT_MODE_THEME } from "./settings.model";
+import { initialSettings } from "../../../config/config";
 import {
   actionSettingsChangeAnimationsElements,
   actionSettingsChangeAnimationsPage,
@@ -17,7 +18,7 @@ import {
 import { Action, createReducer, on } from "@ngrx/store";
 import { environment } from "../../../environments/environment";
 
-export const initialState: SettingsState = {
+const initialBaseState: SettingsState = {
   language: "en",
   theme: "DEFAULT-THEME",
   autoNightMode: false,
@@ -35,6 +36,11 @@ export const initialState: SettingsState = {
   level: environment.config.level,
   highlight: environment.config.highlight,
   hour: new Date().getHours()
+};
+
+export const initialState: SettingsState = {
+  ...initialBaseState,
+  ...initialSettings
 };
 
 const reducer = createReducer(
