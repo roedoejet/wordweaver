@@ -1,0 +1,18 @@
+//
+// Configured Rules
+//
+// Here is where you can put artwork related styling for your
+// WordWeaver instance. By default, artwork can either by placed
+// in the header bar or as a background on the main content div.
+// Use these files to make changes, and set other display properties in
+// ../../config/config.ts
+
+// ==========================================================================
+// $Background
+// ==========================================================================
+@import "background";
+
+// ==========================================================================
+// $Header
+// ==========================================================================
+@import "header";

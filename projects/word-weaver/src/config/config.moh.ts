@@ -126,10 +126,6 @@ export interface Validation {
   };
 }
 
-export interface Meta {
-  wordmakerTempView: "default" | TierNames;
-}
-
 const _defaultOptions: TierOptions = { language: "L1", showName: false };
 
 export const HIGHLIGHTS: Highlight = {
@@ -324,8 +320,57 @@ export const VALIDATION: Validation = {
   }
 };
 
+export interface Link {
+  display: boolean;
+  url: string;
+}
+
+export interface Meta {
+  wordmakerTempView: "default" | TierNames;
+  displayTopGraphic: {
+    desktop: boolean;
+    mobile: boolean;
+  };
+  links: {
+    github: Link;
+    medium: Link;
+    facebook: Link;
+    youtube: Link;
+  };
+  copyright: {
+    name: string;
+    url: string;
+  };
+}
+
 export const META: Meta = {
-  wordmakerTempView: "translation"
+  wordmakerTempView: "translation",
+  displayTopGraphic: {
+    desktop: false,
+    mobile: true
+  },
+  copyright: {
+    name: "Onkwawenna Kentyohkwa",
+    url: "https://onkwawenna.info"
+  },
+  links: {
+    github: {
+      display: true,
+      url: "https://www.github.com/roedoejet/wordweaver-UI"
+    },
+    medium: {
+      display: false,
+      url: ""
+    },
+    facebook: {
+      display: false,
+      url: ""
+    },
+    youtube: {
+      display: true,
+      url: "https://www.youtube.com/channel/UCuRlpf5bo0pxlQKy9Pnn9oA"
+    }
+  }
 };
 
 export const initialSettings: Partial<SettingsState> = {

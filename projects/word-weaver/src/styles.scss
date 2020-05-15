@@ -18,7 +18,9 @@
 @import "./app/app/app.component.scss-theme";
 @import "./app/pages/about/about/about.component.scss-theme";
 @import "./app/pages/tableviewer/tableviewer/tableviewer.component.scss-theme.scss";
+@import "./app/pages/settings/settings/settings-container.component.scss-theme.scss";
 @import "./app/shared/logo/logo.component.scss-theme.scss";
+@import "./scss/config/background";
 
 @mixin custom-components-theme-common($theme) {
   @include ww-styles-reset-theme($theme);
@@ -26,14 +28,17 @@
   @include ww-logo-component-theme($theme);
   @include ww-about-component-theme($theme);
   @include ww-tableviewer-component-theme-common($theme);
+  @include ww-settings-component-theme-common($theme);
 }
 
 @mixin custom-components-theme-light($theme) {
   @include ww-tableviewer-component-theme-light($theme);
+  @include ww-background-theme-light($theme);
 }
 
 @mixin custom-components-theme-dark($theme) {
   @include ww-tableviewer-component-theme-dark($theme);
+  @include ww-background-theme-dark($theme);
 }
 
 // // Customize Angular Material theme with palettes from color-primary and color-secondary. Use http://mcg.mbitson.com to generate palette and add palettes to _palettes partial

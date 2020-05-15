@@ -6,6 +6,8 @@ import { marker } from "@biesbjerg/ngx-translate-extract-marker";
 
 import { environment as env } from "../../environments/environment";
 
+import { META } from "../../config/config";
+
 import {
   authLogin,
   authLogout,
@@ -48,7 +50,7 @@ export class AppComponent implements OnInit {
     ...this.navigation,
     { link: "settings", label: marker("ww.menu.settings") }
   ];
-
+  Meta = META;
   isAuthenticated$: Observable<boolean>;
   stickyHeader$: Observable<boolean>;
   language$: Observable<string>;

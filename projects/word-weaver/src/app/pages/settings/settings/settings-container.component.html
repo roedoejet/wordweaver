@@ -1,10 +1,9 @@
-<div class="container">
+<div class="settings-container br--all container page__content centered vwidth-90">
   <div class="row">
     <div class="col-sm-12">
       <h1>{{ 'ww.settings.title' | translate }}</h1>
     </div>
   </div>
-  <br>
   <ng-container *ngIf="settings$ | async as settings">
     <div class='row'>
       <div class='col-md-6 group' [ngClass]='routeAnimationsElements' *ngIf='objectkeys(settings.highlight).length > 0'>
@@ -16,11 +15,6 @@
           </mat-checkbox>
         </div>
       </div>
-    </div>
-    <br>
-    <br>
-    <br>
-    <div class='row'>
       <div class='col-md-6 group' [ngClass]='routeAnimationsElements' *ngIf='objectkeys(settings.level).length > 0'>
         <h2>{{ 'ww.settings.general.tiers.title' | translate }}</h2>
         <div class='icon-form-field checkboxes'>
@@ -31,8 +25,6 @@
         </div>
       </div>
     </div>
-    <br>
-    <br>
     <div class="row">
       <div class="col-md-6 group" [ngClass]="routeAnimationsElements">
         <h2>{{ 'ww.settings.general.title' | translate }}</h2>
@@ -40,7 +32,7 @@
           <mat-icon color="accent">
             <fa-icon icon="language" color="accent"></fa-icon>
           </mat-icon>
-          <mat-form-field>
+          <mat-form-field class='control'>
             <mat-select [placeholder]="'ww.settings.general.placeholder' | translate" [ngModel]="settings.language"
               (selectionChange)="onLanguageSelect($event)" name="language">
               <mat-option *ngFor="let l of languages" [value]="l.value">
@@ -58,16 +50,21 @@
           <mat-slide-toggle [checked]="settings.stickyHeader" (change)="onStickyHeaderToggle($event)">
           </mat-slide-toggle>
         </div>
+        <div class="icon-form-field">
+          <mat-placeholder>{{ 'ww.settings.advanced' | translate }}
+          </mat-placeholder>
+          <mat-slide-toggle [checked]="settings.testApi" (change)="onTestApiToggle($event)">
+            {{ 'ww.settings.testApi' | translate}}
+          </mat-slide-toggle>
+        </div>
       </div>
-    </div>
-    <div class="row">
       <div class="col-md-6 group" [ngClass]="routeAnimationsElements">
         <h2>{{ 'ww.settings.themes.title' | translate }}</h2>
         <div class="icon-form-field">
           <mat-icon color="accent">
             <fa-icon icon="paint-brush" color="accent"></fa-icon>
           </mat-icon>
-          <mat-form-field>
+          <mat-form-field class='control'>
             <mat-select [placeholder]="'ww.settings.themes.placeholder' | translate" [ngModel]="settings.theme"
               (selectionChange)="onThemeSelect($event)" name="themes">
               <mat-option *ngFor="let t of themes" [value]="t.value">
@@ -85,14 +82,10 @@
           <mat-slide-toggle [checked]="settings.autoNightMode" (change)="onAutoNightModeToggle($event)">
           </mat-slide-toggle>
         </div>
-        <div class="icon-form-field">
-          <mat-placeholder>{{ 'ww.settings.advanced' | translate }}
-          </mat-placeholder>
-          <mat-slide-toggle [checked]="settings.testApi" (change)="onTestApiToggle($event)">
-            {{ 'ww.settings.testApi' | translate}}
-          </mat-slide-toggle>
-        </div>
       </div>
+    </div>
+    <div class="row">
+
     </div>
   </ng-container>
 </div>

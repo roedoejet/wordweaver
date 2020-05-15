@@ -1,0 +1,17 @@
+.top-graphic {
+  &--mobile {
+    width: 100%;
+    text-align: center;
+
+    img {
+      max-height: 50px;
+    }
+  }
+
+  img {
+    max-height: 50px;
+    position: absolute;
+    left: 300px;
+    top: 5px;
+  }
+}

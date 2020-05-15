@@ -1,0 +1,36 @@
+@import "~@angular/material/theming";
+
+@mixin ww-settings-component-theme-common($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background-palette: map-get($theme, background);
+  $foreground-palette: map-get($theme, foreground);
+
+  .settings-container {
+    background-color: darken(mat-color($primary), 5%);
+
+    .mat-checkbox-frame {
+      border-color: mat-color($primary, default-contrast) !important;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    label,
+    input,
+    mat-placeholder,
+    span {
+      color: mat-color($primary, default-contrast);
+    }
+
+    .mat-select-arrow,
+    mat-label {
+      color: mat-color($primary, default-contrast) !important;
+    }
+  }
+}

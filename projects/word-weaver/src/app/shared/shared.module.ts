@@ -42,6 +42,7 @@ import {
   faFilter,
   faTasks,
   faCheck,
+  faHome,
   faSquare,
   faLanguage,
   faPaintBrush,
@@ -52,7 +53,12 @@ import {
   faStream,
   faBook
 } from "@fortawesome/free-solid-svg-icons";
-import { faMediumM, faGithub } from "@fortawesome/free-brands-svg-icons";
+import {
+  faMediumM,
+  faGithub,
+  faYoutube,
+  faFacebook
+} from "@fortawesome/free-brands-svg-icons";
 import { RtlSupportDirective } from "./rtl-support/rtl-support.directive";
 import { LogoComponent } from "./logo/logo.component";
 import { AnimateOnlyPipe } from "./pipes/animate-only/animate-only";
@@ -146,9 +152,12 @@ export class SharedModule {
     faIconLibrary.addIcons(
       faGithub,
       faMediumM,
+      faFacebook,
+      faYoutube,
       faPlus,
       faEdit,
       faTrash,
+      faHome,
       faTimes,
       faCaretUp,
       faCaretDown,
