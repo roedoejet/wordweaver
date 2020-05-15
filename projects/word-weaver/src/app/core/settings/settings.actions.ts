@@ -1,10 +1,10 @@
 import { createAction, props } from "@ngrx/store";
 
-import { Language } from "./settings.model";
+import { AvailableLanguages } from "../../../config/config";
 
 export const actionSettingsChangeLanguage = createAction(
   "[Settings] Change Language",
-  props<{ language: Language }>()
+  props<{ language: AvailableLanguages }>()
 );
 
 export const actionSettingsChangeLevel = createAction(

@@ -325,7 +325,13 @@ export interface Link {
   url: string;
 }
 
+export interface Language {
+  label: string;
+  value: string;
+}
+
 export interface Meta {
+  languages: Language[];
   wordmakerTempView: "default" | TierNames;
   displayTopGraphic: {
     desktop: boolean;
@@ -343,7 +349,14 @@ export interface Meta {
   };
 }
 
+export type AvailableLanguages = "en" | "fr" | "moh";
+
 export const META: Meta = {
+  languages: [
+    { label: "en", value: "en" },
+    { label: "fr", value: "fr" },
+    { label: "ka", value: "moh" }
+  ],
   wordmakerTempView: "translation",
   displayTopGraphic: {
     desktop: false,
