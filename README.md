@@ -18,6 +18,7 @@ This is an Angular web application for visualizing data from WordWeaver.
     - [Features](#features)
   - [Install](#install)
   - [Usage](#usage)
+  - [Adapting to your languages](#adapting-to-your-languages)
   - [Maintainers](#maintainers)
   - [Contributing](#contributing)
     - [Contributors](#contributors)
@@ -62,6 +63,14 @@ After installing, just start the app to run locally:
 ```sh
 $ npm start
 ```
+
+## Adapting to your languages
+
+1. Clone and add remote 'ww'
+2. npm install
+3. Replace the svg in the shared logo component
+4. Edit config
+5. Add any languages to assets/i18n
 
 ## Maintainers
 

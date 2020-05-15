@@ -347,7 +347,7 @@ export const META: Meta = {
   wordmakerTempView: "translation",
   displayTopGraphic: {
     desktop: false,
-    mobile: true
+    mobile: false
   },
   copyright: {
     name: "Onkwawenna Kentyohkwa",

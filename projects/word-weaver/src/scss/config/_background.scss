@@ -11,10 +11,10 @@
     top: 0;
     width: 100%;
     height: 100%;
-    opacity: 0.05;
+    opacity: 0.35;
     // background-image: url('http://placekitten.com/1500/1000');
     background-repeat: no-repeat;
-    background-position: 50% 50;
+    background-position: 20% 100%;
     -ms-background-size: cover;
     -o-background-size: cover;
     -moz-background-size: cover;
@@ -26,7 +26,7 @@
 @mixin ww-background-theme-light($theme) {
   .content {
     &:after {
-      background-image: url("assets/background-light.svg");
+      background-image: url("https://roedoejet.github.io/kawennonnis_gui/dist_toy/assets/img/bg.jpg");
     }
   }
 }
@@ -34,7 +34,7 @@
 @mixin ww-background-theme-dark($theme) {
   .content {
     &:after {
-      background-image: url("assets/background-dark.svg");
+      background-image: url("https://roedoejet.github.io/kawennonnis_gui/dist_toy/assets/img/bg.jpg");
     }
   }
 }
