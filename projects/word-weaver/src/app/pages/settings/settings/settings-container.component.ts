@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { Store, select } from "@ngrx/store";
 import { Observable } from "rxjs";
+import { META } from "../../../../config/config";
 
 import { marker } from "@biesbjerg/ngx-translate-extract-marker";
 
@@ -46,10 +47,12 @@ export class SettingsContainerComponent implements OnInit {
     { value: "MONKEY-THEME", label: marker("ww.settings.themes.fun") }
   ];
 
-  languages = [
-    { value: "en", label: marker("ww.settings.general.language.en") },
-    { value: "fr", label: marker("ww.settings.general.language.fr") }
-  ];
+  languages = META.languages.map(x => {
+    return {
+      value: x.value,
+      label: marker(`ww.settings.general.language.${x.value}`)
+    };
+  });
 
   constructor(private store: Store<State>) {}
 
