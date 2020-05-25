@@ -6,10 +6,20 @@
   $warn: map-get($theme, warn);
   $background-palette: map-get($theme, background);
   $foreground-palette: map-get($theme, foreground);
+}
+
+@mixin ww-settings-component-theme-dark($theme) {
+  $background-palette: map-get($theme, background);
+  $foreground-palette: map-get($theme, foreground);
+
+  $background: lighten(mat-color($background-palette, background), 10%);
+  $foreground: mat-color($foreground-palette, base);
 
   .settings-container {
+    background-color: $background;
+
     .mat-checkbox-frame {
-      border-color: mat-color($foreground-palette, base) !important;
+      border-color: $foreground !important;
     }
 
     h1,
@@ -23,22 +33,13 @@
     input,
     mat-placeholder,
     span {
-      color: mat-color($foreground-palette, base);
+      color: $foreground;
     }
 
     .mat-select-arrow,
     mat-label {
-      color: mat-color($foreground-palette, base) !important;
+      color: $foreground !important;
     }
-  }
-}
-
-@mixin ww-settings-component-theme-dark($theme) {
-  $background-palette: map-get($theme, background);
-  $foreground-palette: map-get($theme, foreground);
-
-  .settings-container {
-    background-color: lighten(mat-color($background-palette, background), 10%);
   }
 }
 
@@ -46,7 +47,33 @@
   $background-palette: map-get($theme, background);
   $foreground-palette: map-get($theme, foreground);
 
+  $background: darken(mat-color($background-palette, background), 10%);
+  $foreground: lighten(mat-color($foreground-palette, base), 20%);
+
   .settings-container {
-    background-color: darken(mat-color($background-palette, background), 10%);
+    background-color: $background;
+
+    .mat-checkbox-frame {
+      border-color: $foreground !important;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    label,
+    input,
+    mat-placeholder,
+    span {
+      color: $foreground;
+    }
+
+    .mat-select-arrow,
+    mat-label {
+      color: $foreground !important;
+    }
   }
 }

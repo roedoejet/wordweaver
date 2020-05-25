@@ -32,16 +32,16 @@
   $background-palette: map-get($theme, background);
   $foreground-palette: map-get($theme, foreground);
 
+  $background: lighten(mat-color($background-palette, background), 10%);
+  $foreground: mat-color($foreground-palette, base);
+
   ww-tableviewer {
     .mat-figure {
-      background-color: lighten(mat-color($background-palette, background), 7%);
+      background-color: darken($background, 3%);
     }
 
     ww-tableviewer-conj-panel {
-      background-color: lighten(
-        mat-color($background-palette, background),
-        10%
-      );
+      background-color: $background;
     }
   }
 }
@@ -52,10 +52,13 @@
   $warn: map-get($theme, warn);
   $background-palette: map-get($theme, background);
   $foreground-palette: map-get($theme, foreground);
-  @debug $foreground-palette;
+
+  $background: darken(mat-color($background-palette, background), 10%);
+  $foreground: lighten(mat-color($foreground-palette, base), 20%);
+
   .control {
     .mat-form-field-underline {
-      background-color: mat-color($foreground-palette, base);
+      background-color: $foreground;
     }
   }
 
@@ -65,32 +68,29 @@
     }
 
     .mat-form-field-ripple {
-      background-color: lighten(
-        mat-color($foreground-palette, base),
-        10%
-      ) !important;
+      background-color: $foreground !important;
     }
   }
 
   ww-tableviewer {
     .mat-checkbox-frame {
-      border-color: mat-color($foreground-palette, base) !important;
+      border-color: $foreground !important;
     }
 
     mat-checkbox {
       label,
       span {
-        color: mat-color($foreground-palette, base) !important;
+        color: $foreground !important;
       }
     }
 
     .mat-drawer-container {
-      background-color: mat-color($foreground-palette, base) !important;
+      background-color: $foreground !important;
     }
 
     .mat-select-arrow,
     mat-label {
-      color: mat-color($foreground-palette, base) !important;
+      color: $foreground !important;
     }
 
     h1,
@@ -103,7 +103,7 @@
     label,
     input,
     span {
-      color: mat-color($foreground-palette, base);
+      color: $foreground;
     }
 
     .mat-accent {
@@ -122,11 +122,11 @@
     }
 
     .mat-figure {
-      background-color: darken(mat-color($background-palette, background), 7%);
+      background-color: darken($background, 3%);
     }
 
     ww-tableviewer-conj-panel {
-      background-color: darken(mat-color($background-palette, background), 10%);
+      background-color: $background;
     }
   }
 }
