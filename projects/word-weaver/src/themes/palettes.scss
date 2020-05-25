@@ -195,3 +195,71 @@ $md-pink: (
     A700: #000000
   )
 );
+
+/* For use in src/lib/core/theming/_palette.scss */
+$md-maddypurp: (
+  50: #efe7f3,
+  100: #d7c3e0,
+  200: #bc9bcc,
+  300: #a172b7,
+  400: #8d54a7,
+  500: #793698,
+  600: #713090,
+  700: #662985,
+  800: #5c227b,
+  900: #49166a,
+  A100: #d8a2ff,
+  A200: #c36fff,
+  A400: #ae3cff,
+  A700: #a323ff,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #ffffff,
+    A700: #ffffff
+  )
+);
+
+/* For use in src/lib/core/theming/_palette.scss */
+$md-maddypurpdark: (
+  50: #f5edf9,
+  100: #e6d2f0,
+  200: #d6b4e6,
+  300: #c595db,
+  400: #b87fd4,
+  500: #ac68cc,
+  600: #a560c7,
+  700: #9b55c0,
+  800: #924bb9,
+  900: #823aad,
+  A100: #fdfbff,
+  A200: #eac8ff,
+  A400: #d695ff,
+  A700: #cc7bff,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000
+  )
+);

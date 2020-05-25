@@ -34,11 +34,13 @@
 @mixin custom-components-theme-light($theme) {
   @include ww-tableviewer-component-theme-light($theme);
   @include ww-background-theme-light($theme);
+  @include ww-settings-component-theme-light($theme);
 }
 
 @mixin custom-components-theme-dark($theme) {
   @include ww-tableviewer-component-theme-dark($theme);
   @include ww-background-theme-dark($theme);
+  @include ww-settings-component-theme-dark($theme);
 }
 
 // // Customize Angular Material theme with palettes from color-primary and color-secondary. Use http://mcg.mbitson.com to generate palette and add palettes to _palettes partial
