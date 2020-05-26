@@ -5,7 +5,7 @@
     <mat-sidenav #sidenav mode="push">
 
       <div class="branding">
-        <!-- <img [src]="logo" /> -->
+        <img [src]="logo" />
         <span>{{ 'ww.title-short' | translate}}</span>
       </div>
       <mat-nav-list>
@@ -32,14 +32,9 @@
           <span routerLink="" class="branding spacer center d-inline d-sm-none"></span>
           <span routerLink="" class="branding spacer center d-none d-sm-inline d-md-none"></span>
           <span routerLink="" class="branding spacer d-none d-md-inline">
+            <img [src]="logo" />
             <ww-logo class='branding ui-button'></ww-logo>
           </span>
-          <div *ngIf='Meta.displayTopGraphic.desktop' class='top-graphic desktop-only'>
-            <img src='assets/top-graphic.svg'>
-          </div>
-          <div *ngIf='Meta.displayTopGraphic.mobile' class='top-graphic--mobile d-md-none centered mobile-only'>
-            <img src='assets/top-graphic.svg'>
-          </div>
           <span class="d-none d-md-inline">
             <button mat-button class="nav-button" *ngFor="let item of navigation" [routerLink]="[item.link]"
               routerLinkActive="active">

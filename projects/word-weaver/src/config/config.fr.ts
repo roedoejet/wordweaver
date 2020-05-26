@@ -179,10 +179,7 @@ export interface Language {
 export interface Meta {
   languages: Language[];
   wordmakerTempView: "default" | TierNames;
-  displayTopGraphic: {
-    desktop: boolean;
-    mobile: boolean;
-  };
+  logo: string;
   links: {
     github: Link;
     medium: Link;
@@ -203,10 +200,7 @@ export const META: Meta = {
     { label: "fr", value: "fr" }
   ],
   wordmakerTempView: "default",
-  displayTopGraphic: {
-    desktop: false,
-    mobile: false
-  },
+  logo: "assets/wwlogo.png",
   copyright: {
     name: "Aidan Pine",
     url: "https://aidanpine.ca"

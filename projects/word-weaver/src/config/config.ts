@@ -181,10 +181,7 @@ export type AvailableLanguages = "en" | "fr";
 export interface Meta {
   languages: Language[];
   wordmakerTempView: "default" | TierNames;
-  displayTopGraphic: {
-    desktop: boolean;
-    mobile: boolean;
-  };
+  logo: string;
   links: {
     github: Link;
     medium: Link;
@@ -203,10 +200,7 @@ export const META: Meta = {
     { label: "fr", value: "fr" }
   ],
   wordmakerTempView: "default",
-  displayTopGraphic: {
-    desktop: false,
-    mobile: false
-  },
+  logo: "assets/wwlogo.png",
   copyright: {
     name: "National Research Council Canada",
     url: "https://nrc.canada.ca/en/node/1378"
