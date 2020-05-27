@@ -26,6 +26,8 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 // import { MatDatepickerModule } from "@angular/material/datepicker";
 // import { MatNativeDateModule } from "@angular/material/core";
 import { MatGridListModule } from "@angular/material/grid-list";
+import { MatTableModule } from "@angular/material/table";
+import { MatPaginatorModule, MatPaginator } from "@angular/material/paginator";
 
 import {
   FontAwesomeModule,
@@ -94,6 +96,8 @@ import { DownloadDialogComponent } from "./download-dialog/download-dialog.compo
     MatSlideToggleModule,
     MatToolbarModule,
     // MatDividerModule,
+    MatTableModule,
+    MatPaginatorModule,
     NgxEchartsModule,
     FontAwesomeModule
   ],
@@ -135,7 +139,8 @@ import { DownloadDialogComponent } from "./download-dialog/download-dialog.compo
     MatToolbarModule,
     // MatDatepickerModule,
     // MatNativeDateModule,
-
+    MatTableModule,
+    MatPaginatorModule,
     FontAwesomeModule,
 
     DownloadDialogComponent,

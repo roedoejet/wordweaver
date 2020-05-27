@@ -73,7 +73,11 @@
             </div>
         </div>
 
-        <div *ngIf="!selection.loading && (gridData$ | async) as gridData;" [hidden]="!selection.gridView">
+        <div *ngIf="!selection.loading && (gridData$ | async) as gridData;" [hidden]="!selection.gridView"
+            class="example-container mat-elevation-z8">
+            <ww-conjugation-grid></ww-conjugation-grid>
+        </div>
+        <!-- <div *ngIf="!selection.loading && (gridData$ | async) as gridData;" [hidden]="!selection.gridView">
             <div id="table-container" class="rel">
                 <div class="error__container" *ngIf="isString(gridData)">
                     <h3 class="error__header">
@@ -116,6 +120,6 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>

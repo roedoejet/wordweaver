@@ -8,6 +8,7 @@ import { SharedModule } from "../../shared/shared.module";
 import { TableviewerRoutingModule } from "./tableviewer-routing.module";
 import { NgxEchartsModule } from "ngx-echarts";
 import { ConjugationTreeComponent } from "./conjugation-tree/conjugation-tree.component";
+import { ConjugationGridComponent } from "./conjugation-grid/conjugation-grid.component";
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ConjugationTreeComponent } from "./conjugation-tree/conjugation-tree.co
     TableviewerPersPanelComponent,
     TableviewerTempPanelComponent,
     TableviewerVerbPanelComponent,
-    ConjugationTreeComponent
+    ConjugationTreeComponent,
+    ConjugationGridComponent
   ],
   imports: [SharedModule, TableviewerRoutingModule, NgxEchartsModule]
 })
