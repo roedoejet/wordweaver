@@ -12,6 +12,8 @@ import { actionChangeLoading } from "../tableviewer-selection/tableviewer-select
 import { selectSettingsState } from "../core.state";
 import { SettingsState } from "../settings/settings.model";
 
+type TableOrder = "root" | "pn" | "option";
+
 @Injectable({
   providedIn: "root"
 })
@@ -84,5 +86,51 @@ export class TierService {
       });
       return tieredConjugation;
     });
+  }
+
+  restructureData(
+    conjugations: Response,
+    main: TableOrder,
+    col: TableOrder,
+    row: TableOrder
+  ) {
+    const structuredData = [];
+    const tieredConjugations = this.createTiers(conjugations).map(
+      conjugation => {
+        const tierObj = {};
+        for (const tier of conjugation) {
+          tierObj[tier["name"]] = tier["html"];
+        }
+        return tierObj;
+      }
+    );
+    const restructuredConjugations = conjugations.map((x, i) => ({
+      ...x.input,
+      ...tieredConjugations[i],
+      pn: x.input.agent + "." + x.input.patient
+    }));
+    const uniqueMain = [...new Set(restructuredConjugations.map(x => x[main]))];
+    const uniqueRow = [...new Set(restructuredConjugations.map(x => x[row]))];
+    uniqueMain.forEach(() => {
+      const mainData = [];
+      const mainDataRows = uniqueRow.map(rowKey => {
+        const structuredEntry = { rowKey };
+        restructuredConjugations.forEach(entry => {
+          if (entry[row] === rowKey) {
+            for (const tier of this.TIERS) {
+              if (tier.name === "display") {
+                structuredEntry[entry[col]] = entry["display"];
+              } else {
+                structuredEntry[entry[col] + "-" + tier.name] =
+                  entry[tier.name];
+              }
+            }
+          }
+        });
+        mainData.push(structuredEntry);
+      });
+      structuredData.push(mainData);
+    });
+    return structuredData;
   }
 }

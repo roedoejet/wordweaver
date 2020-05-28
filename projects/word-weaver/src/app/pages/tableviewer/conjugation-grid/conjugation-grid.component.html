@@ -9,7 +9,7 @@
         <!-- Other Columns -->
         <ng-container [matColumnDef]="col" *ngFor="let col of uniqueCol">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> {{col}} </th>
-            <td mat-cell *matCellDef="let element"> {{element[col]}} <br> {{element[col + "-translation"]}} </td>
+            <td mat-cell *matCellDef="let element" [innerHTML]="element[col]"></td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
