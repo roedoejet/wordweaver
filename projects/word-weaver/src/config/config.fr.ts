@@ -176,9 +176,17 @@ export interface Language {
   value: string;
 }
 
+export type AvailableLanguages = "en" | "fr";
+
+export type TableviewerViewModes = "list" | "grid" | "tree";
+
 export interface Meta {
   languages: Language[];
   wordmakerTempView: "default" | TierNames;
+  tableviewer: {
+    viewModes: TableviewerViewModes[];
+    defaultViewMode: TableviewerViewModes;
+  };
   logo: string;
   links: {
     github: Link;
@@ -192,14 +200,16 @@ export interface Meta {
   };
 }
 
-export type AvailableLanguages = "en" | "fr";
-
 export const META: Meta = {
   languages: [
     { label: "en", value: "en" },
     { label: "fr", value: "fr" }
   ],
   wordmakerTempView: "default",
+  tableviewer: {
+    viewModes: ["grid", "tree"],
+    defaultViewMode: "grid"
+  },
   logo: "assets/wwlogo.png",
   copyright: {
     name: "Aidan Pine",

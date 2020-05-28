@@ -5,12 +5,13 @@ import {
   actionChangeVerbs,
   actionToggleTreeViewOrder,
   actionChangeTreeViewDepth,
-  actionToggleGridView,
+  actionChangeViewMode,
   actionChangeConjugations,
   actionChangeLoading
 } from "./tableviewer-selection.actions";
 import { Action, createReducer, on, ActionReducer } from "@ngrx/store";
 import { TableviewerState } from "./tableviewer-selection.model";
+import { META } from "../../../config/config";
 
 export const initialState: TableviewerState = {
   option: [],
@@ -18,7 +19,7 @@ export const initialState: TableviewerState = {
   patient: [],
   root: [],
   conjugations: [],
-  gridView: true,
+  view: META.tableviewer.defaultViewMode,
   treeDepth: 1,
   standardTreeOrder: true,
   loading: false
@@ -35,10 +36,11 @@ const reducer = createReducer(
     actionChangeTreeViewDepth,
     actionChangeConjugations,
     actionChangeLoading,
+    actionChangeViewMode,
     (state, action) => ({ ...state, ...action })
   ),
   // Toggles
-  on(actionToggleTreeViewOrder, actionToggleGridView, (state, action) => {
+  on(actionToggleTreeViewOrder, (state, action) => {
     const toggledState = {};
     toggledState[action.name] = !state[action.name];
     return { ...state, ...toggledState };

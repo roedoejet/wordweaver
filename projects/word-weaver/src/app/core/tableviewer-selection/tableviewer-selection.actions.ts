@@ -2,7 +2,13 @@ import { createAction, props } from "@ngrx/store";
 
 import { TableviewerTreeDepth } from "./tableviewer-selection.model";
 
-import { Option, Pronoun, Response, Verb } from "../../../config/config";
+import {
+  Option,
+  Pronoun,
+  Response,
+  Verb,
+  TableviewerViewModes
+} from "../../../config/config";
 
 export const actionChangeConjugations = createAction(
   "[Tableviewer] Change Conjugations",
@@ -29,9 +35,9 @@ export const actionChangeOptions = createAction(
   props<{ option: Option[] }>()
 );
 
-export const actionToggleGridView = createAction(
-  "[Tableviewer] Toggle Grid View",
-  props<{ name: "gridView" }>()
+export const actionChangeViewMode = createAction(
+  "[Tableviewer] Toggle View Mode",
+  props<{ view: TableviewerViewModes }>()
 );
 
 export const actionChangeLoading = createAction(

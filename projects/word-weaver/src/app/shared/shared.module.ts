@@ -27,7 +27,8 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 // import { MatNativeDateModule } from "@angular/material/core";
 import { MatGridListModule } from "@angular/material/grid-list";
 import { MatTableModule } from "@angular/material/table";
-import { MatPaginatorModule, MatPaginator } from "@angular/material/paginator";
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatRadioModule } from "@angular/material/radio";
 
 import {
   FontAwesomeModule,
@@ -68,6 +69,7 @@ import { CapitalizePipe } from "./pipes/capitalize/capitalize";
 import { DecapitalizePipe } from "./pipes/decapitalize/decapitalize";
 import { NgxEchartsModule } from "ngx-echarts";
 import { DownloadDialogComponent } from "./download-dialog/download-dialog.component";
+import { TableViewerDialogComponent } from "./tableviewer-dialog/tableviewer-dialog.component";
 
 @NgModule({
   imports: [
@@ -95,6 +97,7 @@ import { DownloadDialogComponent } from "./download-dialog/download-dialog.compo
     MatStepperModule,
     MatSlideToggleModule,
     MatToolbarModule,
+    MatRadioModule,
     // MatDividerModule,
     MatTableModule,
     MatPaginatorModule,
@@ -107,7 +110,8 @@ import { DownloadDialogComponent } from "./download-dialog/download-dialog.compo
     AnimateOnlyPipe,
     CapitalizePipe,
     DecapitalizePipe,
-    DownloadDialogComponent
+    DownloadDialogComponent,
+    TableViewerDialogComponent
   ],
   exports: [
     CommonModule,
@@ -134,6 +138,7 @@ import { DownloadDialogComponent } from "./download-dialog/download-dialog.compo
     MatSnackBarModule,
     MatSlideToggleModule,
     MatStepperModule,
+    MatRadioModule,
     // MatDividerModule,
     // MatSliderModule,
     MatToolbarModule,
@@ -144,6 +149,7 @@ import { DownloadDialogComponent } from "./download-dialog/download-dialog.compo
     FontAwesomeModule,
 
     DownloadDialogComponent,
+    TableViewerDialogComponent,
     LogoComponent,
     RtlSupportDirective,
 

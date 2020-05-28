@@ -2,8 +2,33 @@ table {
   width: 100%;
 }
 
+.table__container {
+  width: 934px;
+  overflow: auto;
+  height: 510px;
+  min-height: 100%;
+}
+
 .mat-paginator {
   position: absolute;
   bottom: 0;
   width: 100%;
+}
+
+th,
+td,
+th.mat-header-cell {
+  width: 150px;
+  text-align: center;
+}
+
+th.mat-header-cell {
+  border-bottom: 1px solid white;
+}
+
+th.mat-header-cell:first-of-type,
+td.mat-cell:first-of-type,
+td.mat-footer-cell:first-of-type {
+  padding: 0;
+  border-right: 1px solid white;
 }

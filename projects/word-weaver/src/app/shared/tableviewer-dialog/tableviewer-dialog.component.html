@@ -1,0 +1,24 @@
+<div class='dialog__container'>
+
+    <h2 mat-dialog-title>{{ "ww.tableviewer.dialog.title" | translate }}</h2>
+    <div mat-dialog-content *ngIf="selection$ | async as selection">
+        <mat-radio-group class="radio-group" [ngModel]='selection.view' (change)='onSelecteViewMode($event)'>
+            <mat-radio-button *ngFor="let mode of Meta.tableviewer.viewModes" [value]='mode'>
+                {{ 'ww.tableviewer.view-modes.' + mode | translate }}<p>
+                    {{ 'ww.tableviewer.view-mode-descriptions.' + mode | translate}}</p>
+            </mat-radio-button>
+        </mat-radio-group>
+    </div>
+
+    <mat-dialog-actions>
+
+        <div class='centered dialog__buttons__container'>
+            <button (click)="exit()" class="exit-button dialog__buttons" mat-raised-button
+                [matTooltip]="'ww.tableviewer.dialog.exit' | translate" [matTooltipShowDelay]="showDelay.value"
+                [matTooltipHideDelay]="hideDelay.value" [matTooltipPosition]="tooltipPosition">
+                {{ "ww.tableviewer.dialog.exit" | translate }}
+            </button>
+        </div>
+    </mat-dialog-actions>
+
+</div>

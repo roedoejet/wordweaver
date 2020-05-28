@@ -1,4 +1,10 @@
-import { Option, Pronoun, Verb, Response } from "../../../config/config";
+import {
+  Option,
+  Pronoun,
+  Verb,
+  Response,
+  TableviewerViewModes
+} from "../../../config/config";
 import { AppState } from "../core.module";
 
 export interface TableviewerState {
@@ -6,7 +12,7 @@ export interface TableviewerState {
   agent: Pronoun[];
   patient: Pronoun[];
   root: Verb[];
-  gridView: boolean;
+  view: TableviewerViewModes;
   treeDepth: TableviewerTreeDepth;
   standardTreeOrder: boolean;
   conjugations: Response;

@@ -178,9 +178,15 @@ export interface Language {
 
 export type AvailableLanguages = "en" | "fr";
 
+export type TableviewerViewModes = "list" | "grid" | "tree";
+
 export interface Meta {
   languages: Language[];
   wordmakerTempView: "default" | TierNames;
+  tableviewer: {
+    viewModes: TableviewerViewModes[];
+    defaultViewMode: TableviewerViewModes;
+  };
   logo: string;
   links: {
     github: Link;
@@ -200,6 +206,10 @@ export const META: Meta = {
     { label: "fr", value: "fr" }
   ],
   wordmakerTempView: "default",
+  tableviewer: {
+    viewModes: ["list", "grid", "tree"],
+    defaultViewMode: "grid"
+  },
   logo: "assets/wwlogo.png",
   copyright: {
     name: "National Research Council Canada",

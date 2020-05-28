@@ -23,11 +23,11 @@
         </div>
     </div>
     <hr *ngIf="viewableVerbs$ | async" class='margin-bottom-50'>
-    <div class='panel__content'>
+    <div class='panel__content custom-scroll-y'>
         <ng-template #loading>
             <mat-spinner class="centered"></mat-spinner>
         </ng-template>
-        <mat-chip-list class="panel__list custom-scroll" *ngIf="viewableVerbs$ | async as verbs; else loading">
+        <mat-chip-list class="panel__list" *ngIf="viewableVerbs$ | async as verbs; else loading">
             <p *ngIf="verbs.length === 0">{{ "ww.wordmaker.verb.try-again" | translate }}</p>
             <mat-chip class="margin-5 bg-white border-accent" (click)="onVerbSelect(verb)" *ngFor="let verb of verbs">
                 <span class="centered color-black">{{verb.gloss}}</span>

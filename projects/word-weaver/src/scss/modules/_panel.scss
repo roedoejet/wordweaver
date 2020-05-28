@@ -49,6 +49,12 @@ $panel-adjustment: 0.1;
   }
 
   &__toolbar {
+    display: inline;
+
+    &__spinner {
+      display: inline-block !important;
+      margin-right: em(15);
+    }
   }
 
   &__content {

@@ -1,0 +1,38 @@
+@import "../../pages/settings/settings/settings-container.component.scss";
+
+.form-container {
+  display: grid;
+}
+
+.form-control {
+  margin: 20px;
+  width: fit-content;
+}
+
+.dialog {
+  &__container {
+    position: relative;
+  }
+
+  &__buttons {
+    margin: 25px;
+
+    &__container {
+      text-align: center;
+    }
+  }
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  /* display: inline-grid; */
+  /* display: grid; */
+  margin: 15px 0;
+}
+
+// .exit-button {
+//     position: absolute;
+//     top: 5px;
+//     right: 5px;
+// }

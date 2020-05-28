@@ -22,74 +22,6 @@
 @import "./app/shared/logo/logo.component.scss-theme.scss";
 @import "./scss/config/background";
 
-@mixin custom-components-theme-common($theme) {
-  @include ww-styles-reset-theme($theme);
-  @include ww-app-component-theme($theme);
-  @include ww-logo-component-theme($theme);
-  @include ww-about-component-theme($theme);
-  @include ww-tableviewer-component-theme-common($theme);
-  @include ww-settings-component-theme-common($theme);
-}
-
-@mixin custom-components-theme-light($theme) {
-  @include ww-tableviewer-component-theme-light($theme);
-  @include ww-background-theme-light($theme);
-  @include ww-settings-component-theme-light($theme);
-}
-
-@mixin custom-components-theme-dark($theme) {
-  @include ww-tableviewer-component-theme-dark($theme);
-  @include ww-background-theme-dark($theme);
-  @include ww-settings-component-theme-dark($theme);
-}
-
-// // Customize Angular Material theme with palettes from color-primary and color-secondary. Use http://mcg.mbitson.com to generate palette and add palettes to _palettes partial
-
-// $wordweaver-primary: mat-palette($md-primary);
-// $wordweaver-accent: mat-palette($md-accent, 400);
-
-// $wordweaver-theme: mat-light-theme($wordweaver-primary, $wordweaver-accent);
-
-// $wordweaver-dark-theme: mat-dark-theme($wordweaver-primary, $wordweaver-accent);
-
-// @include angular-material-theme($wordweaver-theme);
-
-.default-theme {
-  @include angular-material-theme($ww-theme);
-  @include custom-components-theme-common($ww-theme);
-  @include custom-components-theme-light($ww-theme);
-}
-
-.light-theme {
-  @include angular-material-theme($ww-light-theme);
-  @include custom-components-theme-common($ww-light-theme);
-  @include custom-components-theme-light($ww-light-theme);
-}
-
-.black-theme {
-  @include angular-material-theme($ww-black-theme);
-  @include custom-components-theme-common($ww-black-theme);
-  @include custom-components-theme-dark($ww-black-theme);
-}
-
-.purple-light-theme {
-  @include angular-material-theme($ww-purple-theme-light);
-  @include custom-components-theme-common($ww-purple-theme-light);
-  @include custom-components-theme-light($ww-purple-theme-light);
-}
-
-.purple-dark-theme {
-  @include angular-material-theme($ww-purple-theme-dark);
-  @include custom-components-theme-common($ww-purple-theme-dark);
-  @include custom-components-theme-dark($ww-purple-theme-dark);
-}
-
-.monkey-theme {
-  @include angular-material-theme($ww-monkey-theme);
-  @include custom-components-theme-common($ww-monkey-theme);
-  @include custom-components-theme-dark($ww-monkey-theme);
-}
-
 // ==========================================================================
 // Sassy Starter by Mina Markham
 // A SMACSS-based starter toolkit for SCSS projects
@@ -156,6 +88,75 @@ $pesticide-debug-depth: false;
 //   }
 
 @include mat-core();
+
+@mixin custom-components-theme-common($theme) {
+  @include ww-styles-reset-theme($theme);
+  @include ww-app-component-theme($theme);
+  @include ww-logo-component-theme($theme);
+  @include ww-about-component-theme($theme);
+  @include ww-tableviewer-component-theme-common($theme);
+  @include ww-settings-component-theme-common($theme);
+  @include ww-scroll($theme);
+}
+
+@mixin custom-components-theme-light($theme) {
+  @include ww-tableviewer-component-theme-light($theme);
+  @include ww-background-theme-light($theme);
+  @include ww-settings-component-theme-light($theme);
+}
+
+@mixin custom-components-theme-dark($theme) {
+  @include ww-tableviewer-component-theme-dark($theme);
+  @include ww-background-theme-dark($theme);
+  @include ww-settings-component-theme-dark($theme);
+}
+
+// // Customize Angular Material theme with palettes from color-primary and color-secondary. Use http://mcg.mbitson.com to generate palette and add palettes to _palettes partial
+
+// $wordweaver-primary: mat-palette($md-primary);
+// $wordweaver-accent: mat-palette($md-accent, 400);
+
+// $wordweaver-theme: mat-light-theme($wordweaver-primary, $wordweaver-accent);
+
+// $wordweaver-dark-theme: mat-dark-theme($wordweaver-primary, $wordweaver-accent);
+
+// @include angular-material-theme($wordweaver-theme);
+
+.default-theme {
+  @include angular-material-theme($ww-theme);
+  @include custom-components-theme-common($ww-theme);
+  @include custom-components-theme-light($ww-theme);
+}
+
+.light-theme {
+  @include angular-material-theme($ww-light-theme);
+  @include custom-components-theme-common($ww-light-theme);
+  @include custom-components-theme-light($ww-light-theme);
+}
+
+.black-theme {
+  @include angular-material-theme($ww-black-theme);
+  @include custom-components-theme-common($ww-black-theme);
+  @include custom-components-theme-dark($ww-black-theme);
+}
+
+.purple-light-theme {
+  @include angular-material-theme($ww-purple-theme-light);
+  @include custom-components-theme-common($ww-purple-theme-light);
+  @include custom-components-theme-light($ww-purple-theme-light);
+}
+
+.purple-dark-theme {
+  @include angular-material-theme($ww-purple-theme-dark);
+  @include custom-components-theme-common($ww-purple-theme-dark);
+  @include custom-components-theme-dark($ww-purple-theme-dark);
+}
+
+.monkey-theme {
+  @include angular-material-theme($ww-monkey-theme);
+  @include custom-components-theme-common($ww-monkey-theme);
+  @include custom-components-theme-dark($ww-monkey-theme);
+}
 
 // ==========================================================================
 // $Modules

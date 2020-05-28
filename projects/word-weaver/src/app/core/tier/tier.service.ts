@@ -88,6 +88,8 @@ export class TierService {
     });
   }
 
+  // Restructure data for x*y grid
+  // Returns structured data along with unique values for col/row and table separators
   restructureData(
     conjugations: Response,
     main: TableOrder,
@@ -111,6 +113,7 @@ export class TierService {
     }));
     const uniqueMain = [...new Set(restructuredConjugations.map(x => x[main]))];
     const uniqueRow = [...new Set(restructuredConjugations.map(x => x[row]))];
+    const uniqueCol = [...new Set(restructuredConjugations.map(x => x[col]))];
     uniqueMain.forEach(() => {
       const mainData = [];
       const mainDataRows = uniqueRow.map(rowKey => {
@@ -131,6 +134,6 @@ export class TierService {
       });
       structuredData.push(mainData);
     });
-    return structuredData;
+    return { structuredData, uniqueMain, uniqueCol, uniqueRow };
   }
 }

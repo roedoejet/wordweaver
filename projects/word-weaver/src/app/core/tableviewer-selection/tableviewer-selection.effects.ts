@@ -23,7 +23,7 @@ import {
   actionChangeVerbs,
   actionChangeLoading,
   actionChangeConjugations,
-  actionToggleGridView,
+  actionChangeViewMode,
   actionChangeTreeViewDepth,
   actionToggleTreeViewOrder
 } from "./tableviewer-selection.actions";

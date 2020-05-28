@@ -9,6 +9,7 @@ import { TableviewerRoutingModule } from "./tableviewer-routing.module";
 import { NgxEchartsModule } from "ngx-echarts";
 import { ConjugationTreeComponent } from "./conjugation-tree/conjugation-tree.component";
 import { ConjugationGridComponent } from "./conjugation-grid/conjugation-grid.component";
+import { ConjugationSimpleGridComponent } from "./conjugation-simple-grid/conjugation-simple-grid.component";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ConjugationGridComponent } from "./conjugation-grid/conjugation-grid.co
     TableviewerTempPanelComponent,
     TableviewerVerbPanelComponent,
     ConjugationTreeComponent,
-    ConjugationGridComponent
+    ConjugationGridComponent,
+    ConjugationSimpleGridComponent
   ],
   imports: [SharedModule, TableviewerRoutingModule, NgxEchartsModule]
 })

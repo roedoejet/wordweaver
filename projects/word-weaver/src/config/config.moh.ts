@@ -330,9 +330,15 @@ export interface Language {
   value: string;
 }
 
+export type TableviewerViewModes = "list" | "grid" | "tree";
+
 export interface Meta {
   languages: Language[];
   wordmakerTempView: "default" | TierNames;
+  tableviewer: {
+    viewModes: TableviewerViewModes[];
+    defaultViewMode: TableviewerViewModes;
+  };
   logo: string;
   links: {
     github: Link;
@@ -355,6 +361,10 @@ export const META: Meta = {
     { label: "ka", value: "moh" }
   ],
   wordmakerTempView: "translation",
+  tableviewer: {
+    viewModes: ["list", "grid", "tree"],
+    defaultViewMode: "list"
+  },
   logo: "assets/wwlogo.png",
   copyright: {
     name: "Onkwawenna Kentyohkwa",

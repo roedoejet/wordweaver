@@ -17,15 +17,14 @@ import { merge as _merge } from "lodash";
 import {
   actionConjugationEvent,
   actionChangeTreeViewDepth,
-  actionToggleTreeViewOrder,
-  actionToggleGridView
+  actionToggleTreeViewOrder
 } from "../../../core/tableviewer-selection/tableviewer-selection.actions";
 import { SettingsState, State } from "../../../core/settings/settings.model";
 import { TableviewerState } from "../../../core/tableviewer-selection/tableviewer-selection.model";
 import { selectTableviewerState } from "../../../core/core.state";
 import { selectSettings } from "../../../core/settings/settings.selectors";
 import { TierService } from "../../../core/core.module";
-import { TIERS } from "../../../../config/config";
+import { TIERS, TableviewerViewModes, META } from "../../../../config/config";
 
 import { ROUTE_ANIMATIONS_ELEMENTS } from "../../../core/core.module";
 import { marker } from "@biesbjerg/ngx-translate-extract-marker";
@@ -33,6 +32,7 @@ import { actionSettingsChangeThemeColors } from "../../../core/settings/settings
 
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { DownloadDialogComponent } from "../../../shared/download-dialog/download-dialog.component";
+import { TableViewerDialogComponent } from "../../../shared/tableviewer-dialog/tableviewer-dialog.component";
 
 @Component({
   selector: "ww-tableviewer-conj-panel",
@@ -76,8 +76,7 @@ export class TableviewerConjPanelComponent implements AfterViewInit, OnInit {
 
     this.gridData$ = this.selection$.pipe(
       map(selection => {
-        if (selection.gridView && selection.conjugations.length > 0) {
-          console.log(this.tierService.createTiers(selection.conjugations));
+        if (selection.view === "grid" && selection.conjugations.length > 0) {
           return this.tierService.createTiers(selection.conjugations);
         } else {
           return false;
@@ -110,10 +109,6 @@ export class TableviewerConjPanelComponent implements AfterViewInit, OnInit {
     );
   }
 
-  onToggleGridView() {
-    this.store.dispatch(actionToggleGridView({ name: "gridView" }));
-  }
-
   onManualConjugation(event) {
     this.store.dispatch(actionConjugationEvent(event));
   }
@@ -126,6 +121,14 @@ export class TableviewerConjPanelComponent implements AfterViewInit, OnInit {
   // TODO: This is currently used for determining whether gridData is an error. This is fragile, and errors should be handled differently.
   isString(val) {
     return typeof val === "string";
+  }
+
+  showSettings() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.minWidth = "30vw";
+    this.dialog.open(TableViewerDialogComponent, dialogConfig);
   }
 
   download() {
