@@ -1,5 +1,7 @@
 import {
+  ChangeDetectorRef,
   Component,
+  Input,
   OnDestroy,
   OnInit,
   ChangeDetectionStrategy,
@@ -7,15 +9,19 @@ import {
 } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
-import { BehaviorSubject, Subject, Observable } from "rxjs";
-import { map, tap, takeUntil } from "rxjs/operators";
 import { Response } from "../../../../config/config";
+import { Observable, Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
+import { SettingsState, State } from "../../../core/settings/settings.model";
 import { Store, select } from "@ngrx/store";
-import { selectTableviewer } from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
-import { TierService } from "../../../core/core.module";
-import { TableviewerState } from "../../../core/tableviewer-selection/tableviewer-selection.model";
+import { selectSettings } from "../../../core/settings/settings.selectors";
 
-type TableOrder = "root" | "pn" | "option";
+export type GridOrderOptions = "root" | "pn" | "option";
+export interface GridOrder {
+  main: GridOrderOptions;
+  row: GridOrderOptions;
+  col: GridOrderOptions;
+}
 
 @Component({
   selector: "ww-conjugation-grid",
@@ -24,43 +30,39 @@ type TableOrder = "root" | "pn" | "option";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ConjugationGridComponent implements OnDestroy, OnInit {
-  dataSource$: Observable<MatTableDataSource<Response>>;
-  tableOrd: TableOrder = "root";
-  col: TableOrder = "option";
-  row: TableOrder = "pn";
+  keys = Object.keys;
+  settings$: Observable<SettingsState>;
+  dataSources: MatTableDataSource<Response>[];
   uniqueCol: string[];
+  uniqueMain: string[];
   displayedColumns: string[];
-  selection$: Observable<TableviewerState>;
   unsubscribe$ = new Subject<void>();
-
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  constructor(private store: Store, private tierService: TierService) {}
+  @Input() data$;
+  // @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  constructor(private store: Store<State>, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    this.selection$ = this.store.pipe(
+    this.settings$ = this.store.pipe(
       takeUntil(this.unsubscribe$),
-      select(selectTableviewer)
+      select(selectSettings)
     );
-    this.dataSource$ = this.selection$.pipe(
-      map(selection => {
-        const restructuredData = this.tierService.restructureData(
-          selection.conjugations,
-          this.tableOrd,
-          this.col,
-          this.row
-        );
-        const dataSource = new MatTableDataSource<Response>(
-          restructuredData.structuredData[0]
-        ); // restructure data to grid format
-        this.uniqueCol = restructuredData.uniqueCol;
+    this.data$.pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
+      if (data) {
+        this.uniqueCol = data.uniqueCol;
+        this.uniqueMain = data.uniqueMain;
+        this.dataSources = data.structuredData.map(x => {
+          const dataSource = new MatTableDataSource<Response>(x);
+          // dataSource.paginator = this.paginator; // TODO: Paginator is broken :(
+          return dataSource;
+        });
         this.displayedColumns = ["placeholder", ...this.uniqueCol];
-        dataSource.paginator = this.paginator; // add paginator
-        return dataSource;
-      })
-    );
+        this.cdr.detectChanges();
+        // this.dataSource.paginator = this.paginator
+      }
+    });
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }

@@ -1,0 +1,42 @@
+// ==========================================================================
+// $Custom
+// @see ****
+// ==========================================================================
+
+// ==========================================================================
+// This is where you should add any custom styling to data-supplied, classes
+// from the WordWeaver API. Below is an example relevant to Mohawk
+// ==========================================================================
+
+@mixin ww-custom-theme-common($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background-palette: map-get($theme, background);
+  $foreground-palette: map-get($theme, foreground);
+
+  // .transitive.pronoun
+  // .agent.pronoun
+  // .patient.pronoun
+  // .root
+  // .tmp_affix.affix
+  // .aspect.affix
+
+  // aspect, post-asp-suf, pronouns, req, temporal-affix, root
+}
+
+@mixin ww-custom-theme-light($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background-palette: map-get($theme, background);
+  $foreground-palette: map-get($theme, foreground);
+}
+
+@mixin ww-custom-theme-dark($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background-palette: map-get($theme, background);
+  $foreground-palette: map-get($theme, foreground);
+}

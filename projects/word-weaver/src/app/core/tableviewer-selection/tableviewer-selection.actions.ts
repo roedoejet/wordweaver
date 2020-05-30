@@ -9,6 +9,10 @@ import {
   Verb,
   TableviewerViewModes
 } from "../../../config/config";
+import {
+  GridOrderOptions,
+  GridOrder
+} from "../../pages/tableviewer/conjugation-grid/conjugation-grid.component";
 
 export const actionChangeConjugations = createAction(
   "[Tableviewer] Change Conjugations",
@@ -53,6 +57,11 @@ export const actionChangeTreeViewDepth = createAction(
 export const actionToggleTreeViewOrder = createAction(
   "[Tableviewer] Toggle Tree View Order",
   props<{ name: "standardTreeOrder" }>()
+);
+
+export const actionChangeGridOrder = createAction(
+  "[Tableviewer] Change Grid View Rows and Columns",
+  props<{ name: "gridOrder"; partial: Partial<GridOrder> }>()
 );
 
 export const actionConjugationEvent = createAction(

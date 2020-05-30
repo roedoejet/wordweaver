@@ -3,7 +3,8 @@
         <div *ngIf="show_toolbar" class="panel__header panel__header--tableview">
             <h5 #header class="panel__title">{{ 'ww.tableviewer.conj.title' | translate }}</h5>
             <div class="panel__toolbar toolbar" *ngIf="selection$ | async as selection">
-                <mat-spinner *ngIf='selection.loading' class='panel__toolbar__spinner' [color]="'accent'" [diameter]='20'>
+                <mat-spinner *ngIf='selection.loading' class='panel__toolbar__spinner' [color]="'accent'"
+                    [diameter]='20'>
                 </mat-spinner>
                 <button #conjugate (click)='onManualConjugation($event)' class="conjugate mat-accent" mat-raised-button>
                     {{ 'ww.tableviewer.conj.conjugate' | translate }}
@@ -17,11 +18,17 @@
                     <option value="2">2</option>
                     <option value="3">3</option>
                 </select>
-                <button *ngIf="selection.view !== 'list'" class="toolbar__tool ui-button" mat-icon-button
+                <button *ngIf="selection.view === 'tree'" class="toolbar__tool ui-button" mat-icon-button
                     (click)="onToggleTreeOrder()" [matTooltip]="'ww.tableviewer.conj.order-tip' | translate"
                     [matTooltipShowDelay]="showDelay.value" [matTooltipHideDelay]="hideDelay.value"
                     [matTooltipPosition]="tooltipPosition">
                     <mat-icon aria-label="Switch pronoun and temp">swap_horiz</mat-icon>
+                </button>
+                <button *ngIf="selection.view === 'grid'" class="toolbar__tool ui-button" mat-icon-button
+                    (click)="onToggleGridOrder()" [matTooltip]="'ww.tableviewer.conj.grid-order-tip' | translate"
+                    [matTooltipShowDelay]="showDelay.value" [matTooltipHideDelay]="hideDelay.value"
+                    [matTooltipPosition]="tooltipPosition">
+                    <mat-icon aria-label="Switch rows and columns">swap_horiz</mat-icon>
                 </button>
                 <button (click)="download()" class="ui-button toolbar__tool" mat-icon-button
                     [matTooltip]="'ww.tableviewer.conj.download-tip' | translate"
@@ -35,30 +42,7 @@
                     [matTooltipPosition]="tooltipPosition">
                     <mat-icon aria-label="Show setting">more_horiz</mat-icon>
                 </button>
-                <!-- <button class="ui-button toolbar__tool" mat-icon-button (click)="onToggleGridView()"
-                    [matTooltip]="'ww.tableviewer.conj.explorer-tip' | translate"
-                    [matTooltipShowDelay]="showDelay.value" [matTooltipHideDelay]="hideDelay.value"
-                    [matTooltipPosition]="tooltipPosition">
-                    <mat-icon *ngIf="selection.gridView" aria-label="Conjugate">account_tree</mat-icon>
-                    <mat-icon *ngIf="!selection.gridView" aria-label="Conjugate">grid_on</mat-icon>
-                </button> -->
-                <!-- <button (click)="show_toolbar = !show_toolbar" class="ui-button toolbar__tool" mat-icon-button
-                    [matTooltip]="'ww.tableviewer.conj.hide-toolbar-tip' | translate"
-                    [matTooltipShowDelay]="showDelay.value" [matTooltipHideDelay]="hideDelay.value"
-                    [matTooltipPosition]="tooltipPosition">
-                    <mat-icon aria-label="Hide toolbar">cancel</mat-icon>
-                </button> -->
             </div>
-        </div>
-        <div class="panel__underline height-5">
-            <!-- <hr *ngIf="show_toolbar" /> -->
-            <button *ngIf="!show_toolbar" (click)="show_toolbar = !show_toolbar"
-                class="float-right ui-button toolbar__tool" mat-icon-button
-                [matTooltip]="'ww.tableviewer.conj.show-toolbar-tip' | translate"
-                [matTooltipShowDelay]="showDelay.value" [matTooltipHideDelay]="hideDelay.value"
-                [matTooltipPosition]="tooltipPosition">
-                <mat-icon aria-label="Show toolbar">add_circle</mat-icon>
-            </button>
         </div>
     </div>
     <div *ngIf="selection$ | async as selection">
@@ -73,6 +57,7 @@
             </h3>
         </div>
 
+        <!-- Tree View -->
         <div class='panel__tree__container'>
             <div *ngIf="selection.view === 'tree' && selection.conjugations" [hidden]="selection.view !== 'tree'"
                 class="full-width full-height">
@@ -80,53 +65,14 @@
             </div>
         </div>
 
-        <div *ngIf="(gridData$ | async) as gridData;" [hidden]="selection.view !== 'grid'"
-            class="example-container mat-elevation-z8">
-            <ww-conjugation-grid></ww-conjugation-grid>
+        <!-- Grid View  -->
+        <div *ngIf="selection.view === 'grid'" [hidden]="selection.view !== 'grid'" class="grid__container">
+            <ww-conjugation-grid [data$]="gridData$"></ww-conjugation-grid>
         </div>
-        <!-- <div *ngIf="!selection.loading && (gridData$ | async) as gridData;" [hidden]="!selection.gridView">
-            <div id="table-container" class="rel">
-                <div class="error__container" *ngIf="isString(gridData)">
-                    <h3 class="error__header">
-                        {{ 'ww.tableviewer.conj.error.title' | translate }}
-                    </h3>
-                    <p class="error__message">{{ gridData }}</p>
-                    <p class="error__message">
-                        {{ 'ww.tableviewer.conj.error.message' | translate }}
-                    </p>
-                </div>
-                <table class="full-width abs" *ngIf="!isString(gridData)">
-                    <thead>
-                        <tr>
-                            <th *ngIf="isL2Showing(settings.level)">
-                                <h3 class='center-text'>{{ 'ww.language' | translate }}</h3>
-                            </th>
-                            <th *ngIf="isL2Showing(settings.level)">
-                                <h3 class='center-text'>{{ 'ww.translation-language' | translate }}</h3>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="b--bottom" *ngFor="let conjugation of gridData">
-                            <td class='center-text'>
-                                <div *ngFor="let tier of conjugation; let i = index">
-                                    <h3 *ngIf='tier.options.language === "L1" && i === 0' [innerHTML]='tier.html'></h3>
-                                    <h5 *ngIf='settings.level[tier.name] && tier.options.language === "L1" && i !== 0'
-                                        [innerHTML]='tier.html'></h5>
-                                </div>
-                            </td>
-                            <td class='center-text' *ngIf="isL2Showing(settings.level)">
-                                <div *ngFor="let tier of conjugation; let i = index">
-                                    <h3 *ngIf='settings.level[tier.name] && tier.options.language === "L2" && i === 0'
-                                        [innerHTML]='tier.html'></h3>
-                                    <h5 *ngIf='settings.level[tier.name] && tier.options.language === "L2" && i !== 0'
-                                        [innerHTML]='tier.html'></h5>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div> -->
+
+        <!-- List View -->
+        <div *ngIf="selection.view === 'list'" [hidden]="selection.view !== 'list'" class="list__container">
+            <ww-conjugation-list [data$]="listData$"></ww-conjugation-list>
+        </div>
     </div>
 </div>

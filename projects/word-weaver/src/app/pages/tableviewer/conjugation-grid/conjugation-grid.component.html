@@ -1,19 +1,60 @@
 <div class='table__container custom-scroll-x'>
-    <table mat-table [dataSource]="dataSource$ | async">
-        <!-- Placeholder Column -->
-        <ng-container matColumnDef="placeholder" sticky>
-            <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let element"> {{element.rowKey}} </td>
-        </ng-container>
+    <mat-tab-group *ngIf='uniqueMain.length > 1'>
+        <mat-tab [label]='main' *ngFor='let main of uniqueMain; index as i;'>
+            <table mat-table [dataSource]="dataSources[i]" *ngIf="settings$ | async as settings">
+                <!-- Placeholder Column -->
+                <ng-container matColumnDef="placeholder" sticky>
+                    <th mat-header-cell *matHeaderCellDef>
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.rowKey}} </td>
+                </ng-container>
 
-        <!-- Other Columns -->
-        <ng-container [matColumnDef]="col" *ngFor="let col of uniqueCol">
-            <th mat-header-cell *matHeaderCellDef> {{col}} </th>
-            <td mat-cell *matCellDef="let element" [innerHTML]="element[col]"></td>
-        </ng-container>
+                <!-- Other Columns -->
+                <ng-container [matColumnDef]="col" *ngFor="let col of uniqueCol">
+                    <th mat-header-cell *matHeaderCellDef> {{col}} </th>
+                    <td mat-cell *matCellDef="let element">
+                        <span class='font-lg' [innerHTML]="element[col]"></span>
+                        <ng-container *ngFor="let level of keys(settings.level)">
+                            <ng-container *ngIf='settings.level[level]'>
+                                <br>
+                                <span class='font-sm' [innerHTML]="element[col+'-'+level]"></span>
+                            </ng-container>
+                        </ng-container>
+                    </td>
+                </ng-container>
 
-        <tr mat-header-row sticky *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-    <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                <tr mat-header-row sticky *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <!-- <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
+        </mat-tab>
+    </mat-tab-group>
+    <ng-container *ngIf='uniqueMain.length === 1'>
+        <table mat-table [dataSource]="dataSources[0]" *ngIf="settings$ | async as settings">
+            <!-- Placeholder Column -->
+            <ng-container matColumnDef="placeholder" sticky>
+                <th mat-header-cell *matHeaderCellDef>
+                </th>
+                <td mat-cell *matCellDef="let element"> {{element.rowKey}} </td>
+            </ng-container>
+
+            <!-- Other Columns -->
+            <ng-container [matColumnDef]="col" *ngFor="let col of uniqueCol">
+                <th mat-header-cell *matHeaderCellDef> {{col}} </th>
+                <td mat-cell *matCellDef="let element">
+                    <span class='font-lg' [innerHTML]="element[col]"></span>
+                    <ng-container *ngFor="let level of keys(settings.level)">
+                        <ng-container *ngIf='settings.level[level]'>
+                            <br>
+                            <span class='font-sm' [innerHTML]="element[col+'-'+level]"></span>
+                        </ng-container>
+                    </ng-container>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row sticky *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <!-- <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
+    </ng-container>
 </div>

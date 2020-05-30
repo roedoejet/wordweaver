@@ -7,6 +7,21 @@
   $warn: map-get($theme, warn);
   $foreground-palette: map-get($theme, foreground);
 
+  th.mat-header-cell {
+    border-bottom: 1px solid mat-color($foreground-palette, base);
+  }
+
+  th.mat-header-cell:first-of-type,
+  td.mat-cell:first-of-type,
+  td.mat-footer-cell:first-of-type {
+    padding: 0;
+    border-right: 1px solid mat-color($foreground-palette, base);
+  }
+
+  td.mat-cell {
+    padding: 16px 0;
+  }
+
   .mat-option-text {
     color: mat-color($foreground-palette, base);
   }
@@ -40,7 +55,9 @@
       background-color: darken($background, 3%);
     }
 
-    ww-tableviewer-conj-panel {
+    ww-tableviewer-conj-panel,
+    .mat-table,
+    .mat-paginator {
       background-color: $background;
     }
   }
@@ -53,8 +70,8 @@
   $background-palette: map-get($theme, background);
   $foreground-palette: map-get($theme, foreground);
 
-  $background: darken(mat-color($background-palette, background), 10%);
-  $foreground: lighten(mat-color($foreground-palette, base), 20%);
+  $background: mat-color($background-palette, background);
+  $foreground: mat-color($foreground-palette, base);
 
   .control {
     .mat-form-field-underline {
@@ -122,10 +139,12 @@
     }
 
     .mat-figure {
-      background-color: darken($background, 3%);
+      background-color: darken($background, 2%);
     }
 
-    ww-tableviewer-conj-panel {
+    ww-tableviewer-conj-panel,
+    .mat-table,
+    .mat-paginator {
       background-color: $background;
     }
   }

@@ -8,7 +8,7 @@ import { Verb } from "../../../../config/config";
 import { VerbService } from "../../../core/core.module";
 import { Store, select } from "@ngrx/store";
 import { Observable, Subject } from "rxjs";
-import { debounceTime, map, tap, takeUntil } from "rxjs/operators";
+import { debounceTime, map, tap, takeUntil, take } from "rxjs/operators";
 
 import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 
@@ -93,6 +93,10 @@ export class TableviewerVerbPanelComponent implements OnDestroy, OnInit {
 
   onVerbSelect(verbs) {
     this.store.dispatch(actionChangeVerbs({ root: verbs }));
+  }
+
+  selectedRoot(selection: TableviewerState, root: string) {
+    return selection.root.map(x => x.tag).indexOf(root) > 0;
   }
 
   getEntriesFrom(term) {

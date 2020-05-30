@@ -11,8 +11,7 @@ import { select, Store } from "@ngrx/store";
 import { actionChangeLoading } from "../tableviewer-selection/tableviewer-selection.actions";
 import { selectSettingsState } from "../core.state";
 import { SettingsState } from "../settings/settings.model";
-
-type TableOrder = "root" | "pn" | "option";
+import { GridOrder } from "../../pages/tableviewer/conjugation-grid/conjugation-grid.component";
 
 @Injectable({
   providedIn: "root"
@@ -90,12 +89,10 @@ export class TierService {
 
   // Restructure data for x*y grid
   // Returns structured data along with unique values for col/row and table separators
-  restructureData(
-    conjugations: Response,
-    main: TableOrder,
-    col: TableOrder,
-    row: TableOrder
-  ) {
+  restructureData(conjugations: Response, gridOrder: GridOrder) {
+    const main = gridOrder.main;
+    const row = gridOrder.row;
+    const col = gridOrder.col;
     const structuredData = [];
     const tieredConjugations = this.createTiers(conjugations).map(
       conjugation => {
@@ -114,12 +111,12 @@ export class TierService {
     const uniqueMain = [...new Set(restructuredConjugations.map(x => x[main]))];
     const uniqueRow = [...new Set(restructuredConjugations.map(x => x[row]))];
     const uniqueCol = [...new Set(restructuredConjugations.map(x => x[col]))];
-    uniqueMain.forEach(() => {
+    uniqueMain.forEach(mainKey => {
       const mainData = [];
       const mainDataRows = uniqueRow.map(rowKey => {
         const structuredEntry = { rowKey };
         restructuredConjugations.forEach(entry => {
-          if (entry[row] === rowKey) {
+          if (entry[main] === mainKey && entry[row] === rowKey) {
             for (const tier of this.TIERS) {
               if (tier.name === "display") {
                 structuredEntry[entry[col]] = entry["display"];

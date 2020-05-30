@@ -4,6 +4,7 @@ import {
   actionChangePatients,
   actionChangeVerbs,
   actionToggleTreeViewOrder,
+  actionChangeGridOrder,
   actionChangeTreeViewDepth,
   actionChangeViewMode,
   actionChangeConjugations,
@@ -22,7 +23,8 @@ export const initialState: TableviewerState = {
   view: META.tableviewer.defaultViewMode,
   treeDepth: 1,
   standardTreeOrder: true,
-  loading: false
+  loading: false,
+  gridOrder: { main: "root", col: "option", row: "pn" }
 };
 
 const reducer = createReducer(
@@ -37,6 +39,7 @@ const reducer = createReducer(
     actionChangeConjugations,
     actionChangeLoading,
     actionChangeViewMode,
+    // actionChangeGridOrder,
     (state, action) => ({ ...state, ...action })
   ),
   // Toggles
@@ -44,6 +47,14 @@ const reducer = createReducer(
     const toggledState = {};
     toggledState[action.name] = !state[action.name];
     return { ...state, ...toggledState };
+  }),
+  // Partials
+  on(actionChangeGridOrder, (state, action) => {
+    const partialState = { ...state[action.name], ...action.partial };
+    const actionState = {};
+    actionState[action.name] = partialState;
+    console.log({ ...state, ...actionState });
+    return { ...state, ...actionState };
   })
 );
 

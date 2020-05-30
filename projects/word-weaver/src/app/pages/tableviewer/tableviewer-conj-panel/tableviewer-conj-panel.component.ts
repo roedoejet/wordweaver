@@ -1,6 +1,7 @@
 import {
   Component,
   AfterViewInit,
+  OnDestroy,
   OnInit,
   ChangeDetectionStrategy,
   ViewChild,
@@ -12,12 +13,13 @@ import { NotificationService } from "../../../core/core.module";
 import { EChartOption } from "echarts";
 import { Store, select } from "@ngrx/store";
 import { Observable, BehaviorSubject, Subject } from "rxjs";
-import { map, tap, take } from "rxjs/operators";
+import { map, take, takeUntil, tap } from "rxjs/operators";
 import { merge as _merge } from "lodash";
 import {
   actionConjugationEvent,
   actionChangeTreeViewDepth,
-  actionToggleTreeViewOrder
+  actionToggleTreeViewOrder,
+  actionChangeGridOrder
 } from "../../../core/tableviewer-selection/tableviewer-selection.actions";
 import { SettingsState, State } from "../../../core/settings/settings.model";
 import { TableviewerState } from "../../../core/tableviewer-selection/tableviewer-selection.model";
@@ -40,7 +42,8 @@ import { TableViewerDialogComponent } from "../../../shared/tableviewer-dialog/t
   styleUrls: ["./tableviewer-conj-panel.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TableviewerConjPanelComponent implements AfterViewInit, OnInit {
+export class TableviewerConjPanelComponent
+  implements AfterViewInit, OnDestroy, OnInit {
   // Basic config
   settings$: Observable<SettingsState>;
   selection$: Observable<TableviewerState>;
@@ -59,6 +62,8 @@ export class TableviewerConjPanelComponent implements AfterViewInit, OnInit {
   conjugationTrigger$: Observable<any>;
   chartResponse$: Observable<EChartOption | any>;
   gridData$: Observable<any>;
+  listData$: Observable<any>;
+  unsubscribe$ = new Subject<void>();
   // Elements
   @ViewChild("header") header;
   @ViewChild("conjugate") conjugateBtn;
@@ -71,18 +76,39 @@ export class TableviewerConjPanelComponent implements AfterViewInit, OnInit {
 
   ngOnInit(): void {
     // populate with store's selection
-    this.settings$ = this.store.pipe(select(selectSettings));
-    this.selection$ = this.store.pipe(select(selectTableviewerState));
+    this.settings$ = this.store.pipe(
+      takeUntil(this.unsubscribe$),
+      select(selectSettings)
+    );
+    this.selection$ = this.store.pipe(
+      takeUntil(this.unsubscribe$),
+      select(selectTableviewerState)
+    );
 
     this.gridData$ = this.selection$.pipe(
+      takeUntil(this.unsubscribe$),
       map(selection => {
         if (selection.view === "grid" && selection.conjugations.length > 0) {
+          return this.tierService.restructureData(
+            selection.conjugations,
+            selection.gridOrder
+          );
+        } else {
+          return false;
+        }
+      })
+    );
+    this.listData$ = this.selection$.pipe(
+      takeUntil(this.unsubscribe$),
+      map(selection => {
+        if (selection.view === "list" && selection.conjugations.length > 0) {
           return this.tierService.createTiers(selection.conjugations);
         } else {
           return false;
         }
       })
     );
+    this.selection$.subscribe(x => console.log(x.gridOrder));
   }
 
   ngAfterViewInit() {
@@ -97,6 +123,11 @@ export class TableviewerConjPanelComponent implements AfterViewInit, OnInit {
     this.store.dispatch(actionSettingsChangeThemeColors({ primary, accent }));
   }
 
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
   onChangeTreeDepth(event) {
     this.store.dispatch(
       actionChangeTreeViewDepth({ treeDepth: event.target.selectedIndex })
@@ -109,18 +140,27 @@ export class TableviewerConjPanelComponent implements AfterViewInit, OnInit {
     );
   }
 
+  onToggleGridOrder() {
+    this.selection$
+      .pipe(
+        take(1),
+        tap(selection => {
+          this.store.dispatch(
+            actionChangeGridOrder({
+              name: "gridOrder",
+              partial: {
+                col: selection.gridOrder.row,
+                row: selection.gridOrder.col
+              }
+            })
+          );
+        })
+      )
+      .subscribe();
+  }
+
   onManualConjugation(event) {
     this.store.dispatch(actionConjugationEvent(event));
-  }
-
-  isL2Showing(levels): boolean {
-    const L2Tiers = TIERS.filter(x => x.options.language === "L2");
-    return L2Tiers && L2Tiers.some(x => levels[x.name]);
-  }
-
-  // TODO: This is currently used for determining whether gridData is an error. This is fragile, and errors should be handled differently.
-  isString(val) {
-    return typeof val === "string";
   }
 
   showSettings() {

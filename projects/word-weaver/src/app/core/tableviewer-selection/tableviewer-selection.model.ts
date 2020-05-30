@@ -5,6 +5,7 @@ import {
   Response,
   TableviewerViewModes
 } from "../../../config/config";
+import { GridOrder } from "../../pages/tableviewer/conjugation-grid/conjugation-grid.component";
 import { AppState } from "../core.module";
 
 export interface TableviewerState {
@@ -17,6 +18,7 @@ export interface TableviewerState {
   standardTreeOrder: boolean;
   conjugations: Response;
   loading: boolean;
+  gridOrder: GridOrder;
 }
 
 export interface State extends AppState {

@@ -29,6 +29,7 @@ import { MatGridListModule } from "@angular/material/grid-list";
 import { MatTableModule } from "@angular/material/table";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatRadioModule } from "@angular/material/radio";
+import { MatTabsModule } from "@angular/material/tabs";
 
 import {
   FontAwesomeModule,
@@ -98,6 +99,7 @@ import { TableViewerDialogComponent } from "./tableviewer-dialog/tableviewer-dia
     MatSlideToggleModule,
     MatToolbarModule,
     MatRadioModule,
+    MatTabsModule,
     // MatDividerModule,
     MatTableModule,
     MatPaginatorModule,
@@ -145,6 +147,7 @@ import { TableViewerDialogComponent } from "./tableviewer-dialog/tableviewer-dia
     // MatDatepickerModule,
     // MatNativeDateModule,
     MatTableModule,
+    MatTabsModule,
     MatPaginatorModule,
     FontAwesomeModule,
 
