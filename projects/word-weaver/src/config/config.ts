@@ -1,4 +1,5 @@
 import { SettingsState } from "../app/core/settings/settings.model";
+import { GridOrder } from "../app/pages/tableviewer/conjugation-grid/conjugation-grid.component";
 
 export interface Option {
   classes: string[];
@@ -186,6 +187,7 @@ export interface Meta {
   tableviewer: {
     viewModes: TableviewerViewModes[];
     defaultViewMode: TableviewerViewModes;
+    gridViewDefaultOrder: GridOrder;
   };
   logo: string;
   links: {
@@ -208,7 +210,12 @@ export const META: Meta = {
   wordmakerTempView: "default",
   tableviewer: {
     viewModes: ["list", "grid", "tree"],
-    defaultViewMode: "grid"
+    defaultViewMode: "grid",
+    gridViewDefaultOrder: {
+      col: "option",
+      row: "pn",
+      main: "root"
+    }
   },
   logo: "assets/wwlogo.png",
   copyright: {

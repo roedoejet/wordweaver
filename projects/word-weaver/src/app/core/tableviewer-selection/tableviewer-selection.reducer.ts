@@ -24,7 +24,7 @@ export const initialState: TableviewerState = {
   treeDepth: 1,
   standardTreeOrder: true,
   loading: false,
-  gridOrder: { main: "root", col: "option", row: "pn" }
+  gridOrder: META.tableviewer.gridViewDefaultOrder
 };
 
 const reducer = createReducer(

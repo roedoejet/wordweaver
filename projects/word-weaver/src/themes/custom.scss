@@ -5,38 +5,112 @@
 
 // ==========================================================================
 // This is where you should add any custom styling to data-supplied, classes
-// from the WordWeaver API. Below is an example relevant to Mohawk
+// from the WordWeaver API. Below is are examples relevant to Mohawk and French
 // ==========================================================================
 
-@mixin ww-custom-theme-common($theme) {
+// ==================================================
+//                Mohawk Highlights
+// ==================================================
+// Based on:
+//
+// export interface Highlight {
+//  aspect: boolean;
+//  "post-aspectual": boolean;
+//  pronouns: boolean;
+//  required: boolean;
+//  temp: boolean;
+//  verb: boolean;
+// }
+
+@mixin ww-custom-highlights-theme-common-moh($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
   $background-palette: map-get($theme, background);
   $foreground-palette: map-get($theme, foreground);
 
-  // .transitive.pronoun
-  // .agent.pronoun
-  // .patient.pronoun
-  // .root
-  // .tmp_affix.affix
-  // .aspect.affix
+  .highlight-aspect {
+    .aspect.affix {
+      color: mix(mat-color($foreground-palette, base), mediumseagreen, 30%);
+    }
+  }
 
-  // aspect, post-asp-suf, pronouns, req, temporal-affix, root
+  .highlight-post-aspectual {
+    .post_aspectual_suffix.affix {
+      color: mix(mat-color($foreground-palette, base), mediumseagreen, 30%);
+    }
+  }
+
+  .highlight-pronouns {
+    .pronoun.transitive {
+      color: mix(mat-color($foreground-palette, base), mediumpurple, 30%);
+    }
+    .pronoun.agent {
+      color: mix(mat-color($foreground-palette, base), indianred, 40%);
+    }
+    .pronoun.patient {
+      color: mix(mat-color($foreground-palette, base), cornflowerblue, 30%);
+    }
+  }
+
+  .highlight-required {
+  }
+
+  .highlight-temp {
+    .tmp_affix.affix {
+      color: mix(mat-color($foreground-palette, base), mediumseagreen, 30%);
+    }
+  }
+
+  .highlight-verb {
+    .root {
+      color: mix(mat-color($foreground-palette, base), mat-color($accent), 40%);
+    }
+  }
 }
 
-@mixin ww-custom-theme-light($theme) {
+// ==================================================
+//                French Highlights
+// ==================================================
+// Based on:
+//
+// export interface Highlight {
+//  root: boolean;
+//  ending: boolean;
+// }
+
+@mixin ww-custom-highlights-theme-common-fr($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
   $background-palette: map-get($theme, background);
   $foreground-palette: map-get($theme, foreground);
+
+  .highlight-ending {
+    .ending {
+      color: mix(mat-color($primary, A100), mat-color($accent, A100), 50%);
+    }
+  }
+
+  .highlight-root {
+    .root {
+      color: mix(mat-color($primary, A100), mat-color($accent, A100), 50%);
+    }
+  }
 }
 
-@mixin ww-custom-theme-dark($theme) {
-  $primary: map-get($theme, primary);
-  $accent: map-get($theme, accent);
-  $warn: map-get($theme, warn);
-  $background-palette: map-get($theme, background);
-  $foreground-palette: map-get($theme, foreground);
-}
+// @mixin ww-custom-highlights-theme-light($theme) {
+//   $primary: map-get($theme, primary);
+//   $accent: map-get($theme, accent);
+//   $warn: map-get($theme, warn);
+//   $background-palette: map-get($theme, background);
+//   $foreground-palette: map-get($theme, foreground);
+// }
+
+// @mixin ww-custom-highlights-theme-dark($theme) {
+//   $primary: map-get($theme, primary);
+//   $accent: map-get($theme, accent);
+//   $warn: map-get($theme, warn);
+//   $background-palette: map-get($theme, background);
+//   $foreground-palette: map-get($theme, foreground);
+// }

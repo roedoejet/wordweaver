@@ -1,11 +1,13 @@
 import {
+  AfterViewInit,
   ChangeDetectorRef,
   Component,
   Input,
   OnDestroy,
   OnInit,
   ChangeDetectionStrategy,
-  ViewChild
+  QueryList,
+  ViewChildren
 } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
@@ -29,7 +31,8 @@ export interface GridOrder {
   styleUrls: ["./conjugation-grid.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ConjugationGridComponent implements OnDestroy, OnInit {
+export class ConjugationGridComponent
+  implements AfterViewInit, OnDestroy, OnInit {
   keys = Object.keys;
   settings$: Observable<SettingsState>;
   dataSources: MatTableDataSource<Response>[];
@@ -38,7 +41,7 @@ export class ConjugationGridComponent implements OnDestroy, OnInit {
   displayedColumns: string[];
   unsubscribe$ = new Subject<void>();
   @Input() data$;
-  // @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChildren(MatPaginator) paginators: QueryList<MatPaginator>;
   constructor(private store: Store<State>, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
@@ -50,14 +53,23 @@ export class ConjugationGridComponent implements OnDestroy, OnInit {
       if (data) {
         this.uniqueCol = data.uniqueCol;
         this.uniqueMain = data.uniqueMain;
-        this.dataSources = data.structuredData.map(x => {
+        this.dataSources = data.structuredData.map((x, i) => {
           const dataSource = new MatTableDataSource<Response>(x);
-          // dataSource.paginator = this.paginator; // TODO: Paginator is broken :(
           return dataSource;
         });
         this.displayedColumns = ["placeholder", ...this.uniqueCol];
         this.cdr.detectChanges();
-        // this.dataSource.paginator = this.paginator
+      }
+    });
+  }
+
+  ngAfterViewInit(): void {
+    this.data$.pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
+      if (data) {
+        data.structuredData.forEach((x, i) => {
+          this.dataSources[i].paginator = this.paginators.toArray()[i]; // Currently not working for n>1
+        });
+        this.cdr.detectChanges();
       }
     });
   }

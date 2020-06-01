@@ -98,33 +98,25 @@ $pesticide-debug-depth: false;
   @include ww-tableviewer-component-theme-common($theme);
   @include ww-settings-component-theme-common($theme);
   @include ww-scroll($theme);
-  @include ww-custom-theme-common($theme);
+  @include ww-custom-highlights-theme-common-moh($theme);
+  @include ww-custom-highlights-theme-common-fr($theme);
 }
 
 @mixin custom-components-theme-light($theme) {
   @include ww-tableviewer-component-theme-light($theme);
   @include ww-background-theme-light($theme);
   @include ww-settings-component-theme-light($theme);
-  @include ww-custom-theme-light($theme);
 }
 
 @mixin custom-components-theme-dark($theme) {
   @include ww-tableviewer-component-theme-dark($theme);
   @include ww-background-theme-dark($theme);
   @include ww-settings-component-theme-dark($theme);
-  @include ww-custom-theme-dark($theme);
 }
 
-// // Customize Angular Material theme with palettes from color-primary and color-secondary. Use http://mcg.mbitson.com to generate palette and add palettes to _palettes partial
-
-// $wordweaver-primary: mat-palette($md-primary);
-// $wordweaver-accent: mat-palette($md-accent, 400);
-
-// $wordweaver-theme: mat-light-theme($wordweaver-primary, $wordweaver-accent);
-
-// $wordweaver-dark-theme: mat-dark-theme($wordweaver-primary, $wordweaver-accent);
-
-// @include angular-material-theme($wordweaver-theme);
+@mixin custom-highlights-theme-common($theme, $highlight) {
+  @include ww-custom-highlights-theme-common($theme, $highlight);
+}
 
 .default-theme {
   @include angular-material-theme($ww-theme);
