@@ -8,12 +8,14 @@
 
 @include mat-core();
 
-@import "./themes/default-theme";
+// Themes
+@import "./themes/dark-theme";
 @import "./themes/light-theme";
-@import "./themes/black-theme";
-@import "./themes/purple-theme";
-@import "./themes/monkey-theme.scss";
+@import "./themes/purple-theme.scss";
+@import "./themes/purple-blue-theme";
+@import "./themes/purple-gold-theme";
 
+// Custom themes and instance css
 @import "styles-reset.scss-theme";
 @import "./app/app/app.component.scss-theme";
 @import "./app/pages/about/about/about.component.scss-theme";
@@ -119,9 +121,9 @@ $pesticide-debug-depth: false;
 }
 
 .default-theme {
-  @include angular-material-theme($ww-theme);
-  @include custom-components-theme-common($ww-theme);
-  @include custom-components-theme-light($ww-theme);
+  @include angular-material-theme($ww-light-theme);
+  @include custom-components-theme-common($ww-light-theme);
+  @include custom-components-theme-light($ww-light-theme);
 }
 
 .light-theme {
@@ -130,28 +132,46 @@ $pesticide-debug-depth: false;
   @include custom-components-theme-light($ww-light-theme);
 }
 
-.black-theme {
-  @include angular-material-theme($ww-black-theme);
-  @include custom-components-theme-common($ww-black-theme);
-  @include custom-components-theme-dark($ww-black-theme);
+.dark-theme {
+  @include angular-material-theme($ww-dark-theme);
+  @include custom-components-theme-common($ww-dark-theme);
+  @include custom-components-theme-dark($ww-dark-theme);
 }
 
-.purple-light-theme {
-  @include angular-material-theme($ww-purple-theme-light);
-  @include custom-components-theme-common($ww-purple-theme-light);
-  @include custom-components-theme-light($ww-purple-theme-light);
+.purple-theme--light {
+  @include angular-material-theme($ww-purple-theme--light);
+  @include custom-components-theme-common($ww-purple-theme--light);
+  @include custom-components-theme-light($ww-purple-theme--light);
 }
 
-.purple-dark-theme {
-  @include angular-material-theme($ww-purple-theme-dark);
-  @include custom-components-theme-common($ww-purple-theme-dark);
-  @include custom-components-theme-dark($ww-purple-theme-dark);
+.purple-theme--dark {
+  @include angular-material-theme($ww-purple-theme--dark);
+  @include custom-components-theme-common($ww-purple-theme--dark);
+  @include custom-components-theme-dark($ww-purple-theme--dark);
 }
 
-.monkey-theme {
-  @include angular-material-theme($ww-monkey-theme);
-  @include custom-components-theme-common($ww-monkey-theme);
-  @include custom-components-theme-dark($ww-monkey-theme);
+.purple-blue-theme--light {
+  @include angular-material-theme($ww-purple-blue-theme--light);
+  @include custom-components-theme-common($ww-purple-blue-theme--light);
+  @include custom-components-theme-light($ww-purple-blue-theme--light);
+}
+
+.purple-blue-theme--dark {
+  @include angular-material-theme($ww-purple-blue-theme--dark);
+  @include custom-components-theme-common($ww-purple-blue-theme--dark);
+  @include custom-components-theme-dark($ww-purple-blue-theme--dark);
+}
+
+.purple-gold-theme--light {
+  @include angular-material-theme($ww-purple-gold-theme--light);
+  @include custom-components-theme-common($ww-purple-gold-theme--light);
+  @include custom-components-theme-light($ww-purple-gold-theme--light);
+}
+
+.purple-gold-theme--dark {
+  @include angular-material-theme($ww-purple-gold-theme--dark);
+  @include custom-components-theme-common($ww-purple-gold-theme--dark);
+  @include custom-components-theme-dark($ww-purple-gold-theme--dark);
 }
 
 // ==========================================================================

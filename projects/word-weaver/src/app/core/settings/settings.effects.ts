@@ -99,7 +99,6 @@ export class SettingsEffects {
         ofType(actionSettingsChangeTestApi),
         withLatestFrom(this.store.pipe(select(selectSettingsState))),
         tap(([action, settings]) => {
-          console.log(settings.testApi);
           if (settings.testApi) {
             this.store.dispatch(
               actionSettingsChangeBaseUrl({ baseUrl: this.testBaseUrl })

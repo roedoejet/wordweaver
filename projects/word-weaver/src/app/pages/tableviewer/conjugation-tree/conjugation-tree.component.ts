@@ -112,7 +112,6 @@ export class ConjugationTreeComponent implements OnDestroy, OnInit {
       switchMap(selection => {
         if (selection.conjugations.length > 0) {
           return this.store.select(selectThemeColors).pipe(
-            tap(color => console.log(color)),
             map(color =>
               this.createChartData(selection, {
                 primary: this.rgbToHex(color.primary),

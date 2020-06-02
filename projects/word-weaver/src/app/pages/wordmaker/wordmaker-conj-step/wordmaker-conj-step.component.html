@@ -1,4 +1,4 @@
-<div class="margin-top-20 panel centered full-width" wwHighlight>
+<div class="margin-top-20 panel centered full-width">
     <div class='panel__header'>
         <div class='container' *ngIf="conjugation$ | async as conjugations">
             <div class='row'>
@@ -25,8 +25,8 @@
             *ngIf="conjugation$ | async as conjugations; else loading">
             <div id="conjugation-result" class="conjugation center-text"
                 *ngFor="let tier of conjugations; let i = index">
-                <h3 wwHighlight *ngIf='i === 0' [innerHTML]='tier.html'></h3>
-                <h5 wwHighlight *ngIf='(settings$ | async).level[tier.name] && i !== 0' [innerHTML]='tier.html'>
+                <h3 *ngIf='i === 0' [innerHTML]='tier.html'></h3>
+                <h5 *ngIf='(settings$ | async).level[tier.name] && i !== 0' [innerHTML]='tier.html'>
                 </h5>
             </div>
         </div>

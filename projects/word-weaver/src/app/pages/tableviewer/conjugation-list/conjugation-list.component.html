@@ -1,4 +1,4 @@
-<div *ngIf="settings$ | async as settings" wwHighlight>
+<div *ngIf="settings$ | async as settings">
     <ng-container *ngIf="data$ | async as data">
         <div id="table-container" class="rel">
             <div class="error__container" *ngIf="isString(data)">

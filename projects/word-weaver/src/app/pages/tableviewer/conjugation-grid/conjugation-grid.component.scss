@@ -20,6 +20,9 @@ td,
 th.mat-header-cell {
   width: 150px;
   text-align: center;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
 }
 
 .mat-tab-group {

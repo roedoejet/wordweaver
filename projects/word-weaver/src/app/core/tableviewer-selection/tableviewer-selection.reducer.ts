@@ -53,7 +53,6 @@ const reducer = createReducer(
     const partialState = { ...state[action.name], ...action.partial };
     const actionState = {};
     actionState[action.name] = partialState;
-    console.log({ ...state, ...actionState });
     return { ...state, ...actionState };
   })
 );

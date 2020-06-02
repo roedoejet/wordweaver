@@ -1,7 +1,7 @@
-<div class='table__container custom-scroll-x' wwHighlight>
+<div class='table__container custom-scroll-x' *ngIf="settings$ | async as settings" [ngClass]="settings.highlight">
     <mat-tab-group *ngIf='uniqueMain?.length > 1'>
         <mat-tab [label]='main' *ngFor='let main of uniqueMain; index as i;'>
-            <table mat-table [dataSource]="dataSources[i]" *ngIf="settings$ | async as settings">
+            <table mat-table [dataSource]="dataSources[i]">
                 <!-- Placeholder Column -->
                 <ng-container matColumnDef="placeholder" sticky>
                     <th mat-header-cell *matHeaderCellDef>
@@ -30,7 +30,7 @@
         </mat-tab>
     </mat-tab-group>
     <ng-container *ngIf='uniqueMain?.length === 1'>
-        <table mat-table [dataSource]="dataSources[0]" *ngIf="settings$ | async as settings">
+        <table mat-table [dataSource]="dataSources[0]">
             <!-- Placeholder Column -->
             <ng-container matColumnDef="placeholder" sticky>
                 <th mat-header-cell *matHeaderCellDef>

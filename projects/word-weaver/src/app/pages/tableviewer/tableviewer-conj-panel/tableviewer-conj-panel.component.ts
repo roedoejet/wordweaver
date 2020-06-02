@@ -108,7 +108,6 @@ export class TableviewerConjPanelComponent
         }
       })
     );
-    this.selection$.subscribe(x => console.log(x.gridOrder));
   }
 
   ngAfterViewInit() {

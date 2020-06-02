@@ -11,7 +11,6 @@ export function initStateFromLocalStorage(
     if ([INIT.toString(), UPDATE.toString()].includes(action.type)) {
       return { ...newState, ...LocalStorageService.loadInitialState() };
     }
-    console.log(newState);
     return newState;
   };
 }

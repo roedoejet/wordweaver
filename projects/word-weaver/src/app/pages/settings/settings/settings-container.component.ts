@@ -36,15 +36,29 @@ export class SettingsContainerComponent implements OnInit {
     { value: "DEFAULT-THEME", label: marker("ww.settings.themes.blue") },
     { value: "LIGHT-THEME", label: marker("ww.settings.themes.light") },
     {
-      value: "PURPLE-LIGHT-THEME",
+      value: "PURPLE-THEME--LIGHT",
       label: marker("ww.settings.themes.purple-light")
     },
     {
-      value: "PURPLE-DARK-THEME",
+      value: "PURPLE-THEME--DARK",
       label: marker("ww.settings.themes.purple-dark")
     },
-    { value: "BLACK-THEME", label: marker("ww.settings.themes.dark") },
-    { value: "MONKEY-THEME", label: marker("ww.settings.themes.fun") }
+    {
+      value: "PURPLE-BLUE-THEME--LIGHT",
+      label: marker("ww.settings.themes.purple-blue-light")
+    },
+    {
+      value: "PURPLE-BLUE-THEME--DARK",
+      label: marker("ww.settings.themes.purple-blue-dark")
+    },
+    {
+      value: "PURPLE-GOLD-THEME--LIGHT",
+      label: marker("ww.settings.themes.purple-gold-light")
+    },
+    {
+      value: "PURPLE-GOLD-THEME--DARK",
+      label: marker("ww.settings.themes.purple-gold-dark")
+    }
   ];
 
   languages = META.languages.map(x => {

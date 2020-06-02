@@ -29,42 +29,44 @@
   $background-palette: map-get($theme, background);
   $foreground-palette: map-get($theme, foreground);
 
-  .highlight-aspect {
+  .aspect {
     .aspect.affix {
       color: mix(mat-color($foreground-palette, base), mediumseagreen, 30%);
     }
   }
 
-  .highlight-post-aspectual {
+  .post-aspectual {
     .post_aspectual_suffix.affix {
       color: mix(mat-color($foreground-palette, base), mediumseagreen, 30%);
     }
   }
 
-  .highlight-pronouns {
+  .pronouns {
     .pronoun.transitive {
       color: mix(mat-color($foreground-palette, base), mediumpurple, 30%);
     }
+
     .pronoun.agent {
-      color: mix(mat-color($foreground-palette, base), indianred, 40%);
+      color: mix(mat-color($foreground-palette, base), indianred, 20%);
     }
+
     .pronoun.patient {
       color: mix(mat-color($foreground-palette, base), cornflowerblue, 30%);
     }
   }
 
-  .highlight-required {
+  .required {
   }
 
-  .highlight-temp {
+  .temp {
     .tmp_affix.affix {
       color: mix(mat-color($foreground-palette, base), mediumseagreen, 30%);
     }
   }
 
-  .highlight-verb {
+  .verb {
     .root {
-      color: mix(mat-color($foreground-palette, base), mat-color($accent), 40%);
+      color: mix(mat-color($foreground-palette, base), orangered, 40%);
     }
   }
 }
@@ -86,13 +88,13 @@
   $background-palette: map-get($theme, background);
   $foreground-palette: map-get($theme, foreground);
 
-  .highlight-ending {
+  .ending {
     .ending {
       color: mix(mat-color($primary, A100), mat-color($accent, A100), 50%);
     }
   }
 
-  .highlight-root {
+  .root {
     .root {
       color: mix(mat-color($primary, A100), mat-color($accent, A100), 50%);
     }

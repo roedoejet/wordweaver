@@ -120,42 +120,42 @@ export class WordmakerEffects {
                 agent: selection.agent,
                 patient: selection.patient
               };
-              console.log("agent selection:");
-              console.log(
-                this.validationService.validate(
-                  "validation",
-                  "selection",
-                  "agents",
-                  selection
-                )
-              );
-              console.log("agent display:");
-              console.log(
-                this.validationService.validate(
-                  "display",
-                  "categories",
-                  "agents",
-                  selection
-                )
-              );
-              console.log("patient selection:");
-              console.log(
-                this.validationService.validate(
-                  "validation",
-                  "selection",
-                  "patients",
-                  selection
-                )
-              );
-              console.log("patient display:");
-              console.log(
-                this.validationService.validate(
-                  "validation",
-                  "selection",
-                  "patients",
-                  selection
-                )
-              );
+              // console.log("agent selection:");
+              // console.log(
+              //   this.validationService.validate(
+              //     "validation",
+              //     "selection",
+              //     "agents",
+              //     selection
+              //   )
+              // );
+              // console.log("agent display:");
+              // console.log(
+              //   this.validationService.validate(
+              //     "display",
+              //     "categories",
+              //     "agents",
+              //     selection
+              //   )
+              // );
+              // console.log("patient selection:");
+              // console.log(
+              //   this.validationService.validate(
+              //     "validation",
+              //     "selection",
+              //     "patients",
+              //     selection
+              //   )
+              // );
+              // console.log("patient display:");
+              // console.log(
+              //   this.validationService.validate(
+              //     "validation",
+              //     "selection",
+              //     "patients",
+              //     selection
+              //   )
+              // );
               if (
                 !this.validationService.validate(
                   "validation",
