@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
+  Inject,
   Input,
   OnDestroy,
   OnInit,
@@ -11,9 +12,9 @@ import {
 } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
-import { Response } from "../../../../config/config";
-import { Observable, Subject } from "rxjs";
-import { takeUntil } from "rxjs/operators";
+import { Response, TIERS, Tier } from "../../../../config/config";
+import { BehaviorSubject, Observable, Subject } from "rxjs";
+import { takeUntil, distinctUntilChanged, map } from "rxjs/operators";
 import { SettingsState, State } from "../../../core/settings/settings.model";
 import { Store, select } from "@ngrx/store";
 import { selectSettings } from "../../../core/settings/settings.selectors";
@@ -34,6 +35,8 @@ export interface GridOrder {
 export class ConjugationGridComponent
   implements AfterViewInit, OnDestroy, OnInit {
   keys = Object.keys;
+  displayTier = TIERS[0];
+  tiers$: Observable<Tier[]>;
   settings$: Observable<SettingsState>;
   dataSources: MatTableDataSource<Response>[];
   uniqueCol: string[];
@@ -49,18 +52,24 @@ export class ConjugationGridComponent
       takeUntil(this.unsubscribe$),
       select(selectSettings)
     );
-    this.data$.pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
-      if (data) {
-        this.uniqueCol = data.uniqueCol;
-        this.uniqueMain = data.uniqueMain;
-        this.dataSources = data.structuredData.map((x, i) => {
-          const dataSource = new MatTableDataSource<Response>(x);
-          return dataSource;
-        });
-        this.displayedColumns = ["placeholder", ...this.uniqueCol];
-        this.cdr.detectChanges();
-      }
-    });
+    this.tiers$ = this.settings$.pipe(
+      takeUntil(this.unsubscribe$),
+      map(settings => TIERS.filter(tier => settings.level[tier.name]))
+    );
+    this.data$
+      .pipe(takeUntil(this.unsubscribe$), distinctUntilChanged())
+      .subscribe(data => {
+        if (data) {
+          this.uniqueCol = data.uniqueCol;
+          this.uniqueMain = data.uniqueMain;
+          this.dataSources = data.structuredData.map(() => {
+            const dataSource = new MatTableDataSource<Response>();
+            return dataSource;
+          });
+          this.displayedColumns = ["placeholder", ...this.uniqueCol];
+          this.cdr.detectChanges();
+        }
+      });
   }
 
   ngAfterViewInit(): void {
@@ -68,9 +77,10 @@ export class ConjugationGridComponent
       if (data) {
         data.structuredData.forEach((x, i) => {
           this.dataSources[i].paginator = this.paginators.toArray()[i]; // Currently not working for n>1
+          this.dataSources[i].data = x;
         });
-        this.cdr.detectChanges();
       }
+      // this.cdr.detectChanges();
     });
   }
 

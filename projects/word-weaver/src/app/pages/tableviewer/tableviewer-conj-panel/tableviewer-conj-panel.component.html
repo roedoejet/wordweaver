@@ -25,7 +25,7 @@
                     <mat-icon aria-label="Switch pronoun and temp">swap_horiz</mat-icon>
                 </button>
                 <button *ngIf="selection.view === 'grid'" class="toolbar__tool ui-button" mat-icon-button
-                    (click)="onToggleGridOrder()" [matTooltip]="'ww.tableviewer.conj.grid-order-tip' | translate"
+                    (click)="onSwapGridOrder(selection.gridOrder.row, selection.gridOrder.col)" [matTooltip]="'ww.tableviewer.conj.grid-order-tip' | translate"
                     [matTooltipShowDelay]="showDelay.value" [matTooltipHideDelay]="hideDelay.value"
                     [matTooltipPosition]="tooltipPosition">
                     <mat-icon aria-label="Switch rows and columns">swap_horiz</mat-icon>

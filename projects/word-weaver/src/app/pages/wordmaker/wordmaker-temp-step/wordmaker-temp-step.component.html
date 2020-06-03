@@ -23,7 +23,9 @@
             <div *ngIf='displayTier !== "default"' class='centered pwidth-50--desktop pwidth-100--mobile'>
                 <mat-chip-list *ngIf="conjugatedOptions$ | async as options; else loading">
                     <mat-chip (click)="onChipClick(conjugation.input.option)" class="bg-white color-black border-accent"
-                        *ngFor="let conjugation of options" [innerHTML]="returnOptionText([conjugation])"></mat-chip>
+                        *ngFor="let conjugation of options">
+                        <ww-tier [tier]='returnOptionTierFromName()' [data]='conjugation'></ww-tier>
+                    </mat-chip>
                 </mat-chip-list>
             </div>
             <div *ngIf='displayTier === "default"' class='default-container pwidth-100'>
@@ -36,7 +38,8 @@
                         </mat-chip-list>
                     </div>
                 </div>
-                <div *ngIf='!(optionService.optionsUseType$() | async)' class='centered pwidth-50--desktop pwidth-100--mobile'> 
+                <div *ngIf='!(optionService.optionsUseType$() | async)'
+                    class='centered pwidth-50--desktop pwidth-100--mobile'>
                     <mat-chip-list *ngIf="possibleOptions$ | async as options; else loading">
                         <mat-chip (click)="onChipClick(option.tag)" class="bg-white color-black border-accent"
                             *ngFor="let option of options">{{ option.gloss | translate }}</mat-chip>

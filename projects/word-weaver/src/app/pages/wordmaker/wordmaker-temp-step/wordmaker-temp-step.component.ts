@@ -66,13 +66,11 @@ export class WordmakerTempStepComponent implements OnDestroy, OnInit {
     this.unsubscribe$.complete();
   }
 
-  returnOptionText(conjugations: Response) {
+  returnOptionTierFromName() {
     const selectedTier = this.tierService.TIERS.filter(
       x => x.name === this.displayTier
     );
-    return this.tierService.createTiers(conjugations, selectedTier)[0][0][
-      "html"
-    ];
+    return selectedTier[0];
   }
 
   onAffOptSelect(ao) {

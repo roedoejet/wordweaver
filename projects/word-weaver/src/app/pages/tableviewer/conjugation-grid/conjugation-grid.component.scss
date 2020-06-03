@@ -5,7 +5,7 @@ table {
 .table__container {
   width: 934px;
   overflow: auto;
-  height: 520px;
+  max-height: 520px;
   min-height: 100%;
 }
 

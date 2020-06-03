@@ -35,6 +35,7 @@ import { actionSettingsChangeThemeColors } from "../../../core/settings/settings
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { DownloadDialogComponent } from "../../../shared/download-dialog/download-dialog.component";
 import { TableViewerDialogComponent } from "../../../shared/tableviewer-dialog/tableviewer-dialog.component";
+import { GridOrderOptions } from "../conjugation-grid/conjugation-grid.component";
 
 @Component({
   selector: "ww-tableviewer-conj-panel",
@@ -102,7 +103,7 @@ export class TableviewerConjPanelComponent
       takeUntil(this.unsubscribe$),
       map(selection => {
         if (selection.view === "list" && selection.conjugations.length > 0) {
-          return this.tierService.createTiers(selection.conjugations);
+          return selection.conjugations;
         } else {
           return false;
         }
@@ -139,23 +140,16 @@ export class TableviewerConjPanelComponent
     );
   }
 
-  onToggleGridOrder() {
-    this.selection$
-      .pipe(
-        take(1),
-        tap(selection => {
-          this.store.dispatch(
-            actionChangeGridOrder({
-              name: "gridOrder",
-              partial: {
-                col: selection.gridOrder.row,
-                row: selection.gridOrder.col
-              }
-            })
-          );
-        })
-      )
-      .subscribe();
+  onSwapGridOrder(row: GridOrderOptions, col: GridOrderOptions) {
+    this.store.dispatch(
+      actionChangeGridOrder({
+        name: "gridOrder",
+        partial: {
+          col: row,
+          row: col
+        }
+      })
+    );
   }
 
   onManualConjugation(event) {

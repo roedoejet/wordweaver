@@ -71,6 +71,7 @@ import { DecapitalizePipe } from "./pipes/decapitalize/decapitalize";
 import { NgxEchartsModule } from "ngx-echarts";
 import { DownloadDialogComponent } from "./download-dialog/download-dialog.component";
 import { TableViewerDialogComponent } from "./tableviewer-dialog/tableviewer-dialog.component";
+import { TierComponent } from "./tier/tier.component";
 
 @NgModule({
   imports: [
@@ -113,7 +114,8 @@ import { TableViewerDialogComponent } from "./tableviewer-dialog/tableviewer-dia
     CapitalizePipe,
     DecapitalizePipe,
     DownloadDialogComponent,
-    TableViewerDialogComponent
+    TableViewerDialogComponent,
+    TierComponent
   ],
   exports: [
     CommonModule,
@@ -154,6 +156,7 @@ import { TableViewerDialogComponent } from "./tableviewer-dialog/tableviewer-dia
     DownloadDialogComponent,
     TableViewerDialogComponent,
     LogoComponent,
+    TierComponent,
     RtlSupportDirective,
 
     AnimateOnlyPipe,

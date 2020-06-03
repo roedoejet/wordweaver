@@ -17,13 +17,8 @@ import { GridOrder } from "../../pages/tableviewer/conjugation-grid/conjugation-
   providedIn: "root"
 })
 export class TierService {
-  path = environment.base + environment.prefix + `tiers`;
   TIERS = environment.config.tiers;
   constructor(private http: HttpClient, private store: Store) {}
-
-  getTier(index) {
-    return this.TIERS.filter(a => a.position === index)[0];
-  }
 
   getRandomOption(options: Tier[]): Tier {
     return options[Math.floor(Math.random() * options.length)];
@@ -51,42 +46,6 @@ export class TierService {
     );
   }
 
-  // Return span of either value or separator with supplied classes
-  createSpan(value: string | string[] | number, classes: string[]) {
-    let joinedClasses = "";
-    if (classes) {
-      joinedClasses = classes.join(" ");
-    }
-    if (typeof value === "string") {
-      return `<span class='${joinedClasses}'>${value}</span>`;
-    }
-  }
-
-  // Create Tiers based on API
-  createTiers(conjugations: Response, tiers: Tier[] = this.TIERS) {
-    return conjugations.map(conjugation => {
-      const tieredConjugation = [];
-      tiers.forEach(tier => {
-        tieredConjugation.push({
-          name: tier.name,
-          options: tier.options,
-          html: conjugation.output
-            // filter empty
-            .filter(x => x[tier.key])
-            // sort by position
-            .sort(function(a, b) {
-              return a.position - b.position;
-            })
-            // create spans
-            .map(x => this.createSpan(x[tier.key], x["type"]))
-            // join 'em
-            .join(this.createSpan(tier.separator, ["separator"]))
-        });
-      });
-      return tieredConjugation;
-    });
-  }
-
   // Restructure data for x*y grid
   // Returns structured data along with unique values for col/row and table separators
   restructureData(conjugations: Response, gridOrder: GridOrder) {
@@ -94,18 +53,9 @@ export class TierService {
     const row = gridOrder.row;
     const col = gridOrder.col;
     const structuredData = [];
-    const tieredConjugations = this.createTiers(conjugations).map(
-      conjugation => {
-        const tierObj = {};
-        for (const tier of conjugation) {
-          tierObj[tier["name"]] = tier["html"];
-        }
-        return tierObj;
-      }
-    );
-    const restructuredConjugations = conjugations.map((x, i) => ({
+    const restructuredConjugations = conjugations.map(x => ({
       ...x.input,
-      ...tieredConjugations[i],
+      ...x,
       pn: x.input.agent + "." + x.input.patient
     }));
     const uniqueMain = [...new Set(restructuredConjugations.map(x => x[main]))];
@@ -117,14 +67,7 @@ export class TierService {
         const structuredEntry = { rowKey };
         restructuredConjugations.forEach(entry => {
           if (entry[main] === mainKey && entry[row] === rowKey) {
-            for (const tier of this.TIERS) {
-              if (tier.name === "display") {
-                structuredEntry[entry[col]] = entry["display"];
-              } else {
-                structuredEntry[entry[col] + "-" + tier.name] =
-                  entry[tier.name];
-              }
-            }
+            structuredEntry[entry[col]] = entry;
           }
         });
         mainData.push(structuredEntry);

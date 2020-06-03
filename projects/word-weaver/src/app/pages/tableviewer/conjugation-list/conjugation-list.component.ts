@@ -22,6 +22,7 @@ import { takeUntil } from "rxjs/operators";
 })
 export class ConjugationListComponent implements OnDestroy, OnInit {
   settings$: Observable<SettingsState>;
+  tiers = TIERS;
   // selection$: Observable<TableviewerState>;
   @Input() data$: Observable<Response>;
   unsubscribe$ = new Subject<void>();

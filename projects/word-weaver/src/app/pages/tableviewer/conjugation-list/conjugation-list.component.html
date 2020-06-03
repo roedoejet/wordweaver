@@ -1,4 +1,4 @@
-<div *ngIf="settings$ | async as settings">
+<div *ngIf="settings$ | async as settings" [ngClass]="settings.highlight">
     <ng-container *ngIf="data$ | async as data">
         <div id="table-container" class="rel">
             <div class="error__container" *ngIf="isString(data)">
@@ -24,18 +24,23 @@
                 <tbody>
                     <tr class="b--bottom" *ngFor="let conjugation of data">
                         <td class='center-text'>
-                            <div *ngFor="let tier of conjugation; let i = index">
-                                <h3 *ngIf='tier.options.language === "L1" && i === 0' [innerHTML]='tier.html'></h3>
-                                <h5 *ngIf='settings.level[tier.name] && tier.options.language === "L1" && i !== 0'
-                                    [innerHTML]='tier.html'></h5>
+                            <div *ngFor="let tier of tiers; let i = index">
+                                <h3 *ngIf='tier.options.language === "L1" && i === 0'>
+                                    <ww-tier [tier]="tier" [data]="conjugation"></ww-tier>
+                                </h3>
+                                <h5 *ngIf='settings.level[tier.name] && tier.options.language === "L1" && i !== 0'>
+                                    <ww-tier [tier]="tier" [data]="conjugation"></ww-tier>
+                                </h5>
                             </div>
                         </td>
                         <td class='center-text' *ngIf="isL2Showing(settings.level)">
-                            <div *ngFor="let tier of conjugation; let i = index">
-                                <h3 *ngIf='settings.level[tier.name] && tier.options.language === "L2" && i === 0'
-                                    [innerHTML]='tier.html'></h3>
-                                <h5 *ngIf='settings.level[tier.name] && tier.options.language === "L2" && i !== 0'
-                                    [innerHTML]='tier.html'></h5>
+                            <div *ngFor="let tier of tiers; let i = index">
+                                <h3 *ngIf='settings.level[tier.name] && tier.options.language === "L2" && i === 0'>
+                                    <ww-tier [tier]="tier" [data]="conjugation"></ww-tier>
+                                </h3>
+                                <h5 *ngIf='settings.level[tier.name] && tier.options.language === "L2" && i !== 0'>
+                                    <ww-tier [tier]="tier" [data]="conjugation"></ww-tier>
+                                </h5>
                             </div>
                         </td>
                     </tr>
