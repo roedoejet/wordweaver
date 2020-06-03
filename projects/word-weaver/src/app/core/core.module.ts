@@ -82,7 +82,6 @@ import {
 import { OptionService } from "./option/option.service";
 import { PronounService } from "./pronoun/pronoun.service";
 import { TierService } from "./tier/tier.service";
-import { WordmakerSelectionService } from "./wordmaker-selection/wordmaker-selection.service";
 import { VerbService } from "./verb/verb.service";
 import { ValidationService } from "./validation/validation.service";
 
@@ -108,7 +107,6 @@ export {
   OptionService,
   PronounService,
   TierService,
-  WordmakerSelectionService,
   ValidationService,
   VerbService
 };

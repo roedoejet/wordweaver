@@ -4,6 +4,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { State } from "./tableviewer-selection.model";
 import {
   tap,
+  take,
   withLatestFrom,
   switchMap,
   catchError,
@@ -77,7 +78,6 @@ export class TableviewerEffects {
         ofType(actionConjugationEvent),
         withLatestFrom(this.store.pipe(select(selectTableviewerState))),
         tap(([action, selection]) => {
-          console.log("fired");
           const queryArgs = createRequestQueryArgs(selection);
           if (queryArgs) {
             this.store.dispatch(actionChangeLoading({ loading: true }));
@@ -90,7 +90,8 @@ export class TableviewerEffects {
                       settings.baseUrl + "conjugations?" + queryArgs.toString()
                     )
                     .pipe(catchError(err => of(err)))
-                )
+                ),
+                take(1)
               )
               .subscribe(conj => {
                 this.store.dispatch(actionChangeLoading({ loading: false }));

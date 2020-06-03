@@ -5,6 +5,7 @@ import {
   ViewChild,
   ChangeDetectionStrategy
 } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 
 // Imports
 // import { TableviewerConjPanelComponent } from '../tableviewer-conj-panel/tableviewer-conj-panel.component';
@@ -32,7 +33,15 @@ export class TableviewerComponent implements OnInit {
   //     this.conjPanel.conjugate();
   //   }
   // }
-  constructor() {}
+  param1: string;
+  param2: string;
+  constructor(private route: ActivatedRoute) {
+    //   this.route.queryParams.subscribe(params => {
+    //     console.log(params)
+    //     this.param1 = params['param1'];
+    //     this.param2 = params['param2'];
+    // });
+  }
 
   ngOnInit() {
     this.cols = window.innerWidth <= this.breakpoint ? 3 : 12;
