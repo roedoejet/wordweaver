@@ -3,7 +3,7 @@
         <div *ngIf="show_toolbar" class="panel__header panel__header--tableview">
             <h5 #header class="panel__title">{{ 'ww.tableviewer.conj.title' | translate }}</h5>
             <div class="panel__toolbar toolbar" *ngIf="selection$ | async as selection">
-                <mat-spinner *ngIf='selection.loading' class='panel__toolbar__spinner' [color]="'accent'"
+                <mat-spinner *ngIf='loading$ | async' class='panel__toolbar__spinner' [color]="'accent'"
                     [diameter]='20'>
                 </mat-spinner>
                 <button #conjugate (click)='onManualConjugation($event)' class="conjugate mat-accent" mat-raised-button>
@@ -25,7 +25,8 @@
                     <mat-icon aria-label="Switch pronoun and temp">swap_horiz</mat-icon>
                 </button>
                 <button *ngIf="selection.view === 'grid'" class="toolbar__tool ui-button" mat-icon-button
-                    (click)="onSwapGridOrder(selection.gridOrder.row, selection.gridOrder.col)" [matTooltip]="'ww.tableviewer.conj.grid-order-tip' | translate"
+                    (click)="onSwapGridOrder(selection.gridOrder.row, selection.gridOrder.col)"
+                    [matTooltip]="'ww.tableviewer.conj.grid-order-tip' | translate"
                     [matTooltipShowDelay]="showDelay.value" [matTooltipHideDelay]="hideDelay.value"
                     [matTooltipPosition]="tooltipPosition">
                     <mat-icon aria-label="Switch rows and columns">swap_horiz</mat-icon>

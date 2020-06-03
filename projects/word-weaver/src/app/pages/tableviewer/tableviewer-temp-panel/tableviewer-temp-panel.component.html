@@ -4,17 +4,17 @@
   </div>
   <mat-form-field class='control'>
     <mat-label>{{ 'ww.tableviewer.temp.select' | translate }}</mat-label>
-    <mat-select *ngIf="selection$ | async as selection" [ngModel]="selection['option']" multiple
+    <mat-select *ngIf="selection$ | async as selection" [ngModel]="selection" multiple
       (selectionChange)="onOptionSelect($event)">
       <mat-select-trigger>
         <span *ngIf='optionService.optionsUseType$() | async'>
-          {{selection['option'].length ? selection['option'][0].type + ' ' + selection['option'][0].gloss : ''}}
+          {{selection.length ? selection[0].type + ' ' + selection[0].gloss : ''}}
         </span>
         <span *ngIf='!(optionService.optionsUseType$() | async)'>
-          {{selection['option'].length ? selection['option'][0].gloss : ''}}
+          {{selection.length ? selection[0].gloss : ''}}
         </span>
-        <span *ngIf="selection['option'].length > 1" class="example-additional-selection">
-          (+{{selection['option'].length - 1}} {{selection['option'].length === 2 ? 'other' : 'others'}})
+        <span *ngIf="selection.length > 1" class="example-additional-selection">
+          (+{{selection.length - 1}} {{selection.length === 2 ? 'other' : 'others'}})
         </span>
       </mat-select-trigger>
       <div *ngIf='!(optionService.optionsUseType$() | async)'>

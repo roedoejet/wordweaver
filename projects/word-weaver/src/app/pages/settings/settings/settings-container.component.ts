@@ -35,6 +35,7 @@ export class SettingsContainerComponent implements OnInit {
   themes = [
     { value: "DEFAULT-THEME", label: marker("ww.settings.themes.blue") },
     { value: "LIGHT-THEME", label: marker("ww.settings.themes.light") },
+    { value: "DARK-THEME", label: marker("ww.settings.themes.dark") },
     {
       value: "PURPLE-THEME--LIGHT",
       label: marker("ww.settings.themes.purple-light")

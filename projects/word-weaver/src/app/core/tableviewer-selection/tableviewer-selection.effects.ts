@@ -77,6 +77,7 @@ export class TableviewerEffects {
         ofType(actionConjugationEvent),
         withLatestFrom(this.store.pipe(select(selectTableviewerState))),
         tap(([action, selection]) => {
+          console.log("fired");
           const queryArgs = createRequestQueryArgs(selection);
           if (queryArgs) {
             this.store.dispatch(actionChangeLoading({ loading: true }));

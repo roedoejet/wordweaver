@@ -2,7 +2,7 @@ import { AppState } from "../core.module";
 import { Highlight, Level } from "../../../config/config";
 import { AvailableLanguages } from "../../../config/config";
 
-export const NIGHT_MODE_THEME = "BLACK-THEME";
+export const NIGHT_MODE_THEME = "DARK-THEME";
 
 export interface SettingsState {
   language: AvailableLanguages;

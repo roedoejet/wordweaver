@@ -17,7 +17,7 @@ import {
   TableviewerState,
   State
 } from "../../../core/tableviewer-selection/tableviewer-selection.model";
-import { selectTableviewer } from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
+import { selectTableViewerRoot } from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
 
 @Component({
   selector: "ww-tableviewer-verb-panel",
@@ -29,7 +29,7 @@ export class TableviewerVerbPanelComponent implements OnDestroy, OnInit {
   verbs$: Observable<Verb[]> = this.verbService.verbs$;
   checkboxGroup: FormGroup = new FormGroup({});
   viewableVerbs$: Observable<Verb[]>;
-  selection$: Observable<TableviewerState>;
+  selection$: Observable<Verb[]>;
   searchField: FormControl;
   verbForm: FormGroup;
   unsubscribe$ = new Subject<void>();
@@ -82,7 +82,7 @@ export class TableviewerVerbPanelComponent implements OnDestroy, OnInit {
     // populate with store's selection
     this.selection$ = this.store.pipe(
       takeUntil(this.unsubscribe$),
-      select(selectTableviewer)
+      select(selectTableViewerRoot)
     );
   }
 
@@ -95,8 +95,8 @@ export class TableviewerVerbPanelComponent implements OnDestroy, OnInit {
     this.store.dispatch(actionChangeVerbs({ root: verbs }));
   }
 
-  selectedRoot(selection: TableviewerState, root: string) {
-    return selection.root.map(x => x.tag).indexOf(root) > 0;
+  selectedRoot(selection: Verb[], root: string) {
+    return selection.map(x => x.tag).indexOf(root) > 0;
   }
 
   getEntriesFrom(term) {

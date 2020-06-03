@@ -399,6 +399,6 @@ export const META: Meta = {
 
 export const initialSettings: Partial<SettingsState> = {
   language: "en",
-  theme: "PURPLE-LIGHT-THEME",
+  theme: "PURPLE-THEME--LIGHT",
   autoNightMode: true
 };

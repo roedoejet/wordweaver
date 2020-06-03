@@ -1,7 +1,7 @@
 <div class='panel'>
   <div class='panel__header panel__header--tableview'>
     <h5 class="panel__title">{{ 'ww.tableviewer.verb.title' | translate }}</h5>
-    <button *ngIf='(selection$ | async).root.length > 0' class="mat-accent conjugate deselect" mat-raised-button
+    <button *ngIf='(selection$ | async).length > 0' class="mat-accent conjugate deselect" mat-raised-button
       (click)="checkboxGroup.reset()">
       {{ 'ww.tableviewer.verb.deselect' | translate }}
     </button>
@@ -17,7 +17,7 @@
     </form>
     <mat-list class='panel__list' role="list" *ngIf="searchField.value !== ''">
       <div [formGroup]="checkboxGroup" *ngFor="let value of viewableVerbs$ | async">
-        <mat-checkbox [disabled]="!(selectedRoot(selection, value.tag)) && selection.root.length >= 3"
+        <mat-checkbox [disabled]="!(selectedRoot(selection, value.tag)) && selection.length >= 3"
           *ngIf="selection$ | async as selection" class='margin-5' [formControlName]="value.tag">{{
             value.gloss}}
           <span *ngIf='value.display'> - {{value.display}}</span>

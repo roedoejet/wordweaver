@@ -12,8 +12,14 @@ import { HttpClient } from "@angular/common/http";
 import { NotificationService } from "../../../core/core.module";
 import { EChartOption } from "echarts";
 import { Store, select } from "@ngrx/store";
-import { Observable, BehaviorSubject, Subject } from "rxjs";
-import { map, take, takeUntil, tap } from "rxjs/operators";
+import { Observable, BehaviorSubject, Subject, combineLatest } from "rxjs";
+import {
+  map,
+  take,
+  takeUntil,
+  tap,
+  distinctUntilChanged
+} from "rxjs/operators";
 import { merge as _merge } from "lodash";
 import {
   actionConjugationEvent,
@@ -24,9 +30,15 @@ import {
 import { SettingsState, State } from "../../../core/settings/settings.model";
 import { TableviewerState } from "../../../core/tableviewer-selection/tableviewer-selection.model";
 import { selectTableviewerState } from "../../../core/core.state";
+// import { selectTableviewerGridState } from '../../../core/tableviewer-selection/tableviewer-selection.selectors';
 import { selectSettings } from "../../../core/settings/settings.selectors";
 import { TierService } from "../../../core/core.module";
-import { TIERS, TableviewerViewModes, META } from "../../../../config/config";
+import {
+  TIERS,
+  TableviewerViewModes,
+  META,
+  Response
+} from "../../../../config/config";
 
 import { ROUTE_ANIMATIONS_ELEMENTS } from "../../../core/core.module";
 import { marker } from "@biesbjerg/ngx-translate-extract-marker";
@@ -36,6 +48,12 @@ import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { DownloadDialogComponent } from "../../../shared/download-dialog/download-dialog.component";
 import { TableViewerDialogComponent } from "../../../shared/tableviewer-dialog/tableviewer-dialog.component";
 import { GridOrderOptions } from "../conjugation-grid/conjugation-grid.component";
+import {
+  selectTableViewerLoading,
+  selectTableviewerGridSlice,
+  selectTableviewerListSlice,
+  selectTableviewer
+} from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
 
 @Component({
   selector: "ww-tableviewer-conj-panel",
@@ -48,12 +66,15 @@ export class TableviewerConjPanelComponent
   // Basic config
   settings$: Observable<SettingsState>;
   selection$: Observable<TableviewerState>;
+  gridDataState$: Observable<Partial<TableviewerState>>;
+  listDataState$: Observable<Partial<TableviewerState>>;
+
   showDelay = new FormControl(600);
   hideDelay = new FormControl(200);
   tooltipPosition = "above";
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   // Non-reactive states
-  loading = false;
+  loading$: Observable<boolean>;
   show_toolbar = true;
   // Reactive conjugation triggers
   showExplorer$ = new BehaviorSubject<boolean>(false);
@@ -83,27 +104,40 @@ export class TableviewerConjPanelComponent
     );
     this.selection$ = this.store.pipe(
       takeUntil(this.unsubscribe$),
-      select(selectTableviewerState)
+      select(selectTableviewer)
+    );
+    this.listDataState$ = this.store.pipe(
+      takeUntil(this.unsubscribe$),
+      select(selectTableviewerListSlice)
+    );
+    this.gridDataState$ = this.store.pipe(
+      takeUntil(this.unsubscribe$),
+      select(selectTableviewerGridSlice)
+    );
+    this.loading$ = this.store.pipe(
+      takeUntil(this.unsubscribe$),
+      select(selectTableViewerLoading)
     );
 
-    this.gridData$ = this.selection$.pipe(
+    this.gridData$ = this.gridDataState$.pipe(
       takeUntil(this.unsubscribe$),
-      map(selection => {
-        if (selection.view === "grid" && selection.conjugations.length > 0) {
+      map(gridState => {
+        if (gridState.view === "grid" && gridState.conjugations.length > 0) {
           return this.tierService.restructureData(
-            selection.conjugations,
-            selection.gridOrder
+            gridState.conjugations,
+            gridState.gridOrder
           );
         } else {
           return false;
         }
       })
     );
-    this.listData$ = this.selection$.pipe(
+
+    this.listData$ = this.listDataState$.pipe(
       takeUntil(this.unsubscribe$),
-      map(selection => {
-        if (selection.view === "list" && selection.conjugations.length > 0) {
-          return selection.conjugations;
+      map(listState => {
+        if (listState.view === "list" && listState.conjugations.length > 0) {
+          return listState.conjugations;
         } else {
           return false;
         }

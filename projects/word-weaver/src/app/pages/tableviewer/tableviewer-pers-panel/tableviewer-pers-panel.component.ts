@@ -16,7 +16,7 @@ import {
 } from "../../../core/tableviewer-selection/tableviewer-selection.actions";
 
 import { TableviewerState } from "../../../core/tableviewer-selection/tableviewer-selection.model";
-import { selectTableviewer } from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
+import { selectTableviewerPronouns } from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
 
 @Component({
   selector: "ww-tableviewer-pers-panel",
@@ -26,7 +26,7 @@ import { selectTableviewer } from "../../../core/tableviewer-selection/tableview
 })
 export class TableviewerPersPanelComponent implements OnDestroy, OnInit {
   possiblePronouns$: Observable<Pronoun[]>;
-  selection$: Observable<TableviewerState>;
+  selection$: Observable<Partial<TableviewerState>>;
   unsubscribe$ = new Subject<void>();
   constructor(
     public pnService: PronounService,
@@ -39,7 +39,7 @@ export class TableviewerPersPanelComponent implements OnDestroy, OnInit {
   ngOnInit(): void {
     this.selection$ = this.store.pipe(
       takeUntil(this.unsubscribe$),
-      select(selectTableviewer)
+      select(selectTableviewerPronouns)
     );
   }
 

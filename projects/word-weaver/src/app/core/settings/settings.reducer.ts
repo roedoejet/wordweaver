@@ -20,7 +20,7 @@ import { environment } from "../../../environments/environment";
 
 const initialBaseState: SettingsState = {
   language: "en",
-  theme: "DEFAULT-THEME",
+  theme: "PURPLE-THEME--LIGHT",
   autoNightMode: false,
   nightTheme: NIGHT_MODE_THEME,
   stickyHeader: true,
