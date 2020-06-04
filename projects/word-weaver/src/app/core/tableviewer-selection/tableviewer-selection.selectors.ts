@@ -83,6 +83,19 @@ export const selectTableviewerListSlice = createSelector(
   (conjugations, view) => ({ conjugations, view })
 );
 
+export const selectTableviewerTreeSlice = createSelector(
+  selectTableViewerConjugations,
+  selectTableViewerView,
+  selectTableViewerTreeDepth,
+  selectTableViewerTreeOrder,
+  (conjugations, view, treeDepth, standardTreeOrder) => ({
+    conjugations,
+    view,
+    treeDepth,
+    standardTreeOrder
+  })
+);
+
 export const selectTableviewerPronouns = createSelector(
   selectTableViewerAgent,
   selectTableViewerPatient,

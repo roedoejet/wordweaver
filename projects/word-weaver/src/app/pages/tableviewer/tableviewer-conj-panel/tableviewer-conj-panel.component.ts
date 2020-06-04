@@ -54,6 +54,7 @@ import {
   selectTableViewerLoading,
   selectTableviewerGridSlice,
   selectTableviewerListSlice,
+  selectTableviewerTreeSlice,
   selectTableviewer
 } from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
 
@@ -73,7 +74,7 @@ export class TableviewerConjPanelComponent
   selection$: Observable<TableviewerState>;
   gridDataState$: Observable<Partial<TableviewerState>>;
   listDataState$: Observable<Partial<TableviewerState>>;
-
+  treeDataState$: Observable<Partial<TableviewerState>>;
   showDelay = new FormControl(600);
   hideDelay = new FormControl(200);
   tooltipPosition = "above";
@@ -90,6 +91,7 @@ export class TableviewerConjPanelComponent
   chartResponse$: Observable<EChartOption | any>;
   gridData$: Observable<any>;
   listData$: Observable<any>;
+  treeData$: Observable<any>;
   unsubscribe$ = new Subject<void>();
 
   // Elements
@@ -122,6 +124,10 @@ export class TableviewerConjPanelComponent
       takeUntil(this.unsubscribe$),
       select(selectTableviewerGridSlice)
     );
+    this.treeDataState$ = this.store.pipe(
+      takeUntil(this.unsubscribe$),
+      select(selectTableviewerTreeSlice)
+    );
     this.loading$ = this.store.pipe(
       takeUntil(this.unsubscribe$),
       select(selectTableViewerLoading)
@@ -146,6 +152,17 @@ export class TableviewerConjPanelComponent
       map(listState => {
         if (listState.view === "list" && listState.conjugations.length > 0) {
           return listState.conjugations;
+        } else {
+          return false;
+        }
+      })
+    );
+
+    this.treeData$ = this.treeDataState$.pipe(
+      takeUntil(this.unsubscribe$),
+      map(treeState => {
+        if (treeState.view === "tree" && treeState.conjugations.length > 0) {
+          return treeState;
         } else {
           return false;
         }
@@ -216,8 +233,18 @@ export class TableviewerConjPanelComponent
 
   copyLink() {
     this.selection$.pipe(take(1)).subscribe(selection => {
-      console.log(selection);
       const params = createRequestQueryArgs(selection);
+      // Add other relevant params
+      params.append("view", selection["view"]);
+      params.append("depth", selection["treeDepth"].toString());
+      params.append(
+        "grid-order",
+        [
+          selection["gridOrder"]["main"],
+          selection["gridOrder"]["row"],
+          selection["gridOrder"]["col"]
+        ].join(",")
+      );
       const result = this.clipboard.copy(
         window["location"]["href"].split("?")[0] + "?" + params.toString()
       );

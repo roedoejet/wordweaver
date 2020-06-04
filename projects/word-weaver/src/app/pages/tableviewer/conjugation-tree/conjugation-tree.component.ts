@@ -10,7 +10,7 @@ import { Conjugation, Response } from "../../../../config/config";
 import { Tier } from "../../../../config/config";
 import { Store, select } from "@ngrx/store";
 import { selectTableviewer } from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
-import { Observable, Subject } from "rxjs";
+import { Observable, Subject, of } from "rxjs";
 import {
   map,
   switchMap,
@@ -30,11 +30,12 @@ import { selectThemeColors } from "../../../core/settings/settings.selectors";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ConjugationTreeComponent implements OnDestroy, OnInit {
-  options$: Observable<EChartOption>;
+  options$: Observable<EChartOption | boolean>;
   defaultChartOption: EChartOption;
   defaultSeries: any;
   selection$: Observable<TableviewerState>;
   unsubscribe$ = new Subject<void>();
+  @Input() data$: Observable<Partial<TableviewerState>>;
   constructor(
     private store: Store,
     private optionService: OptionService,
@@ -42,10 +43,6 @@ export class ConjugationTreeComponent implements OnDestroy, OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.selection$ = this.store.pipe(
-      takeUntil(this.unsubscribe$),
-      select(selectTableviewer)
-    );
     this.defaultChartOption = {
       tooltip: {
         show: false,
@@ -107,19 +104,22 @@ export class ConjugationTreeComponent implements OnDestroy, OnInit {
       animationDuration: 550,
       animationDurationUpdate: 750
     };
-    this.options$ = this.selection$.pipe(
+    this.options$ = this.data$.pipe(
       takeUntil(this.unsubscribe$),
+      tap(x => console.log(x)),
       switchMap(selection => {
-        if (selection.conjugations.length > 0) {
+        console.log(selection);
+        if (selection && selection.conjugations.length > 0) {
           return this.store.select(selectThemeColors).pipe(
             map(color =>
               this.createChartData(selection, {
                 primary: this.rgbToHex(color.primary),
                 accent: this.rgbToHex(color.accent)
               })
-            ),
-            distinctUntilChanged()
+            )
           );
+        } else {
+          return of(false);
         }
       })
     );
@@ -145,7 +145,8 @@ export class ConjugationTreeComponent implements OnDestroy, OnInit {
     return hex + hexMatches.join("");
   };
 
-  createChartData(tvState: TableviewerState, color) {
+  createChartData(tvState: Partial<TableviewerState>, color) {
+    console.log(tvState);
     const chartOption = Object.assign({}, this.defaultChartOption);
     // Initialize series each time
     chartOption.series = [];

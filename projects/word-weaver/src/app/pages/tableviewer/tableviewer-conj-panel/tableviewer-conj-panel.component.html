@@ -68,7 +68,7 @@
         <div class='panel__tree__container'>
             <div *ngIf="selection.view === 'tree' && selection.conjugations" [hidden]="selection.view !== 'tree'"
                 class="full-width full-height">
-                <ww-conjugation-tree></ww-conjugation-tree>
+                <ww-conjugation-tree [data$]="treeData$"></ww-conjugation-tree>
             </div>
         </div>
 

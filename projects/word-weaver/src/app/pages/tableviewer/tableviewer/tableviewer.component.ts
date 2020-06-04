@@ -14,13 +14,22 @@ import {
   actionChangePatients,
   actionChangeOptions,
   actionChangeVerbs,
-  actionConjugationEvent
+  actionConjugationEvent,
+  actionChangeViewMode,
+  actionChangeTreeViewDepth,
+  actionChangeGridOrder
 } from "../../../core/tableviewer-selection/tableviewer-selection.actions";
 import {
   OptionService,
   PronounService,
   VerbService
 } from "../../../core/core.module";
+import { TableviewerViewModes } from "../../../../config/config";
+import { TableviewerTreeDepth } from "../../../core/tableviewer-selection/tableviewer-selection.model";
+import {
+  GridOrderOptions,
+  GridOrder
+} from "../conjugation-grid/conjugation-grid.component";
 
 @Component({
   selector: "ww-tableviewer",
@@ -102,6 +111,42 @@ export class TableviewerComponent implements OnInit {
               })
             );
           }
+          if ("view" in params) {
+            const viewMode: TableviewerViewModes = this.pluckFirstParam(
+              params.view
+            );
+            console.log(viewMode);
+            this.store.dispatch(
+              actionChangeViewMode({
+                view: viewMode
+              })
+            );
+          }
+          if ("depth" in params) {
+            const treeDepth: TableviewerTreeDepth = this.pluckFirstParam(
+              params.depth
+            );
+            this.store.dispatch(
+              actionChangeTreeViewDepth({
+                treeDepth: treeDepth
+              })
+            );
+          }
+          if ("grid-order" in params) {
+            const gridOrder: GridOrderOptions[] = this.processGridParam(
+              params["grid-order"]
+            );
+            this.store.dispatch(
+              actionChangeGridOrder({
+                name: "gridOrder",
+                partial: {
+                  main: gridOrder[0],
+                  col: gridOrder[1],
+                  row: gridOrder[2]
+                }
+              })
+            );
+          }
         }
         this.store.dispatch(actionConjugationEvent("query"));
       });
@@ -121,9 +166,25 @@ export class TableviewerComponent implements OnInit {
     this.conjrowspan = window.innerWidth <= this.breakpoint ? 3 : 5;
   }
 
+  processGridParam(param): GridOrderOptions[] {
+    if (Array.isArray(param)) {
+      param = param[0];
+    }
+    param = param.split(",");
+    return param;
+  }
+
   paramToArray(param) {
     if (!Array.isArray(param)) {
       return [param];
+    } else {
+      return param;
+    }
+  }
+
+  pluckFirstParam(param) {
+    if (Array.isArray(param)) {
+      return param[0];
     } else {
       return param;
     }
