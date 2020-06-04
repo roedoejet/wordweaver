@@ -5,10 +5,22 @@ import {
   ViewChild,
   ChangeDetectionStrategy
 } from "@angular/core";
+import { take } from "rxjs/operators";
+import { combineLatest, race, interval } from "rxjs";
 import { ActivatedRoute } from "@angular/router";
-
-// Imports
-// import { TableviewerConjPanelComponent } from '../tableviewer-conj-panel/tableviewer-conj-panel.component';
+import { Store, select } from "@ngrx/store";
+import {
+  actionChangeAgents,
+  actionChangePatients,
+  actionChangeOptions,
+  actionChangeVerbs,
+  actionConjugationEvent
+} from "../../../core/tableviewer-selection/tableviewer-selection.actions";
+import {
+  OptionService,
+  PronounService,
+  VerbService
+} from "../../../core/core.module";
 
 @Component({
   selector: "ww-tableviewer",
@@ -33,14 +45,66 @@ export class TableviewerComponent implements OnInit {
   //     this.conjPanel.conjugate();
   //   }
   // }
-  param1: string;
-  param2: string;
-  constructor(private route: ActivatedRoute) {
-    //   this.route.queryParams.subscribe(params => {
-    //     console.log(params)
-    //     this.param1 = params['param1'];
-    //     this.param2 = params['param2'];
-    // });
+  constructor(
+    private optionService: OptionService,
+    private pronounService: PronounService,
+    private route: ActivatedRoute,
+    private store: Store,
+    private verbService: VerbService
+  ) {
+    // CombineLatest to avoid race condition between pronoun, verb and options services and query params
+    // This initializes the view from query params
+    combineLatest([
+      this.pronounService.pronouns$,
+      this.verbService.verbs$,
+      this.optionService.options$,
+      this.route.queryParams.pipe(take(1))
+    ])
+      .pipe(take(1))
+      .subscribe(value => {
+        const params = value[3];
+        if (params) {
+          if ("agent" in params) {
+            const agents = this.paramToArray(params.agent);
+            this.store.dispatch(
+              actionChangeAgents({
+                agent: agents
+                  .map(x => this.pronounService.getPronoun(x))
+                  .filter(x => x)
+              })
+            );
+          }
+          if ("patient" in params) {
+            const patients = this.paramToArray(params.patient);
+            this.store.dispatch(
+              actionChangePatients({
+                patient: patients
+                  .map(x => this.pronounService.getPronoun(x))
+                  .filter(x => x)
+              })
+            );
+          }
+          if ("option" in params) {
+            const options = this.paramToArray(params.option);
+            this.store.dispatch(
+              actionChangeOptions({
+                option: options
+                  .map(x => this.optionService.getOption(x))
+                  .filter(x => x)
+              })
+            );
+          }
+          if ("root" in params) {
+            const roots = this.paramToArray(params.root);
+            this.store.dispatch(
+              actionChangeVerbs({
+                root: roots.map(x => this.verbService.getVerb(x)).filter(x => x)
+              })
+            );
+          }
+        }
+        this.store.dispatch(actionConjugationEvent("query"));
+      });
   }
 
   ngOnInit() {
@@ -55,6 +119,14 @@ export class TableviewerComponent implements OnInit {
     this.rows = window.innerWidth <= this.breakpoint ? 1 : 5;
     this.conjcolspan = window.innerWidth <= this.breakpoint ? 3 : 9;
     this.conjrowspan = window.innerWidth <= this.breakpoint ? 3 : 5;
+  }
+
+  paramToArray(param) {
+    if (!Array.isArray(param)) {
+      return [param];
+    } else {
+      return param;
+    }
   }
 
   conjugate() {

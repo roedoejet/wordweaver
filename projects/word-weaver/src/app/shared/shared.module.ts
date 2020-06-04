@@ -31,6 +31,8 @@ import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatTabsModule } from "@angular/material/tabs";
 
+import { ClipboardModule } from "@angular/cdk/clipboard";
+
 import {
   FontAwesomeModule,
   FaIconLibrary
@@ -105,7 +107,9 @@ import { TierComponent } from "./tier/tier.component";
     MatTableModule,
     MatPaginatorModule,
     NgxEchartsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+
+    ClipboardModule
   ],
   declarations: [
     LogoComponent,
@@ -152,6 +156,8 @@ import { TierComponent } from "./tier/tier.component";
     MatTabsModule,
     MatPaginatorModule,
     FontAwesomeModule,
+
+    ClipboardModule,
 
     DownloadDialogComponent,
     TableViewerDialogComponent,

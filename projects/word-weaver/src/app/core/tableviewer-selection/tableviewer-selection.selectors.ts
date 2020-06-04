@@ -63,6 +63,11 @@ export const selectTableViewerLoading = createSelector(
   (state: TableviewerState) => state.loading
 );
 
+export const selectTableViewerVerbSearchTerm = createSelector(
+  selectTableviewerState,
+  (state: TableviewerState) => state.verbSearchTerm
+);
+
 // Composed Selectors
 
 export const selectTableviewerGridSlice = createSelector(

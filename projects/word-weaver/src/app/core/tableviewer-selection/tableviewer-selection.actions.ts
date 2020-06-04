@@ -24,6 +24,11 @@ export const actionChangeVerbs = createAction(
   props<{ root: Verb[] }>()
 );
 
+export const actionChangeVerbSearchTerm = createAction(
+  "[Tableviewer] Change Verb Search Term",
+  props<{ verbSearchTerm: string }>()
+);
+
 export const actionChangeAgents = createAction(
   "[Tableviewer] Change Selected Agents",
   props<{ agent: Pronoun[] }>()

@@ -24,6 +24,7 @@ export class TierService {
     return options[Math.floor(Math.random() * options.length)];
   }
 
+  // FIXME: Not working with TableViewer
   createRequestQueryArgs(selection) {
     const params = new URLSearchParams();
     ["option", "agent", "patient", "root"].forEach(x => {
@@ -31,6 +32,8 @@ export class TierService {
         params.append(x, selection[x].tag);
       }
     });
+    console.log(params);
+    console.log(params.toString());
     return params;
   }
 

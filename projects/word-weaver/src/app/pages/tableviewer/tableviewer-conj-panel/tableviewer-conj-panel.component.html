@@ -31,6 +31,12 @@
                     [matTooltipPosition]="tooltipPosition">
                     <mat-icon aria-label="Switch rows and columns">swap_horiz</mat-icon>
                 </button>
+                <button class="ui-button toolbar__tool" mat-icon-button
+                    [matTooltip]="'ww.tableviewer.conj.copy-link-tip' | translate"
+                    [matTooltipShowDelay]="showDelay.value" [matTooltipHideDelay]="hideDelay.value"
+                    [matTooltipPosition]="tooltipPosition" (click)="copyLink()">
+                    <mat-icon aria-label="Copy link">link</mat-icon>
+                </button>
                 <button (click)="download()" class="ui-button toolbar__tool" mat-icon-button
                     [matTooltip]="'ww.tableviewer.conj.download-tip' | translate"
                     [matTooltipShowDelay]="showDelay.value" [matTooltipHideDelay]="hideDelay.value"

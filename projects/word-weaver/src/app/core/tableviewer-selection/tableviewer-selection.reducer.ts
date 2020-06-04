@@ -8,7 +8,8 @@ import {
   actionChangeTreeViewDepth,
   actionChangeViewMode,
   actionChangeConjugations,
-  actionChangeLoading
+  actionChangeLoading,
+  actionChangeVerbSearchTerm
 } from "./tableviewer-selection.actions";
 import { Action, createReducer, on, ActionReducer } from "@ngrx/store";
 import { TableviewerState } from "./tableviewer-selection.model";
@@ -24,7 +25,8 @@ export const initialState: TableviewerState = {
   treeDepth: 1,
   standardTreeOrder: true,
   loading: false,
-  gridOrder: META.tableviewer.gridViewDefaultOrder
+  gridOrder: META.tableviewer.gridViewDefaultOrder,
+  verbSearchTerm: ""
 };
 
 const reducer = createReducer(
@@ -39,6 +41,7 @@ const reducer = createReducer(
     actionChangeConjugations,
     actionChangeLoading,
     actionChangeViewMode,
+    actionChangeVerbSearchTerm,
     // actionChangeGridOrder,
     (state, action) => ({ ...state, ...action })
   ),

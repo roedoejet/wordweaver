@@ -8,6 +8,7 @@ import {
   Renderer2
 } from "@angular/core";
 import { FormControl } from "@angular/forms";
+import { LocationStrategy } from "@angular/common";
 import { HttpClient } from "@angular/common/http";
 import { NotificationService } from "../../../core/core.module";
 import { EChartOption } from "echarts";
@@ -30,6 +31,7 @@ import {
 import { SettingsState, State } from "../../../core/settings/settings.model";
 import { TableviewerState } from "../../../core/tableviewer-selection/tableviewer-selection.model";
 import { selectTableviewerState } from "../../../core/core.state";
+import { createRequestQueryArgs } from "../../../core/tableviewer-selection/tableviewer-selection.effects";
 // import { selectTableviewerGridState } from '../../../core/tableviewer-selection/tableviewer-selection.selectors';
 import { selectSettings } from "../../../core/settings/settings.selectors";
 import { TierService } from "../../../core/core.module";
@@ -54,6 +56,9 @@ import {
   selectTableviewerListSlice,
   selectTableviewer
 } from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
+
+import { Clipboard } from "@angular/cdk/clipboard";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "ww-tableviewer-conj-panel",
@@ -86,6 +91,7 @@ export class TableviewerConjPanelComponent
   gridData$: Observable<any>;
   listData$: Observable<any>;
   unsubscribe$ = new Subject<void>();
+
   // Elements
   @ViewChild("header") header;
   @ViewChild("conjugate") conjugateBtn;
@@ -93,7 +99,9 @@ export class TableviewerConjPanelComponent
     private store: Store<State>,
     private notificationService: NotificationService,
     private tierService: TierService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private clipboard: Clipboard,
+    private locationStrategy: LocationStrategy
   ) {}
 
   ngOnInit(): void {
@@ -204,6 +212,29 @@ export class TableviewerConjPanelComponent
     dialogConfig.autoFocus = true;
     dialogConfig.minWidth = "30vw";
     this.dialog.open(DownloadDialogComponent, dialogConfig);
+  }
+
+  copyLink() {
+    this.selection$.pipe(take(1)).subscribe(selection => {
+      console.log(selection);
+      const params = createRequestQueryArgs(selection);
+      const result = this.clipboard.copy(
+        window["location"]["href"].split("?")[0] + "?" + params.toString()
+      );
+      if (result) {
+        this.notificationService.translated(
+          marker("ww.tableviewer.notifications.copy.success"),
+          {},
+          "success"
+        );
+      } else {
+        this.notificationService.translated(
+          marker("ww.tableviewer.notifications.copy.error"),
+          {},
+          "error"
+        );
+      }
+    });
   }
 
   updateToast(success?, code = 200) {
