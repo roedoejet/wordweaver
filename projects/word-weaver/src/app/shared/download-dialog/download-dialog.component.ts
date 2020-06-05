@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { MatDialogRef } from "@angular/material/dialog";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Observable, of, combineLatest } from "rxjs";
-import { switchMap, catchError, take } from "rxjs/operators";
+import { switchMap, catchError, take, map } from "rxjs/operators";
 import { Store, select } from "@ngrx/store";
 import { SettingsState, State } from "../../core/settings/settings.model";
 import { selectSettings } from "../../core/settings/settings.selectors";
@@ -28,12 +28,16 @@ export class DownloadDialogComponent implements OnInit {
   settings$: Observable<SettingsState>;
   selection$: Observable<TableviewerState>;
   selectionAndSettings$: Observable<[TableviewerState, SettingsState]>;
-  fileTypes: string[] = ["csv", "docx", "latex"];
+  fileTypes = {
+    list: ["csv", "docx", "latex"],
+    grid: ["csv", "xlsx", "txt", "json"]
+  };
+  fileTypes$: Observable<string[]>;
   showDelay = new FormControl(600);
   hideDelay = new FormControl(200);
   tooltipPosition = "above";
   form: FormGroup = new FormGroup({
-    ftype: new FormControl("docx", [Validators.required]),
+    ftype: new FormControl("csv", [Validators.required]),
     headers: new FormControl(false),
     heading: new FormControl("")
   });
@@ -56,6 +60,11 @@ export class DownloadDialogComponent implements OnInit {
       this.selection$,
       this.settings$
     ]);
+    this.fileTypes$ = this.selection$.pipe(
+      map(selection => {
+        return this.fileTypes[selection.view];
+      })
+    );
   }
 
   onLevelSelect({ checked }, key: string) {

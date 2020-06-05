@@ -161,7 +161,15 @@ export class TableviewerConjPanelComponent
     this.treeData$ = this.treeDataState$.pipe(
       takeUntil(this.unsubscribe$),
       map(treeState => {
-        if (treeState.view === "tree" && treeState.conjugations.length > 0) {
+        const conjugationsLength = treeState.conjugations.length;
+        if (treeState.view === "tree" && conjugationsLength > 0) {
+          if (conjugationsLength > 50) {
+            this.notificationService.translated(
+              marker("ww.tableviewer.notifications.treeviewer-length.error"),
+              { value: conjugationsLength },
+              "error"
+            );
+          }
           return treeState;
         } else {
           return false;
@@ -188,9 +196,8 @@ export class TableviewerConjPanelComponent
   }
 
   onChangeTreeDepth(event) {
-    this.store.dispatch(
-      actionChangeTreeViewDepth({ treeDepth: event.target.selectedIndex })
-    );
+    console.log(event);
+    this.store.dispatch(actionChangeTreeViewDepth({ treeDepth: event.value }));
   }
 
   onToggleTreeOrder() {
@@ -200,15 +207,25 @@ export class TableviewerConjPanelComponent
   }
 
   onSwapGridOrder(row: GridOrderOptions, col: GridOrderOptions) {
-    this.store.dispatch(
-      actionChangeGridOrder({
-        name: "gridOrder",
-        partial: {
-          col: row,
-          row: col
-        }
-      })
-    );
+    this.gridData$.pipe(take(1)).subscribe(gridData => {
+      if (gridData.uniqueRow.length > 80) {
+        this.notificationService.translated(
+          marker("ww.tableviewer.notifications.gridOrder.limit-error"),
+          {},
+          "error"
+        );
+      } else {
+        this.store.dispatch(
+          actionChangeGridOrder({
+            name: "gridOrder",
+            partial: {
+              col: row,
+              row: col
+            }
+          })
+        );
+      }
+    });
   }
 
   onManualConjugation(event) {

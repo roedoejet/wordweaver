@@ -19,7 +19,6 @@ export interface TableviewerState {
   conjugations: Response;
   loading: boolean;
   gridOrder: GridOrder;
-  verbSearchTerm: string;
 }
 
 export interface State extends AppState {

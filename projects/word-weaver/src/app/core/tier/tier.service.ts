@@ -32,8 +32,6 @@ export class TierService {
         params.append(x, selection[x].tag);
       }
     });
-    console.log(params);
-    console.log(params.toString());
     return params;
   }
 

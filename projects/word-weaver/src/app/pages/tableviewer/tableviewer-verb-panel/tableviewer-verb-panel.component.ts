@@ -95,6 +95,10 @@ export class TableviewerVerbPanelComponent implements OnDestroy, OnInit {
     this.store.dispatch(actionChangeVerbs({ root: verbs }));
   }
 
+  onVerbDeselect(verb) {
+    this.checkboxGroup.controls[verb.tag].setValue(false);
+  }
+
   selectedRoot(selection: Verb[], root: string) {
     return selection.map(x => x.tag).indexOf(root) > 0;
   }

@@ -30,6 +30,11 @@ import { MatTableModule } from "@angular/material/table";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatTabsModule } from "@angular/material/tabs";
+import { MatSliderModule } from "@angular/material/slider";
+import { MatExpansionModule } from "@angular/material/expansion";
+import { DragDropModule } from "@angular/cdk/drag-drop";
+
+import { MatTableExporterModule } from "mat-table-exporter";
 
 import { ClipboardModule } from "@angular/cdk/clipboard";
 
@@ -103,12 +108,15 @@ import { TierComponent } from "./tier/tier.component";
     MatToolbarModule,
     MatRadioModule,
     MatTabsModule,
+    MatSliderModule,
     // MatDividerModule,
     MatTableModule,
+    MatExpansionModule,
     MatPaginatorModule,
     NgxEchartsModule,
     FontAwesomeModule,
-
+    MatTableExporterModule,
+    DragDropModule,
     ClipboardModule
   ],
   declarations: [
@@ -155,8 +163,11 @@ import { TierComponent } from "./tier/tier.component";
     MatTableModule,
     MatTabsModule,
     MatPaginatorModule,
+    MatSliderModule,
     FontAwesomeModule,
-
+    MatTableExporterModule,
+    MatExpansionModule,
+    DragDropModule,
     ClipboardModule,
 
     DownloadDialogComponent,

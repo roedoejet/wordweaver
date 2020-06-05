@@ -1,16 +1,36 @@
 <div class='panel'>
   <div class='panel__header panel__header--tableview'>
     <h5 class="panel__title">{{ 'ww.tableviewer.verb.title' | translate }}</h5>
-    <button *ngIf='(selection$ | async).length > 0' class="mat-accent conjugate deselect" mat-raised-button
+    <!-- <button *ngIf='(selection$ | async).length > 0' class="mat-accent conjugate deselect" mat-raised-button
       (click)="checkboxGroup.reset()">
       {{ 'ww.tableviewer.verb.deselect' | translate }}
-    </button>
+    </button> -->
+    <ng-container *ngIf="selection$ | async as selection">
+      <mat-accordion *ngIf='selection.length !== 0' class='mat-accent ui-button'>
+        <mat-expansion-panel class='selected-verb-panel' [expanded]="false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ selection.length }} Selected
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <mat-chip-list #chipList aria-label="Selected Verbs">
+            <mat-chip class='mat-accent' *ngFor="let verb of selection" selectable="false" [removable]="true"
+              (removed)="onVerbDeselect(verb)">
+              {{verb.display}}
+              <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+          </mat-chip-list>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </ng-container>
   </div>
   <div class="panel__content">
     <form>
       <div>
         <mat-form-field class='control' [formGroup]="verbForm">
-          <input autocomplete="off" type="text" [placeholder]="'ww.tableviewer.verb.placeholder' | translate"
+          <input autocomplete="off" type="text"
+            [placeholder]="'ww.tableviewer.verb.placeholder' | translate: { value: (verbs$ | async)?.length }"
             aria-label="Number" matInput formControlName="search">
         </mat-form-field>
       </div>

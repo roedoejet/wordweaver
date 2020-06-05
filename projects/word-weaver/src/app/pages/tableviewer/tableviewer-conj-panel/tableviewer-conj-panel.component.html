@@ -9,15 +9,10 @@
                 <button #conjugate (click)='onManualConjugation($event)' class="conjugate mat-accent" mat-raised-button>
                     {{ 'ww.tableviewer.conj.conjugate' | translate }}
                 </button>
-                <select *ngIf="selection.view === 'tree'" (change)="onChangeTreeDepth($event)"
-                    class="toolbar__tool ui-button" [matTooltip]="'ww.tableviewer.conj.depth-tip' | translate"
-                    [matTooltipShowDelay]="showDelay.value" [matTooltipHideDelay]="hideDelay.value"
-                    [matTooltipPosition]="tooltipPosition">
-                    <option value="0">0</option>
-                    <option selected value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select>
+                <mat-slider (change)="onChangeTreeDepth($event)" *ngIf="selection.view === 'tree'"
+                    [matTooltip]="'ww.tableviewer.conj.depth-tip' | translate" [matTooltipShowDelay]="showDelay.value"
+                    [matTooltipHideDelay]="hideDelay.value" [matTooltipPosition]="tooltipPosition" value="1" step="1"
+                    tickInterval="1" min='0' max="3"></mat-slider>
                 <button *ngIf="selection.view === 'tree'" class="toolbar__tool ui-button" mat-icon-button
                     (click)="onToggleTreeOrder()" [matTooltip]="'ww.tableviewer.conj.order-tip' | translate"
                     [matTooltipShowDelay]="showDelay.value" [matTooltipHideDelay]="hideDelay.value"
@@ -66,19 +61,19 @@
 
         <!-- Tree View -->
         <div class='panel__tree__container'>
-            <div *ngIf="selection.view === 'tree' && selection.conjugations" [hidden]="selection.view !== 'tree'"
+            <div *ngIf="selection.view === 'tree' && selection.conjugations.length > 0" [hidden]="selection.view !== 'tree'"
                 class="full-width full-height">
                 <ww-conjugation-tree [data$]="treeData$"></ww-conjugation-tree>
             </div>
         </div>
 
         <!-- Grid View  -->
-        <div *ngIf="selection.view === 'grid'" [hidden]="selection.view !== 'grid'" class="grid__container">
+        <div *ngIf="selection.view === 'grid' && selection.conjugations.length > 0" [hidden]="selection.view !== 'grid'" class="grid__container">
             <ww-conjugation-grid [data$]="gridData$"></ww-conjugation-grid>
         </div>
 
         <!-- List View -->
-        <div *ngIf="selection.view === 'list'" [hidden]="selection.view !== 'list'" class="list__container">
+        <div *ngIf="selection.view === 'list' && selection.conjugations.length > 0" [hidden]="selection.view !== 'list'" class="list__container">
             <ww-conjugation-list [data$]="listData$"></ww-conjugation-list>
         </div>
     </div>

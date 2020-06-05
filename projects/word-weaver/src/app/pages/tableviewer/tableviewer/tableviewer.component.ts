@@ -141,14 +141,16 @@ export class TableviewerComponent implements OnInit {
                 name: "gridOrder",
                 partial: {
                   main: gridOrder[0],
-                  col: gridOrder[1],
-                  row: gridOrder[2]
+                  row: gridOrder[1],
+                  col: gridOrder[2]
                 }
               })
             );
           }
         }
-        this.store.dispatch(actionConjugationEvent("query"));
+        if (Object.keys(params).length > 0) {
+          this.store.dispatch(actionConjugationEvent("query"));
+        }
       });
   }
 

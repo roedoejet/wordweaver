@@ -106,9 +106,7 @@ export class ConjugationTreeComponent implements OnDestroy, OnInit {
     };
     this.options$ = this.data$.pipe(
       takeUntil(this.unsubscribe$),
-      tap(x => console.log(x)),
       switchMap(selection => {
-        console.log(selection);
         if (selection && selection.conjugations.length > 0) {
           return this.store.select(selectThemeColors).pipe(
             map(color =>
@@ -146,7 +144,6 @@ export class ConjugationTreeComponent implements OnDestroy, OnInit {
   };
 
   createChartData(tvState: Partial<TableviewerState>, color) {
-    console.log(tvState);
     const chartOption = Object.assign({}, this.defaultChartOption);
     // Initialize series each time
     chartOption.series = [];

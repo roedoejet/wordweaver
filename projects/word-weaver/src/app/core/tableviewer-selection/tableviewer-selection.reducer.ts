@@ -25,8 +25,7 @@ export const initialState: TableviewerState = {
   treeDepth: 1,
   standardTreeOrder: true,
   loading: false,
-  gridOrder: META.tableviewer.gridViewDefaultOrder,
-  verbSearchTerm: ""
+  gridOrder: META.tableviewer.gridViewDefaultOrder
 };
 
 const reducer = createReducer(

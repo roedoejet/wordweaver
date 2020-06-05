@@ -51,8 +51,13 @@
   $foreground: mat-color($foreground-palette, base);
 
   ww-tableviewer {
-    .mat-figure {
+    .mat-figure,
+    .selected-verb-panel {
       background-color: darken($background, 3%);
+    }
+
+    .draggable-item {
+      border: 1px solid $foreground;
     }
 
     ww-tableviewer-conj-panel,
@@ -138,7 +143,8 @@
       }
     }
 
-    .mat-figure {
+    .mat-figure,
+    .selected-verb-panel {
       background-color: darken($background, 2%);
     }
 

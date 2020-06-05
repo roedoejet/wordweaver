@@ -6,7 +6,7 @@
             <mat-form-field class='form-control'>
                 <mat-label>{{ "ww.download.dialog.settings.filetype" | translate}}</mat-label>
                 <mat-select [formControlName]="'ftype'">
-                    <mat-option *ngFor="let ftype of fileTypes" [value]="ftype">
+                    <mat-option *ngFor="let ftype of fileTypes$ | async" [value]="ftype">
                         {{ftype}}
                     </mat-option>
                 </mat-select>
@@ -19,7 +19,7 @@
             </mat-form-field>
 
             <mat-checkbox [formControlName]="'headers'" class='form-control'
-                *ngIf='form.controls.ftype.value === "csv"'>
+                *ngIf='form.controls.ftype.value === "csv" || form.controls.ftype.value === "xlsx"'>
                 {{ "ww.download.dialog.settings.headers" | translate }}</mat-checkbox>
 
             <div class='form-control group' *ngIf='objectkeys(settings.level).length > 0'>

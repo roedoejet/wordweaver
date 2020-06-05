@@ -8,7 +8,17 @@
                     {{ 'ww.tableviewer.view-mode-descriptions.' + mode | translate}}</p>
             </mat-radio-button>
         </mat-radio-group>
+        <!-- <div cdkDropList class="drag-list" (cdkDropListDropped)="drop($event)">
+            <div *ngFor="let value of gridOrderValues; index as i" class="drag-box">
+                <div>{{gridOrderTitles[i]}}</div>
+                <mat-chip-list aria-label="Fish selection">
+                    <mat-chip cdkDrag>{{value}}</mat-chip>
+                </mat-chip-list>
+            </div>
+        </div> -->
     </div>
+
+
 
     <mat-dialog-actions>
 

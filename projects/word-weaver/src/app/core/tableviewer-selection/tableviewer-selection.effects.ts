@@ -30,6 +30,7 @@ import {
 } from "./tableviewer-selection.actions";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { marker } from "@biesbjerg/ngx-translate-extract-marker";
+import { NotificationService } from "../notifications/notification.service";
 
 export const TABLEVIEWER_SELECTION_KEY = "TABLEVIEWER";
 
@@ -51,7 +52,8 @@ export class TableviewerEffects {
     private actions$: Actions,
     private store: Store<State>,
     private localStorageService: LocalStorageService,
-    private http: HttpClient
+    private http: HttpClient,
+    private notificationService: NotificationService
   ) {}
 
   // TODO: persist
@@ -78,6 +80,14 @@ export class TableviewerEffects {
         ofType(actionConjugationEvent),
         withLatestFrom(this.store.pipe(select(selectTableviewerState))),
         tap(([action, selection]) => {
+          if (selection.root.length < 1) {
+            this.notificationService.translated(
+              marker("ww.tableviewer.notifications.error.missing-root"),
+              {},
+              "error"
+            );
+            return;
+          }
           const queryArgs = createRequestQueryArgs(selection);
           if (queryArgs) {
             this.store.dispatch(actionChangeLoading({ loading: true }));

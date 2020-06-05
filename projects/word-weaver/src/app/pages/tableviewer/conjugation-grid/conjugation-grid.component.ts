@@ -73,15 +73,16 @@ export class ConjugationGridComponent
   }
 
   ngAfterViewInit(): void {
-    this.data$.pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
-      if (data) {
-        data.structuredData.forEach((x, i) => {
-          this.dataSources[i].paginator = this.paginators.toArray()[i]; // Currently not working for n>1
-          this.dataSources[i].data = x;
-        });
-      }
-      // this.cdr.detectChanges();
-    });
+    this.data$
+      .pipe(takeUntil(this.unsubscribe$), distinctUntilChanged())
+      .subscribe(data => {
+        if (data) {
+          data.structuredData.forEach((x, i) => {
+            this.dataSources[i].paginator = this.paginators.toArray()[i]; // Currently not working for n>1
+            this.dataSources[i].data = x;
+          });
+        }
+      });
   }
 
   ngOnDestroy() {
