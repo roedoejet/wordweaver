@@ -1,4 +1,4 @@
-<div id='about__page' class="background page__content shadow-box vmargin-right-20 vmargin-left-20 margin-bottom-50">
+<div id='about__page' class="background page__content custom-scroll shadow-box vmargin-right-20 vmargin-left-20 margin-bottom-50">
   <div class="gradient">
     <div class="container">
       <h1>{{ 'ww.title' | translate }}</h1>
@@ -8,7 +8,7 @@
         <div [innerHTML]="'ww.about.text' | translate"></div>
         <br>
       </div>
-      <h3 class='centered center-text margin-bottom-50'>{{ "ww.about.contributors.title" | translate }}</h3>
+      <h3 class='centered center-text margin-bottom-35'>{{ "ww.about.contributors.title" | translate }}</h3>
       <div class='authors container centered center-text contributors'>
         <div class="row contributor" *ngFor="let contributor of contributors; let i = index; let isLast = last">
           <ng-container *ngIf='contributor.img && i%2===0'>
