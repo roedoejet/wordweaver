@@ -43,6 +43,7 @@ export class ConjugationGridComponent
   uniqueMain: string[];
   displayedColumns: string[];
   unsubscribe$ = new Subject<void>();
+  currentTab = 0;
   @Input() data$;
   @ViewChildren(MatPaginator) paginators: QueryList<MatPaginator>;
   constructor(private store: Store<State>, private cdr: ChangeDetectorRef) {}
@@ -81,6 +82,7 @@ export class ConjugationGridComponent
             this.dataSources[i].paginator = this.paginators.toArray()[i]; // Currently not working for n>1
             this.dataSources[i].data = x;
           });
+          this.currentTab = 0;
         }
       });
   }
@@ -88,5 +90,10 @@ export class ConjugationGridComponent
   ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+  }
+
+  onTabChange(event) {
+    this.currentTab = event.index;
+    console.log(this.currentTab);
   }
 }

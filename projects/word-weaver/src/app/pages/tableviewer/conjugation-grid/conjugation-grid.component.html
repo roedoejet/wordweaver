@@ -1,5 +1,5 @@
 <div class='table__container custom-scroll-x' *ngIf="settings$ | async as settings" [ngClass]="settings.highlight">
-    <mat-tab-group *ngIf='uniqueMain?.length > 1'>
+    <mat-tab-group *ngIf='uniqueMain?.length > 1' (selectedTabChange)="onTabChange($event)">
         <mat-tab [label]='main' *ngFor='let main of uniqueMain; index as i;'>
             <table matTableExporter mat-table [dataSource]="dataSources[i]" #exporter="matTableExporter">
                 <!-- Placeholder Column -->
@@ -8,7 +8,7 @@
                     </th>
                     <td mat-cell *matCellDef="let element"> {{element.rowKey}} </td>
                 </ng-container>
-    
+
                 <!-- Other Columns -->
                 <ng-container [matColumnDef]="col" *ngFor="let col of uniqueCol">
                     <th mat-header-cell *matHeaderCellDef> {{col}} </th>
@@ -26,7 +26,7 @@
                         </ng-container>
                     </td>
                 </ng-container>
-    
+
                 <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
@@ -63,6 +63,9 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-        <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </ng-container>
+    <ng-container *ngFor="let main of dataSources; index as i">
+        <mat-paginator [hidden]='i !== currentTab' [pageSize]="10" [pageSizeOptions]="[5, 10, 20]"
+            showFirstLastButtons></mat-paginator>
     </ng-container>
 </div>

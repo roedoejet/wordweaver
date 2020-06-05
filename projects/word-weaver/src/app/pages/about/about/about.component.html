@@ -10,7 +10,7 @@
       </div>
       <h3 class='centered center-text margin-bottom-35'>{{ "ww.about.contributors.title" | translate }}</h3>
       <div class='authors container centered center-text contributors'>
-        <div class="row contributor" *ngFor="let contributor of contributors; let i = index; let isLast = last">
+        <div class="row contributor" *ngFor="let contributor of contributors; index as i; last as isLast">
           <ng-container *ngIf='contributor.img && i%2===0'>
             <div class='col-lg-6'>
               <div class='img__container'>
