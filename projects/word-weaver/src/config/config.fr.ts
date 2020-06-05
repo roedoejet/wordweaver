@@ -185,7 +185,9 @@ export type TableviewerViewModes = "list" | "grid" | "tree";
 export interface Meta {
   contributors: Contributor[];
   languages: Language[];
-  wordmakerTempView: "default" | TierNames;
+  wordmaker: {
+    tempView: "default" | TierNames;
+  };
   tableviewer: {
     viewModes: TableviewerViewModes[];
     defaultViewMode: TableviewerViewModes;
@@ -218,7 +220,9 @@ export const META: Meta = {
     { label: "en", value: "en" },
     { label: "fr", value: "fr" }
   ],
-  wordmakerTempView: "default",
+  wordmaker: {
+    tempView: "default"
+  },
   tableviewer: {
     viewModes: ["grid", "tree"],
     defaultViewMode: "grid",

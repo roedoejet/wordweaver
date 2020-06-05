@@ -2,6 +2,10 @@ import { SettingsState } from "../app/core/settings/settings.model";
 import { GridOrder } from "../app/pages/tableviewer/conjugation-grid/conjugation-grid.component";
 import { Contributor } from "../app/pages/about/about/about.component";
 
+// Data Type Definitions (DTD)
+
+// DTD: Basic
+
 export interface Option {
   classes: string[];
   gloss: string;
@@ -28,24 +32,11 @@ export interface Verb {
   classes: string[];
 }
 
-export interface OptionalParam {
-  param: string;
-  value: string;
-}
-
 export interface ConjugationInput {
   root: string;
   option: string;
   agent: string;
   patient: string;
-}
-
-export interface RequestParams {
-  root: string[];
-  option: string[];
-  agent: string[];
-  patient: string[];
-  optional?: OptionalParam[];
 }
 
 export interface ResponseMorpheme {
@@ -54,6 +45,32 @@ export interface ResponseMorpheme {
   gloss: string;
   english: string;
   type: string[];
+}
+
+export interface Highlight {
+  root: boolean;
+  ending: boolean;
+}
+
+export interface Level {
+  breakdown: boolean;
+}
+
+export type AvailableLanguages = "en" | "fr";
+
+// DTD: Advanced
+
+export interface OptionalParam {
+  param: string;
+  value: string;
+}
+
+export interface RequestParams {
+  root: string[];
+  option: string[];
+  agent: string[];
+  patient: string[];
+  optional?: OptionalParam[];
 }
 
 export type Conjugation = ResponseMorpheme[];
@@ -65,17 +82,8 @@ export interface ResponseObject {
 
 export type Response = ResponseObject[];
 
-export interface Highlight {
-  root: boolean;
-  ending: boolean;
-}
-
 // Tier name must be either the display (default) tier, or one of the toggleable levels in the settings
 export type TierNames = "display" | keyof Level;
-
-export interface Level {
-  breakdown: boolean;
-}
 
 export interface Tier {
   name: TierNames;
@@ -120,7 +128,47 @@ export interface Validation {
   };
 }
 
-const _defaultOptions: TierOptions = { language: "L1", showName: false };
+export interface Link {
+  display: boolean;
+  url: string;
+}
+
+export interface Language {
+  label: string;
+  value: string;
+}
+
+export interface Meta {
+  contributors: Contributor[];
+  languages: Language[];
+  wordmaker: {
+    tempView: "default" | TierNames;
+  };
+  tableviewer: {
+    viewModes: TableviewerViewModes[];
+    defaultViewMode: TableviewerViewModes;
+    gridViewDefaultOrder: GridOrder;
+  };
+  logo: string;
+  links: {
+    github: Link;
+    medium: Link;
+    facebook: Link;
+    youtube: Link;
+  };
+  copyright: {
+    name: string;
+    url: string;
+  };
+}
+
+export type TableviewerViewModes = "list" | "grid" | "tree";
+
+export const _defaultOptions: TierOptions = { language: "L1", showName: false };
+
+// Instance Configuration (IC)
+
+// IC: Basic
 
 export const HIGHLIGHTS: Highlight = {
   root: true,
@@ -148,62 +196,6 @@ export const TIERS: Tier[] = [
   }
 ];
 
-export const VALIDATION: Validation = {
-  display: {
-    categories: {
-      verbs: true,
-      options: true,
-      agents: true,
-      conjugations: true,
-      patients: false
-    }
-  },
-  validation: {
-    selection: {
-      agents: true,
-      options: true,
-      patients: false,
-      verbs: true
-    }
-  }
-};
-
-export interface Link {
-  display: boolean;
-  url: string;
-}
-
-export interface Language {
-  label: string;
-  value: string;
-}
-
-export type AvailableLanguages = "en" | "fr";
-
-export type TableviewerViewModes = "list" | "grid" | "tree";
-
-export interface Meta {
-  contributors: Contributor[];
-  languages: Language[];
-  wordmakerTempView: "default" | TierNames;
-  tableviewer: {
-    viewModes: TableviewerViewModes[];
-    defaultViewMode: TableviewerViewModes;
-    gridViewDefaultOrder: GridOrder;
-  };
-  logo: string;
-  links: {
-    github: Link;
-    medium: Link;
-    facebook: Link;
-    youtube: Link;
-  };
-  copyright: {
-    name: string;
-    url: string;
-  };
-}
-
 export const META: Meta = {
   contributors: [
     {
@@ -218,7 +210,9 @@ export const META: Meta = {
     { label: "en", value: "en" },
     { label: "fr", value: "fr" }
   ],
-  wordmakerTempView: "default",
+  wordmaker: {
+    tempView: "default"
+  },
   tableviewer: {
     viewModes: ["list", "grid", "tree"],
     defaultViewMode: "grid",
@@ -257,4 +251,26 @@ export const initialSettings: Partial<SettingsState> = {
   language: "en",
   theme: "DEFAULT-THEME",
   autoNightMode: false
+};
+
+// IC: Advanced
+
+export const VALIDATION: Validation = {
+  display: {
+    categories: {
+      verbs: true,
+      options: true,
+      agents: true,
+      conjugations: true,
+      patients: false
+    }
+  },
+  validation: {
+    selection: {
+      agents: true,
+      options: true,
+      patients: false,
+      verbs: true
+    }
+  }
 };

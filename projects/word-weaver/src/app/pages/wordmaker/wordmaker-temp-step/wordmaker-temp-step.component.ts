@@ -32,7 +32,7 @@ export class WordmakerTempStepComponent implements OnDestroy, OnInit {
   conjugatedOptions$: Observable<any>;
   possibleOptions$: Observable<Option[]>;
   possibleOptionsByType$: Observable<object>;
-  displayTier: string = META.wordmakerTempView;
+  displayTier: string = META.wordmaker.tempView;
   constructor(
     public optionService: OptionService,
     private store: Store<State>,
