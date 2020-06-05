@@ -1,5 +1,6 @@
 import { SettingsState } from "../app/core/settings/settings.model";
 import { GridOrder } from "../app/pages/tableviewer/conjugation-grid/conjugation-grid.component";
+import { Contributor } from "../app/pages/about/about/about.component";
 
 export interface Option {
   classes: string[];
@@ -334,6 +335,7 @@ export interface Language {
 export type TableviewerViewModes = "list" | "grid" | "tree";
 
 export interface Meta {
+  contributors: Contributor[];
   languages: Language[];
   wordmakerTempView: "default" | TierNames;
   tableviewer: {
@@ -357,6 +359,36 @@ export interface Meta {
 export type AvailableLanguages = "en" | "fr" | "moh";
 
 export const META: Meta = {
+  contributors: [
+    {
+      name: "Owennatekha Brian Maracle",
+      title: "Founder, Onkwawenna Kentyohkwa",
+      text:
+        "Brian Maracle (Owennatekha, Turtle Clan, Mohawk) is the founder of, head of, and teacher at, the Onkwawenna Kentyohkwa Kanyen'kéha immersion school on the Six Nations Reserve near Brantford, Ontario. Brian has been a language activist for nearly 25 years and has developed, published materials and taught adults and children. He is a passionate advocate for the preservation of Kanyen'kéha.",
+      img: "assets/bm.png"
+    },
+    {
+      name: "Ryan DeCaire",
+      title: "",
+      text:
+        "Ryan DeCaire is Kanien'kehá:ka (Mohawk) and was born and raised in Wáhta Mohawk Territory, Ontario. He is an Assistant Professor in the Department of Linguistics and Centre for Indigenous Studies at the University of Toronto, a Phd Student in the Hawaiian and Indigenous Language and Culture Revitalization Program at the University of Hawaii at Hilo, as well as an immersion instructor and curriculum developer at Onkwawén:na Kentyóhkwa. In addition to his work in adult immersion teaching, Ryan is also focussed on Kanien’kéha documentation and Iroquoian morphology.",
+      img: "assets/rd.png"
+    },
+    {
+      name: "Anna Kazantseva",
+      title: "Lead Researcher (NRC)",
+      text:
+        "Anna is a Computational Linguist passionate about applying natural language processing techniques to reclamation of the Indigenous languages in Canada. Her past work was on text processing of stories and novels, but currently her main interest is Iroquoian languages.",
+      img: "assets/ak.png"
+    },
+    {
+      name: "Aidan Pine",
+      title: "Lead Developer (NRC)",
+      text:
+        "Aidan is an application development specialist on the NRC's Indigenous Language Technology project. Aidan is interested in language revitalization because of its inherently multidisplinary nature and because of the social justice component at the centre of the work. Aidan is humbled and excited to be working with such an accomplished and dynamic team and hopes to continue improving the Kawennón:nis for years to come.",
+      img: "assets/ap.png"
+    }
+  ],
   languages: [
     { label: "en", value: "en" },
     { label: "fr", value: "fr" },

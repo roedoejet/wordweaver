@@ -1,12 +1,49 @@
-<div class="background page__content shadow-box vmargin-right-20 vmargin-left-20">
+<div id='about__page' class="background page__content shadow-box vmargin-right-20 vmargin-left-20 margin-bottom-50">
   <div class="gradient">
     <div class="container">
       <h1>{{ 'ww.title' | translate }}</h1>
-      <div class="actions">
+      <div class="actions centered center-text">
         <span [ngClass]="routeAnimationsElements">{{ 'ww.about.slogan' | translate }}</span>
         <br>
         <div [innerHTML]="'ww.about.text' | translate"></div>
         <br>
+      </div>
+      <h3 class='centered center-text margin-bottom-50'>{{ "ww.about.contributors.title" | translate }}</h3>
+      <div class='authors container centered center-text contributors'>
+        <div class="row contributor" *ngFor="let contributor of contributors; let i = index; let isLast = last">
+          <ng-container *ngIf='contributor.img && i%2===0'>
+            <div class='col-lg-6'>
+              <div class='img__container'>
+                <img class='bio' [src]='contributor.img' />
+                <h5><span class='contributor name'>{{contributor.name}}</span><span class='contributor title'
+                    *ngIf='contributor.title'><br>{{contributor.title}}</span>
+                </h5>
+              </div>
+            </div>
+            <div class='col-lg-6' [innerHTML]="contributor.text | translate"></div>
+          </ng-container>
+          <ng-container *ngIf='contributor.img && i%2===1'>
+            <div class='img__container mobile-only'>
+              <img class='bio' [src]='contributor.img' />
+              <h5><span class='contributor name'>{{contributor.name}}</span><span class='contributor title'
+                  *ngIf='contributor.title'><br>{{contributor.title}}</span>
+              </h5>
+            </div>
+            <div class='col-lg-6' [innerHTML]="contributor.text | translate"></div>
+            <div class='col-lg-6'>
+              <div class='img__container desktop-only'>
+                <img class='bio' [src]='contributor.img' />
+                <h5><span class='contributor name'>{{contributor.name}}</span><span class='contributor title'
+                    *ngIf='contributor.title'><br>{{contributor.title}}</span>
+                </h5>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf='!contributor.img'>
+            <div class='col-lg-12'>test-no-img</div>
+          </ng-container>
+          <hr *ngIf="!isLast">
+        </div>
       </div>
     </div>
   </div>
