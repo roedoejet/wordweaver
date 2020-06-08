@@ -1,14 +1,14 @@
 import { AppState } from "../core.module";
 import { Highlight, Level } from "../../../config/config";
-import { AvailableLanguages } from "../../../config/config";
+import { AvailableLanguages, ThemeName } from "../../../config/config";
 
-export const NIGHT_MODE_THEME = "DARK-THEME";
+export const NIGHT_MODE_THEME: ThemeName = "DARK-THEME";
 
 export interface SettingsState {
   language: AvailableLanguages;
-  theme: string;
+  theme: ThemeName;
   autoNightMode: boolean;
-  nightTheme: string;
+  nightTheme: ThemeName;
   stickyHeader: boolean;
   pageAnimations: boolean;
   pageAnimationsDisabled: boolean;

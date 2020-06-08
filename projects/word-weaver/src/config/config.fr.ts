@@ -1,6 +1,7 @@
 import { SettingsState } from "../app/core/settings/settings.model";
-import { GridOrder } from "../app/pages/tableviewer/conjugation-grid/conjugation-grid.component";
 import { Contributor } from "../app/pages/about/about/about.component";
+import { TableviewerState } from "../app/core/tableviewer-selection/tableviewer-selection.model";
+import { marker } from "@biesbjerg/ngx-translate-extract-marker";
 
 export interface Option {
   classes: string[];
@@ -190,8 +191,6 @@ export interface Meta {
   };
   tableviewer: {
     viewModes: TableviewerViewModes[];
-    defaultViewMode: TableviewerViewModes;
-    gridViewDefaultOrder: GridOrder;
   };
   logo: string;
   links: {
@@ -224,13 +223,7 @@ export const META: Meta = {
     tempView: "default"
   },
   tableviewer: {
-    viewModes: ["grid", "tree"],
-    defaultViewMode: "grid",
-    gridViewDefaultOrder: {
-      col: "root",
-      row: "pn",
-      main: "option"
-    }
+    viewModes: ["grid", "tree"]
   },
   logo: "assets/wwlogo.png",
   copyright: {
@@ -262,3 +255,58 @@ export const initialSettings: Partial<SettingsState> = {
   theme: "DEFAULT-THEME",
   autoNightMode: false
 };
+
+export const initialTableViewerSettings: Partial<TableviewerState> = {
+  view: "grid",
+  gridOrder: {
+    col: "root",
+    row: "pn",
+    main: "option"
+  }
+};
+
+export type ThemeName =
+  | "DEFAULT-THEME"
+  | "LIGHT-THEME"
+  | "DARK-THEME"
+  | "PURPLE-THEME--LIGHT"
+  | "PURPLE-THEME--DARK"
+  | "PURPLE-BLUE-THEME--LIGHT"
+  | "PURPLE-BLUE-THEME--DARK"
+  | "PURPLE-GOLD-THEME--LIGHT"
+  | "PURPLE-GOLD-THEME--DARK";
+
+export interface Theme {
+  value: ThemeName;
+  label: string;
+}
+
+export const THEMES: Theme[] = [
+  { value: "DEFAULT-THEME", label: marker("ww.settings.themes.blue") },
+  { value: "LIGHT-THEME", label: marker("ww.settings.themes.light") },
+  { value: "DARK-THEME", label: marker("ww.settings.themes.dark") },
+  {
+    value: "PURPLE-THEME--LIGHT",
+    label: marker("ww.settings.themes.purple-light")
+  },
+  {
+    value: "PURPLE-THEME--DARK",
+    label: marker("ww.settings.themes.purple-dark")
+  },
+  {
+    value: "PURPLE-BLUE-THEME--LIGHT",
+    label: marker("ww.settings.themes.purple-blue-light")
+  },
+  {
+    value: "PURPLE-BLUE-THEME--DARK",
+    label: marker("ww.settings.themes.purple-blue-dark")
+  },
+  {
+    value: "PURPLE-GOLD-THEME--LIGHT",
+    label: marker("ww.settings.themes.purple-gold-light")
+  },
+  {
+    value: "PURPLE-GOLD-THEME--DARK",
+    label: marker("ww.settings.themes.purple-gold-dark")
+  }
+];

@@ -13,19 +13,28 @@ import {
 } from "./tableviewer-selection.actions";
 import { Action, createReducer, on, ActionReducer } from "@ngrx/store";
 import { TableviewerState } from "./tableviewer-selection.model";
-import { META } from "../../../config/config";
+import { initialTableViewerSettings, META } from "../../../config/config";
 
-export const initialState: TableviewerState = {
+export const initialBaseState: TableviewerState = {
   option: [],
   agent: [],
   patient: [],
   root: [],
   conjugations: [],
-  view: META.tableviewer.defaultViewMode,
+  view: "list",
   treeDepth: 1,
   standardTreeOrder: true,
   loading: false,
-  gridOrder: META.tableviewer.gridViewDefaultOrder
+  gridOrder: {
+    col: "option",
+    row: "pn",
+    main: "root"
+  }
+};
+
+export const initialState: TableviewerState = {
+  ...initialBaseState,
+  ...initialTableViewerSettings
 };
 
 const reducer = createReducer(
