@@ -48,7 +48,7 @@ const INIT = of("ww-init-effect-trigger");
 @Injectable()
 export class SettingsEffects {
   defaultBaseUrl = environment.base + environment.prefix;
-  testBaseUrl = environment.base + environment.test_prefix;
+  testBaseUrl = environment.base + environment.testPrefix;
   constructor(
     private actions$: Actions,
     private store: Store<State>,

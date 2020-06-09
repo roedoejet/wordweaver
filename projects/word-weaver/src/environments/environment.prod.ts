@@ -25,7 +25,7 @@ export const environment = {
   },
   base: `http://li223-249.members.linode.com`,
   prefix: `/api/v1/`,
-  test_prefix: `/api/v2/`,
+  testPrefix: `/api/v2/`,
   versions: {
     app: packageJson.version,
     angular: packageJson.dependencies["@angular/core"],

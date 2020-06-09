@@ -26,7 +26,7 @@ export const environment = {
   },
   base: `//localhost`,
   prefix: `/api/v1/`,
-  test_prefix: `/api/v2/`,
+  testPrefix: `/api/v2/`,
   versions: {
     app: packageJson.version,
     angular: packageJson.dependencies["@angular/core"],
