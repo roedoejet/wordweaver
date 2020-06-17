@@ -212,6 +212,13 @@ img {
   }
 }
 
+@media only screen and (max-width: 1900px) {
+  #about__page {
+    margin-left: 15vw;
+    margin-right: 15vw;
+  }
+}
+
 hr {
   width: 100%;
   margin-top: 50px;

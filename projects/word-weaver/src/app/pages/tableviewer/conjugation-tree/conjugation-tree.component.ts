@@ -19,7 +19,7 @@ import {
   takeUntil
 } from "rxjs/operators";
 import { TableviewerState } from "../../../core/tableviewer-selection/tableviewer-selection.model";
-import { OptionService, TierService } from "../../../core/core.module";
+import { OptionService, ConjugationService } from "../../../core/core.module";
 import { merge as _merge } from "lodash";
 import { selectThemeColors } from "../../../core/settings/settings.selectors";
 
@@ -39,7 +39,7 @@ export class ConjugationTreeComponent implements OnDestroy, OnInit {
   constructor(
     private store: Store,
     private optionService: OptionService,
-    private tierService: TierService
+    private conjugationService: ConjugationService
   ) {}
 
   ngOnInit(): void {
@@ -218,7 +218,7 @@ export class ConjugationTreeComponent implements OnDestroy, OnInit {
 
   returnTierValue(
     conjugation: Conjugation,
-    tier: Tier = this.tierService.TIERS[0]
+    tier: Tier = this.conjugationService.TIERS[0]
   ) {
     return (
       conjugation

@@ -9,7 +9,7 @@ import { Option } from "../../../config/config";
   providedIn: "root"
 })
 export class OptionService {
-  path = environment.base + environment.prefix + `options`;
+  path = environment.base + environment.prefix + "options";
   options;
   options$: Observable<Option[]>;
   optionsByType$: Observable<object[]>;

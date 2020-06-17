@@ -16,6 +16,7 @@ import { Store, select } from "@ngrx/store";
 import { Observable, BehaviorSubject, Subject, combineLatest } from "rxjs";
 import {
   map,
+  switchMap,
   take,
   takeUntil,
   tap,
@@ -34,7 +35,7 @@ import { selectTableviewerState } from "../../../core/core.state";
 import { createRequestQueryArgs } from "../../../core/tableviewer-selection/tableviewer-selection.effects";
 // import { selectTableviewerGridState } from '../../../core/tableviewer-selection/tableviewer-selection.selectors';
 import { selectSettings } from "../../../core/settings/settings.selectors";
-import { TierService } from "../../../core/core.module";
+import { ConjugationService } from "../../../core/core.module";
 import {
   TIERS,
   TableviewerViewModes,
@@ -100,7 +101,7 @@ export class TableviewerConjPanelComponent
   constructor(
     private store: Store<State>,
     private notificationService: NotificationService,
-    private tierService: TierService,
+    private conjugationService: ConjugationService,
     private dialog: MatDialog,
     private clipboard: Clipboard,
     private locationStrategy: LocationStrategy
@@ -137,7 +138,7 @@ export class TableviewerConjPanelComponent
       takeUntil(this.unsubscribe$),
       map(gridState => {
         if (gridState.view === "grid" && gridState.conjugations.length > 0) {
-          return this.tierService.restructureData(
+          return this.conjugationService.restructureData(
             gridState.conjugations,
             gridState.gridOrder
           );

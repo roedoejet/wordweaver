@@ -1,9 +1,15 @@
 import { Observable, of } from "rxjs";
-import { map, switchMap, catchError } from "rxjs/operators";
+import {
+  map,
+  switchMap,
+  catchError,
+  shareReplay,
+  filter
+} from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../../environments/environment";
-import { Response } from "../../../config/config";
+import { Response, ResponseObject } from "../../../config/config";
 import { Tier } from "../../../config/config";
 import { TableviewerState } from "../tableviewer-selection/tableviewer-selection.model";
 import { WordmakerState } from "../wordmaker-selection/wordmaker-selection.model";
@@ -13,14 +19,30 @@ import { selectSettingsState } from "../core.state";
 import { SettingsState } from "../settings/settings.model";
 import { GridOrder } from "../../pages/tableviewer/conjugation-grid/conjugation-grid.component";
 
+export type ConjugationRetrievalMethod = "endpoint" | "cache";
+
 @Injectable({
   providedIn: "root"
 })
-export class TierService {
+export class ConjugationService {
   TIERS = environment.config.tiers;
-  constructor(private http: HttpClient, private store: Store) {}
+  conjugations;
+  conjugations$: Observable<Response>;
+  random$: Observable<ResponseObject>;
+  constructor(private http: HttpClient, private store: Store) {
+    this.conjugations$ = this.store.pipe(
+      select(selectSettingsState),
+      switchMap((settings: SettingsState) =>
+        this.http.get<Response>(settings.baseUrl + "conjugations")
+      ),
+      shareReplay(1)
+    );
+    this.random$ = this.conjugations$.pipe(
+      map(res => this.getRandomOption(res))
+    );
+  }
 
-  getRandomOption(options: Tier[]): Tier {
+  getRandomOption(options: Response): ResponseObject {
     return options[Math.floor(Math.random() * options.length)];
   }
 
@@ -35,16 +57,50 @@ export class TierService {
     return params;
   }
 
-  conjugate$(selection: TableviewerState | WordmakerState) {
-    const queryArgs = this.createRequestQueryArgs(selection);
-    return this.store.pipe(
-      select(selectSettingsState),
-      switchMap((settings: SettingsState) =>
-        this.http
-          .get(settings.baseUrl + "conjugations?" + queryArgs.toString())
-          .pipe(catchError(err => of(err)))
-      )
-    );
+  filterConjugations(
+    conjugations: Response,
+    selection: TableviewerState | WordmakerState
+  ) {
+    const filterValues = { root: [], option: [], agent: [], patient: [] };
+    ["option", "agent", "patient", "root"].forEach(x => {
+      if (selection[x]) {
+        if (Array.isArray(selection[x])) {
+          filterValues[x] = filterValues[x].concat(
+            selection[x].map(x => x.tag)
+          );
+        } else {
+          filterValues[x].push(selection[x].tag);
+        }
+      }
+    });
+    return conjugations.filter(x => {
+      return ["option", "agent", "patient", "root"].every(
+        k =>
+          filterValues[k].length === 0 ||
+          filterValues[k].indexOf(x.input[k]) > -1
+      );
+    });
+  }
+
+  conjugate$(
+    selection: TableviewerState | WordmakerState,
+    method: ConjugationRetrievalMethod = "cache"
+  ) {
+    if (method === "endpoint") {
+      const queryArgs = this.createRequestQueryArgs(selection);
+      return this.store.pipe(
+        select(selectSettingsState),
+        switchMap((settings: SettingsState) =>
+          this.http
+            .get(settings.baseUrl + "conjugations?" + queryArgs.toString())
+            .pipe(catchError(err => of(err)))
+        )
+      );
+    } else {
+      return this.conjugations$.pipe(
+        map(conjugations => this.filterConjugations(conjugations, selection))
+      );
+    }
   }
 
   // Restructure data for x*y grid

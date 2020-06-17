@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { select, Store } from "@ngrx/store";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { State } from "./tableviewer-selection.model";
+import { State, TableviewerState } from "./tableviewer-selection.model";
 import {
   tap,
   take,
@@ -31,6 +31,8 @@ import {
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { marker } from "@biesbjerg/ngx-translate-extract-marker";
 import { NotificationService } from "../notifications/notification.service";
+import { Response } from "../../../config/config";
+import { ConjugationService } from "../../core/conjugation/conjugation.service";
 
 export const TABLEVIEWER_SELECTION_KEY = "TABLEVIEWER";
 
@@ -53,7 +55,8 @@ export class TableviewerEffects {
     private store: Store<State>,
     private localStorageService: LocalStorageService,
     private http: HttpClient,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private conjugationService: ConjugationService
   ) {}
 
   // TODO: persist
@@ -94,13 +97,25 @@ export class TableviewerEffects {
             this.store
               .pipe(
                 select(selectSettingsState),
-                switchMap(settings =>
-                  this.http
-                    .get(
-                      settings.baseUrl + "conjugations?" + queryArgs.toString()
-                    )
-                    .pipe(catchError(err => of(err)))
-                ),
+                switchMap(settings => {
+                  if (true) {
+                    // TODO: Currently this always uses the local cached copy, but maybe this should be a configurable setting?
+                    console.log("conjugated");
+                    return this.conjugationService.conjugations$.pipe(
+                      map(x =>
+                        this.conjugationService.filterConjugations(x, selection)
+                      )
+                    );
+                  } else {
+                    return this.http
+                      .get(
+                        settings.baseUrl +
+                          "conjugations?" +
+                          queryArgs.toString()
+                      )
+                      .pipe(catchError(err => of(err)));
+                  }
+                }),
                 take(1)
               )
               .subscribe(conj => {

@@ -13,7 +13,6 @@ import {
   filter
 } from "rxjs/operators";
 import { of } from "rxjs";
-import { WordmakerState } from "./wordmaker-selection.model";
 import { selectWordmakerState, selectSettingsState } from "../core.state";
 import { LocalStorageService } from "../local-storage/local-storage.service";
 import {

@@ -81,7 +81,7 @@ import {
 
 import { OptionService } from "./option/option.service";
 import { PronounService } from "./pronoun/pronoun.service";
-import { TierService } from "./tier/tier.service";
+import { ConjugationService } from "./conjugation/conjugation.service";
 import { VerbService } from "./verb/verb.service";
 import { ValidationService } from "./validation/validation.service";
 
@@ -106,7 +106,7 @@ export {
   selectSettingsStickyHeader,
   OptionService,
   PronounService,
-  TierService,
+  ConjugationService,
   ValidationService,
   VerbService
 };

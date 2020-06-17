@@ -12,7 +12,7 @@ import { SettingsState, State } from "../../../core/settings/settings.model";
 import { Store, select } from "@ngrx/store";
 import { selectSettings } from "../../../core/settings/settings.selectors";
 import { Conjugation } from "../../../../config/config";
-import { TierService } from "../../../core/core.module";
+import { ConjugationService } from "../../../core/core.module";
 import { TIERS } from "../../../../config/config";
 
 @Component({
@@ -27,7 +27,10 @@ export class WordmakerConjStepComponent implements OnDestroy, OnInit {
   conjugation$: Observable<any>;
   unsubscribe$ = new Subject<void>();
   tiers = TIERS;
-  constructor(private store: Store<State>, private tierService: TierService) {}
+  constructor(
+    private store: Store<State>,
+    private conjugationService: ConjugationService
+  ) {}
 
   ngOnInit(): void {
     this.settings$ = this.store.pipe(
@@ -40,7 +43,11 @@ export class WordmakerConjStepComponent implements OnDestroy, OnInit {
     );
     this.conjugation$ = this.selection$.pipe(
       takeUntil(this.unsubscribe$),
-      switchMap(selection => this.tierService.conjugate$(selection))
+      switchMap(selection =>
+        this.conjugationService.conjugations$.pipe(
+          map(x => this.conjugationService.filterConjugations(x, selection))
+        )
+      )
     );
   }
 

@@ -7,7 +7,7 @@ import {
   ChangeDetectionStrategy
 } from "@angular/core";
 import { Option, Conjugation, Response } from "../../../../config/config";
-import { OptionService, TierService } from "../../../core/core.module";
+import { OptionService, ConjugationService } from "../../../core/core.module";
 import { Observable, Subject } from "rxjs";
 import { map, switchMap, withLatestFrom, takeUntil } from "rxjs/operators";
 import { Store, select } from "@ngrx/store";
@@ -36,7 +36,7 @@ export class WordmakerTempStepComponent implements OnDestroy, OnInit {
   constructor(
     public optionService: OptionService,
     private store: Store<State>,
-    private tierService: TierService
+    private conjugationService: ConjugationService
   ) {}
 
   ngOnInit(): void {
@@ -57,7 +57,11 @@ export class WordmakerTempStepComponent implements OnDestroy, OnInit {
         const newSelection = { ...selection, ...{ option: null } };
         return newSelection;
       }),
-      switchMap(selection => this.tierService.conjugate$(selection))
+      switchMap(selection =>
+        this.conjugationService.conjugations$.pipe(
+          map(x => this.conjugationService.filterConjugations(x, selection))
+        )
+      )
     );
   }
 
@@ -67,7 +71,7 @@ export class WordmakerTempStepComponent implements OnDestroy, OnInit {
   }
 
   returnOptionTierFromName() {
-    const selectedTier = this.tierService.TIERS.filter(
+    const selectedTier = this.conjugationService.TIERS.filter(
       x => x.name === this.displayTier
     );
     return selectedTier[0];
