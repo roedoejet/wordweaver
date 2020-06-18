@@ -26,7 +26,8 @@ import { environment } from "../environments/environment";
     AppRoutingModule,
 
     ServiceWorkerModule.register("ngsw-worker.js", {
-      enabled: environment.production
+      enabled: environment.production,
+      registrationStrategy: "registerImmediately"
     })
   ],
   declarations: [AppComponent],

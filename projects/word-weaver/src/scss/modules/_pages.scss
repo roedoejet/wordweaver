@@ -5,6 +5,12 @@
     @include mq(em(1920), "min-width") {
       margin-top: 10vh;
     }
+    @include mq(em(map-get($breakpoints, medium)), "max-width") {
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      min-height: 100%;
+    }
     max-height: em(644);
   }
 }
