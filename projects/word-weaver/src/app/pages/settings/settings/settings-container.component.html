@@ -5,7 +5,7 @@
     </div>
   </div>
   <ng-container *ngIf="settings$ | async as settings">
-    <div class='row'>
+    <div class='row padding-5'>
       <div class='col-md-6 group' [ngClass]='routeAnimationsElements' *ngIf='objectkeys(settings.highlight).length > 0'>
         <h2>{{ 'ww.settings.general.highlighting.title' | translate }}</h2>
         <div class='icon-form-field checkboxes'>
@@ -25,7 +25,7 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row padding-5">
       <div class="col-md-6 group" [ngClass]="routeAnimationsElements">
         <h2>{{ 'ww.settings.general.title' | translate }}</h2>
         <div class="icon-form-field">
