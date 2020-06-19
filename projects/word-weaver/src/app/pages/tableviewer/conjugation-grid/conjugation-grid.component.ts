@@ -13,7 +13,7 @@ import {
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import { Response, TIERS, Tier } from "../../../../config/config";
-import { BehaviorSubject, Observable, Subject, combineLatest } from "rxjs";
+import { BehaviorSubject, Observable, Subject, combineLatest, of } from "rxjs";
 import {
   takeUntil,
   distinctUntilChanged,
@@ -24,9 +24,17 @@ import {
 } from "rxjs/operators";
 import { SettingsState, State } from "../../../core/settings/settings.model";
 import { Store, select } from "@ngrx/store";
-import { selectSettings } from "../../../core/settings/settings.selectors";
+import {
+  selectSettings,
+  selectSettingsLanguage
+} from "../../../core/settings/settings.selectors";
 import { selectTableviewerGridSlice } from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
 import { TranslateService } from "@ngx-translate/core";
+import {
+  PronounService,
+  VerbService,
+  OptionService
+} from "../../../core/core.module";
 
 export type GridOrderOptions = "root" | "pn" | "option";
 export interface GridOrder {
@@ -58,7 +66,10 @@ export class ConjugationGridComponent
   constructor(
     private store: Store<State>,
     private cdr: ChangeDetectorRef,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private optionService: OptionService,
+    private pronounService: PronounService,
+    private verbService: VerbService
   ) {}
 
   ngOnInit(): void {
@@ -101,6 +112,40 @@ export class ConjugationGridComponent
       });
   }
 
+  getTranslation$(term, type) {
+    return this.store.pipe(
+      select(selectTableviewerGridSlice),
+      takeUntil(this.unsubscribe$),
+      switchMap(gridState =>
+        combineLatest([
+          of(gridState),
+          this.store.pipe(
+            takeUntil(this.unsubscribe$),
+            select(selectSettingsLanguage)
+          )
+        ])
+      ),
+      map(([gridState, lang]) => {
+        if (gridState.gridOrder[type] === "root") {
+          return this.verbService.getVerb(term)[lang];
+        } else if (gridState.gridOrder[type] === "pn") {
+          const pnSplit = term.split("→");
+          if (pnSplit.length === 2) {
+            return (
+              this.pronounService.getPronoun(pnSplit[0].trim())[lang]["agent"] +
+              " → " +
+              this.pronounService.getPronoun(pnSplit[1].trim())[lang]["patient"]
+            );
+          } else {
+            return this.pronounService.getPronoun(term)[lang]["agent"];
+          }
+        } else if (gridState.gridOrder[type] === "option") {
+          return this.optionService.getOption(term)[lang]["tag"];
+        }
+      })
+    );
+  }
+
   createTranslationKey$(term, type) {
     return this.store.pipe(
       select(selectTableviewerGridSlice),
@@ -110,7 +155,11 @@ export class ConjugationGridComponent
         if (gridState.gridOrder[type] === "root") {
           prefix = prefix + "verbs.";
         } else if (gridState.gridOrder[type] === "pn") {
-          prefix = prefix + "pronouns.agents.";
+          const pnSplit = term.split("→");
+          if (pnSplit.length === 2) {
+          } else {
+            prefix = prefix + "pronouns.agents.";
+          }
         } else if (gridState.gridOrder[type] === "option") {
           prefix = prefix + "options.items.";
         }
