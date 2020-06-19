@@ -1,4 +1,4 @@
-<div class="margin-top-20 full-width centered panel">
+<div class="margin-top-20 full-width centered panel" *ngIf="lang$ | async as lang">
     <div class="panel__header container">
         <div class="row">
             <div class='col-sm-12'>
@@ -30,7 +30,7 @@
         <mat-chip-list class="panel__list" *ngIf="viewableVerbs$ | async as verbs; else loading">
             <p *ngIf="verbs.length === 0">{{ "ww.wordmaker.verb.try-again" | translate }}</p>
             <mat-chip class="margin-5 bg-white border-accent" (click)="onVerbSelect(verb)" *ngFor="let verb of verbs">
-                <span class="centered color-black">{{verb.gloss}}</span>
+                <span class="centered color-black">{{ verb[lang] | translate}}</span>
                 <mat-icon class="icon-sm margin-left-5" [ngClass]="verb?.classes">brightness_1
                 </mat-icon>
             </mat-chip>

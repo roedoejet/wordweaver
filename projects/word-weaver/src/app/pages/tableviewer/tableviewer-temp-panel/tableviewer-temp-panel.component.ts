@@ -5,7 +5,10 @@ import {
   ChangeDetectionStrategy
 } from "@angular/core";
 import { Option } from "../../../../config/config";
-import { OptionService } from "../../../core/core.module";
+import {
+  OptionService,
+  selectSettingsLanguage
+} from "../../../core/core.module";
 import { Store, select } from "@ngrx/store";
 import { Observable, Subject } from "rxjs";
 import { map, takeUntil } from "rxjs/operators";
@@ -29,6 +32,10 @@ export class TableviewerTempPanelComponent implements OnDestroy, OnInit {
   possibleOptionsByType$: Observable<object>;
   selection$: Observable<Option[]>;
   unsubscribe$ = new Subject<void>();
+  lang$ = this.store.pipe(
+    takeUntil(this.unsubscribe$),
+    select(selectSettingsLanguage)
+  );
   constructor(
     public optionService: OptionService,
     private store: Store<State>

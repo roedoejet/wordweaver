@@ -87,6 +87,9 @@ import { ValidationService } from "./validation/validation.service";
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
+import { Observable, of, forkJoin } from "rxjs";
+import { catchError, map, merge } from "rxjs/operators";
+
 export {
   selectAuth,
   authLogin,
@@ -111,12 +114,55 @@ export {
   VerbService
 };
 
+export interface ITranslationResource {
+  prefix: string;
+  suffix: string;
+}
+
+export class MultiTranslateHttpLoader implements TranslateLoader {
+  constructor(
+    private http: HttpClient,
+    private resources: ITranslationResource[]
+  ) {}
+
+  public getTranslation(lang: string): Observable<any> {
+    const requests = this.resources.map(resource => {
+      const path = resource.prefix + lang + resource.suffix;
+      return this.http.get(path).pipe(
+        catchError(res => {
+          console.error("Could not find translation file:", path);
+          return of({});
+        })
+      );
+    });
+    return forkJoin(requests).pipe(
+      map(response =>
+        response.reduce((result, currentObject) => {
+          for (var key in currentObject) {
+            if (currentObject.hasOwnProperty(key)) {
+              result[key] = currentObject[key];
+            }
+          }
+          return result;
+        }, {})
+      )
+    );
+  }
+}
+
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(
-    http,
-    `${environment.i18nPrefix}/assets/i18n/`,
-    ".json"
-  );
+  return new MultiTranslateHttpLoader(http, [
+    // These are the UI-specific i18n assets
+    {
+      prefix: `${environment.i18nPrefix}/assets/i18n/`,
+      suffix: ".json"
+    },
+    // These are the data-specific i18n assets
+    {
+      prefix: `${environment.base}/i18n/`,
+      suffix: ".json"
+    }
+  ]);
 }
 
 @NgModule({

@@ -6,7 +6,11 @@ import {
   OnInit,
   Output
 } from "@angular/core";
-import { PronounService, ValidationService } from "../../../core/core.module";
+import {
+  PronounService,
+  ValidationService,
+  selectSettingsLanguage
+} from "../../../core/core.module";
 import { Pronoun } from "../../../../config/config";
 import { Observable, Subject } from "rxjs";
 import {
@@ -23,6 +27,7 @@ import {
   selectWordmakerPronouns
 } from "../../../core/wordmaker-selection/wordmaker-selection.selectors";
 import { takeUntil } from "rxjs/operators";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "ww-wordmaker-pers-step",
@@ -34,6 +39,10 @@ export class WordmakerPersStepComponent implements OnDestroy, OnInit {
   pronouns$: Observable<Pronoun[]>;
   selection$: Observable<WordmakerState>;
   unsubscribe$ = new Subject<void>();
+  lang$ = this.store.pipe(
+    takeUntil(this.unsubscribe$),
+    select(selectSettingsLanguage)
+  );
   @Output() selectedAgent = new EventEmitter<Pronoun>();
   @Output() selectedPatient = new EventEmitter<Pronoun>();
   constructor(

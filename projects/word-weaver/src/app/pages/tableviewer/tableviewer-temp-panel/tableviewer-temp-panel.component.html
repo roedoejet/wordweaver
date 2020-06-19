@@ -1,4 +1,4 @@
-<div class="panel">
+<div class="panel" *ngIf="lang$ | async as lang">
   <div class="panel__header panel__header--tableview">
     <h5 class="panel__title">{{ 'ww.tableviewer.temp.title' | translate }}</h5>
   </div>
@@ -8,21 +8,27 @@
       (selectionChange)="onOptionSelect($event)">
       <mat-select-trigger>
         <span *ngIf='optionService.optionsUseType$() | async'>
-          {{selection.length ? selection[0].type + ' ' + selection[0].gloss : ''}}
+          <ng-container *ngIf='selection.length'>
+            {{ 'ww-data.options.types.' + selection[0].type | translate }} -
+            {{ 'ww-data.options.items.' + selection[0].tag | translate }}
+          </ng-container>
         </span>
         <span *ngIf='!(optionService.optionsUseType$() | async)'>
-          {{selection.length ? selection[0].gloss : ''}}
+          {{ (selection.length ? "ww-data.options.items." + selection[0].tag : '') | translate }}
         </span>
         <span *ngIf="selection.length > 1" class="example-additional-selection">
-          (+{{selection.length - 1}} {{selection.length === 2 ? 'other' : 'others'}})
+          (+{{selection.length - 1}}
+          {{ (selection.length === 2 ? 'ww.tableviewer.misc.other' : 'ww.tableviewer.misc.others') | translate }})
         </span>
       </mat-select-trigger>
       <div *ngIf='!(optionService.optionsUseType$() | async)'>
-        <mat-option *ngFor="let option of possibleOptions$ | async" [value]="option">{{option.gloss}}</mat-option>
+        <mat-option *ngFor="let option of possibleOptions$ | async" [value]="option">
+          {{"ww-data.options.items." + option.tag | translate}}</mat-option>
       </div>
       <div *ngIf="possibleOptionsByType$ | async as optionsByType">
-        <mat-optgroup *ngFor="let type of optionsByType" [label]="type.type">
-          <mat-option class='margin-left-25' *ngFor="let option of type.options" [value]="option">{{option.gloss}}
+        <mat-optgroup *ngFor="let type of optionsByType" [label]="'ww-data.options.types.' + type.type | translate">
+          <mat-option class='margin-left-25' *ngFor="let option of type.options" [value]="option">
+            {{"ww-data.options.items." + option.tag | translate}}
           </mat-option>
         </mat-optgroup>
       </div>

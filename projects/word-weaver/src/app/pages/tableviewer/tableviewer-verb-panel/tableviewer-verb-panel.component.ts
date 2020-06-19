@@ -4,11 +4,18 @@ import {
   OnInit,
   ChangeDetectionStrategy
 } from "@angular/core";
-import { Verb } from "../../../../config/config";
-import { VerbService } from "../../../core/core.module";
+import { Verb, META } from "../../../../config/config";
+import { VerbService, selectSettingsLanguage } from "../../../core/core.module";
 import { Store, select } from "@ngrx/store";
-import { Observable, Subject } from "rxjs";
-import { debounceTime, map, tap, takeUntil, take } from "rxjs/operators";
+import { Observable, Subject, zip, of, combineLatest } from "rxjs";
+import {
+  debounceTime,
+  map,
+  tap,
+  takeUntil,
+  take,
+  switchMap
+} from "rxjs/operators";
 
 import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 
@@ -18,6 +25,7 @@ import {
   State
 } from "../../../core/tableviewer-selection/tableviewer-selection.model";
 import { selectTableViewerRoot } from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "ww-tableviewer-verb-panel",
@@ -33,6 +41,10 @@ export class TableviewerVerbPanelComponent implements OnDestroy, OnInit {
   searchField: FormControl;
   verbForm: FormGroup;
   unsubscribe$ = new Subject<void>();
+  lang$ = this.store.pipe(
+    takeUntil(this.unsubscribe$),
+    select(selectSettingsLanguage)
+  );
   constructor(
     public verbService: VerbService,
     private fb: FormBuilder,
@@ -76,7 +88,7 @@ export class TableviewerVerbPanelComponent implements OnDestroy, OnInit {
         this.viewableVerbs$ = this.searchField.valueChanges.pipe(
           takeUntil(this.unsubscribe$),
           debounceTime(200),
-          map(term => this.getEntriesFrom(term))
+          switchMap(term => this.getEntriesFrom$(term))
         );
       });
     // populate with store's selection
@@ -103,17 +115,17 @@ export class TableviewerVerbPanelComponent implements OnDestroy, OnInit {
     return selection.map(x => x.tag).indexOf(root) > 0;
   }
 
-  getEntriesFrom(term) {
-    const vbs: Verb[] = this.verbService.verbs.filter(v => {
-      return this.filterEntries(v, term);
-    });
-    return vbs;
+  getEntriesFrom$(term) {
+    return this.verbService.verbs$.pipe(
+      map(verbs => verbs.filter(v => this.filterEntries(v, term)))
+    );
   }
 
   filterEntries(v, term) {
-    return (
-      v.gloss.toLowerCase().indexOf(term.toLowerCase()) > -1 ||
-      v.tag.toLowerCase().indexOf(term.toLowerCase()) > -1
+    return META.languages.some(
+      lang =>
+        lang.value in v &&
+        v[lang.value].toLowerCase().indexOf(term.toLowerCase()) > -1
     );
   }
 }

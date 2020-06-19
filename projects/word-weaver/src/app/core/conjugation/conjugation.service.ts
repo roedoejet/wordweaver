@@ -103,6 +103,16 @@ export class ConjugationService {
     }
   }
 
+  returnPronounGridDisplay(agent, patient) {
+    if (agent && patient) {
+      return agent + " → " + patient;
+    } else if (agent) {
+      return agent;
+    } else if (patient) {
+      return patient;
+    }
+  }
+
   // Restructure data for x*y grid
   // Returns structured data along with unique values for col/row and table separators
   restructureData(conjugations: Response, gridOrder: GridOrder) {
@@ -113,7 +123,7 @@ export class ConjugationService {
     const restructuredConjugations = conjugations.map(x => ({
       ...x.input,
       ...x,
-      pn: x.input.agent + "." + x.input.patient
+      pn: this.returnPronounGridDisplay(x.input.agent, x.input.patient)
     }));
     const uniqueMain = [...new Set(restructuredConjugations.map(x => x[main]))];
     const uniqueRow = [...new Set(restructuredConjugations.map(x => x[row]))];

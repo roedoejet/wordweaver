@@ -6,12 +6,12 @@ import {
   OnInit,
   Output
 } from "@angular/core";
-import { VerbService } from "../../../core/core.module";
-import { Verb } from "../../../../config/config";
+import { VerbService, selectSettingsLanguage } from "../../../core/core.module";
+import { Verb, META } from "../../../../config/config";
 import { Subject, ReplaySubject } from "rxjs";
 import { debounceTime, tap, takeUntil, shareReplay } from "rxjs/operators";
 import { sortBy } from "lodash";
-import { Store } from "@ngrx/store";
+import { Store, select } from "@ngrx/store";
 import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { State } from "../../../core/wordmaker-selection/wordmaker-selection.model";
 import {
@@ -34,6 +34,10 @@ export class WordmakerVerbStepComponent implements OnDestroy, OnInit {
   searchField: FormControl;
   verbForm: FormGroup;
   unsubscribe$ = new Subject<void>();
+  lang$ = this.store.pipe(
+    takeUntil(this.unsubscribe$),
+    select(selectSettingsLanguage)
+  );
   @Output() selectedVerb = new EventEmitter<Verb>();
   constructor(
     private verbService: VerbService,
@@ -53,7 +57,7 @@ export class WordmakerVerbStepComponent implements OnDestroy, OnInit {
       .pipe(
         takeUntil(this.unsubscribe$),
         debounceTime(200),
-        tap(term => this.viewableVerbs$.next(this.filterEntries(term)))
+        tap(term => this.viewableVerbs$.next(this.getEntriesFrom(term)))
       )
       .subscribe();
   }
@@ -63,11 +67,15 @@ export class WordmakerVerbStepComponent implements OnDestroy, OnInit {
     this.unsubscribe$.complete();
   }
 
-  filterEntries(term) {
-    return this.verbService.verbs.filter(
-      v =>
-        v.gloss.toLowerCase().indexOf(term.toLowerCase()) > -1 ||
-        v.tag.toLowerCase().indexOf(term.toLowerCase()) > -1
+  getEntriesFrom(term) {
+    return this.verbService.verbs.filter(v => this.filterEntries(v, term));
+  }
+
+  filterEntries(v, term) {
+    return META.languages.some(
+      lang =>
+        lang.value in v &&
+        v[lang.value].toLowerCase().indexOf(term.toLowerCase()) > -1
     );
   }
 

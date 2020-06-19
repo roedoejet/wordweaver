@@ -7,7 +7,14 @@ import {
   ViewChild
 } from "@angular/core";
 import { ValidationService } from "../../../core/core.module";
-import { BehaviorSubject, Observable, Subject, Subscription } from "rxjs";
+import {
+  BehaviorSubject,
+  Observable,
+  Subject,
+  Subscription,
+  combineLatest,
+  zip
+} from "rxjs";
 import { selectWordmaker } from "../../../core/wordmaker-selection/wordmaker-selection.selectors";
 import {
   WordmakerState,
@@ -17,6 +24,7 @@ import { Store, select } from "@ngrx/store";
 import { marker } from "@biesbjerg/ngx-translate-extract-marker";
 import { actionChangeStep } from "../../../core/wordmaker-selection/wordmaker-selection.actions";
 import { distinctUntilKeyChanged, take, takeUntil } from "rxjs/operators";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "ww-wordmaker",
@@ -35,7 +43,8 @@ export class WordmakerComponent implements OnDestroy, OnInit, AfterViewInit {
   @ViewChild("stepper") private stepper;
   constructor(
     private store: Store<State>,
-    private validationService: ValidationService
+    private validationService: ValidationService,
+    private translationService: TranslateService
   ) {}
   ngOnInit(): void {
     this.selection$ = this.store.pipe(
@@ -45,7 +54,7 @@ export class WordmakerComponent implements OnDestroy, OnInit, AfterViewInit {
     // Step 1: Labels
     this.selection$.subscribe(x => {
       if (x.root) {
-        this.verbLabel.next(x.root.gloss);
+        this.verbLabel.next("ww-data.verbs." + x.root.tag);
       } else {
         this.verbLabel.next("ww.wordmaker.verb.question");
       }
@@ -53,23 +62,45 @@ export class WordmakerComponent implements OnDestroy, OnInit, AfterViewInit {
       if (x.agent || x.patient) {
         let label = "";
         if (x.agent && x.patient) {
-          label = x.agent.gloss + " > " + x.patient.gloss;
-        } else if (x.agent) {
-          label = x.agent.gloss;
-        } else if (x.patient) {
-          label = x.patient.gloss;
+          zip(
+            this.translationService.get(
+              "ww-data.pronouns.agents." + x.agent.tag
+            ),
+            this.translationService.get(
+              "ww-data.pronouns.patients." + x.patient.tag
+            )
+          )
+            .pipe(take(1))
+            .subscribe(([optType, optItem]) =>
+              this.persLabel.next(optType + " → " + optItem)
+            );
         } else {
-          label = "ww.wordmaker.pers.question";
+          if (x.agent) {
+            label = "ww-data.pronouns.agents." + x.agent.tag;
+          } else if (x.patient) {
+            label = "ww-data.pronouns.patients." + x.patient.tag;
+          } else {
+            label = "ww.wordmaker.pers.question";
+          }
+          this.persLabel.next(label);
         }
-        this.persLabel.next(label);
       } else {
         this.persLabel.next("ww.wordmaker.pers.question");
       }
       if (x.option) {
         if ("type" in x.option) {
-          this.tempLabel.next(x.option.type + " " + x.option.gloss);
+          zip(
+            this.translationService.get(
+              "ww-data.options.types." + x.option.type
+            ),
+            this.translationService.get("ww-data.options.items." + x.option.tag)
+          )
+            .pipe(take(1))
+            .subscribe(([optType, optItem]) =>
+              this.tempLabel.next(optType + " - " + optItem)
+            );
         } else {
-          this.tempLabel.next(x.option.gloss);
+          this.tempLabel.next(x.option["gloss"]);
         }
       } else {
         this.tempLabel.next("ww.wordmaker.temp.question");

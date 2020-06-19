@@ -6,11 +6,15 @@ import {
   Input
 } from "@angular/core";
 import { EChartOption, EChartsSeriesType } from "echarts";
-import { Conjugation, Response } from "../../../../config/config";
+import {
+  Conjugation,
+  Response,
+  AvailableLanguages
+} from "../../../../config/config";
 import { Tier } from "../../../../config/config";
 import { Store, select } from "@ngrx/store";
 import { selectTableviewer } from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
-import { Observable, Subject, of } from "rxjs";
+import { Observable, Subject, of, combineLatest } from "rxjs";
 import {
   map,
   switchMap,
@@ -19,7 +23,13 @@ import {
   takeUntil
 } from "rxjs/operators";
 import { TableviewerState } from "../../../core/tableviewer-selection/tableviewer-selection.model";
-import { OptionService, ConjugationService } from "../../../core/core.module";
+import {
+  OptionService,
+  ConjugationService,
+  selectSettingsLanguage,
+  VerbService,
+  PronounService
+} from "../../../core/core.module";
 import { merge as _merge } from "lodash";
 import { selectThemeColors } from "../../../core/settings/settings.selectors";
 
@@ -39,7 +49,9 @@ export class ConjugationTreeComponent implements OnDestroy, OnInit {
   constructor(
     private store: Store,
     private optionService: OptionService,
-    private conjugationService: ConjugationService
+    private pronounService: PronounService,
+    private conjugationService: ConjugationService,
+    private verbService: VerbService
   ) {}
 
   ngOnInit(): void {
@@ -108,9 +120,18 @@ export class ConjugationTreeComponent implements OnDestroy, OnInit {
       takeUntil(this.unsubscribe$),
       switchMap(selection => {
         if (selection && selection.conjugations.length > 0) {
-          return this.store.select(selectThemeColors).pipe(
-            map(color =>
-              this.createChartData(selection, {
+          return combineLatest([
+            this.store.pipe(
+              takeUntil(this.unsubscribe$),
+              select(selectSettingsLanguage)
+            ),
+            this.store.pipe(
+              takeUntil(this.unsubscribe$),
+              select(selectThemeColors)
+            )
+          ]).pipe(
+            map(([lang, color]) =>
+              this.createChartData(selection, lang, {
                 primary: this.rgbToHex(color.primary),
                 accent: this.rgbToHex(color.accent)
               })
@@ -143,7 +164,11 @@ export class ConjugationTreeComponent implements OnDestroy, OnInit {
     return hex + hexMatches.join("");
   };
 
-  createChartData(tvState: Partial<TableviewerState>, color) {
+  createChartData(
+    tvState: Partial<TableviewerState>,
+    lang: AvailableLanguages,
+    color
+  ) {
     const chartOption = Object.assign({}, this.defaultChartOption);
     // Initialize series each time
     chartOption.series = [];
@@ -155,16 +180,24 @@ export class ConjugationTreeComponent implements OnDestroy, OnInit {
     let node;
     // Populate and merge object node
     conjugations.forEach(conjugation => {
-      const v = conjugation.input.root;
-      const t = this.optionService.getOption(conjugation.input["option"])[
-        "gloss"
+      const v = this.verbService.getVerb(conjugation.input.root)[lang];
+      const t = this.optionService.getOption(conjugation.input["option"])[lang][
+        "tag"
       ];
-      let p = conjugation.output
-        .filter(x => x.type && x.type.indexOf("pronoun") > -1)
-        .map(x => x.gloss)
-        .join();
-      if (!p) {
-        p = conjugation.input.agent; // This is a hack for French - should be changed
+      let p = "";
+      if ("agent" in conjugation.input) {
+        p = this.pronounService.getPronoun(conjugation.input.agent)[lang][
+          "agent"
+        ];
+        if ("patient" in conjugation.input) {
+          p += this.pronounService.getPronoun(conjugation.input.patient)[lang][
+            "patient"
+          ];
+        }
+      } else if ("patient" in conjugation.input) {
+        p = this.pronounService.getPronoun(conjugation.input["patient"])[lang][
+          "agent"
+        ];
       }
       const val = this.returnTierValue(conjugation.output);
       if (order) {

@@ -7,7 +7,11 @@ import {
   ChangeDetectionStrategy
 } from "@angular/core";
 import { Option, Conjugation, Response } from "../../../../config/config";
-import { OptionService, ConjugationService } from "../../../core/core.module";
+import {
+  OptionService,
+  ConjugationService,
+  selectSettingsLanguage
+} from "../../../core/core.module";
 import { Observable, Subject } from "rxjs";
 import { map, switchMap, withLatestFrom, takeUntil } from "rxjs/operators";
 import { Store, select } from "@ngrx/store";
@@ -33,6 +37,10 @@ export class WordmakerTempStepComponent implements OnDestroy, OnInit {
   possibleOptions$: Observable<Option[]>;
   possibleOptionsByType$: Observable<object>;
   displayTier: string = META.wordmaker.tempView;
+  lang$ = this.store.pipe(
+    takeUntil(this.unsubscribe$),
+    select(selectSettingsLanguage)
+  );
   constructor(
     public optionService: OptionService,
     private store: Store<State>,

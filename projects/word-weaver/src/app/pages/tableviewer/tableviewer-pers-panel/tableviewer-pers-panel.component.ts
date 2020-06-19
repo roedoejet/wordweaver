@@ -5,7 +5,11 @@ import {
   ChangeDetectionStrategy
 } from "@angular/core";
 import { Pronoun } from "../../../../config/config";
-import { PronounService, ValidationService } from "../../../core/core.module";
+import {
+  PronounService,
+  ValidationService,
+  selectSettingsLanguage
+} from "../../../core/core.module";
 import { Observable, Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import { Store, select } from "@ngrx/store";
@@ -28,6 +32,10 @@ export class TableviewerPersPanelComponent implements OnDestroy, OnInit {
   possiblePronouns$: Observable<Pronoun[]>;
   selection$: Observable<Partial<TableviewerState>>;
   unsubscribe$ = new Subject<void>();
+  lang$ = this.store.pipe(
+    takeUntil(this.unsubscribe$),
+    select(selectSettingsLanguage)
+  );
   constructor(
     public pnService: PronounService,
     private store: Store,

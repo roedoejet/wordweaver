@@ -13,11 +13,20 @@ import {
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import { Response, TIERS, Tier } from "../../../../config/config";
-import { BehaviorSubject, Observable, Subject } from "rxjs";
-import { takeUntil, distinctUntilChanged, map } from "rxjs/operators";
+import { BehaviorSubject, Observable, Subject, combineLatest } from "rxjs";
+import {
+  takeUntil,
+  distinctUntilChanged,
+  map,
+  switchMap,
+  withLatestFrom,
+  take
+} from "rxjs/operators";
 import { SettingsState, State } from "../../../core/settings/settings.model";
 import { Store, select } from "@ngrx/store";
 import { selectSettings } from "../../../core/settings/settings.selectors";
+import { selectTableviewerGridSlice } from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
+import { TranslateService } from "@ngx-translate/core";
 
 export type GridOrderOptions = "root" | "pn" | "option";
 export interface GridOrder {
@@ -46,7 +55,11 @@ export class ConjugationGridComponent
   currentTab = 0;
   @Input() data$;
   @ViewChildren(MatPaginator) paginators: QueryList<MatPaginator>;
-  constructor(private store: Store<State>, private cdr: ChangeDetectorRef) {}
+  constructor(
+    private store: Store<State>,
+    private cdr: ChangeDetectorRef,
+    private translate: TranslateService
+  ) {}
 
   ngOnInit(): void {
     this.settings$ = this.store.pipe(
@@ -77,6 +90,7 @@ export class ConjugationGridComponent
     this.data$
       .pipe(takeUntil(this.unsubscribe$), distinctUntilChanged())
       .subscribe(data => {
+        console.log(data);
         if (data) {
           data.structuredData.forEach((x, i) => {
             this.dataSources[i].paginator = this.paginators.toArray()[i]; // Currently not working for n>1
@@ -87,6 +101,24 @@ export class ConjugationGridComponent
       });
   }
 
+  createTranslationKey$(term, type) {
+    return this.store.pipe(
+      select(selectTableviewerGridSlice),
+      take(1),
+      switchMap(gridState => {
+        let prefix = "ww-data.";
+        if (gridState.gridOrder[type] === "root") {
+          prefix = prefix + "verbs.";
+        } else if (gridState.gridOrder[type] === "pn") {
+          prefix = prefix + "pronouns.agents.";
+        } else if (gridState.gridOrder[type] === "option") {
+          prefix = prefix + "options.items.";
+        }
+        return this.translate.get(prefix + term);
+      })
+    );
+  }
+
   ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
@@ -94,6 +126,5 @@ export class ConjugationGridComponent
 
   onTabChange(event) {
     this.currentTab = event.index;
-    console.log(this.currentTab);
   }
 }

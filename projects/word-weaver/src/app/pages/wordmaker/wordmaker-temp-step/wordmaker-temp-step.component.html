@@ -1,4 +1,4 @@
-<div class="margin-top-20 panel centered full-width">
+<div class="margin-top-20 panel centered full-width" *ngIf="lang$ | async as lang">
     <div class='panel__header--small'>
         <div class='container'>
             <div class='row'>
@@ -31,10 +31,10 @@
             <div *ngIf='displayTier === "default"' class='default-container pwidth-100'>
                 <div *ngIf='optionService.optionsUseType$() | async' class='default-type__container'>
                     <div class='default-type' *ngFor="let option of possibleOptionsByType$ | async as options">
-                        <h3>{{ option.type | translate }}</h3>
+                        <h3>{{ "ww-data.options.types." + option.type | translate }}</h3>
                         <mat-chip-list>
                             <mat-chip (click)="onChipClick(opt.tag)" class="bg-white color-black border-accent"
-                                *ngFor="let opt of option.options">{{ opt.gloss | translate }}</mat-chip>
+                                *ngFor="let opt of option.options">{{ opt[lang].tag }}</mat-chip>
                         </mat-chip-list>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                     class='centered pwidth-50--desktop pwidth-100--mobile'>
                     <mat-chip-list *ngIf="possibleOptions$ | async as options; else loading">
                         <mat-chip (click)="onChipClick(option.tag)" class="bg-white color-black border-accent"
-                            *ngFor="let option of options">{{ option.gloss | translate }}</mat-chip>
+                            *ngFor="let option of options">{{ option[lang].tag }}</mat-chip>
                     </mat-chip-list>
                 </div>
             </div>

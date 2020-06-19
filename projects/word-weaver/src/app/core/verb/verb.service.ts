@@ -1,10 +1,17 @@
-import { Observable } from "rxjs";
-import { shareReplay } from "rxjs/operators";
+import { Observable, merge, combineLatest, zip, of, from, Subject } from "rxjs";
+import { shareReplay, mergeAll, combineAll } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Verb } from "../../../config/config";
+import { Verb, AvailableLanguages, META } from "../../../config/config";
 import { environment } from "../../../environments/environment";
-import { debounceTime, distinctUntilChanged, map } from "rxjs/operators";
+import {
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  switchMap,
+  take
+} from "rxjs/operators";
+import { TranslateService } from "@ngx-translate/core";
 
 @Injectable({
   providedIn: "root"
@@ -14,13 +21,35 @@ export class VerbService {
   path = environment.base + environment.prefix + `verbs`;
   verbs$: Observable<Verb[]>;
   random$: Observable<Verb>;
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private translate: TranslateService) {
     this.verbs$ = this.http.get<Verb[]>(this.path).pipe(shareReplay(1));
     this.verbs$.subscribe(verbs => (this.verbs = verbs));
     this.random$ = this.verbs$.pipe(
       map(res => {
         return this.getRandomOption(res);
       })
+    );
+  }
+
+  translateVerbs$() {
+    return this.verbs$.pipe(
+      switchMap(verbs =>
+        zip(
+          of(verbs),
+          combineLatest(
+            verbs.map((verb: Verb) =>
+              this.translate.get("ww-data.verbs." + verb.tag)
+            )
+          )
+        )
+      ),
+      map(verbs =>
+        verbs[0].map((verb, index) => {
+          verb["translation"] = verbs[1][index];
+          return verb;
+        })
+      ),
+      take(1)
     );
   }
 
