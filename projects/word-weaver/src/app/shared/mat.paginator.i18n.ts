@@ -11,10 +11,7 @@ export class WWPaginatorIntl extends MatPaginatorIntl {
   ) {
     super();
     this.getTranslations();
-    this.translateService.onLangChange.subscribe(() => {
-      console.log("test");
-      this.getTranslations();
-    });
+    this.translateService.onLangChange.subscribe(() => this.getTranslations());
   }
 
   getTranslations() {
