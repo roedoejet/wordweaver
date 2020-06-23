@@ -20,7 +20,7 @@
             <mat-spinner class="centered"></mat-spinner>
         </ng-template>
         <div class="centered">
-            <div *ngIf='displayTier !== "default"' class='centered pwidth-50--desktop pwidth-100--mobile'>
+            <div *ngIf='displayTier !== "default"' class='option__container custom-scroll centered pwidth-50--desktop pwidth-100--mobile'>
                 <mat-chip-list *ngIf="conjugatedOptions$ | async as options; else loading">
                     <mat-chip (click)="onChipClick(conjugation.input.option)" class="bg-white color-black border-accent"
                         *ngFor="let conjugation of options">
@@ -28,7 +28,7 @@
                     </mat-chip>
                 </mat-chip-list>
             </div>
-            <div *ngIf='displayTier === "default"' class='default-container pwidth-100'>
+            <div *ngIf='displayTier === "default"' class='option__container custom-scroll default-container pwidth-100'>
                 <div *ngIf='optionService.optionsUseType$() | async' class='default-type__container'>
                     <div class='default-type' *ngFor="let option of possibleOptionsByType$ | async as options">
                         <h3>{{ "ww-data.options.types." + option.type | translate }}</h3>
@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div *ngIf='!(optionService.optionsUseType$() | async)'
-                    class='centered pwidth-50--desktop pwidth-100--mobile'>
+                    class='option__container custom-scroll centered pwidth-50--desktop pwidth-100--mobile'>
                     <mat-chip-list *ngIf="possibleOptions$ | async as options; else loading">
                         <mat-chip (click)="onChipClick(option.tag)" class="bg-white color-black border-accent"
                             *ngFor="let option of options">{{ option[lang].tag }}</mat-chip>

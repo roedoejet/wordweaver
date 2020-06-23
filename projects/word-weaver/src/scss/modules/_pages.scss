@@ -14,3 +14,9 @@
     max-height: em(644);
   }
 }
+
+.welcome {
+  @include mq(em(map-get($breakpoints, medium)), "max-width") {
+    margin-top: 0;
+  }
+}

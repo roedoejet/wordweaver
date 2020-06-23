@@ -392,7 +392,6 @@ export const META: Meta = {
   ],
   languages: [
     { label: "en", value: "en" },
-    { label: "fr", value: "fr" },
     { label: "ka", value: "moh" }
   ],
   wordmaker: {

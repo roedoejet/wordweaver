@@ -1,14 +1,16 @@
-<div id='about__page' class="background page__content custom-scroll shadow-box vmargin-right-20 vmargin-left-20 margin-bottom-50">
+<div id='about__page'
+  class="background page__content custom-scroll shadow-box vmargin-right-20 vmargin-left-20 margin-bottom-50">
   <div class="gradient">
     <div class="container">
-      <h1>{{ 'ww.title' | translate }}</h1>
+      <h2 class="main--title centered center-text">{{ 'ww.title' | translate }}</h2>
       <div class="actions centered center-text">
         <span [ngClass]="routeAnimationsElements">{{ 'ww.about.slogan' | translate }}</span>
         <br>
         <div [innerHTML]="'ww.about.text' | translate"></div>
         <br>
       </div>
-      <h3 class='centered center-text margin-bottom-35'>{{ "ww.about.contributors.title" | translate }}</h3>
+      <h3 class='centered center-text margin-bottom-35 contributors--title'>
+        {{ "ww.about.contributors.title" | translate }}</h3>
       <div class='authors container centered center-text contributors'>
         <div class="row contributor" *ngFor="let contributor of contributors; index as i; last as isLast">
           <ng-container *ngIf='contributor.img && i%2===0'>
@@ -40,7 +42,11 @@
             </div>
           </ng-container>
           <ng-container *ngIf='!contributor.img'>
-            <div class='col-lg-12'>test-no-img</div>
+            <div class='col-lg-12'>
+              <h5><span class='contributor name'>{{contributor.name}}</span><span class='contributor title'
+                  *ngIf='contributor.title'><br>{{contributor.title}}</span>
+              </h5>
+            </div>
           </ng-container>
           <hr *ngIf="!isLast">
         </div>

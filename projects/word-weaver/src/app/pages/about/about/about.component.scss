@@ -9,6 +9,15 @@ h2 {
   text-transform: uppercase;
 }
 
+.contributors,
+.main {
+  &--title {
+    margin: 5px;
+    word-wrap: break-word;
+    font-size: xx-large;
+  }
+}
+
 // .background {
 //   padding: 80px 0 0 0;
 //   position: relative;
@@ -176,7 +185,7 @@ h2 {
 }
 
 div.row.contributor {
-  margin: 50px;
+  margin: 25px;
 }
 
 img.bio {
@@ -191,10 +200,14 @@ img {
   border: 3px solid;
   box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
     0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
 
+.img {
   &__container {
     width: 250px;
     min-width: 250px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 

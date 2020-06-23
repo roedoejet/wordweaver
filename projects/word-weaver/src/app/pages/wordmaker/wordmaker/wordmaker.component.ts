@@ -88,6 +88,7 @@ export class WordmakerComponent implements OnDestroy, OnInit, AfterViewInit {
         this.persLabel.next("ww.wordmaker.pers.question");
       }
       if (x.option) {
+        console.log(x.option);
         if ("type" in x.option) {
           zip(
             this.translationService.get(
@@ -100,7 +101,10 @@ export class WordmakerComponent implements OnDestroy, OnInit, AfterViewInit {
               this.tempLabel.next(optType + " - " + optItem)
             );
         } else {
-          this.tempLabel.next(x.option["gloss"]);
+          this.translationService
+            .get("ww-data.options.items." + x.option.tag)
+            .pipe(take(1))
+            .subscribe(opt => this.tempLabel.next(opt));
         }
       } else {
         this.tempLabel.next("ww.wordmaker.temp.question");
