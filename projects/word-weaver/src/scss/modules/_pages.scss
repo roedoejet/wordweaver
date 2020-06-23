@@ -20,3 +20,12 @@
     margin-top: 0;
   }
 }
+
+.contributor--text {
+  @include mq(em(991)) {
+    margin-top: 80px;
+  }
+  @include mq(em(991), "max-width") {
+    margin-top: 0px;
+  }
+}

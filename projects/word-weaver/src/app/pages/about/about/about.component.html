@@ -22,7 +22,7 @@
                 </h5>
               </div>
             </div>
-            <div class='col-lg-6' [innerHTML]="contributor.text | translate"></div>
+            <div class='col-lg-6 contributor--text' [innerHTML]="contributor.text | translate"></div>
           </ng-container>
           <ng-container *ngIf='contributor.img && i%2===1'>
             <div class='img__container mobile-only'>
@@ -31,7 +31,7 @@
                   *ngIf='contributor.title'><br>{{contributor.title}}</span>
               </h5>
             </div>
-            <div class='col-lg-6' [innerHTML]="contributor.text | translate"></div>
+            <div class='col-lg-6 contributor--text' [innerHTML]="contributor.text | translate"></div>
             <div class='col-lg-6'>
               <div class='img__container desktop-only'>
                 <img class='bio' [src]='contributor.img' />
