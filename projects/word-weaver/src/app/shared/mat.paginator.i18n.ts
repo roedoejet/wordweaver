@@ -34,7 +34,6 @@ export class WWPaginatorIntl extends MatPaginatorIntl {
         this.lastPageLabel = translation["ww.paginator.last_page"];
         this.previousPageLabel = translation["ww.paginator.previous_page"];
         this.rangeLabelIntl = translation["ww.paginator.range"];
-        console.log(translation);
         this.changes.next();
       });
   }
