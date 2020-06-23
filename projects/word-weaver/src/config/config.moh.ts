@@ -457,7 +457,7 @@ export interface Theme {
 }
 
 export const THEMES: Theme[] = [
-  { value: "DEFAULT-THEME", label: marker("ww.settings.themes.blue") },
+  { value: "DEFAULT-THEME", label: marker("ww.settings.themes.default") },
   { value: "LIGHT-THEME", label: marker("ww.settings.themes.light") },
   { value: "DARK-THEME", label: marker("ww.settings.themes.dark") },
   {

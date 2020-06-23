@@ -35,6 +35,7 @@ import {
   VerbService,
   OptionService
 } from "../../../core/core.module";
+import { MatPaginatorIntl } from "@angular/material/paginator";
 
 export type GridOrderOptions = "root" | "pn" | "option";
 export interface GridOrder {

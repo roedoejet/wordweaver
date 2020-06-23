@@ -74,21 +74,21 @@
                   "name": "polyfills",
                   "baseline": "150kb",
                   "maximumWarning": "50kb",
-                  "maximumError": "1024kb"
+                  "maximumError": "4096kb"
                 },
                 {
                   "type": "bundle",
                   "name": "styles",
                   "baseline": "280kb",
                   "maximumWarning": "50kb",
-                  "maximumError": "1024kb"
+                  "maximumError": "4096kb"
                 },
                 {
                   "type": "bundle",
                   "name": "main",
                   "baseline": "1024kb",
                   "maximumWarning": "100kb",
-                  "maximumError": "1024kb"
+                  "maximumError": "4096kb"
                 },
                 {
                   "type": "anyComponentStyle",

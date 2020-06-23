@@ -1,6 +1,11 @@
-import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy
+} from "@angular/core";
 import { Store, select } from "@ngrx/store";
-import { Observable } from "rxjs";
+import { Observable, Subject, fromEvent } from "rxjs";
 import { META } from "../../../../config/config";
 
 import { marker } from "@biesbjerg/ngx-translate-extract-marker";
@@ -20,6 +25,7 @@ import {
 } from "../../../core/settings/settings.actions";
 import { SettingsState, State } from "../../../core/settings/settings.model";
 import { selectSettings } from "../../../core/settings/settings.selectors";
+import { takeUntil, map, take } from "rxjs/operators";
 
 @Component({
   selector: "ww-settings",
@@ -27,11 +33,11 @@ import { selectSettings } from "../../../core/settings/settings.selectors";
   styleUrls: ["./settings-container.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SettingsContainerComponent implements OnInit {
+export class SettingsContainerComponent implements OnDestroy, OnInit {
   objectkeys = Object.keys;
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   settings$: Observable<SettingsState>;
-
+  deferredPrompt$: Observable<any>;
   themes = [
     { value: "DEFAULT-THEME", label: marker("ww.settings.themes.blue") },
     { value: "LIGHT-THEME", label: marker("ww.settings.themes.light") },
@@ -68,11 +74,25 @@ export class SettingsContainerComponent implements OnInit {
       label: marker(`ww.settings.general.language.${x.value}`)
     };
   });
-
+  showInstall = false;
+  unsubscribe$ = new Subject<void>();
   constructor(private store: Store<State>) {}
 
   ngOnInit() {
     this.settings$ = this.store.pipe(select(selectSettings));
+    this.deferredPrompt$ = fromEvent(window, "beforeinstallprompt").pipe(
+      takeUntil(this.unsubscribe$),
+      map(e => {
+        e.preventDefault();
+        this.showInstall = true;
+        return e;
+      })
+    );
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   onLanguageSelect({ value: language }) {
@@ -111,5 +131,16 @@ export class SettingsContainerComponent implements OnInit {
     this.store.dispatch(
       actionSettingsChangeAnimationsElements({ elementsAnimations })
     );
+  }
+
+  a2hs() {
+    this.deferredPrompt$.pipe(take(1)).subscribe(e => {
+      e.prompt();
+      e.userChoice.then(result => {
+        if (result.outcome === "accepted") {
+          this.showInstall = false;
+        }
+      });
+    });
   }
 }

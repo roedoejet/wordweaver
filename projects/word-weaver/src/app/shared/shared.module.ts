@@ -27,7 +27,10 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 // import { MatNativeDateModule } from "@angular/material/core";
 import { MatGridListModule } from "@angular/material/grid-list";
 import { MatTableModule } from "@angular/material/table";
-import { MatPaginatorModule } from "@angular/material/paginator";
+import {
+  MatPaginatorModule,
+  MatPaginatorIntl
+} from "@angular/material/paginator";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatSliderModule } from "@angular/material/slider";
@@ -37,6 +40,8 @@ import { DragDropModule } from "@angular/cdk/drag-drop";
 import { MatTableExporterModule } from "mat-table-exporter";
 
 import { ClipboardModule } from "@angular/cdk/clipboard";
+
+import { createCustomMatPaginatorIntl } from "./mat.paginator.i18n";
 
 import {
   FontAwesomeModule,
@@ -79,6 +84,7 @@ import { NgxEchartsModule } from "ngx-echarts";
 import { DownloadDialogComponent } from "./download-dialog/download-dialog.component";
 import { TableViewerDialogComponent } from "./tableviewer-dialog/tableviewer-dialog.component";
 import { TierComponent } from "./tier/tier.component";
+import { TranslateParser, TranslateService } from "@ngx-translate/core";
 
 @NgModule({
   imports: [
@@ -128,6 +134,13 @@ import { TierComponent } from "./tier/tier.component";
     DownloadDialogComponent,
     TableViewerDialogComponent,
     TierComponent
+  ],
+  providers: [
+    {
+      provide: MatPaginatorIntl,
+      deps: [TranslateService, TranslateParser],
+      useFactory: createCustomMatPaginatorIntl
+    }
   ],
   exports: [
     CommonModule,

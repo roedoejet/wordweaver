@@ -4,6 +4,8 @@
       <h1>{{ 'ww.settings.title' | translate }}</h1>
     </div>
   </div>
+  <div>
+  </div>
   <ng-container *ngIf="settings$ | async as settings">
     <div class='row padding-5'>
       <div class='col-md-6 group' [ngClass]='routeAnimationsElements' *ngIf='objectkeys(settings.highlight).length > 0'>
@@ -82,10 +84,12 @@
           <mat-slide-toggle [checked]="settings.autoNightMode" (change)="onAutoNightModeToggle($event)">
           </mat-slide-toggle>
         </div>
+        <div>
+          <button *ngIf="showInstall" mat-raised-button color="primary" (click)="a2hs()">Install
+            <mat-icon class='install' aria-label="Install">get_app</mat-icon>
+          </button>
+        </div>
       </div>
-    </div>
-    <div class="row">
-
     </div>
   </ng-container>
 </div>

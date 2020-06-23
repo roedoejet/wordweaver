@@ -212,7 +212,7 @@ export class TableviewerConjPanelComponent
       if (gridData.uniqueRow.length > 80) {
         this.notificationService.translated(
           marker("ww.tableviewer.notifications.gridOrder.limit-error"),
-          {},
+          { value: gridData.uniqueRow.length },
           "error"
         );
       } else {

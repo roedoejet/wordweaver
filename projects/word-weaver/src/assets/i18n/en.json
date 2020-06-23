@@ -1,6 +1,9 @@
 {
   "ww": {
     "about": {
+      "contributors": {
+        "title": "Contributors"
+      },
       "slogan": "WordWeaver UI weaves beautiful verb conjugation websites",
       "text": "<p>Here is where your text about the project should go.</p>"
     },
@@ -33,6 +36,14 @@
       "tableviewer": "Table Viewer",
       "wordmaker": "Word Maker"
     },
+    "paginator": {
+      "first_page": "First page",
+      "items_per_page": "Conjugations per page:",
+      "last_page": "Last page",
+      "next_page": "Next page",
+      "previous_page": "Previous page",
+      "range": "{{ startIndex }} - {{ endIndex }} of {{ length }}"
+    },
     "settings": {
       "advanced": "Advanced",
       "general": {
@@ -46,10 +57,6 @@
           "temp": "Temporal Affix",
           "title": "Highlighting",
           "verb": "Root"
-        },
-        "language": {
-          "en": "English",
-          "fr": "French"
         },
         "placeholder": "Language",
         "tiers": {
@@ -66,11 +73,15 @@
       "themes": {
         "blue": "Blue",
         "dark": "Dark",
-        "fun": "Fun",
+        "default": "Default",
         "light": "Light",
         "night-mode": "Auto night mode (from 21:00 to 7:00)",
         "placeholder": "Color Theme",
+        "purple-blue-dark": "Dark Blue & Purple",
+        "purple-blue-light": "Light Blue & Purple",
         "purple-dark": "Dark Purple",
+        "purple-gold-dark": "Dark Purple & Gold",
+        "purple-gold-light": "Light Purple & Gold",
         "purple-light": "Light Purple",
         "sticky-header": "Sticky header",
         "title": "Themes"
@@ -80,24 +91,46 @@
     "tableviewer": {
       "conj": {
         "conjugate": "Conjugate",
+        "copy-link-tip": "Copy link",
         "depth-tip": "Change tree depth",
         "download-tip": "Download conjugations",
         "error": {
           "message": "Please try again.",
           "title": "Error"
         },
-        "explorer-tip": "Toggle 'tree' and 'grid' views",
-        "hide-toolbar-tip": "Hide toolbar",
+        "grid-order-tip": "Switch order of rows and columns",
         "instructions": "Please select one or more boxes from the <b>Verb</b>, <b>Person</b>, and <b>Time</b> panels to the left and then press the enter key or conjugate button to see your selection",
         "instructions-mobile": "Please select one or more boxes from the 'Verb', 'Person', and 'Time' panels <br /> and then press the button above to conjugate!",
         "order-tip": "Switch order of nodes",
-        "show-toolbar-tip": "Show toolbar",
+        "show-settings": "Show settings",
         "title": "Conjugation Toolbar"
       },
+      "dialog": {
+        "exit": "Exit",
+        "title": ""
+      },
+      "misc": {
+        "other": "other",
+        "others": "others",
+        "selected": "selected"
+      },
       "notifications": {
+        "copy": {
+          "error": "Hm, we couldn't copy the link to the clipboard, please try again",
+          "success": "Link successfully copied to clipboard"
+        },
         "download": {
           "error": "Whoops! Something went wrong and the file couldn't be downloaded. Please check your conjugation is valid and try again",
           "success": "Success! Conjugations were downloaded"
+        },
+        "error": {
+          "missing-root": "Whoops! You need to select at least one verb"
+        },
+        "gridOrder": {
+          "limit-error": "Sorry, there are too many conjugations ({{ value }}) to switch the order"
+        },
+        "treeviewer-length": {
+          "error": "You're trying to display {{ value }} conjugations in the tree view! This is too many - we'll try to display them properly, but please consider using fewer conjugations with the tree view"
         }
       },
       "pers": {
@@ -110,7 +143,6 @@
         "title": "Time"
       },
       "verb": {
-        "deselect": "Deselect all",
         "no-matching-verb": "Sorry, no verbs matching '{{ value }}'",
         "placeholder": "Search for a verb",
         "title": "Verb"
@@ -123,6 +155,9 @@
       "conj": {
         "congratulations-header": "Congratulations!",
         "congratulations-text": "You made a word <strong>just</strong> like that."
+      },
+      "errors": {
+        "noconjugation": "Whoops! We couldn't conjugate this. Please try again."
       },
       "finished": "Done",
       "home": {
