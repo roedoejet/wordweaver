@@ -1,24 +1,22 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   OnDestroy,
-  OnInit,
-  ChangeDetectionStrategy
+  OnInit
 } from "@angular/core";
+import { select, Store } from "@ngrx/store";
+import { Observable, Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 import { Pronoun } from "../../../../config/config";
 import {
   PronounService,
-  ValidationService,
-  selectSettingsLanguage
+  selectSettingsLanguage,
+  ValidationService
 } from "../../../core/core.module";
-import { Observable, Subject } from "rxjs";
-import { takeUntil } from "rxjs/operators";
-import { Store, select } from "@ngrx/store";
-
 import {
   actionChangeAgents,
   actionChangePatients
 } from "../../../core/tableviewer-selection/tableviewer-selection.actions";
-
 import { TableviewerState } from "../../../core/tableviewer-selection/tableviewer-selection.model";
 import { selectTableviewerPronouns } from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
 

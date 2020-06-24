@@ -1,31 +1,18 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   OnDestroy,
-  OnInit,
-  ChangeDetectionStrategy
+  OnInit
 } from "@angular/core";
-import { Verb, META } from "../../../../config/config";
-import { VerbService, selectSettingsLanguage } from "../../../core/core.module";
-import { Store, select } from "@ngrx/store";
-import { Observable, Subject, zip, of, combineLatest } from "rxjs";
-import {
-  debounceTime,
-  map,
-  tap,
-  takeUntil,
-  take,
-  switchMap
-} from "rxjs/operators";
-
 import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
-
+import { select, Store } from "@ngrx/store";
+import { Observable, Subject } from "rxjs";
+import { debounceTime, map, switchMap, takeUntil, tap } from "rxjs/operators";
+import { META, Verb } from "../../../../config/config";
+import { selectSettingsLanguage, VerbService } from "../../../core/core.module";
 import { actionChangeVerbs } from "../../../core/tableviewer-selection/tableviewer-selection.actions";
-import {
-  TableviewerState,
-  State
-} from "../../../core/tableviewer-selection/tableviewer-selection.model";
+import { State } from "../../../core/tableviewer-selection/tableviewer-selection.model";
 import { selectTableViewerRoot } from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
-import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "ww-tableviewer-verb-panel",

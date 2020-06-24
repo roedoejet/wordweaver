@@ -1,41 +1,38 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  Inject,
   Input,
   OnDestroy,
   OnInit,
-  ChangeDetectionStrategy,
   QueryList,
   ViewChildren
 } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
-import { Response, TIERS, Tier } from "../../../../config/config";
-import { BehaviorSubject, Observable, Subject, combineLatest, of } from "rxjs";
+import { select, Store } from "@ngrx/store";
+import { TranslateService } from "@ngx-translate/core";
+import { combineLatest, Observable, of, Subject } from "rxjs";
 import {
-  takeUntil,
   distinctUntilChanged,
   map,
   switchMap,
-  withLatestFrom,
-  take
+  take,
+  takeUntil
 } from "rxjs/operators";
+import { Response, Tier, TIERS } from "../../../../config/config";
+import {
+  OptionService,
+  PronounService,
+  VerbService
+} from "../../../core/core.module";
 import { SettingsState, State } from "../../../core/settings/settings.model";
-import { Store, select } from "@ngrx/store";
 import {
   selectSettings,
   selectSettingsLanguage
 } from "../../../core/settings/settings.selectors";
 import { selectTableviewerGridSlice } from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
-import { TranslateService } from "@ngx-translate/core";
-import {
-  PronounService,
-  VerbService,
-  OptionService
-} from "../../../core/core.module";
-import { MatPaginatorIntl } from "@angular/material/paginator";
 
 export type GridOrderOptions = "root" | "pn" | "option";
 export interface GridOrder {

@@ -1,37 +1,24 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { select, Store } from "@ngrx/store";
-import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { State } from "./wordmaker-selection.model";
-import {
-  tap,
-  withLatestFrom,
-  switchMap,
-  catchError,
-  map,
-  distinctUntilChanged,
-  mapTo,
-  filter
-} from "rxjs/operators";
-import { of } from "rxjs";
-import { selectWordmakerState, selectSettingsState } from "../core.state";
-import { LocalStorageService } from "../local-storage/local-storage.service";
-import {
-  actionConjugationEvent,
-  actionChangeAgent,
-  actionChangeOption,
-  actionChangePatient,
-  actionChangeVerb,
-  actionChangeStep,
-  actionChangeLoading,
-  actionChangeConjugations
-} from "./wordmaker-selection.actions";
-import { HttpClient, HttpParams } from "@angular/common/http";
 import { marker } from "@biesbjerg/ngx-translate-extract-marker";
+import { Actions, createEffect, ofType } from "@ngrx/effects";
+import { select, Store } from "@ngrx/store";
+import { tap, withLatestFrom } from "rxjs/operators";
+import { selectWordmakerState } from "../core.state";
+import { LocalStorageService } from "../local-storage/local-storage.service";
 import { NotificationService } from "../notifications/notification.service";
-import { VerbService } from "../verb/verb.service";
 import { OptionService } from "../option/option.service";
 import { PronounService } from "../pronoun/pronoun.service";
 import { ValidationService } from "../validation/validation.service";
+import { VerbService } from "../verb/verb.service";
+import {
+  actionChangeAgent,
+  actionChangeOption,
+  actionChangePatient,
+  actionChangeStep,
+  actionChangeVerb
+} from "./wordmaker-selection.actions";
+import { State } from "./wordmaker-selection.model";
 
 export const WORDMAKER_SELECTION_KEY = "WORDMAKER";
 

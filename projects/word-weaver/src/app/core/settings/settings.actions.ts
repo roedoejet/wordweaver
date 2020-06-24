@@ -1,5 +1,4 @@
 import { createAction, props } from "@ngrx/store";
-
 import { AvailableLanguages, ThemeName } from "../../../config/config";
 
 export const actionSettingsChangeLanguage = createAction(

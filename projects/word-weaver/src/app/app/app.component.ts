@@ -1,23 +1,20 @@
-import browser from "browser-detect";
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { Store, select } from "@ngrx/store";
-import { Observable } from "rxjs";
+import { Component, OnInit } from "@angular/core";
 import { marker } from "@biesbjerg/ngx-translate-extract-marker";
-
-import { environment as env } from "../../environments/environment";
-
+import { select, Store } from "@ngrx/store";
+import browser from "browser-detect";
+import { Observable } from "rxjs";
 import { META } from "../../config/config";
-
+import { environment as env } from "../../environments/environment";
 import {
   authLogin,
   authLogout,
-  routeAnimations,
-  specialAnimations,
   LocalStorageService,
+  routeAnimations,
+  selectEffectiveTheme,
   selectIsAuthenticated,
-  selectSettingsStickyHeader,
   selectSettingsLanguage,
-  selectEffectiveTheme
+  selectSettingsStickyHeader,
+  specialAnimations
 } from "../core/core.module";
 import {
   actionSettingsChangeAnimationsPageDisabled,

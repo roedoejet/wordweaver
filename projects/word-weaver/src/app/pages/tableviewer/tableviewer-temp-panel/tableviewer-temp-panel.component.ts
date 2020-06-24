@@ -1,24 +1,19 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   OnDestroy,
-  OnInit,
-  ChangeDetectionStrategy
+  OnInit
 } from "@angular/core";
+import { select, Store } from "@ngrx/store";
+import { Observable, Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 import { Option } from "../../../../config/config";
 import {
   OptionService,
   selectSettingsLanguage
 } from "../../../core/core.module";
-import { Store, select } from "@ngrx/store";
-import { Observable, Subject } from "rxjs";
-import { map, takeUntil } from "rxjs/operators";
-
 import { actionChangeOptions } from "../../../core/tableviewer-selection/tableviewer-selection.actions";
-
-import {
-  TableviewerState,
-  State
-} from "../../../core/tableviewer-selection/tableviewer-selection.model";
+import { State } from "../../../core/tableviewer-selection/tableviewer-selection.model";
 import { selectTableViewerOption } from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
 
 @Component({

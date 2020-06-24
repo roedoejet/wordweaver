@@ -1,23 +1,21 @@
-import { Observable, of } from "rxjs";
-import {
-  map,
-  switchMap,
-  catchError,
-  shareReplay,
-  filter
-} from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { environment } from "../../../environments/environment";
-import { Response, ResponseObject } from "../../../config/config";
-import { Tier } from "../../../config/config";
-import { TableviewerState } from "../tableviewer-selection/tableviewer-selection.model";
-import { WordmakerState } from "../wordmaker-selection/wordmaker-selection.model";
 import { select, Store } from "@ngrx/store";
-import { actionChangeLoading } from "../tableviewer-selection/tableviewer-selection.actions";
+import { Observable, of } from "rxjs";
+import { catchError, map, shareReplay, switchMap } from "rxjs/operators";
+import {
+  Response,
+  ResponseObject,
+  Verb,
+  Pronoun,
+  Option
+} from "../../../config/config";
+import { environment } from "../../../environments/environment";
+import { GridOrder } from "../../pages/tableviewer/conjugation-grid/conjugation-grid.component";
 import { selectSettingsState } from "../core.state";
 import { SettingsState } from "../settings/settings.model";
-import { GridOrder } from "../../pages/tableviewer/conjugation-grid/conjugation-grid.component";
+import { TableviewerState } from "../tableviewer-selection/tableviewer-selection.model";
+import { WordmakerState } from "../wordmaker-selection/wordmaker-selection.model";
 
 export type ConjugationRetrievalMethod = "endpoint" | "cache";
 
@@ -66,7 +64,7 @@ export class ConjugationService {
       if (selection[x]) {
         if (Array.isArray(selection[x])) {
           filterValues[x] = filterValues[x].concat(
-            selection[x].map(x => x.tag)
+            selection[x].map((y: Verb | Pronoun | Option) => y.tag)
           );
         } else {
           filterValues[x].push(selection[x].tag);

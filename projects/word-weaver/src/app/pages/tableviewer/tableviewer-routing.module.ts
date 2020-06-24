@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
-
+import { RouterModule, Routes } from "@angular/router";
 import { TableviewerComponent } from "./tableviewer/tableviewer.component";
 
 const routes: Routes = [

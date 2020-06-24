@@ -1,19 +1,17 @@
+import { routerReducer, RouterReducerState } from "@ngrx/router-store";
 import {
   ActionReducerMap,
-  MetaReducer,
-  createFeatureSelector
+  createFeatureSelector,
+  MetaReducer
 } from "@ngrx/store";
-import { routerReducer, RouterReducerState } from "@ngrx/router-store";
-
 import { environment } from "../../environments/environment";
-
-import { initStateFromLocalStorage } from "./meta-reducers/init-state-from-local-storage.reducer";
-import { debug } from "./meta-reducers/debug.reducer";
 import { AuthState } from "./auth/auth.models";
 import { authReducer } from "./auth/auth.reducer";
+import { debug } from "./meta-reducers/debug.reducer";
+import { initStateFromLocalStorage } from "./meta-reducers/init-state-from-local-storage.reducer";
 import { RouterStateUrl } from "./router/router.state";
-import { settingsReducer } from "./settings/settings.reducer";
 import { SettingsState } from "./settings/settings.model";
+import { settingsReducer } from "./settings/settings.reducer";
 import { TableviewerState } from "./tableviewer-selection/tableviewer-selection.model";
 import { tableviewerReducer } from "./tableviewer-selection/tableviewer-selection.reducer";
 import { WordmakerState } from "./wordmaker-selection/wordmaker-selection.model";

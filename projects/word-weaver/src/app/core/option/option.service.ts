@@ -1,9 +1,9 @@
-import { Observable } from "rxjs";
-import { map, shareReplay } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { environment } from "../../../environments/environment";
+import { Observable } from "rxjs";
+import { map, shareReplay } from "rxjs/operators";
 import { Option } from "../../../config/config";
+import { environment } from "../../../environments/environment";
 
 @Injectable({
   providedIn: "root"

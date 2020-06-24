@@ -1,35 +1,31 @@
 import {
+  ChangeDetectionStrategy,
   Component,
-  HostListener,
   OnInit,
-  ViewChild,
-  ChangeDetectionStrategy
+  ViewChild
 } from "@angular/core";
-import { take } from "rxjs/operators";
-import { combineLatest, race, interval } from "rxjs";
 import { ActivatedRoute } from "@angular/router";
-import { Store, select } from "@ngrx/store";
-import {
-  actionChangeAgents,
-  actionChangePatients,
-  actionChangeOptions,
-  actionChangeVerbs,
-  actionConjugationEvent,
-  actionChangeViewMode,
-  actionChangeTreeViewDepth,
-  actionChangeGridOrder
-} from "../../../core/tableviewer-selection/tableviewer-selection.actions";
+import { Store } from "@ngrx/store";
+import { combineLatest } from "rxjs";
+import { take } from "rxjs/operators";
+import { TableviewerViewModes } from "../../../../config/config";
 import {
   OptionService,
   PronounService,
   VerbService
 } from "../../../core/core.module";
-import { TableviewerViewModes } from "../../../../config/config";
-import { TableviewerTreeDepth } from "../../../core/tableviewer-selection/tableviewer-selection.model";
 import {
-  GridOrderOptions,
-  GridOrder
-} from "../conjugation-grid/conjugation-grid.component";
+  actionChangeAgents,
+  actionChangeGridOrder,
+  actionChangeOptions,
+  actionChangePatients,
+  actionChangeTreeViewDepth,
+  actionChangeVerbs,
+  actionChangeViewMode,
+  actionConjugationEvent
+} from "../../../core/tableviewer-selection/tableviewer-selection.actions";
+import { TableviewerTreeDepth } from "../../../core/tableviewer-selection/tableviewer-selection.model";
+import { GridOrderOptions } from "../conjugation-grid/conjugation-grid.component";
 
 @Component({
   selector: "ww-tableviewer",

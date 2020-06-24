@@ -1,66 +1,47 @@
+import { Clipboard } from "@angular/cdk/clipboard";
+import { LocationStrategy } from "@angular/common";
 import {
-  Component,
   AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
   OnDestroy,
   OnInit,
-  ChangeDetectionStrategy,
-  ViewChild,
-  Renderer2
+  ViewChild
 } from "@angular/core";
 import { FormControl } from "@angular/forms";
-import { LocationStrategy } from "@angular/common";
-import { HttpClient } from "@angular/common/http";
-import { NotificationService } from "../../../core/core.module";
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+import { marker } from "@biesbjerg/ngx-translate-extract-marker";
+import { select, Store } from "@ngrx/store";
 import { EChartOption } from "echarts";
-import { Store, select } from "@ngrx/store";
-import { Observable, BehaviorSubject, Subject, combineLatest } from "rxjs";
+import { BehaviorSubject, Observable, Subject } from "rxjs";
+import { map, take, takeUntil } from "rxjs/operators";
 import {
-  map,
-  switchMap,
-  take,
-  takeUntil,
-  tap,
-  distinctUntilChanged
-} from "rxjs/operators";
-import { merge as _merge } from "lodash";
-import {
-  actionConjugationEvent,
-  actionChangeTreeViewDepth,
-  actionToggleTreeViewOrder,
-  actionChangeGridOrder
-} from "../../../core/tableviewer-selection/tableviewer-selection.actions";
+  ConjugationService,
+  NotificationService,
+  ROUTE_ANIMATIONS_ELEMENTS
+} from "../../../core/core.module";
+import { actionSettingsChangeThemeColors } from "../../../core/settings/settings.actions";
 import { SettingsState, State } from "../../../core/settings/settings.model";
-import { TableviewerState } from "../../../core/tableviewer-selection/tableviewer-selection.model";
-import { selectTableviewerState } from "../../../core/core.state";
-import { createRequestQueryArgs } from "../../../core/tableviewer-selection/tableviewer-selection.effects";
 // import { selectTableviewerGridState } from '../../../core/tableviewer-selection/tableviewer-selection.selectors';
 import { selectSettings } from "../../../core/settings/settings.selectors";
-import { ConjugationService } from "../../../core/core.module";
 import {
-  TIERS,
-  TableviewerViewModes,
-  META,
-  Response
-} from "../../../../config/config";
-
-import { ROUTE_ANIMATIONS_ELEMENTS } from "../../../core/core.module";
-import { marker } from "@biesbjerg/ngx-translate-extract-marker";
-import { actionSettingsChangeThemeColors } from "../../../core/settings/settings.actions";
-
-import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+  actionChangeGridOrder,
+  actionChangeTreeViewDepth,
+  actionConjugationEvent,
+  actionToggleTreeViewOrder
+} from "../../../core/tableviewer-selection/tableviewer-selection.actions";
+import { createRequestQueryArgs } from "../../../core/tableviewer-selection/tableviewer-selection.effects";
+import { TableviewerState } from "../../../core/tableviewer-selection/tableviewer-selection.model";
+import {
+  selectTableviewer,
+  selectTableviewerGridSlice,
+  selectTableviewerListSlice,
+  selectTableViewerLoading,
+  selectTableviewerTreeSlice
+} from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
 import { DownloadDialogComponent } from "../../../shared/download-dialog/download-dialog.component";
 import { TableViewerDialogComponent } from "../../../shared/tableviewer-dialog/tableviewer-dialog.component";
 import { GridOrderOptions } from "../conjugation-grid/conjugation-grid.component";
-import {
-  selectTableViewerLoading,
-  selectTableviewerGridSlice,
-  selectTableviewerListSlice,
-  selectTableviewerTreeSlice,
-  selectTableviewer
-} from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
-
-import { Clipboard } from "@angular/cdk/clipboard";
-import { Router } from "@angular/router";
 
 @Component({
   selector: "ww-tableviewer-conj-panel",

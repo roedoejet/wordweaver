@@ -1,22 +1,22 @@
-import { SettingsState, NIGHT_MODE_THEME } from "./settings.model";
+import { Action, createReducer, on } from "@ngrx/store";
 import { initialSettings } from "../../../config/config";
+import { environment } from "../../../environments/environment";
 import {
   actionSettingsChangeAnimationsElements,
   actionSettingsChangeAnimationsPage,
   actionSettingsChangeAnimationsPageDisabled,
   actionSettingsChangeAutoNightMode,
+  actionSettingsChangeBaseUrl,
+  actionSettingsChangeHighlight,
   actionSettingsChangeHour,
   actionSettingsChangeLanguage,
+  actionSettingsChangeLevel,
   actionSettingsChangeStickyHeader,
   actionSettingsChangeTestApi,
   actionSettingsChangeTheme,
-  actionSettingsChangeLevel,
-  actionSettingsChangeHighlight,
-  actionSettingsChangeBaseUrl,
   actionSettingsChangeThemeColors
 } from "./settings.actions";
-import { Action, createReducer, on } from "@ngrx/store";
-import { environment } from "../../../environments/environment";
+import { NIGHT_MODE_THEME, SettingsState } from "./settings.model";
 
 const initialBaseState: SettingsState = {
   language: "en",

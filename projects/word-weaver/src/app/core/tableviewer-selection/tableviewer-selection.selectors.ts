@@ -1,10 +1,6 @@
-import { createSelector, createFeatureSelector, select } from "@ngrx/store";
-
-import { TableviewerState } from "./tableviewer-selection.model";
+import { createSelector } from "@ngrx/store";
 import { selectTableviewerState } from "../core.state";
-import { Response, TableviewerViewModes } from "../../../config/config";
-import { GridOrder } from "../../pages/tableviewer/conjugation-grid/conjugation-grid.component";
-import { AppState } from "../core.module";
+import { TableviewerState } from "./tableviewer-selection.model";
 
 // Raw Feature Selectors
 

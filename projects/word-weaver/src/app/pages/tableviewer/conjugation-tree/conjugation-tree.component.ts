@@ -1,37 +1,29 @@
 import {
-  Component,
-  OnDestroy,
-  OnInit,
   ChangeDetectionStrategy,
-  Input
+  Component,
+  Input,
+  OnDestroy,
+  OnInit
 } from "@angular/core";
-import { EChartOption, EChartsSeriesType } from "echarts";
-import {
-  Conjugation,
-  Response,
-  AvailableLanguages
-} from "../../../../config/config";
-import { Tier } from "../../../../config/config";
-import { Store, select } from "@ngrx/store";
-import { selectTableviewer } from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
-import { Observable, Subject, of, combineLatest } from "rxjs";
-import {
-  map,
-  switchMap,
-  tap,
-  distinctUntilChanged,
-  takeUntil
-} from "rxjs/operators";
-import { TableviewerState } from "../../../core/tableviewer-selection/tableviewer-selection.model";
-import {
-  OptionService,
-  ConjugationService,
-  selectSettingsLanguage,
-  VerbService,
-  PronounService
-} from "../../../core/core.module";
+import { select, Store } from "@ngrx/store";
+import { EChartOption } from "echarts";
 import { merge as _merge } from "lodash";
+import { combineLatest, Observable, of, Subject } from "rxjs";
+import { map, switchMap, takeUntil } from "rxjs/operators";
+import {
+  AvailableLanguages,
+  Conjugation,
+  Tier
+} from "../../../../config/config";
+import {
+  ConjugationService,
+  OptionService,
+  PronounService,
+  selectSettingsLanguage,
+  VerbService
+} from "../../../core/core.module";
 import { selectThemeColors } from "../../../core/settings/settings.selectors";
+import { TableviewerState } from "../../../core/tableviewer-selection/tableviewer-selection.model";
 
 @Component({
   selector: "ww-conjugation-tree",

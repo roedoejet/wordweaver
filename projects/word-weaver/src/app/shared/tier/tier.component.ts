@@ -1,10 +1,10 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   Input,
-  OnInit,
-  ChangeDetectionStrategy
+  OnInit
 } from "@angular/core";
-import { Tier, ResponseObject, Conjugation } from "../../../config/config";
+import { Conjugation, ResponseObject, Tier } from "../../../config/config";
 
 @Component({
   selector: "ww-tier",

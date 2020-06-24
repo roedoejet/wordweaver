@@ -1,5 +1,5 @@
-import { Directive, ElementRef, OnInit, OnDestroy } from "@angular/core";
-import { TranslateService, LangChangeEvent } from "@ngx-translate/core";
+import { Directive, ElementRef, OnDestroy, OnInit } from "@angular/core";
+import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
 import { Subscription } from "rxjs";
 
 @Directive({

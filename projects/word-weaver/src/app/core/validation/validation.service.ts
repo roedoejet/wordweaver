@@ -1,6 +1,6 @@
-import { Injectable, ɵALLOW_MULTIPLE_PLATFORMS } from "@angular/core";
-import { environment } from "../../../environments/environment";
+import { Injectable } from "@angular/core";
 import { Validation } from "../../../config/config";
+import { environment } from "../../../environments/environment";
 
 @Injectable({
   providedIn: "root"

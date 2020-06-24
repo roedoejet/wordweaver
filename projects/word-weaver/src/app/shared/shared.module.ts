@@ -1,90 +1,88 @@
-import { NgModule } from "@angular/core";
+import { ClipboardModule } from "@angular/cdk/clipboard";
+import { DragDropModule } from "@angular/cdk/drag-drop";
 import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { TranslateModule } from "@ngx-translate/core";
-
 import { MatButtonModule } from "@angular/material/button";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
-import { MatMenuModule } from "@angular/material/menu";
-import { MatSelectModule } from "@angular/material/select";
-// import { MatTabsModule } from "@angular/material/tabs";
-import { MatInputModule } from "@angular/material/input";
-import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
-import { MatChipsModule } from "@angular/material/chips";
-import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatCardModule } from "@angular/material/card";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatChipsModule } from "@angular/material/chips";
 import { MatDialogModule } from "@angular/material/dialog";
-import { MatListModule } from "@angular/material/list";
-import { MatIconModule } from "@angular/material/icon";
-import { MatTooltipModule } from "@angular/material/tooltip";
-import { MatSnackBarModule } from "@angular/material/snack-bar";
-import { MatSlideToggleModule } from "@angular/material/slide-toggle";
-import { MatStepperModule } from "@angular/material/stepper";
-// import { MatDividerModule } from "@angular/material/divider";
-// import { MatSliderModule } from "@angular/material/slider";
-import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatExpansionModule } from "@angular/material/expansion";
 // import { MatDatepickerModule } from "@angular/material/datepicker";
 // import { MatNativeDateModule } from "@angular/material/core";
 import { MatGridListModule } from "@angular/material/grid-list";
-import { MatTableModule } from "@angular/material/table";
+import { MatIconModule } from "@angular/material/icon";
+// import { MatTabsModule } from "@angular/material/tabs";
+import { MatInputModule } from "@angular/material/input";
+import { MatListModule } from "@angular/material/list";
+import { MatMenuModule } from "@angular/material/menu";
 import {
-  MatPaginatorModule,
-  MatPaginatorIntl
+  MatPaginatorIntl,
+  MatPaginatorModule
 } from "@angular/material/paginator";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatRadioModule } from "@angular/material/radio";
-import { MatTabsModule } from "@angular/material/tabs";
+import { MatSelectModule } from "@angular/material/select";
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatSliderModule } from "@angular/material/slider";
-import { MatExpansionModule } from "@angular/material/expansion";
-import { DragDropModule } from "@angular/cdk/drag-drop";
-
-import { MatTableExporterModule } from "mat-table-exporter";
-
-import { ClipboardModule } from "@angular/cdk/clipboard";
-
-import { createCustomMatPaginatorIntl } from "./mat.paginator.i18n";
-
+import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatStepperModule } from "@angular/material/stepper";
+import { MatTableModule } from "@angular/material/table";
+import { MatTabsModule } from "@angular/material/tabs";
+// import { MatDividerModule } from "@angular/material/divider";
+// import { MatSliderModule } from "@angular/material/slider";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatTooltipModule } from "@angular/material/tooltip";
 import {
-  FontAwesomeModule,
-  FaIconLibrary
+  FaIconLibrary,
+  FontAwesomeModule
 } from "@fortawesome/angular-fontawesome";
 import {
-  faPlus,
-  faEdit,
-  faTrash,
-  faTimes,
-  faCaretUp,
+  faFacebook,
+  faGithub,
+  faMediumM,
+  faYoutube
+} from "@fortawesome/free-brands-svg-icons";
+import {
+  faBook,
   faCaretDown,
+  faCaretUp,
+  faCheck,
+  faEdit,
   faExclamationTriangle,
   faFilter,
-  faTasks,
-  faCheck,
   faHome,
-  faSquare,
-  faLanguage,
-  faPaintBrush,
   faKeyboard,
+  faLanguage,
   faLightbulb,
   faMusic,
-  faWindowMaximize,
+  faPaintBrush,
+  faPlus,
+  faSquare,
   faStream,
-  faBook
+  faTasks,
+  faTimes,
+  faTrash,
+  faWindowMaximize
 } from "@fortawesome/free-solid-svg-icons";
 import {
-  faMediumM,
-  faGithub,
-  faYoutube,
-  faFacebook
-} from "@fortawesome/free-brands-svg-icons";
-import { RtlSupportDirective } from "./rtl-support/rtl-support.directive";
+  TranslateModule,
+  TranslateParser,
+  TranslateService
+} from "@ngx-translate/core";
+import { MatTableExporterModule } from "mat-table-exporter";
+import { NgxEchartsModule } from "ngx-echarts";
+import { DownloadDialogComponent } from "./download-dialog/download-dialog.component";
 import { LogoComponent } from "./logo/logo.component";
+import { createCustomMatPaginatorIntl } from "./mat.paginator.i18n";
 import { AnimateOnlyPipe } from "./pipes/animate-only/animate-only";
 import { CapitalizePipe } from "./pipes/capitalize/capitalize";
 import { DecapitalizePipe } from "./pipes/decapitalize/decapitalize";
-import { NgxEchartsModule } from "ngx-echarts";
-import { DownloadDialogComponent } from "./download-dialog/download-dialog.component";
+import { RtlSupportDirective } from "./rtl-support/rtl-support.directive";
 import { TableViewerDialogComponent } from "./tableviewer-dialog/tableviewer-dialog.component";
 import { TierComponent } from "./tier/tier.component";
-import { TranslateParser, TranslateService } from "@ngx-translate/core";
 
 @NgModule({
   imports: [

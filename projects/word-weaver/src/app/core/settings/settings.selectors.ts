@@ -1,7 +1,6 @@
 import { createSelector } from "@ngrx/store";
-
-import { SettingsState } from "./settings.model";
 import { selectSettingsState } from "../core.state";
+import { SettingsState } from "./settings.model";
 
 export const selectSettings = createSelector(
   selectSettingsState,

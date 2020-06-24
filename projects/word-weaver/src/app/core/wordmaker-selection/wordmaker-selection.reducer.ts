@@ -1,13 +1,13 @@
+import { Action, createReducer, on } from "@ngrx/store";
 import {
   actionChangeAgent,
-  actionChangeOption,
-  actionChangePatient,
-  actionChangeVerb,
   actionChangeConjugations,
   actionChangeLoading,
-  actionChangeStep
+  actionChangeOption,
+  actionChangePatient,
+  actionChangeStep,
+  actionChangeVerb
 } from "./wordmaker-selection.actions";
-import { Action, createReducer, on, ActionReducer } from "@ngrx/store";
 import { WordmakerState } from "./wordmaker-selection.model";
 
 export const initialState: WordmakerState = {

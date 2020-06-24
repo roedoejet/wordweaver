@@ -1,18 +1,13 @@
 import { createAction, props } from "@ngrx/store";
-
-import { TableviewerTreeDepth } from "./tableviewer-selection.model";
-
 import {
   Option,
   Pronoun,
   Response,
-  Verb,
-  TableviewerViewModes
+  TableviewerViewModes,
+  Verb
 } from "../../../config/config";
-import {
-  GridOrderOptions,
-  GridOrder
-} from "../../pages/tableviewer/conjugation-grid/conjugation-grid.component";
+import { GridOrder } from "../../pages/tableviewer/conjugation-grid/conjugation-grid.component";
+import { TableviewerTreeDepth } from "./tableviewer-selection.model";
 
 export const actionChangeConjugations = createAction(
   "[Tableviewer] Change Conjugations",

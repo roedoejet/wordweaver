@@ -1,18 +1,16 @@
 import {
+  ChangeDetectionStrategy,
   Component,
-  OnDestroy,
-  OnInit,
   Input,
-  ChangeDetectionStrategy
+  OnDestroy,
+  OnInit
 } from "@angular/core";
-import { TIERS, Response } from "../../../../config/config";
-
-import { SettingsState, State } from "../../../core/settings/settings.model";
-import { selectSettings } from "../../../core/settings/settings.selectors";
-
-import { Store, select } from "@ngrx/store";
+import { select, Store } from "@ngrx/store";
 import { Observable, Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
+import { Response, TIERS } from "../../../../config/config";
+import { SettingsState, State } from "../../../core/settings/settings.model";
+import { selectSettings } from "../../../core/settings/settings.selectors";
 
 @Component({
   selector: "ww-conjugation-list",

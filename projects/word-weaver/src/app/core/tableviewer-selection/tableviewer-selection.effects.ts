@@ -1,38 +1,27 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { select, Store } from "@ngrx/store";
+import { marker } from "@biesbjerg/ngx-translate-extract-marker";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { State, TableviewerState } from "./tableviewer-selection.model";
+import { select, Store } from "@ngrx/store";
+import { of } from "rxjs";
 import {
-  tap,
-  take,
-  withLatestFrom,
-  switchMap,
   catchError,
   map,
-  distinctUntilChanged,
-  mapTo,
-  filter
+  switchMap,
+  take,
+  tap,
+  withLatestFrom
 } from "rxjs/operators";
-import { of } from "rxjs";
-import { selectTableviewerState, selectSettingsState } from "../core.state";
-import { LocalStorageService } from "../local-storage/local-storage.service";
-import {
-  actionConjugationEvent,
-  actionChangeAgents,
-  actionChangeOptions,
-  actionChangePatients,
-  actionChangeVerbs,
-  actionChangeLoading,
-  actionChangeConjugations,
-  actionChangeViewMode,
-  actionChangeTreeViewDepth,
-  actionToggleTreeViewOrder
-} from "./tableviewer-selection.actions";
-import { HttpClient, HttpParams } from "@angular/common/http";
-import { marker } from "@biesbjerg/ngx-translate-extract-marker";
-import { NotificationService } from "../notifications/notification.service";
-import { Response } from "../../../config/config";
 import { ConjugationService } from "../../core/conjugation/conjugation.service";
+import { selectSettingsState, selectTableviewerState } from "../core.state";
+import { LocalStorageService } from "../local-storage/local-storage.service";
+import { NotificationService } from "../notifications/notification.service";
+import {
+  actionChangeConjugations,
+  actionChangeLoading,
+  actionConjugationEvent
+} from "./tableviewer-selection.actions";
+import { State } from "./tableviewer-selection.model";
 
 export const TABLEVIEWER_SELECTION_KEY = "TABLEVIEWER";
 

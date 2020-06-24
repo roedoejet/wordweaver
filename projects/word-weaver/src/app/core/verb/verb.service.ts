@@ -1,17 +1,16 @@
-import { Observable, merge, combineLatest, zip, of, from, Subject } from "rxjs";
-import { shareReplay, mergeAll, combineAll } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Verb, AvailableLanguages, META } from "../../../config/config";
-import { environment } from "../../../environments/environment";
+import { TranslateService } from "@ngx-translate/core";
+import { combineLatest, Observable, of, zip } from "rxjs";
 import {
-  debounceTime,
   distinctUntilChanged,
   map,
+  shareReplay,
   switchMap,
   take
 } from "rxjs/operators";
-import { TranslateService } from "@ngx-translate/core";
+import { Verb } from "../../../config/config";
+import { environment } from "../../../environments/environment";
 
 @Injectable({
   providedIn: "root"

@@ -1,7 +1,7 @@
-import { SettingsState } from "../app/core/settings/settings.model";
-import { Contributor } from "../app/pages/about/about/about.component";
-import { TableviewerState } from "../app/core/tableviewer-selection/tableviewer-selection.model";
 import { marker } from "@biesbjerg/ngx-translate-extract-marker";
+import { SettingsState } from "../app/core/settings/settings.model";
+import { TableviewerState } from "../app/core/tableviewer-selection/tableviewer-selection.model";
+import { Contributor } from "../app/pages/about/about/about.component";
 
 // Data Type Definitions (DTD)
 

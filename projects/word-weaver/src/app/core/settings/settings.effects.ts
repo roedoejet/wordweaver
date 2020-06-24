@@ -1,45 +1,42 @@
-import { ActivationEnd, Router } from "@angular/router";
-import { Injectable } from "@angular/core";
 import { OverlayContainer } from "@angular/cdk/overlay";
+import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
+import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { select, Store } from "@ngrx/store";
-import { Actions, createEffect, ofType, Effect } from "@ngrx/effects";
 import { TranslateService } from "@ngx-translate/core";
 import { combineLatest, interval, merge, of } from "rxjs";
 import {
-  tap,
-  withLatestFrom,
-  map,
   distinctUntilChanged,
+  map,
   mapTo,
-  filter
+  tap,
+  withLatestFrom
 } from "rxjs/operators";
-
+import { environment } from "../../../environments/environment";
+import { AnimationsService } from "../animations/animations.service";
 import { selectSettingsState } from "../core.state";
 import { LocalStorageService } from "../local-storage/local-storage.service";
-import { AnimationsService } from "../animations/animations.service";
-
 import {
   actionSettingsChangeAnimationsElements,
   actionSettingsChangeAnimationsPage,
   actionSettingsChangeAnimationsPageDisabled,
   actionSettingsChangeAutoNightMode,
+  actionSettingsChangeBaseUrl,
+  actionSettingsChangeHighlight,
+  actionSettingsChangeHour,
   actionSettingsChangeLanguage,
   actionSettingsChangeLevel,
-  actionSettingsChangeHighlight,
-  actionSettingsChangeTestApi,
-  actionSettingsChangeTheme,
   actionSettingsChangeStickyHeader,
-  actionSettingsChangeHour,
-  actionSettingsChangeBaseUrl
+  actionSettingsChangeTestApi,
+  actionSettingsChangeTheme
 } from "./settings.actions";
+import { State } from "./settings.model";
 import {
   selectEffectiveTheme,
-  selectSettingsLanguage,
+  selectElementsAnimations,
   selectPageAnimations,
-  selectElementsAnimations
+  selectSettingsLanguage
 } from "./settings.selectors";
-import { State } from "./settings.model";
-import { environment } from "../../../environments/environment";
 
 export const SETTINGS_KEY = "SETTINGS";
 

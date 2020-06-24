@@ -1,19 +1,19 @@
+import { Action, createReducer, on } from "@ngrx/store";
+import { initialTableViewerSettings } from "../../../config/config";
 import {
   actionChangeAgents,
+  actionChangeConjugations,
+  actionChangeGridOrder,
+  actionChangeLoading,
   actionChangeOptions,
   actionChangePatients,
-  actionChangeVerbs,
-  actionToggleTreeViewOrder,
-  actionChangeGridOrder,
   actionChangeTreeViewDepth,
+  actionChangeVerbs,
+  actionChangeVerbSearchTerm,
   actionChangeViewMode,
-  actionChangeConjugations,
-  actionChangeLoading,
-  actionChangeVerbSearchTerm
+  actionToggleTreeViewOrder
 } from "./tableviewer-selection.actions";
-import { Action, createReducer, on, ActionReducer } from "@ngrx/store";
 import { TableviewerState } from "./tableviewer-selection.model";
-import { initialTableViewerSettings, META } from "../../../config/config";
 
 export const initialBaseState: TableviewerState = {
   option: [],

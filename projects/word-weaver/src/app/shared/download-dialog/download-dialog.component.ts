@@ -1,21 +1,21 @@
-import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
-import { MatDialogRef } from "@angular/material/dialog";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { Observable, of, combineLatest } from "rxjs";
-import { switchMap, catchError, take, map } from "rxjs/operators";
-import { Store, select } from "@ngrx/store";
-import { SettingsState, State } from "../../core/settings/settings.model";
-import { selectSettings } from "../../core/settings/settings.selectors";
-import { actionSettingsChangeLevel } from "../../core/settings/settings.actions";
-import { actionChangeLoading } from "../../core/tableviewer-selection/tableviewer-selection.actions";
 import { HttpClient } from "@angular/common/http";
-import { selectTableviewerState } from "../../core/core.state";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { MatDialogRef } from "@angular/material/dialog";
+import { marker } from "@biesbjerg/ngx-translate-extract-marker";
+import { select, Store } from "@ngrx/store";
+import { TranslateService } from "@ngx-translate/core";
+import { saveAs } from "file-saver";
+import { combineLatest, Observable, of } from "rxjs";
+import { catchError, map, switchMap, take } from "rxjs/operators";
 import { TIERS } from "../../../config/config";
 import { NotificationService } from "../../core/core.module";
-import { marker } from "@biesbjerg/ngx-translate-extract-marker";
+import { selectTableviewerState } from "../../core/core.state";
+import { actionSettingsChangeLevel } from "../../core/settings/settings.actions";
+import { SettingsState, State } from "../../core/settings/settings.model";
+import { selectSettings } from "../../core/settings/settings.selectors";
+import { actionChangeLoading } from "../../core/tableviewer-selection/tableviewer-selection.actions";
 import { TableviewerState } from "../../core/tableviewer-selection/tableviewer-selection.model";
-import { saveAs } from "file-saver";
-import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "ww-download-dialog",

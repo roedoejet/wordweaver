@@ -1,6 +1,10 @@
+import {
+  AvailableLanguages,
+  Highlight,
+  Level,
+  ThemeName
+} from "../../../config/config";
 import { AppState } from "../core.module";
-import { Highlight, Level } from "../../../config/config";
-import { AvailableLanguages, ThemeName } from "../../../config/config";
 
 export const NIGHT_MODE_THEME: ThemeName = "DARK-THEME";
 

@@ -1,31 +1,28 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   OnDestroy,
-  OnInit,
-  ChangeDetectionStrategy
+  OnInit
 } from "@angular/core";
-import { Store, select } from "@ngrx/store";
-import { Observable, Subject, fromEvent } from "rxjs";
-import { META } from "../../../../config/config";
-
 import { marker } from "@biesbjerg/ngx-translate-extract-marker";
-
+import { select, Store } from "@ngrx/store";
+import { fromEvent, Observable, Subject } from "rxjs";
+import { map, take, takeUntil } from "rxjs/operators";
+import { META } from "../../../../config/config";
 import { ROUTE_ANIMATIONS_ELEMENTS } from "../../../core/core.module";
-
 import {
   actionSettingsChangeAnimationsElements,
   actionSettingsChangeAnimationsPage,
   actionSettingsChangeAutoNightMode,
+  actionSettingsChangeHighlight,
   actionSettingsChangeLanguage,
   actionSettingsChangeLevel,
-  actionSettingsChangeHighlight,
+  actionSettingsChangeStickyHeader,
   actionSettingsChangeTestApi,
-  actionSettingsChangeTheme,
-  actionSettingsChangeStickyHeader
+  actionSettingsChangeTheme
 } from "../../../core/settings/settings.actions";
 import { SettingsState, State } from "../../../core/settings/settings.model";
 import { selectSettings } from "../../../core/settings/settings.selectors";
-import { takeUntil, map, take } from "rxjs/operators";
 
 @Component({
   selector: "ww-settings",

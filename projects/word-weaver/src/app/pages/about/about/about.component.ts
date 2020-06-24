@@ -1,6 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
-import { ROUTE_ANIMATIONS_ELEMENTS } from "../../../core/core.module";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { META } from "../../../../config/config";
+import { ROUTE_ANIMATIONS_ELEMENTS } from "../../../core/core.module";
 
 export interface Contributor {
   text: string;

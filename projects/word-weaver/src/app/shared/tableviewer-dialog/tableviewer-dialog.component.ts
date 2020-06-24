@@ -1,29 +1,20 @@
-import {
-  Component,
-  Inject,
-  OnInit,
-  ChangeDetectionStrategy
-} from "@angular/core";
-import { MatDialogRef } from "@angular/material/dialog";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { META, TableviewerViewModes } from "../../../config/config";
-import { MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { BehaviorSubject, Observable, Subject } from "rxjs";
-import { take } from "rxjs/operators";
-import {
-  actionChangeViewMode,
-  actionChangeGridOrder
-} from "../../core/tableviewer-selection/tableviewer-selection.actions";
-import { Store, select } from "@ngrx/store";
-import { State } from "../../core/settings/settings.model";
-import { TableviewerState } from "../../core/tableviewer-selection/tableviewer-selection.model";
-import { selectTableviewerState } from "../../core/core.state";
 import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
-import { selectTableViewerGridOrder } from "../../core/tableviewer-selection/tableviewer-selection.selectors";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { FormControl } from "@angular/forms";
+import { MatDialogRef } from "@angular/material/dialog";
+import { select, Store } from "@ngrx/store";
+import { Observable } from "rxjs";
+import { take } from "rxjs/operators";
+import { META } from "../../../config/config";
+import { selectTableviewerState } from "../../core/core.state";
+import { State } from "../../core/settings/settings.model";
 import {
-  GridOrder,
-  GridOrderOptions
-} from "../../pages/tableviewer/conjugation-grid/conjugation-grid.component";
+  actionChangeGridOrder,
+  actionChangeViewMode
+} from "../../core/tableviewer-selection/tableviewer-selection.actions";
+import { TableviewerState } from "../../core/tableviewer-selection/tableviewer-selection.model";
+import { selectTableViewerGridOrder } from "../../core/tableviewer-selection/tableviewer-selection.selectors";
+import { GridOrderOptions } from "../../pages/tableviewer/conjugation-grid/conjugation-grid.component";
 
 @Component({
   selector: "ww-tableviewer-dialog",

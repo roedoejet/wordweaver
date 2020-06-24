@@ -1,6 +1,6 @@
 import { MatPaginatorIntl } from "@angular/material/paginator";
-import { TranslateParser, TranslateService } from "@ngx-translate/core";
 import { marker } from "@biesbjerg/ngx-translate-extract-marker";
+import { TranslateParser, TranslateService } from "@ngx-translate/core";
 
 export class WWPaginatorIntl extends MatPaginatorIntl {
   private rangeLabelIntl: string;

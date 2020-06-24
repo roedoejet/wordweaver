@@ -1,9 +1,9 @@
 import {
   Option,
   Pronoun,
-  Verb,
   Response,
-  TableviewerViewModes
+  TableviewerViewModes,
+  Verb
 } from "../../../config/config";
 import { GridOrder } from "../../pages/tableviewer/conjugation-grid/conjugation-grid.component";
 import { AppState } from "../core.module";
