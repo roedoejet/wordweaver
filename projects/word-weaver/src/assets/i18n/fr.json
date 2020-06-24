@@ -1,5 +1,4 @@
 {
-	"": null,
 	"ww": {
 		"common": {
 			"language": null,
@@ -14,13 +13,13 @@
 			"translation-language": null
 		},
 		"footer": {
-			"changelog": "Afficher le journal des changements"
+			"changelog": null
 		},
 		"menu": {
-			"about": "À propos",
-			"settings": "Paramètres",
-			"tableviewer": "Table Viewer",
-			"wordmaker": "Word Maker"
+			"about": null,
+			"settings": null,
+			"tableviewer": null,
+			"wordmaker": null
 		},
 		"pages": {
 			"about": {
@@ -44,6 +43,11 @@
 						"title": null,
 						"verb": null
 					},
+					"language": { 
+						"en": null,
+						"fr": null,
+						"moh": null
+					  },
 					"placeholder": null,
 					"tiers": {
 						"breakdown": null,
@@ -55,13 +59,14 @@
 					},
 					"title": null
 				},
+				"night-mode": null,
+				"sticky-header": null,
 				"testApi": null,
 				"themes": {
 					"blue": null,
 					"dark": null,
 					"default": null,
 					"light": null,
-					"night-mode": null,
 					"placeholder": null,
 					"purple-blue-dark": null,
 					"purple-blue-light": null,
@@ -69,7 +74,6 @@
 					"purple-gold-dark": null,
 					"purple-gold-light": null,
 					"purple-light": null,
-					"sticky-header": null,
 					"title": null
 				},
 				"title": null
@@ -78,7 +82,17 @@
 				"dialog": {
 					"advanced": {
 						"exit": null,
-						"title": null
+						"title": null,
+						"view-mode-descriptions": {
+							"grid": null,
+							"list": null,
+							"tree": null
+						},
+						"view-modes": {
+							"grid": null,
+							"list": null,
+							"tree": null
+						}
 					},
 					"download": {
 						"download": null,
