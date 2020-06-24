@@ -1,40 +1,205 @@
 {
+	"": null,
 	"ww": {
-		"about": {
-			"contributors": {
-				"title": null
+		"common": {
+			"language": null,
+			"notifications": {
+				"error": {
+					"dev": null,
+					"general": null
+				}
 			},
-			"slogan": "Créez rapidement des histoires interactives en 5 étapes faciles",
-			"text": "<p> Voici où devrait aller votre texte sur le projet. </p>"
-		},
-		"download": {
-			"dialog": {
-				"download": "Téléchargé",
-				"exit": "Fermé",
-				"settings": {
-					"filetype": "Type de fichier",
-					"headers": "Afficher les en-têtes",
-					"heading": {
-						"placeholder": "Mes Conjugaisons",
-						"title": "Titre"
-					}
-				},
-				"title": "Paramètres"
-			}
-		},
-		"error": {
-			"dev": "Hm, quelque chose s'est mal passé, veuillez vérifier la console.",
-			"general": "Oups, une erreur s'est produite."
+			"title": null,
+			"title-short": null,
+			"translation-language": null
 		},
 		"footer": {
 			"changelog": "Afficher le journal des changements"
 		},
-		"language": "Kanyen'kéha (échantillon)",
 		"menu": {
 			"about": "À propos",
 			"settings": "Paramètres",
 			"tableviewer": "Table Viewer",
 			"wordmaker": "Word Maker"
+		},
+		"pages": {
+			"about": {
+				"contributors": {
+					"title": null
+				},
+				"slogan": null,
+				"text": null
+			},
+			"settings": {
+				"advanced": null,
+				"general": {
+					"highlighting": {
+						"aspect": null,
+						"ending": null,
+						"post-aspectual": null,
+						"pronouns": null,
+						"required": null,
+						"root": null,
+						"temp": null,
+						"title": null,
+						"verb": null
+					},
+					"placeholder": null,
+					"tiers": {
+						"breakdown": null,
+						"breakdown-translation": null,
+						"display": null,
+						"gloss": null,
+						"title": null,
+						"translation": null
+					},
+					"title": null
+				},
+				"testApi": null,
+				"themes": {
+					"blue": null,
+					"dark": null,
+					"default": null,
+					"light": null,
+					"night-mode": null,
+					"placeholder": null,
+					"purple-blue-dark": null,
+					"purple-blue-light": null,
+					"purple-dark": null,
+					"purple-gold-dark": null,
+					"purple-gold-light": null,
+					"purple-light": null,
+					"sticky-header": null,
+					"title": null
+				},
+				"title": null
+			},
+			"tableviewer": {
+				"dialog": {
+					"advanced": {
+						"exit": null,
+						"title": null
+					},
+					"download": {
+						"download": null,
+						"exit": null,
+						"settings": {
+							"filetype": null,
+							"headers": null,
+							"heading": {
+								"placeholder": null,
+								"title": null
+							}
+						},
+						"title": null
+					}
+				},
+				"misc": {
+					"other": null,
+					"others": null,
+					"selected": null
+				},
+				"notifications": {
+					"copy": {
+						"error": null,
+						"success": null
+					},
+					"download": {
+						"error": null,
+						"success": null
+					},
+					"error": {
+						"missing-root": null
+					},
+					"gridOrder": {
+						"limit-error": null
+					},
+					"treeviewer-length": {
+						"error": null
+					}
+				},
+				"panels": {
+					"conj": {
+						"conjugate": null,
+						"copy-link-tip": null,
+						"depth-tip": null,
+						"download-tip": null,
+						"error": {
+							"message": null,
+							"title": null
+						},
+						"grid-order-tip": null,
+						"instructions": null,
+						"instructions-mobile": null,
+						"order-tip": null,
+						"show-settings": null,
+						"title": null
+					},
+					"pers": {
+						"select-agent": null,
+						"select-patient": null,
+						"title": null
+					},
+					"temp": {
+						"select": null,
+						"title": null
+					},
+					"verb": {
+						"no-matching-verb": null,
+						"placeholder": null,
+						"title": null
+					}
+				}
+			},
+			"wordmaker": {
+				"common": {
+					"next": null,
+					"previous": null,
+					"restart": null
+				},
+				"home": {
+					"instructions": null,
+					"start": null,
+					"welcome": null
+				},
+				"notifications": {
+					"noconjugation": null,
+					"random": {
+						"pers": {
+							"intransitive": null,
+							"transitive": null
+						},
+						"temp": null,
+						"verb": null
+					}
+				},
+				"steps": {
+					"conj": {
+						"congratulations-header": null,
+						"congratulations-text": null,
+						"finished": null
+					},
+					"pers": {
+						"agent-informal": null,
+						"patient-informal": null,
+						"question": null,
+						"select-intransitive-pronoun": null,
+						"select-transitive-pronoun": null
+					},
+					"temp": {
+						"question": null,
+						"select-temp": null
+					},
+					"verb": {
+						"no-matching-verbs": null,
+						"question": null,
+						"search-placeholder": null,
+						"select-verb-multiple": null,
+						"select-verb-single": null,
+						"try-again": null
+					}
+				}
+			}
 		},
 		"paginator": {
 			"first_page": null,
@@ -43,160 +208,6 @@
 			"next_page": null,
 			"previous_page": null,
 			"range": null
-		},
-		"settings": {
-			"advanced": "Avancée",
-			"general": {
-				"highlighting": {
-					"aspect": "Aspect",
-					"ending": "Terminaison",
-					"post-aspectual": "Suffixe post-aspectuel",
-					"pronouns": "Pronoms",
-					"required": "Obligatoire",
-					"root": "Racine",
-					"temp": "Temps",
-					"title": "Mise en évidence",
-					"verb": "Racine"
-				},
-				"placeholder": "Langue",
-				"tiers": {
-					"breakdown": "Ventilation",
-					"breakdown-translation": "Traduction de Ventilation",
-					"display": "Format d'affichage",
-					"gloss": "Glossaire",
-					"title": "Niveaux",
-					"translation": "Traduction"
-				},
-				"title": "Généraux"
-			},
-			"testApi": "Modèle de langage de test",
-			"themes": {
-				"blue": "Bleu",
-				"dark": "Foncé",
-				"default": null,
-				"light": "Lumière",
-				"night-mode": "Mode nuit automatique (de 21h00 à 7h00)",
-				"placeholder": "Thème de couleur",
-				"purple-blue-dark": null,
-				"purple-blue-light": null,
-				"purple-dark": "Violet foncé",
-				"purple-gold-dark": null,
-				"purple-gold-light": null,
-				"purple-light": "Violet clair",
-				"sticky-header": "Entête fixe",
-				"title": "Thèmes"
-			},
-			"title": "Paramètres"
-		},
-		"tableviewer": {
-			"conj": {
-				"conjugate": "Conjuguer",
-				"copy-link-tip": null,
-				"depth-tip": "Changer la profondeur de l'arbre",
-				"download-tip": "Téléchargé",
-				"error": {
-					"message": "Veuillez réessayer.",
-					"title": "Erreur"
-				},
-				"grid-order-tip": null,
-				"instructions": "Veuillez sélectionner une ou plusieurs cases dans les panneaux <b> Verbe </b>, <b> Personne </b> et <b> Heure </b> à gauche, puis appuyez sur la touche Entrée ou sur le bouton conjugué pour voir votre sélection",
-				"instructions-mobile": "Veuillez sélectionner une ou plusieurs cases dans les panneaux \"Verbe\", \"Personne\" et \"Temps\" <br /> puis appuyez sur le bouton ci-dessus pour conjuguer!",
-				"order-tip": "Changer l'ordre des nœuds",
-				"show-settings": null,
-				"title": "Barre d'outils de conjugaison"
-			},
-			"dialog": {
-				"exit": null,
-				"title": null
-			},
-			"misc": {
-				"other": null,
-				"others": null,
-				"selected": null
-			},
-			"notifications": {
-				"copy": {
-					"error": null,
-					"success": null
-				},
-				"download": {
-					"error": "Oups! Une erreur s'est produite et le fichier n'a pas pu être téléchargé. Veuillez vérifier que votre conjugaison est valide et réessayer",
-					"success": "Succès! Les conjugaisons ont été téléchargées"
-				},
-				"error": {
-					"missing-root": null
-				},
-				"gridOrder": {
-					"limit-error": null
-				},
-				"treeviewer-length": {
-					"error": null
-				}
-			},
-			"pers": {
-				"select-agent": "Sélectionnez un agent",
-				"select-patient": "Sélectionnez un patient",
-				"title": "La personne"
-			},
-			"temp": {
-				"select": "Sélectionner",
-				"title": "Temps"
-			},
-			"verb": {
-				"no-matching-verb": "Désolé, aucun verbe correspondant correspondant à '{{value}}'",
-				"placeholder": "Rechercher un verbe",
-				"title": "Verbe"
-			}
-		},
-		"title": "WordWeaver UI",
-		"title-short": "WordWeaver UI",
-		"translation-language": "Anglais",
-		"wordmaker": {
-			"conj": {
-				"congratulations-header": "Toutes nos félicitations!",
-				"congratulations-text": "Vous avez fait un mot <strong> juste </strong> comme ça."
-			},
-			"errors": {
-				"noconjugation": null
-			},
-			"finished": "Terminé",
-			"home": {
-				"instructions": "<p> Il y a trois étapes pour faire un mot. Nous devons savoir <b> quelle </b> est l'action, <b> qui </b> la fait et <b> quand </b> elle se produit. </p> <p> Vous peut appuyer sur la touche fléchée gauche pour passer à l'étape précédente et sur la touche fléchée droite pour passer à l'étape suivante. </p> <p> Commençons! </p>",
-				"start": "DÉBUT",
-				"welcome": "Bienvenue dans WordWeaver-UI WordMaker"
-			},
-			"next": "Prochain",
-			"notifications": {
-				"random": {
-					"pers": {
-						"intransitive": "Pronom aléatoire '{{value}}' sélectionné",
-						"transitive": "Pronom aléatoire '{{agent}}> {{patient}}' sélectionné"
-					},
-					"temp": "Temps aléatoire '{{value}}' sélectionnée",
-					"verb": "Verbe aléatoire '{{value}}' sélectionné"
-				}
-			},
-			"pers": {
-				"agent-informal": "Auteur",
-				"patient-informal": "Patient",
-				"question": "Qui la fait?",
-				"select-intransitive-pronoun": "Choisissez l'un des pronoms ci-dessous",
-				"select-transitive-pronoun": "Parmi les options ci-dessous, choisissez qui fait l'action et qui lui fait faire l'action"
-			},
-			"previous": "Arrière",
-			"restart": "Recommencer",
-			"temp": {
-				"question": "Quand est-ce qu'elle se produit?",
-				"select-temp": "Choisissez l'une des options ci-dessous"
-			},
-			"verb": {
-				"no-matching-verbs": "Désolé, aucun verbe correspondant correspondant à '{{value}}'",
-				"question": "Quelle est l'action?",
-				"search-placeholder": "Chercher",
-				"select-verb-multiple": "Sélectionnez l'un des {{number}} verbes ci-dessous",
-				"select-verb-single": "Sélectionnez le verbe ci-dessous",
-				"try-again": "Veuillez réessayer."
-			}
 		}
 	}
 }

@@ -1,45 +1,45 @@
 <div class="panel" *ngIf="settings$ | async as settings">
     <div class='panel__header__container'>
         <div *ngIf="show_toolbar" class="panel__header panel__header--tableview">
-            <h5 #header class="panel__title">{{ 'ww.tableviewer.conj.title' | translate }}</h5>
+            <h5 #header class="panel__title">{{ 'ww.pages.tableviewer.panels.conj.title' | translate }}</h5>
             <div class="panel__toolbar toolbar" *ngIf="selection$ | async as selection">
                 <mat-spinner *ngIf='loading$ | async' class='panel__toolbar__spinner' [color]="'accent'"
                     [diameter]='20'>
                 </mat-spinner>
                 <button #conjugate (click)='onManualConjugation($event)' class="conjugate mat-accent" mat-raised-button>
-                    {{ 'ww.tableviewer.conj.conjugate' | translate }}
+                    {{ 'ww.pages.tableviewer.panels.conj.conjugate' | translate }}
                 </button>
                 <mat-slider (change)="onChangeTreeDepth($event)" *ngIf="selection.view === 'tree'"
-                    [matTooltip]="'ww.tableviewer.conj.depth-tip' | translate" [matTooltipShowDelay]="showDelay.value"
+                    [matTooltip]="'ww.pages.tableviewer.panels.conj.depth-tip' | translate" [matTooltipShowDelay]="showDelay.value"
                     [matTooltipHideDelay]="hideDelay.value" [matTooltipPosition]="tooltipPosition" value="1" step="1"
                     tickInterval="1" min='0' max="3"></mat-slider>
                 <button *ngIf="selection.view === 'tree'" class="toolbar__tool ui-button" mat-icon-button
-                    (click)="onToggleTreeOrder()" [matTooltip]="'ww.tableviewer.conj.order-tip' | translate"
+                    (click)="onToggleTreeOrder()" [matTooltip]="'ww.pages.tableviewer.panels.conj.order-tip' | translate"
                     [matTooltipShowDelay]="showDelay.value" [matTooltipHideDelay]="hideDelay.value"
                     [matTooltipPosition]="tooltipPosition">
                     <mat-icon aria-label="Switch pronoun and temp">swap_horiz</mat-icon>
                 </button>
                 <button *ngIf="selection.view === 'grid'" class="toolbar__tool ui-button" mat-icon-button
                     (click)="onSwapGridOrder(selection.gridOrder.row, selection.gridOrder.col)"
-                    [matTooltip]="'ww.tableviewer.conj.grid-order-tip' | translate"
+                    [matTooltip]="'ww.pages.tableviewer.panels.conj.grid-order-tip' | translate"
                     [matTooltipShowDelay]="showDelay.value" [matTooltipHideDelay]="hideDelay.value"
                     [matTooltipPosition]="tooltipPosition">
                     <mat-icon aria-label="Switch rows and columns">swap_horiz</mat-icon>
                 </button>
                 <button class="ui-button toolbar__tool" mat-icon-button
-                    [matTooltip]="'ww.tableviewer.conj.copy-link-tip' | translate"
+                    [matTooltip]="'ww.pages.tableviewer.panels.conj.copy-link-tip' | translate"
                     [matTooltipShowDelay]="showDelay.value" [matTooltipHideDelay]="hideDelay.value"
                     [matTooltipPosition]="tooltipPosition" (click)="copyLink()">
                     <mat-icon aria-label="Copy link">link</mat-icon>
                 </button>
                 <button (click)="download()" class="ui-button toolbar__tool" mat-icon-button
-                    [matTooltip]="'ww.tableviewer.conj.download-tip' | translate"
+                    [matTooltip]="'ww.pages.tableviewer.panels.conj.download-tip' | translate"
                     [matTooltipShowDelay]="showDelay.value" [matTooltipHideDelay]="hideDelay.value"
                     [matTooltipPosition]="tooltipPosition">
                     <mat-icon aria-label="Download conjugations">get_app</mat-icon>
                 </button>
                 <button (click)="showSettings()" class="ui-button toolbar__tool" mat-icon-button
-                    [matTooltip]="'ww.tableviewer.conj.show-settings' | translate"
+                    [matTooltip]="'ww.pages.tableviewer.panels.conj.show-settings' | translate"
                     [matTooltipShowDelay]="showDelay.value" [matTooltipHideDelay]="hideDelay.value"
                     [matTooltipPosition]="tooltipPosition">
                     <mat-icon aria-label="Show setting">more_horiz</mat-icon>
@@ -51,11 +51,11 @@
         <div>
             <h4 class="desktop-only center-text margin-top-50 padding-20"
                 *ngIf="!selection.loading && selection.conjugations.length === 0" [ngClass]="routeAnimationsElements"
-                [innerHTML]="'ww.tableviewer.conj.instructions' | translate">
+                [innerHTML]="'ww.pages.tableviewer.panels.conj.instructions' | translate">
             </h4>
             <h3 class="mobile-only padding-15 center-text"
                 *ngIf="!selection.loading && selection.conjugations.length === 0"
-                [innerHTML]="'ww.tableviewer.conj.instructions-mobile' | translate">
+                [innerHTML]="'ww.pages.tableviewer.panels.conj.instructions-mobile' | translate">
             </h3>
         </div>
 

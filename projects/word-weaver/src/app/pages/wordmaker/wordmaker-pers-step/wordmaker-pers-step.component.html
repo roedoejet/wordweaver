@@ -17,10 +17,10 @@
                     <div class='instructions col-sm-12'>
                         <p
                             *ngIf="(!(validationService.validate('display', 'categories', 'patients', selection)) || !(validationService.validate('display', 'categories', 'patients', selection)))">
-                            {{ "ww.wordmaker.pers.select-intransitive-pronoun" | translate }}</p>
+                            {{ "ww.pages.wordmaker.steps.pers.select-intransitive-pronoun" | translate }}</p>
                         <p
                             *ngIf="((validationService.validate('display', 'categories', 'patients', selection)) && (validationService.validate('display', 'categories', 'patients', selection)))">
-                            {{ "ww.wordmaker.pers.select-transitive-pronoun" | translate }}
+                            {{ "ww.pages.wordmaker.steps.pers.select-transitive-pronoun" | translate }}
                         </p>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                 <div *ngIf="validationService.validate('display', 'categories', 'agents', selection)">
                     <h5
                         *ngIf="((validationService.validate('display', 'categories', 'patients', selection)) && (validationService.validate('display', 'categories', 'patients', selection)))">
-                        {{ "ww.wordmaker.pers.agent-informal" | translate }}</h5>
+                        {{ "ww.pages.wordmaker.steps.pers.agent-informal" | translate }}</h5>
                     <div class='pronoun__container custom-scroll'>
                         <mat-chip-list>
                             <mat-chip class="border-accent" (click)="onAgentSelect(pn)" *ngFor="let pn of pronouns"
@@ -49,7 +49,7 @@
                 <div *ngIf="validationService.validate('display', 'categories', 'patients', selection)">
                     <h5
                         *ngIf="((validationService.validate('display', 'categories', 'patients', selection)) && (validationService.validate('display', 'categories', 'patients', selection)))">
-                        {{ "ww.wordmaker.pers.patient-informal" | translate }}</h5>
+                        {{ "ww.pages.wordmaker.steps.pers.patient-informal" | translate }}</h5>
                     <div class="pronoun__container custom-scroll">
                         <mat-chip-list>
                             <mat-chip class="bg-white border-accent" (click)="onPatientSelect(pn)"

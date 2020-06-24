@@ -74,7 +74,7 @@ export class TableviewerEffects {
         tap(([action, selection]) => {
           if (selection.root.length < 1) {
             this.notificationService.translated(
-              marker("ww.tableviewer.notifications.error.missing-root"),
+              marker("ww.pages.tableviewer.notifications.error.missing-root"),
               {},
               "error"
             );

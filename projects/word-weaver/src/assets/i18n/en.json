@@ -1,202 +1,222 @@
 {
-  "ww": {
-    "about": {
-      "contributors": {
-        "title": "Contributors"
-      },
-      "slogan": "WordWeaver UI weaves beautiful verb conjugation websites",
-      "text": "<p>Here is where your text about the project should go.</p>"
-    },
-    "download": {
-      "dialog": {
-        "download": "Download",
-        "exit": "Exit",
-        "settings": {
-          "filetype": "Filetype",
-          "headers": "Keep Headers",
-          "heading": {
-            "placeholder": "My Conjugations",
-            "title": "Document Title"
-          }
-        },
-        "title": "Download Settings"
-      }
-    },
-    "error": {
-      "dev": "Hm, something went wrong, please check the console.",
-      "general": "Whoops, an error occured."
-    },
-    "footer": {
-      "changelog": "Show changelog"
-    },
-    "language": "Sample Language",
-    "menu": {
-      "about": "About",
-      "settings": "Settings",
-      "tableviewer": "Table Viewer",
-      "wordmaker": "Word Maker"
-    },
-    "paginator": {
-      "first_page": "First page",
-      "items_per_page": "Conjugations per page:",
-      "last_page": "Last page",
-      "next_page": "Next page",
-      "previous_page": "Previous page",
-      "range": "{{ startIndex }} - {{ endIndex }} of {{ length }}"
-    },
-    "settings": {
-      "advanced": "Advanced",
-      "general": {
-        "highlighting": {
-          "aspect": "Aspect",
-          "ending": "Ending",
-          "post-aspectual": "Post Aspectual Suffix",
-          "pronouns": "Pronouns",
-          "required": "Required",
-          "root": "Root",
-          "temp": "Temporal Affix",
-          "title": "Highlighting",
-          "verb": "Root"
-        },
-        "placeholder": "Language",
-        "tiers": {
-          "breakdown": "Breakdown",
-          "breakdown-translation": "Translation Breakdown",
-          "display": "Display",
-          "gloss": "Gloss",
-          "title": "Display Tiers",
-          "translation": "Translation"
-        },
-        "title": "General"
-      },
-      "testApi": "Test Language Model",
-      "themes": {
-        "blue": "Blue",
-        "dark": "Dark",
-        "default": "Default",
-        "light": "Light",
-        "night-mode": "Auto night mode (from 21:00 to 7:00)",
-        "placeholder": "Color Theme",
-        "purple-blue-dark": "Dark Blue & Purple",
-        "purple-blue-light": "Light Blue & Purple",
-        "purple-dark": "Dark Purple",
-        "purple-gold-dark": "Dark Purple & Gold",
-        "purple-gold-light": "Light Purple & Gold",
-        "purple-light": "Light Purple",
-        "sticky-header": "Sticky header",
-        "title": "Themes"
-      },
-      "title": "Settings"
-    },
-    "tableviewer": {
-      "conj": {
-        "conjugate": "Conjugate",
-        "copy-link-tip": "Copy link",
-        "depth-tip": "Change tree depth",
-        "download-tip": "Download conjugations",
-        "error": {
-          "message": "Please try again.",
-          "title": "Error"
-        },
-        "grid-order-tip": "Switch order of rows and columns",
-        "instructions": "Please select one or more boxes from the <b>Verb</b>, <b>Person</b>, and <b>Time</b> panels to the left and then press the enter key or conjugate button to see your selection",
-        "instructions-mobile": "Please select one or more boxes from the 'Verb', 'Person', and 'Time' panels <br /> and then press the button above to conjugate!",
-        "order-tip": "Switch order of nodes",
-        "show-settings": "Show settings",
-        "title": "Conjugation Toolbar"
-      },
-      "dialog": {
-        "exit": "Exit",
-        "title": ""
-      },
-      "misc": {
-        "other": "other",
-        "others": "others",
-        "selected": "selected"
-      },
-      "notifications": {
-        "copy": {
-          "error": "Hm, we couldn't copy the link to the clipboard, please try again",
-          "success": "Link successfully copied to clipboard"
-        },
-        "download": {
-          "error": "Whoops! Something went wrong and the file couldn't be downloaded. Please check your conjugation is valid and try again",
-          "success": "Success! Conjugations were downloaded"
-        },
-        "error": {
-          "missing-root": "Whoops! You need to select at least one verb"
-        },
-        "gridOrder": {
-          "limit-error": "Sorry, there are too many conjugations ({{ value }}) to switch the order"
-        },
-        "treeviewer-length": {
-          "error": "You're trying to display {{ value }} conjugations in the tree view! This is too many - we'll try to display them properly, but please consider using fewer conjugations with the tree view"
-        }
-      },
-      "pers": {
-        "select-agent": "Select an Agent",
-        "select-patient": "Select a Patient",
-        "title": "Person"
-      },
-      "temp": {
-        "select": "Select",
-        "title": "Time"
-      },
-      "verb": {
-        "no-matching-verb": "Sorry, no verbs matching '{{ value }}'",
-        "placeholder": "Search for a verb",
-        "title": "Verb"
-      }
-    },
-    "title": "WordWeaver UI",
-    "title-short": "WordWeaver UI",
-    "translation-language": "English",
-    "wordmaker": {
-      "conj": {
-        "congratulations-header": "Congratulations!",
-        "congratulations-text": "You made a word <strong>just</strong> like that."
-      },
-      "errors": {
-        "noconjugation": "Whoops! We couldn't conjugate this. Please try again."
-      },
-      "finished": "Done",
-      "home": {
-        "instructions": "<p>There are three steps to make a word. We'll need to know <b>what</b> the action is, <b>who</b> is doing it, and <b>when</b> it's happening.</p><p>You can press the left arrow key to go to the previous step and the right arrow key to go to the next step. </p><p>Let's get started!</p>",
-        "start": "START",
-        "welcome": "Welcome to the WordWeaver-UI WordMaker"
-      },
-      "next": "Next",
-      "notifications": {
-        "random": {
-          "pers": {
-            "intransitive": "Random pronoun '{{ value }}' selected",
-            "transitive": "Random pronoun '{{ agent }} > {{ patient }}' selected"
-          },
-          "temp": "Random time '{{ value }}' selected",
-          "verb": "Random verb '{{ value }}' selected"
-        }
-      },
-      "pers": {
-        "agent-informal": "Do-er",
-        "patient-informal": "Do-ee",
-        "question": "Who is doing it?",
-        "select-intransitive-pronoun": "Choose one of the pronouns below",
-        "select-transitive-pronoun": "From the options below, choose who is doing the action and who is having the action done to them"
-      },
-      "previous": "Back",
-      "restart": "Start over",
-      "temp": {
-        "question": "When is it happening?",
-        "select-temp": "Choose one of the options below"
-      },
-      "verb": {
-        "no-matching-verbs": "Sorry, no matching verbs matching '{{ value }}'",
-        "question": "What is the action?",
-        "search-placeholder": "Search",
-        "select-verb-multiple": "Select one of the {{ number }} verbs below",
-        "select-verb-single": "Select the verb below",
-        "try-again": "Please try again."
-      }
-    }
-  }
+	"ww": {
+		"common": {
+			"language": "Sample Language",
+			"notifications": {
+				"error": {
+					"dev": "Hm, something went wrong, please check the console.",
+					"general": "Whoops, an error occured."
+				}
+			},
+			"title": "WordWeaver UI",
+			"title-short": "WordWeaver UI",
+			"translation-language": "English"
+		},
+		"footer": {
+			"changelog": "Show changelog"
+		},
+		"menu": {
+			"about": "About",
+			"settings": "Settings",
+			"tableviewer": "Table Viewer",
+			"wordmaker": "Word Maker"
+		},
+		"pages": {
+			"about": {
+				"contributors": {
+					"title": "Contributors"
+				},
+				"slogan": "WordWeaver UI weaves beautiful verb conjugation websites",
+				"text": "<p>Here is where your text about the project should go.</p>"
+			},
+			"settings": {
+				"advanced": "Advanced",
+				"general": {
+					"highlighting": {
+						"aspect": "Aspect",
+						"ending": "Ending",
+						"post-aspectual": "Post Aspectual Suffix",
+						"pronouns": "Pronouns",
+						"required": "Required",
+						"root": "Root",
+						"temp": "Temporal Affix",
+						"title": "Highlighting",
+						"verb": "Root"
+					},
+					"placeholder": "Language",
+					"tiers": {
+						"breakdown": "Breakdown",
+						"breakdown-translation": "Translation Breakdown",
+						"display": "Display",
+						"gloss": "Gloss",
+						"title": "Display Tiers",
+						"translation": "Translation"
+					},
+					"title": "General"
+				},
+				"testApi": "Test Language Model",
+				"themes": {
+					"blue": "Blue",
+					"dark": "Dark",
+					"default": "Default",
+					"light": "Light",
+					"night-mode": "Auto night mode (from 21:00 to 7:00)",
+					"placeholder": "Color Theme",
+					"purple-blue-dark": "Dark Blue & Purple",
+					"purple-blue-light": "Light Blue & Purple",
+					"purple-dark": "Dark Purple",
+					"purple-gold-dark": "Dark Purple & Gold",
+					"purple-gold-light": "Light Purple & Gold",
+					"purple-light": "Light Purple",
+					"sticky-header": "Sticky header",
+					"title": "Themes"
+				},
+				"title": "Settings"
+			},
+			"tableviewer": {
+				"dialog": {
+					"advanced": {
+						"exit": "Exit",
+            "title": "Advanced Settings",
+            "view-modes": {
+              "list": "List View",
+              "grid": "Grid View",
+              "tree": "Tree View"
+            },
+            "view-mode-descriptions": {
+              "list": "The 'List View' displays all conjugations in a large list. Use this for lots of conjugations.",
+              "grid": "The 'Grid View' displays all conjugations in a grid, similar to the standard Bescherelle-style view.",
+              "tree": "The 'Tree View' draws out your conjugations. It's best used when you only have a few conjugations."
+            }
+					},
+					"download": {
+						"download": "Download",
+						"exit": "Exit",
+						"settings": {
+							"filetype": "Filetype",
+							"headers": "Keep Headers",
+							"heading": {
+								"placeholder": "My Conjugations",
+								"title": "Document Title"
+							}
+						},
+						"title": "Download Settings"
+					}
+				},
+				"misc": {
+					"other": "other",
+					"others": "others",
+					"selected": "selected"
+				},
+				"notifications": {
+					"copy": {
+						"error": "Hm, we couldn't copy the link to the clipboard, please try again",
+						"success": "Link successfully copied to clipboard"
+					},
+					"download": {
+						"error": "Whoops! Something went wrong and the file couldn't be downloaded. Please check your conjugation is valid and try again",
+						"success": "Success! Conjugations were downloaded"
+					},
+					"error": {
+						"missing-root": "Whoops! You need to select at least one verb"
+					},
+					"gridOrder": {
+						"limit-error": "Sorry, there are too many conjugations ({{ value }}) to switch the order"
+					},
+					"treeviewer-length": {
+						"error": "You're trying to display {{ value }} conjugations in the tree view! This is too many - we'll try to display them properly, but please consider using fewer conjugations with the tree view"
+					}
+				},
+				"panels": {
+					"conj": {
+						"conjugate": "Conjugate",
+						"copy-link-tip": "Copy link",
+						"depth-tip": "Change tree depth",
+						"download-tip": "Download conjugations",
+						"error": {
+							"message": "Please try again.",
+							"title": "Error"
+						},
+						"grid-order-tip": "Switch order of rows and columns",
+						"instructions": "Please select one or more boxes from the <b>Verb</b>, <b>Person</b>, and <b>Time</b> panels to the left and then press the enter key or conjugate button to see your selection",
+						"instructions-mobile": "Please select one or more boxes from the 'Verb', 'Person', and 'Time' panels <br /> and then press the button above to conjugate!",
+						"order-tip": "Switch order of nodes",
+						"show-settings": "Show settings",
+						"title": "Conjugation Toolbar"
+					},
+					"pers": {
+						"select-agent": "Select an Agent",
+						"select-patient": "Select a Patient",
+						"title": "Person"
+					},
+					"temp": {
+						"select": "Select",
+						"title": "Time"
+					},
+					"verb": {
+						"no-matching-verb": "Sorry, no verbs matching '{{ value }}'",
+						"placeholder": "Search for a verb",
+						"title": "Verb"
+					}
+				}
+			},
+			"wordmaker": {
+				"common": {
+					"next": "Next",
+					"previous": "Back",
+					"restart": "Start over"
+				},
+				"home": {
+					"instructions": "<p>There are three steps to make a word. We'll need to know <b>what</b> the action is, <b>who</b> is doing it, and <b>when</b> it's happening.</p><p>You can press the left arrow key to go to the previous step and the right arrow key to go to the next step. </p><p>Let's get started!</p>",
+					"start": "START",
+					"welcome": "Welcome to the WordWeaver-UI WordMaker"
+				},
+				"notifications": {
+					"noconjugation": "Whoops! We couldn't conjugate this. Please try again.",
+					"random": {
+						"pers": {
+							"intransitive": "Random pronoun '{{ value }}' selected",
+							"transitive": "Random pronoun '{{ agent }} > {{ patient }}' selected"
+						},
+						"temp": "Random time '{{ value }}' selected",
+						"verb": "Random verb '{{ value }}' selected"
+					}
+				},
+				"steps": {
+					"conj": {
+						"congratulations-header": "Congratulations!",
+						"congratulations-text": "You made a word <strong>just</strong> like that.",
+						"finished": "Done"
+					},
+					"pers": {
+						"agent-informal": "Do-er",
+						"patient-informal": "Do-ee",
+						"question": "Who is doing it?",
+						"select-intransitive-pronoun": "Choose one of the pronouns below",
+						"select-transitive-pronoun": "From the options below, choose who is doing the action and who is having the action done to them"
+					},
+					"temp": {
+						"question": "When is it happening?",
+						"select-temp": "Choose one of the options below"
+					},
+					"verb": {
+						"no-matching-verbs": "Sorry, no matching verbs matching '{{ value }}'",
+						"question": "What is the action?",
+						"search-placeholder": "Search",
+						"select-verb-multiple": "Select one of the {{ number }} verbs below",
+						"select-verb-single": "Select the verb below",
+						"try-again": "Please try again."
+					}
+				}
+			}
+		},
+		"paginator": {
+			"first_page": "First page",
+			"items_per_page": "Conjugations per page:",
+			"last_page": "Last page",
+			"next_page": "Next page",
+			"previous_page": "Previous page",
+			"range": "{{ startIndex }} - {{ endIndex }} of {{ length }}"
+		}
+	}
 }

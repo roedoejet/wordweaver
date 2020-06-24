@@ -2,15 +2,15 @@
   class="background page__content custom-scroll shadow-box vmargin-right-20 vmargin-left-20 margin-bottom-50">
   <div class="gradient">
     <div class="container">
-      <h2 class="main--title centered center-text">{{ 'ww.title' | translate }}</h2>
+      <h2 class="main--title centered center-text">{{ 'ww.common.title' | translate }}</h2>
       <div class="actions centered center-text">
-        <span [ngClass]="routeAnimationsElements">{{ 'ww.about.slogan' | translate }}</span>
+        <span [ngClass]="routeAnimationsElements">{{ 'ww.pages.about.slogan' | translate }}</span>
         <br>
-        <div [innerHTML]="'ww.about.text' | translate"></div>
+        <div [innerHTML]="'ww.pages.about.text' | translate"></div>
         <br>
       </div>
       <h3 class='centered center-text margin-bottom-35 contributors--title'>
-        {{ "ww.about.contributors.title" | translate }}</h3>
+        {{ "ww.pages.about.contributors.title" | translate }}</h3>
       <div class='authors container centered center-text contributors'>
         <div class="row contributor" *ngFor="let contributor of contributors; index as i; last as isLast">
           <ng-container *ngIf='contributor.img && i%2===0'>

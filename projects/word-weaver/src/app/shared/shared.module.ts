@@ -1,5 +1,4 @@
 import { ClipboardModule } from "@angular/cdk/clipboard";
-import { DragDropModule } from "@angular/cdk/drag-drop";
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -120,7 +119,6 @@ import { TierComponent } from "./tier/tier.component";
     NgxEchartsModule,
     FontAwesomeModule,
     MatTableExporterModule,
-    DragDropModule,
     ClipboardModule
   ],
   declarations: [
@@ -178,7 +176,6 @@ import { TierComponent } from "./tier/tier.component";
     FontAwesomeModule,
     MatTableExporterModule,
     MatExpansionModule,
-    DragDropModule,
     ClipboardModule,
 
     DownloadDialogComponent,

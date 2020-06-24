@@ -282,31 +282,31 @@ export interface Theme {
 }
 
 export const THEMES: Theme[] = [
-  { value: "DEFAULT-THEME", label: marker("ww.settings.themes.default") },
-  { value: "LIGHT-THEME", label: marker("ww.settings.themes.light") },
-  { value: "DARK-THEME", label: marker("ww.settings.themes.dark") },
+  { value: "DEFAULT-THEME", label: marker("ww.pages.settings.themes.default") },
+  { value: "LIGHT-THEME", label: marker("ww.pages.settings.themes.light") },
+  { value: "DARK-THEME", label: marker("ww.pages.settings.themes.dark") },
   {
     value: "PURPLE-THEME--LIGHT",
-    label: marker("ww.settings.themes.purple-light")
+    label: marker("ww.pages.settings.themes.purple-light")
   },
   {
     value: "PURPLE-THEME--DARK",
-    label: marker("ww.settings.themes.purple-dark")
+    label: marker("ww.pages.settings.themes.purple-dark")
   },
   {
     value: "PURPLE-BLUE-THEME--LIGHT",
-    label: marker("ww.settings.themes.purple-blue-light")
+    label: marker("ww.pages.settings.themes.purple-blue-light")
   },
   {
     value: "PURPLE-BLUE-THEME--DARK",
-    label: marker("ww.settings.themes.purple-blue-dark")
+    label: marker("ww.pages.settings.themes.purple-blue-dark")
   },
   {
     value: "PURPLE-GOLD-THEME--LIGHT",
-    label: marker("ww.settings.themes.purple-gold-light")
+    label: marker("ww.pages.settings.themes.purple-gold-light")
   },
   {
     value: "PURPLE-GOLD-THEME--DARK",
-    label: marker("ww.settings.themes.purple-gold-dark")
+    label: marker("ww.pages.settings.themes.purple-gold-dark")
   }
 ];

@@ -30,7 +30,7 @@ import { actionChangeVerb } from "../../../core/wordmaker-selection/wordmaker-se
 export class WordmakerVerbStepComponent implements OnDestroy, OnInit {
   viewableVerbs$ = new ReplaySubject<Verb[]>();
   loading;
-  language = "ww.language";
+  language = "ww.common.language";
   searchField: FormControl;
   verbForm: FormGroup;
   unsubscribe$ = new Subject<void>();

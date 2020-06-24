@@ -20,9 +20,9 @@ export class AppErrorHandler extends ErrorHandler {
     let displayMessage;
 
     if (!environment.production) {
-      displayMessage = marker("ww.error.dev");
+      displayMessage = marker("ww.common.notifications.error.dev");
     } else {
-      displayMessage = marker("ww.error.general");
+      displayMessage = marker("ww.common.notifications.error.general");
     }
 
     this.notificationsService.translated(displayMessage, {}, "error");

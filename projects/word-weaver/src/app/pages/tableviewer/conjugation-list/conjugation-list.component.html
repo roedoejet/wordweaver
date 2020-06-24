@@ -3,21 +3,21 @@
         <div id="table-container" class="rel">
             <div class="error__container" *ngIf="isString(data)">
                 <h3 class="error__header">
-                    {{ 'ww.tableviewer.conj.error.title' | translate }}
+                    {{ 'ww.pages.tableviewer.panels.conj.error.title' | translate }}
                 </h3>
                 <p class="error__message">{{ data }}</p>
                 <p class="error__message">
-                    {{ 'ww.tableviewer.conj.error.message' | translate }}
+                    {{ 'ww.pages.tableviewer.panels.conj.error.message' | translate }}
                 </p>
             </div>
             <table class="full-width abs" *ngIf="!isString(data)">
                 <thead>
                     <tr>
                         <th *ngIf="isL2Showing(settings.level)">
-                            <h3 class='center-text'>{{ 'ww.language' | translate }}</h3>
+                            <h3 class='center-text'>{{ 'ww.common.language' | translate }}</h3>
                         </th>
                         <th *ngIf="isL2Showing(settings.level)">
-                            <h3 class='center-text'>{{ 'ww.translation-language' | translate }}</h3>
+                            <h3 class='center-text'>{{ 'ww.common.translation-language' | translate }}</h3>
                         </th>
                     </tr>
                 </thead>

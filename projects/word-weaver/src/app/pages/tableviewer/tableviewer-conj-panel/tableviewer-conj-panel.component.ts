@@ -147,7 +147,9 @@ export class TableviewerConjPanelComponent
         if (treeState.view === "tree" && conjugationsLength > 0) {
           if (conjugationsLength > 50) {
             this.notificationService.translated(
-              marker("ww.tableviewer.notifications.treeviewer-length.error"),
+              marker(
+                "ww.pages.tableviewer.notifications.treeviewer-length.error"
+              ),
               { value: conjugationsLength },
               "error"
             );
@@ -192,7 +194,7 @@ export class TableviewerConjPanelComponent
     this.gridData$.pipe(take(1)).subscribe(gridData => {
       if (gridData.uniqueRow.length > 80) {
         this.notificationService.translated(
-          marker("ww.tableviewer.notifications.gridOrder.limit-error"),
+          marker("ww.pages.tableviewer.notifications.gridOrder.limit-error"),
           { value: gridData.uniqueRow.length },
           "error"
         );
@@ -249,13 +251,13 @@ export class TableviewerConjPanelComponent
       );
       if (result) {
         this.notificationService.translated(
-          marker("ww.tableviewer.notifications.copy.success"),
+          marker("ww.pages.tableviewer.notifications.copy.success"),
           {},
           "success"
         );
       } else {
         this.notificationService.translated(
-          marker("ww.tableviewer.notifications.copy.error"),
+          marker("ww.pages.tableviewer.notifications.copy.error"),
           {},
           "error"
         );
@@ -266,13 +268,13 @@ export class TableviewerConjPanelComponent
   updateToast(success?, code = 200) {
     if (success) {
       this.notificationService.translated(
-        marker("ww.tableviewer.notifications.download.success"),
+        marker("ww.pages.tableviewer.notifications.download.success"),
         {},
         "success"
       );
     } else {
       this.notificationService.translated(
-        marker("ww.tableviewer.notifications.download.error"),
+        marker("ww.pages.tableviewer.notifications.download.error"),
         {},
         "error"
       );

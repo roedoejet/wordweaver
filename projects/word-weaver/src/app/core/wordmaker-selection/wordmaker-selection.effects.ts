@@ -90,7 +90,7 @@ export class WordmakerEffects {
                 const random = randomX(this.verbService.verbs);
                 this.store.dispatch(actionChangeVerb({ root: random }));
                 this.notificationService.translated(
-                  marker("ww.wordmaker.notifications.random.verb"),
+                  marker("ww.pages.wordmaker.notifications.random.verb"),
                   { value: random.gloss },
                   "success"
                 );
@@ -188,7 +188,9 @@ export class WordmakerEffects {
               }
               if (pronoun.agent && pronoun.patient) {
                 this.notificationService.translated(
-                  marker("ww.wordmaker.notifications.random.pers.transitive"),
+                  marker(
+                    "ww.pages.wordmaker.notifications.random.pers.transitive"
+                  ),
                   {
                     agent: pronoun.agent.gloss,
                     patient: pronoun.patient.gloss
@@ -197,13 +199,17 @@ export class WordmakerEffects {
                 );
               } else if (pronoun.agent) {
                 this.notificationService.translated(
-                  marker("ww.wordmaker.notifications.random.pers.intransitive"),
+                  marker(
+                    "ww.pages.wordmaker.notifications.random.pers.intransitive"
+                  ),
                   { value: pronoun.agent.gloss },
                   "success"
                 );
               } else if (pronoun.patient) {
                 this.notificationService.translated(
-                  marker("ww.wordmaker.notifications.random.pers.intransitive"),
+                  marker(
+                    "ww.pages.wordmaker.notifications.random.pers.intransitive"
+                  ),
                   { value: pronoun.patient.gloss },
                   "success"
                 );
@@ -216,7 +222,7 @@ export class WordmakerEffects {
                 const random = randomX(this.optionService.options);
                 this.store.dispatch(actionChangeOption({ option: random }));
                 this.notificationService.translated(
-                  marker("ww.wordmaker.notifications.random.temp"),
+                  marker("ww.pages.wordmaker.notifications.random.temp"),
                   { value: random.gloss },
                   "success"
                 );

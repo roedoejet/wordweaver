@@ -1,4 +1,3 @@
-import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { MatDialogRef } from "@angular/material/dialog";
@@ -8,10 +7,7 @@ import { take } from "rxjs/operators";
 import { META } from "../../../config/config";
 import { selectTableviewerState } from "../../core/core.state";
 import { State } from "../../core/settings/settings.model";
-import {
-  actionChangeGridOrder,
-  actionChangeViewMode
-} from "../../core/tableviewer-selection/tableviewer-selection.actions";
+import { actionChangeViewMode } from "../../core/tableviewer-selection/tableviewer-selection.actions";
 import { TableviewerState } from "../../core/tableviewer-selection/tableviewer-selection.model";
 import { selectTableViewerGridOrder } from "../../core/tableviewer-selection/tableviewer-selection.selectors";
 import { GridOrderOptions } from "../../pages/tableviewer/conjugation-grid/conjugation-grid.component";
@@ -43,24 +39,6 @@ export class TableViewerDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.selection$ = this.store.pipe(select(selectTableviewerState));
-  }
-
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(
-      this.gridOrderValues,
-      event.previousIndex,
-      event.currentIndex
-    );
-    this.store.dispatch(
-      actionChangeGridOrder({
-        name: "gridOrder",
-        partial: {
-          main: this.gridOrderValues[0],
-          row: this.gridOrderValues[1],
-          col: this.gridOrderValues[2]
-        }
-      })
-    );
   }
 
   onSelecteViewMode(event) {

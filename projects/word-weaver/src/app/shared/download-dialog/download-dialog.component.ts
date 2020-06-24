@@ -49,7 +49,11 @@ export class DownloadDialogComponent implements OnInit {
     private translate: TranslateService
   ) {
     this.translate
-      .get(marker("ww.download.dialog.settings.heading.placeholder"))
+      .get(
+        marker(
+          "ww.pages.tableviewer.dialog.download.settings.heading.placeholder"
+        )
+      )
       .subscribe(x => this.form.controls.heading.setValue(x));
   }
 
@@ -107,7 +111,7 @@ export class DownloadDialogComponent implements OnInit {
               .pipe(
                 catchError(err => {
                   this.notificationService.translated(
-                    marker("ww.tableviewer.notifications.download.error"),
+                    marker("ww.pages.tableviewer.notifications.download.error"),
                     {},
                     "error"
                   );

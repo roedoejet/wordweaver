@@ -35,9 +35,15 @@ import { TranslateService } from "@ngx-translate/core";
 export class WordmakerComponent implements OnDestroy, OnInit, AfterViewInit {
   loading;
   isLinear = true;
-  verbLabel = new BehaviorSubject<string>(marker("ww.wordmaker.verb.question"));
-  persLabel = new BehaviorSubject<string>(marker("ww.wordmaker.pers.question"));
-  tempLabel = new BehaviorSubject<string>(marker("ww.wordmaker.temp.question"));
+  verbLabel = new BehaviorSubject<string>(
+    marker("ww.pages.wordmaker.steps.verb.question")
+  );
+  persLabel = new BehaviorSubject<string>(
+    marker("ww.pages.wordmaker.steps.pers.question")
+  );
+  tempLabel = new BehaviorSubject<string>(
+    marker("ww.pages.wordmaker.steps.temp.question")
+  );
   selection$: Observable<WordmakerState>;
   unsubscribe$ = new Subject<void>();
   @ViewChild("stepper") private stepper;
@@ -56,7 +62,7 @@ export class WordmakerComponent implements OnDestroy, OnInit, AfterViewInit {
       if (x.root) {
         this.verbLabel.next("ww-data.verbs." + x.root.tag);
       } else {
-        this.verbLabel.next("ww.wordmaker.verb.question");
+        this.verbLabel.next("ww.pages.wordmaker.steps.verb.question");
       }
       // TODO: This needs to be refactored to be language agnostic
       if (x.agent || x.patient) {
@@ -80,12 +86,12 @@ export class WordmakerComponent implements OnDestroy, OnInit, AfterViewInit {
           } else if (x.patient) {
             label = "ww-data.pronouns.patients." + x.patient.tag;
           } else {
-            label = "ww.wordmaker.pers.question";
+            label = "ww.pages.wordmaker.steps.pers.question";
           }
           this.persLabel.next(label);
         }
       } else {
-        this.persLabel.next("ww.wordmaker.pers.question");
+        this.persLabel.next("ww.pages.wordmaker.steps.pers.question");
       }
       if (x.option) {
         console.log(x.option);
@@ -107,7 +113,7 @@ export class WordmakerComponent implements OnDestroy, OnInit, AfterViewInit {
             .subscribe(opt => this.tempLabel.next(opt));
         }
       } else {
-        this.tempLabel.next("ww.wordmaker.temp.question");
+        this.tempLabel.next("ww.pages.wordmaker.steps.temp.question");
       }
     });
   }

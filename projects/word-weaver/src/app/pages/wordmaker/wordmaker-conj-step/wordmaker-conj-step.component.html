@@ -3,14 +3,14 @@
     <div class='panel__header'>
         <div class='container' *ngIf="conjugation$ | async as conjugations">
             <div class='row'>
-                <p class="margin-0 font-lg">{{ 'ww.wordmaker.conj.congratulations-header' | translate }}!</p>
+                <p class="margin-0 font-lg">{{ 'ww.pages.wordmaker.steps.conj.congratulations-header' | translate }}!</p>
             </div>
             <div class='row'>
                 <br>
             </div>
             <div class='row'>
                 <div class='congratulations col-sm-12'>
-                    <p class="font-lg" [innerHTML]="'ww.wordmaker.conj.congratulations-text' | translate">
+                    <p class="font-lg" [innerHTML]="'ww.pages.wordmaker.steps.conj.congratulations-text' | translate">
                     </p>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                 <h5 *ngIf='settings.level[tier.name] && i !== 0'>
                     <ww-tier *ngIf="conjugations[0]" [tier]="tier" [data]="conjugations[0]"></ww-tier>
                 </h5>
-                <h3 *ngIf="!conjugations[0]" >{{ 'ww.wordmaker.errors.noconjugation' | translate }}</h3>
+                <h3 *ngIf="!conjugations[0]" >{{ 'ww.pages.wordmaker.notifications.noconjugation' | translate }}</h3>
             </div>
         </div>
     </div>

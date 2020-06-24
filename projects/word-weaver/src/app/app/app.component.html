@@ -6,7 +6,7 @@
 
       <div class="branding">
         <img [src]="logo" />
-        <span>{{ 'ww.title-short' | translate}}</span>
+        <span>{{ 'ww.common.title-short' | translate}}</span>
       </div>
       <mat-nav-list>
         <a mat-list-item *ngFor="let item of navigationSideMenu" (click)="sidenav.close()" [routerLink]="[item.link]"
