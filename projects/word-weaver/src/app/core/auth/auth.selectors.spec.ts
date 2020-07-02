@@ -18,6 +18,8 @@ function createAuthState() {
       isAuthenticated: false
     },
     settings: {} as any,
+    tableviewer: {} as any,
+    wordmaker: {} as any,
     router: {} as any
   };
 }

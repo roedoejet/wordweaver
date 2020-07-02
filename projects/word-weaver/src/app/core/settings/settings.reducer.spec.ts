@@ -21,13 +21,13 @@ describe("SettingsReducer", () => {
   it("should update language", () => {
     const action = actionSettingsChangeLanguage({ language: "fr" });
     const state = settingsReducer(undefined, action);
-    expect(state.language).toEqual("sk");
+    expect(state.language).toEqual("fr");
   });
 
   it("should update theme", () => {
-    const action = actionSettingsChangeTheme({ theme: "dark" });
+    const action = actionSettingsChangeTheme({ theme: "PURPLE-THEME--DARK" });
     const state = settingsReducer(undefined, action);
-    expect(state.theme).toEqual("dark");
+    expect(state.theme).toEqual("PURPLE-THEME--DARK");
   });
 
   it("should update pageAnimations", () => {

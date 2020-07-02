@@ -1,18 +1,23 @@
 import { TestBed } from "@angular/core/testing";
 
-import { HttpClientModule } from "@angular/common/http";
+import {
+  HttpClientTestingModule,
+  HttpTestingController
+} from "@angular/common/http/testing";
 
 import { OptionService } from "./option.service";
 
 describe("OptionService", () => {
   let service: OptionService;
+  let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [OptionService],
-      imports: [HttpClientModule]
+      imports: [HttpClientTestingModule]
     });
     service = TestBed.inject(OptionService);
+    httpMock = TestBed.get(HttpTestingController);
   });
 
   it("should be created", () => {

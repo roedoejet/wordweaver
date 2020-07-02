@@ -159,7 +159,7 @@
 
 @mixin bg-colors($map) {
   @each $theme, $color in $map {
-    &.bg-#{$theme} {
+    &.bg-#{"" + $theme + ""} {
       background-color: $color !important;
     }
   }
@@ -172,7 +172,7 @@
 
 @mixin colors($map) {
   @each $theme, $color in $map {
-    &.color-#{$theme} {
+    &.color-#{"" + $theme + ""} {
       color: $color !important;
     }
   }
@@ -185,7 +185,7 @@
 
 @mixin border-colors($map) {
   @each $theme, $color in $map {
-    &.border-#{$theme} {
+    &.border-#{"" + $theme + ""} {
       border: em(1) solid $color !important;
     }
   }

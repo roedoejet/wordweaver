@@ -93,7 +93,7 @@ describe("SettingsComponent", () => {
   it("should dispatch change auto night mode on night mode toggle", () => {
     dispatchSpy = spyOn(store, "dispatch");
     const componentDebug = fixture.debugElement;
-    const slider = componentDebug.queryAll(By.directive(MatSlideToggle))[1];
+    const slider = componentDebug.queryAll(By.directive(MatSlideToggle))[2];
 
     slider.triggerEventHandler("change", { checked: false });
     fixture.detectChanges();
@@ -102,49 +102,5 @@ describe("SettingsComponent", () => {
     expect(dispatchSpy).toHaveBeenCalledWith(
       actionSettingsChangeAutoNightMode({ autoNightMode: false })
     );
-  });
-
-  it("should dispatch change animations page", () => {
-    dispatchSpy = spyOn(store, "dispatch");
-    const componentDebug = fixture.debugElement;
-    const slider = componentDebug.queryAll(By.directive(MatSlideToggle))[2];
-
-    slider.triggerEventHandler("change", { checked: false });
-    fixture.detectChanges();
-
-    expect(dispatchSpy).toHaveBeenCalledTimes(1);
-    expect(dispatchSpy).toHaveBeenCalledWith(
-      actionSettingsChangeAnimationsPage({ pageAnimations: false })
-    );
-  });
-
-  it("should dispatch change animations elements", () => {
-    dispatchSpy = spyOn(store, "dispatch");
-    const componentDebug = fixture.debugElement;
-    const slider = componentDebug.queryAll(By.directive(MatSlideToggle))[3];
-
-    slider.triggerEventHandler("change", { checked: false });
-    fixture.detectChanges();
-
-    expect(dispatchSpy).toHaveBeenCalledTimes(1);
-    expect(dispatchSpy).toHaveBeenCalledWith(
-      actionSettingsChangeAnimationsElements({ elementsAnimations: false })
-    );
-  });
-
-  it("should disable change animations page when disabled is set in state", () => {
-    mockSelectSettings.setResult({
-      pageAnimationsDisabled: true
-    } as SettingsState);
-    store.refreshState();
-    fixture.detectChanges();
-
-    dispatchSpy = spyOn(store, "dispatch");
-    const componentDebug = fixture.debugElement;
-    const slider = componentDebug.queryAll(By.directive(MatSlideToggle))[2];
-    slider.triggerEventHandler("change", { checked: false });
-    fixture.detectChanges();
-
-    expect(dispatchSpy).toHaveBeenCalledTimes(0);
   });
 });

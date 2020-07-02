@@ -100,7 +100,9 @@ export class WordmakerComponent implements OnDestroy, OnInit, AfterViewInit {
             this.translationService.get(
               "ww-data.options.types." + x.option.type
             ),
-            this.translationService.get("ww-data.options.items." + x.option.tag)
+            this.translationService.get(
+              "ww-data.options.items." + x.option["tag"]
+            )
           )
             .pipe(take(1))
             .subscribe(([optType, optItem]) =>
@@ -108,7 +110,7 @@ export class WordmakerComponent implements OnDestroy, OnInit, AfterViewInit {
             );
         } else {
           this.translationService
-            .get("ww-data.options.items." + x.option.tag)
+            .get("ww-data.options.items." + x.option["tag"])
             .pipe(take(1))
             .subscribe(opt => this.tempLabel.next(opt));
         }

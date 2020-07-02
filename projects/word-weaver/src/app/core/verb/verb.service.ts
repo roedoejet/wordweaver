@@ -30,52 +30,11 @@ export class VerbService {
     );
   }
 
-  translateVerbs$() {
-    return this.verbs$.pipe(
-      switchMap(verbs =>
-        zip(
-          of(verbs),
-          combineLatest(
-            verbs.map((verb: Verb) =>
-              this.translate.get("ww-data.verbs." + verb.tag)
-            )
-          )
-        )
-      ),
-      map(verbs =>
-        verbs[0].map((verb, index) => {
-          verb["translation"] = verbs[1][index];
-          return verb;
-        })
-      ),
-      take(1)
-    );
-  }
-
   getRandomOption(options: Verb[]): Verb {
     return options[Math.floor(Math.random() * options.length)];
   }
 
   getVerb(tag) {
     return this.verbs.filter(v => v.tag === tag)[0];
-  }
-
-  searchEntries(terms: Observable<string>) {
-    return terms.pipe(
-      // debounceTime(100),
-      distinctUntilChanged(),
-      map(val =>
-        this.verbs.filter(verb => {
-          if (val && val.length > 2) {
-            return (
-              verb.gloss.toLowerCase().indexOf(val.toLowerCase()) > -1 ||
-              verb.tag.toLowerCase().indexOf(val.toLowerCase()) > -1
-            );
-          } else {
-            return true;
-          }
-        })
-      )
-    );
   }
 }

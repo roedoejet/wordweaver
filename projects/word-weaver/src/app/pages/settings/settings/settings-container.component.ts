@@ -77,14 +77,14 @@ export class SettingsContainerComponent implements OnDestroy, OnInit {
 
   ngOnInit() {
     this.settings$ = this.store.pipe(select(selectSettings));
-    this.deferredPrompt$ = fromEvent(window, "beforeinstallprompt").pipe(
-      takeUntil(this.unsubscribe$),
-      map(e => {
-        e.preventDefault();
-        this.showInstall = true;
-        return e;
-      })
-    );
+    // this.deferredPrompt$ = fromEvent(window, "beforeinstallprompt").pipe(
+    //   takeUntil(this.unsubscribe$),
+    //   map(e => {
+    //     e.preventDefault();
+    //     this.showInstall = true;
+    //     return e;
+    //   })
+    // );
   }
 
   ngOnDestroy() {

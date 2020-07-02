@@ -66,7 +66,7 @@
 
 // Let checkboxes be colored after verbs
 @each $theme, $color in $verb-highlight-color-names {
-  .mat-checkbox-checked.mat-#{$theme} .mat-checkbox-background {
+  .mat-checkbox-checked.mat-#{"" + $theme + ""} .mat-checkbox-background {
     background-color: $color !important;
   }
 }

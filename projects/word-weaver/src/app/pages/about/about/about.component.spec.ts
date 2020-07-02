@@ -26,4 +26,8 @@ describe("AboutComponent", () => {
   it("should be created", () => {
     expect(component).toBeTruthy();
   });
+
+  it("should have some contributors", () => {
+    expect(component.contributors.length).toBeGreaterThan(0);
+  });
 });

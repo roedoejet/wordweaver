@@ -18,11 +18,6 @@ const routes: Routes = [
       import("./pages/settings/settings.module").then(m => m.SettingsModule)
   },
   {
-    path: "info",
-    loadChildren: () =>
-      import("./pages/info/info.module").then(m => m.InfoModule)
-  },
-  {
     path: "wordmaker",
     loadChildren: () =>
       import("./pages/wordmaker/wordmaker.module").then(m => m.WordmakerModule)

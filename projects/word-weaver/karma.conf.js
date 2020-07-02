@@ -15,6 +15,7 @@ module.exports = function(config) {
       require("@angular-devkit/build-angular/plugins/karma")
     ],
     client: {
+      captureConsole: true,
       clearContext: true // leave Jasmine Spec Runner output visible in browser
     },
     coverageIstanbulReporter: {
@@ -27,6 +28,7 @@ module.exports = function(config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
+    usePolling: true,
     browsers: ["Chrome"],
     restartOnFileChange: true,
     customLaunchers: {

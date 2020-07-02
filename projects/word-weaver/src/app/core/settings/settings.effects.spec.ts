@@ -14,7 +14,7 @@ import {
 } from "../core.module";
 
 import { SettingsEffects, SETTINGS_KEY } from "./settings.effects";
-import { SettingsState } from "./settings.model";
+import { SettingsState, NIGHT_MODE_THEME } from "./settings.model";
 import { actionSettingsChangeTheme } from "./settings.actions";
 
 const scheduler = new TestScheduler((actual, expected) =>
@@ -59,31 +59,25 @@ describe("SettingsEffects", () => {
         language: "en",
         pageAnimations: true,
         elementsAnimations: true,
-        theme: "default",
-        nightTheme: "default",
+        theme: "PURPLE-THEME--LIGHT",
+        nightTheme: NIGHT_MODE_THEME,
         autoNightMode: false,
         stickyHeader: false,
         baseUrl: environment.base + environment.prefix,
         testApi: false,
-        level: {
-          gloss: false,
-          breakdown: false,
-          "translation-breakdown": false,
-          translation: true
+        colors: {
+          primary: "rgb(255, 255, 255)",
+          accent: "rgb(255, 255, 255)"
         },
-        highlight: {
-          root: false,
-          pronoun: true,
-          aspect: false,
-          post_aspectual_suffix: false,
-          prepronominal_prefix: false,
-          tmp_affix: false
-        },
+        level: environment.config.level,
+        highlight: environment.config.highlight,
         pageAnimationsDisabled: true,
         hour: 12
       };
       store.pipe.and.returnValue(of(settings));
-      const persistAction = actionSettingsChangeTheme({ theme: "DEFAULT" });
+      const persistAction = actionSettingsChangeTheme({
+        theme: "PURPLE-THEME--LIGHT"
+      });
       const source = cold("a", { a: persistAction });
       const actions = new Actions(source);
       const effect = new SettingsEffects(
