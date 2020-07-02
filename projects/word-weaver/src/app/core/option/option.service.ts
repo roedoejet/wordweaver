@@ -15,6 +15,10 @@ export class OptionService {
   optionsByType$: Observable<object[]>;
   random$: Observable<Option>;
   constructor(private http: HttpClient) {
+    if (environment.serverless) {
+      this.path += ".json";
+    }
+    console.log(this.path);
     this.options$ = this.http.get<Option[]>(this.path).pipe(shareReplay(1));
     this.optionsByType$ = this.options$.pipe(
       map(options => {

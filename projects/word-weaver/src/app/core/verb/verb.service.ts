@@ -21,6 +21,9 @@ export class VerbService {
   verbs$: Observable<Verb[]>;
   random$: Observable<Verb>;
   constructor(private http: HttpClient, private translate: TranslateService) {
+    if (environment.serverless) {
+      this.path += ".json";
+    }
     this.verbs$ = this.http.get<Verb[]>(this.path).pipe(shareReplay(1));
     this.verbs$.subscribe(verbs => (this.verbs = verbs));
     this.random$ = this.verbs$.pipe(

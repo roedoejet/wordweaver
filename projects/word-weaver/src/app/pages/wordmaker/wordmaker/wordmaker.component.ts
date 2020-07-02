@@ -94,7 +94,6 @@ export class WordmakerComponent implements OnDestroy, OnInit, AfterViewInit {
         this.persLabel.next("ww.pages.wordmaker.steps.pers.question");
       }
       if (x.option) {
-        console.log(x.option);
         if ("type" in x.option) {
           zip(
             this.translationService.get(

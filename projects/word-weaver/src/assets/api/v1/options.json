@@ -1,0 +1,68 @@
+[
+  {
+    "tag": "indicatif-present",
+    "type": "indicatif",
+    "en": { "type": "Indicative", "tag": "Indicative Present" },
+    "fr": { "type": "Indicatif", "tag": "Indicatif Pr\u00e9sent" }
+  },
+  {
+    "tag": "indicatif-imparfait",
+    "type": "indicatif",
+    "en": { "type": "Indicative", "tag": "Imperfect" },
+    "fr": { "type": "Indicatif", "tag": "Indicatif Imparfait" }
+  },
+  {
+    "tag": "indicatif-passe-simple",
+    "type": "indicatif",
+    "en": { "type": "Indicative", "tag": "Simple Past" },
+    "fr": { "type": "Indicatif", "tag": "Indicatif Pass\u00e9 Simple" }
+  },
+  {
+    "tag": "indicatif-futur",
+    "type": "indicatif",
+    "en": { "type": "Indicative", "tag": "Future" },
+    "fr": { "type": "Indicatif", "tag": "Indicatif Futur" }
+  },
+  {
+    "tag": "subjonctif-present",
+    "type": "subjonctif",
+    "en": { "type": "Subjonctive", "tag": "Subjunctive Present" },
+    "fr": { "type": "Subjonctif", "tag": "Subjonctif Pr\u00e9sent" }
+  },
+  {
+    "tag": "subjonctif-imparfait",
+    "type": "subjonctif",
+    "en": { "type": "Subjonctive", "tag": "Subjunctive Imperfect" },
+    "fr": { "type": "Subjonctif", "tag": "Subjonctif Imparfait" }
+  },
+  {
+    "tag": "conditionnel-present",
+    "type": "conditionnel",
+    "en": { "type": "Conditional", "tag": "Conditional Present" },
+    "fr": { "type": "Conditionnel", "tag": "Conditionnel Pr\u00e9sent" }
+  },
+  {
+    "tag": "imperatif-present",
+    "type": "imperatif",
+    "en": { "type": "Imperative", "tag": "Present Imperative" },
+    "fr": { "type": "Imperatif", "tag": "Imperatif Pr\u00e9sent" }
+  },
+  {
+    "tag": "infinitif-present",
+    "type": "infinitif",
+    "en": { "type": "Infinitive", "tag": "Infinitive Present" },
+    "fr": { "type": "Infinitif", "tag": "Infinitif Pr\u00e9sent" }
+  },
+  {
+    "tag": "participe-present",
+    "type": "participe",
+    "en": { "type": "Participal", "tag": "Present Participal" },
+    "fr": { "type": "Participe", "tag": "Participe Pr\u00e9sent" }
+  },
+  {
+    "tag": "participe-passe",
+    "type": "participe",
+    "en": { "type": "Participal", "tag": "Past Participal" },
+    "fr": { "type": "Participe", "tag": "Participe Pass\u00e9" }
+  }
+]

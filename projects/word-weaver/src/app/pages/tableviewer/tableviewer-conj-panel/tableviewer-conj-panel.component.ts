@@ -42,6 +42,7 @@ import {
 import { DownloadDialogComponent } from "../../../shared/download-dialog/download-dialog.component";
 import { TableViewerDialogComponent } from "../../../shared/tableviewer-dialog/tableviewer-dialog.component";
 import { GridOrderOptions } from "../conjugation-grid/conjugation-grid.component";
+import { environment } from "../../../../environments/environment";
 
 @Component({
   selector: "ww-tableviewer-conj-panel",
@@ -75,7 +76,7 @@ export class TableviewerConjPanelComponent
   listData$: Observable<any>;
   treeData$: Observable<any>;
   unsubscribe$ = new Subject<void>();
-
+  serverless = environment.serverless;
   // Elements
   @ViewChild("header") header;
   @ViewChild("conjugate") conjugateBtn;

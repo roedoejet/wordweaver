@@ -153,7 +153,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     },
     // These are the data-specific i18n assets
     {
-      prefix: `${environment.base}/i18n/`,
+      prefix: `${environment.i18nDataPrefix}`,
       suffix: ".json"
     }
   ]);

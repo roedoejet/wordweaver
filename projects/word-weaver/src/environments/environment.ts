@@ -16,9 +16,11 @@ export const environment = {
     level: LEVELS,
     meta: META
   },
+  serverless: false,
   production: false,
   test: false,
   i18nPrefix: "",
+  i18nDataPrefix: "//localhost/i18n/",
   firebase: {
     apiKey: "AIzaSyBkM2v1la_3Arbnt0qziB_TYQB0nFij3kk",
     authDomain: "wordweavertoy.firebaseapp.com",

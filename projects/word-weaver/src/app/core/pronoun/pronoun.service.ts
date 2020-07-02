@@ -14,6 +14,9 @@ export class PronounService {
   pronouns$: Observable<Pronoun[]>;
   random$: Observable<Pronoun>;
   constructor(private http: HttpClient) {
+    if (environment.serverless) {
+      this.path += ".json";
+    }
     this.pronouns$ = this.http.get<Pronoun[]>(this.path).pipe(shareReplay(1));
     this.random$ = this.pronouns$.pipe(map(res => this.getRandomPro(res)));
     this.pronouns$.subscribe(pns => (this.pronouns = pns));

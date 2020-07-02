@@ -27,11 +27,15 @@ export class ConjugationService {
   conjugations;
   conjugations$: Observable<Response>;
   random$: Observable<ResponseObject>;
+  path = "conjugations";
   constructor(private http: HttpClient, private store: Store) {
+    if (environment.serverless) {
+      this.path += ".json";
+    }
     this.conjugations$ = this.store.pipe(
       select(selectSettingsState),
       switchMap((settings: SettingsState) =>
-        this.http.get<Response>(settings.baseUrl + "conjugations")
+        this.http.get<Response>(settings.baseUrl + this.path)
       ),
       shareReplay(1)
     );

@@ -12,9 +12,11 @@ export const environment = {
     level: LEVELS,
     meta: META
   },
+  serverless: false,
   production: true,
   test: false,
   i18nPrefix: "/wordweaver-UI",
+  i18nDataPrefix: "http://li223-249.members.linode.com/i18n/",
   firebase: {
     apiKey: "AIzaSyB8Rh04f4p61cphLkDAIoOozvESbUrweAA",
     authDomain: "kawennonis.firebaseapp.com",
