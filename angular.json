@@ -70,7 +70,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
@@ -189,5 +188,8 @@
       }
     }
   },
-  "defaultProject": "word-weaver"
+  "defaultProject": "word-weaver",
+  "cli": {
+    "analytics": false
+  }
 }
