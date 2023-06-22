@@ -66,5 +66,5 @@ export const actionChangeGridOrder = createAction(
 
 export const actionConjugationEvent = createAction(
   "[Tableviewer] Manual Conjugation Event",
-  props<{}>()
+  props<{ event_type: string }>()
 );

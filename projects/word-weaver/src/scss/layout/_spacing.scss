@@ -138,18 +138,18 @@ $size: 5;
     }
   }
   .pheight-#{$size} {
-    height: percentage($size/100);
+    height: percentage(calc($size/100));
   }
   .pwidth-#{$size} {
-    width: percentage($size/100);
+    width: percentage(calc($size/100));
     &--desktop {
       @include mq(em(map-get($breakpoints, medium))) {
-        width: percentage($size/100);
+        width: percentage(calc($size/100));
       }
     }
     &--mobile {
       @include mq(em(map-get($breakpoints, medium)), "max-width") {
-        width: percentage($size/100);
+        width: percentage(calc($size/100));
       }
     }
   }

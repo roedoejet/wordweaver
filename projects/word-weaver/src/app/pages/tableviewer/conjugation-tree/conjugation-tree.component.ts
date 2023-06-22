@@ -6,7 +6,7 @@ import {
   OnInit
 } from "@angular/core";
 import { select, Store } from "@ngrx/store";
-import { EChartOption } from "echarts";
+import { EChartsOption } from "echarts";
 import { merge as _merge } from "lodash";
 import { combineLatest, Observable, of, Subject } from "rxjs";
 import { map, switchMap, takeUntil } from "rxjs/operators";
@@ -32,8 +32,8 @@ import { TableviewerState } from "../../../core/tableviewer-selection/tableviewe
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ConjugationTreeComponent implements OnDestroy, OnInit {
-  options$: Observable<EChartOption | boolean>;
-  defaultChartOption: EChartOption;
+  options$: Observable<EChartsOption | boolean>;
+  defaultChartOption: EChartsOption;
   defaultSeries: any;
   selection$: Observable<TableviewerState>;
   unsubscribe$ = new Subject<void>();

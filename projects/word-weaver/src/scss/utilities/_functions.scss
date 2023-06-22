@@ -34,7 +34,7 @@
   @if $target == 0 {
     @return 0;
   }
-  @return $target / $context + 0em;
+  @return calc($target / $context) + 0em;
 }
 // rem()
 //
@@ -56,7 +56,7 @@
   @if $target == 0 {
     @return 0;
   }
-  @return $target / $context + 0rem;
+  @return calc($target / $context) + 0rem;
 }
 
 // px()
