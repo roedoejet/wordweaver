@@ -18,6 +18,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "stylePreprocessorOptions": { "includePaths": ["./node_modules"] },
             "outputPath": "dist/word-weaver",
             "index": "projects/word-weaver/src/index.html",
             "main": "projects/word-weaver/src/main.ts",

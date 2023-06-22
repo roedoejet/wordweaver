@@ -1,4 +1,4 @@
-@import "~@angular/material/theming";
+@import "@angular/material/theming";
 
 @mixin ww-settings-component-theme-common($theme) {
   $primary: map-get($theme, primary);
