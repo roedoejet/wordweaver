@@ -149,6 +149,6 @@
     "echarts": "^5.4.2",
     "file-saver": "^2.0.2",
     "mat-table-exporter": "^10.2.4",
-    "ngx-echarts": "^4.2.2"
+    "ngx-echarts": "^14.0.0"
   }
 }

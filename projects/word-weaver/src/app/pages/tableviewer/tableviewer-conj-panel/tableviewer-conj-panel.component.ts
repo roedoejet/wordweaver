@@ -12,7 +12,7 @@ import { FormControl } from "@angular/forms";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { marker } from "@biesbjerg/ngx-translate-extract-marker";
 import { select, Store } from "@ngrx/store";
-import { EChartOption } from "echarts";
+import { EChartsOption } from "echarts";
 import { BehaviorSubject, Observable, Subject } from "rxjs";
 import { map, take, takeUntil } from "rxjs/operators";
 import {
@@ -71,7 +71,7 @@ export class TableviewerConjPanelComponent
   order$ = new BehaviorSubject<boolean>(true);
   depth$ = new BehaviorSubject<number>(1);
   conjugationTrigger$: Observable<any>;
-  chartResponse$: Observable<EChartOption | any>;
+  chartResponse$: Observable<EChartsOption | any>;
   gridData$: Observable<any>;
   listData$: Observable<any>;
   treeData$: Observable<any>;
