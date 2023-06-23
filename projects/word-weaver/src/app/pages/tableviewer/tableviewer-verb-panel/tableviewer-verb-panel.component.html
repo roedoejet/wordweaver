@@ -10,7 +10,16 @@
         <mat-expansion-panel class='selected-verb-panel' [expanded]="false">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              {{ selection.length }} {{ 'ww.pages.tableviewer.misc.selected' | translate }}
+              {{ selection.length }}&nbsp;
+              <div *ngIf="selection.length == 1">
+                {{ 'ww.pages.tableviewer.misc.selected-one' | translate }}
+              </div>
+              <div *ngIf="selection.length == 2">
+                {{ 'ww.pages.tableviewer.misc.selected-two' | translate }}
+              </div>
+              <div *ngIf="selection.length > 2">
+                {{ 'ww.pages.tableviewer.misc.selected-many' | translate }}
+              </div>
             </mat-panel-title>
           </mat-expansion-panel-header>
 

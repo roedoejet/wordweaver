@@ -111,7 +111,10 @@
 				"misc": {
 					"other": "other",
 					"others": "others",
-					"selected": "selected"
+					"selected": "selected",
+					"selected-one": "selected",
+					"selected-two": "selected",
+					"selected-many": "selected"
 				},
 				"notifications": {
 					"copy": {
