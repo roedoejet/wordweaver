@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { environment } from "../../../environments/environment";
+import { CONFIG_NAME } from "../../../config/config";
 
 // Slugify a string
 function slugify(str) {
@@ -28,7 +29,7 @@ function slugify(str) {
   return str;
 }
 
-const APP_PREFIX = "ww-" + slugify(environment.base);
+const APP_PREFIX = "ww-" + slugify(environment.base) + CONFIG_NAME;
 
 @Injectable({
   providedIn: "root"

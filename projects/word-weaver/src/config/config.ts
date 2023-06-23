@@ -169,6 +169,8 @@ export const _defaultOptions: TierOptions = { language: "L1", showName: false };
 
 // IC: Basic
 
+export const CONFIG_NAME: string = "dflt";
+
 export const HIGHLIGHTS: Highlight = {
   root: true,
   ending: true

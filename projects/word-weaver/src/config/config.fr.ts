@@ -121,6 +121,8 @@ export interface Validation {
   };
 }
 
+export const CONFIG_NAME: string = "fr";
+
 const _defaultOptions: TierOptions = { language: "L1", showName: false };
 
 export const HIGHLIGHTS: Highlight = {
