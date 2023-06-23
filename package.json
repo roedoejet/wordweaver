@@ -146,6 +146,7 @@
   "dependencies": {
     "@angular-devkit/schematics": "^14.2.10",
     "@ngrx/data": "^14.3.3",
+    "docx": "^8.0.4",
     "echarts": "^5.4.2",
     "file-saver": "^2.0.2",
     "mat-table-exporter": "^10.2.4",

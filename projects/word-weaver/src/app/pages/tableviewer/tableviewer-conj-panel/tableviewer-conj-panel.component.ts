@@ -1,5 +1,4 @@
 import { Clipboard } from "@angular/cdk/clipboard";
-import { LocationStrategy } from "@angular/common";
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -8,13 +7,31 @@ import {
   OnInit,
   ViewChild
 } from "@angular/core";
+import { saveAs } from "file-saver";
 import { FormControl } from "@angular/forms";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { marker } from "@biesbjerg/ngx-translate-extract-marker";
 import { select, Store } from "@ngrx/store";
 import { EChartsOption } from "echarts";
-import { BehaviorSubject, Observable, Subject } from "rxjs";
-import { map, take, takeUntil } from "rxjs/operators";
+import { TranslateService } from "@ngx-translate/core";
+import {
+  BehaviorSubject,
+  forkJoin,
+  from,
+  of,
+  Observable,
+  Subject,
+  zip
+} from "rxjs";
+import {
+  combineAll,
+  combineLatest,
+  map,
+  switchMap,
+  take,
+  takeUntil,
+  tap
+} from "rxjs/operators";
 import {
   ConjugationService,
   NotificationService,
@@ -39,10 +56,20 @@ import {
   selectTableViewerLoading,
   selectTableviewerTreeSlice
 } from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
-import { DownloadDialogComponent } from "../../../shared/download-dialog/download-dialog.component";
 import { TableViewerDialogComponent } from "../../../shared/tableviewer-dialog/tableviewer-dialog.component";
+import { Tier, TIERS } from "../../../../config/config";
 import { GridOrderOptions } from "../conjugation-grid/conjugation-grid.component";
 import { environment } from "../../../../environments/environment";
+import {
+  AlignmentType,
+  convertInchesToTwip,
+  Document,
+  LevelFormat,
+  Packer,
+  Paragraph,
+  TextRun
+} from "docx";
+import { utils, write } from "xlsx";
 
 @Component({
   selector: "ww-tableviewer-conj-panel",
@@ -75,6 +102,7 @@ export class TableviewerConjPanelComponent
   gridData$: Observable<any>;
   listData$: Observable<any>;
   treeData$: Observable<any>;
+  tiers = environment.config.tiers;
   unsubscribe$ = new Subject<void>();
   serverless = environment.serverless;
   // Elements
@@ -85,8 +113,8 @@ export class TableviewerConjPanelComponent
     private notificationService: NotificationService,
     private conjugationService: ConjugationService,
     private dialog: MatDialog,
-    private clipboard: Clipboard,
-    private locationStrategy: LocationStrategy
+    private translate: TranslateService,
+    private clipboard: Clipboard
   ) {}
 
   ngOnInit(): void {
@@ -226,11 +254,138 @@ export class TableviewerConjPanelComponent
   }
 
   download() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.minWidth = "30vw";
-    this.dialog.open(DownloadDialogComponent, dialogConfig);
+    this.selection$
+      .pipe(
+        take(1),
+        switchMap(selection => {
+          let data;
+          if (selection.view === "grid") {
+            data = this.gridData$;
+          } else if (selection.view === "list") {
+            data = this.listData$;
+          } else {
+            throw new Error("Proper view not selected for download");
+          }
+          return zip(of(selection.view), data);
+        }),
+        switchMap(downloadData => {
+          let view = downloadData[0];
+          let data: any = downloadData[1];
+          if (view === "grid") {
+            return this.store.pipe(
+              select(selectTableviewerGridSlice),
+              take(1),
+              switchMap(gridState => {
+                // TODO: determine whether columns or rows are options or pronouns from gridState
+                console.log(data);
+                let wb = utils.book_new();
+                data["uniqueMain"].forEach((verb, verbIndex) => {
+                  let cols: string[] = data["uniqueCol"].map(option => option);
+                  // Create the columns
+                  let ws = utils.aoa_to_sheet([["", ...cols]]);
+                  // Add the data
+                  let tier = this.tiers[0];
+                  let formattedData = data["uniqueRow"].map((row, rowIndex) => [
+                    row,
+                    ...cols.map(col => {
+                      if (col in data["structuredData"][verbIndex][rowIndex]) {
+                        return [
+                          data["structuredData"][verbIndex][rowIndex][col][
+                            "output"
+                          ]
+                            .map(morpheme => morpheme[tier.key])
+                            .join(tier["separator"])
+                        ];
+                      } else {
+                        return [];
+                      }
+                    })
+                  ]);
+                  utils.sheet_add_aoa(ws, formattedData, { origin: "A2" });
+                  this.translate
+                    .get("ww-data.verbs." + verb)
+                    .subscribe(verb => utils.book_append_sheet(wb, ws, verb));
+                });
+                let wbout = write(wb, { bookType: "xlsx", type: "array" });
+                /* prepare data for POST */
+                return zip(
+                  of(view),
+                  of(
+                    new Blob([new Uint8Array(wbout)], {
+                      type: "application/octet-stream"
+                    })
+                  )
+                );
+              })
+            );
+          } else if (view === "list") {
+            const content = [];
+            let emptyParagraph = new Paragraph({ children: [] });
+            data.forEach(conjugation => {
+              this.tiers.forEach((tier, index) => {
+                content.push(
+                  new Paragraph({
+                    indent: index === 1 ? { left: 720 } : null,
+                    numbering:
+                      index === 0
+                        ? { reference: "custom-numbering", level: 0 }
+                        : null,
+                    children: [
+                      new TextRun({
+                        text: conjugation["output"]
+                          // filter empty morphemes
+                          .filter(morpheme => morpheme[tier.key])
+                          // join morphemes by the tier-declared separator
+                          .map(morpheme => morpheme[tier.key])
+                          .join(tier.separator),
+                        bold: index === 0
+                      })
+                    ]
+                  })
+                );
+              });
+              // Add empty paragraph for new line
+              content.push(emptyParagraph);
+            });
+            const doc = new Document({
+              numbering: {
+                config: [
+                  {
+                    reference: "custom-numbering",
+                    levels: [
+                      {
+                        level: 0,
+                        format: LevelFormat.DECIMAL,
+                        text: "%1.",
+                        alignment: AlignmentType.START,
+                        style: {
+                          paragraph: {
+                            indent: { left: 720, hanging: 720 }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              sections: [{ children: content }]
+            });
+            return zip(of(view), from(Packer.toBlob(doc)));
+          }
+        })
+      )
+      .subscribe(
+        response => {
+          if (response[0] === "list") {
+            saveAs(response[1], "example.docx");
+          } else if (response[0] === "grid") {
+            saveAs(response[1], "example.xlsx");
+          }
+        },
+        error => {
+          console.error(error);
+        }
+      );
   }
 
   copyLink() {
