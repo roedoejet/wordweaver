@@ -29,8 +29,8 @@ export class DownloadDialogComponent implements OnInit {
   selection$: Observable<TableviewerState>;
   selectionAndSettings$: Observable<[TableviewerState, SettingsState]>;
   fileTypes = {
-    list: ["csv", "docx", "latex"],
-    grid: ["csv", "xlsx", "txt", "json"]
+    list: ["docx"],
+    grid: ["xlsx"]
   };
   fileTypes$: Observable<string[]>;
   showDelay = new FormControl(600);
