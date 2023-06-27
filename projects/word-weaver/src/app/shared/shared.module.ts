@@ -116,7 +116,9 @@ import { TierComponent } from "./tier/tier.component";
     MatTableModule,
     MatExpansionModule,
     MatPaginatorModule,
-    NgxEchartsModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import("echarts")
+    }),
     FontAwesomeModule,
     MatTableExporterModule,
     ClipboardModule
