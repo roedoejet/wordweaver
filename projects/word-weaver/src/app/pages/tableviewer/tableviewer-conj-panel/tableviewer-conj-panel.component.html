@@ -32,7 +32,7 @@
                     [matTooltipPosition]="tooltipPosition" (click)="copyLink()">
                     <mat-icon aria-label="Copy link">link</mat-icon>
                 </button>
-                <button *ngIf="!serverless" (click)="download()" class="ui-button toolbar__tool" mat-icon-button
+                <button *ngIf="selection.view !== 'tree'" (click)="download()" class="ui-button toolbar__tool" mat-icon-button
                     [matTooltip]="'ww.pages.tableviewer.panels.conj.download-tip' | translate"
                     [matTooltipShowDelay]="showDelay.value" [matTooltipHideDelay]="hideDelay.value"
                     [matTooltipPosition]="tooltipPosition">
