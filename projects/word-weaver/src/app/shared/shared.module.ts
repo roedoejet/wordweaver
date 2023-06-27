@@ -71,7 +71,6 @@ import {
   TranslateParser,
   TranslateService
 } from "@ngx-translate/core";
-import { MatTableExporterModule } from "mat-table-exporter";
 import { NgxEchartsModule } from "ngx-echarts";
 import { DownloadDialogComponent } from "./download-dialog/download-dialog.component";
 import { LogoComponent } from "./logo/logo.component";
@@ -120,7 +119,6 @@ import { TierComponent } from "./tier/tier.component";
       echarts: () => import("echarts")
     }),
     FontAwesomeModule,
-    MatTableExporterModule,
     ClipboardModule
   ],
   declarations: [
@@ -176,7 +174,6 @@ import { TierComponent } from "./tier/tier.component";
     MatPaginatorModule,
     MatSliderModule,
     FontAwesomeModule,
-    MatTableExporterModule,
     MatExpansionModule,
     ClipboardModule,
 
