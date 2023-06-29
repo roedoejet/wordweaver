@@ -51,12 +51,14 @@ export interface RequestParams {
   optional?: OptionalParam[];
 }
 
-export interface ResponseMorpheme {
-  position: number;
-  value: string;
-  gloss: string;
-  english: string;
-  type: string[];
+export type ResponseMorpheme = [position: number, value: string, gloss: string, english: string, type: string[]]
+
+export enum ResponseMorphemeNameIndex {
+  position = 0,
+  value = 1,
+  gloss = 2,
+  english = 3,
+  type = 4
 }
 
 export type Conjugation = ResponseMorpheme[];
@@ -89,7 +91,7 @@ export interface Level {
 export interface Tier {
   name: TierNames;
   separator: string;
-  key: keyof ResponseMorpheme;
+  key: ResponseMorphemeNameIndex;
   position: number;
   options: TierOptions;
 }
@@ -131,6 +133,8 @@ export interface Validation {
 
 const _defaultOptions: TierOptions = { language: "L1", showName: false };
 
+export const CONFIG_NAME: string = "moh";
+
 export const HIGHLIGHTS: Highlight = {
   aspect: false,
   "post-aspectual": false,
@@ -151,7 +155,7 @@ export const TIERS: Tier[] = [
     name: "display",
     separator: "",
     position: 0,
-    key: "value",
+    key: ResponseMorphemeNameIndex.value,
     options: {
       language: "L1",
       showName: false
@@ -161,7 +165,7 @@ export const TIERS: Tier[] = [
     name: "breakdown",
     separator: "-",
     position: 1,
-    key: "value",
+    key: ResponseMorphemeNameIndex.value,
     options: {
       language: "L1",
       showName: false
@@ -171,7 +175,7 @@ export const TIERS: Tier[] = [
     name: "gloss",
     separator: "-",
     position: 2,
-    key: "gloss",
+    key: ResponseMorphemeNameIndex.gloss,
     options: {
       language: "L1",
       showName: false
@@ -181,7 +185,7 @@ export const TIERS: Tier[] = [
     name: "translation",
     separator: "",
     position: 4,
-    key: "english",
+    key: ResponseMorphemeNameIndex.english,
     options: {
       language: "L2",
       showName: false

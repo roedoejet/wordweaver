@@ -4,7 +4,12 @@ import {
   Input,
   OnInit
 } from "@angular/core";
-import { Conjugation, ResponseObject, Tier } from "../../../config/config";
+import {
+  Conjugation,
+  ResponseMorphemeNameIndex,
+  ResponseObject,
+  Tier
+} from "../../../config/config";
 
 @Component({
   selector: "ww-tier",
@@ -22,6 +27,10 @@ export class TierComponent implements OnInit {
     // Filter empty values and sort on position
     this.output = this.data.output
       .filter(x => x[this.tier.key])
-      .sort((a, b) => a.position - b.position);
+      .sort(
+        (a, b) =>
+          a[ResponseMorphemeNameIndex.position] -
+          b[ResponseMorphemeNameIndex.position]
+      );
   }
 }

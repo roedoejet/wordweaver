@@ -40,13 +40,16 @@ export interface ConjugationInput {
   patient: string;
 }
 
-export interface ResponseMorpheme {
-  position: number;
-  value: string;
-  gloss: string;
-  english: string;
-  type: string[];
+export type ResponseMorpheme = [position: number, value: string, gloss: string, english: string, type: string[]]
+
+export enum ResponseMorphemeNameIndex {
+  position = 0,
+  value = 1,
+  gloss = 2,
+  english = 3,
+  type = 4
 }
+
 
 export interface Highlight {
   root: boolean;
@@ -89,7 +92,7 @@ export type TierNames = "display" | keyof Level;
 export interface Tier {
   name: TierNames;
   separator: string;
-  key: keyof ResponseMorpheme;
+  key: ResponseMorphemeNameIndex;
   position: number;
   options: TierOptions;
 }
@@ -183,14 +186,14 @@ export const LEVELS: Level = {
 export const TIERS: Tier[] = [
   {
     name: "display",
-    key: "value",
+    key: ResponseMorphemeNameIndex.value,
     position: 0,
     separator: "",
     options: _defaultOptions
   },
   {
     name: "breakdown",
-    key: "value",
+    key: ResponseMorphemeNameIndex.value,
     position: 1,
     separator: "-",
     options: _defaultOptions

@@ -13,6 +13,7 @@ import { map, switchMap, takeUntil } from "rxjs/operators";
 import {
   AvailableLanguages,
   Conjugation,
+  ResponseMorphemeNameIndex,
   Tier
 } from "../../../../config/config";
 import {
@@ -251,7 +252,10 @@ export class ConjugationTreeComponent implements OnDestroy, OnInit {
         .filter(x => x[tier.key])
         // sort by position
         .sort(function(a, b) {
-          return a.position - b.position;
+          return (
+            a[ResponseMorphemeNameIndex.position] -
+            b[ResponseMorphemeNameIndex.position]
+          );
         })
         // create strings
         .map(x => x[tier.key])
