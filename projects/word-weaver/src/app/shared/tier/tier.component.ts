@@ -19,12 +19,14 @@ import {
 })
 export class TierComponent implements OnInit {
   output: Conjugation;
+  morph_type: number;
   @Input() data: ResponseObject;
   @Input() tier: Tier;
   constructor() {}
 
   ngOnInit(): void {
     // Filter empty values and sort on position
+    this.morph_type = ResponseMorphemeNameIndex.type;
     this.output = this.data.output
       .filter(x => x[this.tier.key])
       .sort(
