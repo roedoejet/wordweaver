@@ -183,6 +183,7 @@ export class ConjugationTreeComponent implements OnDestroy, OnInit {
           "agent"
         ];
         if ("patient" in conjugation.input) {
+          p += " → ";
           p += this.pronounService.getPronoun(conjugation.input.patient)[lang][
             "patient"
           ];
