@@ -1,0 +1,2 @@
+# So far our code base didn't use es5 trailing commas so let's leave them out for now
+trailingComma: "none"
