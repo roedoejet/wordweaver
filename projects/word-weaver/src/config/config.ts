@@ -40,7 +40,13 @@ export interface ConjugationInput {
   patient: string;
 }
 
-export type ResponseMorpheme = [position: number, value: string, gloss: string, english: string, type: string[]]
+export type ResponseMorpheme = [
+  position: number,
+  value: string,
+  gloss: string,
+  english: string,
+  type: string[]
+];
 
 export enum ResponseMorphemeNameIndex {
   position = 0,
@@ -49,7 +55,6 @@ export enum ResponseMorphemeNameIndex {
   english = 3,
   type = 4
 }
-
 
 export interface Highlight {
   root: boolean;
@@ -205,8 +210,7 @@ export const META: Meta = {
     {
       name: "Aidan Pine",
       title: "Lead Developer",
-      text:
-        "Aidan is an application development specialist on the NRC's Indigenous Language Technology project. Aidan is interested in language revitalization because of its inherently multidisplinary nature and because of the social justice component at the centre of the work. Aidan is humbled and excited to be working with such an accomplished and dynamic team and hopes to continue improving the WordWeaver for years to come.",
+      text: "Aidan is an application development specialist on the NRC's Indigenous Language Technology project. Aidan is interested in language revitalization because of its inherently multidisplinary nature and because of the social justice component at the centre of the work. Aidan is humbled and excited to be working with such an accomplished and dynamic team and hopes to continue improving the WordWeaver for years to come.",
       img: false
     }
   ],
