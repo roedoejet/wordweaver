@@ -9,20 +9,17 @@ import { environment } from "../../../environments/environment";
   providedIn: "root"
 })
 export class PronounService {
-  path = environment.base + environment.prefix + `pronouns`;
+  path = environment.base + environment.dataPrefix + `pronouns.json`;
   pronouns: Pronoun[];
   pronouns$: Observable<Pronoun[]>;
   random$: Observable<Pronoun>;
   constructor(private http: HttpClient) {
-    if (environment.serverless) {
-      this.path += ".json";
-    }
     this.pronouns$ = this.http.get<Pronoun[]>(this.path).pipe(shareReplay(1));
-    this.random$ = this.pronouns$.pipe(map(res => this.getRandomPro(res)));
-    this.pronouns$.subscribe(pns => (this.pronouns = pns));
+    this.random$ = this.pronouns$.pipe(map((res) => this.getRandomPro(res)));
+    this.pronouns$.subscribe((pns) => (this.pronouns = pns));
   }
   getPronoun(tag) {
-    return this.pronouns.filter(p => p.tag === tag)[0];
+    return this.pronouns.filter((p) => p.tag === tag)[0];
   }
 
   getRandomPro(options: Pronoun[]): Pronoun {

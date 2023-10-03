@@ -59,7 +59,8 @@ import { utils, write } from "xlsx";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableviewerConjPanelComponent
-  implements AfterViewInit, OnDestroy, OnInit {
+  implements AfterViewInit, OnDestroy, OnInit
+{
   // Basic config
   settings$: Observable<SettingsState>;
   selection$: Observable<TableviewerState>;
@@ -85,7 +86,6 @@ export class TableviewerConjPanelComponent
   treeData$: Observable<any>;
   tiers = environment.config.tiers;
   unsubscribe$ = new Subject<void>();
-  serverless = environment.serverless;
   // Elements
   @ViewChild("header") header;
   @ViewChild("conjugate") conjugateBtn;
@@ -127,7 +127,7 @@ export class TableviewerConjPanelComponent
 
     this.gridData$ = this.gridDataState$.pipe(
       takeUntil(this.unsubscribe$),
-      map(gridState => {
+      map((gridState) => {
         if (gridState.view === "grid" && gridState.conjugations.length > 0) {
           return this.conjugationService.restructureData(
             gridState.conjugations,
@@ -141,7 +141,7 @@ export class TableviewerConjPanelComponent
 
     this.listData$ = this.listDataState$.pipe(
       takeUntil(this.unsubscribe$),
-      map(listState => {
+      map((listState) => {
         if (listState.view === "list" && listState.conjugations.length > 0) {
           return listState.conjugations;
         } else {
@@ -152,7 +152,7 @@ export class TableviewerConjPanelComponent
 
     this.treeData$ = this.treeDataState$.pipe(
       takeUntil(this.unsubscribe$),
-      map(treeState => {
+      map((treeState) => {
         const conjugationsLength = treeState.conjugations.length;
         if (treeState.view === "tree" && conjugationsLength > 0) {
           if (conjugationsLength > 50) {
@@ -200,7 +200,7 @@ export class TableviewerConjPanelComponent
   }
 
   onSwapGridOrder(row: GridOrderOptions, col: GridOrderOptions) {
-    this.gridData$.pipe(take(1)).subscribe(gridData => {
+    this.gridData$.pipe(take(1)).subscribe((gridData) => {
       if (gridData.uniqueRow.length > 80) {
         this.notificationService.translated(
           marker("ww.pages.tableviewer.notifications.gridOrder.limit-error"),
@@ -234,7 +234,7 @@ export class TableviewerConjPanelComponent
   }
 
   translateDataForGrid(data, gridState, dataType: "col" | "row" = "row") {
-    return data.map(row_or_col => {
+    return data.map((row_or_col) => {
       if (gridState.gridOrder[dataType] === "option") {
         return this.translate.instant("ww-data.options.items." + row_or_col);
       } else if (gridState.gridOrder[dataType] === "pn") {
@@ -257,7 +257,7 @@ export class TableviewerConjPanelComponent
     this.selection$
       .pipe(
         take(1),
-        switchMap(selection => {
+        switchMap((selection) => {
           let data;
           if (selection.view === "grid") {
             data = this.gridData$;
@@ -268,7 +268,7 @@ export class TableviewerConjPanelComponent
           }
           return zip(of(selection.view), data);
         }),
-        switchMap(downloadData => {
+        switchMap((downloadData) => {
           let view = downloadData[0];
           let data: any = downloadData[1];
           // If grid view, export an xlsx file
@@ -276,7 +276,7 @@ export class TableviewerConjPanelComponent
             return this.store.pipe(
               select(selectTableviewerGridSlice),
               take(1),
-              switchMap(gridState => {
+              switchMap((gridState) => {
                 // Create a new workbook
                 let wb = utils.book_new();
                 // Translate Columns synchronously
@@ -292,7 +292,7 @@ export class TableviewerConjPanelComponent
                   "row"
                 );
                 // Translate Verbs synchronously
-                let translatedVerbs = data["uniqueMain"].map(verb =>
+                let translatedVerbs = data["uniqueMain"].map((verb) =>
                   this.translate.instant("ww-data.verbs." + verb)
                 );
                 // Iterate through each verb
@@ -312,7 +312,7 @@ export class TableviewerConjPanelComponent
                           data["structuredData"][verbIndex][rowIndex][col][
                             "output"
                           ]
-                            .map(morpheme => morpheme[tier.key])
+                            .map((morpheme) => morpheme[tier.key])
                             .join(tier["separator"])
                         ];
                       } else {
@@ -341,7 +341,7 @@ export class TableviewerConjPanelComponent
           } else if (view === "list") {
             const content = [];
             let emptyParagraph = new Paragraph({ children: [] });
-            data.forEach(conjugation => {
+            data.forEach((conjugation) => {
               this.tiers.forEach((tier, index) => {
                 content.push(
                   // Create custom indent strategy - first tier is numbered and subsequent tiers are indented
@@ -355,9 +355,9 @@ export class TableviewerConjPanelComponent
                       new TextRun({
                         text: conjugation["output"]
                           // filter empty morphemes
-                          .filter(morpheme => morpheme[tier.key])
+                          .filter((morpheme) => morpheme[tier.key])
                           // join morphemes by the tier-declared separator
-                          .map(morpheme => morpheme[tier.key])
+                          .map((morpheme) => morpheme[tier.key])
                           .join(tier.separator),
                         bold: index === 0
                       })
@@ -396,21 +396,21 @@ export class TableviewerConjPanelComponent
         })
       )
       .subscribe(
-        response => {
+        (response) => {
           if (response[0] === "list") {
             saveAs(response[1], "conjugations.docx");
           } else if (response[0] === "grid") {
             saveAs(response[1], "conjugations.xlsx");
           }
         },
-        error => {
+        (error) => {
           throw error;
         }
       );
   }
 
   copyLink() {
-    this.selection$.pipe(take(1)).subscribe(selection => {
+    this.selection$.pipe(take(1)).subscribe((selection) => {
       const params = createRequestQueryArgs(selection);
       // Add other relevant params
       params.append("view", selection["view"]);

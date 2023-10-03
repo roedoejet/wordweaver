@@ -52,17 +52,13 @@ export interface RequestParams {
 export type ResponseMorpheme = [
   position: number,
   value: string,
-  gloss: string,
-  english: string,
   type: string[]
 ];
 
 export enum ResponseMorphemeNameIndex {
   position = 0,
   value = 1,
-  gloss = 2,
-  english = 3,
-  type = 4
+  type = 2
 }
 
 export type Conjugation = ResponseMorpheme[];

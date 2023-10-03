@@ -53,14 +53,6 @@
                 }
               ]
             },
-            "serverless": {
-              "fileReplacements": [
-                {
-                  "replace": "projects/word-weaver/src/environments/environment.ts",
-                  "with": "projects/word-weaver/src/environments/environment.serverless.ts"
-                }
-              ]
-            },
             "production": {
               "fileReplacements": [
                 {
@@ -119,9 +111,6 @@
             },
             "moh": {
               "browserTarget": "word-weaver:build:moh"
-            },
-            "serverless": {
-              "browserTarget": "word-weaver:build:serverless"
             },
             "fr": {
               "browserTarget": "word-weaver:build:fr"

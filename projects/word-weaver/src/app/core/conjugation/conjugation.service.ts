@@ -27,11 +27,8 @@ export class ConjugationService {
   conjugations;
   conjugations$: Observable<Response>;
   random$: Observable<ResponseObject>;
-  path = "conjugations";
+  path = "conjugations.json";
   constructor(private http: HttpClient, private store: Store) {
-    if (environment.serverless) {
-      this.path += ".json";
-    }
     this.conjugations$ = this.store.pipe(
       select(selectSettingsState),
       switchMap((settings: SettingsState) =>
@@ -40,7 +37,7 @@ export class ConjugationService {
       shareReplay(1)
     );
     this.random$ = this.conjugations$.pipe(
-      map(res => this.getRandomOption(res))
+      map((res) => this.getRandomOption(res))
     );
   }
 
@@ -51,7 +48,7 @@ export class ConjugationService {
   // FIXME: Not working with TableViewer
   createRequestQueryArgs(selection) {
     const params = new URLSearchParams();
-    ["option", "agent", "patient", "root"].forEach(x => {
+    ["option", "agent", "patient", "root"].forEach((x) => {
       if (selection[x]) {
         params.append(x, selection[x].tag);
       }
@@ -64,7 +61,7 @@ export class ConjugationService {
     selection: TableviewerState | WordmakerState
   ) {
     const filterValues = { root: [], option: [], agent: [], patient: [] };
-    ["option", "agent", "patient", "root"].forEach(x => {
+    ["option", "agent", "patient", "root"].forEach((x) => {
       if (selection[x]) {
         if (Array.isArray(selection[x])) {
           filterValues[x] = filterValues[x].concat(
@@ -75,9 +72,9 @@ export class ConjugationService {
         }
       }
     });
-    return conjugations.filter(x => {
+    return conjugations.filter((x) => {
       return ["option", "agent", "patient", "root"].every(
-        k =>
+        (k) =>
           filterValues[k].length === 0 ||
           filterValues[k].indexOf(x.input[k]) > -1
       );
@@ -95,12 +92,12 @@ export class ConjugationService {
         switchMap((settings: SettingsState) =>
           this.http
             .get(settings.baseUrl + "conjugations?" + queryArgs.toString())
-            .pipe(catchError(err => of(err)))
+            .pipe(catchError((err) => of(err)))
         )
       );
     } else {
       return this.conjugations$.pipe(
-        map(conjugations => this.filterConjugations(conjugations, selection))
+        map((conjugations) => this.filterConjugations(conjugations, selection))
       );
     }
   }
@@ -122,19 +119,21 @@ export class ConjugationService {
     const row = gridOrder.row;
     const col = gridOrder.col;
     const structuredData = [];
-    const restructuredConjugations = conjugations.map(x => ({
+    const restructuredConjugations = conjugations.map((x) => ({
       ...x.input,
       ...x,
       pn: this.returnPronounGridDisplay(x.input.agent, x.input.patient)
     }));
-    const uniqueMain = [...new Set(restructuredConjugations.map(x => x[main]))];
-    const uniqueRow = [...new Set(restructuredConjugations.map(x => x[row]))];
-    const uniqueCol = [...new Set(restructuredConjugations.map(x => x[col]))];
-    uniqueMain.forEach(mainKey => {
+    const uniqueMain = [
+      ...new Set(restructuredConjugations.map((x) => x[main]))
+    ];
+    const uniqueRow = [...new Set(restructuredConjugations.map((x) => x[row]))];
+    const uniqueCol = [...new Set(restructuredConjugations.map((x) => x[col]))];
+    uniqueMain.forEach((mainKey) => {
       const mainData = [];
-      const mainDataRows = uniqueRow.map(rowKey => {
+      const mainDataRows = uniqueRow.map((rowKey) => {
         const structuredEntry = { rowKey };
-        restructuredConjugations.forEach(entry => {
+        restructuredConjugations.forEach((entry) => {
           if (entry[main] === mainKey && entry[row] === rowKey) {
             structuredEntry[entry[col]] = entry;
           }
