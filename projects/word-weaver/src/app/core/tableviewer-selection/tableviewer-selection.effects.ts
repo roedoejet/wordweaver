@@ -14,7 +14,7 @@ import {
 } from "rxjs/operators";
 import { ConjugationService } from "../../core/conjugation/conjugation.service";
 import { selectSettingsState, selectTableviewerState } from "../core.state";
-import { LocalStorageService } from "../local-storage/local-storage.service";
+// import { LocalStorageService } from "../local-storage/local-storage.service";
 import { NotificationService } from "../notifications/notification.service";
 import {
   actionChangeConjugations,
@@ -27,8 +27,8 @@ export const TABLEVIEWER_SELECTION_KEY = "TABLEVIEWER";
 
 export function createRequestQueryArgs(selection) {
   const params = new URLSearchParams();
-  ["option", "agent", "patient", "root"].forEach(x => {
-    selection[x].forEach(y => {
+  ["option", "agent", "patient", "root"].forEach((x) => {
+    selection[x].forEach((y) => {
       if (y.tag) {
         params.append(x, y.tag);
       }
@@ -42,7 +42,7 @@ export class TableviewerEffects {
   constructor(
     private actions$: Actions,
     private store: Store<State>,
-    private localStorageService: LocalStorageService,
+    // private localStorageService: LocalStorageService,
     private http: HttpClient,
     private notificationService: NotificationService,
     private conjugationService: ConjugationService
@@ -86,12 +86,12 @@ export class TableviewerEffects {
             this.store
               .pipe(
                 select(selectSettingsState),
-                switchMap(settings => {
+                switchMap((settings) => {
                   if (true) {
                     // TODO: Currently this always uses the local cached copy, but maybe this should be a configurable setting?
                     console.log("conjugated");
                     return this.conjugationService.conjugations$.pipe(
-                      map(x =>
+                      map((x) =>
                         this.conjugationService.filterConjugations(x, selection)
                       )
                     );
@@ -102,12 +102,12 @@ export class TableviewerEffects {
                           "conjugations?" +
                           queryArgs.toString()
                       )
-                      .pipe(catchError(err => of(err)));
+                      .pipe(catchError((err) => of(err)));
                   }
                 }),
                 take(1)
               )
-              .subscribe(conj => {
+              .subscribe((conj) => {
                 this.store.dispatch(actionChangeLoading({ loading: false }));
                 this.store.dispatch(
                   actionChangeConjugations({ conjugations: conj })

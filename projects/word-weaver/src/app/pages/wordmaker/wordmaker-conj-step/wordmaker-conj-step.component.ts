@@ -11,7 +11,6 @@ import { selectWordmaker } from "../../../core/wordmaker-selection/wordmaker-sel
 import { SettingsState, State } from "../../../core/settings/settings.model";
 import { Store, select } from "@ngrx/store";
 import { selectSettings } from "../../../core/settings/settings.selectors";
-import { Conjugation } from "../../../../config/config";
 import { ConjugationService } from "../../../core/core.module";
 import { TIERS } from "../../../../config/config";
 
@@ -43,9 +42,9 @@ export class WordmakerConjStepComponent implements OnDestroy, OnInit {
     );
     this.conjugation$ = this.selection$.pipe(
       takeUntil(this.unsubscribe$),
-      switchMap(selection =>
+      switchMap((selection) =>
         this.conjugationService.conjugations$.pipe(
-          map(x => this.conjugationService.filterConjugations(x, selection))
+          map((x) => this.conjugationService.filterConjugations(x, selection))
         )
       )
     );

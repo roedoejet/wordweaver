@@ -1,11 +1,10 @@
-import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { marker } from "@biesbjerg/ngx-translate-extract-marker";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { select, Store } from "@ngrx/store";
 import { tap, withLatestFrom } from "rxjs/operators";
 import { selectWordmakerState } from "../core.state";
-import { LocalStorageService } from "../local-storage/local-storage.service";
+// import { LocalStorageService } from "../local-storage/local-storage.service";
 import { NotificationService } from "../notifications/notification.service";
 import { OptionService } from "../option/option.service";
 import { PronounService } from "../pronoun/pronoun.service";
@@ -24,7 +23,7 @@ export const WORDMAKER_SELECTION_KEY = "WORDMAKER";
 
 export function createRequestQueryArgs(selection) {
   const params = new URLSearchParams();
-  ["option", "agent", "patient", "root"].forEach(x => {
+  ["option", "agent", "patient", "root"].forEach((x) => {
     if (selection[x]) {
       params.append(x, selection[x].tag);
     }
@@ -41,8 +40,7 @@ export class WordmakerEffects {
   constructor(
     private actions$: Actions,
     private store: Store<State>,
-    private localStorageService: LocalStorageService,
-    private http: HttpClient,
+    // private localStorageService: LocalStorageService,
     private notificationService: NotificationService,
     private verbService: VerbService,
     private optionService: OptionService,

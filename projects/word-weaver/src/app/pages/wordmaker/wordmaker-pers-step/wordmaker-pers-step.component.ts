@@ -22,12 +22,8 @@ import {
   WordmakerState
 } from "../../../core/wordmaker-selection/wordmaker-selection.model";
 import { Store, select } from "@ngrx/store";
-import {
-  selectWordmaker,
-  selectWordmakerPronouns
-} from "../../../core/wordmaker-selection/wordmaker-selection.selectors";
+import { selectWordmaker } from "../../../core/wordmaker-selection/wordmaker-selection.selectors";
 import { takeUntil } from "rxjs/operators";
-import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "ww-wordmaker-pers-step",

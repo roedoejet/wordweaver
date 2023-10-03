@@ -6,14 +6,14 @@ import {
   Output,
   ChangeDetectionStrategy
 } from "@angular/core";
-import { Option, Conjugation, Response } from "../../../../config/config";
+import { Option } from "../../../../config/config";
 import {
   OptionService,
   ConjugationService,
   selectSettingsLanguage
 } from "../../../core/core.module";
 import { Observable, Subject } from "rxjs";
-import { map, switchMap, withLatestFrom, takeUntil } from "rxjs/operators";
+import { map, switchMap, takeUntil } from "rxjs/operators";
 import { Store, select } from "@ngrx/store";
 import { actionChangeOption } from "../../../core/wordmaker-selection/wordmaker-selection.actions";
 import {
@@ -61,13 +61,13 @@ export class WordmakerTempStepComponent implements OnDestroy, OnInit {
     this.conjugatedOptions$ = this.selection$.pipe(
       takeUntil(this.unsubscribe$),
       // See all options, despite selection
-      map(selection => {
+      map((selection) => {
         const newSelection = { ...selection, ...{ option: null } };
         return newSelection;
       }),
-      switchMap(selection =>
+      switchMap((selection) =>
         this.conjugationService.conjugations$.pipe(
-          map(x => this.conjugationService.filterConjugations(x, selection))
+          map((x) => this.conjugationService.filterConjugations(x, selection))
         )
       )
     );
@@ -80,7 +80,7 @@ export class WordmakerTempStepComponent implements OnDestroy, OnInit {
 
   returnOptionTierFromName() {
     const selectedTier = this.conjugationService.TIERS.filter(
-      x => x.name === this.displayTier
+      (x) => x.name === this.displayTier
     );
     return selectedTier[0];
   }
@@ -91,15 +91,15 @@ export class WordmakerTempStepComponent implements OnDestroy, OnInit {
   }
 
   onChipClick(tag) {
-    this.returnAffoptFromTag$(tag).subscribe(t => {
+    this.returnAffoptFromTag$(tag).subscribe((t) => {
       this.onAffOptSelect(t);
     });
   }
 
   returnAffoptFromTag$(tag) {
     return this.optionService.options$.pipe(
-      map(affopts => {
-        const picked_ao = affopts.filter(ao => ao["tag"] === tag)[0];
+      map((affopts) => {
+        const picked_ao = affopts.filter((ao) => ao["tag"] === tag)[0];
         return picked_ao;
       })
     );
@@ -107,8 +107,8 @@ export class WordmakerTempStepComponent implements OnDestroy, OnInit {
 
   returnAffoptFromGloss$(gloss) {
     return this.optionService.options$.pipe(
-      map(affopts => {
-        const picked_ao = affopts.filter(ao => ao["gloss"] === gloss)[0];
+      map((affopts) => {
+        const picked_ao = affopts.filter((ao) => ao["gloss"] === gloss)[0];
         return picked_ao;
       })
     );

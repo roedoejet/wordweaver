@@ -1,12 +1,10 @@
 import {
   animate,
-  group,
   query,
   style,
   transition,
   trigger,
-  stagger,
-  sequence
+  stagger
 } from "@angular/animations";
 
 export const fadeAnimation = trigger("fadeAnimation", [

@@ -131,7 +131,7 @@ export class ConjugationService {
     const uniqueCol = [...new Set(restructuredConjugations.map((x) => x[col]))];
     uniqueMain.forEach((mainKey) => {
       const mainData = [];
-      const mainDataRows = uniqueRow.map((rowKey) => {
+      uniqueRow.forEach((rowKey) => {
         const structuredEntry = { rowKey };
         restructuredConjugations.forEach((entry) => {
           if (entry[main] === mainKey && entry[row] === rowKey) {

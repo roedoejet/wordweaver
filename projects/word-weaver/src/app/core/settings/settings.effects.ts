@@ -1,6 +1,5 @@
 import { OverlayContainer } from "@angular/cdk/overlay";
 import { Injectable } from "@angular/core";
-import { Router } from "@angular/router";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { select, Store } from "@ngrx/store";
 import { TranslateService } from "@ngx-translate/core";
@@ -49,7 +48,6 @@ export class SettingsEffects {
   constructor(
     private actions$: Actions,
     private store: Store<State>,
-    private router: Router,
     private overlayContainer: OverlayContainer,
     private localStorageService: LocalStorageService,
     private animationsService: AnimationsService,

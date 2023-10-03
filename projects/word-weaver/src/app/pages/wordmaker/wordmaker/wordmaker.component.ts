@@ -7,14 +7,7 @@ import {
   ViewChild
 } from "@angular/core";
 import { ValidationService } from "../../../core/core.module";
-import {
-  BehaviorSubject,
-  Observable,
-  Subject,
-  Subscription,
-  combineLatest,
-  zip
-} from "rxjs";
+import { BehaviorSubject, Observable, Subject, zip } from "rxjs";
 import { selectWordmaker } from "../../../core/wordmaker-selection/wordmaker-selection.selectors";
 import {
   WordmakerState,
@@ -58,7 +51,7 @@ export class WordmakerComponent implements OnDestroy, OnInit, AfterViewInit {
       select(selectWordmaker)
     );
     // Step 1: Labels
-    this.selection$.subscribe(x => {
+    this.selection$.subscribe((x) => {
       if (x.root) {
         this.verbLabel.next("ww-data.verbs." + x.root.tag);
       } else {
@@ -111,7 +104,7 @@ export class WordmakerComponent implements OnDestroy, OnInit, AfterViewInit {
           this.translationService
             .get("ww-data.options.items." + x.option["tag"])
             .pipe(take(1))
-            .subscribe(opt => this.tempLabel.next(opt));
+            .subscribe((opt) => this.tempLabel.next(opt));
         }
       } else {
         this.tempLabel.next("ww.pages.wordmaker.steps.temp.question");
@@ -129,7 +122,7 @@ export class WordmakerComponent implements OnDestroy, OnInit, AfterViewInit {
         takeUntil(this.unsubscribe$),
         distinctUntilKeyChanged("selectedIndex")
       )
-      .subscribe(x => this.onStepChange(x.selectedIndex));
+      .subscribe((x) => this.onStepChange(x.selectedIndex));
   }
 
   ngOnDestroy() {
@@ -146,7 +139,7 @@ export class WordmakerComponent implements OnDestroy, OnInit, AfterViewInit {
   }
 
   onPatientSelect($event) {
-    this.selection$.pipe(take(1)).subscribe(selection => {
+    this.selection$.pipe(take(1)).subscribe((selection) => {
       if (
         this.validationService.validate(
           "validation",
@@ -161,7 +154,7 @@ export class WordmakerComponent implements OnDestroy, OnInit, AfterViewInit {
   }
 
   onAgentSelect($event) {
-    this.selection$.pipe(take(1)).subscribe(selection => {
+    this.selection$.pipe(take(1)).subscribe((selection) => {
       if (
         this.validationService.validate(
           "validation",

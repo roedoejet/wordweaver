@@ -6,8 +6,8 @@ import {
 } from "@angular/core";
 import { marker } from "@biesbjerg/ngx-translate-extract-marker";
 import { select, Store } from "@ngrx/store";
-import { fromEvent, Observable, Subject } from "rxjs";
-import { map, take, takeUntil } from "rxjs/operators";
+import { Observable, Subject } from "rxjs";
+import { take } from "rxjs/operators";
 import { META } from "../../../../config/config";
 import { ROUTE_ANIMATIONS_ELEMENTS } from "../../../core/core.module";
 import {
@@ -65,7 +65,7 @@ export class SettingsContainerComponent implements OnDestroy, OnInit {
     }
   ];
 
-  languages = META.languages.map(x => {
+  languages = META.languages.map((x) => {
     return {
       value: x.value,
       label: marker(`ww.pages.settings.general.language.${x.value}`)
@@ -131,9 +131,9 @@ export class SettingsContainerComponent implements OnDestroy, OnInit {
   }
 
   a2hs() {
-    this.deferredPrompt$.pipe(take(1)).subscribe(e => {
+    this.deferredPrompt$.pipe(take(1)).subscribe((e) => {
       e.prompt();
-      e.userChoice.then(result => {
+      e.userChoice.then((result) => {
         if (result.outcome === "accepted") {
           this.showInstall = false;
         }
