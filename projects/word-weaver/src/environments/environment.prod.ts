@@ -17,14 +17,6 @@ export const environment = {
   test: false,
   i18nPrefix: "/wordweaver-UI",
   i18nDataPrefix: "http://li223-249.members.linode.com/i18n/",
-  firebase: {
-    apiKey: "AIzaSyB8Rh04f4p61cphLkDAIoOozvESbUrweAA",
-    authDomain: "kawennonis.firebaseapp.com",
-    databaseURL: "//kawennonis.firebaseio.com",
-    projectId: "kawennonis",
-    storageBucket: "//kawennonis.appspot.com",
-    messagingSenderId: "711160847583"
-  },
   base: `http://li223-249.members.linode.com`,
   prefix: `/api/v1/`,
   testPrefix: `/api/v2/`,

@@ -21,15 +21,6 @@ export const environment = {
   test: false,
   i18nPrefix: "",
   i18nDataPrefix: "/assets/i18n/api/",
-  firebase: {
-    apiKey: "AIzaSyBkM2v1la_3Arbnt0qziB_TYQB0nFij3kk",
-    authDomain: "wordweavertoy.firebaseapp.com",
-    databaseURL: "https://wordweavertoy.firebaseio.com",
-    projectId: "wordweavertoy",
-    storageBucket: "wordweavertoy.appspot.com",
-    messagingSenderId: "568985112547",
-    appId: "1:568985112547:web:525d184b31008b60"
-  },
   base: `//localhost:4200`,
   prefix: `/assets/api/v1/`,
   testPrefix: `/assets/api/v2/`,
