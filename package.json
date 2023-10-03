@@ -90,6 +90,7 @@
     "@ngx-translate/core": "12.0.0",
     "@ngx-translate/http-loader": "4.0.0",
     "@types/echarts": "^4.4.4",
+    "@types/file-saver-es": "^2.0.1",
     "@types/jasmine": "3.3.16",
     "@types/jasminewd2": "2.0.8",
     "@types/mocha": "5.2.7",
@@ -144,9 +145,9 @@
   "dependencies": {
     "@angular-devkit/schematics": "^14.2.10",
     "@ngrx/data": "^14.3.3",
-    "docx": "^8.0.4",
+    "docx": "^8.2.3",
     "echarts": "^5.4.2",
-    "file-saver": "^2.0.2",
+    "file-saver-es": "^2.0.5",
     "ngx-echarts": "^14.0.0",
     "xlsx": "^0.18.5"
   }

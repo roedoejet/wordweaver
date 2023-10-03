@@ -5,7 +5,7 @@ import { MatDialogRef } from "@angular/material/dialog";
 import { marker } from "@biesbjerg/ngx-translate-extract-marker";
 import { select, Store } from "@ngrx/store";
 import { TranslateService } from "@ngx-translate/core";
-import { saveAs } from "file-saver";
+import { saveAs } from "file-saver-es";
 import { combineLatest, Observable, of } from "rxjs";
 import { catchError, map, switchMap, take } from "rxjs/operators";
 import { TIERS } from "../../../config/config";
@@ -54,7 +54,7 @@ export class DownloadDialogComponent implements OnInit {
           "ww.pages.tableviewer.dialog.download.settings.heading.placeholder"
         )
       )
-      .subscribe(x => this.form.controls.heading.setValue(x));
+      .subscribe((x) => this.form.controls.heading.setValue(x));
   }
 
   ngOnInit(): void {
@@ -65,7 +65,7 @@ export class DownloadDialogComponent implements OnInit {
       this.settings$
     ]);
     this.fileTypes$ = this.selection$.pipe(
-      map(selection => {
+      map((selection) => {
         return this.fileTypes[selection.view];
       })
     );
@@ -77,8 +77,8 @@ export class DownloadDialogComponent implements OnInit {
 
   createRequestQueryArgs(selection) {
     const params = new URLSearchParams();
-    ["option", "agent", "patient", "root"].forEach(x => {
-      selection[x].forEach(y => {
+    ["option", "agent", "patient", "root"].forEach((x) => {
+      selection[x].forEach((y) => {
         if (y.tag) {
           params.append(x, y.tag);
         }
@@ -95,7 +95,7 @@ export class DownloadDialogComponent implements OnInit {
           const queryArgs = this.createRequestQueryArgs(selection);
           if (queryArgs) {
             this.store.dispatch(actionChangeLoading({ loading: true }));
-            const tiers = TIERS.filter(x => appSettings.level[x.name]);
+            const tiers = TIERS.filter((x) => appSettings.level[x.name]);
             const settings = {
               heading: this.form.controls.heading.value,
               headers: this.form.controls.headers.value
@@ -109,7 +109,7 @@ export class DownloadDialogComponent implements OnInit {
                 { responseType: "blob" }
               )
               .pipe(
-                catchError(err => {
+                catchError((err) => {
                   this.notificationService.translated(
                     marker("ww.pages.tableviewer.notifications.download.error"),
                     {},

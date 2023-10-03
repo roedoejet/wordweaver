@@ -7,7 +7,7 @@ import {
   OnInit,
   ViewChild
 } from "@angular/core";
-import { saveAs } from "file-saver";
+import { saveAs } from "file-saver-es";
 import { FormControl } from "@angular/forms";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { marker } from "@biesbjerg/ngx-translate-extract-marker";

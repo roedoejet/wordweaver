@@ -10,7 +10,6 @@ import { VerbService, selectSettingsLanguage } from "../../../core/core.module";
 import { Verb, META } from "../../../../config/config";
 import { Subject, ReplaySubject } from "rxjs";
 import { debounceTime, tap, takeUntil } from "rxjs/operators";
-import { sortBy } from "lodash";
 import { Store, select } from "@ngrx/store";
 import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { State } from "../../../core/wordmaker-selection/wordmaker-selection.model";
@@ -84,9 +83,5 @@ export class WordmakerVerbStepComponent implements OnDestroy, OnInit {
     this.store.dispatch(actionChangeVerb({ root: verb }));
     // Update parent component
     this.selectedVerb.emit(verb);
-  }
-
-  sortVerbs(verbs) {
-    return sortBy(verbs, ["gloss"]);
   }
 }
