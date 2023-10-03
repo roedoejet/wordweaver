@@ -26,22 +26,5 @@
         ]
       }
     }
-  ],
-  "dataGroups": [
-    {
-      "name": "wordweaver-api",
-      "urls": [
-        "https://api.kawennonnis.ca/api/v1/conjugations",
-        "https://api.kawennonnis.ca/api/v1/options",
-        "https://api.kawennonnis.ca/api/v1/pronouns",
-        "https://api.kawennonnis.ca/api/v1/verbs"
-      ],
-      "cacheConfig": {
-        "strategy": "freshness",
-        "maxAge": "100d",
-        "maxSize": 100,
-        "timeout": "2s"
-      }
-    }
   ]
 }

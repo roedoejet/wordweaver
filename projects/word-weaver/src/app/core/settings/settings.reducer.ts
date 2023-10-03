@@ -27,7 +27,7 @@ const initialBaseState: SettingsState = {
   pageAnimations: true,
   pageAnimationsDisabled: false,
   elementsAnimations: true,
-  baseUrl: environment.base + environment.prefix,
+  baseUrl: environment.base + environment.dataPrefix,
   testApi: false,
   colors: {
     primary: "rgb(255, 255, 255)",

@@ -52,7 +52,7 @@ describe("SettingsEffects", () => {
   });
 
   it("should call methods on LocalStorageService for PERSIST action", () => {
-    scheduler.run(helpers => {
+    scheduler.run((helpers) => {
       const { cold } = helpers;
 
       const settings: SettingsState = {
@@ -63,7 +63,7 @@ describe("SettingsEffects", () => {
         nightTheme: NIGHT_MODE_THEME,
         autoNightMode: false,
         stickyHeader: false,
-        baseUrl: environment.base + environment.prefix,
+        baseUrl: environment.base + environment.dataPrefix,
         testApi: false,
         colors: {
           primary: "rgb(255, 255, 255)",

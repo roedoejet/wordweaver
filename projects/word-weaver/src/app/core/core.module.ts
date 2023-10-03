@@ -120,17 +120,17 @@ export class MultiTranslateHttpLoader implements TranslateLoader {
   ) {}
 
   public getTranslation(lang: string): Observable<any> {
-    const requests = this.resources.map(resource => {
+    const requests = this.resources.map((resource) => {
       const path = resource.prefix + lang + resource.suffix;
       return this.http.get(path).pipe(
-        catchError(res => {
+        catchError((res) => {
           console.error("Could not find translation file:", path);
           return of({});
         })
       );
     });
     return forkJoin(requests).pipe(
-      map(response =>
+      map((response) =>
         response.reduce((result, currentObject) => {
           for (const key in currentObject) {
             if (currentObject.hasOwnProperty(key)) {
@@ -148,12 +148,12 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new MultiTranslateHttpLoader(http, [
     // These are the UI-specific i18n assets
     {
-      prefix: `${environment.i18nPrefix}/assets/i18n/`,
+      prefix: "/assets/i18n/",
       suffix: ".json"
     },
     // These are the data-specific i18n assets
     {
-      prefix: `${environment.i18nDataPrefix}`,
+      prefix: "/assets/i18n/data/",
       suffix: ".json"
     }
   ]);

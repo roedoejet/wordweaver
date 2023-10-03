@@ -16,14 +16,11 @@ export const environment = {
     level: LEVELS,
     meta: META
   },
-  serverless: false,
   production: false,
   test: false,
-  i18nPrefix: "",
-  i18nDataPrefix: "//localhost/i18n/",
-  base: `//localhost`,
-  prefix: `/api/v1/`,
-  testPrefix: `/api/v2/`,
+  base: `//localhost:4200`,
+  dataPrefix: `/assets/data/fr/v1/`,
+  dataTestPrefix: `/assets/data/fr/v2/`,
   versions: {
     app: packageJson.version,
     angular: packageJson.dependencies["@angular/core"],

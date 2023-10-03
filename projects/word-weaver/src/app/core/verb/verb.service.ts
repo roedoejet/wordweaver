@@ -17,17 +17,14 @@ import { environment } from "../../../environments/environment";
 })
 export class VerbService {
   verbs: Verb[];
-  path = environment.base + environment.prefix + `verbs`;
+  path = environment.base + environment.dataPrefix + `verbs.json`;
   verbs$: Observable<Verb[]>;
   random$: Observable<Verb>;
   constructor(private http: HttpClient, private translate: TranslateService) {
-    if (environment.serverless) {
-      this.path += ".json";
-    }
     this.verbs$ = this.http.get<Verb[]>(this.path).pipe(shareReplay(1));
-    this.verbs$.subscribe(verbs => (this.verbs = verbs));
+    this.verbs$.subscribe((verbs) => (this.verbs = verbs));
     this.random$ = this.verbs$.pipe(
-      map(res => {
+      map((res) => {
         return this.getRandomOption(res);
       })
     );
@@ -38,6 +35,6 @@ export class VerbService {
   }
 
   getVerb(tag) {
-    return this.verbs.filter(v => v.tag === tag)[0];
+    return this.verbs.filter((v) => v.tag === tag)[0];
   }
 }

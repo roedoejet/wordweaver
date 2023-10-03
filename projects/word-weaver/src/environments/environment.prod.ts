@@ -12,14 +12,11 @@ export const environment = {
     level: LEVELS,
     meta: META
   },
-  serverless: false,
   production: true,
   test: false,
-  i18nPrefix: "/wordweaver-UI",
-  i18nDataPrefix: "http://li223-249.members.linode.com/i18n/",
-  base: `http://li223-249.members.linode.com`,
-  prefix: `/api/v1/`,
-  testPrefix: `/api/v2/`,
+  base: `https://test.kawennonnis.ca`,
+  dataPrefix: `/assets/data/fr/v1/`,
+  dataTestPrefix: `/assets/data/fr/v2/`,
   versions: {
     app: packageJson.version,
     angular: packageJson.dependencies["@angular/core"],

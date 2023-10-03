@@ -22,7 +22,6 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --open",
-    "start:prod": "npm run build:prod && npm run server",
     "build": "ng build",
     "build:prod": "ng build --prod",
     "build:moh": "npm run build -- --configuration=moh-production",
@@ -36,7 +35,6 @@
     "format:write": "prettier projects/**/*.{ts,json,md,scss} --write",
     "format:test": "prettier projects/**/*.{ts,json,md,scss} --list-different",
     "ci": "npm run format:test && ng lint && npm run e2e && npm run build:prod -- --deploy-url /wordweaver-UI/ --base-href /wordweaver-UI/",
-    "server": "node ./projects/server/server.js",
     "analyze": "npm run build:prod -- --stats-json && webpack-bundle-analyzer ./dist/word-weaver/stats-es2015.json",
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate && node .all-contributors-html.js",

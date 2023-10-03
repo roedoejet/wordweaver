@@ -44,8 +44,8 @@ const INIT = of("ww-init-effect-trigger");
 
 @Injectable()
 export class SettingsEffects {
-  defaultBaseUrl = environment.base + environment.prefix;
-  testBaseUrl = environment.base + environment.testPrefix;
+  defaultBaseUrl = environment.base + environment.dataPrefix;
+  testBaseUrl = environment.base + environment.dataTestPrefix;
   constructor(
     private actions$: Actions,
     private store: Store<State>,
@@ -63,7 +63,7 @@ export class SettingsEffects {
     ).pipe(
       mapTo(new Date().getHours()),
       distinctUntilChanged(),
-      map(hour => actionSettingsChangeHour({ hour }))
+      map((hour) => actionSettingsChangeHour({ hour }))
     )
   );
 
@@ -142,8 +142,8 @@ export class SettingsEffects {
       merge(INIT, this.actions$.pipe(ofType(actionSettingsChangeTheme))).pipe(
         withLatestFrom(this.store.pipe(select(selectEffectiveTheme))),
         tap(([action, effectiveTheme]) => {
-          const classList = this.overlayContainer.getContainerElement()
-            .classList;
+          const classList =
+            this.overlayContainer.getContainerElement().classList;
           const toRemove = Array.from(classList).filter((item: string) =>
             item.includes("-theme")
           );
@@ -161,7 +161,7 @@ export class SettingsEffects {
       this.store.pipe(
         select(selectSettingsLanguage),
         distinctUntilChanged(),
-        tap(language => this.translateService.use(language))
+        tap((language) => this.translateService.use(language))
       ),
     { dispatch: false }
   );

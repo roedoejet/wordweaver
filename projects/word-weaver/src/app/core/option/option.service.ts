@@ -9,44 +9,41 @@ import { environment } from "../../../environments/environment";
   providedIn: "root"
 })
 export class OptionService {
-  path = environment.base + environment.prefix + "options";
+  path = environment.base + environment.dataPrefix + "options.json";
   options;
   options$: Observable<Option[]>;
   optionsByType$: Observable<object[]>;
   random$: Observable<Option>;
   constructor(private http: HttpClient) {
-    if (environment.serverless) {
-      this.path += ".json";
-    }
     console.log(this.path);
     this.options$ = this.http.get<Option[]>(this.path).pipe(shareReplay(1));
     this.optionsByType$ = this.options$.pipe(
-      map(options => {
-        const optionTypes = [...new Set(options.map(x => x.type))];
+      map((options) => {
+        const optionTypes = [...new Set(options.map((x) => x.type))];
         const optionsByType = [];
         optionTypes
-          .filter(x => x)
-          .forEach(x =>
+          .filter((x) => x)
+          .forEach((x) =>
             optionsByType.push({
               type: x,
-              options: options.filter(y => y.type === x)
+              options: options.filter((y) => y.type === x)
             })
           );
         return optionsByType;
       })
     );
-    this.random$ = this.options$.pipe(map(res => this.getRandomOption(res)));
-    this.options$.subscribe(o => (this.options = o));
+    this.random$ = this.options$.pipe(map((res) => this.getRandomOption(res)));
+    this.options$.subscribe((o) => (this.options = o));
   }
 
   optionsUseType$(): Observable<boolean> {
     return this.options$.pipe(
-      map(options => options.some(option => option.type))
+      map((options) => options.some((option) => option.type))
     );
   }
 
   getOption(tag) {
-    return this.options.filter(a => a.tag === tag)[0];
+    return this.options.filter((a) => a.tag === tag)[0];
   }
 
   getRandomOption(options: Option[]): Option {
