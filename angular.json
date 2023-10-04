@@ -18,7 +18,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "stylePreprocessorOptions": { "includePaths": ["./node_modules"] },
+            "stylePreprocessorOptions": {
+              "includePaths": ["./node_modules"]
+            },
             "outputPath": "dist/word-weaver",
             "index": "projects/word-weaver/src/index.html",
             "main": "projects/word-weaver/src/main.ts",
@@ -158,20 +160,55 @@
             "tsConfig": [
               "projects/word-weaver/tsconfig.app.json",
               "projects/word-weaver/tsconfig.spec.json",
-              "projects/word-weaver/e2e/tsconfig.json"
+              "projects/word-weaver/cypress/tsconfig.json"
             ],
             "exclude": ["**/node_modules/**"]
           }
         },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+        "cypress-run": {
+          "builder": "@cypress/schematic:cypress",
           "options": {
-            "protractorConfig": "projects/word-weaver/e2e/protractor.conf.js",
-            "devServerTarget": "word-weaver:serve"
+            "devServerTarget": "word-weaver:serve",
+            "configFile": "projects/word-weaver/cypress.config.ts"
           },
           "configurations": {
             "production": {
               "devServerTarget": "word-weaver:serve:production"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "watch": true,
+            "headless": false,
+            "configFile": "projects/word-weaver/cypress.config.ts"
+          }
+        },
+        "ct": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "word-weaver:serve",
+            "watch": true,
+            "headless": false,
+            "testingType": "component"
+          },
+          "configurations": {
+            "development": {
+              "devServerTarget": "word-weaver:serve:development"
+            }
+          }
+        },
+        "e2e": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "word-weaver:serve",
+            "watch": true,
+            "headless": false
+          },
+          "configurations": {
+            "development": {
+              "devServerTarget": "word-weaver:serve:development"
             }
           }
         }
@@ -180,6 +217,7 @@
   },
   "defaultProject": "word-weaver",
   "cli": {
-    "analytics": false
+    "analytics": false,
+    "schematicCollections": ["@cypress/schematic", "@schematics/angular"]
   }
 }
