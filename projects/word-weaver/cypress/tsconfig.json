@@ -1,0 +1,7 @@
+{
+  "include": ["**/*.ts", "../../../node_modules/cypress", "cypress/**/*.ts"],
+  "compilerOptions": {
+    "sourceMap": false,
+    "types": ["cypress"]
+  }
+}

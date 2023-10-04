@@ -1,0 +1,25 @@
+name: Run tests
+on: [push]
+jobs:
+  test-suites:
+    runs-on: ubuntu-latest
+    # Stop the occasional rogue instance before the 6h GitHub limit
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Use Node.js 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install everything
+        run: npm install
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          install: false
+          start: |
+            npm start
+          wait-on: "http://localhost:4200/assets/data/fr/v1/options.json"
+          wait-on-timeout: 180
+          command: npm run-script cypress:run
