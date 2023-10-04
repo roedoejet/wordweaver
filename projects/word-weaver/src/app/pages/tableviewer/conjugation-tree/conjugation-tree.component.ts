@@ -111,7 +111,7 @@ export class ConjugationTreeComponent implements OnDestroy, OnInit {
     };
     this.options$ = this.data$.pipe(
       takeUntil(this.unsubscribe$),
-      switchMap(selection => {
+      switchMap((selection) => {
         if (selection && selection.conjugations.length > 0) {
           return combineLatest([
             this.store.pipe(
@@ -142,11 +142,11 @@ export class ConjugationTreeComponent implements OnDestroy, OnInit {
     this.unsubscribe$.complete();
   }
 
-  rgbToHex = function(rgb) {
+  rgbToHex = function (rgb) {
     const pattern = /\d+/g;
     const matches = rgb.match(pattern).slice(0, 3);
     const hex = "#";
-    const hexMatches = matches.map(match => {
+    const hexMatches = matches.map((match) => {
       match = Number(match);
       let matchHex = Number(match).toString(16);
       if (matchHex.length < 2) {
@@ -172,7 +172,7 @@ export class ConjugationTreeComponent implements OnDestroy, OnInit {
     const rootNodes = [];
     let node;
     // Populate and merge object node
-    conjugations.forEach(conjugation => {
+    conjugations.forEach((conjugation) => {
       const v = this.verbService.getVerb(conjugation.input.root)[lang];
       const t = this.optionService.getOption(conjugation.input["option"])[lang][
         "tag"
@@ -202,12 +202,12 @@ export class ConjugationTreeComponent implements OnDestroy, OnInit {
     });
 
     // Recursively format to echart Data
-    Object.keys(node).forEach(firstTier => {
+    Object.keys(node).forEach((firstTier) => {
       rootNodes.push(firstTier);
       const firstNode = { name: firstTier, children: [] };
-      Object.keys(node[firstTier]).forEach(secondTier => {
+      Object.keys(node[firstTier]).forEach((secondTier) => {
         const secondNode = { name: secondTier, children: [] };
-        Object.keys(node[firstTier][secondTier]).forEach(thirdTier => {
+        Object.keys(node[firstTier][secondTier]).forEach((thirdTier) => {
           const thirdNode = {
             name: thirdTier,
             children: [{ name: node[firstTier][secondTier][thirdTier] }]
@@ -223,7 +223,7 @@ export class ConjugationTreeComponent implements OnDestroy, OnInit {
     if (rootNodes.length < 2) {
       initialTreeDepth = depth;
     } else {
-      rootNodes.forEach(v => {
+      rootNodes.forEach((v) => {
         chartOption.legend["data"].push(v);
       });
     }
@@ -250,16 +250,16 @@ export class ConjugationTreeComponent implements OnDestroy, OnInit {
     return (
       conjugation
         // filter empty
-        .filter(x => x[tier.key])
+        .filter((x) => x[tier.key])
         // sort by position
-        .sort(function(a, b) {
+        .sort(function (a, b) {
           return (
             a[ResponseMorphemeNameIndex.position] -
             b[ResponseMorphemeNameIndex.position]
           );
         })
         // create strings
-        .map(x => x[tier.key])
+        .map((x) => x[tier.key])
         // join 'em
         .join(tier.separator)
     );

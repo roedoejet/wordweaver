@@ -66,7 +66,7 @@ export class TableviewerComponent implements OnInit {
       this.route.queryParams.pipe(take(1))
     ])
       .pipe(take(1))
-      .subscribe(value => {
+      .subscribe((value) => {
         const params = value[3];
         if (params) {
           if ("agent" in params) {
@@ -74,8 +74,8 @@ export class TableviewerComponent implements OnInit {
             this.store.dispatch(
               actionChangeAgents({
                 agent: agents
-                  .map(x => this.pronounService.getPronoun(x))
-                  .filter(x => x)
+                  .map((x) => this.pronounService.getPronoun(x))
+                  .filter((x) => x)
               })
             );
           }
@@ -84,8 +84,8 @@ export class TableviewerComponent implements OnInit {
             this.store.dispatch(
               actionChangePatients({
                 patient: patients
-                  .map(x => this.pronounService.getPronoun(x))
-                  .filter(x => x)
+                  .map((x) => this.pronounService.getPronoun(x))
+                  .filter((x) => x)
               })
             );
           }
@@ -94,8 +94,8 @@ export class TableviewerComponent implements OnInit {
             this.store.dispatch(
               actionChangeOptions({
                 option: options
-                  .map(x => this.optionService.getOption(x))
-                  .filter(x => x)
+                  .map((x) => this.optionService.getOption(x))
+                  .filter((x) => x)
               })
             );
           }
@@ -103,7 +103,9 @@ export class TableviewerComponent implements OnInit {
             const roots = this.paramToArray(params.root);
             this.store.dispatch(
               actionChangeVerbs({
-                root: roots.map(x => this.verbService.getVerb(x)).filter(x => x)
+                root: roots
+                  .map((x) => this.verbService.getVerb(x))
+                  .filter((x) => x)
               })
             );
           }

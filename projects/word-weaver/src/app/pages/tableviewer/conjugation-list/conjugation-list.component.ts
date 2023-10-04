@@ -44,7 +44,7 @@ export class ConjugationListComponent implements OnDestroy, OnInit {
   }
 
   isL2Showing(levels): boolean {
-    const L2Tiers = TIERS.filter(x => x.options.language === "L2");
-    return L2Tiers && L2Tiers.some(x => levels[x.name]);
+    const L2Tiers = TIERS.filter((x) => x.options.language === "L2");
+    return L2Tiers && L2Tiers.some((x) => levels[x.name]);
   }
 }

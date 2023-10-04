@@ -28,7 +28,7 @@ export class TierComponent implements OnInit {
     // Filter empty values and sort on position
     this.morph_type = ResponseMorphemeNameIndex.type;
     this.output = this.data.output
-      .filter(x => x[this.tier.key])
+      .filter((x) => x[this.tier.key])
       .sort(
         (a, b) =>
           a[ResponseMorphemeNameIndex.position] -

@@ -21,7 +21,7 @@ describe("App", () => {
     page.navigateTo();
     page
       .getAllMenus()
-      .then(menus =>
+      .then((menus) =>
         expect(menus).toEqual(["Word Maker", "Table Viewer", "About"])
       );
   });

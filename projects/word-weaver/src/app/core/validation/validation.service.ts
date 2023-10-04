@@ -16,7 +16,7 @@ export class ValidationService {
     logic = null
   ): boolean {
     const conditionsTruth = [];
-    conditions.forEach(condition => {
+    conditions.forEach((condition) => {
       if (condition.logic) {
         // recurse if logic operator present
         conditionsTruth.push(
@@ -54,9 +54,9 @@ export class ValidationService {
       }
     });
     if (logic === "or") {
-      return conditionsTruth.some(x => x);
+      return conditionsTruth.some((x) => x);
     } else if (!logic || logic === "and") {
-      return conditionsTruth.every(x => x);
+      return conditionsTruth.every((x) => x);
     }
   }
 

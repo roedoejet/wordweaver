@@ -48,7 +48,8 @@ export interface GridOrder {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ConjugationGridComponent
-  implements AfterViewInit, OnDestroy, OnInit {
+  implements AfterViewInit, OnDestroy, OnInit
+{
   keys = Object.keys;
   displayTier = TIERS[0];
   tiers$: Observable<Tier[]>;
@@ -77,11 +78,11 @@ export class ConjugationGridComponent
     );
     this.tiers$ = this.settings$.pipe(
       takeUntil(this.unsubscribe$),
-      map(settings => TIERS.filter(tier => settings.level[tier.name]))
+      map((settings) => TIERS.filter((tier) => settings.level[tier.name]))
     );
     this.data$
       .pipe(takeUntil(this.unsubscribe$), distinctUntilChanged())
-      .subscribe(data => {
+      .subscribe((data) => {
         if (data) {
           this.uniqueCol = data.uniqueCol;
           this.uniqueMain = data.uniqueMain;
@@ -98,7 +99,7 @@ export class ConjugationGridComponent
   ngAfterViewInit(): void {
     this.data$
       .pipe(takeUntil(this.unsubscribe$), distinctUntilChanged())
-      .subscribe(data => {
+      .subscribe((data) => {
         console.log(data);
         if (data) {
           data.structuredData.forEach((x, i) => {
@@ -114,7 +115,7 @@ export class ConjugationGridComponent
     return this.store.pipe(
       select(selectTableviewerGridSlice),
       takeUntil(this.unsubscribe$),
-      switchMap(gridState =>
+      switchMap((gridState) =>
         combineLatest([
           of(gridState),
           this.store.pipe(
@@ -148,7 +149,7 @@ export class ConjugationGridComponent
     return this.store.pipe(
       select(selectTableviewerGridSlice),
       take(1),
-      switchMap(gridState => {
+      switchMap((gridState) => {
         let prefix = "ww-data.";
         if (gridState.gridOrder[type] === "root") {
           prefix = prefix + "verbs.";

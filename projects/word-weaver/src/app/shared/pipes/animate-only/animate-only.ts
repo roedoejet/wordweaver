@@ -8,6 +8,6 @@ export class AnimateOnlyPipe implements PipeTransform {
   // Returns only Animate pronouns
 
   transform(value: Pronoun[], ...args) {
-    return value.filter(pn => pn["gloss"].toLowerCase() !== "it");
+    return value.filter((pn) => pn["gloss"].toLowerCase() !== "it");
   }
 }

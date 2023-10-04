@@ -10,23 +10,25 @@ const routes: Routes = [
   {
     path: "about",
     loadChildren: () =>
-      import("./pages/about/about.module").then(m => m.AboutModule)
+      import("./pages/about/about.module").then((m) => m.AboutModule)
   },
   {
     path: "settings",
     loadChildren: () =>
-      import("./pages/settings/settings.module").then(m => m.SettingsModule)
+      import("./pages/settings/settings.module").then((m) => m.SettingsModule)
   },
   {
     path: "wordmaker",
     loadChildren: () =>
-      import("./pages/wordmaker/wordmaker.module").then(m => m.WordmakerModule)
+      import("./pages/wordmaker/wordmaker.module").then(
+        (m) => m.WordmakerModule
+      )
   },
   {
     path: "tableviewer",
     loadChildren: () =>
       import("./pages/tableviewer/tableviewer.module").then(
-        m => m.TableviewerModule
+        (m) => m.TableviewerModule
       )
   },
   {

@@ -20,7 +20,7 @@ export class NotificationService {
   ) {
     this.translation
       .get(toTranslate, data)
-      .subscribe(translated => {
+      .subscribe((translated) => {
         if (notificationType === "default") {
           this.default(translated);
         } else if (notificationType === "info") {

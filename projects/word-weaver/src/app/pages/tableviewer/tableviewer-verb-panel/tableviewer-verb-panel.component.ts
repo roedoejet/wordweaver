@@ -46,36 +46,36 @@ export class TableviewerVerbPanelComponent implements OnDestroy, OnInit {
       .pipe(
         takeUntil(this.unsubscribe$),
         // Create checkbox group
-        tap(verbs =>
-          verbs.map(verb =>
+        tap((verbs) =>
+          verbs.map((verb) =>
             this.checkboxGroup.addControl(verb["tag"], new FormControl(false))
           )
         ),
         // Subscribe to checkbox valuechanges
-        tap(x =>
+        tap((x) =>
           this.checkboxGroup.valueChanges
             .pipe(
               takeUntil(this.unsubscribe$),
               // Filter checked checkboxes
-              map(checkboxes =>
-                Object.keys(checkboxes).filter(k => checkboxes[k])
+              map((checkboxes) =>
+                Object.keys(checkboxes).filter((k) => checkboxes[k])
               ),
               // Convert tag to full Verb
-              map(verbTags =>
-                verbTags.map(verbTag => this.verbService.getVerb(verbTag))
+              map((verbTags) =>
+                verbTags.map((verbTag) => this.verbService.getVerb(verbTag))
               ),
               // Dispatch action to store
-              tap(selectedVerbs => this.onVerbSelect(selectedVerbs))
+              tap((selectedVerbs) => this.onVerbSelect(selectedVerbs))
             )
             .subscribe()
         )
       )
-      .subscribe(x => {
+      .subscribe((x) => {
         // change viewable verbs
         this.viewableVerbs$ = this.searchField.valueChanges.pipe(
           takeUntil(this.unsubscribe$),
           debounceTime(200),
-          switchMap(term => this.getEntriesFrom$(term))
+          switchMap((term) => this.getEntriesFrom$(term))
         );
       });
     // populate with store's selection
@@ -99,18 +99,18 @@ export class TableviewerVerbPanelComponent implements OnDestroy, OnInit {
   }
 
   selectedRoot(selection: Verb[], root: string) {
-    return selection.map(x => x.tag).indexOf(root) > 0;
+    return selection.map((x) => x.tag).indexOf(root) > 0;
   }
 
   getEntriesFrom$(term) {
     return this.verbService.verbs$.pipe(
-      map(verbs => verbs.filter(v => this.filterEntries(v, term)))
+      map((verbs) => verbs.filter((v) => this.filterEntries(v, term)))
     );
   }
 
   filterEntries(v, term) {
     return META.languages.some(
-      lang =>
+      (lang) =>
         lang.value in v &&
         v[lang.value].toLowerCase().indexOf(term.toLowerCase()) > -1
     );

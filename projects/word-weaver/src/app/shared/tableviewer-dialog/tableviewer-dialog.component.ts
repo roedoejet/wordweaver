@@ -34,7 +34,7 @@ export class TableViewerDialogComponent implements OnInit {
     this.gridOrder$ = this.store.pipe(select(selectTableViewerGridOrder));
     this.gridOrder$
       .pipe(take(1))
-      .subscribe(x => (this.gridOrderValues = [x.main, x.row, x.col])); // Initialize
+      .subscribe((x) => (this.gridOrderValues = [x.main, x.row, x.col])); // Initialize
   }
 
   ngOnInit(): void {
