@@ -5,46 +5,22 @@ import { Contributor } from "../app/pages/about/about/about.component";
 
 // Data Type Definitions (DTD)
 
-// DTD: Basic
+// DTD: Basic data file decriptions: see schema.ts
 
-export interface Option {
-  classes: string[];
-  gloss: string;
-  tag: string;
-  type?: string;
-}
+import { Option, Pronoun, Verb, ConjugationInput } from "./schema";
 
-export interface Pronoun {
-  gender: "M" | "F" | "N" | "";
-  gloss: string;
-  number: "SG" | "PL";
-  role: "agent" | "patient" | "";
-  obj_gloss: string;
-  person: "1" | "2" | "3";
-  value: string;
-  position?: Number;
-  tag: string;
-}
+export {
+  Option,
+  Pronoun,
+  Verb,
+  ConjugationInput,
+  ResponseMorpheme,
+  Conjugation,
+  ResponseObject,
+  Response
+} from "./schema";
 
-export interface Verb {
-  gloss: string;
-  display: string;
-  tag: string;
-  classes: string[];
-}
-
-export interface ConjugationInput {
-  root: string;
-  option: string;
-  agent: string;
-  patient: string;
-}
-
-export type ResponseMorpheme = [
-  position: number,
-  value: string,
-  type: string[]
-];
+// DTD: Basic other
 
 export enum ResponseMorphemeNameIndex {
   position = 0,
@@ -77,15 +53,6 @@ export interface RequestParams {
   patient: string[];
   optional?: OptionalParam[];
 }
-
-export type Conjugation = ResponseMorpheme[];
-
-export interface ResponseObject {
-  input: ConjugationInput;
-  output: Conjugation;
-}
-
-export type Response = ResponseObject[];
 
 // Tier name must be either the display (default) tier, or one of the toggleable levels in the settings
 export type TierNames = "display" | keyof Level;
