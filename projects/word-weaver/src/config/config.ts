@@ -14,15 +14,15 @@ export {
   Pronoun,
   Verb,
   ConjugationInput,
-  ResponseMorpheme,
+  ConjugationMorpheme,
   Conjugation,
-  ResponseObject,
-  Response
+  ConjugationObject,
+  Conjugations
 } from "./schema";
 
 // DTD: Basic other
 
-export enum ResponseMorphemeNameIndex {
+export enum ConjugationMorphemeNameIndex {
   position = 0,
   value = 1,
   type = 2
@@ -60,7 +60,7 @@ export type TierNames = "display" | keyof Level;
 export interface Tier {
   name: TierNames;
   separator: string;
-  key: ResponseMorphemeNameIndex;
+  key: ConjugationMorphemeNameIndex;
   position: number;
   options: TierOptions;
 }
@@ -154,14 +154,14 @@ export const LEVELS: Level = {
 export const TIERS: Tier[] = [
   {
     name: "display",
-    key: ResponseMorphemeNameIndex.value,
+    key: ConjugationMorphemeNameIndex.value,
     position: 0,
     separator: "",
     options: _defaultOptions
   },
   {
     name: "breakdown",
-    key: ResponseMorphemeNameIndex.value,
+    key: ConjugationMorphemeNameIndex.value,
     position: 1,
     separator: "-",
     options: _defaultOptions

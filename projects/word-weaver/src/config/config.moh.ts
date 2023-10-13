@@ -51,7 +51,7 @@ export interface RequestParams {
   optional?: OptionalParam[];
 }
 
-export type ResponseMorpheme = [
+export type ConjugationMorpheme = [
   position: number,
   value: string,
   gloss: string,
@@ -59,7 +59,7 @@ export type ResponseMorpheme = [
   type: string[]
 ];
 
-export enum ResponseMorphemeNameIndex {
+export enum ConjugationMorphemeNameIndex {
   position = 0,
   value = 1,
   gloss = 2,
@@ -67,14 +67,14 @@ export enum ResponseMorphemeNameIndex {
   type = 4
 }
 
-export type Conjugation = ResponseMorpheme[];
+export type Conjugation = ConjugationMorpheme[];
 
-export interface ResponseObject {
+export interface ConjugationObject {
   input: ConjugationInput;
   output: Conjugation;
 }
 
-export type Response = ResponseObject[];
+export type Conjugations = ConjugationObject[];
 
 export interface Highlight {
   aspect: boolean;
@@ -97,7 +97,7 @@ export interface Level {
 export interface Tier {
   name: TierNames;
   separator: string;
-  key: ResponseMorphemeNameIndex;
+  key: ConjugationMorphemeNameIndex;
   position: number;
   options: TierOptions;
 }
@@ -161,7 +161,7 @@ export const TIERS: Tier[] = [
     name: "display",
     separator: "",
     position: 0,
-    key: ResponseMorphemeNameIndex.value,
+    key: ConjugationMorphemeNameIndex.value,
     options: {
       language: "L1",
       showName: false
@@ -171,7 +171,7 @@ export const TIERS: Tier[] = [
     name: "breakdown",
     separator: "-",
     position: 1,
-    key: ResponseMorphemeNameIndex.value,
+    key: ConjugationMorphemeNameIndex.value,
     options: {
       language: "L1",
       showName: false
@@ -181,7 +181,7 @@ export const TIERS: Tier[] = [
     name: "gloss",
     separator: "-",
     position: 2,
-    key: ResponseMorphemeNameIndex.gloss,
+    key: ConjugationMorphemeNameIndex.gloss,
     options: {
       language: "L1",
       showName: false
@@ -191,7 +191,7 @@ export const TIERS: Tier[] = [
     name: "translation",
     separator: "",
     position: 4,
-    key: ResponseMorphemeNameIndex.english,
+    key: ConjugationMorphemeNameIndex.english,
     options: {
       language: "L2",
       showName: false

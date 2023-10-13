@@ -49,26 +49,26 @@ export interface RequestParams {
   optional?: OptionalParam[];
 }
 
-export type ResponseMorpheme = [
+export type ConjugationMorpheme = [
   position: number,
   value: string,
   type: string[]
 ];
 
-export enum ResponseMorphemeNameIndex {
+export enum ConjugationMorphemeNameIndex {
   position = 0,
   value = 1,
   type = 2
 }
 
-export type Conjugation = ResponseMorpheme[];
+export type Conjugation = ConjugationMorpheme[];
 
-export interface ResponseObject {
+export interface ConjugationObject {
   input: ConjugationInput;
   output: Conjugation;
 }
 
-export type Response = ResponseObject[];
+export type Conjugations = ConjugationObject[];
 
 export interface Highlight {
   root: boolean;
@@ -85,7 +85,7 @@ export interface Level {
 export interface Tier {
   name: TierNames;
   separator: string;
-  key: ResponseMorphemeNameIndex;
+  key: ConjugationMorphemeNameIndex;
   position: number;
   options: TierOptions;
 }
@@ -141,14 +141,14 @@ export const LEVELS: Level = {
 export const TIERS: Tier[] = [
   {
     name: "display",
-    key: ResponseMorphemeNameIndex.value,
+    key: ConjugationMorphemeNameIndex.value,
     position: 0,
     separator: "",
     options: _defaultOptions
   },
   {
     name: "breakdown",
-    key: ResponseMorphemeNameIndex.value,
+    key: ConjugationMorphemeNameIndex.value,
     position: 1,
     separator: "-",
     options: _defaultOptions

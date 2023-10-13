@@ -21,7 +21,7 @@ import {
   take,
   takeUntil
 } from "rxjs/operators";
-import { Response, Tier, TIERS } from "../../../../config/config";
+import { Conjugations, Tier, TIERS } from "../../../../config/config";
 import {
   OptionService,
   PronounService,
@@ -54,7 +54,7 @@ export class ConjugationGridComponent
   displayTier = TIERS[0];
   tiers$: Observable<Tier[]>;
   settings$: Observable<SettingsState>;
-  dataSources: MatTableDataSource<Response>[];
+  dataSources: MatTableDataSource<Conjugations>[];
   uniqueCol: string[];
   uniqueMain: string[];
   displayedColumns: string[];
@@ -87,7 +87,7 @@ export class ConjugationGridComponent
           this.uniqueCol = data.uniqueCol;
           this.uniqueMain = data.uniqueMain;
           this.dataSources = data.structuredData.map(() => {
-            const dataSource = new MatTableDataSource<Response>();
+            const dataSource = new MatTableDataSource<Conjugations>();
             return dataSource;
           });
           this.displayedColumns = ["placeholder", ...this.uniqueCol];

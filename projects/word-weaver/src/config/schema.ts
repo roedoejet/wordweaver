@@ -36,17 +36,17 @@ export interface ConjugationInput {
   patient: string;
 }
 
-export type ResponseMorpheme = [
+export type ConjugationMorpheme = [
   position: number,
   value: string,
   type: string[]
 ];
 
-export type Conjugation = ResponseMorpheme[];
+export type Conjugation = ConjugationMorpheme[];
 
-export interface ResponseObject {
+export interface ConjugationObject {
   input: ConjugationInput;
   output: Conjugation;
 }
 
-export type Response = ResponseObject[];
+export type Conjugations = ConjugationObject[];
