@@ -1,3 +1,3 @@
 #!/bin/bash
 
-npx ts-node validate.sh
+npx ts-node validate.ts
