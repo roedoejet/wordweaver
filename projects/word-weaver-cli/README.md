@@ -1,6 +1,6 @@
 ## Validation for data files
 
-To run:
+To run validation:
 
 ```
 cd projects/word-weaver-cli

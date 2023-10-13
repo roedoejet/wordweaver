@@ -3,11 +3,23 @@
 // for the data only, i.e., for conjugations.json, options.json, pronouns.json
 // and verbs.json.
 
+export interface LocalizedOption {
+  tag: string;
+  type?: string;
+}
+
 export interface Option {
   classes: string[];
   gloss: string;
   tag: string;
   type?: string;
+  en: LocalizedOption;
+  fr: LocalizedOption;
+}
+
+export interface LocalizedPronoun {
+  agent: string;
+  patient: string;
 }
 
 export interface Pronoun {
@@ -20,6 +32,8 @@ export interface Pronoun {
   value: string;
   position?: Number;
   tag: string;
+  en: LocalizedPronoun;
+  fr: LocalizedPronoun;
 }
 
 export interface Verb {
@@ -27,6 +41,8 @@ export interface Verb {
   display: string;
   tag: string;
   classes: string[];
+  en: string;
+  fr: string;
 }
 
 export interface ConjugationInput {
