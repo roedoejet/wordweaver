@@ -3,6 +3,8 @@
 // for the data only, i.e., for conjugations.json, options.json, pronouns.json
 // and verbs.json.
 
+// Data Type Definitions (DTD)
+
 export interface Option {
   classes: string[];
   gloss: string;

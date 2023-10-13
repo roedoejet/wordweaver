@@ -3,6 +3,8 @@
 // for the data only, i.e., for conjugations.json, options.json, pronouns.json
 // and verbs.json.
 
+// Data Type Definitions (DTD)
+
 export interface Option {
   classes: string[];
   gloss: string;
@@ -11,9 +13,10 @@ export interface Option {
 }
 
 export interface Pronoun {
-  gender: "M" | "F" | "N" | "";
+  gender: "M" | "F" | "FZ" | "N" | "";
   gloss: string;
-  number: "SG" | "PL";
+  inclusivity: "incl" | "excl" | "";
+  number: "SG" | "DL" | "PL";
   role: "agent" | "patient" | "";
   obj_gloss: string;
   person: "1" | "2" | "3";
@@ -25,6 +28,7 @@ export interface Pronoun {
 export interface Verb {
   gloss: string;
   display: string;
+  thematic_relation: "red" | "blue" | "purple";
   tag: string;
   classes: string[];
 }
@@ -39,13 +43,17 @@ export interface ConjugationInput {
 export type ConjugationMorpheme = [
   position: number,
   value: string,
+  gloss: string,
+  english: string,
   type: string[]
 ];
 
 export enum ConjugationMorphemeNameIndex {
   position = 0,
   value = 1,
-  type = 2
+  gloss = 2,
+  english = 3,
+  type = 4
 }
 
 export type Conjugation = ConjugationMorpheme[];

@@ -3,30 +3,27 @@ import { SettingsState } from "../app/core/settings/settings.model";
 import { TableviewerState } from "../app/core/tableviewer-selection/tableviewer-selection.model";
 import { Contributor } from "../app/pages/about/about/about.component";
 
-// Data Type Definitions (DTD)
-
 // DTD: Basic data file decriptions: see schema.ts
 
-import { Option, Pronoun, Verb, ConjugationInput } from "./schema";
+import {
+  Option,
+  Pronoun,
+  Verb,
+  ConjugationInput,
+  ConjugationMorphemeNameIndex
+} from "./schema";
 
 export {
   Option,
   Pronoun,
   Verb,
-  ConjugationInput,
-  ConjugationMorpheme,
   Conjugation,
   ConjugationObject,
+  ConjugationMorphemeNameIndex,
   Conjugations
 } from "./schema";
 
-// DTD: Basic other
-
-export enum ConjugationMorphemeNameIndex {
-  position = 0,
-  value = 1,
-  type = 2
-}
+// DTD: Advanced
 
 export interface Highlight {
   root: boolean;
@@ -38,8 +35,6 @@ export interface Level {
 }
 
 export type AvailableLanguages = "en" | "fr";
-
-// DTD: Advanced
 
 export interface OptionalParam {
   param: string;
