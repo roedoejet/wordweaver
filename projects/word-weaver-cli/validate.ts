@@ -1,5 +1,8 @@
 import * as fs from "fs";
 import Ajv from "ajv";
+import { env } from "process";
+
+const DATA_DIR = env.DATA_DIR || "../word-weaver/src/assets/data/fr/v1";
 
 let ajv = new Ajv({
   // allErrors: true,  // uncomment to get all the errors printed
@@ -26,7 +29,7 @@ function validate_file(file_prefix: string) {
   )}.jsonschema.json`;
   const schema = read_json_file(schema_file_name);
 
-  const data_file_name = `../word-weaver/src/assets/data/fr/v1/${file_prefix}.json`;
+  const data_file_name = `${DATA_DIR}/${file_prefix}.json`;
   const data = read_json_file(data_file_name);
 
   if (data == null || schema == null) {
@@ -37,11 +40,11 @@ function validate_file(file_prefix: string) {
   const valid = validate(data);
 
   if (valid) {
-    console.log(`OK: ${file_prefix}.json is valid`);
+    console.log(`OK: ${data_file_name} is valid`);
     return true;
   } else {
     console.log(
-      `ERROR: ${file_prefix}.json is not valid. Here it the first error:`
+      `ERROR: ${data_file_name} is not valid. Here it the first error:`
     );
     console.log(validate.errors);
     return false;
