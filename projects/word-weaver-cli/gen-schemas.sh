@@ -12,8 +12,9 @@
 set -o errexit
 
 CONFIG_PATH=../word-weaver/src/config
-if [[ $1 ]]; then
-    CONFIG_FILE=schema."$1".ts
+SCHEMA_LANG=$1
+if [[ $SCHEMA_LANG ]]; then
+    CONFIG_FILE=schema."$SCHEMA_LANG".ts
 else
     CONFIG_FILE=schema.ts
 fi
