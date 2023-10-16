@@ -1,12 +1,10 @@
-<div class="margin-top-20 full-width centered panel" *ngIf="lang$ | async as lang">
+<div class="margin-top-20 full-width centered panel" *ngIf="lang$ | async">
     <div class="panel__header container">
         <div class="row">
             <div class='col-sm-12'>
                 <form class="margin-left-25 font-md" *ngIf="viewableVerbs$ | async">
                     <mat-form-field class="margin-bottom-20" [formGroup]="verbForm">
-                        <input autocomplete="off" type="text"
-                            [placeholder]="'ww.pages.wordmaker.steps.verb.search-placeholder' | translate" value=""
-                            aria-label="Number" matInput formControlName="search">
+                        <input autocomplete="off" type="text" [placeholder]="'ww.pages.wordmaker.steps.verb.search-placeholder' | translate" value="" aria-label="Number" matInput formControlName="search">
                     </mat-form-field>
                 </form>
             </div>
@@ -17,8 +15,7 @@
                     {{ 'ww.pages.wordmaker.steps.verb.select-verb-multiple' | translate: { number: viewableVerbs.length } }}
                 </p>
                 <p *ngSwitchCase='1'>{{ "ww.pages.wordmaker.steps.verb.select-verb-single" | translate }}</p>
-                <p *ngSwitchCase='0'
-                    [innerHTML]="'ww.pages.wordmaker.steps.verb.no-matching-verbs' | translate: { value: searchField.value }"></p>
+                <p *ngSwitchCase='0' [innerHTML]="'ww.pages.wordmaker.steps.verb.no-matching-verbs' | translate: { value: searchField.value }"></p>
             </div>
         </div>
     </div>
@@ -30,7 +27,7 @@
         <mat-chip-list class="panel__list" *ngIf="viewableVerbs$ | async as verbs; else loading">
             <p *ngIf="verbs.length === 0">{{ "ww.pages.wordmaker.steps.verb.try-again" | translate }}</p>
             <mat-chip class="margin-5 bg-white border-accent" (click)="onVerbSelect(verb)" *ngFor="let verb of verbs">
-                <span class="centered color-black">{{ verb[lang] | translate}}</span>
+                <span class="centered color-black">{{'ww-data.verbs.' + verb.tag | translate }}</span>
                 <mat-icon class="icon-sm margin-left-5" [ngClass]="verb?.classes">brightness_1
                 </mat-icon>
             </mat-chip>

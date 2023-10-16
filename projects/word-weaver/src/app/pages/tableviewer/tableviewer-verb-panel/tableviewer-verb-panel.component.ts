@@ -7,8 +7,9 @@ import {
 import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { select, Store } from "@ngrx/store";
 import { Observable, Subject } from "rxjs";
+import { TranslateService } from "@ngx-translate/core";
 import { debounceTime, map, switchMap, takeUntil, tap } from "rxjs/operators";
-import { META, Verb } from "../../../../config/config";
+import { Verb } from "../../../../config/config";
 import { selectSettingsLanguage, VerbService } from "../../../core/core.module";
 import { actionChangeVerbs } from "../../../core/tableviewer-selection/tableviewer-selection.actions";
 import { State } from "../../../core/tableviewer-selection/tableviewer-selection.model";
@@ -33,6 +34,7 @@ export class TableviewerVerbPanelComponent implements OnDestroy, OnInit {
     select(selectSettingsLanguage)
   );
   constructor(
+    private translate: TranslateService,
     public verbService: VerbService,
     private fb: FormBuilder,
     private store: Store<State>
@@ -102,17 +104,19 @@ export class TableviewerVerbPanelComponent implements OnDestroy, OnInit {
     return selection.map((x) => x.tag).indexOf(root) > 0;
   }
 
-  getEntriesFrom$(term) {
+  getEntriesFrom$(term: string) {
+    term = term.toLowerCase();
     return this.verbService.verbs$.pipe(
       map((verbs) => verbs.filter((v) => this.filterEntries(v, term)))
     );
   }
 
-  filterEntries(v, term) {
-    return META.languages.some(
-      (lang) =>
-        lang.value in v &&
-        v[lang.value].toLowerCase().indexOf(term.toLowerCase()) > -1
+  filterEntries(v: Verb, term) {
+    return (
+      this.translate
+        .instant("ww-data.verbs." + v.tag)
+        .toLowerCase()
+        .indexOf(term.toLowerCase()) > -1
     );
   }
 }
