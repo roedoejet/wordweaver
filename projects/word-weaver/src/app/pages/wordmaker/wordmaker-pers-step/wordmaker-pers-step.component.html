@@ -1,4 +1,4 @@
-<ng-container *ngIf='lang$ | async as lang'>
+<ng-container *ngIf='lang$ | async'>
     <div class="margin-top-20 panel centered full-width" *ngIf="(selection$ | async) as selection">
         <ng-template #loading>
             <mat-spinner class="centered"></mat-spinner>
@@ -38,7 +38,7 @@
                         <mat-chip-list>
                             <mat-chip class="border-accent" (click)="onAgentSelect(pn)" *ngFor="let pn of pronouns"
                                 [ngClass]="selection.agent === pn ? 'color-white bg-red' : 'bg-white color-black'">
-                                {{ pn[lang].agent }}
+                                {{ "ww-data.pronouns.agents." + pn.tag | translate }}
                                 <mat-icon class="margin-left-5 icon-md"
                                     [ngClass]="selection.agent === pn ? 'color-white' : 'color-red'">person
                                 </mat-icon>
@@ -55,7 +55,7 @@
                             <mat-chip class="bg-white border-accent" (click)="onPatientSelect(pn)"
                                 *ngFor="let pn of pronouns"
                                 [ngClass]="selection.patient === pn ? 'color-white bg-blue' : 'bg-white color-black'">
-                                {{ pn[lang].patient }}
+                                {{ "ww-data.pronouns.patients." + pn.tag | translate }}
                                 <mat-icon class="margin-left-5 icon-md"
                                     [ngClass]="selection.patient === pn ? 'color-white' : 'color-blue'">
                                     person

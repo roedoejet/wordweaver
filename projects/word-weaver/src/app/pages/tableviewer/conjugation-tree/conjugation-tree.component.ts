@@ -8,10 +8,10 @@ import {
 import { select, Store } from "@ngrx/store";
 import { EChartsOption } from "echarts";
 import { merge as _merge } from "lodash";
-import { combineLatest, Observable, of, Subject } from "rxjs";
+import { TranslateService } from "@ngx-translate/core";
+import { Observable, of, Subject } from "rxjs";
 import { map, switchMap, takeUntil } from "rxjs/operators";
 import {
-  AvailableLanguages,
   Conjugation,
   ConjugationMorphemeNameIndex,
   Tier
@@ -20,7 +20,6 @@ import {
   ConjugationService,
   OptionService,
   PronounService,
-  selectSettingsLanguage,
   VerbService
 } from "../../../core/core.module";
 import { selectThemeColors } from "../../../core/settings/settings.selectors";
@@ -44,7 +43,8 @@ export class ConjugationTreeComponent implements OnDestroy, OnInit {
     private optionService: OptionService,
     private pronounService: PronounService,
     private conjugationService: ConjugationService,
-    private verbService: VerbService
+    private verbService: VerbService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -113,18 +113,11 @@ export class ConjugationTreeComponent implements OnDestroy, OnInit {
       takeUntil(this.unsubscribe$),
       switchMap((selection) => {
         if (selection && selection.conjugations.length > 0) {
-          return combineLatest([
-            this.store.pipe(
-              takeUntil(this.unsubscribe$),
-              select(selectSettingsLanguage)
-            ),
-            this.store.pipe(
-              takeUntil(this.unsubscribe$),
-              select(selectThemeColors)
-            )
-          ]).pipe(
-            map(([lang, color]) =>
-              this.createChartData(selection, lang, {
+          return this.store.pipe(
+            takeUntil(this.unsubscribe$),
+            select(selectThemeColors),
+            map((color) =>
+              this.createChartData(selection, {
                 primary: this.rgbToHex(color.primary),
                 accent: this.rgbToHex(color.accent)
               })
@@ -157,11 +150,7 @@ export class ConjugationTreeComponent implements OnDestroy, OnInit {
     return hex + hexMatches.join("");
   };
 
-  createChartData(
-    tvState: Partial<TableviewerState>,
-    lang: AvailableLanguages,
-    color
-  ) {
+  createChartData(tvState: Partial<TableviewerState>, color) {
     const chartOption = Object.assign({}, this.defaultChartOption);
     // Initialize series each time
     chartOption.series = [];
@@ -173,25 +162,32 @@ export class ConjugationTreeComponent implements OnDestroy, OnInit {
     let node;
     // Populate and merge object node
     conjugations.forEach((conjugation) => {
-      const v = this.verbService.getVerb(conjugation.input.root)[lang];
-      const t = this.optionService.getOption(conjugation.input["option"])[lang][
-        "tag"
-      ];
+      const v = this.translate.instant(
+        "ww-data.verbs." +
+          this.verbService.getVerb(conjugation.input.root)["tag"]
+      );
+      const t = this.translate.instant(
+        "ww-data.options.items." +
+          this.optionService.getOption(conjugation.input["option"])["tag"]
+      );
       let p = "";
       if ("agent" in conjugation.input) {
-        p = this.pronounService.getPronoun(conjugation.input.agent)[lang][
-          "agent"
-        ];
+        p = this.translate.instant(
+          "ww-data.pronouns.agents." +
+            this.pronounService.getPronoun(conjugation.input.agent)["tag"]
+        );
         if ("patient" in conjugation.input) {
           p += " → ";
-          p += this.pronounService.getPronoun(conjugation.input.patient)[lang][
-            "patient"
-          ];
+          p += this.translate.instant(
+            "ww-data.pronouns.patients" +
+              this.pronounService.getPronoun(conjugation.input.patient)["tag"]
+          );
         }
       } else if ("patient" in conjugation.input) {
-        p = this.pronounService.getPronoun(conjugation.input["patient"])[lang][
-          "agent"
-        ];
+        p = this.translate.instant(
+          "ww-data.pronouns.agents." +
+            this.pronounService.getPronoun(conjugation.input["patient"])["tag"]
+        );
       }
       const val = this.returnTierValue(conjugation.output);
       if (order) {

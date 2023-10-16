@@ -7,7 +7,7 @@ import {
   Output
 } from "@angular/core";
 import { VerbService, selectSettingsLanguage } from "../../../core/core.module";
-import { Verb, META } from "../../../../config/config";
+import { Verb } from "../../../../config/config";
 import { Subject, ReplaySubject } from "rxjs";
 import { debounceTime, tap, takeUntil } from "rxjs/operators";
 import { Store, select } from "@ngrx/store";
@@ -18,6 +18,7 @@ import {
   listAnimation
 } from "../../../core/animations/value.animations";
 import { actionChangeVerb } from "../../../core/wordmaker-selection/wordmaker-selection.actions";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "ww-wordmaker-verb-step",
@@ -41,7 +42,8 @@ export class WordmakerVerbStepComponent implements OnDestroy, OnInit {
   constructor(
     private verbService: VerbService,
     private fb: FormBuilder,
-    private store: Store<State>
+    private store: Store<State>,
+    private translate: TranslateService
   ) {
     // subscribe to search input
     this.searchField = new FormControl();
@@ -66,15 +68,17 @@ export class WordmakerVerbStepComponent implements OnDestroy, OnInit {
     this.unsubscribe$.complete();
   }
 
-  getEntriesFrom(term) {
+  getEntriesFrom(term: string) {
+    term = term.toLowerCase();
     return this.verbService.verbs.filter((v) => this.filterEntries(v, term));
   }
 
-  filterEntries(v, term) {
-    return META.languages.some(
-      (lang) =>
-        lang.value in v &&
-        v[lang.value].toLowerCase().indexOf(term.toLowerCase()) > -1
+  filterEntries(v: Verb, term: string) {
+    return (
+      this.translate
+        .instant("ww-data.verbs." + v.tag)
+        .toLowerCase()
+        .indexOf(term.toLowerCase()) > -1
     );
   }
 

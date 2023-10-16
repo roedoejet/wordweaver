@@ -13,14 +13,8 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import { select, Store } from "@ngrx/store";
 import { TranslateService } from "@ngx-translate/core";
-import { combineLatest, Observable, of, Subject } from "rxjs";
-import {
-  distinctUntilChanged,
-  map,
-  switchMap,
-  take,
-  takeUntil
-} from "rxjs/operators";
+import { Observable, Subject } from "rxjs";
+import { distinctUntilChanged, map, takeUntil } from "rxjs/operators";
 import { Conjugations, Tier, TIERS } from "../../../../config/config";
 import {
   OptionService,
@@ -28,10 +22,7 @@ import {
   VerbService
 } from "../../../core/core.module";
 import { SettingsState, State } from "../../../core/settings/settings.model";
-import {
-  selectSettings,
-  selectSettingsLanguage
-} from "../../../core/settings/settings.selectors";
+import { selectSettings } from "../../../core/settings/settings.selectors";
 import { selectTableviewerGridSlice } from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
 
 export type GridOrderOptions = "root" | "pn" | "option";
@@ -115,54 +106,36 @@ export class ConjugationGridComponent
     return this.store.pipe(
       select(selectTableviewerGridSlice),
       takeUntil(this.unsubscribe$),
-      switchMap((gridState) =>
-        combineLatest([
-          of(gridState),
-          this.store.pipe(
-            takeUntil(this.unsubscribe$),
-            select(selectSettingsLanguage)
-          )
-        ])
-      ),
-      map(([gridState, lang]) => {
+      map((gridState) => {
         if (gridState.gridOrder[type] === "root") {
-          return this.verbService.getVerb(term)[lang];
+          return this.translate.instant(
+            "ww-data.verbs." + this.verbService.getVerb(term)["tag"]
+          );
         } else if (gridState.gridOrder[type] === "pn") {
           const pnSplit = term.split("→");
           if (pnSplit.length === 2) {
             return (
-              this.pronounService.getPronoun(pnSplit[0].trim())[lang]["agent"] +
+              this.translate.instant(
+                "ww-data.pronouns.agents." +
+                  this.pronounService.getPronoun(pnSplit[0].trim())["tag"]
+              ) +
               " → " +
-              this.pronounService.getPronoun(pnSplit[1].trim())[lang]["patient"]
+              this.translate.instant(
+                "ww-data.pronouns.patients." +
+                  this.pronounService.getPronoun(pnSplit[1].trim())["tag"]
+              )
             );
           } else {
-            return this.pronounService.getPronoun(term)[lang]["agent"];
+            return this.translate.instant(
+              "ww-data.pronouns.agents." +
+                this.pronounService.getPronoun(term)["tag"]
+            );
           }
         } else if (gridState.gridOrder[type] === "option") {
-          return this.optionService.getOption(term)[lang]["tag"];
+          return this.translate.instant(
+            "ww-data.options.items." + this.optionService.getOption(term)["tag"]
+          );
         }
-      })
-    );
-  }
-
-  createTranslationKey$(term, type) {
-    return this.store.pipe(
-      select(selectTableviewerGridSlice),
-      take(1),
-      switchMap((gridState) => {
-        let prefix = "ww-data.";
-        if (gridState.gridOrder[type] === "root") {
-          prefix = prefix + "verbs.";
-        } else if (gridState.gridOrder[type] === "pn") {
-          const pnSplit = term.split("→");
-          if (pnSplit.length === 2) {
-          } else {
-            prefix = prefix + "pronouns.agents.";
-          }
-        } else if (gridState.gridOrder[type] === "option") {
-          prefix = prefix + "options.items.";
-        }
-        return this.translate.get(prefix + term);
       })
     );
   }
