@@ -6,8 +6,8 @@ import {
 } from "@angular/core";
 import {
   Conjugation,
-  ResponseMorphemeNameIndex,
-  ResponseObject,
+  ConjugationMorphemeNameIndex,
+  ConjugationObject,
   Tier
 } from "../../../config/config";
 
@@ -20,19 +20,19 @@ import {
 export class TierComponent implements OnInit {
   output: Conjugation;
   morph_type: number;
-  @Input() data: ResponseObject;
+  @Input() data: ConjugationObject;
   @Input() tier: Tier;
   constructor() {}
 
   ngOnInit(): void {
     // Filter empty values and sort on position
-    this.morph_type = ResponseMorphemeNameIndex.type;
+    this.morph_type = ConjugationMorphemeNameIndex.type;
     this.output = this.data.output
       .filter((x) => x[this.tier.key])
       .sort(
         (a, b) =>
-          a[ResponseMorphemeNameIndex.position] -
-          b[ResponseMorphemeNameIndex.position]
+          a[ConjugationMorphemeNameIndex.position] -
+          b[ConjugationMorphemeNameIndex.position]
       );
   }
 }

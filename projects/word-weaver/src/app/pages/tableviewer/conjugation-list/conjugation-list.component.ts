@@ -8,7 +8,7 @@ import {
 import { select, Store } from "@ngrx/store";
 import { Observable, Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
-import { Response, TIERS } from "../../../../config/config";
+import { Conjugations, TIERS } from "../../../../config/config";
 import { SettingsState, State } from "../../../core/settings/settings.model";
 import { selectSettings } from "../../../core/settings/settings.selectors";
 
@@ -22,7 +22,7 @@ export class ConjugationListComponent implements OnDestroy, OnInit {
   settings$: Observable<SettingsState>;
   tiers = TIERS;
   // selection$: Observable<TableviewerState>;
-  @Input() data$: Observable<Response>;
+  @Input() data$: Observable<Conjugations>;
   unsubscribe$ = new Subject<void>();
   constructor(private store: Store<State>) {}
 

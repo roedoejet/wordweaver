@@ -42,7 +42,11 @@
     "tslint-check": "tslint-config-prettier-check ./tslint.json",
     "extract-translations": "ngx-translate-extract --input ./projects/word-weaver/src --output ./projects/word-weaver/src/assets/i18n/*.json --sort --format namespaced-json --null-as-default-value --marker _",
     "update-translations": "./update_translations.sh",
-    "postinstall": "ngcc"
+    "postinstall": "ngcc",
+    "compress":"cd ./projects/word-weaver-cli && npm run-script compress",
+    "generate-schemas":"cd ./projects/word-weaver-cli && npm run-script generate-schemas",
+    "validate":"cd ./projects/word-weaver-cli && npm run-script validate",
+    "validate-and-compress":"cd ./projects/word-weaver-cli && npm run-script validate && npm run-script compress"
   },
   "husky": {
     "hooks": {
@@ -137,6 +141,7 @@
     "wait-on": "4.0.0",
     "webdriver-manager": "12.1.7",
     "webpack-bundle-analyzer": "^4.9.0",
+    "word-weaver-cli": "file:projects/word-weaver-cli",
     "zone.js": "0.11.8"
   },
   "engines": {

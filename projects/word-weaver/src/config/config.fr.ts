@@ -3,42 +3,31 @@ import { SettingsState } from "../app/core/settings/settings.model";
 import { TableviewerState } from "../app/core/tableviewer-selection/tableviewer-selection.model";
 import { Contributor } from "../app/pages/about/about/about.component";
 
-export interface Option {
-  classes: string[];
-  gloss: string;
-  tag: string;
-  type?: string;
-}
+// DTD: Basic data file decriptions: see schema.fr.ts
 
-export interface Pronoun {
-  gender: "M" | "F" | "N" | "";
-  gloss: string;
-  number: "SG" | "PL";
-  role: "agent" | "patient" | "";
-  obj_gloss: string;
-  person: "1" | "2" | "3";
-  value: string;
-  position?: Number;
-  tag: string;
-}
+import {
+  Option,
+  Pronoun,
+  Verb,
+  ConjugationInput,
+  ConjugationMorphemeNameIndex
+} from "./schema.fr";
 
-export interface Verb {
-  gloss: string;
-  display: string;
-  tag: string;
-  classes: string[];
-}
+export {
+  Option,
+  Pronoun,
+  Verb,
+  Conjugation,
+  ConjugationObject,
+  ConjugationMorphemeNameIndex,
+  Conjugations
+} from "./schema.fr";
+
+// DTD: Advanced
 
 export interface OptionalParam {
   param: string;
   value: string;
-}
-
-export interface ConjugationInput {
-  root: string;
-  option: string;
-  agent: string;
-  patient: string;
 }
 
 export interface RequestParams {
@@ -48,27 +37,6 @@ export interface RequestParams {
   patient: string[];
   optional?: OptionalParam[];
 }
-
-export type ResponseMorpheme = [
-  position: number,
-  value: string,
-  type: string[]
-];
-
-export enum ResponseMorphemeNameIndex {
-  position = 0,
-  value = 1,
-  type = 2
-}
-
-export type Conjugation = ResponseMorpheme[];
-
-export interface ResponseObject {
-  input: ConjugationInput;
-  output: Conjugation;
-}
-
-export type Response = ResponseObject[];
 
 export interface Highlight {
   root: boolean;
@@ -85,7 +53,7 @@ export interface Level {
 export interface Tier {
   name: TierNames;
   separator: string;
-  key: ResponseMorphemeNameIndex;
+  key: ConjugationMorphemeNameIndex;
   position: number;
   options: TierOptions;
 }
@@ -141,14 +109,14 @@ export const LEVELS: Level = {
 export const TIERS: Tier[] = [
   {
     name: "display",
-    key: ResponseMorphemeNameIndex.value,
+    key: ConjugationMorphemeNameIndex.value,
     position: 0,
     separator: "",
     options: _defaultOptions
   },
   {
     name: "breakdown",
-    key: ResponseMorphemeNameIndex.value,
+    key: ConjugationMorphemeNameIndex.value,
     position: 1,
     separator: "-",
     options: _defaultOptions

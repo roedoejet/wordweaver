@@ -1,10 +1,10 @@
 import { createAction, props } from "@ngrx/store";
-import { Option, Pronoun, Response, Verb } from "../../../config/config";
+import { Option, Pronoun, Conjugations, Verb } from "../../../config/config";
 import { Step } from "./wordmaker-selection.model";
 
 export const actionChangeConjugations = createAction(
   "[Wordmaker] Change Conjugations",
-  props<{ conjugations: Response }>()
+  props<{ conjugations: Conjugations }>()
 );
 
 export const actionChangeVerb = createAction(

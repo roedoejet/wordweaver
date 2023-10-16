@@ -3,44 +3,31 @@ import { SettingsState } from "../app/core/settings/settings.model";
 import { TableviewerState } from "../app/core/tableviewer-selection/tableviewer-selection.model";
 import { Contributor } from "../app/pages/about/about/about.component";
 
-export interface Option {
-  classes: string[];
-  gloss: string;
-  tag: string;
-  type?: string;
-}
+// DTD: Basic data file decriptions: see schema.moh.ts
 
-export interface Pronoun {
-  gender: "M" | "F" | "FZ" | "N" | "";
-  gloss: string;
-  inclusivity: "incl" | "excl" | "";
-  number: "SG" | "DL" | "PL";
-  role: "agent" | "patient" | "";
-  obj_gloss: string;
-  person: "1" | "2" | "3";
-  value: string;
-  position?: Number;
-  tag: string;
-}
+import {
+  Option,
+  Pronoun,
+  Verb,
+  ConjugationInput,
+  ConjugationMorphemeNameIndex
+} from "./schema.moh";
 
-export interface Verb {
-  gloss: string;
-  display: string;
-  thematic_relation: "red" | "blue" | "purple";
-  tag: string;
-  classes: string[];
-}
+export {
+  Option,
+  Pronoun,
+  Verb,
+  Conjugation,
+  ConjugationObject,
+  ConjugationMorphemeNameIndex,
+  Conjugations
+} from "./schema.moh";
+
+// DTD: Advanced
 
 export interface OptionalParam {
   param: string;
   value: string;
-}
-
-export interface ConjugationInput {
-  root: string;
-  option: string;
-  agent: string;
-  patient: string;
 }
 
 export interface RequestParams {
@@ -50,31 +37,6 @@ export interface RequestParams {
   patient: string[];
   optional?: OptionalParam[];
 }
-
-export type ResponseMorpheme = [
-  position: number,
-  value: string,
-  gloss: string,
-  english: string,
-  type: string[]
-];
-
-export enum ResponseMorphemeNameIndex {
-  position = 0,
-  value = 1,
-  gloss = 2,
-  english = 3,
-  type = 4
-}
-
-export type Conjugation = ResponseMorpheme[];
-
-export interface ResponseObject {
-  input: ConjugationInput;
-  output: Conjugation;
-}
-
-export type Response = ResponseObject[];
 
 export interface Highlight {
   aspect: boolean;
@@ -97,7 +59,7 @@ export interface Level {
 export interface Tier {
   name: TierNames;
   separator: string;
-  key: ResponseMorphemeNameIndex;
+  key: ConjugationMorphemeNameIndex;
   position: number;
   options: TierOptions;
 }
@@ -161,7 +123,7 @@ export const TIERS: Tier[] = [
     name: "display",
     separator: "",
     position: 0,
-    key: ResponseMorphemeNameIndex.value,
+    key: ConjugationMorphemeNameIndex.value,
     options: {
       language: "L1",
       showName: false
@@ -171,7 +133,7 @@ export const TIERS: Tier[] = [
     name: "breakdown",
     separator: "-",
     position: 1,
-    key: ResponseMorphemeNameIndex.value,
+    key: ConjugationMorphemeNameIndex.value,
     options: {
       language: "L1",
       showName: false
@@ -181,7 +143,7 @@ export const TIERS: Tier[] = [
     name: "gloss",
     separator: "-",
     position: 2,
-    key: ResponseMorphemeNameIndex.gloss,
+    key: ConjugationMorphemeNameIndex.gloss,
     options: {
       language: "L1",
       showName: false
@@ -191,7 +153,7 @@ export const TIERS: Tier[] = [
     name: "translation",
     separator: "",
     position: 4,
-    key: ResponseMorphemeNameIndex.english,
+    key: ConjugationMorphemeNameIndex.english,
     options: {
       language: "L2",
       showName: false

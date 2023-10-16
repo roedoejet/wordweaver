@@ -1,7 +1,7 @@
 import {
   Option,
   Pronoun,
-  Response,
+  Conjugations,
   TableviewerViewModes,
   Verb
 } from "../../../config/config";
@@ -16,7 +16,7 @@ export interface TableviewerState {
   view: TableviewerViewModes;
   treeDepth: TableviewerTreeDepth;
   standardTreeOrder: boolean;
-  conjugations: Response;
+  conjugations: Conjugations;
   loading: boolean;
   gridOrder: GridOrder;
 }

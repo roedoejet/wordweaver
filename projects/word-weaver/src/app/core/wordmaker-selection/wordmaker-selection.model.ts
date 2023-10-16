@@ -1,4 +1,4 @@
-import { Option, Pronoun, Response, Verb } from "../../../config/config";
+import { Option, Pronoun, Conjugations, Verb } from "../../../config/config";
 import { AppState } from "../core.module";
 
 export type Step = 0 | 1 | 2 | 3;
@@ -9,7 +9,7 @@ export interface WordmakerState {
   patient: Pronoun;
   root: Verb;
   step: Step;
-  conjugations: Response;
+  conjugations: Conjugations;
   loading: boolean;
 }
 

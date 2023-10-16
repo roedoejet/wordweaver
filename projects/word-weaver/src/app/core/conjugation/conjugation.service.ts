@@ -4,8 +4,8 @@ import { select, Store } from "@ngrx/store";
 import { Observable, of } from "rxjs";
 import { catchError, map, shareReplay, switchMap } from "rxjs/operators";
 import {
-  Response,
-  ResponseObject,
+  Conjugations,
+  ConjugationObject,
   Verb,
   Pronoun,
   Option
@@ -25,14 +25,14 @@ export type ConjugationRetrievalMethod = "endpoint" | "cache";
 export class ConjugationService {
   TIERS = environment.config.tiers;
   conjugations;
-  conjugations$: Observable<Response>;
-  random$: Observable<ResponseObject>;
+  conjugations$: Observable<Conjugations>;
+  random$: Observable<ConjugationObject>;
   path = "conjugations.json";
   constructor(private http: HttpClient, private store: Store) {
     this.conjugations$ = this.store.pipe(
       select(selectSettingsState),
       switchMap((settings: SettingsState) =>
-        this.http.get<Response>(settings.baseUrl + this.path)
+        this.http.get<Conjugations>(settings.baseUrl + this.path)
       ),
       shareReplay(1)
     );
@@ -41,7 +41,7 @@ export class ConjugationService {
     );
   }
 
-  getRandomOption(options: Response): ResponseObject {
+  getRandomOption(options: Conjugations): ConjugationObject {
     return options[Math.floor(Math.random() * options.length)];
   }
 
@@ -57,7 +57,7 @@ export class ConjugationService {
   }
 
   filterConjugations(
-    conjugations: Response,
+    conjugations: Conjugations,
     selection: TableviewerState | WordmakerState
   ) {
     const filterValues = { root: [], option: [], agent: [], patient: [] };
@@ -114,7 +114,7 @@ export class ConjugationService {
 
   // Restructure data for x*y grid
   // Returns structured data along with unique values for col/row and table separators
-  restructureData(conjugations: Response, gridOrder: GridOrder) {
+  restructureData(conjugations: Conjugations, gridOrder: GridOrder) {
     const main = gridOrder.main;
     const row = gridOrder.row;
     const col = gridOrder.col;
