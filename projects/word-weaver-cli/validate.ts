@@ -1,8 +1,10 @@
 import * as fs from "fs";
 import Ajv from "ajv";
-import { env } from "process";
+import { argv } from "process";
 
-const DATA_DIR = env.DATA_DIR || "../word-weaver/src/assets/data/fr/v1";
+const DATA_LANG = argv[2] || "fr";
+const DATA_VERSION = argv[3] || "v1";
+const DATA_DIR = `../word-weaver/src/assets/data/${DATA_LANG}/${DATA_VERSION}`;
 
 let ajv = new Ajv({
   // allErrors: true,  // uncomment to get all the errors printed
