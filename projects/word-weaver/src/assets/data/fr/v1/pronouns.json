@@ -2,69 +2,51 @@
   {
     "person": "1",
     "number": "SG",
-    "tag": "1-sg",
-    "en": { "agent": "I", "patient": "Me" },
-    "fr": { "agent": "Je", "patient": "Moi" }
+    "tag": "1-sg"
   },
   {
     "person": "2",
     "number": "SG",
-    "tag": "2-sg",
-    "en": { "agent": "You", "patient": "You" },
-    "fr": { "agent": "Tu", "patient": "Toi" }
+    "tag": "2-sg"
   },
   {
     "person": "3",
     "number": "SG",
     "gender": "F",
-    "tag": "3-sg-f",
-    "en": { "agent": "She", "patient": "Her" },
-    "fr": { "agent": "Elle", "patient": "Elle" }
+    "tag": "3-sg-f"
   },
   {
     "person": "3",
     "number": "SG",
     "gender": "M",
-    "tag": "3-sg-m",
-    "en": { "agent": "He", "patient": "Him" },
-    "fr": { "agent": "Il", "patient": "Lui" }
+    "tag": "3-sg-m"
   },
   {
     "person": "3",
     "number": "SG",
     "gender": "N",
-    "tag": "3-sg-n",
-    "en": { "agent": "It", "patient": "It" },
-    "fr": { "agent": "On", "patient": "\u00c7a" }
+    "tag": "3-sg-n"
   },
   {
     "person": "1",
     "number": "PL",
-    "tag": "1-pl",
-    "en": { "agent": "We", "patient": "Us" },
-    "fr": { "agent": "Nous", "patient": "Nous" }
+    "tag": "1-pl"
   },
   {
     "person": "2",
     "number": "PL",
-    "tag": "2-pl",
-    "en": { "agent": "You all", "patient": "You all" },
-    "fr": { "agent": "Vous", "patient": "Vous" }
+    "tag": "2-pl"
   },
   {
     "person": "3",
     "number": "PL",
     "gender": "M",
-    "tag": "3-pl-m",
-    "en": { "agent": "They (m)", "patient": "Them (m)" },
-    "fr": { "agent": "Ils", "patient": "Eux" }
+    "tag": "3-pl-m"
   },
   {
     "person": "3",
     "number": "PL",
     "gender": "F",
-    "tag": "3-pl-f",
-    "en": { "agent": "They (f)", "patient": "Them (f)" },
-    "fr": { "agent": "Elles", "patient": "Elles" }
+    "tag": "3-pl-f"
   }
 ]
