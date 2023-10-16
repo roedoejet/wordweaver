@@ -1,16 +1,17 @@
 #!/bin/bash
 
 # Usage:
-#    cd projects/word-weaver-cli
-#    DATA_DIR=path/to/data/dir ./compress.sh
+#    ./compress.sh <data_lang> <data_version>
 #
 # Compress all the data files associated with a word-weaver model.
-# $DATA_DIR should contain {verbs,options,pronouns,conjugations}.json
-#
+# Looks for the files containing {verbs,options,pronouns,conjugations}.json
+# in the directory ../word-weaver/src/assets/data/<data_lang>/<data_version>
 # E.g.:
-#    DATA_DIR=../word-weaver/src/assets/data/fr/v1 ./compress.sh
+#    ./compress.sh fr v1
 
-DATA_DIR?=../word-weaver/src/assets/data/fr/v1
+DATA_LANG=$1
+DATA_VERSION=$2
+DATA_DIR=../word-weaver/src/assets/data/${DATA_LANG}/${DATA_VERSION}
 
 EXIT_STATUS=0
 
