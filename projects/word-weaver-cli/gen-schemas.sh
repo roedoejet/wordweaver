@@ -5,5 +5,7 @@ mkdir -p schemas
 
 for type in Options Verbs Pronouns Conjugations; do
     echo Generating the schema for $type.
-    npx typescript-json-schema package.json $type > schemas/$type.jsonschema.json
+    npx typescript-json-schema --noExtraProps package.json $type > schemas/$type.jsonschema.json
 done
+
+rm ./schema.ts
