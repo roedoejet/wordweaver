@@ -1,4 +1,4 @@
-<div class='panel' *ngIf="lang$ | async as lang">
+<div class='panel' *ngIf="lang$ | async">
   <div class='panel__header panel__header--tableview'>
     <h5 class="panel__title">{{ 'ww.pages.tableviewer.panels.verb.title' | translate }}</h5>
     <!-- <button *ngIf='(selection$ | async).length > 0' class="mat-accent conjugate deselect" mat-raised-button
@@ -26,7 +26,7 @@
           <mat-chip-list #chipList aria-label="Selected Verbs">
             <mat-chip class='mat-accent' *ngFor="let verb of selection" selectable="false" [removable]="true"
               (removed)="onVerbDeselect(verb)">
-              <div class="chip-text">{{ verb[lang] }}</div>
+              <div class="chip-text">{{ "ww-data.verbs." + verb["tag"] | translate }}</div>
               <mat-icon matChipRemove>cancel</mat-icon>
             </mat-chip>
           </mat-chip-list>
@@ -48,7 +48,7 @@
       <div [formGroup]="checkboxGroup" *ngFor="let value of viewableVerbs$ | async">
         <mat-checkbox [disabled]="!(selectedRoot(selection, value.tag)) && selection.length >= 3"
           *ngIf="selection$ | async as selection" class='margin-5' [formControlName]="value.tag">
-          {{value[lang]}}
+          {{"ww-data.verbs." + value["tag"] | translate}}
           <!-- <span *ngIf='value.display'> - {{value.display}}</span> -->
         </mat-checkbox>
       </div>

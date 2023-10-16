@@ -1,4 +1,4 @@
-<ng-container *ngIf="lang$ | async as lang">
+<ng-container *ngIf="lang$ | async">
   <div class='panel' *ngIf="selection$ | async as selection">
     <div class='panel__header--tableview panel__header'>
       <h5 class='panel__title'>{{ 'ww.pages.tableviewer.panels.pers.title' | translate }}</h5>
@@ -14,7 +14,7 @@
           </span>
         </mat-select-trigger>
         <mat-option *ngFor="let pn of possiblePronouns$ | async" [value]="pn">
-          {{ pn[lang].agent }}
+          {{ 'ww-data.pronouns.agents.' + pn.tag | translate }}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -29,7 +29,7 @@
           </span>
         </mat-select-trigger>
         <mat-option *ngFor="let pn of possiblePronouns$ | async" [value]="pn">
-          {{ pn[lang].patient  }}</mat-option>
+          {{ 'ww-data.pronouns.patients.' + pn.tag | translate  }}</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
