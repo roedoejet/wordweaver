@@ -73,7 +73,7 @@
         </div>
 
         <!-- List View -->
-        <div *ngIf="selection.view === 'list' && selection.conjugations.length > 0" [hidden]="selection.view !== 'list'" class="list__container">
+        <div *ngIf="selection.view === 'list' && selection.conjugations.length > 0" [hidden]="selection.view !== 'list'" class="list__container custom-scroll-y full-width full-height">
             <ww-conjugation-list [data$]="listData$"></ww-conjugation-list>
         </div>
     </div>
