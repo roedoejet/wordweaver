@@ -1,6 +1,6 @@
 describe("My First Test", () => {
   it("Visits the initial project page", () => {
     cy.visit("/");
-    cy.contains("Welcome to the WordWeaver-UI WordMaker");
+    cy.contains("Welcome to the WordWeaver WordMaker");
   });
 });

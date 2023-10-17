@@ -14,7 +14,7 @@ export const environment = {
   },
   production: true,
   test: false,
-  base: `https://roedoejet.github.io/wordweaver-ui`,
+  base: `https://roedoejet.github.io/wordweaver`,
   dataPrefix: `/assets/data/fr/v1/`,
   dataTestPrefix: `/assets/data/fr/v2/`,
   versions: {
