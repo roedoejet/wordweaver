@@ -39,14 +39,6 @@
             "scripts": []
           },
           "configurations": {
-            "moh": {
-              "fileReplacements": [
-                {
-                  "replace": "projects/word-weaver/src/config/config.ts",
-                  "with": "projects/word-weaver/src/config/config.moh.ts"
-                }
-              ]
-            },
             "fr": {
               "fileReplacements": [
                 {
@@ -110,9 +102,6 @@
           "configurations": {
             "production": {
               "browserTarget": "word-weaver:build:production"
-            },
-            "moh": {
-              "browserTarget": "word-weaver:build:moh"
             },
             "fr": {
               "browserTarget": "word-weaver:build:fr"

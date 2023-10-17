@@ -64,20 +64,6 @@ a {
   font-family: $font-family-display;
 }
 
-.bg-img {
-  /* The image used */
-  background-image: url("https://roedoejet.github.io/wordweaver/dist_toy/assets/img/bg.jpg");
-  /* Full height */
-  height: 100vh;
-  overflow: overlay;
-  overflow-x: hidden;
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  min-height: 100%;
-}
-
 .shadow-box {
   box-shadow: 0 0.3125rem 1rem 0 rgba(0, 0, 0, 0.24);
   padding: 25px;
@@ -86,7 +72,6 @@ a {
 }
 
 // Colors
-
 @for $i from 1 through length($other-highlights) {
   .highlight-#{$i} {
     color: map-get($other-highlights, $i);

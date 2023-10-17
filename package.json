@@ -24,7 +24,6 @@
         "start": "ng serve --open",
         "build": "ng build",
         "build:prod": "ng build --configuration production",
-        "build:moh": "npm run build -- --configuration=moh-production",
         "build:fr": "npm run build -- --configuration=fr-production",
         "build-toy": "ng build --outputPath ./dist_toy",
         "lint": "ng lint",
