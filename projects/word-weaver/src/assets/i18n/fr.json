@@ -177,7 +177,7 @@
                 "home": {
                     "instructions": "<p>Construire un mot prend trois étapes. Il faut choisir <b>quoi</b> : quelle est l'action, <b>qui</b> la fait et <b>quand</b> elle se produit.</p><p>Vous pouvez utiliser les touches de curseur à droite et à gauche pour avancer et reculer dans le processus.</p><p>Allons-y!</p>",
                     "start": "Démarrer",
-                    "welcome": "Bienvenue à la Machine à mots de WordWeaver-UI."
+                    "welcome": "Bienvenue à la Machine à mots de WordWeaver."
                 },
                 "notifications": {
                     "noconjugation": "Oups, on n'a pas pu conjuguer cela. Prière de réessayer.",
