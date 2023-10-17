@@ -9,6 +9,14 @@
 # E.g.:
 #    ./compress.sh fr v1
 
+if [[ $# -ne 2 ]]; then
+    echo "ERROR: missing or extra command line argument(s)"
+    echo "Usage: ./compress.sh <data_lang> <data_version>"
+    echo "   or: npm run compress <data_lang> <data_version>"
+    echo " e.g.: npm run compress fr v1"
+    exit 1
+fi
+
 DATA_LANG=$1
 DATA_VERSION=$2
 DATA_DIR=../word-weaver/src/assets/data/${DATA_LANG}/${DATA_VERSION}
