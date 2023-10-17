@@ -177,7 +177,7 @@
 				"home": {
 					"instructions": "<p>There are three steps to make a word. We'll need to know <b>what</b> the action is, <b>who</b> is doing it, and <b>when</b> it's happening.</p><p>You can press the left arrow key to go to the previous step and the right arrow key to go to the next step. </p><p>Let's get started!</p>",
 					"start": "START",
-					"welcome": "Welcome to the WordWeaver-UI WordMaker"
+					"welcome": "Welcome to the WordWeaver WordMaker"
 				},
 				"notifications": {
 					"noconjugation": "Whoops! We couldn't conjugate this. Please try again.",

@@ -1,6 +1,6 @@
-# WordWeaver-GUI
+# WordWeaver
 
-[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/roedoejet/wordweaver-UI)
+[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/roedoejet/wordweaver)
 ![POEditor](https://img.shields.io/poeditor/progress/331037/en?token=611d3987e3a7e94e57b049c0df8de613)
 ![POEditor](https://img.shields.io/poeditor/progress/331037/fr?token=611d3987e3a7e94e57b049c0df8de613)
 
@@ -12,7 +12,7 @@ This is an Angular web application for visualizing data from WordWeaver.
 
 ## Table of Contents
 
-- [WordWeaver-GUI](#wordweaver-gui)
+- [WordWeaver](#wordweaver)
   - [Table of Contents](#table-of-contents)
   - [Background](#background)
     - [Features](#features)
@@ -26,7 +26,7 @@ This is an Angular web application for visualizing data from WordWeaver.
 
 ## Background
 
-This is the front-end for the [WordWeaver](https://github.com/roedoejet/wwapi) tool.
+This is a tool for creating interactive conjugation tools for your language.
 
 ### Features
 
@@ -34,15 +34,14 @@ This is the front-end for the [WordWeaver](https://github.com/roedoejet/wwapi) t
 - Functions offline (including your conjugation data!) thanks to PouchDB
 - Built for mobile (PWA support)
 - Totally themable
-- Configurable to match your data from [WordWeaver](https://github.com/roedoejet/wwapi)
 
 ## Install
 
 If using with a new language, it is recommended to clone the repo.
 
 ```sh
-$ git clone https://github.com/roedoejet/wordweaver-UI.git
-$ cd wordweaver-UI
+$ git clone https://github.com/roedoejet/wordweaver.git
+$ cd wordweaver
 $ npm install
 ```
 
@@ -52,9 +51,9 @@ Then, you can create a new repo on GitHub and reset the origin remote to your ne
 
 Then, add a new repo and set the url to this:
 
-`git remote add ww https://github.com/roedoejet/wordweaver-UI.git`
+`git remote add ww https://github.com/roedoejet/wordweaver.git`
 
-That way, you can make changes in your repo, push them to your origin, but still pull new changes to the gui using `git pull ww master`
+That way, you can make changes in your repo, push them to your origin, but still pull new changes to the gui using `git pull ww main`
 
 ## Usage
 
@@ -78,7 +77,7 @@ $ npm start
 
 ## Contributing
 
-Feel free to dive in! [Open an issue](https://github.com/roedoejet/wordweaver-UI/issues/new) or submit PRs.
+Feel free to dive in! [Open an issue](https://github.com/roedoejet/wordweaver/issues/new) or submit PRs.
 
 This repo follows the [Contributor Covenant](http://contributor-covenant.org/version/1/3/0/) Code of Conduct.
 

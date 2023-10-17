@@ -3,7 +3,7 @@ import { HIGHLIGHTS, LEVELS, META, TIERS, VALIDATION } from "../config/config";
 const packageJson = require("../../../../package.json");
 
 export const environment = {
-  appName: "WordWeaver-UI",
+  appName: "WordWeaver",
   envName: "TEST",
   config: {
     tiers: TIERS,

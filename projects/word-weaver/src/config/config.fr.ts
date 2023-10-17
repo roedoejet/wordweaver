@@ -206,7 +206,7 @@ export const META: Meta = {
   links: {
     github: {
       display: true,
-      url: "https://www.github.com/roedoejet/wordweaver-UI"
+      url: "https://www.github.com/roedoejet/wordweaver"
     },
     medium: {
       display: false,
