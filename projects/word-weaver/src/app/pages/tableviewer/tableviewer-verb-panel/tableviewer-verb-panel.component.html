@@ -26,7 +26,7 @@
           <mat-chip-list #chipList aria-label="Selected Verbs">
             <mat-chip class='mat-accent' *ngFor="let verb of selection" selectable="false" [removable]="true"
               (removed)="onVerbDeselect(verb)">
-              {{ verb[lang] }}
+              <div class="chip-text">{{ verb[lang] }}</div>
               <mat-icon matChipRemove>cancel</mat-icon>
             </mat-chip>
           </mat-chip-list>

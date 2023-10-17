@@ -39,6 +39,28 @@ button.deselect {
 .mat-accordion {
   min-width: 170px;
   max-width: 170px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.mat-chip {
+  min-width: 100%;
+  max-width: 100%;
+}
+
+.chip-text {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  position: relative;
+  width: 80%;
+  line-height: 1;
+}
+
+.mat-icon {
+  margin: 0 !important;
+  position: absolute;
+  right: 9px;
 }
 
 // mat-icon.mat-chip-remove {
