@@ -25,7 +25,8 @@
 @mixin ww-background-theme-light($theme) {
   .content {
     &:after {
-      background-image: url("https://roedoejet.github.io/kawennonnis_gui/dist_toy/assets/img/bg.jpg");
+      // You can mixin background images for example:
+      // background-image: url("https://roedoejet.github.io/kawennonnis_gui/dist_toy/assets/img/bg.jpg");
     }
   }
 }
@@ -33,7 +34,8 @@
 @mixin ww-background-theme-dark($theme) {
   .content {
     &:after {
-      background-image: url("https://roedoejet.github.io/kawennonnis_gui/dist_toy/assets/img/bg.jpg");
+      // You can mixin background images for example:
+      // background-image: url("https://roedoejet.github.io/kawennonnis_gui/dist_toy/assets/img/bg.jpg");
     }
   }
 }
