@@ -166,9 +166,9 @@ export const TIERS: Tier[] = [
 export const META: Meta = {
   contributors: [
     {
-      name: "Aidan Pine",
+      name: "Your Name",
       title: "Lead Developer",
-      text: "Aidan is an application development specialist on the NRC's Indigenous Language Technology project. Aidan is interested in language revitalization because of its inherently multidisplinary nature and because of the social justice component at the centre of the work. Aidan is humbled and excited to be working with such an accomplished and dynamic team and hopes to continue improving the WordWeaver for years to come.",
+      text: "Some text about you, the developer.",
       img: false
     }
   ],
@@ -182,10 +182,10 @@ export const META: Meta = {
   tableviewer: {
     viewModes: ["list", "grid", "tree"]
   },
-  logo: "assets/wwlogo.png",
+  logo: "assets/logo.png",
   copyright: {
-    name: "National Research Council Canada",
-    url: "https://nrc.canada.ca/en/node/1378"
+    name: "Your Name",
+    url: "https://yourwebsite.com"
   },
   links: {
     github: {
