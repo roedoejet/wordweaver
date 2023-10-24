@@ -1,22 +1,54 @@
-import { HttpClient } from "@angular/common/http";
+import {
+  HttpClient,
+  HttpContext,
+  HttpErrorResponse
+} from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { map, shareReplay } from "rxjs/operators";
+import { Store, select } from "@ngrx/store";
+import { Observable, of, throwError } from "rxjs";
+import { catchError, map, retry, shareReplay, switchMap } from "rxjs/operators";
+
 import { Option } from "../../../config/config";
-import { environment } from "../../../environments/environment";
+import { selectSettingsState } from "../core.state";
+import { SUPPRESS_ERROR } from "../http-interceptors/http-error.interceptor";
+import { SettingsState } from "../settings/settings.model";
 
 @Injectable({
   providedIn: "root"
 })
 export class OptionService {
-  path = environment.base + environment.dataPrefix + "options.json";
+  path = "options.json.gz";
   options;
   options$: Observable<Option[]>;
   optionsByType$: Observable<object[]>;
   random$: Observable<Option>;
-  constructor(private http: HttpClient) {
-    console.log(this.path);
-    this.options$ = this.http.get<Option[]>(this.path).pipe(shareReplay(1));
+  suppressError = true;
+  constructor(private http: HttpClient, private store: Store) {
+    this.options$ = this.store.pipe(
+      select(selectSettingsState),
+      switchMap((settings: SettingsState) =>
+        this.http.get<Option[]>(settings.baseUrl + this.path, {
+          context: new HttpContext().set(SUPPRESS_ERROR, this.suppressError)
+        })
+      ),
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 404 && error.url.endsWith("gz")) {
+          // Try falling back to uncompressed url
+          this.path = "options.json";
+          this.suppressError = false;
+          return throwError(
+            () =>
+              new Error(
+                "compressed file not found, falling back to uncompressed version."
+              )
+          );
+        } else {
+          return throwError(() => of(error));
+        }
+      }),
+      retry(1),
+      shareReplay(1)
+    );
     this.optionsByType$ = this.options$.pipe(
       map((options) => {
         const optionTypes = [...new Set(options.map((x) => x.type))];

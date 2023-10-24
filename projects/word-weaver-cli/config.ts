@@ -1,4 +1,4 @@
-import { Verb, Option, Pronoun, Conjugations } from "./schema"
+import { Verb, Option, Pronoun, Conjugations } from "./schema";
 
 export type Options = Option[];
 export type Pronouns = Pronoun[];

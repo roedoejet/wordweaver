@@ -1,23 +1,27 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { select, Store } from "@ngrx/store";
-import { Observable, of } from "rxjs";
-import { catchError, map, shareReplay, switchMap } from "rxjs/operators";
 import {
-  Conjugations,
+  HttpClient,
+  HttpContext,
+  HttpErrorResponse
+} from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Store, select } from "@ngrx/store";
+import { Observable, of, throwError } from "rxjs";
+import { catchError, map, retry, shareReplay, switchMap } from "rxjs/operators";
+
+import {
   ConjugationObject,
-  Verb,
+  Conjugations,
+  Option,
   Pronoun,
-  Option
+  Verb
 } from "../../../config/config";
 import { environment } from "../../../environments/environment";
 import { GridOrder } from "../../pages/tableviewer/conjugation-grid/conjugation-grid.component";
 import { selectSettingsState } from "../core.state";
+import { SUPPRESS_ERROR } from "../http-interceptors/http-error.interceptor";
 import { SettingsState } from "../settings/settings.model";
 import { TableviewerState } from "../tableviewer-selection/tableviewer-selection.model";
 import { WordmakerState } from "../wordmaker-selection/wordmaker-selection.model";
-
-export type ConjugationRetrievalMethod = "endpoint" | "cache";
 
 @Injectable({
   providedIn: "root"
@@ -27,13 +31,32 @@ export class ConjugationService {
   conjugations;
   conjugations$: Observable<Conjugations>;
   random$: Observable<ConjugationObject>;
-  path = "conjugations.json";
+  path = "conjugations.json.gz";
+  suppressError = true;
   constructor(private http: HttpClient, private store: Store) {
     this.conjugations$ = this.store.pipe(
       select(selectSettingsState),
       switchMap((settings: SettingsState) =>
-        this.http.get<Conjugations>(settings.baseUrl + this.path)
+        this.http.get<Conjugations>(settings.baseUrl + this.path, {
+          context: new HttpContext().set(SUPPRESS_ERROR, this.suppressError)
+        })
       ),
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 404 && error.url.endsWith("gz")) {
+          // Try falling back to uncompressed url
+          this.path = "conjugations.json";
+          this.suppressError = false;
+          return throwError(
+            () =>
+              new Error(
+                "compressed file not found, falling back to uncompressed version."
+              )
+          );
+        } else {
+          return throwError(() => of(error));
+        }
+      }),
+      retry(1),
       shareReplay(1)
     );
     this.random$ = this.conjugations$.pipe(
@@ -81,25 +104,10 @@ export class ConjugationService {
     });
   }
 
-  conjugate$(
-    selection: TableviewerState | WordmakerState,
-    method: ConjugationRetrievalMethod = "cache"
-  ) {
-    if (method === "endpoint") {
-      const queryArgs = this.createRequestQueryArgs(selection);
-      return this.store.pipe(
-        select(selectSettingsState),
-        switchMap((settings: SettingsState) =>
-          this.http
-            .get(settings.baseUrl + "conjugations?" + queryArgs.toString())
-            .pipe(catchError((err) => of(err)))
-        )
-      );
-    } else {
-      return this.conjugations$.pipe(
-        map((conjugations) => this.filterConjugations(conjugations, selection))
-      );
-    }
+  conjugate$(selection: TableviewerState | WordmakerState) {
+    return this.conjugations$.pipe(
+      map((conjugations) => this.filterConjugations(conjugations, selection))
+    );
   }
 
   returnPronounGridDisplay(agent, patient) {
