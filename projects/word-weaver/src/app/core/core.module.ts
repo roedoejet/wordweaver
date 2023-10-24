@@ -54,10 +54,6 @@ import {
   ROUTE_ANIMATIONS_ELEMENTS,
   specialAnimations
 } from "./animations/route.animations";
-import { AuthGuardService } from "./auth/auth-guard.service";
-import { authLogin, authLogout } from "./auth/auth.actions";
-import { AuthEffects } from "./auth/auth.effects";
-import { selectAuth, selectIsAuthenticated } from "./auth/auth.selectors";
 import { ConjugationService } from "./conjugation/conjugation.service";
 import {
   AppState,
@@ -85,17 +81,12 @@ import { VerbService } from "./verb/verb.service";
 import { WordmakerEffects } from "./wordmaker-selection/wordmaker-selection.effects";
 
 export {
-  selectAuth,
-  authLogin,
-  authLogout,
   routeAnimations,
   specialAnimations,
   AppState,
   LocalStorageService,
-  selectIsAuthenticated,
   ROUTE_ANIMATIONS_ELEMENTS,
   AnimationsService,
-  AuthGuardService,
   selectRouterState,
   NotificationService,
   selectEffectiveTheme,
@@ -181,7 +172,6 @@ export const httpLoaderFactory = (http: HttpClient) =>
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot([
-      AuthEffects,
       SettingsEffects,
       GoogleAnalyticsEffects,
       TableviewerEffects,

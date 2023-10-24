@@ -6,12 +6,9 @@ import { Observable } from "rxjs";
 import { META_DATA } from "../../config/config";
 import { environment as env } from "../../environments/environment";
 import {
-  authLogin,
-  authLogout,
   LocalStorageService,
   routeAnimations,
   selectEffectiveTheme,
-  selectIsAuthenticated,
   selectSettingsLanguage,
   selectSettingsStickyHeader,
   specialAnimations
@@ -46,7 +43,6 @@ export class AppComponent implements OnInit {
     { link: "settings", label: marker("ww.menu.settings") }
   ];
   metaData = META_DATA;
-  isAuthenticated$: Observable<boolean>;
   stickyHeader$: Observable<boolean>;
   language$: Observable<string>;
   theme$: Observable<string>;
@@ -69,18 +65,9 @@ export class AppComponent implements OnInit {
       );
     }
 
-    this.isAuthenticated$ = this.store.pipe(select(selectIsAuthenticated));
     this.stickyHeader$ = this.store.pipe(select(selectSettingsStickyHeader));
     this.language$ = this.store.pipe(select(selectSettingsLanguage));
     this.theme$ = this.store.pipe(select(selectEffectiveTheme));
-  }
-
-  onLoginClick() {
-    this.store.dispatch(authLogin());
-  }
-
-  onLogoutClick() {
-    this.store.dispatch(authLogout());
   }
 
   onLanguageSelect({ value: language }) {
