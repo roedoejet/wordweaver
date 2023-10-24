@@ -35,6 +35,7 @@ describe("SettingsEffects", () => {
         snapshot: {}
       },
       events: {
+        // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
         pipe() {}
       }
     };

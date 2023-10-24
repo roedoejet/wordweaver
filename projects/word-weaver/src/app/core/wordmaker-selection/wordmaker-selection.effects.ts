@@ -21,7 +21,7 @@ import { State } from "./wordmaker-selection.model";
 
 export const WORDMAKER_SELECTION_KEY = "WORDMAKER";
 
-export function createRequestQueryArgs(selection) {
+export const createRequestQueryArgs = (selection) => {
   const params = new URLSearchParams();
   ["option", "agent", "patient", "root"].forEach((x) => {
     if (selection[x]) {
@@ -29,11 +29,9 @@ export function createRequestQueryArgs(selection) {
     }
   });
   return params;
-}
+};
 
-export function randomX(x) {
-  return x[Math.floor(Math.random() * (x.length - 1) + 1)];
-}
+export const randomX = (x) => x[Math.floor(Math.random() * (x.length - 1) + 1)];
 
 @Injectable()
 export class WordmakerEffects {

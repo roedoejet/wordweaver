@@ -65,15 +65,13 @@ const reducer = createReducer(
       pageAnimations: false
     })
   ),
-  on(actionSettingsChangeThemeColors, (state, action) => {
-    return {
-      ...state,
-      colors: {
-        ...state.colors,
-        ...{ primary: action.primary, accent: action.accent }
-      }
-    };
-  }),
+  on(actionSettingsChangeThemeColors, (state, action) => ({
+    ...state,
+    colors: {
+      ...state.colors,
+      ...{ primary: action.primary, accent: action.accent }
+    }
+  })),
   on(actionSettingsChangeHighlight, (state, action) => {
     const newNestedState = {};
     newNestedState[action.key] = action.checked;
@@ -92,9 +90,7 @@ const reducer = createReducer(
   })
 );
 
-export function settingsReducer(
+export const settingsReducer = (
   state: SettingsState | undefined,
   action: Action
-) {
-  return reducer(state, action);
-}
+) => reducer(state, action);

@@ -69,8 +69,8 @@ export interface Condition {
   logic: null | "or" | "and";
   operator?: "eq" | "in" | "truthy";
   method?: "selection";
-  method_key?: keyof ConjugationInput;
-  item_key?: keyof Option | keyof Pronoun | keyof Verb | null;
+  methodKey?: keyof ConjugationInput;
+  itemKey?: keyof Option | keyof Pronoun | keyof Verb | null;
   value?: string | string[] | null;
   conditions?: Condition[];
 }
@@ -135,7 +135,7 @@ export const _defaultOptions: TierOptions = { language: "L1", showName: false };
 
 // IC: Basic
 
-export const CONFIG_NAME: string = "dflt";
+export const CONFIG_NAME = "dflt";
 
 export const HIGHLIGHTS: Highlight = {
   root: true,
@@ -163,7 +163,7 @@ export const TIERS: Tier[] = [
   }
 ];
 
-export const META: Meta = {
+export const META_DATA: Meta = {
   contributors: [
     {
       name: "Your Name",

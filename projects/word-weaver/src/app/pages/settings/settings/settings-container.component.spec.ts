@@ -15,8 +15,6 @@ import { SharedModule } from "../../../shared/shared.module";
 
 import { SettingsContainerComponent } from "./settings-container.component";
 import {
-  actionSettingsChangeAnimationsElements,
-  actionSettingsChangeAnimationsPage,
   actionSettingsChangeAutoNightMode,
   actionSettingsChangeTheme,
   actionSettingsChangeStickyHeader
@@ -29,7 +27,10 @@ describe("SettingsComponent", () => {
   let fixture: ComponentFixture<SettingsContainerComponent>;
   let store: MockStore;
   let dispatchSpy;
-  let mockSelectSettings: MemoizedSelector<{}, SettingsState>;
+  let mockSelectSettings: MemoizedSelector<
+    Record<string, unknown>,
+    SettingsState
+  >;
 
   const getThemeSelectArrow = () =>
     fixture.debugElement.queryAll(By.css(".mat-select-trigger"))[1];

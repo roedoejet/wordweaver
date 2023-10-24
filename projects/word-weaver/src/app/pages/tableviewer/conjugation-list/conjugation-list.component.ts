@@ -19,10 +19,11 @@ import { selectSettings } from "../../../core/settings/settings.selectors";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ConjugationListComponent implements OnDestroy, OnInit {
+  @Input() data$: Observable<Conjugations>;
+
   settings$: Observable<SettingsState>;
   tiers = TIERS;
   // selection$: Observable<TableviewerState>;
-  @Input() data$: Observable<Conjugations>;
   unsubscribe$ = new Subject<void>();
   constructor(private store: Store<State>) {}
 
@@ -44,7 +45,7 @@ export class ConjugationListComponent implements OnDestroy, OnInit {
   }
 
   isL2Showing(levels): boolean {
-    const L2Tiers = TIERS.filter((x) => x.options.language === "L2");
-    return L2Tiers && L2Tiers.some((x) => levels[x.name]);
+    const l2Tiers = TIERS.filter((x) => x.options.language === "L2");
+    return l2Tiers && l2Tiers.some((x) => levels[x.name]);
   }
 }

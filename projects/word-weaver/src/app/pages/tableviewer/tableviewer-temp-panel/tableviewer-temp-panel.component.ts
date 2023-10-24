@@ -55,7 +55,7 @@ export class TableviewerTempPanelComponent implements OnDestroy, OnInit {
     this.unsubscribe$.complete();
   }
 
-  onOptionSelect(Options) {
-    this.store.dispatch(actionChangeOptions({ option: Options.value }));
+  onOptionSelect(options) {
+    this.store.dispatch(actionChangeOptions({ option: options.value }));
   }
 }

@@ -38,7 +38,7 @@
                         </mat-chip-list>
                     </div>
                 </div>
-                <div *ngIf='!(optionService.optionsUseType$() | async)'
+                <div *ngIf='(optionService.optionsUseType$() | async) === false'
                     class='option__container custom-scroll centered pwidth-50--desktop pwidth-100--mobile'>
                     <mat-chip-list *ngIf="possibleOptions$ | async as options; else loading">
                         <mat-chip (click)="onChipClick(option.tag)" class="bg-white color-black border-accent"

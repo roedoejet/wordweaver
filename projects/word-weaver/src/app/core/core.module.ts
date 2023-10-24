@@ -144,8 +144,8 @@ export class MultiTranslateHttpLoader implements TranslateLoader {
   }
 }
 
-export function HttpLoaderFactory(http: HttpClient) {
-  return new MultiTranslateHttpLoader(http, [
+export const httpLoaderFactory = (http: HttpClient) =>
+  new MultiTranslateHttpLoader(http, [
     // These are the UI-specific i18n assets
     {
       prefix: "/assets/i18n/",
@@ -157,7 +157,6 @@ export function HttpLoaderFactory(http: HttpClient) {
       suffix: ".json"
     }
   ]);
-}
 
 @NgModule({
   imports: [
@@ -199,7 +198,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
+        useFactory: httpLoaderFactory,
         deps: [HttpClient]
       }
     })

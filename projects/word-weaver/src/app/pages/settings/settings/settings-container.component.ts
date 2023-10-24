@@ -8,7 +8,7 @@ import { marker } from "@biesbjerg/ngx-translate-extract-marker";
 import { select, Store } from "@ngrx/store";
 import { Observable, Subject } from "rxjs";
 import { take } from "rxjs/operators";
-import { META } from "../../../../config/config";
+import { META_DATA } from "../../../../config/config";
 import { ROUTE_ANIMATIONS_ELEMENTS } from "../../../core/core.module";
 import {
   actionSettingsChangeAnimationsElements,
@@ -65,12 +65,10 @@ export class SettingsContainerComponent implements OnDestroy, OnInit {
     }
   ];
 
-  languages = META.languages.map((x) => {
-    return {
-      value: x.value,
-      label: marker(`ww.pages.settings.general.language.${x.value}`)
-    };
-  });
+  languages = META_DATA.languages.map((x) => ({
+    value: x.value,
+    label: marker(`ww.pages.settings.general.language.${x.value}`)
+  }));
   showInstall = false;
   unsubscribe$ = new Subject<void>();
   constructor(private store: Store<State>) {}

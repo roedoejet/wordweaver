@@ -61,6 +61,9 @@ import { utils, write } from "xlsx";
 export class TableviewerConjPanelComponent
   implements AfterViewInit, OnDestroy, OnInit
 {
+  // Elements
+  @ViewChild("header") header;
+  @ViewChild("conjugate") conjugateBtn;
   // Basic config
   settings$: Observable<SettingsState>;
   selection$: Observable<TableviewerState>;
@@ -73,7 +76,7 @@ export class TableviewerConjPanelComponent
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   // Non-reactive states
   loading$: Observable<boolean>;
-  show_toolbar = true;
+  showToolbar = true;
   // Reactive conjugation triggers
   showExplorer$ = new BehaviorSubject<boolean>(false);
   manualConjugation$ = new Subject<any>();
@@ -86,9 +89,6 @@ export class TableviewerConjPanelComponent
   treeData$: Observable<any>;
   tiers = environment.config.tiers;
   unsubscribe$ = new Subject<void>();
-  // Elements
-  @ViewChild("header") header;
-  @ViewChild("conjugate") conjugateBtn;
   constructor(
     private store: Store<State>,
     private notificationService: NotificationService,
@@ -234,20 +234,18 @@ export class TableviewerConjPanelComponent
   }
 
   translateDataForGrid(data, gridState, dataType: "col" | "row" = "row") {
-    return data.map((row_or_col) => {
+    return data.map((rowOrCol) => {
       if (gridState.gridOrder[dataType] === "option") {
-        return this.translate.instant("ww-data.options.items." + row_or_col);
+        return this.translate.instant("ww-data.options.items." + rowOrCol);
       } else if (gridState.gridOrder[dataType] === "pn") {
-        if (row_or_col.indexOf("→") > -1) {
+        if (rowOrCol.indexOf("→") > -1) {
           return (
-            this.translate.instant("ww-data.pronouns.agents." + row_or_col) +
+            this.translate.instant("ww-data.pronouns.agents." + rowOrCol) +
             " → " +
-            this.translate.instant("ww-data.pronouns.patients." + row_or_col)
+            this.translate.instant("ww-data.pronouns.patients." + rowOrCol)
           );
         } else {
-          return this.translate.instant(
-            "ww-data.pronouns.agents." + row_or_col
-          );
+          return this.translate.instant("ww-data.pronouns.agents." + rowOrCol);
         }
       }
     });
@@ -269,8 +267,8 @@ export class TableviewerConjPanelComponent
           return zip(of(selection.view), data);
         }),
         switchMap((downloadData) => {
-          let view = downloadData[0];
-          let data: any = downloadData[1];
+          const view = downloadData[0];
+          const data: any = downloadData[1];
           // If grid view, export an xlsx file
           if (view === "grid") {
             return this.store.pipe(
@@ -278,31 +276,31 @@ export class TableviewerConjPanelComponent
               take(1),
               switchMap((gridState) => {
                 // Create a new workbook
-                let wb = utils.book_new();
+                const wb = utils.book_new();
                 // Translate Columns synchronously
-                let translatedCols = this.translateDataForGrid(
+                const translatedCols = this.translateDataForGrid(
                   data["uniqueCol"],
                   gridState,
                   "col"
                 );
                 // Translate Rows synchronously
-                let translatedRows = this.translateDataForGrid(
+                const translatedRows = this.translateDataForGrid(
                   data["uniqueRow"],
                   gridState,
                   "row"
                 );
                 // Translate Verbs synchronously
-                let translatedVerbs = data["uniqueMain"].map((verb) =>
+                const translatedVerbs = data["uniqueMain"].map((verb) =>
                   this.translate.instant("ww-data.verbs." + verb)
                 );
                 // Iterate through each verb
                 translatedVerbs.forEach((verb: any, verbIndex) => {
                   // Create the columns
-                  let ws = utils.aoa_to_sheet([["", ...translatedCols]]);
+                  const ws = utils.aoa_to_sheet([["", ...translatedCols]]);
                   // Add the data by joining the first tier only. multi-tier outputs are not supported in grid view.
-                  let tier = this.tiers[0];
+                  const tier = this.tiers[0];
                   // for each row
-                  let formattedData = translatedRows.map((row, rowIndex) => [
+                  const formattedData = translatedRows.map((row, rowIndex) => [
                     // the first item is the row 'header'
                     row,
                     // subsequent row values are equal to joining each conjugation 'morpheme' by the tier-0 separator
@@ -325,7 +323,7 @@ export class TableviewerConjPanelComponent
                   // Append the worksheet labelled by the verb onto the workbook
                   utils.book_append_sheet(wb, ws, verb);
                 });
-                let wbout = write(wb, { bookType: "xlsx", type: "array" });
+                const wbout = write(wb, { bookType: "xlsx", type: "array" });
                 // return a zip including the xlsx blob
                 return zip(
                   of(view),
@@ -340,7 +338,7 @@ export class TableviewerConjPanelComponent
             // Else if list view, export a docx file
           } else if (view === "list") {
             const content = [];
-            let emptyParagraph = new Paragraph({ children: [] });
+            const emptyParagraph = new Paragraph({ children: [] });
             data.forEach((conjugation) => {
               this.tiers.forEach((tier, index) => {
                 content.push(

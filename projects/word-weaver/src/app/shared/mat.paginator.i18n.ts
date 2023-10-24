@@ -50,9 +50,7 @@ export class WWPaginatorIntl extends MatPaginatorIntl {
   };
 }
 
-export function createCustomMatPaginatorIntl(
+export const createCustomMatPaginatorIntl = (
   translateService: TranslateService,
   translateParser: TranslateParser
-) {
-  return new WWPaginatorIntl(translateService, translateParser);
-}
+) => new WWPaginatorIntl(translateService, translateParser);

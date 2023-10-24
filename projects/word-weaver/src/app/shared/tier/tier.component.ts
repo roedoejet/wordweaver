@@ -18,15 +18,16 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TierComponent implements OnInit {
-  output: Conjugation;
-  morph_type: number;
   @Input() data: ConjugationObject;
   @Input() tier: Tier;
+
+  output: Conjugation;
+  morphType: number;
   constructor() {}
 
   ngOnInit(): void {
     // Filter empty values and sort on position
-    this.morph_type = ConjugationMorphemeNameIndex.type;
+    this.morphType = ConjugationMorphemeNameIndex.type;
     this.output = this.data.output
       .filter((x) => x[this.tier.key])
       .sort(

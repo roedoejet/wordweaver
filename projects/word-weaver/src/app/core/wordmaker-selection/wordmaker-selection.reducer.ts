@@ -35,9 +35,7 @@ const reducer = createReducer(
   )
 );
 
-export function wordmakerReducer(
+export const wordmakerReducer = (
   state: WordmakerState | undefined,
   action: Action
-) {
-  return reducer(state, action);
-}
+) => reducer(state, action);

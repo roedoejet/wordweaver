@@ -1,48 +1,46 @@
 <div [class]="'theme-wrapper ' + (theme$ | async)">
 
-  <mat-sidenav-container>
+    <mat-sidenav-container>
 
-    <mat-sidenav #sidenav mode="push">
+        <mat-sidenav #sidenav mode="push">
 
-      <div class="branding">
-        <img [src]="logo" />
-        <span>{{ 'ww.common.title-short' | translate}}</span>
-      </div>
-      <mat-nav-list>
-        <a mat-list-item *ngFor="let item of navigationSideMenu" (click)="sidenav.close()" [routerLink]="[item.link]"
-          routerLinkActive="active">
+            <div class="branding">
+                <img [src]="logo" />
+                <span>{{ 'ww.common.title-short' | translate}}</span>
+            </div>
+            <mat-nav-list>
+                <a mat-list-item *ngFor="let item of navigationSideMenu" (click)="sidenav.close()" [routerLink]="[item.link]" routerLinkActive="active">
           {{item.label | translate}}
         </a>
-        <!-- <a mat-list-item href="https://github.com/roedoejet/wordweaver" target="_blank">
+                <!-- <a mat-list-item href="https://github.com/roedoejet/wordweaver" target="_blank">
           Github
         </a> -->
-      </mat-nav-list>
-    </mat-sidenav>
+            </mat-nav-list>
+        </mat-sidenav>
 
-    <div class="wrapper">
+        <div class="wrapper">
 
-      <div class="nav" [style.position]="(stickyHeader$ | async) ? 'fixed' : 'inherit'"
-        [class.mat-elevation-z4]="(stickyHeader$ | async)">
-        <mat-toolbar color="primary">
-          <button mat-icon-button class="d-md-none mobile-only" (click)="sidenav.open()">
+            <div class="nav" [style.position]="(stickyHeader$ | async) ? 'fixed' : 'inherit'" [class.mat-elevation-z4]="(stickyHeader$ | async)">
+                <mat-toolbar color="primary">
+                    <button mat-icon-button class="d-md-none mobile-only" (click)="sidenav.open()">
             <fa-icon icon="bars"></fa-icon>
 
           </button>
 
-          <span routerLink="" class="branding spacer center d-inline d-sm-none"></span>
-          <span routerLink="" class="branding spacer center d-none d-sm-inline d-md-none"></span>
-          <span routerLink="" class="branding spacer d-none d-md-inline">
+                    <span routerLink="" class="branding spacer center d-inline d-sm-none"></span>
+                    <span routerLink="" class="branding spacer center d-none d-sm-inline d-md-none"></span>
+                    <span routerLink="" class="branding spacer d-none d-md-inline">
             <img [src]="logo" />
             <ww-logo class='branding ui-button'></ww-logo>
           </span>
-          <span class="d-none d-md-inline">
+                    <span class="d-none d-md-inline">
             <button mat-button class="nav-button" *ngFor="let item of navigation" [routerLink]="[item.link]"
               routerLinkActive="active">
               {{item.label | translate}}
             </button>
           </span>
 
-          <!-- <button mat-button mat-stroked-button color="accent" *ngIf="!(isAuthenticated$ | async)"
+                    <!-- <button mat-button mat-stroked-button color="accent" *ngIf="!(isAuthenticated$ | async)"
             (click)="onLoginClick()">
             {{ 'ww.menu.login' | translate }}
           </button>
@@ -58,70 +56,66 @@
               <span>{{ 'ww.menu.logout' | translate }}</span>
             </button>
           </mat-menu> -->
-          <span class='margin-right-20 desktop-only'>|</span>
+                    <span class='margin-right-20 desktop-only'>|</span>
 
-          <button class="nav-button" routerLinkActive="active" mat-icon-button routerLink="settings" class="d-none d-sm-inline">
+                    <button class="nav-button" routerLinkActive="active" mat-icon-button routerLink="settings" class="d-none d-sm-inline">
             <fa-icon icon="cog"></fa-icon>
           </button>
-          <!-- <a [matTooltip]="'ww.header.github' | translate" matTooltipPosition="before" mat-icon-button
+                    <!-- <a [matTooltip]="'ww.header.github' | translate" matTooltipPosition="before" mat-icon-button
             class="link d-none d-sm-inline" href="https://github.com/roedoejet/ReadAlong-Studio" target="_blank">
             <fa-icon [icon]="['fab','github']"></fa-icon>
           </a> -->
 
-          <span *ngIf="language$ | async as language">
+                    <span *ngIf="language$ | async as language">
             <mat-select [ngModel]="language" (selectionChange)="onLanguageSelect($event)">
               <mat-option *ngFor="let l of languages" [value]="l.value">
                 {{ l.label.toUpperCase() }}
               </mat-option>
             </mat-select>
           </span>
-        </mat-toolbar>
-      </div>
+                </mat-toolbar>
+            </div>
 
-      <div class="content"
-        [@routeAnimations]="o.isActivated && o.activatedRoute.routeConfig.data && o.activatedRoute.routeConfig.data.title"
-        [@specialAnimations]="o && o.isActivated && o.activatedRouteData && o.activatedRouteData['animation']">
-        <router-outlet #o="outlet"></router-outlet>
-      </div>
+            <div class="content" [@routeAnimations]="o.isActivated && o.activatedRoute.routeConfig.data && o.activatedRoute.routeConfig.data.title" [@specialAnimations]="o && o.isActivated && o.activatedRouteData && o.activatedRouteData['animation']">
+                <router-outlet #o="outlet"></router-outlet>
+            </div>
 
-      <div class="footer">
-        <div class="row">
-          <div class="col-12 signature margin-top-50"><a [href]="Meta.copyright.url">{{ Meta.copyright.name }}</a>
-            &#169; <span class="year margin-right-5">{{year}}</span>
-            <br class="d-block d-sm-none">
-            <a [matTooltip]="'ww.footer.changelog' | translate" matTooltipPosition="before"
-              href="https://github.com/roedoejet/ReadAlong-Studio/blob/master/CHANGELOG.md">
-              <fa-icon icon="rocket"></fa-icon>
-              {{version}} <span *ngIf="!isProd">[{{envName}}]</span>
-            </a>
-          </div>
+            <div class="footer">
+                <div class="row">
+                    <div class="col-12 signature margin-top-50"><a [href]="metaData.copyright.url">{{ metaData.copyright.name }}</a> &#169; <span class="year margin-right-5">{{year}}</span>
+                        <br class="d-block d-sm-none">
+                        <a [matTooltip]="'ww.footer.changelog' | translate" matTooltipPosition="before" href="https://github.com/roedoejet/ReadAlong-Studio/blob/master/CHANGELOG.md">
+                            <fa-icon icon="rocket"></fa-icon>
+                            {{version}} <span *ngIf="!isProd">[{{envName}}]</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 links">
+                        <a *ngIf="metaData.links.github.display" [href]="metaData.links.github.url" target="_blank">
+                            <fa-icon [icon]="['fab','github']"></fa-icon>
+                            <span>Github</span>
+                        </a>
+                        <a *ngIf="metaData.links.medium.display" [href]="metaData.links.medium.url" target="_blank">
+                            <fa-icon [icon]="['fab','medium-m']"></fa-icon>
+                            <span>Medium</span>
+                        </a>
+                        <a *ngIf="metaData.links.facebook.display" [href]="metaData.links.facebook.url" target="_blank">
+                            <fa-icon [icon]="['fab','facebook']"></fa-icon>
+                            <span>Facebook</span>
+                        </a>
+                        <a *ngIf="metaData.links.youtube.display" [href]="metaData.links.youtube.url" target="_blank">
+                            <fa-icon [icon]="['fab','youtube']"></fa-icon>
+                            <span>Youtube</span>
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
-        <div class="row">
-          <div class="col-sm-12 links">
-            <a *ngIf="Meta.links.github.display" [href]="Meta.links.github.url" target="_blank">
-              <fa-icon [icon]="['fab','github']"></fa-icon>
-              <span>Github</span>
-            </a>
-            <a *ngIf="Meta.links.medium.display" [href]="Meta.links.medium.url" target="_blank">
-              <fa-icon [icon]="['fab','medium-m']"></fa-icon>
-              <span>Medium</span>
-            </a>
-            <a *ngIf="Meta.links.facebook.display" [href]="Meta.links.facebook.url" target="_blank">
-              <fa-icon [icon]="['fab','facebook']"></fa-icon>
-              <span>Facebook</span>
-            </a>
-            <a *ngIf="Meta.links.youtube.display" [href]="Meta.links.youtube.url" target="_blank">
-              <fa-icon [icon]="['fab','youtube']"></fa-icon>
-              <span>Youtube</span>
-            </a>
-          </div>
 
-        </div>
-
-      </div>
-
-    </div>
-
-  </mat-sidenav-container>
+    </mat-sidenav-container>
 
 </div>

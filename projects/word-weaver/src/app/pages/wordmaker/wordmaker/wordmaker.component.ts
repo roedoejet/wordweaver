@@ -26,6 +26,8 @@ import { TranslateService } from "@ngx-translate/core";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WordmakerComponent implements OnDestroy, OnInit, AfterViewInit {
+  @ViewChild("stepper") private stepper;
+
   loading;
   isLinear = true;
   verbLabel = new BehaviorSubject<string>(
@@ -39,7 +41,6 @@ export class WordmakerComponent implements OnDestroy, OnInit, AfterViewInit {
   );
   selection$: Observable<WordmakerState>;
   unsubscribe$ = new Subject<void>();
-  @ViewChild("stepper") private stepper;
   constructor(
     private store: Store<State>,
     private validationService: ValidationService,

@@ -39,6 +39,7 @@
             "accessibility": "explicit"
           }
         ],
+        "@typescript-eslint/member-ordering": "off",
         "@typescript-eslint/member-delimiter-style": [
           "off",
           {

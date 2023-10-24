@@ -15,10 +15,10 @@ export interface Pronoun {
   gloss: string;
   number: "SG" | "PL";
   role: "agent" | "patient" | "";
-  obj_gloss: string;
+  objectGloss: string;
   person: "1" | "2" | "3";
   value: string;
-  position?: Number;
+  position?: number;
   tag: string;
 }
 

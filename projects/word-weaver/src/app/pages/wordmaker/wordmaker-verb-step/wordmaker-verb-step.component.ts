@@ -28,6 +28,8 @@ import { TranslateService } from "@ngx-translate/core";
   animations: [fadeAnimation, listAnimation]
 })
 export class WordmakerVerbStepComponent implements OnDestroy, OnInit {
+  @Output() selectedVerb = new EventEmitter<Verb>();
+
   viewableVerbs$ = new ReplaySubject<Verb[]>();
   loading;
   language = "ww.common.language";
@@ -38,7 +40,6 @@ export class WordmakerVerbStepComponent implements OnDestroy, OnInit {
     takeUntil(this.unsubscribe$),
     select(selectSettingsLanguage)
   );
-  @Output() selectedVerb = new EventEmitter<Verb>();
   constructor(
     private verbService: VerbService,
     private fb: FormBuilder,

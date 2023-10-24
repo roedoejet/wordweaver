@@ -67,8 +67,8 @@ export interface Condition {
   logic: null | "or" | "and";
   operator?: "eq" | "in" | "truthy";
   method?: "selection";
-  method_key?: keyof ConjugationInput;
-  item_key?: keyof Option | keyof Pronoun | keyof Verb | null;
+  methodKey?: keyof ConjugationInput;
+  itemKey?: keyof Option | keyof Pronoun | keyof Verb | null;
   value?: string | string[] | null;
   conditions?: Condition[];
 }
@@ -93,7 +93,7 @@ export interface Validation {
   };
 }
 
-export const CONFIG_NAME: string = "fr";
+export const CONFIG_NAME = "fr";
 
 const _defaultOptions: TierOptions = { language: "L1", showName: false };
 
@@ -179,7 +179,7 @@ export interface Meta {
   };
 }
 
-export const META: Meta = {
+export const META_DATA: Meta = {
   contributors: [
     {
       name: "Your Name",

@@ -13,7 +13,7 @@
             {{ 'ww-data.options.items.' + selection[0].tag | translate }}
           </ng-container>
         </span>
-        <span *ngIf='!(optionService.optionsUseType$() | async)'>
+        <span *ngIf='(optionService.optionsUseType$() | async) === false'>
           {{ (selection.length ? "ww-data.options.items." + selection[0].tag : '') | translate }}
         </span>
         <span *ngIf="selection.length > 1" class="example-additional-selection">
@@ -21,7 +21,7 @@
           {{ (selection.length === 2 ? 'ww.pages.tableviewer.misc.other' : 'ww.pages.tableviewer.misc.others') | translate }})
         </span>
       </mat-select-trigger>
-      <div *ngIf='!(optionService.optionsUseType$() | async)'>
+      <div *ngIf='(optionService.optionsUseType$() | async) === false'>
         <mat-option *ngFor="let option of possibleOptions$ | async" [value]="option">
           {{"ww-data.options.items." + option.tag | translate}}</mat-option>
       </div>

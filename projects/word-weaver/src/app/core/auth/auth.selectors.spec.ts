@@ -12,14 +12,12 @@ describe("Auth Selectors", () => {
   });
 });
 
-function createAuthState() {
-  return {
-    auth: {
-      isAuthenticated: false
-    },
-    settings: {} as any,
-    tableviewer: {} as any,
-    wordmaker: {} as any,
-    router: {} as any
-  };
-}
+const createAuthState = () => ({
+  auth: {
+    isAuthenticated: false
+  },
+  settings: {} as any,
+  tableviewer: {} as any,
+  wordmaker: {} as any,
+  router: {} as any
+});

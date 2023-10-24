@@ -1,6 +1,6 @@
 <ng-container *ngIf="output">
     <ng-container *ngFor="let morpheme of output; last as isLast">
-        <span [ngClass]="morpheme[morph_type]">{{morpheme[tier.key]}}</span>
+        <span [ngClass]="morpheme[morphType]">{{morpheme[tier.key]}}</span>
         <span *ngIf='!isLast' class='separator'>{{tier.separator}}</span>
     </ng-container>
 </ng-container>

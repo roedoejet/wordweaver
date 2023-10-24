@@ -38,16 +38,16 @@ export class ValidationService {
         if (condition["operator"] === "in") {
           conditionsTruth.push(
             condition["value"].indexOf(
-              method[condition["method_key"]][condition["item_key"]]
+              method[condition["methodKey"]][condition["itemKey"]]
             ) > -1
           );
         } else if (condition["operator"] === "eq") {
           conditionsTruth.push(
             condition["value"] ===
-              method[condition["method_key"]][condition["item_key"]]
+              method[condition["methodKey"]][condition["itemKey"]]
           );
         } else if (condition["operator"] === "truthy") {
-          conditionsTruth.push(!!method[condition["method_key"]]);
+          conditionsTruth.push(!!method[condition["methodKey"]]);
         } else {
           return false;
         }

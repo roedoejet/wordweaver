@@ -3,7 +3,7 @@ import { marker } from "@biesbjerg/ngx-translate-extract-marker";
 import { select, Store } from "@ngrx/store";
 import browser from "browser-detect";
 import { Observable } from "rxjs";
-import { META } from "../../config/config";
+import { META_DATA } from "../../config/config";
 import { environment as env } from "../../environments/environment";
 import {
   authLogin,
@@ -33,8 +33,8 @@ export class AppComponent implements OnInit {
   version = env.versions.app;
   year = new Date().getFullYear();
   // logo = require("../../assets/logo.png");
-  logo = META.logo;
-  languages = META.languages;
+  logo = META_DATA.logo;
+  languages = META_DATA.languages;
   navigation = [
     { link: "wordmaker", label: marker("ww.menu.wordmaker") },
     { link: "tableviewer", label: marker("ww.menu.tableviewer") },
@@ -45,7 +45,7 @@ export class AppComponent implements OnInit {
     ...this.navigation,
     { link: "settings", label: marker("ww.menu.settings") }
   ];
-  Meta = META;
+  metaData = META_DATA;
   isAuthenticated$: Observable<boolean>;
   stickyHeader$: Observable<boolean>;
   language$: Observable<string>;

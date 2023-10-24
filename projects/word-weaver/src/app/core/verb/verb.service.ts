@@ -49,11 +49,7 @@ export class VerbService {
       shareReplay(1)
     );
     this.verbs$.subscribe((verbs) => (this.verbs = verbs));
-    this.random$ = this.verbs$.pipe(
-      map((res) => {
-        return this.getRandomOption(res);
-      })
-    );
+    this.random$ = this.verbs$.pipe(map((res) => this.getRandomOption(res)));
   }
 
   getRandomOption(options: Verb[]): Verb {
