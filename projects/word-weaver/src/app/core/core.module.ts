@@ -62,7 +62,6 @@ import {
   selectRouterState
 } from "./core.state";
 import { AppErrorHandler } from "./error-handler/app-error-handler.service";
-import { GoogleAnalyticsEffects } from "./google-analytics/google-analytics.effects";
 import { HttpErrorInterceptor } from "./http-interceptors/http-error.interceptor";
 import { LocalStorageService } from "./local-storage/local-storage.service";
 import { NotificationService } from "./notifications/notification.service";
@@ -173,7 +172,6 @@ export const httpLoaderFactory = (http: HttpClient) =>
     StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot([
       SettingsEffects,
-      GoogleAnalyticsEffects,
       TableviewerEffects,
       WordmakerEffects
     ]),
