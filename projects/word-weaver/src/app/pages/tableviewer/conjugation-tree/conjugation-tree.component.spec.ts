@@ -1,21 +1,44 @@
+import { HttpClient } from "@angular/common/http";
+import {
+  HttpClientTestingModule,
+  HttpTestingController
+} from "@angular/common/http/testing";
+import { TranslateModule } from "@ngx-translate/core";
+import { NoopAnimationsModule } from "@angular/platform-browser/animations";
+import { of } from "rxjs";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-
 import { ConjugationTreeComponent } from "./conjugation-tree.component";
+import { MockStore, provideMockStore } from "@ngrx/store/testing";
+import { SharedModule } from "../../../shared/shared.module";
 
 describe("ConjugationTreeComponent", () => {
   let component: ConjugationTreeComponent;
   let fixture: ComponentFixture<ConjugationTreeComponent>;
-
+  let httpClient: HttpClient;
+  let httpTestingController: HttpTestingController;
+  let store: MockStore;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ConjugationTreeComponent]
+      imports: [
+        SharedModule,
+        NoopAnimationsModule,
+        TranslateModule.forRoot(),
+        HttpClientTestingModule
+      ],
+      declarations: [ConjugationTreeComponent],
+      providers: [provideMockStore()]
     }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ConjugationTreeComponent);
+    store = TestBed.inject(MockStore);
     component = fixture.componentInstance;
+    // @ts-ignore
+    component.data$ = of([]);
     fixture.detectChanges();
+    httpClient = TestBed.get(HttpClient);
+    httpTestingController = TestBed.get(HttpTestingController);
   });
 
   it("should create", () => {

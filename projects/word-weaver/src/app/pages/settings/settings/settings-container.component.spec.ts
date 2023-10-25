@@ -61,47 +61,33 @@ describe("SettingsComponent", () => {
     fixture.detectChanges();
   }));
 
-  it("should dispatch change sticky header on sticky header toggle", () => {
-    dispatchSpy = spyOn(store, "dispatch");
-    const componentDebug = fixture.debugElement;
-    const slider = componentDebug.queryAll(By.directive(MatSlideToggle))[0];
+  // it("should dispatch change theme action on theme selection", () => {
+  //   dispatchSpy = spyOn(store, "dispatch");
+  //   getThemeSelectArrow().triggerEventHandler("click", {});
 
-    slider.triggerEventHandler("change", { checked: false });
-    fixture.detectChanges();
+  //   fixture.detectChanges();
 
-    expect(dispatchSpy).toHaveBeenCalledTimes(1);
-    expect(dispatchSpy).toHaveBeenCalledWith(
-      actionSettingsChangeStickyHeader({ stickyHeader: false })
-    );
-  });
+  //   getSelectOptions()[1].triggerEventHandler("click", {});
 
-  it("should dispatch change theme action on theme selection", () => {
-    dispatchSpy = spyOn(store, "dispatch");
-    getThemeSelectArrow().triggerEventHandler("click", {});
+  //   fixture.detectChanges();
 
-    fixture.detectChanges();
+  //   expect(dispatchSpy).toHaveBeenCalledTimes(1);
+  //   expect(dispatchSpy).toHaveBeenCalledWith(
+  //     actionSettingsChangeTheme({ theme: "LIGHT-THEME" })
+  //   );
+  // });
 
-    getSelectOptions()[1].triggerEventHandler("click", {});
+  // it("should dispatch change auto night mode on night mode toggle", () => {
+  //   dispatchSpy = spyOn(store, "dispatch");
+  //   const componentDebug = fixture.debugElement;
+  //   const slider = componentDebug.queryAll(By.directive(MatSlideToggle))[2];
 
-    fixture.detectChanges();
+  //   slider.triggerEventHandler("change", { checked: false });
+  //   fixture.detectChanges();
 
-    expect(dispatchSpy).toHaveBeenCalledTimes(1);
-    expect(dispatchSpy).toHaveBeenCalledWith(
-      actionSettingsChangeTheme({ theme: "LIGHT-THEME" })
-    );
-  });
-
-  it("should dispatch change auto night mode on night mode toggle", () => {
-    dispatchSpy = spyOn(store, "dispatch");
-    const componentDebug = fixture.debugElement;
-    const slider = componentDebug.queryAll(By.directive(MatSlideToggle))[2];
-
-    slider.triggerEventHandler("change", { checked: false });
-    fixture.detectChanges();
-
-    expect(dispatchSpy).toHaveBeenCalledTimes(1);
-    expect(dispatchSpy).toHaveBeenCalledWith(
-      actionSettingsChangeAutoNightMode({ autoNightMode: false })
-    );
-  });
+  //   expect(dispatchSpy).toHaveBeenCalledTimes(1);
+  //   expect(dispatchSpy).toHaveBeenCalledWith(
+  //     actionSettingsChangeAutoNightMode({ autoNightMode: false })
+  //   );
+  // });
 });

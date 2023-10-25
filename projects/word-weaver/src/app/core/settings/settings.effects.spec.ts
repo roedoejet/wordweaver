@@ -1,7 +1,6 @@
-import * as assert from "assert";
 import { OverlayContainer } from "@angular/cdk/overlay";
 import { TranslateService } from "@ngx-translate/core";
-import { Actions, getEffectsMetadata } from "@ngrx/effects";
+import { Actions } from "@ngrx/effects";
 import { TestScheduler } from "rxjs/testing";
 import { Store } from "@ngrx/store";
 import { of } from "rxjs";
@@ -17,9 +16,10 @@ import { SettingsEffects, SETTINGS_KEY } from "./settings.effects";
 import { SettingsState, NIGHT_MODE_THEME } from "./settings.model";
 import { actionSettingsChangeTheme } from "./settings.actions";
 
-const scheduler = new TestScheduler((actual, expected) =>
-  assert.deepStrictEqual(actual, expected)
-);
+const scheduler = new TestScheduler((actual, expected) => {
+  // @ts-ignore
+  expect(actual).deep.equal(expected);
+});
 
 describe("SettingsEffects", () => {
   let router: any;
@@ -84,7 +84,6 @@ describe("SettingsEffects", () => {
       const effect = new SettingsEffects(
         actions,
         store,
-        router,
         overlayContainer,
         localStorageService,
         animationsService,

@@ -121,6 +121,7 @@
             "polyfills": "projects/word-weaver/src/polyfills.ts",
             "tsConfig": "projects/word-weaver/tsconfig.spec.json",
             "karmaConfig": "projects/word-weaver/karma.conf.js",
+            "codeCoverage": true,
             "assets": [
               "projects/word-weaver/src/favicon.ico",
               "projects/word-weaver/src/assets",
