@@ -15,6 +15,17 @@ describe("TierComponent", () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(TierComponent);
     component = fixture.componentInstance;
+    component.tier = {
+      key: 0,
+      name: "breakdown",
+      separator: "",
+      position: 0,
+      options: { language: "L1" }
+    };
+    component.data = {
+      input: { agent: "test", patient: "test", option: "test", root: "test" },
+      output: []
+    };
     fixture.detectChanges();
   });
 

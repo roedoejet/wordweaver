@@ -1,19 +1,20 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { NoopAnimationsModule } from "@angular/platform-browser/animations";
+import { TranslateModule } from "@ngx-translate/core";
+import { HttpClientModule } from "@angular/common/http";
+import { MockStore, provideMockStore } from "@ngrx/store/testing";
 
 import { SharedModule } from "../../../shared/shared.module";
-import { TranslateModule } from "@ngx-translate/core";
-import { NoopAnimationsModule } from "@angular/platform-browser/animations";
-
 import { WordmakerPersStepComponent } from "./wordmaker-pers-step.component";
-import { HttpClientModule } from "@angular/common/http";
 
 describe("WordmakerPersStepComponent", () => {
   let component: WordmakerPersStepComponent;
   let fixture: ComponentFixture<WordmakerPersStepComponent>;
-
+  let store: MockStore;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [WordmakerPersStepComponent],
+      providers: [provideMockStore()],
       imports: [
         SharedModule,
         NoopAnimationsModule,
@@ -25,6 +26,7 @@ describe("WordmakerPersStepComponent", () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(WordmakerPersStepComponent);
+    store = TestBed.inject(MockStore);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -3,7 +3,7 @@ import { environment } from "../../../environments/environment";
 import { CONFIG_NAME } from "../../../config/config";
 
 // Slugify a string
-function slugify(str) {
+const slugify = (str: string) => {
   str = str.replace(/^\s+|\s+$/g, "");
 
   // Make the string lowercase
@@ -27,7 +27,7 @@ function slugify(str) {
     .replace(/-+/g, "-");
 
   return str;
-}
+};
 
 const APP_PREFIX = "ww-" + slugify(environment.base) + slugify(CONFIG_NAME);
 
@@ -84,11 +84,10 @@ export class LocalStorageService {
   testLocalStorage() {
     const testValue = "testValue";
     const testKey = "testKey";
-    let retrievedValue: string;
     const errorMessage = "localStorage did not return expected value";
 
     this.setItem(testKey, testValue);
-    retrievedValue = this.getItem(testKey);
+    const retrievedValue: string = this.getItem(testKey);
     this.removeItem(testKey);
 
     if (retrievedValue !== testValue) {

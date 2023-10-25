@@ -15,7 +15,6 @@ import {
   Pronoun,
   Verb
 } from "../../../config/config";
-import { environment } from "../../../environments/environment";
 import { GridOrder } from "../../pages/tableviewer/conjugation-grid/conjugation-grid.component";
 import { selectSettingsState } from "../core.state";
 import { SUPPRESS_ERROR } from "../http-interceptors/http-error.interceptor";
@@ -27,7 +26,6 @@ import { WordmakerState } from "../wordmaker-selection/wordmaker-selection.model
   providedIn: "root"
 })
 export class ConjugationService {
-  TIERS = environment.config.tiers;
   conjugations;
   conjugations$: Observable<Conjugations>;
   random$: Observable<ConjugationObject>;
@@ -95,13 +93,13 @@ export class ConjugationService {
         }
       }
     });
-    return conjugations.filter((x) => {
-      return ["option", "agent", "patient", "root"].every(
+    return conjugations.filter((x) =>
+      ["option", "agent", "patient", "root"].every(
         (k) =>
           filterValues[k].length === 0 ||
           filterValues[k].indexOf(x.input[k]) > -1
-      );
-    });
+      )
+    );
   }
 
   conjugate$(selection: TableviewerState | WordmakerState) {

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
-import { META } from "../../../../config/config";
+import { META_DATA } from "../../../../config/config";
 import { ROUTE_ANIMATIONS_ELEMENTS } from "../../../core/core.module";
 
 export interface Contributor {
@@ -17,7 +17,7 @@ export interface Contributor {
 })
 export class AboutComponent implements OnInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
-  contributors = META.contributors;
+  contributors = META_DATA.contributors;
   constructor() {}
   ngOnInit() {}
 }

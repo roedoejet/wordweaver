@@ -9,23 +9,21 @@ const DATA_DIR = `../word-weaver/src/assets/data/${DATA_LANG}/${DATA_VERSION}`;
 let ajv = new Ajv({
   // allErrors: true,  // uncomment to get all the errors printed
   strict: true,
-  verbose: true
+  verbose: true,
 });
 
-function capitalize(s: string) {
-  return s[0].toUpperCase() + s.slice(1);
-}
+const capitalize = (s: string) => s[0].toUpperCase() + s.slice(1);
 
-function read_json_file(file_name: string) {
+const read_json_file = (file_name: string) => {
   try {
     return JSON.parse(String(fs.readFileSync(file_name)));
   } catch (error) {
     console.log(`ERROR: cannot read file ${file_name}: ${error}`);
     return null;
   }
-}
+};
 
-function validate_file(file_prefix: string) {
+const validate_file = (file_prefix: string) => {
   const schema_file_name = `./schemas/${capitalize(
     file_prefix
   )}.jsonschema.json`;
@@ -51,7 +49,7 @@ function validate_file(file_prefix: string) {
     console.log(validate.errors);
     return false;
   }
-}
+};
 
 const file_prefixes = ["verbs", "pronouns", "options", "conjugations"];
 let all_valid = true;

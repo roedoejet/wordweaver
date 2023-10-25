@@ -1,6 +1,3 @@
-package.json
 package-lock.json
-*.html
 dist/word-weaver/
 dist_toy/
-projects/word-weaver/src/assets/i18n/*.json

@@ -65,9 +65,7 @@ export class DownloadDialogComponent implements OnInit {
       this.settings$
     ]);
     this.fileTypes$ = this.selection$.pipe(
-      map((selection) => {
-        return this.fileTypes[selection.view];
-      })
+      map((selection) => this.fileTypes[selection.view])
     );
   }
 

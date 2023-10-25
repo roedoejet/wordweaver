@@ -29,7 +29,7 @@ export const actionChangeOption = createAction(
 
 export const actionConjugationEvent = createAction(
   "[Wordmaker] Manual Conjugation Event",
-  props<{ event_type: any }>()
+  props<{ eventType: any }>()
 );
 
 export const actionChangeLoading = createAction(

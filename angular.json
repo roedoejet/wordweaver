@@ -121,6 +121,7 @@
             "polyfills": "projects/word-weaver/src/polyfills.ts",
             "tsConfig": "projects/word-weaver/tsconfig.spec.json",
             "karmaConfig": "projects/word-weaver/karma.conf.js",
+            "codeCoverage": true,
             "assets": [
               "projects/word-weaver/src/favicon.ico",
               "projects/word-weaver/src/assets",
@@ -144,14 +145,12 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/word-weaver/tsconfig.app.json",
-              "projects/word-weaver/tsconfig.spec.json",
-              "projects/word-weaver/cypress/tsconfig.json"
-            ],
-            "exclude": ["**/node_modules/**"]
+            "lintFilePatterns": [
+              "projects/word-weaver/**/*.ts",
+              "projects/word-weaver/**/*.html"
+            ]
           }
         },
         "cypress-run": {
@@ -207,6 +206,10 @@
   "defaultProject": "word-weaver",
   "cli": {
     "analytics": false,
-    "schematicCollections": ["@cypress/schematic", "@schematics/angular"]
+    "schematicCollections": [
+      "@angular-eslint/schematics",
+      "@cypress/schematic",
+      "@schematics/angular"
+    ]
   }
 }

@@ -92,6 +92,18 @@ const STEPS_NONE = [];
 const STEPS_PAGE = [STEPS_ALL[0], STEPS_ALL[2]];
 const STEPS_ELEMENTS = [STEPS_ALL[1], STEPS_ALL[3]];
 
+export const isRouteAnimationsAll = () =>
+  AnimationsService.isRouteAnimationsType("ALL");
+
+export const isRouteAnimationsNone = () =>
+  AnimationsService.isRouteAnimationsType("NONE");
+
+export const isRouteAnimationsPage = () =>
+  AnimationsService.isRouteAnimationsType("PAGE");
+
+export const isRouteAnimationsElements = () =>
+  AnimationsService.isRouteAnimationsType("ELEMENTS");
+
 export const routeAnimations = trigger("routeAnimations", [
   transition(isRouteAnimationsAll, STEPS_ALL),
   transition(isRouteAnimationsNone, STEPS_NONE),
@@ -100,19 +112,3 @@ export const routeAnimations = trigger("routeAnimations", [
 ]);
 
 export const specialAnimations = [stepperAnimation];
-
-export function isRouteAnimationsAll() {
-  return AnimationsService.isRouteAnimationsType("ALL");
-}
-
-export function isRouteAnimationsNone() {
-  return AnimationsService.isRouteAnimationsType("NONE");
-}
-
-export function isRouteAnimationsPage() {
-  return AnimationsService.isRouteAnimationsType("PAGE");
-}
-
-export function isRouteAnimationsElements() {
-  return AnimationsService.isRouteAnimationsType("ELEMENTS");
-}

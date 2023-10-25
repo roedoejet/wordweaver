@@ -32,6 +32,9 @@ import { takeUntil } from "rxjs/operators";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WordmakerPersStepComponent implements OnDestroy, OnInit {
+  @Output() selectedAgent = new EventEmitter<Pronoun>();
+  @Output() selectedPatient = new EventEmitter<Pronoun>();
+
   pronouns$: Observable<Pronoun[]>;
   selection$: Observable<WordmakerState>;
   unsubscribe$ = new Subject<void>();
@@ -39,8 +42,6 @@ export class WordmakerPersStepComponent implements OnDestroy, OnInit {
     takeUntil(this.unsubscribe$),
     select(selectSettingsLanguage)
   );
-  @Output() selectedAgent = new EventEmitter<Pronoun>();
-  @Output() selectedPatient = new EventEmitter<Pronoun>();
   constructor(
     private pronounService: PronounService,
     private store: Store<State>,

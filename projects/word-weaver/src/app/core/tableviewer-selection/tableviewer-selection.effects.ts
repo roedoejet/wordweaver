@@ -25,7 +25,7 @@ import { State } from "./tableviewer-selection.model";
 
 export const TABLEVIEWER_SELECTION_KEY = "TABLEVIEWER";
 
-export function createRequestQueryArgs(selection) {
+export const createRequestQueryArgs = (selection) => {
   const params = new URLSearchParams();
   ["option", "agent", "patient", "root"].forEach((x) => {
     selection[x].forEach((y) => {
@@ -35,7 +35,7 @@ export function createRequestQueryArgs(selection) {
     });
   });
   return params;
-}
+};
 
 @Injectable()
 export class TableviewerEffects {

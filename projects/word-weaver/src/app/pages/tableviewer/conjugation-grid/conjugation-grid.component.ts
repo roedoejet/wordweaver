@@ -41,6 +41,9 @@ export interface GridOrder {
 export class ConjugationGridComponent
   implements AfterViewInit, OnDestroy, OnInit
 {
+  @Input() data$;
+  @ViewChildren(MatPaginator) paginators: QueryList<MatPaginator>;
+
   keys = Object.keys;
   displayTier = TIERS[0];
   tiers$: Observable<Tier[]>;
@@ -51,8 +54,6 @@ export class ConjugationGridComponent
   displayedColumns: string[];
   unsubscribe$ = new Subject<void>();
   currentTab = 0;
-  @Input() data$;
-  @ViewChildren(MatPaginator) paginators: QueryList<MatPaginator>;
   constructor(
     private store: Store<State>,
     private cdr: ChangeDetectorRef,

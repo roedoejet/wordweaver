@@ -68,9 +68,7 @@ const reducer = createReducer(
   })
 );
 
-export function tableviewerReducer(
+export const tableviewerReducer = (
   state: TableviewerState | undefined,
   action: Action
-) {
-  return reducer(state, action);
-}
+) => reducer(state, action);

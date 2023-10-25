@@ -5,8 +5,6 @@ import {
   MetaReducer
 } from "@ngrx/store";
 import { environment } from "../../environments/environment";
-import { AuthState } from "./auth/auth.models";
-import { authReducer } from "./auth/auth.reducer";
 import { debug } from "./meta-reducers/debug.reducer";
 import { initStateFromLocalStorage } from "./meta-reducers/init-state-from-local-storage.reducer";
 import { RouterStateUrl } from "./router/router.state";
@@ -18,7 +16,6 @@ import { WordmakerState } from "./wordmaker-selection/wordmaker-selection.model"
 import { wordmakerReducer } from "./wordmaker-selection/wordmaker-selection.reducer";
 
 export const reducers: ActionReducerMap<AppState> = {
-  auth: authReducer,
   settings: settingsReducer,
   router: routerReducer,
   tableviewer: tableviewerReducer,
@@ -34,10 +31,6 @@ if (!environment.production) {
     metaReducers.unshift(debug);
   }
 }
-
-export const selectAuthState = createFeatureSelector<AppState, AuthState>(
-  "auth"
-);
 
 export const selectSettingsState = createFeatureSelector<
   AppState,
@@ -60,7 +53,6 @@ export const selectRouterState = createFeatureSelector<
 >("router");
 
 export interface AppState {
-  auth: AuthState;
   settings: SettingsState;
   router: RouterReducerState<RouterStateUrl>;
   tableviewer: TableviewerState;

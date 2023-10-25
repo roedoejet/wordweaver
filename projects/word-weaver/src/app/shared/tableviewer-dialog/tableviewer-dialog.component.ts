@@ -4,7 +4,7 @@ import { MatDialogRef } from "@angular/material/dialog";
 import { select, Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { take } from "rxjs/operators";
-import { META } from "../../../config/config";
+import { META_DATA } from "../../../config/config";
 import { selectTableviewerState } from "../../core/core.state";
 import { State } from "../../core/settings/settings.model";
 import { actionChangeViewMode } from "../../core/tableviewer-selection/tableviewer-selection.actions";
@@ -22,7 +22,7 @@ export class TableViewerDialogComponent implements OnInit {
   showDelay = new FormControl(600);
   hideDelay = new FormControl(200);
   tooltipPosition = "above";
-  Meta = META;
+  metaData = META_DATA;
   selection$: Observable<TableviewerState>;
   gridOrderTitles = ["Tabs", "Rows", "Columns"];
   gridOrder$;

@@ -54,10 +54,6 @@ import {
   ROUTE_ANIMATIONS_ELEMENTS,
   specialAnimations
 } from "./animations/route.animations";
-import { AuthGuardService } from "./auth/auth-guard.service";
-import { authLogin, authLogout } from "./auth/auth.actions";
-import { AuthEffects } from "./auth/auth.effects";
-import { selectAuth, selectIsAuthenticated } from "./auth/auth.selectors";
 import { ConjugationService } from "./conjugation/conjugation.service";
 import {
   AppState,
@@ -66,7 +62,6 @@ import {
   selectRouterState
 } from "./core.state";
 import { AppErrorHandler } from "./error-handler/app-error-handler.service";
-import { GoogleAnalyticsEffects } from "./google-analytics/google-analytics.effects";
 import { HttpErrorInterceptor } from "./http-interceptors/http-error.interceptor";
 import { LocalStorageService } from "./local-storage/local-storage.service";
 import { NotificationService } from "./notifications/notification.service";
@@ -85,17 +80,12 @@ import { VerbService } from "./verb/verb.service";
 import { WordmakerEffects } from "./wordmaker-selection/wordmaker-selection.effects";
 
 export {
-  selectAuth,
-  authLogin,
-  authLogout,
   routeAnimations,
   specialAnimations,
   AppState,
   LocalStorageService,
-  selectIsAuthenticated,
   ROUTE_ANIMATIONS_ELEMENTS,
   AnimationsService,
-  AuthGuardService,
   selectRouterState,
   NotificationService,
   selectEffectiveTheme,
@@ -144,8 +134,8 @@ export class MultiTranslateHttpLoader implements TranslateLoader {
   }
 }
 
-export function HttpLoaderFactory(http: HttpClient) {
-  return new MultiTranslateHttpLoader(http, [
+export const httpLoaderFactory = (http: HttpClient) =>
+  new MultiTranslateHttpLoader(http, [
     // These are the UI-specific i18n assets
     {
       prefix: "/assets/i18n/",
@@ -157,7 +147,6 @@ export function HttpLoaderFactory(http: HttpClient) {
       suffix: ".json"
     }
   ]);
-}
 
 @NgModule({
   imports: [
@@ -182,9 +171,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot([
-      AuthEffects,
       SettingsEffects,
-      GoogleAnalyticsEffects,
       TableviewerEffects,
       WordmakerEffects
     ]),
@@ -199,7 +186,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
+        useFactory: httpLoaderFactory,
         deps: [HttpClient]
       }
     })

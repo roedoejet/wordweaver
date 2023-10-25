@@ -34,7 +34,7 @@ $breakpoints: (
   medium: 910,
   // This is usually 768, but it works better with the nav bar at 910, so everything else should follow suit
   large: 1024,
-  xlarge: 1280
+  xlarge: 1280,
 );
 
 // $zindex
@@ -54,5 +54,5 @@ $zindex: (
   footer: 500,
   pseduo: 400,
   default: 1,
-  bottomless-pit: -10000
+  bottomless-pit: -10000,
 );

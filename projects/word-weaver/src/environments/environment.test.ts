@@ -1,4 +1,10 @@
-import { HIGHLIGHTS, LEVELS, META, TIERS, VALIDATION } from "../config/config";
+import {
+  HIGHLIGHTS,
+  LEVELS,
+  META_DATA,
+  TIERS,
+  VALIDATION
+} from "../config/config";
 
 const packageJson = require("../../../../package.json");
 
@@ -10,7 +16,7 @@ export const environment = {
     validation: VALIDATION,
     highlight: HIGHLIGHTS,
     level: LEVELS,
-    meta: META
+    meta: META_DATA
   },
   production: false,
   test: true,

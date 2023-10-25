@@ -3,15 +3,12 @@ import { marker } from "@biesbjerg/ngx-translate-extract-marker";
 import { select, Store } from "@ngrx/store";
 import browser from "browser-detect";
 import { Observable } from "rxjs";
-import { META } from "../../config/config";
+import { META_DATA } from "../../config/config";
 import { environment as env } from "../../environments/environment";
 import {
-  authLogin,
-  authLogout,
   LocalStorageService,
   routeAnimations,
   selectEffectiveTheme,
-  selectIsAuthenticated,
   selectSettingsLanguage,
   selectSettingsStickyHeader,
   specialAnimations
@@ -33,8 +30,8 @@ export class AppComponent implements OnInit {
   version = env.versions.app;
   year = new Date().getFullYear();
   // logo = require("../../assets/logo.png");
-  logo = META.logo;
-  languages = META.languages;
+  logo = META_DATA.logo;
+  languages = META_DATA.languages;
   navigation = [
     { link: "wordmaker", label: marker("ww.menu.wordmaker") },
     { link: "tableviewer", label: marker("ww.menu.tableviewer") },
@@ -45,8 +42,7 @@ export class AppComponent implements OnInit {
     ...this.navigation,
     { link: "settings", label: marker("ww.menu.settings") }
   ];
-  Meta = META;
-  isAuthenticated$: Observable<boolean>;
+  metaData = META_DATA;
   stickyHeader$: Observable<boolean>;
   language$: Observable<string>;
   theme$: Observable<string>;
@@ -69,18 +65,9 @@ export class AppComponent implements OnInit {
       );
     }
 
-    this.isAuthenticated$ = this.store.pipe(select(selectIsAuthenticated));
     this.stickyHeader$ = this.store.pipe(select(selectSettingsStickyHeader));
     this.language$ = this.store.pipe(select(selectSettingsLanguage));
     this.theme$ = this.store.pipe(select(selectEffectiveTheme));
-  }
-
-  onLoginClick() {
-    this.store.dispatch(authLogin());
-  }
-
-  onLogoutClick() {
-    this.store.dispatch(authLogout());
   }
 
   onLanguageSelect({ value: language }) {

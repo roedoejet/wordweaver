@@ -6,9 +6,7 @@ export class DecapitalizePipe implements PipeTransform {
     // Move all uppercase characters to lowercase except 'I'
     const find = /([A-H,J-Z]|I\w)/;
     const re = new RegExp(find, "g");
-    value = value.replace(re, function (v) {
-      return v.toLowerCase();
-    });
+    value = value.replace(re, (v: string) => v.toLowerCase());
     return value;
   }
 }

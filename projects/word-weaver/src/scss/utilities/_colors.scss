@@ -38,7 +38,7 @@ $ui-colors: (
   accent: $color-accent,
   shadow: $color-shadow,
   white: $white,
-  black: $black
+  black: $black,
 );
 
 // Common colors
@@ -57,13 +57,13 @@ $color-text-strong-invert: $color-background;
 $verb-highlight-colors: (
   agent: map-get($md-red, 600),
   patient: map-get($md-blue, 600),
-  transitive: map-get($md-purple, 600)
+  transitive: map-get($md-purple, 600),
 );
 
 $verb-highlight-color-names: (
   red: map-get($verb-highlight-colors, agent),
   blue: map-get($verb-highlight-colors, patient),
-  purple: map-get($verb-highlight-colors, transitive)
+  purple: map-get($verb-highlight-colors, transitive),
 );
 
 $other-highlights: (
@@ -72,7 +72,7 @@ $other-highlights: (
   3: #5d74bf,
   4: #92374d,
   5: #aa4465,
-  6: #92374d
+  6: #92374d,
 );
 
 // Links

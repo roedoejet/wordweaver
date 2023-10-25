@@ -126,7 +126,7 @@ export class TableviewerComponent implements OnInit {
             );
             this.store.dispatch(
               actionChangeTreeViewDepth({
-                treeDepth: treeDepth
+                treeDepth
               })
             );
           }
@@ -147,7 +147,7 @@ export class TableviewerComponent implements OnInit {
           }
         }
         if (Object.keys(params).length > 0) {
-          this.store.dispatch(actionConjugationEvent({ event_type: "query" }));
+          this.store.dispatch(actionConjugationEvent({ eventType: "query" }));
         }
       });
   }

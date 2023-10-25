@@ -14,10 +14,10 @@ import { map, switchMap, takeUntil } from "rxjs/operators";
 import {
   Conjugation,
   ConjugationMorphemeNameIndex,
-  Tier
+  Tier,
+  TIERS
 } from "../../../../config/config";
 import {
-  ConjugationService,
   OptionService,
   PronounService,
   VerbService
@@ -32,17 +32,17 @@ import { TableviewerState } from "../../../core/tableviewer-selection/tableviewe
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ConjugationTreeComponent implements OnDestroy, OnInit {
+  @Input() data$: Observable<Partial<TableviewerState>>;
+
   options$: Observable<EChartsOption | boolean>;
   defaultChartOption: EChartsOption;
   defaultSeries: any;
   selection$: Observable<TableviewerState>;
   unsubscribe$ = new Subject<void>();
-  @Input() data$: Observable<Partial<TableviewerState>>;
   constructor(
     private store: Store,
     private optionService: OptionService,
     private pronounService: PronounService,
-    private conjugationService: ConjugationService,
     private verbService: VerbService,
     private translate: TranslateService
   ) {}
@@ -135,7 +135,7 @@ export class ConjugationTreeComponent implements OnDestroy, OnInit {
     this.unsubscribe$.complete();
   }
 
-  rgbToHex = function (rgb) {
+  rgbToHex = (rgb) => {
     const pattern = /\d+/g;
     const matches = rgb.match(pattern).slice(0, 3);
     const hex = "#";
@@ -223,11 +223,11 @@ export class ConjugationTreeComponent implements OnDestroy, OnInit {
         chartOption.legend["data"].push(v);
       });
     }
-    for (let j = 0; j < data.length; j++) {
+    for (const dataPoint of data) {
       top += 20;
       const ser = Object.assign({}, this.defaultSeries);
-      ser.name = data[j]["name"];
-      ser.data = [data[j]];
+      ser.name = dataPoint.name;
+      ser.data = [dataPoint];
       ser.top = top.toString() + "%";
       ser.lineStyle.color = color.primary;
       ser.label.normal.color = color.primary;
@@ -239,21 +239,17 @@ export class ConjugationTreeComponent implements OnDestroy, OnInit {
     return chartOption;
   }
 
-  returnTierValue(
-    conjugation: Conjugation,
-    tier: Tier = this.conjugationService.TIERS[0]
-  ) {
+  returnTierValue(conjugation: Conjugation, tier: Tier = TIERS[0]) {
     return (
       conjugation
         // filter empty
         .filter((x) => x[tier.key])
         // sort by position
-        .sort(function (a, b) {
-          return (
+        .sort(
+          (a, b) =>
             a[ConjugationMorphemeNameIndex.position] -
             b[ConjugationMorphemeNameIndex.position]
-          );
-        })
+        )
         // create strings
         .map((x) => x[tier.key])
         // join 'em
