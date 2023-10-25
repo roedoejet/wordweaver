@@ -7,8 +7,7 @@
       "parserOptions": {
         "project": [
           "projects/word-weaver/tsconfig.app.json",
-          "projects/word-weaver/tsconfig.spec.json",
-          "projects/word-weaver/cypress/tsconfig.json"
+          "projects/word-weaver/tsconfig.spec.json"
         ],
         "createDefaultProgram": true
       },

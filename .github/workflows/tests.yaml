@@ -29,12 +29,13 @@ jobs:
           node-version: 18
       - name: Install everything
         run: npm install
-      - name: Cypress run
-        uses: cypress-io/github-action@v6
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+      - name: Run Playwright tests
+        run: npx npm run-script e2e
+      - uses: actions/upload-artifact@v3
+        if: always()
         with:
-          install: false
-          start: |
-            npm start
-          wait-on: "http://localhost:4200/assets/data/fr/v1/options.json"
-          wait-on-timeout: 180
-          command: npm run-script cypress:run
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
