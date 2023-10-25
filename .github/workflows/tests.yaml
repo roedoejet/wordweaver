@@ -1,7 +1,7 @@
 name: Run tests
 on: [push]
 jobs:
-  spec-tests:
+  all-tests:
     runs-on: ubuntu-latest
     # Stop the occasional rogue instance before the 6h GitHub limit
     timeout-minutes: 15
@@ -14,32 +14,41 @@ jobs:
           node-version: 18
       - name: Install everything
         run: npm install
-      - name: Run lint and spec tests
-        run: npm run-script ci:test
+
+      - name: Run spec tests
+        id: specs
+        continue-on-error: true
+        run: npm run-script ci:test || echo "exit_code=$?" >> $GITHUB_OUTPUT
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-  e2e-tests:
-    runs-on: ubuntu-latest
-    # Stop the occasional rogue instance before the 6h GitHub limit
-    timeout-minutes: 15
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Use Node.js 18
-        uses: actions/setup-node@v3
         with:
-          node-version: 18
-      - name: Install everything
-        run: npm install
+          fail_ci_if_error: false
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Run ng lint
+        id: lint
+        continue-on-error: true
+        run: npm run-script lint || echo "exit_code=$?" >> $GITHUB_OUTPUT
+
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests
-        run: npx npm run-script e2e
+        id: e2e
+        continue-on-error: true
+        run: npx npm run-script e2e || echo "exit_code=$?" >> $GITHUB_OUTPUT
       - uses: actions/upload-artifact@v3
-        if: always()
+        if: steps.e2e.outputs.exit_code == ''
         with:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+
+      - name: check that all validation passed
+        run: |
+          if [[ "${{ steps.specs.outputs.exit_code }}" != "" || \
+                "${{ steps.e2e.outputs.exit_code }}" != "" || \
+                "${{ steps.lint.outputs.exit_code }}" != "" ]]; then \
+            echo ERROR: at least one kind of validation failed, see logs above; \
+            false; \
+          fi
+          echo All tests passed.
