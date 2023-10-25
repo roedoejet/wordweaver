@@ -1,3 +1,9 @@
-<div *ngIf="(options$ | async) as options">
-    <div #explorer echarts [options]="options" [theme]="'vintage'" class="demo-chart"></div>
+<div *ngIf="options$ | async as options">
+  <div
+    #explorer
+    echarts
+    [options]="options"
+    [theme]="'vintage'"
+    class="demo-chart"
+  ></div>
 </div>

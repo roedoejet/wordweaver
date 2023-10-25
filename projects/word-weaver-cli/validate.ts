@@ -9,7 +9,7 @@ const DATA_DIR = `../word-weaver/src/assets/data/${DATA_LANG}/${DATA_VERSION}`;
 let ajv = new Ajv({
   // allErrors: true,  // uncomment to get all the errors printed
   strict: true,
-  verbose: true
+  verbose: true,
 });
 
 const capitalize = (s: string) => s[0].toUpperCase() + s.slice(1);

@@ -1,34 +1,63 @@
 <div class="panel" *ngIf="lang$ | async">
   <div class="panel__header panel__header--tableview">
-    <h5 class="panel__title">{{ 'ww.pages.tableviewer.panels.temp.title' | translate }}</h5>
+    <h5 class="panel__title">
+      {{ "ww.pages.tableviewer.panels.temp.title" | translate }}
+    </h5>
   </div>
-  <mat-form-field class='control'>
-    <mat-label>{{ 'ww.pages.tableviewer.panels.temp.select' | translate }}</mat-label>
-    <mat-select *ngIf="selection$ | async as selection" [ngModel]="selection" multiple
-      (selectionChange)="onOptionSelect($event)">
+  <mat-form-field class="control">
+    <mat-label>{{
+      "ww.pages.tableviewer.panels.temp.select" | translate
+    }}</mat-label>
+    <mat-select
+      *ngIf="selection$ | async as selection"
+      [ngModel]="selection"
+      multiple
+      (selectionChange)="onOptionSelect($event)"
+    >
       <mat-select-trigger>
-        <span *ngIf='optionService.optionsUseType$() | async'>
-          <ng-container *ngIf='selection.length'>
-            {{ 'ww-data.options.types.' + selection[0].type | translate }} -
-            {{ 'ww-data.options.items.' + selection[0].tag | translate }}
+        <span *ngIf="optionService.optionsUseType$() | async">
+          <ng-container *ngIf="selection.length">
+            {{ "ww-data.options.types." + selection[0].type | translate }} -
+            {{ "ww-data.options.items." + selection[0].tag | translate }}
           </ng-container>
         </span>
-        <span *ngIf='(optionService.optionsUseType$() | async) === false'>
-          {{ (selection.length ? "ww-data.options.items." + selection[0].tag : '') | translate }}
+        <span *ngIf="(optionService.optionsUseType$() | async) === false">
+          {{
+            (selection.length
+              ? "ww-data.options.items." + selection[0].tag
+              : ""
+            ) | translate
+          }}
         </span>
         <span *ngIf="selection.length > 1" class="example-additional-selection">
-          (+{{selection.length - 1}}
-          {{ (selection.length === 2 ? 'ww.pages.tableviewer.misc.other' : 'ww.pages.tableviewer.misc.others') | translate }})
+          (+{{ selection.length - 1 }}
+          {{
+            (selection.length === 2
+              ? "ww.pages.tableviewer.misc.other"
+              : "ww.pages.tableviewer.misc.others"
+            ) | translate
+          }})
         </span>
       </mat-select-trigger>
-      <div *ngIf='(optionService.optionsUseType$() | async) === false'>
-        <mat-option *ngFor="let option of possibleOptions$ | async" [value]="option">
-          {{"ww-data.options.items." + option.tag | translate}}</mat-option>
+      <div *ngIf="(optionService.optionsUseType$() | async) === false">
+        <mat-option
+          *ngFor="let option of possibleOptions$ | async"
+          [value]="option"
+        >
+          {{ "ww-data.options.items." + option.tag | translate }}</mat-option
+        >
       </div>
       <div *ngIf="possibleOptionsByType$ | async as optionsByType">
-        <mat-optgroup *ngFor="let type of optionsByType" [label]="'ww-data.options.types.' + type.type | translate">
-          <mat-option class='margin-left-25' *ngFor="let option of type.options" [value]="option">
-            {{"ww-data.options.items." + option.tag | translate}}
+        <mat-optgroup
+          *ngFor="let type of optionsByType"
+          [label]="'ww-data.options.types.' + type.type | translate"
+        >
+          <mat-option
+            class="margin-left-25"
+            *ngFor="let option of type.options"
+            [value]="option"
+          >
+            {{ "ww-data.options.items." + option.tag | translate }}
           </mat-option>
         </mat-optgroup>
       </div>

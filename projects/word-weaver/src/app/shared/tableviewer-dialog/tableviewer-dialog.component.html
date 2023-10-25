@@ -1,22 +1,46 @@
-<div class='dialog__container'>
-    <h2 mat-dialog-title>{{ "ww.pages.tableviewer.dialog.advanced.title" | translate }}</h2>
-    <div mat-dialog-content *ngIf="selection$ | async as selection">
-        <mat-radio-group class="radio-group" [ngModel]='selection.view' (change)='onSelecteViewMode($event)'>
-            <mat-radio-button *ngFor="let mode of metaData.tableviewer.viewModes" [value]='mode'>
-                <h5 class='margin-0'>{{ 'ww.pages.tableviewer.dialog.advanced.view-modes.' + mode | translate }}</h5>
-                <p>{{ 'ww.pages.tableviewer.dialog.advanced.view-mode-descriptions.' + mode | translate}}</p>
-            </mat-radio-button>
-        </mat-radio-group>
+<div class="dialog__container">
+  <h2 mat-dialog-title>
+    {{ "ww.pages.tableviewer.dialog.advanced.title" | translate }}
+  </h2>
+  <div mat-dialog-content *ngIf="selection$ | async as selection">
+    <mat-radio-group
+      class="radio-group"
+      [ngModel]="selection.view"
+      (change)="onSelecteViewMode($event)"
+    >
+      <mat-radio-button
+        *ngFor="let mode of metaData.tableviewer.viewModes"
+        [value]="mode"
+      >
+        <h5 class="margin-0">
+          {{
+            "ww.pages.tableviewer.dialog.advanced.view-modes." + mode
+              | translate
+          }}
+        </h5>
+        <p>
+          {{
+            "ww.pages.tableviewer.dialog.advanced.view-mode-descriptions." +
+              mode | translate
+          }}
+        </p>
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+
+  <mat-dialog-actions>
+    <div class="centered dialog__buttons__container">
+      <button
+        (click)="exit()"
+        class="exit-button dialog__buttons"
+        mat-raised-button
+        [matTooltip]="'ww.pages.tableviewer.dialog.advanced.exit' | translate"
+        [matTooltipShowDelay]="showDelay.value"
+        [matTooltipHideDelay]="hideDelay.value"
+        [matTooltipPosition]="tooltipPosition"
+      >
+        {{ "ww.pages.tableviewer.dialog.advanced.exit" | translate }}
+      </button>
     </div>
-
-
-
-    <mat-dialog-actions>
-        <div class='centered dialog__buttons__container'>
-            <button (click)="exit()" class="exit-button dialog__buttons" mat-raised-button [matTooltip]="'ww.pages.tableviewer.dialog.advanced.exit' | translate" [matTooltipShowDelay]="showDelay.value" [matTooltipHideDelay]="hideDelay.value" [matTooltipPosition]="tooltipPosition">
-                {{ "ww.pages.tableviewer.dialog.advanced.exit" | translate }}
-            </button>
-        </div>
-    </mat-dialog-actions>
-
+  </mat-dialog-actions>
 </div>
