@@ -152,53 +152,6 @@
               "projects/word-weaver/**/*.html"
             ]
           }
-        },
-        "cypress-run": {
-          "builder": "@cypress/schematic:cypress",
-          "options": {
-            "devServerTarget": "word-weaver:serve",
-            "configFile": "projects/word-weaver/cypress.config.ts"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "word-weaver:serve:production"
-            }
-          }
-        },
-        "cypress-open": {
-          "builder": "@cypress/schematic:cypress",
-          "options": {
-            "watch": true,
-            "headless": false,
-            "configFile": "projects/word-weaver/cypress.config.ts"
-          }
-        },
-        "ct": {
-          "builder": "@cypress/schematic:cypress",
-          "options": {
-            "devServerTarget": "word-weaver:serve",
-            "watch": true,
-            "headless": false,
-            "testingType": "component"
-          },
-          "configurations": {
-            "development": {
-              "devServerTarget": "word-weaver:serve:development"
-            }
-          }
-        },
-        "e2e": {
-          "builder": "@cypress/schematic:cypress",
-          "options": {
-            "devServerTarget": "word-weaver:serve",
-            "watch": true,
-            "headless": false
-          },
-          "configurations": {
-            "development": {
-              "devServerTarget": "word-weaver:serve:development"
-            }
-          }
         }
       }
     }
@@ -208,7 +161,6 @@
     "analytics": false,
     "schematicCollections": [
       "@angular-eslint/schematics",
-      "@cypress/schematic",
       "@schematics/angular"
     ]
   }

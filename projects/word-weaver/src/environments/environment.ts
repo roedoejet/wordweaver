@@ -7,7 +7,7 @@ import {
   LEVELS,
   META_DATA,
   TIERS,
-  VALIDATION
+  VALIDATION,
 } from "../config/config";
 
 const packageJson = require("../../../../package.json");
@@ -20,7 +20,7 @@ export const environment = {
     validation: VALIDATION,
     highlight: HIGHLIGHTS,
     level: LEVELS,
-    meta: META_DATA
+    meta: META_DATA,
   },
   production: false,
   test: false,
@@ -38,6 +38,5 @@ export const environment = {
     fontAwesome: packageJson.dependencies["@fortawesome/fontawesome-free"],
     angularCli: packageJson.devDependencies["@angular/cli"],
     typescript: packageJson.devDependencies["typescript"],
-    cypress: packageJson.devDependencies["cypress"]
-  }
+  },
 };
