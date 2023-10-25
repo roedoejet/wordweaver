@@ -1,36 +1,86 @@
-<div class="container page__content vwidth-90 centered margin-bottom-50 custom-scroll">
-  <div class='desktop-only'>
-    <mat-grid-list [cols]="cols" rowHeight="8em" (window:resize)="onResize($event)">
-      <mat-grid-tile [colspan]="3" [rowspan]="2" class="br--tl b--left b--top b--bottom">
-        <ww-tableviewer-verb-panel class='custom-scroll-y full-width full-height'></ww-tableviewer-verb-panel>
+<div
+  class="container page__content vwidth-90 centered margin-bottom-50 custom-scroll"
+>
+  <div class="desktop-only">
+    <mat-grid-list
+      [cols]="cols"
+      rowHeight="8em"
+      (window:resize)="onResize($event)"
+    >
+      <mat-grid-tile
+        [colspan]="3"
+        [rowspan]="2"
+        class="br--tl b--left b--top b--bottom"
+      >
+        <ww-tableviewer-verb-panel
+          class="custom-scroll-y full-width full-height"
+        ></ww-tableviewer-verb-panel>
       </mat-grid-tile>
-      <mat-grid-tile class="b--top b--left b--right br--tr br--br b--bottom" [colspan]="conjcolspan"
-        [rowspan]="conjrowspan">
-        <ww-tableviewer-conj-panel #conjPanel class="custom-scroll-y full-width full-height">
+      <mat-grid-tile
+        class="b--top b--left b--right br--tr br--br b--bottom"
+        [colspan]="conjcolspan"
+        [rowspan]="conjrowspan"
+      >
+        <ww-tableviewer-conj-panel
+          #conjPanel
+          class="custom-scroll-y full-width full-height"
+        >
         </ww-tableviewer-conj-panel>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="3" [rowspan]="2" class="b--left">
-        <ww-tableviewer-pers-panel class='custom-scroll-y full-width full-height'></ww-tableviewer-pers-panel>
+        <ww-tableviewer-pers-panel
+          class="custom-scroll-y full-width full-height"
+        ></ww-tableviewer-pers-panel>
       </mat-grid-tile>
-      <mat-grid-tile [colspan]="3" [rowspan]="1" class="br--bl b--top b--left b--bottom">
-        <ww-tableviewer-temp-panel class='custom-scroll-y full-width'></ww-tableviewer-temp-panel>
+      <mat-grid-tile
+        [colspan]="3"
+        [rowspan]="1"
+        class="br--bl b--top b--left b--bottom"
+      >
+        <ww-tableviewer-temp-panel
+          class="custom-scroll-y full-width"
+        ></ww-tableviewer-temp-panel>
       </mat-grid-tile>
     </mat-grid-list>
   </div>
-  <div class='mobile-only'>
-    <mat-grid-list [cols]="cols" rowHeight="8em" (window:resize)="onResize($event)">
-      <mat-grid-tile [colspan]="3" [rowspan]="2" class="br--tl b--left b--top b--bottom">
-        <ww-tableviewer-verb-panel class='custom-scroll-y full-width full-height'></ww-tableviewer-verb-panel>
+  <div class="mobile-only">
+    <mat-grid-list
+      [cols]="cols"
+      rowHeight="8em"
+      (window:resize)="onResize($event)"
+    >
+      <mat-grid-tile
+        [colspan]="3"
+        [rowspan]="2"
+        class="br--tl b--left b--top b--bottom"
+      >
+        <ww-tableviewer-verb-panel
+          class="custom-scroll-y full-width full-height"
+        ></ww-tableviewer-verb-panel>
       </mat-grid-tile>
-      <mat-grid-tile class="b--top b--left b--right br--tr br--br b--bottom" [colspan]="3"
-        [rowspan]="2">
-        <ww-tableviewer-pers-panel class='custom-scroll-y full-width full-height'></ww-tableviewer-pers-panel>
+      <mat-grid-tile
+        class="b--top b--left b--right br--tr br--br b--bottom"
+        [colspan]="3"
+        [rowspan]="2"
+      >
+        <ww-tableviewer-pers-panel
+          class="custom-scroll-y full-width full-height"
+        ></ww-tableviewer-pers-panel>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="3" [rowspan]="1" class="b--left">
-        <ww-tableviewer-temp-panel class='custom-scroll-y full-width'></ww-tableviewer-temp-panel>
+        <ww-tableviewer-temp-panel
+          class="custom-scroll-y full-width"
+        ></ww-tableviewer-temp-panel>
       </mat-grid-tile>
-      <mat-grid-tile [colspan]="conjcolspan" [rowspan]="conjrowspan" class="br--bl b--top b--left b--bottom">
-        <ww-tableviewer-conj-panel #conjPanel class="custom-scroll-y full-width full-height">
+      <mat-grid-tile
+        [colspan]="conjcolspan"
+        [rowspan]="conjrowspan"
+        class="br--bl b--top b--left b--bottom"
+      >
+        <ww-tableviewer-conj-panel
+          #conjPanel
+          class="custom-scroll-y full-width full-height"
+        >
         </ww-tableviewer-conj-panel>
       </mat-grid-tile>
     </mat-grid-list>

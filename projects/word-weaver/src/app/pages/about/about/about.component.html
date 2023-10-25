@@ -1,54 +1,82 @@
-<div id='about__page'
-  class="background page__content custom-scroll shadow-box vmargin-right-20 vmargin-left-20 margin-bottom-50">
+<div
+  id="about__page"
+  class="background page__content custom-scroll shadow-box vmargin-right-20 vmargin-left-20 margin-bottom-50"
+>
   <div class="gradient">
     <div class="container">
-      <h2 class="main--title centered center-text">{{ 'ww.common.title' | translate }}</h2>
+      <h2 class="main--title centered center-text">
+        {{ "ww.common.title" | translate }}
+      </h2>
       <div class="actions centered center-text">
-        <span [ngClass]="routeAnimationsElements">{{ 'ww.pages.about.slogan' | translate }}</span>
-        <br>
+        <span [ngClass]="routeAnimationsElements">{{
+          "ww.pages.about.slogan" | translate
+        }}</span>
+        <br />
         <div [innerHTML]="'ww.pages.about.text' | translate"></div>
-        <br>
+        <br />
       </div>
-      <h3 class='centered center-text margin-bottom-35 contributors--title'>
-        {{ "ww.pages.about.contributors.title" | translate }}</h3>
-      <div class='authors container centered center-text contributors'>
-        <div class="row contributor" *ngFor="let contributor of contributors; index as i; last as isLast">
-          <ng-container *ngIf='contributor.img && i%2===0'>
-            <div class='col-lg-6'>
-              <div class='img__container'>
-                <img class='bio' [src]='contributor.img' />
-                <h5><span class='contributor name'>{{contributor.name}}</span><span class='contributor title'
-                    *ngIf='contributor.title'><br>{{contributor.title}}</span>
+      <h3 class="centered center-text margin-bottom-35 contributors--title">
+        {{ "ww.pages.about.contributors.title" | translate }}
+      </h3>
+      <div class="authors container centered center-text contributors">
+        <div
+          class="row contributor"
+          *ngFor="let contributor of contributors; index as i; last as isLast"
+        >
+          <ng-container *ngIf="contributor.img && i % 2 === 0">
+            <div class="col-lg-6">
+              <div class="img__container">
+                <img class="bio" [src]="contributor.img" />
+                <h5>
+                  <span class="contributor name">{{ contributor.name }}</span
+                  ><span class="contributor title" *ngIf="contributor.title"
+                    ><br />{{ contributor.title }}</span
+                  >
                 </h5>
               </div>
             </div>
-            <div class='col-lg-6 contributor--text' [innerHTML]="contributor.text | translate"></div>
+            <div
+              class="col-lg-6 contributor--text"
+              [innerHTML]="contributor.text | translate"
+            ></div>
           </ng-container>
-          <ng-container *ngIf='contributor.img && i%2===1'>
-            <div class='img__container mobile-only'>
-              <img class='bio' [src]='contributor.img' />
-              <h5><span class='contributor name'>{{contributor.name}}</span><span class='contributor title'
-                  *ngIf='contributor.title'><br>{{contributor.title}}</span>
+          <ng-container *ngIf="contributor.img && i % 2 === 1">
+            <div class="img__container mobile-only">
+              <img class="bio" [src]="contributor.img" />
+              <h5>
+                <span class="contributor name">{{ contributor.name }}</span
+                ><span class="contributor title" *ngIf="contributor.title"
+                  ><br />{{ contributor.title }}</span
+                >
               </h5>
             </div>
-            <div class='col-lg-6 contributor--text' [innerHTML]="contributor.text | translate"></div>
-            <div class='col-lg-6'>
-              <div class='img__container desktop-only'>
-                <img class='bio' [src]='contributor.img' />
-                <h5><span class='contributor name'>{{contributor.name}}</span><span class='contributor title'
-                    *ngIf='contributor.title'><br>{{contributor.title}}</span>
+            <div
+              class="col-lg-6 contributor--text"
+              [innerHTML]="contributor.text | translate"
+            ></div>
+            <div class="col-lg-6">
+              <div class="img__container desktop-only">
+                <img class="bio" [src]="contributor.img" />
+                <h5>
+                  <span class="contributor name">{{ contributor.name }}</span
+                  ><span class="contributor title" *ngIf="contributor.title"
+                    ><br />{{ contributor.title }}</span
+                  >
                 </h5>
               </div>
             </div>
           </ng-container>
-          <ng-container *ngIf='!contributor.img'>
-            <div class='col-lg-12'>
-              <h5><span class='contributor name'>{{contributor.name}}</span><span class='contributor title'
-                  *ngIf='contributor.title'><br>{{contributor.title}}</span>
+          <ng-container *ngIf="!contributor.img">
+            <div class="col-lg-12">
+              <h5>
+                <span class="contributor name">{{ contributor.name }}</span
+                ><span class="contributor title" *ngIf="contributor.title"
+                  ><br />{{ contributor.title }}</span
+                >
               </h5>
             </div>
           </ng-container>
-          <hr *ngIf="!isLast">
+          <hr *ngIf="!isLast" />
         </div>
       </div>
     </div>
