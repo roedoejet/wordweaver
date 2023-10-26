@@ -15,7 +15,7 @@ jobs:
       - name: Install everything
         run: npm install
 
-      - name: Run spec tests
+      - name: Validation Step Run spec tests
         id: specs
         continue-on-error: true
         run: npm run-script ci:test
@@ -26,14 +26,22 @@ jobs:
           fail_ci_if_error: false
           token: ${{ secrets.CODECOV_TOKEN }}
 
-      - name: Run ng lint
+      - name: Validation Step Run ng lint
         id: lint
         continue-on-error: true
         run: npm run-script lint
 
+      - name: Validation Step Run validate to make sure the data is valid
+        id: validate
+        continue-on-error: true
+        run: npm run-script generate-schemas && npm run-script validate || echo "exit_code=$?" >> $GITHUB_OUTPUT
+      - name: Compress the data files and make sure they didn't change
+        run: |
+          npm run-script compress
+
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
-      - name: Run Playwright tests
+      - name: Validation Step Run Playwright tests
         id: e2e
         continue-on-error: true
         run: npx npm run-script e2e
@@ -44,8 +52,8 @@ jobs:
           path: playwright-report/
           retention-days: 30
 
-      - name: Fail if any previous test failed
-        if: steps.specs.outcome == 'failure' || steps.lint.outputs.outcome == 'failure' || steps.e2e.outputs.outcome == 'failure'
+      - name: Fail if any Validation Step failed
+        if: steps.specs.outcome == 'failure' || steps.lint.outcome == 'failure' || steps.e2e.outcome == 'failure' || steps.validate.outcome == 'failure'
         run: |
-          echo ERROR: at least one validation step failed, see logs of earlier steps above
+          echo ERROR: at least one Validation Step failed, look at all the Validation Step logs above for details
           false
