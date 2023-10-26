@@ -47,11 +47,15 @@ $ npm install
 
 Then, you can create a new repo on GitHub and reset the origin remote to your new repo:
 
-`git remote set-url origin https://github.com/<yourusername>/<yourrepo>`
+```sh
+git remote set-url origin https://github.com/<yourusername>/<yourrepo>
+```
 
 Then, add a new repo and set the url to this:
 
-`git remote add ww https://github.com/roedoejet/wordweaver.git`
+```sh
+git remote add ww https://github.com/roedoejet/wordweaver.git
+```
 
 That way, you can make changes in your repo, push them to your origin, but still pull new changes to the gui using `git pull ww main`
 
@@ -80,6 +84,27 @@ $ npm start
 Feel free to dive in! [Open an issue](https://github.com/roedoejet/wordweaver/issues/new) or submit PRs.
 
 This repo follows the [Contributor Covenant](http://contributor-covenant.org/version/1/3/0/) Code of Conduct.
+
+### Running the test suites
+
+To execute the unit test suites, run:
+
+```
+npm run-script test      # regular mode
+npm run-script ci:test   # alternative, headless mode
+```
+
+To execute the end-to-end test suite, you must first install Playwright by running:
+
+```
+npx playwright install --with-deps
+```
+
+and then you can execute the suite with:
+
+```
+npm run-script e2e
+```
 
 ### Contributors
 
