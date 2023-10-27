@@ -31,20 +31,20 @@ jobs:
         continue-on-error: true
         run: npm run-script lint
 
-      - name: Validation Step Run validate to make sure the data is valid
+      - name: Validation Step Validate data
         id: validate
         continue-on-error: true
         run: |
           npm run-script generate-schemas
           npm run-script validate
-      - name: Compress the data files and make sure they didn't change
+      - name: Validation Step Check compressed data files
         if: steps.validate.outcome == 'success'
         id: compress
         continue-on-error: true
         run: |
           npm run-script compress fr v1
           if git status --porcelain=v1 | grep '\.json\.gz'; then \
-            echo Error: Please run \"npm run-script compress fr v1\" and commit the .json.gz files.; \
+            echo Error: Please run \"npm run-script compress fr v1\" and commit the .json.gz files created or updated.; \
             false; \
           else \
             echo OK; \
@@ -64,7 +64,11 @@ jobs:
           retention-days: 30
 
       - name: Fail if any Validation Step failed
-        if: steps.specs.outcome == 'failure' || steps.lint.outcome == 'failure' || steps.e2e.outcome == 'failure' || steps.validate.outcome == 'failure' || steps.compress.outcome == 'failure'
+        if: steps.specs.outcome == 'failure' || steps.lint.outcome == 'failure' || steps.validate.outcome == 'failure' || steps.compress.outcome == 'failure' || steps.e2e.outcome == 'failure'
         run: |
-          echo ERROR: at least one Validation Step failed, look at all the Validation Step logs above for details
+          if [[ "${{ steps.specs.outcome }}" == failure ]]; then echo ERROR: Validation Step Run spec tests failed; fi
+          if [[ "${{ steps.lint.outcome }}" == failure ]]; then echo ERROR: Validation Step Run ng lint failed; fi
+          if [[ "${{ steps.validate.outcome }}" == failure ]]; then echo ERROR: Validation Step Validate data failed; fi
+          if [[ "${{ steps.compress.outcome }}" == failure ]]; then echo ERROR: Validation Step Check compressed data files failed; fi
+          if [[ "${{ steps.e2e.outcome }}" == failure ]]; then echo ERROR: Validation Step Run Playwright tests failed; fi
           false
