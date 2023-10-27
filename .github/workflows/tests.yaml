@@ -34,10 +34,21 @@ jobs:
       - name: Validation Step Run validate to make sure the data is valid
         id: validate
         continue-on-error: true
-        run: npm run-script generate-schemas && npm run-script validate || echo "exit_code=$?" >> $GITHUB_OUTPUT
-      - name: Compress the data files and make sure they didn't change
         run: |
-          npm run-script compress
+          npm run-script generate-schemas
+          npm run-script validate
+      - name: Compress the data files and make sure they didn't change
+        if: steps.validate.outcome == 'success'
+        id: compress
+        continue-on-error: true
+        run: |
+          npm run-script compress fr v1
+          if git status --porcelain=v1 | grep '\.json\.gz'; then \
+            echo Error: Please run \"npm run-script compress fr v1\" and commit the .json.gz files.; \
+            false; \
+          else \
+            echo OK; \
+          fi
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
@@ -53,7 +64,7 @@ jobs:
           retention-days: 30
 
       - name: Fail if any Validation Step failed
-        if: steps.specs.outcome == 'failure' || steps.lint.outcome == 'failure' || steps.e2e.outcome == 'failure' || steps.validate.outcome == 'failure'
+        if: steps.specs.outcome == 'failure' || steps.lint.outcome == 'failure' || steps.e2e.outcome == 'failure' || steps.validate.outcome == 'failure' || steps.compress.outcome == 'failure'
         run: |
           echo ERROR: at least one Validation Step failed, look at all the Validation Step logs above for details
           false
