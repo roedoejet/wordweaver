@@ -3,6 +3,7 @@ import { marker } from "@biesbjerg/ngx-translate-extract-marker";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { select, Store } from "@ngrx/store";
 import { tap, withLatestFrom } from "rxjs/operators";
+import { TranslateService } from "@ngx-translate/core";
 import { selectWordmakerState } from "../core.state";
 // import { LocalStorageService } from "../local-storage/local-storage.service";
 import { NotificationService } from "../notifications/notification.service";
@@ -43,6 +44,7 @@ export class WordmakerEffects {
     private verbService: VerbService,
     private optionService: OptionService,
     private pronounService: PronounService,
+    private translate: TranslateService,
     private validationService: ValidationService
   ) {}
 
@@ -87,7 +89,11 @@ export class WordmakerEffects {
                 this.store.dispatch(actionChangeVerb({ root: random }));
                 this.notificationService.translated(
                   marker("ww.pages.wordmaker.notifications.random.verb"),
-                  { value: random.gloss },
+                  {
+                    value: this.translate.instant(
+                      "ww-data.verbs." + random.tag
+                    ),
+                  },
                   "success"
                 );
               }
@@ -95,7 +101,7 @@ export class WordmakerEffects {
               this.store.dispatch(actionChangeOption({ option: null }));
               break;
             }
-            // Temp Selection Step
+            // Tense Selection Step
             case 2: {
               // Notify random selection
               const pronoun = {
@@ -183,32 +189,50 @@ export class WordmakerEffects {
                 }
               }
               if (pronoun.agent && pronoun.patient) {
-                this.notificationService.translated(
-                  marker(
-                    "ww.pages.wordmaker.notifications.random.pers.transitive"
-                  ),
-                  {
-                    agent: pronoun.agent.gloss,
-                    patient: pronoun.patient.gloss,
-                  },
-                  "success"
-                );
+                if (!selection.agent || !selection.patient) {
+                  this.notificationService.translated(
+                    marker(
+                      "ww.pages.wordmaker.notifications.random.pers.transitive"
+                    ),
+                    {
+                      agent: this.translate.instant(
+                        "ww-data.pronouns.agents." + pronoun.agent.tag
+                      ),
+                      patient: this.translate.instant(
+                        "ww-data.pronouns.patients." + pronoun.patient.tag
+                      ),
+                    },
+                    "success"
+                  );
+                }
               } else if (pronoun.agent) {
-                this.notificationService.translated(
-                  marker(
-                    "ww.pages.wordmaker.notifications.random.pers.intransitive"
-                  ),
-                  { value: pronoun.agent.gloss },
-                  "success"
-                );
+                if (!selection.agent) {
+                  this.notificationService.translated(
+                    marker(
+                      "ww.pages.wordmaker.notifications.random.pers.intransitive"
+                    ),
+                    {
+                      value: this.translate.instant(
+                        "ww-data.pronouns.agents." + pronoun.agent.tag
+                      ),
+                    },
+                    "success"
+                  );
+                }
               } else if (pronoun.patient) {
-                this.notificationService.translated(
-                  marker(
-                    "ww.pages.wordmaker.notifications.random.pers.intransitive"
-                  ),
-                  { value: pronoun.patient.gloss },
-                  "success"
-                );
+                if (!selection.patient) {
+                  this.notificationService.translated(
+                    marker(
+                      "ww.pages.wordmaker.notifications.random.pers.intransitive"
+                    ),
+                    {
+                      value: this.translate.instant(
+                        "ww-data.pronouns.patients." + pronoun.patient.tag
+                      ),
+                    },
+                    "success"
+                  );
+                }
               }
               break;
             }
@@ -219,7 +243,11 @@ export class WordmakerEffects {
                 this.store.dispatch(actionChangeOption({ option: random }));
                 this.notificationService.translated(
                   marker("ww.pages.wordmaker.notifications.random.temp"),
-                  { value: random.gloss },
+                  {
+                    value: this.translate.instant(
+                      "ww-data.options.items." + random.tag
+                    ),
+                  },
                   "success"
                 );
               }

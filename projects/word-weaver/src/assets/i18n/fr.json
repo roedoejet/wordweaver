@@ -184,7 +184,7 @@
           "random": {
             "pers": {
               "intransitive": "Pronom « {{ value }} » choisi au hasard",
-              "transitive": "Pronom « {{ agent }} > {{ patient }} » choisi au hasard"
+              "transitive": "Pronoms « {{ agent }} > {{ patient }} » choisis au hasard"
             },
             "temp": "Temps « {{ value }} » choisi au hasard",
             "verb": "Verbe « {{ value }} » choisi au hasard"
