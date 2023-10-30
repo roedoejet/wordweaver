@@ -5,7 +5,7 @@ import { Router } from "@angular/router";
 @Component({
   selector: "ww-logo",
   templateUrl: "logo.component.html",
-  styleUrls: ["./logo.component.scss"]
+  styleUrls: ["./logo.component.scss"],
 })
 export class LogoComponent implements AfterViewInit {
   constructor(public router: Router) {}

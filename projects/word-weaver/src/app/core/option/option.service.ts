@@ -1,7 +1,7 @@
 import {
   HttpClient,
   HttpContext,
-  HttpErrorResponse
+  HttpErrorResponse,
 } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Store, select } from "@ngrx/store";
@@ -14,7 +14,7 @@ import { SUPPRESS_ERROR } from "../http-interceptors/http-error.interceptor";
 import { SettingsState } from "../settings/settings.model";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class OptionService {
   path = "options.json.gz";
@@ -28,7 +28,7 @@ export class OptionService {
       select(selectSettingsState),
       switchMap((settings: SettingsState) =>
         this.http.get<Option[]>(settings.baseUrl + this.path, {
-          context: new HttpContext().set(SUPPRESS_ERROR, this.suppressError)
+          context: new HttpContext().set(SUPPRESS_ERROR, this.suppressError),
         })
       ),
       catchError((error: HttpErrorResponse) => {
@@ -58,7 +58,7 @@ export class OptionService {
           .forEach((x) =>
             optionsByType.push({
               type: x,
-              options: options.filter((y) => y.type === x)
+              options: options.filter((y) => y.type === x),
             })
           );
         return optionsByType;

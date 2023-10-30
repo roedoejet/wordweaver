@@ -12,7 +12,7 @@ describe("NotificationsService", () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [NotificationService, MatSnackBar, Overlay],
-      imports: [TranslateModule.forRoot()]
+      imports: [TranslateModule.forRoot()],
     });
     service = TestBed.inject<NotificationService>(NotificationService);
   });

@@ -2,7 +2,7 @@ import {
   AvailableLanguages,
   Highlight,
   Level,
-  ThemeName
+  ThemeName,
 } from "../../../config/config";
 import { AppState } from "../core.module";
 

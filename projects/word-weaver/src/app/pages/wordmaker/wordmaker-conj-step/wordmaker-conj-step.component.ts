@@ -2,7 +2,7 @@ import {
   Component,
   ChangeDetectionStrategy,
   OnDestroy,
-  OnInit
+  OnInit,
 } from "@angular/core";
 import { Observable, Subject } from "rxjs";
 import { switchMap, map, takeUntil } from "rxjs/operators";
@@ -18,7 +18,7 @@ import { TIERS } from "../../../../config/config";
   selector: "ww-wordmaker-conj-step",
   templateUrl: "./wordmaker-conj-step.component.html",
   styleUrls: ["./wordmaker-conj-step.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WordmakerConjStepComponent implements OnDestroy, OnInit {
   settings$: Observable<SettingsState>;

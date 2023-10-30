@@ -2,7 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   OnInit,
-  ViewChild
+  ViewChild,
 } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Store } from "@ngrx/store";
@@ -12,7 +12,7 @@ import { TableviewerViewModes } from "../../../../config/config";
 import {
   OptionService,
   PronounService,
-  VerbService
+  VerbService,
 } from "../../../core/core.module";
 import {
   actionChangeAgents,
@@ -22,7 +22,7 @@ import {
   actionChangeTreeViewDepth,
   actionChangeVerbs,
   actionChangeViewMode,
-  actionConjugationEvent
+  actionConjugationEvent,
 } from "../../../core/tableviewer-selection/tableviewer-selection.actions";
 import { TableviewerTreeDepth } from "../../../core/tableviewer-selection/tableviewer-selection.model";
 import { GridOrderOptions } from "../conjugation-grid/conjugation-grid.component";
@@ -31,7 +31,7 @@ import { GridOrderOptions } from "../conjugation-grid/conjugation-grid.component
   selector: "ww-tableviewer",
   templateUrl: "./tableviewer.component.html",
   styleUrls: ["./tableviewer.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableviewerComponent implements OnInit {
   @ViewChild("conjPanel") conjPanel;
@@ -63,7 +63,7 @@ export class TableviewerComponent implements OnInit {
       this.pronounService.pronouns$,
       this.verbService.verbs$,
       this.optionService.options$,
-      this.route.queryParams.pipe(take(1))
+      this.route.queryParams.pipe(take(1)),
     ])
       .pipe(take(1))
       .subscribe((value) => {
@@ -75,7 +75,7 @@ export class TableviewerComponent implements OnInit {
               actionChangeAgents({
                 agent: agents
                   .map((x) => this.pronounService.getPronoun(x))
-                  .filter((x) => x)
+                  .filter((x) => x),
               })
             );
           }
@@ -85,7 +85,7 @@ export class TableviewerComponent implements OnInit {
               actionChangePatients({
                 patient: patients
                   .map((x) => this.pronounService.getPronoun(x))
-                  .filter((x) => x)
+                  .filter((x) => x),
               })
             );
           }
@@ -95,7 +95,7 @@ export class TableviewerComponent implements OnInit {
               actionChangeOptions({
                 option: options
                   .map((x) => this.optionService.getOption(x))
-                  .filter((x) => x)
+                  .filter((x) => x),
               })
             );
           }
@@ -105,7 +105,7 @@ export class TableviewerComponent implements OnInit {
               actionChangeVerbs({
                 root: roots
                   .map((x) => this.verbService.getVerb(x))
-                  .filter((x) => x)
+                  .filter((x) => x),
               })
             );
           }
@@ -116,7 +116,7 @@ export class TableviewerComponent implements OnInit {
             console.log(viewMode);
             this.store.dispatch(
               actionChangeViewMode({
-                view: viewMode
+                view: viewMode,
               })
             );
           }
@@ -126,7 +126,7 @@ export class TableviewerComponent implements OnInit {
             );
             this.store.dispatch(
               actionChangeTreeViewDepth({
-                treeDepth
+                treeDepth,
               })
             );
           }
@@ -140,8 +140,8 @@ export class TableviewerComponent implements OnInit {
                 partial: {
                   main: gridOrder[0],
                   row: gridOrder[1],
-                  col: gridOrder[2]
-                }
+                  col: gridOrder[2],
+                },
               })
             );
           }

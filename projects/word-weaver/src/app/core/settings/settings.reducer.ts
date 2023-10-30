@@ -14,7 +14,7 @@ import {
   actionSettingsChangeStickyHeader,
   actionSettingsChangeTestApi,
   actionSettingsChangeTheme,
-  actionSettingsChangeThemeColors
+  actionSettingsChangeThemeColors,
 } from "./settings.actions";
 import { NIGHT_MODE_THEME, SettingsState } from "./settings.model";
 
@@ -31,16 +31,16 @@ const initialBaseState: SettingsState = {
   testApi: false,
   colors: {
     primary: "rgb(255, 255, 255)",
-    accent: "rgb(255, 255, 255)"
+    accent: "rgb(255, 255, 255)",
   },
   level: environment.config.level,
   highlight: environment.config.highlight,
-  hour: new Date().getHours()
+  hour: new Date().getHours(),
 };
 
 export const initialState: SettingsState = {
   ...initialBaseState,
-  ...initialSettings
+  ...initialSettings,
 };
 
 const reducer = createReducer(
@@ -62,22 +62,22 @@ const reducer = createReducer(
     (state, { pageAnimationsDisabled }) => ({
       ...state,
       pageAnimationsDisabled,
-      pageAnimations: false
+      pageAnimations: false,
     })
   ),
   on(actionSettingsChangeThemeColors, (state, action) => ({
     ...state,
     colors: {
       ...state.colors,
-      ...{ primary: action.primary, accent: action.accent }
-    }
+      ...{ primary: action.primary, accent: action.accent },
+    },
   })),
   on(actionSettingsChangeHighlight, (state, action) => {
     const newNestedState = {};
     newNestedState[action.key] = action.checked;
     return {
       ...state,
-      highlight: { ...state.highlight, ...newNestedState }
+      highlight: { ...state.highlight, ...newNestedState },
     };
   }),
   on(actionSettingsChangeLevel, (state, action) => {
@@ -85,7 +85,7 @@ const reducer = createReducer(
     newNestedState[action.key] = action.checked;
     return {
       ...state,
-      level: { ...state.level, ...newNestedState }
+      level: { ...state.level, ...newNestedState },
     };
   })
 );

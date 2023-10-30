@@ -6,12 +6,12 @@ const routes: Routes = [
   {
     path: "",
     component: AboutComponent,
-    data: { title: "ww.menu.about" }
-  }
+    data: { title: "ww.menu.about" },
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AboutRoutingModule {}

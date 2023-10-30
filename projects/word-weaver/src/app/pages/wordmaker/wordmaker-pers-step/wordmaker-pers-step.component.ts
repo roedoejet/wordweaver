@@ -4,22 +4,22 @@ import {
   EventEmitter,
   OnDestroy,
   OnInit,
-  Output
+  Output,
 } from "@angular/core";
 import {
   PronounService,
   ValidationService,
-  selectSettingsLanguage
+  selectSettingsLanguage,
 } from "../../../core/core.module";
 import { Pronoun } from "../../../../config/config";
 import { Observable, Subject } from "rxjs";
 import {
   actionChangeAgent,
-  actionChangePatient
+  actionChangePatient,
 } from "../../../core/wordmaker-selection/wordmaker-selection.actions";
 import {
   State,
-  WordmakerState
+  WordmakerState,
 } from "../../../core/wordmaker-selection/wordmaker-selection.model";
 import { Store, select } from "@ngrx/store";
 import { selectWordmaker } from "../../../core/wordmaker-selection/wordmaker-selection.selectors";
@@ -29,7 +29,7 @@ import { takeUntil } from "rxjs/operators";
   selector: "ww-wordmaker-pers-step",
   templateUrl: "./wordmaker-pers-step.component.html",
   styleUrls: ["./wordmaker-pers-step.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WordmakerPersStepComponent implements OnDestroy, OnInit {
   @Output() selectedAgent = new EventEmitter<Pronoun>();

@@ -3,7 +3,7 @@ import {
   Component,
   Input,
   OnDestroy,
-  OnInit
+  OnInit,
 } from "@angular/core";
 import { select, Store } from "@ngrx/store";
 import { EChartsOption } from "echarts";
@@ -15,12 +15,12 @@ import {
   Conjugation,
   ConjugationMorphemeNameIndex,
   Tier,
-  TIERS
+  TIERS,
 } from "../../../../config/config";
 import {
   OptionService,
   PronounService,
-  VerbService
+  VerbService,
 } from "../../../core/core.module";
 import { selectThemeColors } from "../../../core/settings/settings.selectors";
 import { TableviewerState } from "../../../core/tableviewer-selection/tableviewer-selection.model";
@@ -29,7 +29,7 @@ import { TableviewerState } from "../../../core/tableviewer-selection/tableviewe
   selector: "ww-conjugation-tree",
   templateUrl: "./conjugation-tree.component.html",
   styleUrls: ["./conjugation-tree.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConjugationTreeComponent implements OnDestroy, OnInit {
   @Input() data$: Observable<Partial<TableviewerState>>;
@@ -52,21 +52,21 @@ export class ConjugationTreeComponent implements OnDestroy, OnInit {
       tooltip: {
         show: false,
         trigger: "item",
-        triggerOn: "mousemove"
+        triggerOn: "mousemove",
       },
       toolbox: {
         feature: {
-          saveAsImage: { title: "save", show: false }
-        }
+          saveAsImage: { title: "save", show: false },
+        },
       },
       legend: {
         top: "2%",
         left: "3%",
         orient: "vertical",
         data: [],
-        borderColor: "#c23531"
+        borderColor: "#c23531",
       },
-      series: []
+      series: [],
     };
     this.defaultSeries = {
       type: "tree",
@@ -79,35 +79,35 @@ export class ConjugationTreeComponent implements OnDestroy, OnInit {
       symbolSize: 7,
       initialTreeDepth: 0,
       lineStyle: {
-        color: "#fff"
+        color: "#fff",
       },
       label: {
         normal: {
           position: "bottom",
           verticalAlign: "middle",
           align: "middle",
-          color: "#fff"
-        }
+          color: "#fff",
+        },
       },
       itemStyle: {
-        borderColor: "#fff"
+        borderColor: "#fff",
       },
       leaves: {
         label: {
           normal: {
             position: "top",
             verticalAlign: "middle",
-            align: "middle"
-          }
+            align: "middle",
+          },
         },
         itemStyle: {
-          borderColor: "#fff"
-        }
+          borderColor: "#fff",
+        },
       },
       expandAndCollapse: true,
       roam: true,
       animationDuration: 550,
-      animationDurationUpdate: 750
+      animationDurationUpdate: 750,
     };
     this.options$ = this.data$.pipe(
       takeUntil(this.unsubscribe$),
@@ -119,7 +119,7 @@ export class ConjugationTreeComponent implements OnDestroy, OnInit {
             map((color) =>
               this.createChartData(selection, {
                 primary: this.rgbToHex(color.primary),
-                accent: this.rgbToHex(color.accent)
+                accent: this.rgbToHex(color.accent),
               })
             )
           );
@@ -206,7 +206,7 @@ export class ConjugationTreeComponent implements OnDestroy, OnInit {
         Object.keys(node[firstTier][secondTier]).forEach((thirdTier) => {
           const thirdNode = {
             name: thirdTier,
-            children: [{ name: node[firstTier][secondTier][thirdTier] }]
+            children: [{ name: node[firstTier][secondTier][thirdTier] }],
           };
           secondNode["children"].push(thirdNode);
         });

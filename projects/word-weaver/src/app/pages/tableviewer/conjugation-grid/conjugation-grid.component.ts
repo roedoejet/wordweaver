@@ -7,7 +7,7 @@ import {
   OnDestroy,
   OnInit,
   QueryList,
-  ViewChildren
+  ViewChildren,
 } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
@@ -19,7 +19,7 @@ import { Conjugations, Tier, TIERS } from "../../../../config/config";
 import {
   OptionService,
   PronounService,
-  VerbService
+  VerbService,
 } from "../../../core/core.module";
 import { SettingsState, State } from "../../../core/settings/settings.model";
 import { selectSettings } from "../../../core/settings/settings.selectors";
@@ -36,7 +36,7 @@ export interface GridOrder {
   selector: "ww-conjugation-grid",
   templateUrl: "./conjugation-grid.component.html",
   styleUrls: ["./conjugation-grid.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConjugationGridComponent
   implements AfterViewInit, OnDestroy, OnInit

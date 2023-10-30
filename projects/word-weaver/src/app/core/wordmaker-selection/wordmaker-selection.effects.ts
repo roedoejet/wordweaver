@@ -15,7 +15,7 @@ import {
   actionChangeOption,
   actionChangePatient,
   actionChangeStep,
-  actionChangeVerb
+  actionChangeVerb,
 } from "./wordmaker-selection.actions";
 import { State } from "./wordmaker-selection.model";
 
@@ -100,7 +100,7 @@ export class WordmakerEffects {
               // Notify random selection
               const pronoun = {
                 agent: selection.agent,
-                patient: selection.patient
+                patient: selection.patient,
               };
               // console.log("agent selection:");
               // console.log(
@@ -189,7 +189,7 @@ export class WordmakerEffects {
                   ),
                   {
                     agent: pronoun.agent.gloss,
-                    patient: pronoun.patient.gloss
+                    patient: pronoun.patient.gloss,
                   },
                   "success"
                 );

@@ -20,8 +20,8 @@ describe("WordmakerVerbStepComponent", () => {
         SharedModule,
         NoopAnimationsModule,
         TranslateModule.forRoot(),
-        HttpClientModule
-      ]
+        HttpClientModule,
+      ],
     }).compileComponents();
   }));
 

@@ -2,7 +2,7 @@ import { CommonModule } from "@angular/common";
 import {
   HttpClient,
   HttpClientModule,
-  HTTP_INTERCEPTORS
+  HTTP_INTERCEPTORS,
 } from "@angular/common/http";
 import { ErrorHandler, NgModule, Optional, SkipSelf } from "@angular/core";
 import { FormsModule } from "@angular/forms";
@@ -18,14 +18,14 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {
   FaIconLibrary,
-  FontAwesomeModule
+  FontAwesomeModule,
 } from "@fortawesome/angular-fontawesome";
 import {
   faGithub,
   faInstagram,
   faMediumM,
   faTwitter,
-  faYoutube
+  faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
 import {
   faBars,
@@ -35,12 +35,12 @@ import {
   faPlayCircle,
   faPowerOff,
   faRocket,
-  faUserCircle
+  faUserCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { EffectsModule } from "@ngrx/effects";
 import {
   RouterStateSerializer,
-  StoreRouterConnectingModule
+  StoreRouterConnectingModule,
 } from "@ngrx/router-store";
 import { StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
@@ -52,14 +52,14 @@ import { AnimationsService } from "./animations/animations.service";
 import {
   routeAnimations,
   ROUTE_ANIMATIONS_ELEMENTS,
-  specialAnimations
+  specialAnimations,
 } from "./animations/route.animations";
 import { ConjugationService } from "./conjugation/conjugation.service";
 import {
   AppState,
   metaReducers,
   reducers,
-  selectRouterState
+  selectRouterState,
 } from "./core.state";
 import { AppErrorHandler } from "./error-handler/app-error-handler.service";
 import { HttpErrorInterceptor } from "./http-interceptors/http-error.interceptor";
@@ -72,7 +72,7 @@ import { SettingsEffects } from "./settings/settings.effects";
 import {
   selectEffectiveTheme,
   selectSettingsLanguage,
-  selectSettingsStickyHeader
+  selectSettingsStickyHeader,
 } from "./settings/settings.selectors";
 import { TableviewerEffects } from "./tableviewer-selection/tableviewer-selection.effects";
 import { ValidationService } from "./validation/validation.service";
@@ -95,7 +95,7 @@ export {
   PronounService,
   ConjugationService,
   ValidationService,
-  VerbService
+  VerbService,
 };
 
 export interface ITranslationResource {
@@ -139,13 +139,13 @@ export const httpLoaderFactory = (http: HttpClient) =>
     // These are the UI-specific i18n assets
     {
       prefix: "/assets/i18n/",
-      suffix: ".json"
+      suffix: ".json",
     },
     // These are the data-specific i18n assets
     {
       prefix: "/assets/i18n/data/",
-      suffix: ".json"
-    }
+      suffix: ".json",
+    },
   ]);
 
 @NgModule({
@@ -173,12 +173,12 @@ export const httpLoaderFactory = (http: HttpClient) =>
     EffectsModule.forRoot([
       SettingsEffects,
       TableviewerEffects,
-      WordmakerEffects
+      WordmakerEffects,
     ]),
     environment.production
       ? []
       : StoreDevtoolsModule.instrument({
-          name: "Word Weaver"
+          name: "Word Weaver",
         }),
 
     // 3rd party
@@ -187,15 +187,15 @@ export const httpLoaderFactory = (http: HttpClient) =>
       loader: {
         provide: TranslateLoader,
         useFactory: httpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+        deps: [HttpClient],
+      },
+    }),
   ],
   declarations: [],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     { provide: ErrorHandler, useClass: AppErrorHandler },
-    { provide: RouterStateSerializer, useClass: CustomSerializer }
+    { provide: RouterStateSerializer, useClass: CustomSerializer },
   ],
   exports: [
     // angular
@@ -214,8 +214,8 @@ export const httpLoaderFactory = (http: HttpClient) =>
 
     // 3rd party
     FontAwesomeModule,
-    TranslateModule
-  ]
+    TranslateModule,
+  ],
 })
 export class CoreModule {
   constructor(

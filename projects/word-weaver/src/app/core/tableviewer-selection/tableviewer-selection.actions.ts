@@ -4,7 +4,7 @@ import {
   Pronoun,
   Conjugations,
   TableviewerViewModes,
-  Verb
+  Verb,
 } from "../../../config/config";
 import { GridOrder } from "../../pages/tableviewer/conjugation-grid/conjugation-grid.component";
 import { TableviewerTreeDepth } from "./tableviewer-selection.model";

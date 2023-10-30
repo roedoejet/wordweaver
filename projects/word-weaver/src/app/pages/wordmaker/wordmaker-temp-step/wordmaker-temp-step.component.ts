@@ -4,13 +4,13 @@ import {
   OnDestroy,
   OnInit,
   Output,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
 } from "@angular/core";
 import { Option, TIERS } from "../../../../config/config";
 import {
   OptionService,
   ConjugationService,
-  selectSettingsLanguage
+  selectSettingsLanguage,
 } from "../../../core/core.module";
 import { Observable, Subject } from "rxjs";
 import { map, switchMap, takeUntil } from "rxjs/operators";
@@ -18,7 +18,7 @@ import { Store, select } from "@ngrx/store";
 import { actionChangeOption } from "../../../core/wordmaker-selection/wordmaker-selection.actions";
 import {
   WordmakerState,
-  State
+  State,
 } from "../../../core/wordmaker-selection/wordmaker-selection.model";
 import { selectWordmaker } from "../../../core/wordmaker-selection/wordmaker-selection.selectors";
 import { META_DATA } from "../../../../config/config";
@@ -27,7 +27,7 @@ import { META_DATA } from "../../../../config/config";
   selector: "ww-wordmaker-temp-step",
   templateUrl: "./wordmaker-temp-step.component.html",
   styleUrls: ["./wordmaker-temp-step.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WordmakerTempStepComponent implements OnDestroy, OnInit {
   @Output() selectedTemp = new EventEmitter<Option>();

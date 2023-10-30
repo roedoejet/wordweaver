@@ -2,7 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   OnDestroy,
-  OnInit
+  OnInit,
 } from "@angular/core";
 import { select, Store } from "@ngrx/store";
 import { Observable, Subject } from "rxjs";
@@ -11,11 +11,11 @@ import { Pronoun } from "../../../../config/config";
 import {
   PronounService,
   selectSettingsLanguage,
-  ValidationService
+  ValidationService,
 } from "../../../core/core.module";
 import {
   actionChangeAgents,
-  actionChangePatients
+  actionChangePatients,
 } from "../../../core/tableviewer-selection/tableviewer-selection.actions";
 import { TableviewerState } from "../../../core/tableviewer-selection/tableviewer-selection.model";
 import { selectTableviewerPronouns } from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
@@ -24,7 +24,7 @@ import { selectTableviewerPronouns } from "../../../core/tableviewer-selection/t
   selector: "ww-tableviewer-pers-panel",
   templateUrl: "./tableviewer-pers-panel.component.html",
   styleUrls: ["./tableviewer-pers-panel.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableviewerPersPanelComponent implements OnDestroy, OnInit {
   possiblePronouns$: Observable<Pronoun[]>;

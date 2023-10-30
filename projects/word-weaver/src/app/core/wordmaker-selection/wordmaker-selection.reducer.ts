@@ -6,7 +6,7 @@ import {
   actionChangeOption,
   actionChangePatient,
   actionChangeStep,
-  actionChangeVerb
+  actionChangeVerb,
 } from "./wordmaker-selection.actions";
 import { WordmakerState } from "./wordmaker-selection.model";
 
@@ -17,7 +17,7 @@ export const initialState: WordmakerState = {
   root: null,
   conjugations: [],
   step: 0,
-  loading: false
+  loading: false,
 };
 
 const reducer = createReducer(

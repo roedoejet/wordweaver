@@ -22,7 +22,7 @@ export class WWPaginatorIntl extends MatPaginatorIntl {
         marker("ww.paginator.previous_page"),
         marker("ww.paginator.first_page"),
         marker("ww.paginator.last_page"),
-        marker("ww.paginator.range")
+        marker("ww.paginator.range"),
       ])
       .subscribe((translation) => {
         this.itemsPerPageLabel = translation["ww.paginator.items_per_page"];
@@ -45,7 +45,7 @@ export class WWPaginatorIntl extends MatPaginatorIntl {
     return this.translateParser.interpolate(this.rangeLabelIntl, {
       startIndex,
       endIndex,
-      length
+      length,
     });
   };
 }

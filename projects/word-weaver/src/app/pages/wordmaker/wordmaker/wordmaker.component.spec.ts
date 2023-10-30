@@ -22,15 +22,15 @@ describe("WordmakerComponent", () => {
         WordmakerConjStepComponent,
         WordmakerTempStepComponent,
         WordmakerVerbStepComponent,
-        WordmakerPersStepComponent
+        WordmakerPersStepComponent,
       ],
       providers: [provideMockStore()],
       imports: [
         SharedModule,
         NoopAnimationsModule,
         TranslateModule.forRoot(),
-        HttpClientModule
-      ]
+        HttpClientModule,
+      ],
     }).compileComponents();
   }));
 

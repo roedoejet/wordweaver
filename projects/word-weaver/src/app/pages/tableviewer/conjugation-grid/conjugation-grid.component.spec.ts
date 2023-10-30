@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import {
   HttpClientTestingModule,
-  HttpTestingController
+  HttpTestingController,
 } from "@angular/common/http/testing";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { TranslateModule } from "@ngx-translate/core";
@@ -22,10 +22,10 @@ describe("ConjugationGridComponent", () => {
         SharedModule,
         NoopAnimationsModule,
         TranslateModule.forRoot(),
-        HttpClientTestingModule
+        HttpClientTestingModule,
       ],
       declarations: [ConjugationGridComponent],
-      providers: [provideMockStore()]
+      providers: [provideMockStore()],
     }).compileComponents();
   }));
 

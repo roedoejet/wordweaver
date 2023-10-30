@@ -8,17 +8,17 @@ const routes: Routes = [
   {
     path: "stepper",
     component: WordmakerComponent,
-    data: { title: "ww.menu.wordmaker.stepper" }
+    data: { title: "ww.menu.wordmaker.stepper" },
   },
   {
     path: "",
     component: WordmakerHomeComponent,
-    data: { title: "ww.menu.wordmaker.home" }
-  }
+    data: { title: "ww.menu.wordmaker.home" },
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class WordmakerRoutingModule {}

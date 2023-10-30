@@ -25,10 +25,10 @@ import { SharedModule } from "./shared/shared.module";
 
     ServiceWorkerModule.register("ngsw-worker.js", {
       enabled: environment.production,
-      registrationStrategy: "registerImmediately"
-    })
+      registrationStrategy: "registerImmediately",
+    }),
   ],
   declarations: [AppComponent],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

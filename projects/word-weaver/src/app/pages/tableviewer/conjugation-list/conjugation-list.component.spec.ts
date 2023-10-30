@@ -10,7 +10,7 @@ describe("ConjugationListComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ConjugationListComponent],
-      providers: [provideMockStore()]
+      providers: [provideMockStore()],
     }).compileComponents();
   }));
 

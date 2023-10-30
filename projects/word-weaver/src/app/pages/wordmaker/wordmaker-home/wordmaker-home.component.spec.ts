@@ -13,7 +13,7 @@ describe("WordmakerHomeComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [WordmakerHomeComponent],
-      imports: [SharedModule, NoopAnimationsModule, TranslateModule.forRoot()]
+      imports: [SharedModule, NoopAnimationsModule, TranslateModule.forRoot()],
     }).compileComponents();
   }));
 

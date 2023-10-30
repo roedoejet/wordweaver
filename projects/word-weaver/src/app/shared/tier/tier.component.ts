@@ -2,20 +2,20 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  OnInit
+  OnInit,
 } from "@angular/core";
 import {
   Conjugation,
   ConjugationMorphemeNameIndex,
   ConjugationObject,
-  Tier
+  Tier,
 } from "../../../config/config";
 
 @Component({
   selector: "ww-tier",
   templateUrl: "./tier.component.html",
   styleUrls: ["./tier.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TierComponent implements OnInit {
   @Input() data: ConjugationObject;

@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import {
   HttpClientTestingModule,
-  HttpTestingController
+  HttpTestingController,
 } from "@angular/common/http/testing";
 import { ComponentFixture, TestBed, async } from "@angular/core/testing";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -28,9 +28,9 @@ describe("TableviewerConjPanelComponent", () => {
         TranslateModule.forRoot(),
         MatInputModule,
         MatFormFieldModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
       ],
-      providers: [provideMockStore()]
+      providers: [provideMockStore()],
     }).compileComponents();
   }));
 
@@ -38,10 +38,10 @@ describe("TableviewerConjPanelComponent", () => {
     fixture = TestBed.createComponent(TableviewerConjPanelComponent);
     component = fixture.componentInstance;
     component.header = {
-      nativeElement: jasmine.createSpyObj("nativeElement", ["focus"])
+      nativeElement: jasmine.createSpyObj("nativeElement", ["focus"]),
     };
     component.conjugateBtn = {
-      nativeElement: jasmine.createSpyObj("nativeElement", ["focus"])
+      nativeElement: jasmine.createSpyObj("nativeElement", ["focus"]),
     };
     fixture.detectChanges();
     httpClient = TestBed.get(HttpClient);

@@ -45,7 +45,7 @@ export type ConjugationMorpheme = [
 export enum ConjugationMorphemeNameIndex {
   position = 0,
   value = 1,
-  type = 2
+  type = 2,
 }
 
 export type Conjugation = ConjugationMorpheme[];

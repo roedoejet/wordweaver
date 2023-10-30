@@ -21,7 +21,7 @@ import { TableviewerState } from "../../core/tableviewer-selection/tableviewer-s
   selector: "ww-download-dialog",
   templateUrl: "./download-dialog.component.html",
   styleUrls: ["./download-dialog.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DownloadDialogComponent implements OnInit {
   objectkeys = Object.keys;
@@ -30,7 +30,7 @@ export class DownloadDialogComponent implements OnInit {
   selectionAndSettings$: Observable<[TableviewerState, SettingsState]>;
   fileTypes = {
     list: ["docx"],
-    grid: ["xlsx"]
+    grid: ["xlsx"],
   };
   fileTypes$: Observable<string[]>;
   showDelay = new FormControl(600);
@@ -39,7 +39,7 @@ export class DownloadDialogComponent implements OnInit {
   form: FormGroup = new FormGroup({
     ftype: new FormControl("csv", [Validators.required]),
     headers: new FormControl(false),
-    heading: new FormControl("")
+    heading: new FormControl(""),
   });
   constructor(
     private dialogRef: MatDialogRef<DownloadDialogComponent>,
@@ -62,7 +62,7 @@ export class DownloadDialogComponent implements OnInit {
     this.settings$ = this.store.pipe(select(selectSettings));
     this.selectionAndSettings$ = combineLatest([
       this.selection$,
-      this.settings$
+      this.settings$,
     ]);
     this.fileTypes$ = this.selection$.pipe(
       map((selection) => this.fileTypes[selection.view])
@@ -96,7 +96,7 @@ export class DownloadDialogComponent implements OnInit {
             const tiers = TIERS.filter((x) => appSettings.level[x.name]);
             const settings = {
               heading: this.form.controls.heading.value,
-              headers: this.form.controls.headers.value
+              headers: this.form.controls.headers.value,
             };
             return this.http
               .post(

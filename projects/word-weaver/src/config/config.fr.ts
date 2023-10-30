@@ -10,7 +10,7 @@ import {
   Pronoun,
   Verb,
   ConjugationInput,
-  ConjugationMorphemeNameIndex
+  ConjugationMorphemeNameIndex,
 } from "./schema.fr";
 
 export {
@@ -20,7 +20,7 @@ export {
   Conjugation,
   ConjugationObject,
   ConjugationMorphemeNameIndex,
-  Conjugations
+  Conjugations,
 } from "./schema.fr";
 
 // DTD: Advanced
@@ -99,11 +99,11 @@ const _defaultOptions: TierOptions = { language: "L1", showName: false };
 
 export const HIGHLIGHTS: Highlight = {
   root: true,
-  ending: true
+  ending: true,
 };
 
 export const LEVELS: Level = {
-  breakdown: true
+  breakdown: true,
 };
 
 export const TIERS: Tier[] = [
@@ -112,15 +112,15 @@ export const TIERS: Tier[] = [
     key: ConjugationMorphemeNameIndex.value,
     position: 0,
     separator: "",
-    options: _defaultOptions
+    options: _defaultOptions,
   },
   {
     name: "breakdown",
     key: ConjugationMorphemeNameIndex.value,
     position: 1,
     separator: "-",
-    options: _defaultOptions
-  }
+    options: _defaultOptions,
+  },
 ];
 
 export const VALIDATION: Validation = {
@@ -130,17 +130,17 @@ export const VALIDATION: Validation = {
       options: true,
       agents: true,
       conjugations: true,
-      patients: false
-    }
+      patients: false,
+    },
   },
   validation: {
     selection: {
       agents: true,
       options: true,
       patients: false,
-      verbs: true
-    }
-  }
+      verbs: true,
+    },
+  },
 };
 
 export interface Link {
@@ -185,48 +185,48 @@ export const META_DATA: Meta = {
       name: "Your Name",
       title: "Lead Developer",
       text: "Some text about you, the developer.",
-      img: false
-    }
+      img: false,
+    },
   ],
   languages: [
     { label: "en", value: "en" },
-    { label: "fr", value: "fr" }
+    { label: "fr", value: "fr" },
   ],
   wordmaker: {
-    tempView: "default"
+    tempView: "default",
   },
   tableviewer: {
-    viewModes: ["grid", "tree"]
+    viewModes: ["grid", "tree"],
   },
   logo: "assets/logo.png",
   copyright: {
     name: "Your Name",
-    url: "https://yourwebsite.com"
+    url: "https://yourwebsite.com",
   },
   links: {
     github: {
       display: true,
-      url: "https://www.github.com/roedoejet/wordweaver"
+      url: "https://www.github.com/roedoejet/wordweaver",
     },
     medium: {
       display: false,
-      url: ""
+      url: "",
     },
     facebook: {
       display: false,
-      url: ""
+      url: "",
     },
     youtube: {
       display: false,
-      url: ""
-    }
-  }
+      url: "",
+    },
+  },
 };
 
 export const initialSettings: Partial<SettingsState> = {
   language: "en",
   theme: "DEFAULT-THEME",
-  autoNightMode: false
+  autoNightMode: false,
 };
 
 export const initialTableViewerSettings: Partial<TableviewerState> = {
@@ -234,8 +234,8 @@ export const initialTableViewerSettings: Partial<TableviewerState> = {
   gridOrder: {
     col: "root",
     row: "pn",
-    main: "option"
-  }
+    main: "option",
+  },
 };
 
 export type ThemeName =
@@ -260,26 +260,26 @@ export const THEMES: Theme[] = [
   { value: "DARK-THEME", label: marker("ww.pages.settings.themes.dark") },
   {
     value: "PURPLE-THEME--LIGHT",
-    label: marker("ww.pages.settings.themes.purple-light")
+    label: marker("ww.pages.settings.themes.purple-light"),
   },
   {
     value: "PURPLE-THEME--DARK",
-    label: marker("ww.pages.settings.themes.purple-dark")
+    label: marker("ww.pages.settings.themes.purple-dark"),
   },
   {
     value: "PURPLE-BLUE-THEME--LIGHT",
-    label: marker("ww.pages.settings.themes.purple-blue-light")
+    label: marker("ww.pages.settings.themes.purple-blue-light"),
   },
   {
     value: "PURPLE-BLUE-THEME--DARK",
-    label: marker("ww.pages.settings.themes.purple-blue-dark")
+    label: marker("ww.pages.settings.themes.purple-blue-dark"),
   },
   {
     value: "PURPLE-GOLD-THEME--LIGHT",
-    label: marker("ww.pages.settings.themes.purple-gold-light")
+    label: marker("ww.pages.settings.themes.purple-gold-light"),
   },
   {
     value: "PURPLE-GOLD-THEME--DARK",
-    label: marker("ww.pages.settings.themes.purple-gold-dark")
-  }
+    label: marker("ww.pages.settings.themes.purple-gold-dark"),
+  },
 ];

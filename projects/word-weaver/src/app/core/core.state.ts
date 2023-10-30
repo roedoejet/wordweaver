@@ -2,7 +2,7 @@ import { routerReducer, RouterReducerState } from "@ngrx/router-store";
 import {
   ActionReducerMap,
   createFeatureSelector,
-  MetaReducer
+  MetaReducer,
 } from "@ngrx/store";
 import { environment } from "../../environments/environment";
 import { debug } from "./meta-reducers/debug.reducer";
@@ -19,11 +19,11 @@ export const reducers: ActionReducerMap<AppState> = {
   settings: settingsReducer,
   router: routerReducer,
   tableviewer: tableviewerReducer,
-  wordmaker: wordmakerReducer
+  wordmaker: wordmakerReducer,
 };
 
 export const metaReducers: MetaReducer<AppState>[] = [
-  initStateFromLocalStorage
+  initStateFromLocalStorage,
 ];
 
 if (!environment.production) {

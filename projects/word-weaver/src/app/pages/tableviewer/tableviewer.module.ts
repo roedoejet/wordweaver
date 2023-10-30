@@ -20,8 +20,8 @@ import { TableviewerComponent } from "./tableviewer/tableviewer.component";
     TableviewerVerbPanelComponent,
     ConjugationTreeComponent,
     ConjugationGridComponent,
-    ConjugationListComponent
+    ConjugationListComponent,
   ],
-  imports: [SharedModule, TableviewerRoutingModule, NgxEchartsModule]
+  imports: [SharedModule, TableviewerRoutingModule, NgxEchartsModule],
 })
 export class TableviewerModule {}

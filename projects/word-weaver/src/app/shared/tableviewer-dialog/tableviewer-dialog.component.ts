@@ -16,7 +16,7 @@ import { GridOrderOptions } from "../../pages/tableviewer/conjugation-grid/conju
   selector: "ww-tableviewer-dialog",
   templateUrl: "./tableviewer-dialog.component.html",
   styleUrls: ["./tableviewer-dialog.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableViewerDialogComponent implements OnInit {
   showDelay = new FormControl(600);

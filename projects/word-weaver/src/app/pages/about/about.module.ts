@@ -6,6 +6,6 @@ import { AboutComponent } from "./about/about.component";
 
 @NgModule({
   declarations: [AboutComponent],
-  imports: [CommonModule, SharedModule, AboutRoutingModule]
+  imports: [CommonModule, SharedModule, AboutRoutingModule],
 })
 export class AboutModule {}

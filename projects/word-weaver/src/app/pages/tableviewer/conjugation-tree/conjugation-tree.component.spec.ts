@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import {
   HttpClientTestingModule,
-  HttpTestingController
+  HttpTestingController,
 } from "@angular/common/http/testing";
 import { TranslateModule } from "@ngx-translate/core";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
@@ -23,10 +23,10 @@ describe("ConjugationTreeComponent", () => {
         SharedModule,
         NoopAnimationsModule,
         TranslateModule.forRoot(),
-        HttpClientTestingModule
+        HttpClientTestingModule,
       ],
       declarations: [ConjugationTreeComponent],
-      providers: [provideMockStore()]
+      providers: [provideMockStore()],
     }).compileComponents();
   }));
 

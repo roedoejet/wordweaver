@@ -10,7 +10,7 @@ import {
   switchMap,
   take,
   tap,
-  withLatestFrom
+  withLatestFrom,
 } from "rxjs/operators";
 import { ConjugationService } from "../../core/conjugation/conjugation.service";
 import { selectSettingsState, selectTableviewerState } from "../core.state";
@@ -19,7 +19,7 @@ import { NotificationService } from "../notifications/notification.service";
 import {
   actionChangeConjugations,
   actionChangeLoading,
-  actionConjugationEvent
+  actionConjugationEvent,
 } from "./tableviewer-selection.actions";
 import { State } from "./tableviewer-selection.model";
 

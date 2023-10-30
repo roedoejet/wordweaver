@@ -1,230 +1,230 @@
 {
-    "ww": {
-        "footer": {
-            "changelog": "Afficher le journal des modifications"
-        },
-        "menu": {
-            "about": "À propos de",
-            "settings": "Paramètres",
-            "tableviewer": "Afficheur de tableaux",
-            "wordmaker": "Machine à mots"
-        },
-        "common": {
-            "language": "Dans la langue du conjugueur",
-            "notifications": {
-                "error": {
-                    "dev": "Désolé, un problème est survenu, prière de vérifier la console.",
-                    "general": "Oups, une erreur s'est produite."
-                }
-            },
-            "title": "WordWeaver UI",
-            "title-short": "WordWeaver UI",
-            "translation-language": "Anglais"
-        },
-        "pages": {
-            "about": {
-                "contributors": {
-                    "title": "Collaborateurs"
-                },
-                "slogan": "La machine à mots WordWeaver UI tisse de beaux sites web de conjugaison.",
-                "text": "<p>Insérer la description de votre projet ici.</p>"
-            },
-            "settings": {
-                "advanced": "Paramètres avancés",
-                "general": {
-                    "highlighting": {
-                        "aspect": "Aspect",
-                        "ending": "Terminaison",
-                        "post-aspectual": "Suffixe post-aspectuel",
-                        "pronouns": "Pronoms",
-                        "required": "Requis",
-                        "root": "Racine",
-                        "temp": "Affixe temporel",
-                        "title": "Surlignement",
-                        "verb": "Racine"
-                    },
-                    "language": {
-                        "en": "English",
-                        "fr": "Français",
-                        "moh": "Kanyen'kéha"
-                    },
-                    "placeholder": "Langue",
-                    "tiers": {
-                        "breakdown": "Décomposition",
-                        "breakdown-translation": "Décomposition traduite",
-                        "display": "Affichage",
-                        "gloss": "Glose",
-                        "title": "Couches à afficher",
-                        "translation": "Traduction"
-                    },
-                    "title": "Paramètres généraux"
-                },
-                "night-mode": "Mode jour/nuit automatique (de 21 h à 7 h)",
-                "sticky-header": "Entête fixe",
-                "testApi": "Modèle de langue d'essai",
-                "themes": {
-                    "blue": "Bleu",
-                    "dark": "Obscur",
-                    "default": "Par défaut",
-                    "light": "Clair",
-                    "placeholder": "Thème de couleurs",
-                    "purple-blue-dark": "Bleu et violet obscur",
-                    "purple-blue-light": "Bleu et violet clair",
-                    "purple-dark": "Violet obscur",
-                    "purple-gold-dark": "Violet et doré obscur",
-                    "purple-gold-light": "Violet et doré clair",
-                    "purple-light": "Violet clair",
-                    "title": "Thèmes"
-                },
-                "title": "Paramètres"
-            },
-            "tableviewer": {
-                "dialog": {
-                    "advanced": {
-                        "exit": "Fermer",
-                        "title": "Paramètres avancés",
-                        "view-mode-descriptions": {
-                            "grid": "La « Vue Grille » affiche les conjugaisons en grille, un peu comme dans un Bescherelle.",
-                            "list": "La « Vue Liste » affiche les conjugaisons dans une liste. Cette option est préférable pour afficher un grand nombre de conjugaisons.",
-                            "tree": "La « Vue Arbre » présente les conjugaisons en diagramme arborescent. Cette option est idéale pour un petit nombre de conjugaisons."
-                        },
-                        "view-modes": {
-                            "grid": "Vue Grille",
-                            "list": "Vue Liste",
-                            "tree": "Vue Arbre"
-                        }
-                    },
-                    "download": {
-                        "download": "Télécharger",
-                        "exit": "Fermer",
-                        "settings": {
-                            "filetype": "Format",
-                            "headers": "Inclure les entêtes",
-                            "heading": {
-                                "placeholder": "Mes conjugaisons",
-                                "title": "Titre du document"
-                            }
-                        },
-                        "title": "Paramètres de téléchargement"
-                    }
-                },
-                "misc": {
-                    "other": "autre",
-                    "others": "autres",
-                    "selected": "choisi(s)",
-                    "selected-one": "choisi",
-                    "selected-two": "choisis",
-                    "selected-many": "choisis"
-                },
-                "notifications": {
-                    "copy": {
-                        "error": "La copie du lien au presse-papiers a échoué, prière de réessayer.",
-                        "success": "La copie du lien au presse-papiers a réussi."
-                    },
-                    "download": {
-                        "error": "Oups, une erreur s'est produite et le fichier n'a pas pu être téléchargé. Prière de vérifier si vos conjugaisons sont valides et de réessayer.",
-                        "success": "Réussite! Les conjugaisons ont été téléchargées."
-                    },
-                    "error": {
-                        "missing-root": "Oups, il faut choisir au moins un verbe."
-                    },
-                    "gridOrder": {
-                        "limit-error": "Désolé, il y a trop de conjugaisons ({{ value }}) pour inverser l'ordre."
-                    },
-                    "treeviewer-length": {
-                        "error": "Vous tentez d'afficher {{ value }} conjugaisons dans la vue Arbre. C'est trop, mais nous tenterons de les afficher du mieux possible. Vous pouvez en réduire le nombre pour améliorer l'affichage."
-                    }
-                },
-                "panels": {
-                    "conj": {
-                        "conjugate": "Conjuguer",
-                        "copy-link-tip": "Copier le lien",
-                        "depth-tip": "Modifier la profondeur de l'arbre",
-                        "download-tip": "Télécharger les conjugaisons",
-                        "error": {
-                            "message": "Prière de réessayer.",
-                            "title": "Erreur"
-                        },
-                        "grid-order-tip": "Inverser les colonnes et les rangées",
-                        "instructions": "Prière de choisir au moins un <b>Verbe</b>, une <b>Personne</b> et un <b>Temps</b> dans le panneau de gauche et appuyez sur la touche Entrée ou sur le bouton Conjuguer pour afficher vos conjugaisons.",
-                        "instructions-mobile": "Prière de choisir au moins un « Verbe », une « Personne » et un « Temps » <br /> et appuyez sur le bouton ci-haut pour conjuguer.",
-                        "order-tip": "Inverser l'ordre des nœuds",
-                        "show-settings": "Afficher les paramètres",
-                        "title": "Menu de conjugaison"
-                    },
-                    "pers": {
-                        "select-agent": "Choisir un agent",
-                        "select-patient": "Choisir un objet patient",
-                        "title": "Personne"
-                    },
-                    "temp": {
-                        "select": "Choisir",
-                        "title": "Temps"
-                    },
-                    "verb": {
-                        "no-matching-verb": "Désolé, aucun verbe ne correspond à « {{ value }} ».",
-                        "placeholder": "Rechercher un verbe",
-                        "title": "Verbe"
-                    }
-                }
-            },
-            "wordmaker": {
-                "common": {
-                    "next": "Suite",
-                    "previous": "Retour",
-                    "restart": "Recommencer"
-                },
-                "home": {
-                    "instructions": "<p>Construire un mot prend trois étapes. Il faut choisir <b>quoi</b> : quelle est l'action, <b>qui</b> la fait et <b>quand</b> elle se produit.</p><p>Vous pouvez utiliser les touches de curseur à droite et à gauche pour avancer et reculer dans le processus.</p><p>Allons-y!</p>",
-                    "start": "Démarrer",
-                    "welcome": "Bienvenue à la Machine à mots de WordWeaver."
-                },
-                "notifications": {
-                    "noconjugation": "Oups, on n'a pas pu conjuguer cela. Prière de réessayer.",
-                    "random": {
-                        "pers": {
-                            "intransitive": "Pronom « {{ value }} » choisi au hasard",
-                            "transitive": "Pronom « {{ agent }} > {{ patient }} » choisi au hasard"
-                        },
-                        "temp": "Temps « {{ value }} » choisi au hasard",
-                        "verb": "Verbe « {{ value }} » choisi au hasard"
-                    }
-                },
-                "steps": {
-                    "conj": {
-                        "congratulations-header": "Félicitations!",
-                        "congratulations-text": "Vous avez fabriqué un mot, <strong>juste</strong> comme ça.",
-                        "finished": "Terminé"
-                    },
-                    "pers": {
-                        "agent-informal": "Qui le fait",
-                        "patient-informal": "À qui on le fait",
-                        "question": "Qui le fait?",
-                        "select-intransitive-pronoun": "Choisir un des pronoms ci-dessous",
-                        "select-transitive-pronoun": "Parmi les options ci-dessous, choisir qui fait l'action et à/envers qui on la fait."
-                    },
-                    "temp": {
-                        "question": "Quand cela se passe-t-il?",
-                        "select-temp": "Choisir une des options ci-dessous"
-                    },
-                    "verb": {
-                        "no-matching-verbs": "Désolé, aucun verbe ne correspond à « {{ value }} ».",
-                        "question": "Quelle est l'action?",
-                        "search-placeholder": "Recherche",
-                        "select-verb-multiple": "Choisir un des {{ number }} verbes ci-dessous",
-                        "select-verb-single": "Choisir le verbe ci-dessous",
-                        "try-again": "Prière de réessayer."
-                    }
-                }
-            }
-        },
-        "paginator": {
-            "first_page": "Première page",
-            "items_per_page": "Conjugaisons par page :",
-            "last_page": "Dernière page",
-            "next_page": "Page suivante",
-            "previous_page": "Page précédente",
-            "range": "{{ startIndex }} à {{ endIndex }} de {{ length }}"
+  "ww": {
+    "footer": {
+      "changelog": "Afficher le journal des modifications"
+    },
+    "menu": {
+      "about": "À propos de",
+      "settings": "Paramètres",
+      "tableviewer": "Afficheur de tableaux",
+      "wordmaker": "Machine à mots"
+    },
+    "common": {
+      "language": "Dans la langue du conjugueur",
+      "notifications": {
+        "error": {
+          "dev": "Désolé, un problème est survenu, prière de vérifier la console.",
+          "general": "Oups, une erreur s'est produite."
         }
+      },
+      "title": "WordWeaver UI",
+      "title-short": "WordWeaver UI",
+      "translation-language": "Anglais"
+    },
+    "pages": {
+      "about": {
+        "contributors": {
+          "title": "Collaborateurs"
+        },
+        "slogan": "La machine à mots WordWeaver UI tisse de beaux sites web de conjugaison.",
+        "text": "<p>Insérer la description de votre projet ici.</p>"
+      },
+      "settings": {
+        "advanced": "Paramètres avancés",
+        "general": {
+          "highlighting": {
+            "aspect": "Aspect",
+            "ending": "Terminaison",
+            "post-aspectual": "Suffixe post-aspectuel",
+            "pronouns": "Pronoms",
+            "required": "Requis",
+            "root": "Racine",
+            "temp": "Affixe temporel",
+            "title": "Surlignement",
+            "verb": "Racine"
+          },
+          "language": {
+            "en": "English",
+            "fr": "Français",
+            "moh": "Kanyen'kéha"
+          },
+          "placeholder": "Langue",
+          "tiers": {
+            "breakdown": "Décomposition",
+            "breakdown-translation": "Décomposition traduite",
+            "display": "Affichage",
+            "gloss": "Glose",
+            "title": "Couches à afficher",
+            "translation": "Traduction"
+          },
+          "title": "Paramètres généraux"
+        },
+        "night-mode": "Mode jour/nuit automatique (de 21 h à 7 h)",
+        "sticky-header": "Entête fixe",
+        "testApi": "Modèle de langue d'essai",
+        "themes": {
+          "blue": "Bleu",
+          "dark": "Obscur",
+          "default": "Par défaut",
+          "light": "Clair",
+          "placeholder": "Thème de couleurs",
+          "purple-blue-dark": "Bleu et violet obscur",
+          "purple-blue-light": "Bleu et violet clair",
+          "purple-dark": "Violet obscur",
+          "purple-gold-dark": "Violet et doré obscur",
+          "purple-gold-light": "Violet et doré clair",
+          "purple-light": "Violet clair",
+          "title": "Thèmes"
+        },
+        "title": "Paramètres"
+      },
+      "tableviewer": {
+        "dialog": {
+          "advanced": {
+            "exit": "Fermer",
+            "title": "Paramètres avancés",
+            "view-mode-descriptions": {
+              "grid": "La « Vue Grille » affiche les conjugaisons en grille, un peu comme dans un Bescherelle.",
+              "list": "La « Vue Liste » affiche les conjugaisons dans une liste. Cette option est préférable pour afficher un grand nombre de conjugaisons.",
+              "tree": "La « Vue Arbre » présente les conjugaisons en diagramme arborescent. Cette option est idéale pour un petit nombre de conjugaisons."
+            },
+            "view-modes": {
+              "grid": "Vue Grille",
+              "list": "Vue Liste",
+              "tree": "Vue Arbre"
+            }
+          },
+          "download": {
+            "download": "Télécharger",
+            "exit": "Fermer",
+            "settings": {
+              "filetype": "Format",
+              "headers": "Inclure les entêtes",
+              "heading": {
+                "placeholder": "Mes conjugaisons",
+                "title": "Titre du document"
+              }
+            },
+            "title": "Paramètres de téléchargement"
+          }
+        },
+        "misc": {
+          "other": "autre",
+          "others": "autres",
+          "selected": "choisi(s)",
+          "selected-one": "choisi",
+          "selected-two": "choisis",
+          "selected-many": "choisis"
+        },
+        "notifications": {
+          "copy": {
+            "error": "La copie du lien au presse-papiers a échoué, prière de réessayer.",
+            "success": "La copie du lien au presse-papiers a réussi."
+          },
+          "download": {
+            "error": "Oups, une erreur s'est produite et le fichier n'a pas pu être téléchargé. Prière de vérifier si vos conjugaisons sont valides et de réessayer.",
+            "success": "Réussite! Les conjugaisons ont été téléchargées."
+          },
+          "error": {
+            "missing-root": "Oups, il faut choisir au moins un verbe."
+          },
+          "gridOrder": {
+            "limit-error": "Désolé, il y a trop de conjugaisons ({{ value }}) pour inverser l'ordre."
+          },
+          "treeviewer-length": {
+            "error": "Vous tentez d'afficher {{ value }} conjugaisons dans la vue Arbre. C'est trop, mais nous tenterons de les afficher du mieux possible. Vous pouvez en réduire le nombre pour améliorer l'affichage."
+          }
+        },
+        "panels": {
+          "conj": {
+            "conjugate": "Conjuguer",
+            "copy-link-tip": "Copier le lien",
+            "depth-tip": "Modifier la profondeur de l'arbre",
+            "download-tip": "Télécharger les conjugaisons",
+            "error": {
+              "message": "Prière de réessayer.",
+              "title": "Erreur"
+            },
+            "grid-order-tip": "Inverser les colonnes et les rangées",
+            "instructions": "Prière de choisir au moins un <b>Verbe</b>, une <b>Personne</b> et un <b>Temps</b> dans le panneau de gauche et appuyez sur la touche Entrée ou sur le bouton Conjuguer pour afficher vos conjugaisons.",
+            "instructions-mobile": "Prière de choisir au moins un « Verbe », une « Personne » et un « Temps » <br /> et appuyez sur le bouton ci-haut pour conjuguer.",
+            "order-tip": "Inverser l'ordre des nœuds",
+            "show-settings": "Afficher les paramètres",
+            "title": "Menu de conjugaison"
+          },
+          "pers": {
+            "select-agent": "Choisir un agent",
+            "select-patient": "Choisir un objet patient",
+            "title": "Personne"
+          },
+          "temp": {
+            "select": "Choisir",
+            "title": "Temps"
+          },
+          "verb": {
+            "no-matching-verb": "Désolé, aucun verbe ne correspond à « {{ value }} ».",
+            "placeholder": "Rechercher un verbe",
+            "title": "Verbe"
+          }
+        }
+      },
+      "wordmaker": {
+        "common": {
+          "next": "Suite",
+          "previous": "Retour",
+          "restart": "Recommencer"
+        },
+        "home": {
+          "instructions": "<p>Construire un mot prend trois étapes. Il faut choisir <b>quoi</b> : quelle est l'action, <b>qui</b> la fait et <b>quand</b> elle se produit.</p><p>Vous pouvez utiliser les touches de curseur à droite et à gauche pour avancer et reculer dans le processus.</p><p>Allons-y!</p>",
+          "start": "Démarrer",
+          "welcome": "Bienvenue à la Machine à mots de WordWeaver."
+        },
+        "notifications": {
+          "noconjugation": "Oups, on n'a pas pu conjuguer cela. Prière de réessayer.",
+          "random": {
+            "pers": {
+              "intransitive": "Pronom « {{ value }} » choisi au hasard",
+              "transitive": "Pronom « {{ agent }} > {{ patient }} » choisi au hasard"
+            },
+            "temp": "Temps « {{ value }} » choisi au hasard",
+            "verb": "Verbe « {{ value }} » choisi au hasard"
+          }
+        },
+        "steps": {
+          "conj": {
+            "congratulations-header": "Félicitations!",
+            "congratulations-text": "Vous avez fabriqué un mot, <strong>juste</strong> comme ça.",
+            "finished": "Terminé"
+          },
+          "pers": {
+            "agent-informal": "Qui le fait",
+            "patient-informal": "À qui on le fait",
+            "question": "Qui le fait?",
+            "select-intransitive-pronoun": "Choisir un des pronoms ci-dessous",
+            "select-transitive-pronoun": "Parmi les options ci-dessous, choisir qui fait l'action et à/envers qui on la fait."
+          },
+          "temp": {
+            "question": "Quand cela se passe-t-il?",
+            "select-temp": "Choisir une des options ci-dessous"
+          },
+          "verb": {
+            "no-matching-verbs": "Désolé, aucun verbe ne correspond à « {{ value }} ».",
+            "question": "Quelle est l'action?",
+            "search-placeholder": "Recherche",
+            "select-verb-multiple": "Choisir un des {{ number }} verbes ci-dessous",
+            "select-verb-single": "Choisir le verbe ci-dessous",
+            "try-again": "Prière de réessayer."
+          }
+        }
+      }
+    },
+    "paginator": {
+      "first_page": "Première page",
+      "items_per_page": "Conjugaisons par page :",
+      "last_page": "Dernière page",
+      "next_page": "Page suivante",
+      "previous_page": "Page précédente",
+      "range": "{{ startIndex }} à {{ endIndex }} de {{ length }}"
     }
+  }
 }

@@ -9,7 +9,7 @@ import { environment } from "../../../environments/environment";
 import {
   AnimationsService,
   AppState,
-  LocalStorageService
+  LocalStorageService,
 } from "../core.module";
 
 import { SettingsEffects, SETTINGS_KEY } from "./settings.effects";
@@ -32,21 +32,21 @@ describe("SettingsEffects", () => {
   beforeEach(() => {
     router = {
       routerState: {
-        snapshot: {}
+        snapshot: {},
       },
       events: {
         // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
-        pipe() {}
-      }
+        pipe() {},
+      },
     };
     localStorageService = jasmine.createSpyObj("LocalStorageService", [
-      "setItem"
+      "setItem",
     ]);
     overlayContainer = jasmine.createSpyObj("OverlayContainer", [
-      "getContainerElement"
+      "getContainerElement",
     ]);
     animationsService = jasmine.createSpyObj("AnimationsService", [
-      "updateRouteAnimationType"
+      "updateRouteAnimationType",
     ]);
     translateService = jasmine.createSpyObj("TranslateService", ["use"]);
     store = jasmine.createSpyObj("store", ["pipe"]);
@@ -68,16 +68,16 @@ describe("SettingsEffects", () => {
         testApi: false,
         colors: {
           primary: "rgb(255, 255, 255)",
-          accent: "rgb(255, 255, 255)"
+          accent: "rgb(255, 255, 255)",
         },
         level: environment.config.level,
         highlight: environment.config.highlight,
         pageAnimationsDisabled: true,
-        hour: 12
+        hour: 12,
       };
       store.pipe.and.returnValue(of(settings));
       const persistAction = actionSettingsChangeTheme({
-        theme: "PURPLE-THEME--LIGHT"
+        theme: "PURPLE-THEME--LIGHT",
       });
       const source = cold("a", { a: persistAction });
       const actions = new Actions(source);

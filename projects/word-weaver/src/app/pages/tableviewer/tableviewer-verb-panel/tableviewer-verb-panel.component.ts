@@ -2,7 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   OnDestroy,
-  OnInit
+  OnInit,
 } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { select, Store } from "@ngrx/store";
@@ -19,7 +19,7 @@ import { selectTableViewerRoot } from "../../../core/tableviewer-selection/table
   selector: "ww-tableviewer-verb-panel",
   templateUrl: "./tableviewer-verb-panel.component.html",
   styleUrls: ["./tableviewer-verb-panel.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableviewerVerbPanelComponent implements OnDestroy, OnInit {
   verbs$: Observable<Verb[]> = this.verbService.verbs$;

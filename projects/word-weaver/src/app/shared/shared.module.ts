@@ -19,7 +19,7 @@ import { MatListModule } from "@angular/material/list";
 import { MatMenuModule } from "@angular/material/menu";
 import {
   MatPaginatorIntl,
-  MatPaginatorModule
+  MatPaginatorModule,
 } from "@angular/material/paginator";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatRadioModule } from "@angular/material/radio";
@@ -36,13 +36,13 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import {
   FaIconLibrary,
-  FontAwesomeModule
+  FontAwesomeModule,
 } from "@fortawesome/angular-fontawesome";
 import {
   faFacebook,
   faGithub,
   faMediumM,
-  faYoutube
+  faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
 import {
   faBook,
@@ -64,12 +64,12 @@ import {
   faTasks,
   faTimes,
   faTrash,
-  faWindowMaximize
+  faWindowMaximize,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   TranslateModule,
   TranslateParser,
-  TranslateService
+  TranslateService,
 } from "@ngx-translate/core";
 import { NgxEchartsModule } from "ngx-echarts";
 import { DownloadDialogComponent } from "./download-dialog/download-dialog.component";
@@ -116,10 +116,10 @@ import { TierComponent } from "./tier/tier.component";
     MatExpansionModule,
     MatPaginatorModule,
     NgxEchartsModule.forRoot({
-      echarts: () => import("echarts")
+      echarts: () => import("echarts"),
     }),
     FontAwesomeModule,
-    ClipboardModule
+    ClipboardModule,
   ],
   declarations: [
     LogoComponent,
@@ -129,14 +129,14 @@ import { TierComponent } from "./tier/tier.component";
     DecapitalizePipe,
     DownloadDialogComponent,
     TableViewerDialogComponent,
-    TierComponent
+    TierComponent,
   ],
   providers: [
     {
       provide: MatPaginatorIntl,
       deps: [TranslateService, TranslateParser],
-      useFactory: createCustomMatPaginatorIntl
-    }
+      useFactory: createCustomMatPaginatorIntl,
+    },
   ],
   exports: [
     CommonModule,
@@ -185,8 +185,8 @@ import { TierComponent } from "./tier/tier.component";
 
     AnimateOnlyPipe,
     CapitalizePipe,
-    DecapitalizePipe
-  ]
+    DecapitalizePipe,
+  ],
 })
 export class SharedModule {
   constructor(faIconLibrary: FaIconLibrary) {

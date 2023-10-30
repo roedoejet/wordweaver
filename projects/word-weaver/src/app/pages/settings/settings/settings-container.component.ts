@@ -2,7 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   OnDestroy,
-  OnInit
+  OnInit,
 } from "@angular/core";
 import { marker } from "@biesbjerg/ngx-translate-extract-marker";
 import { select, Store } from "@ngrx/store";
@@ -19,7 +19,7 @@ import {
   actionSettingsChangeLevel,
   actionSettingsChangeStickyHeader,
   actionSettingsChangeTestApi,
-  actionSettingsChangeTheme
+  actionSettingsChangeTheme,
 } from "../../../core/settings/settings.actions";
 import { SettingsState, State } from "../../../core/settings/settings.model";
 import { selectSettings } from "../../../core/settings/settings.selectors";
@@ -28,7 +28,7 @@ import { selectSettings } from "../../../core/settings/settings.selectors";
   selector: "ww-settings",
   templateUrl: "./settings-container.component.html",
   styleUrls: ["./settings-container.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SettingsContainerComponent implements OnDestroy, OnInit {
   objectkeys = Object.keys;
@@ -41,33 +41,33 @@ export class SettingsContainerComponent implements OnDestroy, OnInit {
     { value: "DARK-THEME", label: marker("ww.pages.settings.themes.dark") },
     {
       value: "PURPLE-THEME--LIGHT",
-      label: marker("ww.pages.settings.themes.purple-light")
+      label: marker("ww.pages.settings.themes.purple-light"),
     },
     {
       value: "PURPLE-THEME--DARK",
-      label: marker("ww.pages.settings.themes.purple-dark")
+      label: marker("ww.pages.settings.themes.purple-dark"),
     },
     {
       value: "PURPLE-BLUE-THEME--LIGHT",
-      label: marker("ww.pages.settings.themes.purple-blue-light")
+      label: marker("ww.pages.settings.themes.purple-blue-light"),
     },
     {
       value: "PURPLE-BLUE-THEME--DARK",
-      label: marker("ww.pages.settings.themes.purple-blue-dark")
+      label: marker("ww.pages.settings.themes.purple-blue-dark"),
     },
     {
       value: "PURPLE-GOLD-THEME--LIGHT",
-      label: marker("ww.pages.settings.themes.purple-gold-light")
+      label: marker("ww.pages.settings.themes.purple-gold-light"),
     },
     {
       value: "PURPLE-GOLD-THEME--DARK",
-      label: marker("ww.pages.settings.themes.purple-gold-dark")
-    }
+      label: marker("ww.pages.settings.themes.purple-gold-dark"),
+    },
   ];
 
   languages = META_DATA.languages.map((x) => ({
     value: x.value,
-    label: marker(`ww.pages.settings.general.language.${x.value}`)
+    label: marker(`ww.pages.settings.general.language.${x.value}`),
   }));
   showInstall = false;
   unsubscribe$ = new Subject<void>();

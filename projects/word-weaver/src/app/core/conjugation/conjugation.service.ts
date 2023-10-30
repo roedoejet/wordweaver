@@ -1,7 +1,7 @@
 import {
   HttpClient,
   HttpContext,
-  HttpErrorResponse
+  HttpErrorResponse,
 } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Store, select } from "@ngrx/store";
@@ -13,7 +13,7 @@ import {
   Conjugations,
   Option,
   Pronoun,
-  Verb
+  Verb,
 } from "../../../config/config";
 import { GridOrder } from "../../pages/tableviewer/conjugation-grid/conjugation-grid.component";
 import { selectSettingsState } from "../core.state";
@@ -23,7 +23,7 @@ import { TableviewerState } from "../tableviewer-selection/tableviewer-selection
 import { WordmakerState } from "../wordmaker-selection/wordmaker-selection.model";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class ConjugationService {
   conjugations;
@@ -36,7 +36,7 @@ export class ConjugationService {
       select(selectSettingsState),
       switchMap((settings: SettingsState) =>
         this.http.get<Conjugations>(settings.baseUrl + this.path, {
-          context: new HttpContext().set(SUPPRESS_ERROR, this.suppressError)
+          context: new HttpContext().set(SUPPRESS_ERROR, this.suppressError),
         })
       ),
       catchError((error: HttpErrorResponse) => {
@@ -128,10 +128,10 @@ export class ConjugationService {
     const restructuredConjugations = conjugations.map((x) => ({
       ...x.input,
       ...x,
-      pn: this.returnPronounGridDisplay(x.input.agent, x.input.patient)
+      pn: this.returnPronounGridDisplay(x.input.agent, x.input.patient),
     }));
     const uniqueMain = [
-      ...new Set(restructuredConjugations.map((x) => x[main]))
+      ...new Set(restructuredConjugations.map((x) => x[main])),
     ];
     const uniqueRow = [...new Set(restructuredConjugations.map((x) => x[row]))];
     const uniqueCol = [...new Set(restructuredConjugations.map((x) => x[col]))];

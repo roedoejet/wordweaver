@@ -5,7 +5,7 @@ import {
   Component,
   OnDestroy,
   OnInit,
-  ViewChild
+  ViewChild,
 } from "@angular/core";
 import { saveAs } from "file-saver-es";
 import { FormControl } from "@angular/forms";
@@ -19,7 +19,7 @@ import { map, switchMap, take, takeUntil } from "rxjs/operators";
 import {
   ConjugationService,
   NotificationService,
-  ROUTE_ANIMATIONS_ELEMENTS
+  ROUTE_ANIMATIONS_ELEMENTS,
 } from "../../../core/core.module";
 import { actionSettingsChangeThemeColors } from "../../../core/settings/settings.actions";
 import { SettingsState, State } from "../../../core/settings/settings.model";
@@ -28,7 +28,7 @@ import {
   actionChangeGridOrder,
   actionChangeTreeViewDepth,
   actionConjugationEvent,
-  actionToggleTreeViewOrder
+  actionToggleTreeViewOrder,
 } from "../../../core/tableviewer-selection/tableviewer-selection.actions";
 import { createRequestQueryArgs } from "../../../core/tableviewer-selection/tableviewer-selection.effects";
 import { TableviewerState } from "../../../core/tableviewer-selection/tableviewer-selection.model";
@@ -37,7 +37,7 @@ import {
   selectTableviewerGridSlice,
   selectTableviewerListSlice,
   selectTableViewerLoading,
-  selectTableviewerTreeSlice
+  selectTableviewerTreeSlice,
 } from "../../../core/tableviewer-selection/tableviewer-selection.selectors";
 import { TableViewerDialogComponent } from "../../../shared/tableviewer-dialog/tableviewer-dialog.component";
 import { GridOrderOptions } from "../conjugation-grid/conjugation-grid.component";
@@ -48,7 +48,7 @@ import {
   LevelFormat,
   Packer,
   Paragraph,
-  TextRun
+  TextRun,
 } from "docx";
 import { utils, write } from "xlsx";
 
@@ -56,7 +56,7 @@ import { utils, write } from "xlsx";
   selector: "ww-tableviewer-conj-panel",
   templateUrl: "./tableviewer-conj-panel.component.html",
   styleUrls: ["./tableviewer-conj-panel.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableviewerConjPanelComponent
   implements AfterViewInit, OnDestroy, OnInit
@@ -213,8 +213,8 @@ export class TableviewerConjPanelComponent
             name: "gridOrder",
             partial: {
               col: row,
-              row: col
-            }
+              row: col,
+            },
           })
         );
       }
@@ -311,12 +311,12 @@ export class TableviewerConjPanelComponent
                             "output"
                           ]
                             .map((morpheme) => morpheme[tier.key])
-                            .join(tier["separator"])
+                            .join(tier["separator"]),
                         ];
                       } else {
                         return [];
                       }
-                    })
+                    }),
                   ]);
                   // Append the data onto the worksheet
                   utils.sheet_add_aoa(ws, formattedData, { origin: "A2" });
@@ -329,7 +329,7 @@ export class TableviewerConjPanelComponent
                   of(view),
                   of(
                     new Blob([new Uint8Array(wbout)], {
-                      type: "application/octet-stream"
+                      type: "application/octet-stream",
                     })
                   )
                 );
@@ -357,9 +357,9 @@ export class TableviewerConjPanelComponent
                           // join morphemes by the tier-declared separator
                           .map((morpheme) => morpheme[tier.key])
                           .join(tier.separator),
-                        bold: index === 0
-                      })
-                    ]
+                        bold: index === 0,
+                      }),
+                    ],
                   })
                 );
               });
@@ -379,15 +379,15 @@ export class TableviewerConjPanelComponent
                         alignment: AlignmentType.START,
                         style: {
                           paragraph: {
-                            indent: { left: 720, hanging: 720 }
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
+                            indent: { left: 720, hanging: 720 },
+                          },
+                        },
+                      },
+                    ],
+                  },
+                ],
               },
-              sections: [{ children: content }]
+              sections: [{ children: content }],
             });
             return zip(of(view), from(Packer.toBlob(doc)));
           }
@@ -418,7 +418,7 @@ export class TableviewerConjPanelComponent
         [
           selection["gridOrder"]["main"],
           selection["gridOrder"]["row"],
-          selection["gridOrder"]["col"]
+          selection["gridOrder"]["col"],
         ].join(",")
       );
       const result = this.clipboard.copy(

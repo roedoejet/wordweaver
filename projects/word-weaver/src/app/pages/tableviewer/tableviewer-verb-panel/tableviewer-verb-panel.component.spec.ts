@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import {
   HttpClientTestingModule,
-  HttpTestingController
+  HttpTestingController,
 } from "@angular/common/http/testing";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
@@ -28,9 +28,9 @@ describe("TableviewerVerbPanelComponent", () => {
         TranslateModule.forRoot(),
         MatInputModule,
         MatFormFieldModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
       ],
-      providers: [provideMockStore()]
+      providers: [provideMockStore()],
     }).compileComponents();
   }));
   beforeEach(() => {

@@ -5,36 +5,36 @@ const routes: Routes = [
   {
     path: "",
     redirectTo: "wordmaker",
-    pathMatch: "full"
+    pathMatch: "full",
   },
   {
     path: "about",
     loadChildren: () =>
-      import("./pages/about/about.module").then((m) => m.AboutModule)
+      import("./pages/about/about.module").then((m) => m.AboutModule),
   },
   {
     path: "settings",
     loadChildren: () =>
-      import("./pages/settings/settings.module").then((m) => m.SettingsModule)
+      import("./pages/settings/settings.module").then((m) => m.SettingsModule),
   },
   {
     path: "wordmaker",
     loadChildren: () =>
       import("./pages/wordmaker/wordmaker.module").then(
         (m) => m.WordmakerModule
-      )
+      ),
   },
   {
     path: "tableviewer",
     loadChildren: () =>
       import("./pages/tableviewer/tableviewer.module").then(
         (m) => m.TableviewerModule
-      )
+      ),
   },
   {
     path: "**",
-    redirectTo: "wordmaker"
-  }
+    redirectTo: "wordmaker",
+  },
 ];
 
 @NgModule({
@@ -43,9 +43,9 @@ const routes: Routes = [
     RouterModule.forRoot(routes, {
       useHash: false,
       scrollPositionRestoration: "enabled",
-      preloadingStrategy: PreloadAllModules
-    })
+      preloadingStrategy: PreloadAllModules,
+    }),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}

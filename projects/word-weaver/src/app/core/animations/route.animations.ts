@@ -6,7 +6,7 @@ import {
   transition,
   trigger,
   stagger,
-  sequence
+  sequence,
 } from "@angular/animations";
 import { AnimationsService } from "./animations.service";
 
@@ -14,10 +14,10 @@ export const ROUTE_ANIMATIONS_ELEMENTS = "route-animations-elements";
 
 const STEPS_ALL: any[] = [
   query(":enter > *", style({ opacity: 0, position: "fixed" }), {
-    optional: true
+    optional: true,
   }),
   query(":enter ." + ROUTE_ANIMATIONS_ELEMENTS, style({ opacity: 0 }), {
-    optional: true
+    optional: true,
   }),
   sequence([
     query(
@@ -28,7 +28,7 @@ const STEPS_ALL: any[] = [
           "0.2s ease-in-out",
           style({ transform: "translateY(-3%)", opacity: 0 })
         ),
-        style({ position: "fixed" })
+        style({ position: "fixed" }),
       ],
       { optional: true }
     ),
@@ -38,15 +38,15 @@ const STEPS_ALL: any[] = [
         style({
           transform: "translateY(-3%)",
           opacity: 0,
-          position: "static"
+          position: "static",
         }),
         animate(
           "0.5s ease-in-out",
           style({ transform: "translateY(0%)", opacity: 1 })
-        )
+        ),
       ],
       { optional: true }
-    )
+    ),
   ]),
   query(
     ":enter ." + ROUTE_ANIMATIONS_ELEMENTS,
@@ -55,23 +55,23 @@ const STEPS_ALL: any[] = [
       animate(
         "0.5s ease-in-out",
         style({ transform: "translateY(0%)", opacity: 1 })
-      )
+      ),
     ]),
     { optional: true }
-  )
+  ),
 ];
 
 export const stepperAnimation = trigger("specialAnimations", [
   transition("Wordmaker => Stepper", [
     query(":enter, :leave", style({ position: "fixed", width: "100%" }), {
-      optional: true
+      optional: true,
     }),
     group([
       query(
         ":enter",
         [
           style({ transform: "translateX(100%)" }),
-          animate("1s ease-in-out", style({ transform: "translateX(0%)" }))
+          animate("1s ease-in-out", style({ transform: "translateX(0%)" })),
         ],
         { optional: true }
       ),
@@ -79,13 +79,13 @@ export const stepperAnimation = trigger("specialAnimations", [
         ":leave",
         [
           style({ transform: "translateX(0%)" }),
-          animate("1s ease-in-out", style({ transform: "translateX(-100%)" }))
+          animate("1s ease-in-out", style({ transform: "translateX(-100%)" })),
         ],
         { optional: true }
-      )
-    ])
+      ),
+    ]),
   ]),
-  transition("* => Wordmaker", [STEPS_ALL[0], STEPS_ALL[2]])
+  transition("* => Wordmaker", [STEPS_ALL[0], STEPS_ALL[2]]),
 ]);
 
 const STEPS_NONE = [];
@@ -108,7 +108,7 @@ export const routeAnimations = trigger("routeAnimations", [
   transition(isRouteAnimationsAll, STEPS_ALL),
   transition(isRouteAnimationsNone, STEPS_NONE),
   transition(isRouteAnimationsPage, STEPS_PAGE),
-  transition(isRouteAnimationsElements, STEPS_ELEMENTS)
+  transition(isRouteAnimationsElements, STEPS_ELEMENTS),
 ]);
 
 export const specialAnimations = [stepperAnimation];

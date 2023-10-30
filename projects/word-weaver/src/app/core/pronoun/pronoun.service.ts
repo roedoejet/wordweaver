@@ -1,7 +1,7 @@
 import {
   HttpClient,
   HttpContext,
-  HttpErrorResponse
+  HttpErrorResponse,
 } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Store, select } from "@ngrx/store";
@@ -14,7 +14,7 @@ import { SUPPRESS_ERROR } from "../http-interceptors/http-error.interceptor";
 import { SettingsState } from "../settings/settings.model";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class PronounService {
   path = "pronouns.json.gz";
@@ -27,7 +27,7 @@ export class PronounService {
       select(selectSettingsState),
       switchMap((settings: SettingsState) =>
         this.http.get<Pronoun[]>(settings.baseUrl + this.path, {
-          context: new HttpContext().set(SUPPRESS_ERROR, this.suppressError)
+          context: new HttpContext().set(SUPPRESS_ERROR, this.suppressError),
         })
       ),
       catchError((error: HttpErrorResponse) => {

@@ -3,7 +3,7 @@ import { MatSnackBar, MatSnackBarConfig } from "@angular/material/snack-bar";
 import { TranslateService } from "@ngx-translate/core";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class NotificationService {
   config: object = { duration: 2000, verticalPosition: "top" };
@@ -41,7 +41,7 @@ export class NotificationService {
   default(message: string) {
     const config: object = {
       ...this.config,
-      ...{ panelClass: "default-notification-overlay" }
+      ...{ panelClass: "default-notification-overlay" },
     };
     this.show(message, config);
   }
@@ -49,7 +49,7 @@ export class NotificationService {
   info(message: string) {
     const config: object = {
       ...this.config,
-      ...{ panelClass: "info-notification-overlay" }
+      ...{ panelClass: "info-notification-overlay" },
     };
     this.show(message, config);
   }
@@ -57,7 +57,7 @@ export class NotificationService {
   success(message: string) {
     const config: object = {
       ...this.config,
-      ...{ panelClass: "success-notification-overlay" }
+      ...{ panelClass: "success-notification-overlay" },
     };
     this.show(message, config);
   }
@@ -65,7 +65,7 @@ export class NotificationService {
   warn(message: string) {
     const config: object = {
       ...this.config,
-      ...{ panelClass: "warning-notification-overlay" }
+      ...{ panelClass: "warning-notification-overlay" },
     };
     this.show(message, config);
   }
@@ -76,8 +76,8 @@ export class NotificationService {
       ...{
         panelClass: "error-notification-overlay",
         duration: 3000,
-        verticalPosition: "bottom"
-      }
+        verticalPosition: "bottom",
+      },
     };
     this.show(message, config);
   }

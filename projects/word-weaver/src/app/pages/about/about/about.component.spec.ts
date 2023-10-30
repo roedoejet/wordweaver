@@ -13,7 +13,7 @@ describe("AboutComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [SharedModule, NoopAnimationsModule, TranslateModule.forRoot()],
-      declarations: [AboutComponent]
+      declarations: [AboutComponent],
     }).compileComponents();
   }));
 

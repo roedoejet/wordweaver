@@ -7,7 +7,7 @@ import { provideMockStore, MockStore } from "@ngrx/store/testing";
 import { MemoizedSelector } from "@ngrx/store";
 import {
   FaIconLibrary,
-  FontAwesomeModule
+  FontAwesomeModule,
 } from "@fortawesome/angular-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 
@@ -17,7 +17,7 @@ import { SettingsContainerComponent } from "./settings-container.component";
 import {
   actionSettingsChangeAutoNightMode,
   actionSettingsChangeTheme,
-  actionSettingsChangeStickyHeader
+  actionSettingsChangeStickyHeader,
 } from "../../../core/settings/settings.actions";
 import { selectSettings } from "../../../core/settings/settings.selectors";
 import { SettingsState } from "../../../core/settings/settings.model";
@@ -43,10 +43,10 @@ describe("SettingsComponent", () => {
         FontAwesomeModule,
         SharedModule,
         NoopAnimationsModule,
-        TranslateModule.forRoot()
+        TranslateModule.forRoot(),
       ],
       providers: [provideMockStore()],
-      declarations: [SettingsContainerComponent]
+      declarations: [SettingsContainerComponent],
     }).compileComponents();
 
     TestBed.inject(FaIconLibrary).addIcons(faBars);

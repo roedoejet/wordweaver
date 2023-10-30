@@ -4,7 +4,7 @@ import {
   HttpEvent,
   HttpHandler,
   HttpInterceptor,
-  HttpRequest
+  HttpRequest,
 } from "@angular/common/http";
 import { ErrorHandler, Injectable, Injector } from "@angular/core";
 import { Observable, throwError } from "rxjs";
@@ -34,7 +34,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
             const appErrorHandler = this.injector.get(ErrorHandler);
             appErrorHandler.handleError(err);
           }
-        }
+        },
       })
     );
   }

@@ -15,8 +15,8 @@ import { WordmakerHomeComponent } from "./wordmaker-home/wordmaker-home.componen
     WordmakerPersStepComponent,
     WordmakerVerbStepComponent,
     WordmakerTempStepComponent,
-    WordmakerHomeComponent
+    WordmakerHomeComponent,
   ],
-  imports: [SharedModule, WordmakerRoutingModule]
+  imports: [SharedModule, WordmakerRoutingModule],
 })
 export class WordmakerModule {}

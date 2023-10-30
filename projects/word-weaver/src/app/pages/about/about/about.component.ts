@@ -13,7 +13,7 @@ export interface Contributor {
   selector: "ww-about",
   templateUrl: "./about.component.html",
   styleUrls: ["./about.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AboutComponent implements OnInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;

@@ -1,13 +1,13 @@
 import {
   initialState,
-  tableviewerReducer
+  tableviewerReducer,
 } from "./tableviewer-selection.reducer";
 
 import {
   actionChangeOptions,
   actionChangeAgents,
   actionChangePatients,
-  actionChangeVerbs
+  actionChangeVerbs,
 } from "./tableviewer-selection.actions";
 
 describe("TableviewerReducer", () => {

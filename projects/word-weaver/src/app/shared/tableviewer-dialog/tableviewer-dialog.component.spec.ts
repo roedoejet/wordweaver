@@ -4,7 +4,7 @@ import { TranslateModule } from "@ngx-translate/core";
 import {
   MAT_DIALOG_DATA,
   MatDialogModule,
-  MatDialogRef
+  MatDialogRef,
 } from "@angular/material/dialog";
 
 import { TableViewerDialogComponent } from "./tableviewer-dialog.component";
@@ -20,8 +20,8 @@ describe("TableViewerDialogComponent", () => {
       providers: [
         provideMockStore(),
         { provide: MatDialogRef, useValue: {} },
-        { provide: MAT_DIALOG_DATA, useValue: [] }
-      ]
+        { provide: MAT_DIALOG_DATA, useValue: [] },
+      ],
     }).compileComponents();
   }));
 

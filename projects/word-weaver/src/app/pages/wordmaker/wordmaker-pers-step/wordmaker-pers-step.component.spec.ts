@@ -19,8 +19,8 @@ describe("WordmakerPersStepComponent", () => {
         SharedModule,
         NoopAnimationsModule,
         TranslateModule.forRoot(),
-        HttpClientModule
-      ]
+        HttpClientModule,
+      ],
     }).compileComponents();
   }));
 

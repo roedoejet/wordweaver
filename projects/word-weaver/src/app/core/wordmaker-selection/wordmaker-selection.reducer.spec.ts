@@ -4,7 +4,7 @@ import {
   actionChangeOption,
   actionChangeAgent,
   actionChangePatient,
-  actionChangeVerb
+  actionChangeVerb,
 } from "./wordmaker-selection.actions";
 
 describe("WordmkerReducer", () => {

@@ -2,7 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   OnDestroy,
-  OnInit
+  OnInit,
 } from "@angular/core";
 import { select, Store } from "@ngrx/store";
 import { Observable, Subject } from "rxjs";
@@ -10,7 +10,7 @@ import { takeUntil } from "rxjs/operators";
 import { Option } from "../../../../config/config";
 import {
   OptionService,
-  selectSettingsLanguage
+  selectSettingsLanguage,
 } from "../../../core/core.module";
 import { actionChangeOptions } from "../../../core/tableviewer-selection/tableviewer-selection.actions";
 import { State } from "../../../core/tableviewer-selection/tableviewer-selection.model";
@@ -20,7 +20,7 @@ import { selectTableViewerOption } from "../../../core/tableviewer-selection/tab
   selector: "ww-tableviewer-temp-panel",
   templateUrl: "./tableviewer-temp-panel.component.html",
   styleUrls: ["./tableviewer-temp-panel.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableviewerTempPanelComponent implements OnDestroy, OnInit {
   possibleOptions$: Observable<Option[]>;

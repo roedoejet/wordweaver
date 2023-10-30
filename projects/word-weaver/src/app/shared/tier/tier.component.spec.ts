@@ -8,7 +8,7 @@ describe("TierComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [TierComponent]
+      declarations: [TierComponent],
     }).compileComponents();
   }));
 
@@ -20,11 +20,11 @@ describe("TierComponent", () => {
       name: "breakdown",
       separator: "",
       position: 0,
-      options: { language: "L1" }
+      options: { language: "L1" },
     };
     component.data = {
       input: { agent: "test", patient: "test", option: "test", root: "test" },
-      output: []
+      output: [],
     };
     fixture.detectChanges();
   });

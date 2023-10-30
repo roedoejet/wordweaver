@@ -19,9 +19,9 @@ describe("WordmakerConjStepComponent", () => {
         SharedModule,
         NoopAnimationsModule,
         TranslateModule.forRoot(),
-        HttpClientModule
+        HttpClientModule,
       ],
-      providers: [provideMockStore()]
+      providers: [provideMockStore()],
     }).compileComponents();
   }));
 

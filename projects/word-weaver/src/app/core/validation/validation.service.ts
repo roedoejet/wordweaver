@@ -3,7 +3,7 @@ import { Validation } from "../../../config/config";
 import { environment } from "../../../environments/environment";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class ValidationService {
   validation: Validation = environment.config.validation;

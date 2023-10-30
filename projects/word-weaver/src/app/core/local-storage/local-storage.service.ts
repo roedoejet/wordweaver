@@ -32,7 +32,7 @@ const slugify = (str: string) => {
 const APP_PREFIX = "ww-" + slugify(environment.base) + slugify(CONFIG_NAME);
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class LocalStorageService {
   constructor() {}

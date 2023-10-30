@@ -11,7 +11,7 @@ import {
   actionChangeVerbs,
   actionChangeVerbSearchTerm,
   actionChangeViewMode,
-  actionToggleTreeViewOrder
+  actionToggleTreeViewOrder,
 } from "./tableviewer-selection.actions";
 import { TableviewerState } from "./tableviewer-selection.model";
 
@@ -28,13 +28,13 @@ export const initialBaseState: TableviewerState = {
   gridOrder: {
     col: "option",
     row: "pn",
-    main: "root"
-  }
+    main: "root",
+  },
 };
 
 export const initialState: TableviewerState = {
   ...initialBaseState,
-  ...initialTableViewerSettings
+  ...initialTableViewerSettings,
 };
 
 const reducer = createReducer(

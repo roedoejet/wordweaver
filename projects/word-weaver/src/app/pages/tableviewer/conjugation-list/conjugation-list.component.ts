@@ -3,7 +3,7 @@ import {
   Component,
   Input,
   OnDestroy,
-  OnInit
+  OnInit,
 } from "@angular/core";
 import { select, Store } from "@ngrx/store";
 import { Observable, Subject } from "rxjs";
@@ -16,7 +16,7 @@ import { selectSettings } from "../../../core/settings/settings.selectors";
   selector: "ww-conjugation-list",
   templateUrl: "./conjugation-list.component.html",
   styleUrls: ["./conjugation-list.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConjugationListComponent implements OnDestroy, OnInit {
   @Input() data$: Observable<Conjugations>;

@@ -4,14 +4,14 @@ import {
   OnDestroy,
   OnInit,
   ChangeDetectionStrategy,
-  ViewChild
+  ViewChild,
 } from "@angular/core";
 import { ValidationService } from "../../../core/core.module";
 import { BehaviorSubject, Observable, Subject, zip } from "rxjs";
 import { selectWordmaker } from "../../../core/wordmaker-selection/wordmaker-selection.selectors";
 import {
   WordmakerState,
-  State
+  State,
 } from "../../../core/wordmaker-selection/wordmaker-selection.model";
 import { Store, select } from "@ngrx/store";
 import { marker } from "@biesbjerg/ngx-translate-extract-marker";
@@ -23,7 +23,7 @@ import { TranslateService } from "@ngx-translate/core";
   selector: "ww-wordmaker",
   templateUrl: "./wordmaker.component.html",
   styleUrls: ["./wordmaker.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WordmakerComponent implements OnDestroy, OnInit, AfterViewInit {
   @ViewChild("stepper") private stepper;

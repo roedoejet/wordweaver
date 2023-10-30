@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from "@angular/core";
 import { Pronoun } from "../../../../config/config";
 
 @Pipe({
-  name: "animateOnly"
+  name: "animateOnly",
 })
 export class AnimateOnlyPipe implements PipeTransform {
   // Returns only Animate pronouns

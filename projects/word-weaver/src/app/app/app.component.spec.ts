@@ -7,7 +7,7 @@ import { MockStore, provideMockStore } from "@ngrx/store/testing";
 import {
   selectEffectiveTheme,
   selectSettingsLanguage,
-  selectSettingsStickyHeader
+  selectSettingsStickyHeader,
 } from "../core/core.module";
 import { SharedModule } from "../shared/shared.module";
 
@@ -22,10 +22,10 @@ describe("AppComponent", () => {
         SharedModule,
         RouterTestingModule,
         NoopAnimationsModule,
-        TranslateModule.forRoot()
+        TranslateModule.forRoot(),
       ],
       providers: [provideMockStore()],
-      declarations: [AppComponent]
+      declarations: [AppComponent],
     }).compileComponents();
 
     store = TestBed.inject(MockStore);

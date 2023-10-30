@@ -9,7 +9,7 @@ export const debug =
     console.log(`[DEBUG] action: ${action.type}`, {
       payload: (action as any).payload,
       oldState: state,
-      newState
+      newState,
     });
     return newState;
   };

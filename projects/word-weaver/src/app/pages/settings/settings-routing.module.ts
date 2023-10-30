@@ -6,12 +6,12 @@ const routes: Routes = [
   {
     path: "",
     component: SettingsContainerComponent,
-    data: { title: "ww.menu.settings" }
-  }
+    data: { title: "ww.menu.settings" },
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class SettingsRoutingModule {}

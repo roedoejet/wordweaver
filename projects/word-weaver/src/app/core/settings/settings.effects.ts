@@ -9,7 +9,7 @@ import {
   map,
   mapTo,
   tap,
-  withLatestFrom
+  withLatestFrom,
 } from "rxjs/operators";
 import { environment } from "../../../environments/environment";
 import { AnimationsService } from "../animations/animations.service";
@@ -27,14 +27,14 @@ import {
   actionSettingsChangeLevel,
   actionSettingsChangeStickyHeader,
   actionSettingsChangeTestApi,
-  actionSettingsChangeTheme
+  actionSettingsChangeTheme,
 } from "./settings.actions";
 import { State } from "./settings.model";
 import {
   selectEffectiveTheme,
   selectElementsAnimations,
   selectPageAnimations,
-  selectSettingsLanguage
+  selectSettingsLanguage,
 } from "./settings.selectors";
 
 export const SETTINGS_KEY = "SETTINGS";
@@ -122,7 +122,7 @@ export class SettingsEffects {
         withLatestFrom(
           combineLatest([
             this.store.pipe(select(selectPageAnimations)),
-            this.store.pipe(select(selectElementsAnimations))
+            this.store.pipe(select(selectElementsAnimations)),
           ])
         ),
         tap(([action, [pageAnimations, elementsAnimations]]) =>

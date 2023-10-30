@@ -83,7 +83,7 @@ export const selectTableviewerTreeSlice = createSelector(
     conjugations,
     view,
     treeDepth,
-    standardTreeOrder
+    standardTreeOrder,
   })
 );
 

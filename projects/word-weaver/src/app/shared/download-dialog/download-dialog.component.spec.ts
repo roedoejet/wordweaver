@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import {
   HttpClientTestingModule,
-  HttpTestingController
+  HttpTestingController,
 } from "@angular/common/http/testing";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { MockStore, provideMockStore } from "@ngrx/store/testing";
@@ -10,7 +10,7 @@ import { DownloadDialogComponent } from "./download-dialog.component";
 import {
   MAT_DIALOG_DATA,
   MatDialogModule,
-  MatDialogRef
+  MatDialogRef,
 } from "@angular/material/dialog";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { TranslateModule } from "@ngx-translate/core";
@@ -27,14 +27,14 @@ describe("DownloadDialogComponent", () => {
         MatDialogModule,
         MatSnackBarModule,
         TranslateModule.forRoot(),
-        HttpClientTestingModule
+        HttpClientTestingModule,
       ],
       declarations: [DownloadDialogComponent],
       providers: [
         provideMockStore(),
         { provide: MatDialogRef, useValue: {} },
-        { provide: MAT_DIALOG_DATA, useValue: [] }
-      ]
+        { provide: MAT_DIALOG_DATA, useValue: [] },
+      ],
     }).compileComponents();
   }));
 

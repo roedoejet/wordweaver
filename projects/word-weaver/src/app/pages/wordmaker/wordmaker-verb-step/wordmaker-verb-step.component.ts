@@ -4,7 +4,7 @@ import {
   EventEmitter,
   OnDestroy,
   OnInit,
-  Output
+  Output,
 } from "@angular/core";
 import { VerbService, selectSettingsLanguage } from "../../../core/core.module";
 import { Verb } from "../../../../config/config";
@@ -15,7 +15,7 @@ import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { State } from "../../../core/wordmaker-selection/wordmaker-selection.model";
 import {
   fadeAnimation,
-  listAnimation
+  listAnimation,
 } from "../../../core/animations/value.animations";
 import { actionChangeVerb } from "../../../core/wordmaker-selection/wordmaker-selection.actions";
 import { TranslateService } from "@ngx-translate/core";
@@ -25,7 +25,7 @@ import { TranslateService } from "@ngx-translate/core";
   templateUrl: "./wordmaker-verb-step.component.html",
   styleUrls: ["./wordmaker-verb-step.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [fadeAnimation, listAnimation]
+  animations: [fadeAnimation, listAnimation],
 })
 export class WordmakerVerbStepComponent implements OnDestroy, OnInit {
   @Output() selectedVerb = new EventEmitter<Verb>();

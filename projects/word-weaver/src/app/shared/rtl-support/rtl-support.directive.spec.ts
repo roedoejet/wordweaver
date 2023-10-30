@@ -13,7 +13,7 @@ import { NoopAnimationsModule } from "@angular/platform-browser/animations";
     <h2 rtl>The Default (Gray)</h2>
     <h2>No Highlight</h2>
     <div rtl>Vasili</div>
-  `
+  `,
 })
 class TestComponent {}
 
@@ -33,10 +33,10 @@ describe("RtlSupportDirective", () => {
           provide: TranslateService,
           useValue: {
             currentLang: "he",
-            onLangChange: languageSubject.asObservable()
-          }
-        }
-      ]
+            onLangChange: languageSubject.asObservable(),
+          },
+        },
+      ],
     }).createComponent(TestComponent);
 
     fixture.detectChanges(); // initial binding
