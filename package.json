@@ -112,7 +112,7 @@
     "browser-detect": "^0.2.28",
     "chai": "4.2.0",
     "conventional-changelog-cli": "^3.0.0",
-    "core-js": "3.1.4",
+    "core-js": "3.23.3",
     "eslint": "^8.28.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-import": "^2.27.5",
