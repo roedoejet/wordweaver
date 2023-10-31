@@ -1,7 +1,7 @@
 name: Run tests
 on: [push]
 jobs:
-  spec-tests:
+  all-tests:
     runs-on: ubuntu-latest
     # Stop the occasional rogue instance before the 6h GitHub limit
     timeout-minutes: 15
@@ -14,32 +14,61 @@ jobs:
           node-version: 18
       - name: Install everything
         run: npm install
-      - name: Run lint and spec tests
+
+      - name: Validation Step Run spec tests
+        id: specs
+        continue-on-error: true
         run: npm run-script ci:test
       - name: Upload coverage reports to Codecov
+        if: steps.specs.outcome == 'success'
         uses: codecov/codecov-action@v3
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-  e2e-tests:
-    runs-on: ubuntu-latest
-    # Stop the occasional rogue instance before the 6h GitHub limit
-    timeout-minutes: 15
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Use Node.js 18
-        uses: actions/setup-node@v3
         with:
-          node-version: 18
-      - name: Install everything
-        run: npm install
+          fail_ci_if_error: false
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Validation Step Run ng lint
+        id: lint
+        continue-on-error: true
+        run: npm run-script lint
+
+      - name: Validation Step Validate data
+        id: validate
+        continue-on-error: true
+        run: |
+          npm run-script generate-schemas
+          npm run-script validate
+      - name: Validation Step Check compressed data files
+        if: steps.validate.outcome == 'success'
+        id: compress
+        continue-on-error: true
+        run: |
+          npm run-script compress fr v1
+          if git status --porcelain=v1 | grep '\.json\.gz'; then \
+            echo Error: Please run \"npm run-script compress fr v1\" and commit the .json.gz files created or updated.; \
+            false; \
+          else \
+            echo OK; \
+          fi
+
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
-      - name: Run Playwright tests
+      - name: Validation Step Run Playwright tests
+        id: e2e
+        continue-on-error: true
         run: npx npm run-script e2e
       - uses: actions/upload-artifact@v3
-        if: always()
+        if: steps.e2e.outcome == 'success'
         with:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+
+      - name: Fail if any Validation Step failed
+        if: steps.specs.outcome == 'failure' || steps.lint.outcome == 'failure' || steps.validate.outcome == 'failure' || steps.compress.outcome == 'failure' || steps.e2e.outcome == 'failure'
+        run: |
+          if [[ "${{ steps.specs.outcome }}" == failure ]]; then echo ERROR: Validation Step Run spec tests failed; fi
+          if [[ "${{ steps.lint.outcome }}" == failure ]]; then echo ERROR: Validation Step Run ng lint failed; fi
+          if [[ "${{ steps.validate.outcome }}" == failure ]]; then echo ERROR: Validation Step Validate data failed; fi
+          if [[ "${{ steps.compress.outcome }}" == failure ]]; then echo ERROR: Validation Step Check compressed data files failed; fi
+          if [[ "${{ steps.e2e.outcome }}" == failure ]]; then echo ERROR: Validation Step Run Playwright tests failed; fi
+          false

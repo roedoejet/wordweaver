@@ -28,7 +28,7 @@
     "build-toy": "ng build --outputPath ./dist_toy",
     "lint": "ng lint",
     "test": "ng lint && ng test --configuration=test",
-    "ci:test": "ng lint && ng test --browsers=ChromeHeadless --watch=false --configuration=test",
+    "ci:test": "ng test --browsers=ChromeHeadless --watch=false --configuration=test",
     "watch": "ng test --configuration=test --browsers ChromeHeadless --watch --reporters dots",
     "release": "standard-version && git push --follow-tags origin master",
     "format:write": "prettier 'projects/**/*.{ts,json,md,scss,html}' --write",
