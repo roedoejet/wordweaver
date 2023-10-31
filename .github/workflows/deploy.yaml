@@ -26,7 +26,7 @@ jobs:
       - name: Install and Build 🔧
         run: |
           npm install
-          npm run-script build
+          npm run-script build --configuration=production -- --deploy-url /wordweaver/ --base-href /wordweaver/
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
