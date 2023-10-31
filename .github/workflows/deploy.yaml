@@ -9,6 +9,8 @@ on:
     workflows: ["Run tests"]
     types:
       - completed
+    branches:
+      - main
 
 jobs:
   build-and-deploy:
@@ -37,4 +39,4 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'failure' }}
     steps:
-      - run: echo "Tests conclusion was failure. Deployment not ran."
+      - run: echo "Test conclusion was failure. Deployment cancelled."
