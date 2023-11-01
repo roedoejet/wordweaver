@@ -1,0 +1,46 @@
+[
+  {
+    "tag": "indicatif-present",
+    "type": "indicatif"
+  },
+  {
+    "tag": "indicatif-imparfait",
+    "type": "indicatif"
+  },
+  {
+    "tag": "indicatif-passe-simple",
+    "type": "indicatif"
+  },
+  {
+    "tag": "indicatif-futur",
+    "type": "indicatif"
+  },
+  {
+    "tag": "subjonctif-present",
+    "type": "subjonctif"
+  },
+  {
+    "tag": "subjonctif-imparfait",
+    "type": "subjonctif"
+  },
+  {
+    "tag": "conditionnel-present",
+    "type": "conditionnel"
+  },
+  {
+    "tag": "imperatif-present",
+    "type": "imperatif"
+  },
+  {
+    "tag": "infinitif-present",
+    "type": "infinitif"
+  },
+  {
+    "tag": "participe-present",
+    "type": "participe"
+  },
+  {
+    "tag": "participe-passe",
+    "type": "participe"
+  }
+]

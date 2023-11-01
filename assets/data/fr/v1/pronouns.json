@@ -1,0 +1,52 @@
+[
+  {
+    "person": "1",
+    "number": "SG",
+    "tag": "1-sg"
+  },
+  {
+    "person": "2",
+    "number": "SG",
+    "tag": "2-sg"
+  },
+  {
+    "person": "3",
+    "number": "SG",
+    "gender": "F",
+    "tag": "3-sg-f"
+  },
+  {
+    "person": "3",
+    "number": "SG",
+    "gender": "M",
+    "tag": "3-sg-m"
+  },
+  {
+    "person": "3",
+    "number": "SG",
+    "gender": "N",
+    "tag": "3-sg-n"
+  },
+  {
+    "person": "1",
+    "number": "PL",
+    "tag": "1-pl"
+  },
+  {
+    "person": "2",
+    "number": "PL",
+    "tag": "2-pl"
+  },
+  {
+    "person": "3",
+    "number": "PL",
+    "gender": "M",
+    "tag": "3-pl-m"
+  },
+  {
+    "person": "3",
+    "number": "PL",
+    "gender": "F",
+    "tag": "3-pl-f"
+  }
+]
