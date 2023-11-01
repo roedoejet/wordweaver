@@ -1,0 +1,42 @@
+# template from https://github.com/JamesIves/github-pages-deploy-action/tree/dev
+
+name: CI
+
+run-name: Deployment Triggered - ${{ github.event.workflow_run.conclusion == 'success'}}
+
+on:
+  workflow_run:
+    workflows: ["Run tests"]
+    types:
+      - completed
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    #concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      - name: Install and Build 🔧
+        run: |
+          npm install
+          npm run-script build --configuration=production -- --deploy-url /wordweaver/ --base-href /wordweaver/
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          folder: dist/word-weaver # The folder the action should deploy.
+
+  on-failure:
+    name: Validation Failed
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    steps:
+      - run: echo "Test conclusion was failure. Deployment cancelled."
