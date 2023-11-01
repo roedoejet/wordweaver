@@ -138,12 +138,12 @@ export const httpLoaderFactory = (http: HttpClient) =>
   new MultiTranslateHttpLoader(http, [
     // These are the UI-specific i18n assets
     {
-      prefix: "/assets/i18n/",
+      prefix: environment.base + "/assets/i18n/",
       suffix: ".json",
     },
     // These are the data-specific i18n assets
     {
-      prefix: "/assets/i18n/data/",
+      prefix: environment.base + "/assets/i18n/data/",
       suffix: ".json",
     },
   ]);

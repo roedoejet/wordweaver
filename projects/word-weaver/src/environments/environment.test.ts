@@ -20,7 +20,7 @@ export const environment = {
   },
   production: false,
   test: true,
-  base: `//localhost:4200`,
+  base: "",
   dataPrefix: `/assets/data/fr/v1/`,
   dataTestPrefix: `/assets/data/fr/v2/`,
   versions: {

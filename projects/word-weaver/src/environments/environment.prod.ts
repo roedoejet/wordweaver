@@ -20,7 +20,7 @@ export const environment = {
   },
   production: true,
   test: false,
-  base: `https://roedoejet.github.io/wordweaver`,
+  base: "/wordweaver",
   dataPrefix: `/assets/data/fr/v1/`,
   dataTestPrefix: `/assets/data/fr/v2/`,
   versions: {
