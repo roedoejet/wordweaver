@@ -12,13 +12,12 @@ import { Option } from "../../../config/config";
 import { selectSettingsState } from "../core.state";
 import { SUPPRESS_ERROR } from "../http-interceptors/http-error.interceptor";
 import { SettingsState } from "../settings/settings.model";
-import { environment } from "../../../environments/environment";
 
 @Injectable({
   providedIn: "root",
 })
 export class OptionService {
-  path = environment.production ? "options.json.gz" : "options.json";
+  path = "options.json.gz";
   options;
   options$: Observable<Option[]>;
   optionsByType$: Observable<object[]>;

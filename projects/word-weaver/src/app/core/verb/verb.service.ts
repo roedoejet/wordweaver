@@ -12,14 +12,13 @@ import { Verb } from "../../../config/config";
 import { selectSettingsState } from "../core.state";
 import { SUPPRESS_ERROR } from "../http-interceptors/http-error.interceptor";
 import { SettingsState } from "../settings/settings.model";
-import { environment } from "../../../environments/environment";
 
 @Injectable({
   providedIn: "root",
 })
 export class VerbService {
   verbs: Verb[];
-  path = environment.production ? "verbs.json.gz" : "verbs.json";
+  path = "verbs.json.gz";
   verbs$: Observable<Verb[]>;
   random$: Observable<Verb>;
   suppressError = true;
