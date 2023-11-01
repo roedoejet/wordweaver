@@ -21,6 +21,7 @@ import { SUPPRESS_ERROR } from "../http-interceptors/http-error.interceptor";
 import { SettingsState } from "../settings/settings.model";
 import { TableviewerState } from "../tableviewer-selection/tableviewer-selection.model";
 import { WordmakerState } from "../wordmaker-selection/wordmaker-selection.model";
+import { environment } from "../../../environments/environment";
 
 @Injectable({
   providedIn: "root",
@@ -29,7 +30,7 @@ export class ConjugationService {
   conjugations;
   conjugations$: Observable<Conjugations>;
   random$: Observable<ConjugationObject>;
-  path = "conjugations.json.gz";
+  path = environment.production ? "conjugations.json.gz" : "conjugations.json";
   suppressError = true;
   constructor(private http: HttpClient, private store: Store) {
     this.conjugations$ = this.store.pipe(
