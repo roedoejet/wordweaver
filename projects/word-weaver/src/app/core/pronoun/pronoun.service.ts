@@ -12,12 +12,13 @@ import { Pronoun } from "../../../config/config";
 import { selectSettingsState } from "../core.state";
 import { SUPPRESS_ERROR } from "../http-interceptors/http-error.interceptor";
 import { SettingsState } from "../settings/settings.model";
+import { environment } from "../../../environments/environment";
 
 @Injectable({
   providedIn: "root",
 })
 export class PronounService {
-  path = "pronouns.json.gz";
+  path = environment.production ? "pronouns.json.gz" : "pronouns.json";
   pronouns: Pronoun[];
   pronouns$: Observable<Pronoun[]>;
   random$: Observable<Pronoun>;
