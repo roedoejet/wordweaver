@@ -1,7 +1,3 @@
-// The file contents for the current environment will overwrite these during build.
-// The build system defaults to the dev environment which uses `environment.ts`, but if you do
-// `ng build --configuration=ghpages` and `ng build --configuration=netlify` will use `environment.ghpages.ts` and `environment.netlify.ts` respectively.
-// The list of which env maps to which file can be found in `.angular-cli.json`.
 import {
   HIGHLIGHTS,
   LEVELS,
@@ -14,7 +10,7 @@ const packageJson = require("../../../../package.json");
 
 export const environment = {
   appName: "WordWeaver",
-  envName: "DEV",
+  envName: "PROD",
   config: {
     tiers: TIERS,
     validation: VALIDATION,
@@ -22,9 +18,9 @@ export const environment = {
     level: LEVELS,
     meta: META_DATA,
   },
-  production: false,
+  production: true,
   test: false,
-  base: "",
+  base: "/wordweaver",
   dataPrefix: `/assets/data/fr/v1/`,
   dataTestPrefix: `/assets/data/fr/v2/`,
   usePrecompressedData: false, // Set to true only if deploying to Netlify or somewhere you can set the appropriate Content-Type: application/json & Content-Encoding: gzip response headers.
@@ -36,7 +32,8 @@ export const environment = {
     bootstrap: packageJson.dependencies.bootstrap,
     rxjs: packageJson.dependencies.rxjs,
     ngxtranslate: packageJson.dependencies["@ngx-translate/core"],
-    fontAwesome: packageJson.dependencies["@fortawesome/fontawesome-free"],
+    fontAwesome:
+      packageJson.dependencies["@fortawesome/fontawesome-free-webfonts"],
     angularCli: packageJson.devDependencies["@angular/cli"],
     typescript: packageJson.devDependencies["typescript"],
   },

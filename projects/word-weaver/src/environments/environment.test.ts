@@ -23,6 +23,7 @@ export const environment = {
   base: "",
   dataPrefix: `/assets/data/fr/v1/`,
   dataTestPrefix: `/assets/data/fr/v2/`,
+  usePrecompressedData: false, // Set to true only if deploying to Netlify or somewhere you can set the appropriate Content-Type: application/json & Content-Encoding: gzip response headers.
   versions: {
     app: packageJson.version,
     angular: packageJson.dependencies["@angular/core"],

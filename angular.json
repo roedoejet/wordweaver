@@ -30,7 +30,12 @@
             "assets": [
               "projects/word-weaver/src/favicon.ico",
               "projects/word-weaver/src/assets",
-              "projects/word-weaver/src/manifest.webmanifest"
+              "projects/word-weaver/src/manifest.webmanifest",
+              {
+                "input": "projects/word-weaver",
+                "glob": "_headers",
+                "output": "."
+              }
             ],
             "styles": [
               "projects/word-weaver/src/styles-app-loading.scss",
@@ -47,11 +52,56 @@
                 }
               ]
             },
-            "production": {
+            "ghpages": {
               "fileReplacements": [
                 {
                   "replace": "projects/word-weaver/src/environments/environment.ts",
-                  "with": "projects/word-weaver/src/environments/environment.prod.ts"
+                  "with": "projects/word-weaver/src/environments/environment.ghpages.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "bundle",
+                  "name": "polyfills",
+                  "baseline": "150kb",
+                  "maximumWarning": "50kb",
+                  "maximumError": "4096kb"
+                },
+                {
+                  "type": "bundle",
+                  "name": "styles",
+                  "baseline": "280kb",
+                  "maximumWarning": "50kb",
+                  "maximumError": "4096kb"
+                },
+                {
+                  "type": "bundle",
+                  "name": "main",
+                  "baseline": "1024kb",
+                  "maximumWarning": "100kb",
+                  "maximumError": "4096kb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "projects/word-weaver/ngsw-config.json"
+            },
+            "netlify": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/word-weaver/src/environments/environment.ts",
+                  "with": "projects/word-weaver/src/environments/environment.netlify.ts"
                 }
               ],
               "optimization": true,
@@ -100,9 +150,6 @@
             "browserTarget": "word-weaver:build"
           },
           "configurations": {
-            "production": {
-              "browserTarget": "word-weaver:build:production"
-            },
             "fr": {
               "browserTarget": "word-weaver:build:fr"
             }
