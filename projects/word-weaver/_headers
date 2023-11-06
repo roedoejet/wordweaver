@@ -1,0 +1,4 @@
+/assets/data/*/*/*json.gz
+  # headers for that path:
+  Content-Type: application/json
+  Content-Encoding: gzip

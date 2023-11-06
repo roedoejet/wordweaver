@@ -1,23 +1,19 @@
-import {
-  HttpClient,
-  HttpContext,
-  HttpErrorResponse,
-} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Store, select } from "@ngrx/store";
-import { Observable, of, throwError } from "rxjs";
-import { catchError, map, retry, shareReplay, switchMap } from "rxjs/operators";
+import { Observable } from "rxjs";
+import { map, shareReplay, switchMap } from "rxjs/operators";
 
 import { Option } from "../../../config/config";
 import { selectSettingsState } from "../core.state";
-import { SUPPRESS_ERROR } from "../http-interceptors/http-error.interceptor";
 import { SettingsState } from "../settings/settings.model";
+import { environment } from "../../../environments/environment";
 
 @Injectable({
   providedIn: "root",
 })
 export class OptionService {
-  path = "options.json.gz";
+  path = environment.usePrecompressedData ? "options.json.gz" : "options.json";
   options;
   options$: Observable<Option[]>;
   optionsByType$: Observable<object[]>;
@@ -27,26 +23,8 @@ export class OptionService {
     this.options$ = this.store.pipe(
       select(selectSettingsState),
       switchMap((settings: SettingsState) =>
-        this.http.get<Option[]>(settings.baseUrl + this.path, {
-          context: new HttpContext().set(SUPPRESS_ERROR, this.suppressError),
-        })
+        this.http.get<Option[]>(settings.baseUrl + this.path)
       ),
-      catchError((error: HttpErrorResponse) => {
-        if (error.status === 404 && error.url.endsWith("gz")) {
-          // Try falling back to uncompressed url
-          this.path = "options.json";
-          this.suppressError = false;
-          return throwError(
-            () =>
-              new Error(
-                "compressed file not found, falling back to uncompressed version."
-              )
-          );
-        } else {
-          return throwError(() => of(error));
-        }
-      }),
-      retry(1),
       shareReplay(1)
     );
     this.optionsByType$ = this.options$.pipe(
