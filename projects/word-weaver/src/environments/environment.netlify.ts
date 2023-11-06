@@ -18,6 +18,7 @@ export const environment = {
     level: LEVELS,
     meta: META_DATA,
   },
+  plausibleAnalyticsDataDomain: "",
   production: true,
   test: false,
   base: "",
