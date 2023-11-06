@@ -143,7 +143,7 @@ export const httpLoaderFactory = (http: HttpClient) =>
     },
     // These are the data-specific i18n assets
     {
-      prefix: environment.base + "/assets/i18n/data/",
+      prefix: environment.base + environment.dataPrefix + "i18n/",
       suffix: ".json",
     },
   ]);
