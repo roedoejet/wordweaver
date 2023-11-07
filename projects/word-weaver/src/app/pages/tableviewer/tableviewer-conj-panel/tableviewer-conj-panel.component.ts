@@ -10,7 +10,7 @@ import {
 import { saveAs } from "file-saver-es";
 import { FormControl } from "@angular/forms";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
-import { marker } from "@biesbjerg/ngx-translate-extract-marker";
+import { marker as _ } from "@colsen1991/ngx-translate-extract-marker";
 import { select, Store } from "@ngrx/store";
 import { EChartsOption } from "echarts";
 import { TranslateService } from "@ngx-translate/core";
@@ -157,9 +157,7 @@ export class TableviewerConjPanelComponent
         if (treeState.view === "tree" && conjugationsLength > 0) {
           if (conjugationsLength > 50) {
             this.notificationService.translated(
-              marker(
-                "ww.pages.tableviewer.notifications.treeviewer-length.error"
-              ),
+              _("ww.pages.tableviewer.notifications.treeviewer-length.error"),
               { value: conjugationsLength },
               "error"
             );
@@ -203,7 +201,7 @@ export class TableviewerConjPanelComponent
     this.gridData$.pipe(take(1)).subscribe((gridData) => {
       if (gridData.uniqueRow.length > 80) {
         this.notificationService.translated(
-          marker("ww.pages.tableviewer.notifications.gridOrder.limit-error"),
+          _("ww.pages.tableviewer.notifications.gridOrder.limit-error"),
           { value: gridData.uniqueRow.length },
           "error"
         );
@@ -426,13 +424,13 @@ export class TableviewerConjPanelComponent
       );
       if (result) {
         this.notificationService.translated(
-          marker("ww.pages.tableviewer.notifications.copy.success"),
+          _("ww.pages.tableviewer.notifications.copy.success"),
           {},
           "success"
         );
       } else {
         this.notificationService.translated(
-          marker("ww.pages.tableviewer.notifications.copy.error"),
+          _("ww.pages.tableviewer.notifications.copy.error"),
           {},
           "error"
         );
@@ -443,13 +441,13 @@ export class TableviewerConjPanelComponent
   updateToast(success?, code = 200) {
     if (success) {
       this.notificationService.translated(
-        marker("ww.pages.tableviewer.notifications.download.success"),
+        _("ww.pages.tableviewer.notifications.download.success"),
         {},
         "success"
       );
     } else {
       this.notificationService.translated(
-        marker("ww.pages.tableviewer.notifications.download.error"),
+        _("ww.pages.tableviewer.notifications.download.error"),
         {},
         "error"
       );

@@ -9,6 +9,7 @@ import { AppState } from "../core.module";
 export const NIGHT_MODE_THEME: ThemeName = "DARK-THEME";
 
 export interface SettingsState {
+  analytics: boolean;
   language: AvailableLanguages;
   theme: ThemeName;
   autoNightMode: boolean;

@@ -2,6 +2,7 @@ import { Action, createReducer, on } from "@ngrx/store";
 import { initialSettings } from "../../../config/config";
 import { environment } from "../../../environments/environment";
 import {
+  actionSettingsChangeAnalytics,
   actionSettingsChangeAnimationsElements,
   actionSettingsChangeAnimationsPage,
   actionSettingsChangeAnimationsPageDisabled,
@@ -19,6 +20,7 @@ import {
 import { NIGHT_MODE_THEME, SettingsState } from "./settings.model";
 
 const initialBaseState: SettingsState = {
+  analytics: !!environment.plausibleAnalyticsDataDomain,
   language: "en",
   theme: "PURPLE-THEME--LIGHT",
   autoNightMode: false,
@@ -46,6 +48,7 @@ export const initialState: SettingsState = {
 const reducer = createReducer(
   initialState,
   on(
+    actionSettingsChangeAnalytics,
     actionSettingsChangeLanguage,
     actionSettingsChangeTheme,
     actionSettingsChangeAutoNightMode,
