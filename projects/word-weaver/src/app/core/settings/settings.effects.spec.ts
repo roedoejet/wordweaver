@@ -10,6 +10,7 @@ import {
   AnimationsService,
   AppState,
   LocalStorageService,
+  NotificationService,
 } from "../core.module";
 
 import { SettingsEffects, SETTINGS_KEY } from "./settings.effects";
@@ -27,6 +28,7 @@ describe("SettingsEffects", () => {
   let overlayContainer: jasmine.SpyObj<OverlayContainer>;
   let animationsService: jasmine.SpyObj<AnimationsService>;
   let translateService: jasmine.SpyObj<TranslateService>;
+  let notificationService: jasmine.SpyObj<NotificationService>;
   let store: jasmine.SpyObj<Store<AppState>>;
 
   beforeEach(() => {
@@ -49,6 +51,7 @@ describe("SettingsEffects", () => {
       "updateRouteAnimationType",
     ]);
     translateService = jasmine.createSpyObj("TranslateService", ["use"]);
+    notificationService = jasmine.createSpyObj("NotificationService", ["use"]);
     store = jasmine.createSpyObj("store", ["pipe"]);
   });
 
@@ -57,6 +60,7 @@ describe("SettingsEffects", () => {
       const { cold } = helpers;
 
       const settings: SettingsState = {
+        analytics: false,
         language: "en",
         pageAnimations: true,
         elementsAnimations: true,
@@ -87,7 +91,8 @@ describe("SettingsEffects", () => {
         overlayContainer,
         localStorageService,
         animationsService,
-        translateService
+        translateService,
+        notificationService
       );
 
       effect.persistSettings.subscribe(() => {
