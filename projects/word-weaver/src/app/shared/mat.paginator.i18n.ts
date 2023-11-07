@@ -1,5 +1,5 @@
 import { MatPaginatorIntl } from "@angular/material/paginator";
-import { marker } from "@biesbjerg/ngx-translate-extract-marker";
+import { marker as _ } from "@colsen1991/ngx-translate-extract-marker";
 import { TranslateParser, TranslateService } from "@ngx-translate/core";
 
 export class WWPaginatorIntl extends MatPaginatorIntl {
@@ -17,12 +17,12 @@ export class WWPaginatorIntl extends MatPaginatorIntl {
   getTranslations() {
     this.translateService
       .get([
-        marker("ww.paginator.items_per_page"),
-        marker("ww.paginator.next_page"),
-        marker("ww.paginator.previous_page"),
-        marker("ww.paginator.first_page"),
-        marker("ww.paginator.last_page"),
-        marker("ww.paginator.range"),
+        _("ww.paginator.items_per_page"),
+        _("ww.paginator.next_page"),
+        _("ww.paginator.previous_page"),
+        _("ww.paginator.first_page"),
+        _("ww.paginator.last_page"),
+        _("ww.paginator.range"),
       ])
       .subscribe((translation) => {
         this.itemsPerPageLabel = translation["ww.paginator.items_per_page"];

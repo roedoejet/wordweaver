@@ -80,6 +80,19 @@
           >
           </mat-slide-toggle>
         </div>
+        <div class="icon-form-field" *ngIf="usesAnalytics">
+          <mat-icon color="accent">
+            <fa-icon icon="bars" color="accent"></fa-icon>
+          </mat-icon>
+          <mat-placeholder
+            >{{ "ww.pages.settings.analytics" | translate }}
+          </mat-placeholder>
+          <mat-slide-toggle
+            [checked]="settings.analytics"
+            (change)="onAnalyticsToggle($event)"
+          >
+          </mat-slide-toggle>
+        </div>
         <div class="icon-form-field">
           <mat-placeholder
             >{{ "ww.pages.settings.advanced" | translate }}

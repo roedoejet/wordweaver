@@ -4,13 +4,14 @@ import {
   OnDestroy,
   OnInit,
 } from "@angular/core";
-import { marker } from "@biesbjerg/ngx-translate-extract-marker";
+import { marker as _ } from "@colsen1991/ngx-translate-extract-marker";
 import { select, Store } from "@ngrx/store";
 import { Observable, Subject } from "rxjs";
 import { take } from "rxjs/operators";
 import { META_DATA } from "../../../../config/config";
 import { ROUTE_ANIMATIONS_ELEMENTS } from "../../../core/core.module";
 import {
+  actionSettingsChangeAnalytics,
   actionSettingsChangeAnimationsElements,
   actionSettingsChangeAnimationsPage,
   actionSettingsChangeAutoNightMode,
@@ -23,6 +24,7 @@ import {
 } from "../../../core/settings/settings.actions";
 import { SettingsState, State } from "../../../core/settings/settings.model";
 import { selectSettings } from "../../../core/settings/settings.selectors";
+import { environment } from "../../../../environments/environment";
 
 @Component({
   selector: "ww-settings",
@@ -35,39 +37,40 @@ export class SettingsContainerComponent implements OnDestroy, OnInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   settings$: Observable<SettingsState>;
   deferredPrompt$: Observable<any>;
+  usesAnalytics = !!environment.plausibleAnalyticsDataDomain;
   themes = [
-    { value: "DEFAULT-THEME", label: marker("ww.pages.settings.themes.blue") },
-    { value: "LIGHT-THEME", label: marker("ww.pages.settings.themes.light") },
-    { value: "DARK-THEME", label: marker("ww.pages.settings.themes.dark") },
+    { value: "DEFAULT-THEME", label: _("ww.pages.settings.themes.blue") },
+    { value: "LIGHT-THEME", label: _("ww.pages.settings.themes.light") },
+    { value: "DARK-THEME", label: _("ww.pages.settings.themes.dark") },
     {
       value: "PURPLE-THEME--LIGHT",
-      label: marker("ww.pages.settings.themes.purple-light"),
+      label: _("ww.pages.settings.themes.purple-light"),
     },
     {
       value: "PURPLE-THEME--DARK",
-      label: marker("ww.pages.settings.themes.purple-dark"),
+      label: _("ww.pages.settings.themes.purple-dark"),
     },
     {
       value: "PURPLE-BLUE-THEME--LIGHT",
-      label: marker("ww.pages.settings.themes.purple-blue-light"),
+      label: _("ww.pages.settings.themes.purple-blue-light"),
     },
     {
       value: "PURPLE-BLUE-THEME--DARK",
-      label: marker("ww.pages.settings.themes.purple-blue-dark"),
+      label: _("ww.pages.settings.themes.purple-blue-dark"),
     },
     {
       value: "PURPLE-GOLD-THEME--LIGHT",
-      label: marker("ww.pages.settings.themes.purple-gold-light"),
+      label: _("ww.pages.settings.themes.purple-gold-light"),
     },
     {
       value: "PURPLE-GOLD-THEME--DARK",
-      label: marker("ww.pages.settings.themes.purple-gold-dark"),
+      label: _("ww.pages.settings.themes.purple-gold-dark"),
     },
   ];
 
   languages = META_DATA.languages.map((x) => ({
     value: x.value,
-    label: marker(`ww.pages.settings.general.language.${x.value}`),
+    label: _(`ww.pages.settings.general.language.${x.value}`),
   }));
   showInstall = false;
   unsubscribe$ = new Subject<void>();
@@ -75,6 +78,7 @@ export class SettingsContainerComponent implements OnDestroy, OnInit {
 
   ngOnInit() {
     this.settings$ = this.store.pipe(select(selectSettings));
+    this.settings$.subscribe((settings) => console.log(settings));
     // this.deferredPrompt$ = fromEvent(window, "beforeinstallprompt").pipe(
     //   takeUntil(this.unsubscribe$),
     //   map(e => {
@@ -116,6 +120,10 @@ export class SettingsContainerComponent implements OnDestroy, OnInit {
 
   onStickyHeaderToggle({ checked: stickyHeader }) {
     this.store.dispatch(actionSettingsChangeStickyHeader({ stickyHeader }));
+  }
+
+  onAnalyticsToggle({ checked: analytics }) {
+    this.store.dispatch(actionSettingsChangeAnalytics({ analytics }));
   }
 
   onPageAnimationsToggle({ checked: pageAnimations }) {

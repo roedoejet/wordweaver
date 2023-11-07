@@ -12,6 +12,11 @@ export const selectSettingsStickyHeader = createSelector(
   (state: SettingsState) => state.stickyHeader
 );
 
+export const selectSettingsAnalytics = createSelector(
+  selectSettings,
+  (state: SettingsState) => state.analytics
+);
+
 export const selectSettingsLanguage = createSelector(
   selectSettings,
   (state: SettingsState) => state.language
