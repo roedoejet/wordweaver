@@ -46,6 +46,11 @@ export const actionSettingsChangeStickyHeader = createAction(
   props<{ stickyHeader: boolean }>()
 );
 
+export const actionSettingsChangeAnalytics = createAction(
+  "[Settings] Change Analytics Opt-in",
+  props<{ analytics: boolean }>()
+);
+
 export const actionSettingsChangeAnimationsPage = createAction(
   "[Settings] Change Animations Page",
   props<{ pageAnimations: boolean }>()

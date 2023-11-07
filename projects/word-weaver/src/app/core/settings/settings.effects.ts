@@ -1,5 +1,6 @@
 import { OverlayContainer } from "@angular/cdk/overlay";
 import { Injectable } from "@angular/core";
+import { marker as _ } from "@colsen1991/ngx-translate-extract-marker";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { select, Store } from "@ngrx/store";
 import { TranslateService } from "@ngx-translate/core";
@@ -16,6 +17,7 @@ import { AnimationsService } from "../animations/animations.service";
 import { selectSettingsState } from "../core.state";
 import { LocalStorageService } from "../local-storage/local-storage.service";
 import {
+  actionSettingsChangeAnalytics,
   actionSettingsChangeAnimationsElements,
   actionSettingsChangeAnimationsPage,
   actionSettingsChangeAnimationsPageDisabled,
@@ -34,8 +36,10 @@ import {
   selectEffectiveTheme,
   selectElementsAnimations,
   selectPageAnimations,
+  selectSettingsAnalytics,
   selectSettingsLanguage,
 } from "./settings.selectors";
+import { NotificationService } from "../core.module";
 
 export const SETTINGS_KEY = "SETTINGS";
 
@@ -51,7 +55,8 @@ export class SettingsEffects {
     private overlayContainer: OverlayContainer,
     private localStorageService: LocalStorageService,
     private animationsService: AnimationsService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private notificationService: NotificationService
   ) {}
 
   changeHour = createEffect(() =>
@@ -65,10 +70,39 @@ export class SettingsEffects {
     )
   );
 
+  changeAnalytics = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(actionSettingsChangeAnalytics),
+        withLatestFrom(this.store.pipe(select(selectSettingsAnalytics))),
+        tap(([action, usesAnalytics]) => {
+          if (usesAnalytics) {
+            // Change to opt-in
+            this.localStorageService.removeItem("plausible_ignore");
+            this.notificationService.translated(
+              _("ww.pages.settings.notifications.analytics.opt-in"),
+              {},
+              "success"
+            );
+          } else {
+            // Change to opt-out
+            this.localStorageService.setItem("plausible_ignore", "true");
+            this.notificationService.translated(
+              _("ww.pages.settings.notifications.analytics.opt-out"),
+              {},
+              "error"
+            );
+          }
+        })
+      ),
+    { dispatch: false }
+  );
+
   persistSettings = createEffect(
     () =>
       this.actions$.pipe(
         ofType(
+          actionSettingsChangeAnalytics,
           actionSettingsChangeAnimationsElements,
           actionSettingsChangeAnimationsPage,
           actionSettingsChangeAnimationsPageDisabled,
