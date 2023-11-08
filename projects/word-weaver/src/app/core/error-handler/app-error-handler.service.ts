@@ -5,7 +5,7 @@ import { environment } from "../../../environments/environment";
 
 import { NotificationService } from "../notifications/notification.service";
 
-import { marker as _ } from "@colsen1991/ngx-translate-extract-marker";
+import { marker } from "@colsen1991/ngx-translate-extract-marker";
 
 /** Application-wide error handler that adds a UI notification to the error handling
  * provided by the default Angular ErrorHandler.
@@ -20,9 +20,9 @@ export class AppErrorHandler extends ErrorHandler {
     let displayMessage;
 
     if (!environment.production) {
-      displayMessage = _("ww.common.notifications.error.dev");
+      displayMessage = marker("ww.common.notifications.error.dev");
     } else {
-      displayMessage = _("ww.common.notifications.error.general");
+      displayMessage = marker("ww.common.notifications.error.general");
     }
 
     this.notificationsService.translated(displayMessage, {}, "error");
