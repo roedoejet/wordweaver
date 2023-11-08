@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { marker as _ } from "@colsen1991/ngx-translate-extract-marker";
+import { marker } from "@colsen1991/ngx-translate-extract-marker";
 import { select, Store } from "@ngrx/store";
 import browser from "browser-detect";
 import { Observable } from "rxjs";
@@ -33,14 +33,14 @@ export class AppComponent implements OnInit {
   logo = META_DATA.logo;
   languages = META_DATA.languages;
   navigation = [
-    { link: "wordmaker", label: _("ww.menu.wordmaker") },
-    { link: "tableviewer", label: _("ww.menu.tableviewer") },
-    // { link: "info", label: _("ww.menu.info") },
-    { link: "about", label: _("ww.menu.about") },
+    { link: "wordmaker", label: marker("ww.menu.wordmaker") },
+    { link: "tableviewer", label: marker("ww.menu.tableviewer") },
+    // { link: "info", label: marker("ww.menu.info") },
+    { link: "about", label: marker("ww.menu.about") },
   ];
   navigationSideMenu = [
     ...this.navigation,
-    { link: "settings", label: _("ww.menu.settings") },
+    { link: "settings", label: marker("ww.menu.settings") },
   ];
   metaData = META_DATA;
   stickyHeader$: Observable<boolean>;

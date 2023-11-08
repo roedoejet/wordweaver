@@ -14,7 +14,7 @@ import {
   State,
 } from "../../../core/wordmaker-selection/wordmaker-selection.model";
 import { Store, select } from "@ngrx/store";
-import { marker as _ } from "@colsen1991/ngx-translate-extract-marker";
+import { marker } from "@colsen1991/ngx-translate-extract-marker";
 import { actionChangeStep } from "../../../core/wordmaker-selection/wordmaker-selection.actions";
 import { distinctUntilKeyChanged, take, takeUntil } from "rxjs/operators";
 import { TranslateService } from "@ngx-translate/core";
@@ -31,13 +31,13 @@ export class WordmakerComponent implements OnDestroy, OnInit, AfterViewInit {
   loading;
   isLinear = true;
   verbLabel = new BehaviorSubject<string>(
-    _("ww.pages.wordmaker.steps.verb.question")
+    marker("ww.pages.wordmaker.steps.verb.question")
   );
   persLabel = new BehaviorSubject<string>(
-    _("ww.pages.wordmaker.steps.pers.question")
+    marker("ww.pages.wordmaker.steps.pers.question")
   );
   tempLabel = new BehaviorSubject<string>(
-    _("ww.pages.wordmaker.steps.temp.question")
+    marker("ww.pages.wordmaker.steps.temp.question")
   );
   selection$: Observable<WordmakerState>;
   unsubscribe$ = new Subject<void>();

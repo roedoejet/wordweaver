@@ -1,4 +1,4 @@
-import { marker as _ } from "@colsen1991/ngx-translate-extract-marker";
+import { marker } from "@colsen1991/ngx-translate-extract-marker";
 import { SettingsState } from "../app/core/settings/settings.model";
 import { TableviewerState } from "../app/core/tableviewer-selection/tableviewer-selection.model";
 import { Contributor } from "../app/pages/about/about/about.component";
@@ -263,38 +263,38 @@ export interface Theme {
 export const THEMES: Theme[] = [
   {
     value: "DEFAULT-THEME",
-    label: _("ww.pages.settings.themes.default"),
+    label: marker("ww.pages.settings.themes.default"),
   },
   {
     value: "LIGHT-THEME",
-    label: _("ww.pages.settings.themes.light"),
+    label: marker("ww.pages.settings.themes.light"),
   },
   {
     value: "DARK-THEME",
-    label: _("ww.pages.settings.themes.dark"),
+    label: marker("ww.pages.settings.themes.dark"),
   },
   {
     value: "PURPLE-THEME--LIGHT",
-    label: _("ww.pages.settings.themes.purple-light"),
+    label: marker("ww.pages.settings.themes.purple-light"),
   },
   {
     value: "PURPLE-THEME--DARK",
-    label: _("ww.pages.settings.themes.purple-dark"),
+    label: marker("ww.pages.settings.themes.purple-dark"),
   },
   {
     value: "PURPLE-BLUE-THEME--LIGHT",
-    label: _("ww.pages.settings.themes.purple-blue-light"),
+    label: marker("ww.pages.settings.themes.purple-blue-light"),
   },
   {
     value: "PURPLE-BLUE-THEME--DARK",
-    label: _("ww.pages.settings.themes.purple-blue-dark"),
+    label: marker("ww.pages.settings.themes.purple-blue-dark"),
   },
   {
     value: "PURPLE-GOLD-THEME--LIGHT",
-    label: _("ww.pages.settings.themes.purple-gold-light"),
+    label: marker("ww.pages.settings.themes.purple-gold-light"),
   },
   {
     value: "PURPLE-GOLD-THEME--DARK",
-    label: _("ww.pages.settings.themes.purple-gold-dark"),
+    label: marker("ww.pages.settings.themes.purple-gold-dark"),
   },
 ];
