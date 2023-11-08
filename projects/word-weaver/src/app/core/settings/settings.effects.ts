@@ -78,7 +78,9 @@ export class SettingsEffects {
         tap(([action, usesAnalytics]) => {
           if (usesAnalytics) {
             // Change to opt-in
-            this.localStorageService.removeItem("plausible_ignore");
+            // We don't use the localstorage service because we don't
+            // want the app prefix
+            window.localStorage.removeItem("plausible_ignore");
             this.notificationService.translated(
               marker("ww.pages.settings.notifications.analytics.opt-in"),
               {},
@@ -86,7 +88,9 @@ export class SettingsEffects {
             );
           } else {
             // Change to opt-out
-            this.localStorageService.setItem("plausible_ignore", "true");
+            // We don't use the localstorage service because we don't
+            // want the app prefix
+            window.localStorage.setItem("plausible_ignore", "true");
             this.notificationService.translated(
               marker("ww.pages.settings.notifications.analytics.opt-out"),
               {},
