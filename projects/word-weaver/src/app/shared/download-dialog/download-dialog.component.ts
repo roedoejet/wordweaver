@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { MatDialogRef } from "@angular/material/dialog";
-import { marker as _ } from "@colsen1991/ngx-translate-extract-marker";
+import { marker } from "@colsen1991/ngx-translate-extract-marker";
 import { select, Store } from "@ngrx/store";
 import { TranslateService } from "@ngx-translate/core";
 import { saveAs } from "file-saver-es";
@@ -50,7 +50,9 @@ export class DownloadDialogComponent implements OnInit {
   ) {
     this.translate
       .get(
-        _("ww.pages.tableviewer.dialog.download.settings.heading.placeholder")
+        marker(
+          "ww.pages.tableviewer.dialog.download.settings.heading.placeholder"
+        )
       )
       .subscribe((x) => this.form.controls.heading.setValue(x));
   }
@@ -107,7 +109,7 @@ export class DownloadDialogComponent implements OnInit {
               .pipe(
                 catchError((err) => {
                   this.notificationService.translated(
-                    _("ww.pages.tableviewer.notifications.download.error"),
+                    marker("ww.pages.tableviewer.notifications.download.error"),
                     {},
                     "error"
                   );

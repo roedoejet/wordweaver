@@ -1,6 +1,6 @@
 import { OverlayContainer } from "@angular/cdk/overlay";
 import { Injectable } from "@angular/core";
-import { marker as _ } from "@colsen1991/ngx-translate-extract-marker";
+import { marker } from "@colsen1991/ngx-translate-extract-marker";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { select, Store } from "@ngrx/store";
 import { TranslateService } from "@ngx-translate/core";
@@ -80,7 +80,7 @@ export class SettingsEffects {
             // Change to opt-in
             this.localStorageService.removeItem("plausible_ignore");
             this.notificationService.translated(
-              _("ww.pages.settings.notifications.analytics.opt-in"),
+              marker("ww.pages.settings.notifications.analytics.opt-in"),
               {},
               "success"
             );
@@ -88,7 +88,7 @@ export class SettingsEffects {
             // Change to opt-out
             this.localStorageService.setItem("plausible_ignore", "true");
             this.notificationService.translated(
-              _("ww.pages.settings.notifications.analytics.opt-out"),
+              marker("ww.pages.settings.notifications.analytics.opt-out"),
               {},
               "error"
             );

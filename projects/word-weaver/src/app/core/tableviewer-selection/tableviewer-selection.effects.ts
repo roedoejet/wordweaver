@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { marker as _ } from "@colsen1991/ngx-translate-extract-marker";
+import { marker } from "@colsen1991/ngx-translate-extract-marker";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { select, Store } from "@ngrx/store";
 import { of } from "rxjs";
@@ -74,7 +74,7 @@ export class TableviewerEffects {
         tap(([action, selection]) => {
           if (selection.root.length < 1) {
             this.notificationService.translated(
-              _("ww.pages.tableviewer.notifications.error.missing-root"),
+              marker("ww.pages.tableviewer.notifications.error.missing-root"),
               {},
               "error"
             );
