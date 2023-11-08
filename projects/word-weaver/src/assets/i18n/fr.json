@@ -31,7 +31,7 @@
       },
       "settings": {
         "advanced": "Paramètres avancés",
-        "analytics": null,
+        "analytics": "Analytique Web",
         "general": {
           "highlighting": {
             "aspect": "Aspect",
@@ -63,8 +63,8 @@
         "night-mode": "Mode jour/nuit automatique (de 21 h à 7 h)",
         "notifications": {
           "analytics": {
-            "opt-in": null,
-            "opt-out": null
+            "opt-in": "Merci d'avoir activé l'analytique Web!",
+            "opt-out": "Désolé de vous voir désactiver l'analytique Web."
           }
         },
         "sticky-header": "Entête fixe",
