@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { marker as _ } from "@colsen1991/ngx-translate-extract-marker";
+import { marker } from "@colsen1991/ngx-translate-extract-marker";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { select, Store } from "@ngrx/store";
 import { tap, withLatestFrom } from "rxjs/operators";
@@ -88,7 +88,7 @@ export class WordmakerEffects {
                 const random = randomX(this.verbService.verbs);
                 this.store.dispatch(actionChangeVerb({ root: random }));
                 this.notificationService.translated(
-                  _("ww.pages.wordmaker.notifications.random.verb"),
+                  marker("ww.pages.wordmaker.notifications.random.verb"),
                   {
                     value: this.translate.instant(
                       "ww-data.verbs." + random.tag
@@ -191,7 +191,7 @@ export class WordmakerEffects {
               if (pronoun.agent && pronoun.patient) {
                 if (!selection.agent || !selection.patient) {
                   this.notificationService.translated(
-                    _(
+                    marker(
                       "ww.pages.wordmaker.notifications.random.pers.transitive"
                     ),
                     {
@@ -208,7 +208,7 @@ export class WordmakerEffects {
               } else if (pronoun.agent) {
                 if (!selection.agent) {
                   this.notificationService.translated(
-                    _(
+                    marker(
                       "ww.pages.wordmaker.notifications.random.pers.intransitive"
                     ),
                     {
@@ -222,7 +222,7 @@ export class WordmakerEffects {
               } else if (pronoun.patient) {
                 if (!selection.patient) {
                   this.notificationService.translated(
-                    _(
+                    marker(
                       "ww.pages.wordmaker.notifications.random.pers.intransitive"
                     ),
                     {
@@ -242,7 +242,7 @@ export class WordmakerEffects {
                 const random = randomX(this.optionService.options);
                 this.store.dispatch(actionChangeOption({ option: random }));
                 this.notificationService.translated(
-                  _("ww.pages.wordmaker.notifications.random.temp"),
+                  marker("ww.pages.wordmaker.notifications.random.temp"),
                   {
                     value: this.translate.instant(
                       "ww-data.options.items." + random.tag

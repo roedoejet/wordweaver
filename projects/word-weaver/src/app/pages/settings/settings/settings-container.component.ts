@@ -4,7 +4,7 @@ import {
   OnDestroy,
   OnInit,
 } from "@angular/core";
-import { marker as _ } from "@colsen1991/ngx-translate-extract-marker";
+import { marker } from "@colsen1991/ngx-translate-extract-marker";
 import { select, Store } from "@ngrx/store";
 import { Observable, Subject } from "rxjs";
 import { take } from "rxjs/operators";
@@ -39,38 +39,38 @@ export class SettingsContainerComponent implements OnDestroy, OnInit {
   deferredPrompt$: Observable<any>;
   usesAnalytics = !!environment.plausibleAnalyticsDataDomain;
   themes = [
-    { value: "DEFAULT-THEME", label: _("ww.pages.settings.themes.blue") },
-    { value: "LIGHT-THEME", label: _("ww.pages.settings.themes.light") },
-    { value: "DARK-THEME", label: _("ww.pages.settings.themes.dark") },
+    { value: "DEFAULT-THEME", label: marker("ww.pages.settings.themes.blue") },
+    { value: "LIGHT-THEME", label: marker("ww.pages.settings.themes.light") },
+    { value: "DARK-THEME", label: marker("ww.pages.settings.themes.dark") },
     {
       value: "PURPLE-THEME--LIGHT",
-      label: _("ww.pages.settings.themes.purple-light"),
+      label: marker("ww.pages.settings.themes.purple-light"),
     },
     {
       value: "PURPLE-THEME--DARK",
-      label: _("ww.pages.settings.themes.purple-dark"),
+      label: marker("ww.pages.settings.themes.purple-dark"),
     },
     {
       value: "PURPLE-BLUE-THEME--LIGHT",
-      label: _("ww.pages.settings.themes.purple-blue-light"),
+      label: marker("ww.pages.settings.themes.purple-blue-light"),
     },
     {
       value: "PURPLE-BLUE-THEME--DARK",
-      label: _("ww.pages.settings.themes.purple-blue-dark"),
+      label: marker("ww.pages.settings.themes.purple-blue-dark"),
     },
     {
       value: "PURPLE-GOLD-THEME--LIGHT",
-      label: _("ww.pages.settings.themes.purple-gold-light"),
+      label: marker("ww.pages.settings.themes.purple-gold-light"),
     },
     {
       value: "PURPLE-GOLD-THEME--DARK",
-      label: _("ww.pages.settings.themes.purple-gold-dark"),
+      label: marker("ww.pages.settings.themes.purple-gold-dark"),
     },
   ];
 
   languages = META_DATA.languages.map((x) => ({
     value: x.value,
-    label: _(`ww.pages.settings.general.language.${x.value}`),
+    label: marker(`ww.pages.settings.general.language.${x.value}`),
   }));
   showInstall = false;
   unsubscribe$ = new Subject<void>();
