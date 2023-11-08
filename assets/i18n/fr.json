@@ -1,14 +1,5 @@
 {
   "ww": {
-    "footer": {
-      "changelog": "Afficher le journal des modifications"
-    },
-    "menu": {
-      "about": "À propos de",
-      "settings": "Paramètres",
-      "tableviewer": "Afficheur de tableaux",
-      "wordmaker": "Machine à mots"
-    },
     "common": {
       "language": "Dans la langue du conjugueur",
       "notifications": {
@@ -21,6 +12,15 @@
       "title-short": "WordWeaver UI",
       "translation-language": "Anglais"
     },
+    "footer": {
+      "changelog": "Afficher le journal des modifications"
+    },
+    "menu": {
+      "about": "À propos de",
+      "settings": "Paramètres",
+      "tableviewer": "Afficheur de tableaux",
+      "wordmaker": "Machine à mots"
+    },
     "pages": {
       "about": {
         "contributors": {
@@ -31,6 +31,7 @@
       },
       "settings": {
         "advanced": "Paramètres avancés",
+        "analytics": "Analytique Web",
         "general": {
           "highlighting": {
             "aspect": "Aspect",
@@ -60,6 +61,12 @@
           "title": "Paramètres généraux"
         },
         "night-mode": "Mode jour/nuit automatique (de 21 h à 7 h)",
+        "notifications": {
+          "analytics": {
+            "opt-in": "Merci d'avoir activé l'analytique Web!",
+            "opt-out": "Désolé de vous voir désactiver l'analytique Web."
+          }
+        },
         "sticky-header": "Entête fixe",
         "testApi": "Modèle de langue d'essai",
         "themes": {
@@ -112,9 +119,9 @@
           "other": "autre",
           "others": "autres",
           "selected": "choisi(s)",
+          "selected-many": "choisis",
           "selected-one": "choisi",
-          "selected-two": "choisis",
-          "selected-many": "choisis"
+          "selected-two": "choisis"
         },
         "notifications": {
           "copy": {

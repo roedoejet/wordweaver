@@ -31,6 +31,7 @@
       },
       "settings": {
         "advanced": "Advanced",
+        "analytics": "Analytics",
         "general": {
           "highlighting": {
             "aspect": "Aspect",
@@ -60,6 +61,12 @@
           "title": "General"
         },
         "night-mode": "Auto night mode (from 21:00 to 7:00)",
+        "notifications": {
+          "analytics": {
+            "opt-in": "Thank you for opting in to our analytics!",
+            "opt-out": "Sorry to see you opt out of our analytics!"
+          }
+        },
         "sticky-header": "Sticky header",
         "testApi": "Test Language Model",
         "themes": {
@@ -112,9 +119,9 @@
           "other": "other",
           "others": "others",
           "selected": "selected",
+          "selected-many": "selected",
           "selected-one": "selected",
-          "selected-two": "selected",
-          "selected-many": "selected"
+          "selected-two": "selected"
         },
         "notifications": {
           "copy": {
