@@ -33,11 +33,8 @@ for file_base in verbs options pronouns conjugations; do
         else
             echo -n "Compressing $file_name... "
         fi
-        # Note: we use "cat $file_name | gzip" instead of "gzip < $file_name"
-        # because in the latter case, the .gz file will encode the timestamp,
-        # which we don't want because we want stable file contents even in .gz
-        # format.
-        if cat "$file_name" | gzip -9 > "$file_name.gz"; then
+        # Compress with 0 timestamps so that we have stable file contents even in .gz format.
+        if cat "$file_name" | gzip -9 | ./zero-gzip-timestamp.sh > "$file_name.gz"; then
             echo OK
         else
             echo ERROR: error running gzip command
