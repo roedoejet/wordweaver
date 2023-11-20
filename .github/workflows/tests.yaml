@@ -43,7 +43,14 @@ jobs:
         continue-on-error: true
         run: |
           npm run-script compress fr v1
-          if git status --porcelain=v1 | grep '\.json\.gz'; then \
+          ALL_OK=1; \
+          for file in $(git status --porcelain=v1 | grep '\.json\.gz' | cut -c4-); do \
+            if ! diff -q <(git show HEAD:$file 2> /dev/null | gunzip -f) <(zcat $file); then \
+              echo Error: "$file needs to be (re-)compressed and committed."; \
+              ALL_OK=0; \
+            fi; \
+          done; \
+          if [[ $ALL_OK == 0 ]]; then \
             echo Error: Please run \"npm run-script compress fr v1\" and commit the .json.gz files created or updated.; \
             false; \
           else \
