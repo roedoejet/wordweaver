@@ -15,7 +15,7 @@ jobs:
       - name: Install everything
         run: npm install
 
-      - name: Validation Step Run spec tests
+      - name: Check1 Run spec tests
         id: specs
         continue-on-error: true
         run: npm run-script ci:test
@@ -26,18 +26,18 @@ jobs:
           fail_ci_if_error: false
           token: ${{ secrets.CODECOV_TOKEN }}
 
-      - name: Validation Step Run ng lint
+      - name: Check2 Run ng lint
         id: lint
         continue-on-error: true
         run: npm run-script lint
 
-      - name: Validation Step Validate data
+      - name: Check3 Validate data
         id: validate
         continue-on-error: true
         run: |
           npm run-script generate-schemas
           npm run-script validate
-      - name: Validation Step Check compressed data files
+      - name: Check4 Check compressed data files
         if: steps.validate.outcome == 'success'
         id: compress
         continue-on-error: true
@@ -59,7 +59,7 @@ jobs:
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
-      - name: Validation Step Run Playwright tests
+      - name: Check5 Run Playwright tests
         id: e2e
         continue-on-error: true
         run: npx npm run-script e2e
@@ -70,12 +70,12 @@ jobs:
           path: playwright-report/
           retention-days: 30
 
-      - name: Fail if any Validation Step failed
+      - name: Fail if any Check step failed
         if: steps.specs.outcome == 'failure' || steps.lint.outcome == 'failure' || steps.validate.outcome == 'failure' || steps.compress.outcome == 'failure' || steps.e2e.outcome == 'failure'
         run: |
-          if [[ "${{ steps.specs.outcome }}" == failure ]]; then echo ERROR: Validation Step Run spec tests failed; fi
-          if [[ "${{ steps.lint.outcome }}" == failure ]]; then echo ERROR: Validation Step Run ng lint failed; fi
-          if [[ "${{ steps.validate.outcome }}" == failure ]]; then echo ERROR: Validation Step Validate data failed; fi
-          if [[ "${{ steps.compress.outcome }}" == failure ]]; then echo ERROR: Validation Step Check compressed data files failed; fi
-          if [[ "${{ steps.e2e.outcome }}" == failure ]]; then echo ERROR: Validation Step Run Playwright tests failed; fi
+          if [[ "${{ steps.specs.outcome }}" == failure ]]; then echo ERROR: Check1 Run spec tests failed; fi
+          if [[ "${{ steps.lint.outcome }}" == failure ]]; then echo ERROR: Check2 Run ng lint failed; fi
+          if [[ "${{ steps.validate.outcome }}" == failure ]]; then echo ERROR: Check3 Validate data failed; fi
+          if [[ "${{ steps.compress.outcome }}" == failure ]]; then echo ERROR: Check4 Check compressed data files failed; fi
+          if [[ "${{ steps.e2e.outcome }}" == failure ]]; then echo ERROR: Check5 Run Playwright tests failed; fi
           false
