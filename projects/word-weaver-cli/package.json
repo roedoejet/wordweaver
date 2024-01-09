@@ -4,12 +4,13 @@
   "type": "module",
   "scripts": {
     "compress": "bash compress.sh",
-    "validate": "npx ts-node validate.ts",
+    "validate": "npx tsx validate.ts",
     "generate-schemas": "bash gen-schemas.sh"
   },
   "dependencies": {
     "ajv": "^8.12.0",
     "ts-node": "^10.9.1",
+    "tsx": "^4.7.0",
     "typescript-json-schema": "^0.61.0"
   },
   "devDependencies": {
