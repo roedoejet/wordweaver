@@ -12,8 +12,5 @@
     "module": "esnext",
     "target": "es2020",
     "lib": ["esnext", "dom"]
-  },
-  "ts-node": {
-    "esm": true
   }
 }

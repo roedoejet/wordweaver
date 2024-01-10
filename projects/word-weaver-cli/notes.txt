@@ -1,5 +1,5 @@
 npm install ajv
-npm install ts-node
+npm install tsx
 npm install typescript-json-schema
 
 cp ../word-weaver/src/config/schema.ts .
@@ -8,4 +8,4 @@ for type in Options Verbs Pronouns Conjugations; do
     npx typescript-json-schema --ignoreErrors package.json $type > $type.jsonschema.json
 done
 
-npx ts-node validate.ts
+npx tsx validate.ts
