@@ -2,7 +2,7 @@ name: Run tests
 on: [push]
 jobs:
   all-tests:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     # Stop the occasional rogue instance before the 6h GitHub limit
     timeout-minutes: 15
     steps:
