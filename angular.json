@@ -35,6 +35,11 @@
                 "input": "projects/word-weaver",
                 "glob": "_headers",
                 "output": "."
+              },
+              {
+                "input": "projects/word-weaver",
+                "glob": "_redirects",
+                "output": "."
               }
             ],
             "styles": [
