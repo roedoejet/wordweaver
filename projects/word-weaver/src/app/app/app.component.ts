@@ -84,15 +84,17 @@ export class AppComponent implements OnInit {
 
   loadAssets() {
     new Promise<void>((resolve, reject) => {
-      this.verbService.verbs;
-      this.pronounService.pronouns;
-      this.optionService.options;
-      if (this.conjugationService.conjugations) {
-        console.log("conjugationService.conjugations");
+      if (
+        this.conjugationService.conjugations &&
+        this.verbService.verbs &&
+        this.optionService.options &&
+        this.pronounService.pronouns
+      ) {
+        console.log("All assets loaded");
         resolve();
       } else {
-        console.log("conjugationService.conjugations not loaded");
-        reject("conjugationService.conjugations not loaded");
+        console.log("Not all assets loaded");
+        reject("Not all assets loaded");
       }
     });
   }
