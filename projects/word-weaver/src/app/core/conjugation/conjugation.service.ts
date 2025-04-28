@@ -22,7 +22,7 @@ import { environment } from "../../../environments/environment";
   providedIn: "root",
 })
 export class ConjugationService {
-  conjugations;
+  conjugations: Conjugations;
   conjugations$: Observable<Conjugations>;
   random$: Observable<ConjugationObject>;
   path = environment.usePrecompressedData
@@ -37,6 +37,10 @@ export class ConjugationService {
       ),
       shareReplay(1)
     );
+    this.conjugations$.subscribe(
+      (conjugations) => (this.conjugations = conjugations)
+    );
+
     this.random$ = this.conjugations$.pipe(
       map((res) => this.getRandomOption(res))
     );

@@ -18,6 +18,13 @@ import {
   actionSettingsChangeLanguage,
 } from "../core/settings/settings.actions";
 
+import {
+  VerbService,
+  OptionService,
+  PronounService,
+  ConjugationService,
+} from "../core/core.module";
+
 @Component({
   selector: "ww-root",
   templateUrl: "./app.component.html",
@@ -48,8 +55,14 @@ export class AppComponent implements OnInit {
   theme$: Observable<string>;
   constructor(
     private store: Store,
-    private storageService: LocalStorageService
-  ) {}
+    private storageService: LocalStorageService,
+    private verbService: VerbService,
+    private pronounService: PronounService,
+    private optionService: OptionService,
+    private conjugationService: ConjugationService
+  ) {
+    this.verbService.verbs;
+  }
 
   private static isIEorEdgeOrSafari() {
     return ["ie", "edge", "safari"].includes(browser().name);
@@ -68,6 +81,21 @@ export class AppComponent implements OnInit {
     this.stickyHeader$ = this.store.pipe(select(selectSettingsStickyHeader));
     this.language$ = this.store.pipe(select(selectSettingsLanguage));
     this.theme$ = this.store.pipe(select(selectEffectiveTheme));
+    this.loadAssets();
+  }
+
+  loadAssets() {
+    new Promise<void>((resolve, reject) => {
+      this.pronounService.pronouns;
+      this.optionService.options;
+      if (this.conjugationService.conjugations) {
+        console.log("conjugationService.conjugations");
+        resolve();
+      } else {
+        console.log("conjugationService.conjugations not loaded");
+        reject("conjugationService.conjugations not loaded");
+      }
+    });
   }
 
   onLanguageSelect({ value: language }) {
