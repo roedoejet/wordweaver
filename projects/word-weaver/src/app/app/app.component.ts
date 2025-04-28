@@ -60,9 +60,7 @@ export class AppComponent implements OnInit {
     private pronounService: PronounService,
     private optionService: OptionService,
     private conjugationService: ConjugationService
-  ) {
-    this.verbService.verbs;
-  }
+  ) {}
 
   private static isIEorEdgeOrSafari() {
     return ["ie", "edge", "safari"].includes(browser().name);
@@ -86,6 +84,7 @@ export class AppComponent implements OnInit {
 
   loadAssets() {
     new Promise<void>((resolve, reject) => {
+      this.verbService.verbs;
       this.pronounService.pronouns;
       this.optionService.options;
       if (this.conjugationService.conjugations) {
