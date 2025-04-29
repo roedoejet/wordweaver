@@ -79,10 +79,9 @@ export class AppComponent implements OnInit {
     this.stickyHeader$ = this.store.pipe(select(selectSettingsStickyHeader));
     this.language$ = this.store.pipe(select(selectSettingsLanguage));
     this.theme$ = this.store.pipe(select(selectEffectiveTheme));
-    this.loadAssets();
   }
 
-  loadAssets() {
+  checkAssetsAreLoaded() {
     new Promise<void>((resolve, reject) => {
       if (
         this.conjugationService.conjugations &&
