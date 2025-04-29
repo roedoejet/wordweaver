@@ -1,8 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Store, select } from "@ngrx/store";
-import { Observable } from "rxjs";
-import { map, shareReplay, switchMap } from "rxjs/operators";
+import { Observable, throwError } from "rxjs";
+import { map, shareReplay, switchMap, retry, catchError } from "rxjs/operators";
 
 import {
   ConjugationObject,
@@ -22,7 +22,7 @@ import { environment } from "../../../environments/environment";
   providedIn: "root",
 })
 export class ConjugationService {
-  conjugations: Conjugations;
+  conjugations;
   conjugations$: Observable<Conjugations>;
   random$: Observable<ConjugationObject>;
   path = environment.usePrecompressedData
@@ -35,12 +35,16 @@ export class ConjugationService {
       switchMap((settings: SettingsState) =>
         this.http.get<Conjugations>(settings.baseUrl + this.path)
       ),
-      shareReplay(1)
+      retry(2),
+      shareReplay(1),
+      catchError((err) => {
+        console.error("Failed to load conjugations", err);
+        return throwError(() => err); // let error propagate
+      })
     );
     this.conjugations$.subscribe(
       (conjugations) => (this.conjugations = conjugations)
     );
-
     this.random$ = this.conjugations$.pipe(
       map((res) => this.getRandomOption(res))
     );

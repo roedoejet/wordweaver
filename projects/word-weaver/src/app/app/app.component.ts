@@ -2,7 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { marker } from "@colsen1991/ngx-translate-extract-marker";
 import { select, Store } from "@ngrx/store";
 import browser from "browser-detect";
-import { Observable } from "rxjs";
+import { forkJoin, Observable, of } from "rxjs";
+import { take, map, catchError } from "rxjs/operators";
 import { META_DATA } from "../../config/config";
 import { environment as env } from "../../environments/environment";
 import {
@@ -24,6 +25,13 @@ import {
   PronounService,
   ConjugationService,
 } from "../core/core.module";
+
+// wraps an observable to see if the observable was a success or not
+const safeLoad = <T>(obs$: Observable<T>) =>
+  obs$.pipe(
+    map((data) => ({ status: "success" as const, data })),
+    catchError((error) => of({ status: "error" as const, error }))
+  );
 
 @Component({
   selector: "ww-root",
@@ -79,21 +87,24 @@ export class AppComponent implements OnInit {
     this.stickyHeader$ = this.store.pipe(select(selectSettingsStickyHeader));
     this.language$ = this.store.pipe(select(selectSettingsLanguage));
     this.theme$ = this.store.pipe(select(selectEffectiveTheme));
-  }
 
-  checkAssetsAreLoaded() {
-    new Promise<void>((resolve, reject) => {
-      if (
-        this.conjugationService.conjugations &&
-        this.verbService.verbs &&
-        this.optionService.options &&
-        this.pronounService.pronouns
-      ) {
-        console.log("All assets loaded");
-        resolve();
+    forkJoin([
+      safeLoad(this.conjugationService.conjugations$.pipe(take(1))),
+      safeLoad(this.verbService.verbs$.pipe(take(1))),
+      safeLoad(this.optionService.options$.pipe(take(1))),
+      safeLoad(this.pronounService.pronouns$.pipe(take(1))),
+    ]).subscribe((results) => {
+      const [c, v, o, p] = results;
+      if ([c, v, o, p].some((r) => r.status === "error")) {
+        console.warn("Some observables failed:", results);
+        // handle partial failure, maybe retry or show a warning
       } else {
-        console.log("Not all assets loaded");
-        reject("Not all assets loaded");
+        console.log("All data loaded successfully:", {
+          conjugations: c,
+          verbs: v,
+          options: o,
+          pronouns: p,
+        });
       }
     });
   }
