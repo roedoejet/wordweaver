@@ -1,8 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Store, select } from "@ngrx/store";
-import { Observable } from "rxjs";
-import { map, shareReplay, switchMap } from "rxjs/operators";
+import { Observable, throwError } from "rxjs";
+import { map, shareReplay, switchMap, retry, catchError } from "rxjs/operators";
 
 import { Verb } from "../../../config/config";
 import { selectSettingsState } from "../core.state";
@@ -24,7 +24,12 @@ export class VerbService {
       switchMap((settings: SettingsState) =>
         this.http.get<Verb[]>(settings.baseUrl + this.path)
       ),
-      shareReplay(1)
+      retry(2),
+      shareReplay(1),
+      catchError((err) => {
+        console.error("Failed to load verbs", err);
+        return throwError(() => err); // let error propagate
+      })
     );
     this.verbs$.subscribe((verbs) => (this.verbs = verbs));
     this.random$ = this.verbs$.pipe(map((res) => this.getRandomOption(res)));

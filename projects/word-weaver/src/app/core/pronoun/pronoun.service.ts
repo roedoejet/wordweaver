@@ -1,8 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Store, select } from "@ngrx/store";
-import { Observable } from "rxjs";
-import { map, shareReplay, switchMap } from "rxjs/operators";
+import { Observable, throwError } from "rxjs";
+import { map, shareReplay, switchMap, retry, catchError } from "rxjs/operators";
 
 import { Pronoun } from "../../../config/config";
 import { selectSettingsState } from "../core.state";
@@ -26,7 +26,12 @@ export class PronounService {
       switchMap((settings: SettingsState) =>
         this.http.get<Pronoun[]>(settings.baseUrl + this.path)
       ),
-      shareReplay(1)
+      retry(2),
+      shareReplay(1),
+      catchError((err) => {
+        console.error("Failed to load pronouns", err);
+        return throwError(() => err); // let error propagate
+      })
     );
     this.random$ = this.pronouns$.pipe(map((res) => this.getRandomPro(res)));
     this.pronouns$.subscribe((pns) => (this.pronouns = pns));
