@@ -193,6 +193,10 @@ export const httpLoaderFactory = (http: HttpClient) =>
   ],
   declarations: [],
   providers: [
+    ConjugationService,
+    OptionService,
+    PronounService,
+    VerbService,
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     { provide: ErrorHandler, useClass: AppErrorHandler },
     { provide: RouterStateSerializer, useClass: CustomSerializer },
