@@ -90,13 +90,13 @@
 
   .ending {
     .ending {
-      color: mix(mat-color($primary, A100), mat-color($accent, A100), 50%);
+      color: mix(map-get(map-get($primary, contrast), A100), mat-color($accent, A100), 50%);
     }
   }
 
   .root {
     .root {
-      color: mix(mat-color($primary, A100), mat-color($accent, A100), 50%);
+      color: mix(map-get(map-get($primary, contrast), A100), mat-color($accent, A100), 80%);
     }
   }
 }
