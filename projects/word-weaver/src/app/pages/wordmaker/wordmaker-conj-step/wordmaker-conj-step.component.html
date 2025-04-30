@@ -55,7 +55,7 @@
             [data]="conjugations[0]"
           ></ww-tier>
         </h5>
-        <h3 *ngIf="!conjugations[0]">
+        <h3 *ngIf="!conjugations[0] && i === 0">
           {{ "ww.pages.wordmaker.notifications.noconjugation" | translate }}
         </h3>
       </div>
