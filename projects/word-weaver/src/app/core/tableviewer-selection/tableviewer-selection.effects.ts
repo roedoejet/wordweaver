@@ -1,15 +1,13 @@
-import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { marker } from "@colsen1991/ngx-translate-extract-marker";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { select, Store } from "@ngrx/store";
-import { of } from "rxjs";
+import { EMPTY } from "rxjs";
 import {
-  catchError,
+  concatMap,
   map,
   switchMap,
   take,
-  tap,
   withLatestFrom,
 } from "rxjs/operators";
 import { ConjugationService } from "../../core/conjugation/conjugation.service";
@@ -43,7 +41,6 @@ export class TableviewerEffects {
     private actions$: Actions,
     private store: Store<State>,
     // private localStorageService: LocalStorageService,
-    private http: HttpClient,
     private notificationService: NotificationService,
     private conjugationService: ConjugationService
   ) {}
@@ -66,56 +63,49 @@ export class TableviewerEffects {
   //   { dispatch: false }
   // );
 
-  conjugate = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(actionConjugationEvent),
-        withLatestFrom(this.store.pipe(select(selectTableviewerState))),
-        tap(([action, selection]) => {
-          if (selection.root.length < 1) {
-            this.notificationService.translated(
-              marker("ww.pages.tableviewer.notifications.error.missing-root"),
-              {},
-              "error"
+  private hasRootSelection(selection: any): boolean {
+    return Array.isArray(selection.root) && selection.root.length > 0;
+  }
+
+  conjugate$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actionConjugationEvent),
+      withLatestFrom(this.store.select(selectTableviewerState)),
+      switchMap(([action, selection]) => {
+        if (!this.hasRootSelection(selection)) {
+          this.notificationService.translated(
+            marker("ww.pages.tableviewer.notifications.error.missing-root"),
+            {},
+            "error"
+          );
+          return EMPTY; // no further actions dispatched
+        }
+
+        const queryArgs = createRequestQueryArgs(selection);
+        if (!queryArgs) {
+          return EMPTY;
+        }
+
+        this.store.dispatch(actionChangeLoading({ loading: true }));
+
+        return this.store.pipe(
+          select(selectSettingsState),
+          take(1),
+          switchMap((settings) => {
+            console.log("conjugated");
+            return this.conjugationService.conjugations$.pipe(
+              map((data) =>
+                this.conjugationService.filterConjugations(data, selection)
+              ),
+              map((filtered) => [
+                actionChangeLoading({ loading: false }),
+                actionChangeConjugations({ conjugations: filtered }),
+              ])
             );
-            return;
-          }
-          const queryArgs = createRequestQueryArgs(selection);
-          if (queryArgs) {
-            this.store.dispatch(actionChangeLoading({ loading: true }));
-            this.store
-              .pipe(
-                select(selectSettingsState),
-                switchMap((settings) => {
-                  if (true) {
-                    // TODO: Currently this always uses the local cached copy, but maybe this should be a configurable setting?
-                    console.log("conjugated");
-                    return this.conjugationService.conjugations$.pipe(
-                      map((x) =>
-                        this.conjugationService.filterConjugations(x, selection)
-                      )
-                    );
-                  } else {
-                    return this.http
-                      .get(
-                        settings.baseUrl +
-                          "conjugations?" +
-                          queryArgs.toString()
-                      )
-                      .pipe(catchError((err) => of(err)));
-                  }
-                }),
-                take(1)
-              )
-              .subscribe((conj) => {
-                this.store.dispatch(actionChangeLoading({ loading: false }));
-                this.store.dispatch(
-                  actionChangeConjugations({ conjugations: conj })
-                );
-              });
-          }
-        })
-      ),
-    { dispatch: false }
+          }),
+          concatMap((actions) => actions) // emit actions one by one
+        );
+      })
+    )
   );
 }

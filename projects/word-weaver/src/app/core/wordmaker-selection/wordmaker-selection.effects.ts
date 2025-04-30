@@ -257,36 +257,4 @@ export class WordmakerEffects {
       ),
     { dispatch: false }
   );
-
-  // conjugate = createEffect(
-  //   () =>
-  //     this.actions$.pipe(
-  //       ofType(actionConjugationEvent),
-  //       withLatestFrom(this.store.pipe(select(selectWordmakerState))),
-  //       tap(([action, selection]) => {
-  //         const queryArgs = createRequestQueryArgs(selection);
-  //         if (queryArgs) {
-  //           this.store.dispatch(actionChangeLoading({ loading: true }));
-  //           this.store
-  //             .pipe(
-  //               select(selectSettingsState),
-  //               switchMap(settings =>
-  //                 this.http
-  //                   .get(
-  //                     settings.baseUrl + "conjugations?" + queryArgs.toString()
-  //                   )
-  //                   .pipe(catchError(err => of(err)))
-  //               )
-  //             )
-  //             .subscribe(conj => {
-  //               this.store.dispatch(actionChangeLoading({ loading: false }));
-  //               this.store.dispatch(
-  //                 actionChangeConjugations({ conjugations: conj })
-  //               );
-  //             });
-  //         }
-  //       })
-  //     ),
-  //   { dispatch: false }
-  // );
 }
