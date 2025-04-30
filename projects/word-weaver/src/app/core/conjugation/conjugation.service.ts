@@ -54,16 +54,17 @@ export class ConjugationService {
     return options[Math.floor(Math.random() * options.length)];
   }
 
-  // FIXME: Not working with TableViewer
-  createRequestQueryArgs(selection) {
+  createRequestQueryArgs = (selection) => {
     const params = new URLSearchParams();
     ["option", "agent", "patient", "root"].forEach((x) => {
-      if (selection[x]) {
-        params.append(x, selection[x].tag);
-      }
+      selection[x].forEach((y) => {
+        if (y.tag) {
+          params.append(x, y.tag);
+        }
+      });
     });
     return params;
-  }
+  };
 
   filterConjugations(
     conjugations: Conjugations,
