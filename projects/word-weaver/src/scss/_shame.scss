@@ -72,6 +72,7 @@
 }
 
 .mat-icon {
+  overflow: visible !important;
   @each $name, $value in $font-sizes {
     &.icon-#{$name} {
       height: em($value) !important;
