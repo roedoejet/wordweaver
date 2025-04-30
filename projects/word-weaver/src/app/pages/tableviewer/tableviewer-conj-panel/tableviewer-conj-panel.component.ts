@@ -30,7 +30,6 @@ import {
   actionConjugationEvent,
   actionToggleTreeViewOrder,
 } from "../../../core/tableviewer-selection/tableviewer-selection.actions";
-import { createRequestQueryArgs } from "../../../core/tableviewer-selection/tableviewer-selection.effects";
 import { TableviewerState } from "../../../core/tableviewer-selection/tableviewer-selection.model";
 import {
   selectTableviewer,
@@ -409,7 +408,7 @@ export class TableviewerConjPanelComponent
 
   copyLink() {
     this.selection$.pipe(take(1)).subscribe((selection) => {
-      const params = createRequestQueryArgs(selection);
+      const params = this.conjugationService.createRequestQueryArgs(selection);
       // Add other relevant params
       params.append("view", selection["view"]);
       params.append("depth", selection["treeDepth"].toString());

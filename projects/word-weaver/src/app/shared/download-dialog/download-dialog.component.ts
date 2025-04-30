@@ -9,7 +9,10 @@ import { saveAs } from "file-saver-es";
 import { combineLatest, Observable, of } from "rxjs";
 import { catchError, map, switchMap, take } from "rxjs/operators";
 import { TIERS } from "../../../config/config";
-import { NotificationService } from "../../core/core.module";
+import {
+  ConjugationService,
+  NotificationService,
+} from "../../core/core.module";
 import { selectTableviewerState } from "../../core/core.state";
 import { actionSettingsChangeLevel } from "../../core/settings/settings.actions";
 import { SettingsState, State } from "../../core/settings/settings.model";
@@ -46,6 +49,7 @@ export class DownloadDialogComponent implements OnInit {
     private store: Store<State>,
     private http: HttpClient,
     private notificationService: NotificationService,
+    private conjugationService: ConjugationService,
     private translate: TranslateService
   ) {
     this.translate
@@ -73,24 +77,13 @@ export class DownloadDialogComponent implements OnInit {
     this.store.dispatch(actionSettingsChangeLevel({ checked, key }));
   }
 
-  createRequestQueryArgs(selection) {
-    const params = new URLSearchParams();
-    ["option", "agent", "patient", "root"].forEach((x) => {
-      selection[x].forEach((y) => {
-        if (y.tag) {
-          params.append(x, y.tag);
-        }
-      });
-    });
-    return params;
-  }
-
   download() {
     this.selectionAndSettings$
       .pipe(
         take(1),
         switchMap(([selection, appSettings]) => {
-          const queryArgs = this.createRequestQueryArgs(selection);
+          const queryArgs =
+            this.conjugationService.createRequestQueryArgs(selection);
           if (queryArgs) {
             this.store.dispatch(actionChangeLoading({ loading: true }));
             const tiers = TIERS.filter((x) => appSettings.level[x.name]);
