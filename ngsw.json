@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1745617696120,
+  "timestamp": 1746047350631,
   "index": "/wordweaver/index.html",
   "assetGroups": [
     {
@@ -11,18 +11,18 @@
         "ignoreVary": true
       },
       "urls": [
-        "/wordweaver/169.4671720be7f5a80f.js",
-        "/wordweaver/407.db7541182e242198.js",
-        "/wordweaver/582.e1724b94d62aa0ad.js",
+        "/wordweaver/169.1c732b5b4d2084ad.js",
+        "/wordweaver/407.382c6ff557df4582.js",
+        "/wordweaver/582.e6a83adda0e4d1b7.js",
         "/wordweaver/701.bc488aef2a01c42e.js",
-        "/wordweaver/980.adfe95425036accc.js",
+        "/wordweaver/980.8d75bddd3f5ec1b9.js",
         "/wordweaver/common.e6349b012c30dee3.js",
         "/wordweaver/favicon.ico",
         "/wordweaver/index.html",
-        "/wordweaver/main.b4a3bc2a771339d2.js",
+        "/wordweaver/main.43b4ea62a20f64a5.js",
         "/wordweaver/manifest.webmanifest",
         "/wordweaver/polyfills.c29b11413222dc4e.js",
-        "/wordweaver/runtime.fd04dfef92137b0d.js",
+        "/wordweaver/runtime.a4b5308e11986c1a.js",
         "/wordweaver/styles.2c48041307a8d012.css"
       ],
       "patterns": []
@@ -83,11 +83,11 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "/wordweaver/169.4671720be7f5a80f.js": "0d66f70cf78b05d826d816851a3b04a15496119b",
-    "/wordweaver/407.db7541182e242198.js": "d22db040238affcae42c120fd6c5ef710d9d0798",
-    "/wordweaver/582.e1724b94d62aa0ad.js": "54918e879aaec4c212575f14af8f8dd73327edd1",
+    "/wordweaver/169.1c732b5b4d2084ad.js": "870234d754abcac19bbd844323d1095e5b3cb015",
+    "/wordweaver/407.382c6ff557df4582.js": "805a48a0cf4507602e21fa98b66c5c146746c506",
+    "/wordweaver/582.e6a83adda0e4d1b7.js": "400d7fef1338325bb93a58c3505a1987e3663d78",
     "/wordweaver/701.bc488aef2a01c42e.js": "6e4775ea25c53e7f0fbe7673463d8518b00bffb8",
-    "/wordweaver/980.adfe95425036accc.js": "5341d00e391e3f17defb8193f010df7ea1743f33",
+    "/wordweaver/980.8d75bddd3f5ec1b9.js": "00621532cf88decc22eeb3b6e7893bb04a283466",
     "/wordweaver/assets/data/fr/v1/conjugations.json": "0a22de1e0609eb711e48b4e63e9b8e88604a5672",
     "/wordweaver/assets/data/fr/v1/conjugations.json.gz": "dc56352206e8f38a638997d3f1ebe1a32bc951e9",
     "/wordweaver/assets/data/fr/v1/i18n/en.json": "ea5b904a404352da6daad65a24b4bf8e03e24e73",
@@ -132,11 +132,11 @@
     "/wordweaver/assets/logo.svg": "36da0c3ab640822a03e396813ff976ad066c1bf2",
     "/wordweaver/common.e6349b012c30dee3.js": "484de7623c6ba7a267aadbba9ed41d1da03befd6",
     "/wordweaver/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
-    "/wordweaver/index.html": "be7273e9a0434c12836bf49977378b784f02d2f4",
-    "/wordweaver/main.b4a3bc2a771339d2.js": "e0e08ffa678b2d6cc9b9963c043ed325a0125d55",
+    "/wordweaver/index.html": "d35fa236a58de167388406c7d96f546a837e7250",
+    "/wordweaver/main.43b4ea62a20f64a5.js": "9b287d12f71d10e9ca747fb28b75419e82d72889",
     "/wordweaver/manifest.webmanifest": "2e2ceff7d5713d23b6922cd5e0708db086522291",
     "/wordweaver/polyfills.c29b11413222dc4e.js": "8f2575d92954f5396f430edc6a67878c89fa2a2e",
-    "/wordweaver/runtime.fd04dfef92137b0d.js": "f476f35d691753ed84579584c4f7053063bce6f3",
+    "/wordweaver/runtime.a4b5308e11986c1a.js": "8a0881ef4f36c83793c586bce56e7cfbe9a2ba8d",
     "/wordweaver/styles.2c48041307a8d012.css": "66fb7e49d1bdcd13159c8025afa15ce60104e194"
   },
   "navigationUrls": [
