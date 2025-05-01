@@ -23,6 +23,7 @@
     "ng": "ng",
     "start": "ng serve --open",
     "build": "ng build",
+    "build-ev": "ng build EveryVoice",
     "build-toy": "ng build --outputPath ./dist_toy",
     "lint": "ng lint",
     "test": "ng lint && ng test --configuration=test",

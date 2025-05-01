@@ -1,13 +1,14 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-
+import { EveryVoiceModule } from "EveryVoice";
 import { TierComponent } from "./tier.component";
-
+import { everyVoiceConfig } from "../../../environments/environment";
 describe("TierComponent", () => {
   let component: TierComponent;
   let fixture: ComponentFixture<TierComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [EveryVoiceModule.forRoot(everyVoiceConfig)],
       declarations: [TierComponent],
     }).compileComponents();
   }));
