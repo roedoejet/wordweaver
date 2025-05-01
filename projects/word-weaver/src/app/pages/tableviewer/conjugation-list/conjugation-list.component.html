@@ -30,7 +30,11 @@
             <td class="center-text">
               <div *ngFor="let tier of tiers; let i = index">
                 <h3 *ngIf="tier.options.language === 'L1' && i === 0">
-                  <ww-tier [tier]="tier" [data]="conjugation"></ww-tier>
+                  <ww-tier
+                    [tier]="tier"
+                    [data]="conjugation"
+                    [hasAudio]="true"
+                  ></ww-tier>
                 </h3>
                 <h5
                   *ngIf="

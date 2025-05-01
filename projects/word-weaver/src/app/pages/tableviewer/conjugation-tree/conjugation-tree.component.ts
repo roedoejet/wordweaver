@@ -6,11 +6,12 @@ import {
   OnInit,
 } from "@angular/core";
 import { select, Store } from "@ngrx/store";
-import { EChartsOption } from "echarts";
+import { EChartsOption, EChartsType } from "echarts";
 import { merge as _merge } from "lodash";
 import { TranslateService } from "@ngx-translate/core";
 import { Observable, of, Subject } from "rxjs";
 import { map, switchMap, takeUntil } from "rxjs/operators";
+import { EveryVoiceService } from "EveryVoice";
 import {
   Conjugation,
   ConjugationMorphemeNameIndex,
@@ -44,7 +45,8 @@ export class ConjugationTreeComponent implements OnDestroy, OnInit {
     private optionService: OptionService,
     private pronounService: PronounService,
     private verbService: VerbService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private tts: EveryVoiceService
   ) {}
 
   ngOnInit(): void {
@@ -149,6 +151,17 @@ export class ConjugationTreeComponent implements OnDestroy, OnInit {
     });
     return hex + hexMatches.join("");
   };
+
+  onChartInit(ec: EChartsType): void {
+    ec.on("click", (params) => {
+      const nodeData: any = params.data;
+      const isLeaf = !nodeData.children || nodeData.children.length === 0;
+
+      if (isLeaf) {
+        this.tts.playSound(nodeData.name);
+      }
+    });
+  }
 
   createChartData(tvState: Partial<TableviewerState>, color) {
     const chartOption = Object.assign({}, this.defaultChartOption);
