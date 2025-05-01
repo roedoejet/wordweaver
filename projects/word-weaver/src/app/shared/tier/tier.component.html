@@ -1,6 +1,12 @@
 <ng-container *ngIf="output">
-  <ng-container *ngFor="let morpheme of output; last as isLast">
-    <span [ngClass]="morpheme[morphType]">{{ morpheme[tier.key] }}</span>
-    <span *ngIf="!isLast" class="separator">{{ tier.separator }}</span>
-  </ng-container>
+  <div>
+    <ng-container *ngFor="let morpheme of output; last as isLast">
+      <span [ngClass]="morpheme[morphType]">{{ morpheme[tier.key] }}</span>
+      <span *ngIf="!isLast" class="separator">{{ tier.separator }}</span>
+    </ng-container>
+    <lib-every-voice
+      *ngIf="hasAudio"
+      [textToGenerate]="'test'"
+    ></lib-every-voice>
+  </div>
 </ng-container>

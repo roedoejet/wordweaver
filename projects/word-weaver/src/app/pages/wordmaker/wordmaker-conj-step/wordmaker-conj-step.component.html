@@ -46,6 +46,7 @@
             *ngIf="conjugations[0]"
             [tier]="tier"
             [data]="conjugations[0]"
+            [hasAudio]="true"
           ></ww-tier>
         </h3>
         <h5 *ngIf="settings.level[tier.name] && i !== 0">

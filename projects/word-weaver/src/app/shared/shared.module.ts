@@ -21,6 +21,7 @@ import {
   MatPaginatorIntl,
   MatPaginatorModule,
 } from "@angular/material/paginator";
+import { EveryVoiceModule } from "EveryVoice";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatSelectModule } from "@angular/material/select";
@@ -88,7 +89,9 @@ import { TierComponent } from "./tier/tier.component";
     FormsModule,
     ReactiveFormsModule,
     TranslateModule,
-
+    EveryVoiceModule.forRoot({
+      apiUrl: "https://custom.api/tts",
+    }),
     MatButtonModule,
     MatButtonToggleModule,
     MatSelectModule,

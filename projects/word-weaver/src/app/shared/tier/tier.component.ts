@@ -20,6 +20,7 @@ import {
 export class TierComponent implements OnInit {
   @Input() data: ConjugationObject;
   @Input() tier: Tier;
+  @Input() hasAudio = false;
 
   output: Conjugation;
   morphType: number;
