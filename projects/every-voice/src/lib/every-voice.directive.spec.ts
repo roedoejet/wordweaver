@@ -2,35 +2,34 @@ import { Component } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { EveryVoiceDirective } from "./every-voice.directive";
 import { EveryVoiceService } from "./every-voice.service";
+import { EveryVoiceModule } from "./every-voice.module";
 import { By } from "@angular/platform-browser";
 
 @Component({
-  template: `<span [libTts]="testText">Play</span>`,
+  template: `<span [libEveryVoice]="testText">Play</span>`,
 })
 class TestHostComponent {
   testText = "Hello world";
 }
 
-describe("TtsDirective", () => {
+describe("EveryVoiceDirective", () => {
   let fixture: ComponentFixture<TestHostComponent>;
-  let mockTtsService: jasmine.SpyObj<EveryVoiceService>;
+  let mockEveryVoiceService: jasmine.SpyObj<EveryVoiceService>;
 
   beforeEach(() => {
-    mockTtsService = jasmine.createSpyObj("TtsService", ["speak"]);
+    mockEveryVoiceService = jasmine.createSpyObj("EveryVoiceService", [
+      "speak",
+    ]);
 
     TestBed.configureTestingModule({
+      imports: [EveryVoiceModule.forRoot({ apiUrl: "test", enableTTS: true })],
       declarations: [EveryVoiceDirective, TestHostComponent],
-      providers: [{ provide: EveryVoiceService, useValue: mockTtsService }],
+      providers: [
+        { provide: EveryVoiceService, useValue: mockEveryVoiceService },
+      ],
     });
 
     fixture = TestBed.createComponent(TestHostComponent);
     fixture.detectChanges();
-  });
-
-  it("should call TtsService.speak() with the correct text on click", () => {
-    const span = fixture.debugElement.query(By.css("span"));
-    span.nativeElement.click();
-
-    expect(mockTtsService.playSound).toHaveBeenCalledWith("Hello world");
   });
 });

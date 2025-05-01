@@ -2,6 +2,7 @@
 // https://karma-runner.github.io/1.0/config/configuration-file.html
 
 module.exports = function (config) {
+  var isWatch = config.buildWebpack.options.watch;
   config.set({
     basePath: "",
     frameworks: ["jasmine", "@angular-devkit/build-angular"],
@@ -9,11 +10,14 @@ module.exports = function (config) {
       require("karma-jasmine"),
       require("karma-chrome-launcher"),
       require("karma-jasmine-html-reporter"),
-      require("karma-coverage"),
+      require("karma-spec-reporter"),
+      require("karma-coverage-istanbul-reporter"),
       require("@angular-devkit/build-angular/plugins/karma"),
     ],
     client: {
+      captureConsole: true,
       jasmine: {
+        random: false,
         // you can add configuration options for Jasmine here
         // the possible options are listed at https://jasmine.github.io/api/edge/Configuration.html
         // for example, you can disable the random execution with `random: false`
@@ -24,18 +28,26 @@ module.exports = function (config) {
     jasmineHtmlReporter: {
       suppressAll: true, // removes the duplicated traces
     },
-    coverageReporter: {
+    coverageIstanbulReporter: {
       dir: require("path").join(__dirname, "../../coverage/every-voice"),
-      subdir: ".",
-      reporters: [{ type: "html" }, { type: "text-summary" }],
+      reports: ["html", "lcovonly", "text-summary"],
+      fixWebpackSourcePaths: true,
     },
-    reporters: ["progress", "kjhtml"],
+    reporters: ["spec", "coverage-istanbul"],
     port: 9876,
     colors: true,
-    logLevel: config.LOG_INFO,
+    logLevel: config.NONE,
     autoWatch: true,
+    usePolling: true,
     browsers: ["Chrome"],
-    singleRun: false,
+    singleRun: !isWatch,
+    customLaunchers: {
+      ChromeTravisCi: {
+        base: "Chrome",
+        flags: ["--no-sandbox"],
+      },
+    },
+    browserNoActivityTimeout: 50000,
     restartOnFileChange: true,
   });
 };

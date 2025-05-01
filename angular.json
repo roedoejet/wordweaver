@@ -199,6 +199,9 @@
             "main": "projects/every-voice/src/test.ts",
             "tsConfig": "projects/every-voice/tsconfig.spec.json",
             "karmaConfig": "projects/every-voice/karma.conf.js"
+          },
+          "configurations": {
+            "test": {}
           }
         },
         "lint": {
