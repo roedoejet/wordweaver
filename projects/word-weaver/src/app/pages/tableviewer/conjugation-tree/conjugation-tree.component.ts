@@ -179,7 +179,7 @@ export class ConjugationTreeComponent implements OnDestroy, OnInit {
         if ("patient" in conjugation.input) {
           p += " → ";
           p += this.translate.instant(
-            "ww-data.pronouns.patients" +
+            "ww-data.pronouns.patients." +
               this.pronounService.getPronoun(conjugation.input.patient)["tag"]
           );
         }
