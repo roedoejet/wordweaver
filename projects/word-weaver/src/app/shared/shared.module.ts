@@ -90,7 +90,7 @@ import { TierComponent } from "./tier/tier.component";
     ReactiveFormsModule,
     TranslateModule,
     EveryVoiceModule.forRoot({
-      apiUrl: "https://custom.api/tts",
+      apiUrl: "default-system-tts",
     }),
     MatButtonModule,
     MatButtonToggleModule,

@@ -22,6 +22,7 @@ export class TierComponent implements OnInit {
   @Input() tier: Tier;
   @Input() hasAudio = false;
 
+  rawText: string;
   output: Conjugation;
   morphType: number;
   constructor() {}
@@ -36,5 +37,6 @@ export class TierComponent implements OnInit {
           a[ConjugationMorphemeNameIndex.position] -
           b[ConjugationMorphemeNameIndex.position]
       );
+    this.rawText = this.output.map((m) => m[1]).join();
   }
 }
