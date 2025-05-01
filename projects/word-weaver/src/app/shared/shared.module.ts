@@ -82,6 +82,7 @@ import { DecapitalizePipe } from "./pipes/decapitalize/decapitalize";
 import { RtlSupportDirective } from "./rtl-support/rtl-support.directive";
 import { TableViewerDialogComponent } from "./tableviewer-dialog/tableviewer-dialog.component";
 import { TierComponent } from "./tier/tier.component";
+import { environment } from "../../environments/environment";
 
 @NgModule({
   imports: [
@@ -90,10 +91,7 @@ import { TierComponent } from "./tier/tier.component";
     ReactiveFormsModule,
     TranslateModule,
     // TTS support using the EveryVoice Angular module
-    EveryVoiceModule.forRoot({
-      apiUrl: "default-system-tts",
-      enableTTS: true,
-    }),
+    EveryVoiceModule.forRoot(environment.ttsConfig),
     MatButtonModule,
     MatButtonToggleModule,
     MatSelectModule,
