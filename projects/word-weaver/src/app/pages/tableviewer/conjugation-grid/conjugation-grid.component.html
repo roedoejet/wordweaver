@@ -79,6 +79,7 @@
               *ngIf="element[col]"
               [data]="element[col]"
               [tier]="displayTier"
+              [hasAudio]="true"
             ></ww-tier>
           </span>
           <ng-container *ngFor="let tier of tiers$ | async">
