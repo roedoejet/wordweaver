@@ -10,6 +10,7 @@ import {
   ConjugationObject,
   Tier,
 } from "../../../config/config";
+import { EveryVoiceService } from "EveryVoice";
 
 @Component({
   selector: "ww-tier",
@@ -25,7 +26,7 @@ export class TierComponent implements OnInit {
   rawText: string;
   output: Conjugation;
   morphType: number;
-  constructor() {}
+  constructor(public tts: EveryVoiceService) {}
 
   ngOnInit(): void {
     // Filter empty values and sort on position

@@ -89,8 +89,10 @@ import { TierComponent } from "./tier/tier.component";
     FormsModule,
     ReactiveFormsModule,
     TranslateModule,
+    // TTS support using the EveryVoice Angular module
     EveryVoiceModule.forRoot({
       apiUrl: "default-system-tts",
+      enableTTS: true,
     }),
     MatButtonModule,
     MatButtonToggleModule,

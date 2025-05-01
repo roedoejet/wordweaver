@@ -4,17 +4,21 @@ import { EveryVoiceConfig } from "./every-voice.config";
 
 @Injectable()
 export class EveryVoiceService {
+  public enableTTS: boolean;
   private apiUrl: string;
 
   constructor(
     @Optional() @Inject(EVERY_VOICE_CONFIG) config: EveryVoiceConfig
   ) {
     this.apiUrl = config?.apiUrl ?? "https://default.api/tts";
+    this.enableTTS = config?.enableTTS ?? true;
   }
   playSound(text: string) {
-    console.log(`Calling ${this.apiUrl} with text:`, text);
-    const utterance = new SpeechSynthesisUtterance(text);
-    window.speechSynthesis.speak(utterance);
+    if (this.enableTTS) {
+      console.log(`Calling ${this.apiUrl} with text:`, text);
+      const utterance = new SpeechSynthesisUtterance(text);
+      window.speechSynthesis.speak(utterance);
+    }
   }
 
   stop() {
