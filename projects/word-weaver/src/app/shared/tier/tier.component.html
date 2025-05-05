@@ -5,7 +5,7 @@
       <span *ngIf="!isLast" class="separator">{{ tier.separator }}</span>
     </ng-container>
     <lib-every-voice
-      *ngIf="hasAudio && tts.enableTTS"
+      *ngIf="hasAudio"
       [textToGenerate]="rawText"
     ></lib-every-voice>
   </div>

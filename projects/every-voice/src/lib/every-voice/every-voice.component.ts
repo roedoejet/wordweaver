@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit, Input } from "@angular/core";
 import { EveryVoiceService } from "../every-voice.service";
 
 @Component({
@@ -9,17 +9,29 @@ import { EveryVoiceService } from "../every-voice.service";
 export class EveryVoiceComponent implements OnInit {
   @Input() textToGenerate: string;
   @Input() icon = "volume_up";
-
-  constructor(private tts: EveryVoiceService) {}
+  @Input() stopIcon = "stop";
+  isPlaying = false;
+  constructor(public tts: EveryVoiceService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {}
 
   onClick() {
     if (this.textToGenerate) {
-      this.tts.playSound(this.textToGenerate);
-    } else {
-      console.log("whoops");
-      console.log(this.textToGenerate);
+      if (this.isPlaying) {
+        this.tts.stop();
+        this.isPlaying = false;
+      } else {
+        this.isPlaying = true;
+        this.tts
+          .playSound(this.textToGenerate)
+          .catch((error) => {
+            console.error(error);
+          })
+          .finally(() => {
+            this.isPlaying = false;
+            this.cdr.detectChanges();
+          });
+      }
     }
   }
 }

@@ -21,15 +21,15 @@ npm install every-voice # TODO: This is not published yet
 In your **root app module** (`app.module.ts`), import `EveryVoiceModule` using the `forRoot()` method to provide the API URL:
 
 ```ts
-import { EveryVoiceModule } from 'EveryVoice';
+import { EveryVoiceModule } from "EveryVoice";
 
 @NgModule({
   imports: [
     EveryVoiceModule.forRoot({
-      apiUrl: 'https://your.api/tts' // 👈 your TTS backend endpoint
-      enableTTS: true // 👈 set this to false if you want to disable your TTS for in certain deployment environments
-    })
-  ]
+      apiUrl: "https://your.api/tts", // 👈 your TTS backend endpoint
+      enableTTS: true, // 👈 set this to false if you want to disable your TTS in certain deployment environments
+    }),
+  ],
 })
 export class AppModule {}
 ```
@@ -74,7 +74,7 @@ import { EveryVoiceService } from "EveryVoice";
 export class ExampleComponent {
   constructor(private tts: EveryVoiceService) {}
 
-  onClick(text: string): void {
+  onClick(text: string): Promise<void> {
     this.tts.playSound(text);
   }
 }
