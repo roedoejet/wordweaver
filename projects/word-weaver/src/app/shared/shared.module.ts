@@ -21,7 +21,7 @@ import {
   MatPaginatorIntl,
   MatPaginatorModule,
 } from "@angular/material/paginator";
-import { EveryVoiceModule } from "EveryVoice";
+import { EveryVoiceModule } from "@everyvoice/every-voice";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatSelectModule } from "@angular/material/select";

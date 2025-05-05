@@ -2,7 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "EveryVoice": ["../dist/every-voice"]
+      "@everyvoice/every-voice": ["../dist/every-voice"]
     },
     "baseUrl": "./src",
     "outDir": "./dist/out-tsc",

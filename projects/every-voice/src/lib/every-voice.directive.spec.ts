@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { EveryVoiceDirective } from "./every-voice.directive";
 import { EveryVoiceService } from "./every-voice.service";
 import { EveryVoiceModule } from "./every-voice.module";
-import { By } from "@angular/platform-browser";
 
 @Component({
   template: `<span [libEveryVoice]="testText">Play</span>`,

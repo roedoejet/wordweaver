@@ -9,7 +9,7 @@
 Install the package via npm:
 
 ```bash
-npm install every-voice # TODO: This is not published yet
+npm install @everyvoice/every-voice
 ```
 
 ---
@@ -21,13 +21,13 @@ npm install every-voice # TODO: This is not published yet
 In your **root app module** (`app.module.ts`), import `EveryVoiceModule` using the `forRoot()` method to provide the API URL:
 
 ```ts
-import { EveryVoiceModule } from "EveryVoice";
+import { EveryVoiceModule } from "@everyvoice/every-voice";
 
 @NgModule({
   imports: [
     EveryVoiceModule.forRoot({
       apiUrl: "https://your.api/tts", // 👈 your TTS backend endpoint
-      enableTTS: true, // 👈 set this to false if you want to disable your TTS in certain deployment environments
+      enableTTS: true, // 👈 set this to false if you want to disable your TTS in certain deployment environments. Note, if this is disabled, your EveryVoice components will not render and TTS will not be accessible from your application.
     }),
   ],
 })
@@ -37,7 +37,7 @@ export class AppModule {}
 If you use the module in a **feature module** or a **lazy-loaded module**, use `forChild()` instead:
 
 ```ts
-import { EveryVoiceModule } from "EveryVoice";
+import { EveryVoiceModule } from "@everyvoice/every-voice";
 
 @NgModule({
   imports: [EveryVoiceModule.forChild()],
@@ -69,7 +69,7 @@ Alternatively use the component `lib-every-voice` like so:
 Lastly, you can use the EveryVoiceService to generate audio programatically:
 
 ```ts
-import { EveryVoiceService } from "EveryVoice";
+import { EveryVoiceService } from "@everyvoice/every-voice";
 
 export class ExampleComponent {
   constructor(private tts: EveryVoiceService) {}
@@ -102,13 +102,13 @@ If you're using this package locally during development:
 1. Build the library:
 
    ```bash
-   ng build EveryVoice
+   ng build every-voice
    ```
 
 2. Use a local path in your app’s `package.json`:
 
    ```json
-   "EveryVoice": "file:../path/to/every-voice/dist/every-voice"
+   "@everyvoice/every-voice": "file:../path/to/every-voice/dist/every-voice"
    ```
 
 Contributions and issues are welcome — feel free to submit a pull request or open an issue!

@@ -11,7 +11,7 @@ import { merge as _merge } from "lodash";
 import { TranslateService } from "@ngx-translate/core";
 import { Observable, of, Subject } from "rxjs";
 import { map, switchMap, takeUntil } from "rxjs/operators";
-import { EveryVoiceService } from "EveryVoice";
+import { EveryVoiceService } from "@everyvoice/every-voice";
 import {
   Conjugation,
   ConjugationMorphemeNameIndex,

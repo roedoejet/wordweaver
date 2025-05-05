@@ -10,7 +10,7 @@ import {
   ConjugationObject,
   Tier,
 } from "../../../config/config";
-import { EveryVoiceService } from "EveryVoice";
+import { EveryVoiceService } from "@everyvoice/every-voice";
 
 @Component({
   selector: "ww-tier",

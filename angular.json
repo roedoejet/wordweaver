@@ -172,7 +172,7 @@
         }
       }
     },
-    "EveryVoice": {
+    "every-voice": {
       "projectType": "library",
       "root": "projects/every-voice",
       "sourceRoot": "projects/every-voice/src",

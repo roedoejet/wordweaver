@@ -5,7 +5,7 @@ import {
   TIERS,
   VALIDATION,
 } from "../config/config";
-import { EveryVoiceConfig } from "EveryVoice";
+import { EveryVoiceConfig } from "@everyvoice/every-voice";
 
 const packageJson = require("../../../../package.json");
 

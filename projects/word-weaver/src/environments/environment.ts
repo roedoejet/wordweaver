@@ -9,13 +9,13 @@ import {
   TIERS,
   VALIDATION,
 } from "../config/config";
-import { EveryVoiceConfig } from "EveryVoice";
+import { EveryVoiceConfig } from "@everyvoice/every-voice";
 
 const packageJson = require("../../../../package.json");
 
 export const everyVoiceConfig: EveryVoiceConfig = {
   apiUrl: "default-system-tts",
-  enableTTS: false,
+  enableTTS: true,
 };
 
 export const environment = {
