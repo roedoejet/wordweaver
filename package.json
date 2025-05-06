@@ -23,6 +23,7 @@
     "ng": "ng",
     "start": "ng serve --open",
     "build": "ng build",
+    "build-ev": "ng build every-voice",
     "build-toy": "ng build --outputPath ./dist_toy",
     "lint": "ng lint",
     "test": "ng lint && ng test --configuration=test",
@@ -31,8 +32,8 @@
     "release": "standard-version && git push --follow-tags origin master",
     "format:write": "prettier 'projects/**/*.{ts,json,md,scss,html}' --write",
     "format:test": "prettier 'projects/**/*.{ts,json,md,scss,html}' --list-different",
-    "ci:build:ghpages": "ng build --configuration=production,ghpages --deploy-url /wordweaver/ --base-href /wordweaver/",
-    "ci:build:netlify": "ng build --configuration=production,netlify --base-href / --deploy-url /",
+    "ci:build:ghpages": "ng build every-voice && ng build --configuration=production,ghpages --deploy-url /wordweaver/ --base-href /wordweaver/",
+    "ci:build:netlify": "ng build every-voice && ng build --configuration=production,netlify --base-href / --deploy-url /",
     "analyze": "npm run build:netlify -- --stats-json && webpack-bundle-analyzer ./dist/word-weaver/stats-es2015.json",
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate && node .all-contributors-html.js",
@@ -132,6 +133,7 @@
     "madge": "^4.0.2",
     "mocha": "^10.2.0",
     "monocart-reporter": "^1.7.13",
+    "ng-packagr": "^14.2.0",
     "npm-run-all": "4.1.5",
     "peaks.js": "^0.19.0",
     "prettier": "^2.8.8",
@@ -161,6 +163,7 @@
     "echarts": "^5.4.2",
     "file-saver-es": "^2.0.5",
     "ngx-echarts": "^14.0.0",
+    "tslib": "^2.3.0",
     "xlsx": "^0.18.5"
   }
 }

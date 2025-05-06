@@ -21,6 +21,7 @@ import {
   MatPaginatorIntl,
   MatPaginatorModule,
 } from "@angular/material/paginator";
+import { EveryVoiceModule } from "@everyvoice/every-voice";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatSelectModule } from "@angular/material/select";
@@ -81,6 +82,7 @@ import { DecapitalizePipe } from "./pipes/decapitalize/decapitalize";
 import { RtlSupportDirective } from "./rtl-support/rtl-support.directive";
 import { TableViewerDialogComponent } from "./tableviewer-dialog/tableviewer-dialog.component";
 import { TierComponent } from "./tier/tier.component";
+import { environment } from "../../environments/environment";
 
 @NgModule({
   imports: [
@@ -88,7 +90,8 @@ import { TierComponent } from "./tier/tier.component";
     FormsModule,
     ReactiveFormsModule,
     TranslateModule,
-
+    // TTS support using the EveryVoice Angular module
+    EveryVoiceModule.forRoot(environment.ttsConfig),
     MatButtonModule,
     MatButtonToggleModule,
     MatSelectModule,

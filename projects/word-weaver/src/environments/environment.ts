@@ -9,12 +9,19 @@ import {
   TIERS,
   VALIDATION,
 } from "../config/config";
+import { EveryVoiceConfig } from "@everyvoice/every-voice";
 
 const packageJson = require("../../../../package.json");
+
+export const everyVoiceConfig: EveryVoiceConfig = {
+  apiUrl: "default-system-tts",
+  enableTTS: true,
+};
 
 export const environment = {
   appName: "WordWeaver",
   envName: "DEV",
+  ttsConfig: everyVoiceConfig,
   config: {
     tiers: TIERS,
     validation: VALIDATION,

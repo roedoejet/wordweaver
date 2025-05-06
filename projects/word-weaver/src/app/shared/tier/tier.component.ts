@@ -10,6 +10,7 @@ import {
   ConjugationObject,
   Tier,
 } from "../../../config/config";
+import { EveryVoiceService } from "@everyvoice/every-voice";
 
 @Component({
   selector: "ww-tier",
@@ -20,10 +21,12 @@ import {
 export class TierComponent implements OnInit {
   @Input() data: ConjugationObject;
   @Input() tier: Tier;
+  @Input() hasAudio = false;
 
+  rawText: string;
   output: Conjugation;
   morphType: number;
-  constructor() {}
+  constructor(public tts: EveryVoiceService) {}
 
   ngOnInit(): void {
     // Filter empty values and sort on position
@@ -35,5 +38,6 @@ export class TierComponent implements OnInit {
           a[ConjugationMorphemeNameIndex.position] -
           b[ConjugationMorphemeNameIndex.position]
       );
+    this.rawText = this.output.map((m) => m[1]).join("");
   }
 }

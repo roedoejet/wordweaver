@@ -1,0 +1,7 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/every-voice",
+  "lib": {
+    "entryFile": "src/public-api.ts"
+  }
+}

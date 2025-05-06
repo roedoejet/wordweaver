@@ -15,6 +15,9 @@ jobs:
       - name: Install everything
         run: npm install
 
+      - name: build EveryVoice
+        run: npm run-script build-ev
+
       - name: Check1 Run spec tests
         id: specs
         continue-on-error: true
