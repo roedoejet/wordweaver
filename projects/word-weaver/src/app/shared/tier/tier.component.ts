@@ -38,6 +38,6 @@ export class TierComponent implements OnInit {
           a[ConjugationMorphemeNameIndex.position] -
           b[ConjugationMorphemeNameIndex.position]
       );
-    this.rawText = this.output.map((m) => m[1]).join();
+    this.rawText = this.output.map((m) => m[1]).join("");
   }
 }
