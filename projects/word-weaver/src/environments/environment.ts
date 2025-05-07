@@ -16,6 +16,9 @@ const packageJson = require("../../../../package.json");
 export const everyVoiceConfig: EveryVoiceConfig = {
   apiUrl: "default-system-tts",
   enableTTS: true,
+  requiresAuth: false,
+  domain: "",
+  clientId: "",
 };
 
 export const environment = {

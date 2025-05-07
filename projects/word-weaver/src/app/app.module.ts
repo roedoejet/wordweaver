@@ -7,9 +7,12 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app/app.component";
 import { CoreModule } from "./core/core.module";
 import { SharedModule } from "./shared/shared.module";
+import { EveryVoiceModule } from "@everyvoice/every-voice";
 
 @NgModule({
   imports: [
+    // TTS support using the EveryVoice Angular module
+    EveryVoiceModule.forRoot(environment.ttsConfig),
     // angular
     BrowserAnimationsModule,
     BrowserModule,

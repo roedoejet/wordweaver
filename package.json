@@ -158,6 +158,7 @@
   },
   "dependencies": {
     "@angular-devkit/schematics": "^14.2.10",
+    "@auth0/auth0-angular": "^2.2.3",
     "@ngrx/data": "^14.3.3",
     "docx": "^8.2.3",
     "echarts": "^5.4.2",

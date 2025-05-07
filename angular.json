@@ -57,6 +57,18 @@
                 }
               ]
             },
+            "test": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/word-weaver/src/config/config.ts",
+                  "with": "projects/word-weaver/src/config/config.fr.ts"
+                },
+                {
+                  "replace": "projects/word-weaver/src/environments/environment.ts",
+                  "with": "projects/word-weaver/src/environments/environment.test.ts"
+                }
+              ]
+            },
             "production": {
               "optimization": true,
               "outputHashing": "all",
@@ -122,6 +134,9 @@
           "configurations": {
             "fr": {
               "browserTarget": "word-weaver:build:fr"
+            },
+            "test": {
+              "browserTarget": "word-weaver:build:test"
             }
           }
         },

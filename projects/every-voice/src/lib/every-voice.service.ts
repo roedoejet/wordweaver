@@ -4,12 +4,14 @@ import {
   EveryVoiceConfig,
   EveryVoiceServiceStatus,
 } from "./every-voice.config";
-//import { Client } from "@gradio/client";
-import { Subject } from "rxjs";
+import { BehaviorSubject, Subject } from "rxjs";
+
 @Injectable()
 export class EveryVoiceService {
   public status$: Subject<EveryVoiceServiceStatus>;
-  public enableTTS: boolean;
+  public ttsEnabledAndAuthenticated$ = new BehaviorSubject<boolean>(false);
+  private enableTTS: boolean;
+  private requiresAuth: boolean;
   private apiUrl: string;
   private bearerToken: string | undefined;
   private speakerID: string | undefined;
@@ -29,9 +31,11 @@ export class EveryVoiceService {
     this.bearerToken = config?.bearerToken;
     this.speakerID = config?.speakerID;
     this.steps = config?.steps;
+    this.requiresAuth = !config?.requiresAuth;
+    // If authentication is not required, then we set the default to true
+    this.ttsEnabledAndAuthenticated$.next(this.enableTTS && this.requiresAuth);
     console.log("[DEBUG] initialized EveryVoiceService with config:", config);
     this.status$.next("READY");
-    //this.client = new Client(this.apiUrl); //TODO: check which version of Gradio Client can be compiled by this version of Angular
   }
   generateSessionHash(): string {
     let sessionHash = "";
@@ -200,8 +204,6 @@ export class EveryVoiceService {
           reject("Audio URL not found in response");
           return;
         }
-      } else {
-        reject("Text-to-Speech is disabled");
       }
     });
   }

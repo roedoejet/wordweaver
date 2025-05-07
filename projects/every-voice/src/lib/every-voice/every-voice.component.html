@@ -7,7 +7,7 @@
 <button
   mat-icon-button
   (click)="onClick()"
-  [hidden]="!tts.enableTTS || isLoading"
+  [hidden]="!isVisible"
 >
   <mat-icon>{{ hasError ? "error" : isPlaying ? stopIcon : icon }}</mat-icon>
 </button>
