@@ -27,6 +27,8 @@ describe("EveryVoiceDirective", () => {
           enableTTS: true,
           requiresAuth: false,
           clientId: "",
+          audience: "",
+          middlewareEndpoint: "",
           domain: "",
         }),
       ],
