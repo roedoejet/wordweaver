@@ -1,1 +1,1 @@
-web: cd projects/tts-middleware && node index.js
+web: cd projects/tts-middleware && npm install && node index.js
