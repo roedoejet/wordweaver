@@ -208,6 +208,7 @@ export const httpLoaderFactory = (http: HttpClient) =>
       authorizationParams: {
         // eslint-disable-next-line @typescript-eslint/naming-convention
         redirect_uri: window.location.origin,
+        audience: environment.ttsConfig.audience,
       },
     }),
   ],

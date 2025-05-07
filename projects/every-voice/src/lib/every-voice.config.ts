@@ -7,6 +7,8 @@ export interface EveryVoiceConfig {
   steps?: number; // Optional: Number of steps for TTS
   domain?: string; // Optional: Auth0 Domain
   clientId?: string; // Optional: Auth0 ClientId
+  middlewareEndpoint?: string; // Optional: Middleware endpoint
+  audience?: string; // Optional: Auth0 audience
 }
 export type EveryVoiceServiceStatus =
   | "INITIALIZED"

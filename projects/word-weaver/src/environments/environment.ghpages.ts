@@ -13,8 +13,10 @@ export const everyVoiceConfig: EveryVoiceConfig = {
   apiUrl: "default-system-tts",
   enableTTS: true,
   requiresAuth: false,
+  middlewareEndpoint: "",
   domain: "",
   clientId: "",
+  audience: "",
 };
 
 export const environment = {

@@ -7,7 +7,8 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app/app.component";
 import { CoreModule } from "./core/core.module";
 import { SharedModule } from "./shared/shared.module";
-import { EveryVoiceModule } from "@everyvoice/every-voice";
+import { AUTH0_INSTANCE, EveryVoiceModule } from "@everyvoice/every-voice";
+import { AuthService } from "@auth0/auth0-angular";
 
 @NgModule({
   imports: [
@@ -33,5 +34,11 @@ import { EveryVoiceModule } from "@everyvoice/every-voice";
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
+  providers: [
+    {
+      provide: AUTH0_INSTANCE,
+      useExisting: AuthService, // Use the existing instance
+    },
+  ],
 })
 export class AppModule {}

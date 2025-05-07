@@ -6,7 +6,7 @@ import {
   OnDestroy,
 } from "@angular/core";
 import { EveryVoiceService } from "../every-voice.service";
-import { BehaviorSubject, Subject, Subscription } from "rxjs";
+import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 
 @Component({

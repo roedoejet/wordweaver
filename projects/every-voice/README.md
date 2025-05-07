@@ -28,10 +28,10 @@ import { EveryVoiceModule } from "@everyvoice/every-voice";
     EveryVoiceModule.forRoot({
       apiUrl: "https://[INSTANCE].hf.space/gradio_api/queue/", // 👈 your TTS backend endpoint
       enableTTS: true, // 👈 set this to false if you want to disable your TTS in certain deployment environments. Note, if this is disabled, your EveryVoice components will not render and TTS will not be accessible from your application.
-
       bearerToken: "[HF_TOKEN]", // 👈 OPTIONAL authentication token if required by your API. It will be treated as an Authorization Bearer token
       speakerID: "[SPEAKER NAME]", // 👈 OPTIONAL speaker id.
       steps: 3, // 👈  OPTIONAL: number of diffusion steps
+      requiresAuth: false, // 👈 set this to false if you do not require users to authenticate before using TTS. If you do, you will need to set up an Auth0 account. See below for more details.
     }),
   ],
 })
@@ -47,6 +47,66 @@ import { EveryVoiceModule } from "@everyvoice/every-voice";
   imports: [EveryVoiceModule.forChild()],
 })
 export class FeatureModule {}
+```
+
+#### Advanced: User Authentication using Auth0
+
+If you want the TTS service to only be accessible by authenticated users, you need to create an Auth0 account and do the following:
+
+#### Setting Up Auth0 (Domain, Client ID, Audience)
+
+1. Log into Auth0 Dashboard.
+2. Create a New Application
+
+- Navigate to Applications → Applications.
+- Click “Create Application”.
+- Choose a name (e.g., My Angular App).
+- Select Single Page Web Applications.
+- Click Create.
+
+3. Configure Application Settings
+
+- Set the following fields:
+  - Domain – Found in the Application Settings (e.g., my-tenant.us.auth0.com)
+  - Client ID – Also listed in the same settings section
+  - Audience:
+    - Navigate to APIs → Create API.
+    - Define a name and an identifier (this becomes your audience).
+
+4. Add Allowed URLs
+   In the app settings, configure:
+   - Allowed Callback URLs – e.g., https://<your_web_application>
+   - Allowed Logout URLs – e.g., https://<your_web_application>
+   - Allowed Web Origins – e.g., https://<your_web_application>
+
+Requests from the EveryVoice TTS Angular service work by sending text and an authentication token to a middleware server that verifies the token and forwards the request to your TTS backend. The server is in projects/tts-middleware. You will need to host this server and record the domain + /tts as the middlewareEndpoint.
+
+You can then install @auth0/auth0-angular and import the module with your domain, clientId, and audience. You will also need to provide the AuthService from your parent application to the EveryVoiceModule like so:
+
+```ts
+import { AUTH0_INSTANCE, EveryVoiceModule } from "@everyvoice/every-voice";
+import { AuthService } from "@auth0/auth0-angular";
+
+@NgModule({
+  imports: [
+    EveryVoiceModule.forRoot({
+      apiUrl: "https://your.api/tts", // 👈 your TTS backend endpoint
+      enableTTS: true, // 👈 set this to false if you want to disable your TTS in certain deployment environments. Note, if this is disabled, your EveryVoice components will not render and TTS will not be accessible from your application.
+      requiresAuth: true, // 👈 set this to false if you do not require users to authenticate before using TTS. If you do, you will need to set up an Auth0 account. See below for more details.
+      domain: "my-tenant.us.auth0.com", // 👈 example tenant domain from auth0
+      clientId: "78189afh9unuij2example", // 👈 example tenant client id from auth0
+      audience: "my-audience.us.auth0.com", // 👈 example audience from auth0,
+      middlewareEndpoint: "https://my-server-instance.com/tts", // 👈 endpoint for the projects/tts-middleware server,
+    }),
+  ],
+  providers: [
+    {
+      provide: AUTH0_INSTANCE,
+      useExisting: AuthService, // Use the existing instance
+    },
+  ],
+})
+export class AppModule {}
 ```
 
 ---
@@ -94,6 +154,11 @@ The `forRoot()` method takes a configuration object with the following structure
 interface EveryVoiceConfig {
   apiUrl: string; // The base URL for your TTS API
   enableTTS: boolean; // Whether to enable the TTS feature
+  requiresAuth: boolean; // Whether you require Auth0 to authenticate your TTS service
+  domain: string; // Your Auth0 Tenant Domain
+  clientId: string; // Your Auth0 Tenant Client ID
+  audience: string; // Your Auth0 API Audience
+  middlewareEndpoint: string; // Your middleware endpoint
 }
 ```
 

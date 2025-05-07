@@ -1,10 +1,14 @@
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+
 import { Inject, Injectable, Optional } from "@angular/core";
-import { EVERY_VOICE_CONFIG } from "./every-voice.token";
+import { AUTH0_INSTANCE, EVERY_VOICE_CONFIG } from "./every-voice.token";
 import {
   EveryVoiceConfig,
   EveryVoiceServiceStatus,
 } from "./every-voice.config";
-import { BehaviorSubject, Subject } from "rxjs";
+import { BehaviorSubject, Subject, Observable, from } from "rxjs";
+import { finalize, switchMap } from "rxjs/operators";
+import { AuthService } from "@auth0/auth0-angular";
 
 @Injectable()
 export class EveryVoiceService {
@@ -19,12 +23,17 @@ export class EveryVoiceService {
   private steps: number | undefined;
   private abortController: any | undefined;
   private audioPlayer: HTMLAudioElement | undefined;
+  private middlewareEndpoint: string;
+
   constructor(
-    @Optional() @Inject(EVERY_VOICE_CONFIG) config: EveryVoiceConfig
+    @Optional() @Inject(EVERY_VOICE_CONFIG) config: EveryVoiceConfig,
+    @Optional() @Inject(AUTH0_INSTANCE) private authService: AuthService,
+    private http: HttpClient
   ) {
     this.status$ = new Subject<EveryVoiceServiceStatus>();
     this.status$.next("INITIALIZED");
     this.apiUrl = config?.apiUrl ?? "https://default.api/tts";
+    this.middlewareEndpoint = config?.middlewareEndpoint;
     this.enableTTS =
       config?.enableTTS !== undefined
         ? config.enableTTS
@@ -32,9 +41,9 @@ export class EveryVoiceService {
     this.bearerToken = config?.bearerToken;
     this.speakerID = config?.speakerID;
     this.steps = config?.steps;
-    this.requiresAuth = !config?.requiresAuth;
+    this.requiresAuth = config?.requiresAuth;
     // If authentication is not required, then we set the default to true
-    this.ttsEnabledAndAuthenticated$.next(this.enableTTS && this.requiresAuth);
+    this.ttsEnabledAndAuthenticated$.next(this.enableTTS && !this.requiresAuth);
     console.log("[DEBUG] initialized EveryVoiceService with config:", config);
     this.status$.next("READY");
   }
@@ -207,6 +216,45 @@ export class EveryVoiceService {
         }
       }
     });
+  }
+
+  playSoundWithDefaultTTS(text: string): Promise<object> {
+    return new Promise((resolve, reject) => {
+      if (this.ttsEnabledAndAuthenticated$.value) {
+        console.log(`Calling ${this.apiUrl} with text:`, text);
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.onend = () => {
+          resolve(() => {});
+        };
+        utterance.onerror = (event) => reject(event.error);
+        window.speechSynthesis.speak(utterance);
+      } else {
+        reject("Text-to-Speech is disabled");
+      }
+    });
+  }
+
+  sendTextToTTSMiddleware(text: string, token: string): Observable<object> {
+    this.loading$.next(true);
+    const headers = new HttpHeaders({
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      Authorization: `Bearer ${token}`,
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      "Content-Type": "application/json",
+    });
+
+    return this.http.post(this.middlewareEndpoint, { text }, { headers }).pipe(
+      finalize(() => {
+        this.loading$.next(false);
+      })
+    );
+  }
+
+  playSoundWithTTSMiddleware(text): Observable<object> {
+    this.loading$.next(true);
+    return this.authService.getAccessTokenSilently().pipe(
+      switchMap((token) => this.sendTextToTTSMiddleware(text, token)) // pass token to the next step
+    );
   }
 
   stop() {

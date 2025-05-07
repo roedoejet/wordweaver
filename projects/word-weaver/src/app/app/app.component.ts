@@ -74,7 +74,7 @@ export class AppComponent implements OnInit {
     private pronounService: PronounService,
     private optionService: OptionService,
     private conjugationService: ConjugationService,
-    private tts: EveryVoiceService,
+    public tts: EveryVoiceService,
     public authService: AuthService
   ) {}
 
