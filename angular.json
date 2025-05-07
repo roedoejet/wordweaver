@@ -21,6 +21,7 @@
             "stylePreprocessorOptions": {
               "includePaths": ["./node_modules"]
             },
+            "sourceMap": true,
             "outputPath": "dist/word-weaver",
             "index": "projects/word-weaver/src/index.html",
             "main": "projects/word-weaver/src/main.ts",
