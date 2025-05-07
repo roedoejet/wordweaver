@@ -25,6 +25,7 @@
     "build": "ng build every-voice && ng build",
     "build-ev": "ng build every-voice",
     "build-toy": "ng build --outputPath ./dist_toy",
+    "heroku-postbuild": "echo 'no-op'",
     "lint": "ng lint",
     "test": "ng lint && ng test --configuration=test",
     "ci:test": "ng test --browsers=ChromeHeadless --watch=false --configuration=test",
@@ -154,7 +155,7 @@
     "zone.js": "0.11.8"
   },
   "engines": {
-    "node": ">=10.13.0"
+    "node": ">=10.13.0 <20"
   },
   "dependencies": {
     "@angular-devkit/schematics": "^14.2.10",
