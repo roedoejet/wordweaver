@@ -10,6 +10,7 @@ import { BehaviorSubject, Subject } from "rxjs";
 export class EveryVoiceService {
   public status$: Subject<EveryVoiceServiceStatus>;
   public ttsEnabledAndAuthenticated$ = new BehaviorSubject<boolean>(false);
+  public loading$ = new BehaviorSubject<boolean>(false);
   private enableTTS: boolean;
   private requiresAuth: boolean;
   private apiUrl: string;
