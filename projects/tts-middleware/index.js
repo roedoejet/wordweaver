@@ -9,7 +9,13 @@ dotenv.config();
 
 const client = await Client.connect(process.env.TTS_BACKEND_URL);
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:4200", // or '*' if you want to allow all
+    methods: ["GET", "POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 app.use(express.json());
 
 // JWT Middleware
