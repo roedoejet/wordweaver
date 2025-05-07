@@ -11,12 +11,30 @@ const client = await Client.connect(process.env.TTS_BACKEND_URL);
 const app = express();
 app.use(
   cors({
-    origin: "http://localhost:4200", // or '*' if you want to allow all
-    methods: ["GET", "POST", "OPTIONS"],
+    origin: process.env.PERMITTED_ORIGIN, // should only allow localhost in dev, not in production
+    methods: ["POST"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 app.use(express.json());
+
+app.use((req, res, next) => {
+  const origin = req.get("Origin") || "";
+  const referer = req.get("Referer") || "";
+
+  const allowedOrigin = process.env.PERMITTED_ORIGIN;
+
+  if (
+    origin &&
+    origin !== allowedOrigin &&
+    referer &&
+    !referer.startsWith(allowedOrigin)
+  ) {
+    return res.status(403).json({ error: "Forbidden: Invalid origin" });
+  }
+
+  next();
+});
 
 // JWT Middleware
 const checkJwt = expressjwt({
