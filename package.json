@@ -22,7 +22,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --open",
-    "build": "ng build",
+    "build": "ng build every-voice && ng build",
     "build-ev": "ng build every-voice",
     "build-toy": "ng build --outputPath ./dist_toy",
     "lint": "ng lint",
