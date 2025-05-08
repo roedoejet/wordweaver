@@ -1,0 +1,8 @@
+.loader {
+  display: inline-block;
+  position: relative;
+  margin: auto 9px;
+  vertical-align: baseline;
+  line-height: 40px;
+  top: 8px;
+}

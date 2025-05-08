@@ -1,3 +1,13 @@
-<button mat-icon-button (click)="onClick()" [hidden]="!tts.enableTTS">
+<mat-spinner
+  [diameter]="24"
+  [strokeWidth]="3"
+  class="loader"
+  [hidden]="!isLoading"
+></mat-spinner>
+<button
+  mat-icon-button
+  (click)="onClick()"
+  [hidden]="!tts.enableTTS || isLoading"
+>
   <mat-icon>{{ isPlaying ? stopIcon : icon }}</mat-icon>
 </button>
