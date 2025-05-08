@@ -38,6 +38,10 @@ export class EveryVoiceComponent implements OnInit, OnDestroy {
           this.isLoading = false;
           this.isPlaying = false;
           this.hasError = false;
+        } else if (status === "PLAYING") {
+          this.isLoading = false;
+          this.isPlaying = true;
+          this.hasError = false;
         } else if (status === "ERROR") {
           this.hasError = true;
           this.isLoading = false;

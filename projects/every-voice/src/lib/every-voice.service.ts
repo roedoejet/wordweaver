@@ -53,16 +53,19 @@ export class EveryVoiceService {
     const sessionHash = this.generateSessionHash();
     //setup request
     const header = new Headers({
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       "Content-Type": "application/json",
-      mode: "no-cors",
     });
     if (this.bearerToken) {
       header.append("Authorization", `Bearer ${this.bearerToken}`);
     }
     const body = {
       data: [],
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       session_hash: sessionHash,
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       fn_index: 0,
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       event_data: null,
       trigger: null,
     };
