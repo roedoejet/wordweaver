@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1746491118995,
+  "timestamp": 1746743624969,
   "index": "/wordweaver/index.html",
   "assetGroups": [
     {
@@ -19,7 +19,7 @@
         "/wordweaver/common.4f1e8e2e97092549.js",
         "/wordweaver/favicon.ico",
         "/wordweaver/index.html",
-        "/wordweaver/main.c44ec086da64fc99.js",
+        "/wordweaver/main.3095769f24b7eb51.js",
         "/wordweaver/manifest.webmanifest",
         "/wordweaver/polyfills.c29b11413222dc4e.js",
         "/wordweaver/runtime.33b902265c19814e.js",
@@ -132,8 +132,8 @@
     "/wordweaver/assets/logo.svg": "36da0c3ab640822a03e396813ff976ad066c1bf2",
     "/wordweaver/common.4f1e8e2e97092549.js": "875fca1054a53037c7f4cc7f003be68db73e7537",
     "/wordweaver/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
-    "/wordweaver/index.html": "4012cb71c9c66a272968f31845f96237926ff4bd",
-    "/wordweaver/main.c44ec086da64fc99.js": "8b8a58816837e3179d7f8fd09e44b7aef22c5e1a",
+    "/wordweaver/index.html": "aa8f5edc53d93671743d18e21774a9b16d6bf096",
+    "/wordweaver/main.3095769f24b7eb51.js": "34f550715db812c0ff9de150a9237e249114503a",
     "/wordweaver/manifest.webmanifest": "2e2ceff7d5713d23b6922cd5e0708db086522291",
     "/wordweaver/polyfills.c29b11413222dc4e.js": "8f2575d92954f5396f430edc6a67878c89fa2a2e",
     "/wordweaver/runtime.33b902265c19814e.js": "9a621f87f3601f9b890e77ed29cd866053b8a61a",
