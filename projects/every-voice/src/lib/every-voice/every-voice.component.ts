@@ -19,6 +19,8 @@ export class EveryVoiceComponent implements OnInit, OnDestroy {
   @Input() stopIcon = "stop";
   isPlaying: boolean;
   isLoading: boolean;
+  hasError: boolean;
+
   private subscription: Subscription;
 
   constructor(public tts: EveryVoiceService, private cdr: ChangeDetectorRef) {
@@ -27,9 +29,17 @@ export class EveryVoiceComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.tts.status$.subscribe((status) => {
         console.log("[DEBUG] tts status received", status);
+
         if (status === "GENERATING" || status === "LOADING") {
           this.isLoading = true;
+          this.isPlaying = false;
+          this.hasError = false;
         } else if (status === "READY" || status === "PAUSED") {
+          this.isLoading = false;
+          this.isPlaying = false;
+          this.hasError = false;
+        } else if (status === "ERROR") {
+          this.hasError = true;
           this.isLoading = false;
           this.isPlaying = false;
         } else {
@@ -46,6 +56,7 @@ export class EveryVoiceComponent implements OnInit, OnDestroy {
   }
   onClick() {
     if (this.textToGenerate) {
+      this.hasError = false;
       if (this.isPlaying) {
         this.tts.stop();
         this.isPlaying = false;
@@ -59,6 +70,8 @@ export class EveryVoiceComponent implements OnInit, OnDestroy {
           console.error(error);
         });
       }
+    } else {
+      this.hasError = true;
     }
   }
 }

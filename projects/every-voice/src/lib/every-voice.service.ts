@@ -69,19 +69,19 @@ export class EveryVoiceService {
     body.data.push(text);
     if (this.speakerID) {
       body.data.push(this.speakerID);
-    } else {
+    } /*else {
       this.status$.next("ERROR");
       reject("Speaker ID is required");
 
       return;
-    }
+    }*/
     if (this.steps) {
       body.data.push(this.steps);
-    } else {
+    } /*else {
       this.status$.next("ERROR");
       reject("Steps is required");
       return;
-    }
+    }*/
     console.log("[DEBUG] Body: ", body);
     console.log("[DEBUG] Header: ", header);
     // Send the request to the API

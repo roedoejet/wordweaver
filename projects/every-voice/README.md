@@ -26,8 +26,12 @@ import { EveryVoiceModule } from "@everyvoice/every-voice";
 @NgModule({
   imports: [
     EveryVoiceModule.forRoot({
-      apiUrl: "https://your.api/tts", // 👈 your TTS backend endpoint
+      apiUrl: "https://[INSTANCE].hf.space/gradio_api/queue/", // 👈 your TTS backend endpoint
       enableTTS: true, // 👈 set this to false if you want to disable your TTS in certain deployment environments. Note, if this is disabled, your EveryVoice components will not render and TTS will not be accessible from your application.
+
+      bearerToken: "[HF_TOKEN]", // 👈 OPTIONAL authentication token if required by your API. It will be treated as an Authorization Bearer token
+      speakerID: "[SPEAKER NAME]", // 👈 OPTIONAL speaker id.
+      steps: 3, // 👈  OPTIONAL: number of diffusion steps
     }),
   ],
 })

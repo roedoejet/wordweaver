@@ -9,5 +9,5 @@
   (click)="onClick()"
   [hidden]="!tts.enableTTS || isLoading"
 >
-  <mat-icon>{{ isPlaying ? stopIcon : icon }}</mat-icon>
+  <mat-icon>{{ hasError ? "error" : isPlaying ? stopIcon : icon }}</mat-icon>
 </button>
