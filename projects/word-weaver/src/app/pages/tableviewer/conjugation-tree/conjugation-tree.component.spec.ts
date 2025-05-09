@@ -10,7 +10,8 @@ import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { ConjugationTreeComponent } from "./conjugation-tree.component";
 import { MockStore, provideMockStore } from "@ngrx/store/testing";
 import { SharedModule } from "../../../shared/shared.module";
-
+import { EveryVoiceModule } from "@everyvoice/every-voice";
+import { environment } from "../../../../environments/environment";
 describe("ConjugationTreeComponent", () => {
   let component: ConjugationTreeComponent;
   let fixture: ComponentFixture<ConjugationTreeComponent>;
@@ -24,6 +25,7 @@ describe("ConjugationTreeComponent", () => {
         NoopAnimationsModule,
         TranslateModule.forRoot(),
         HttpClientTestingModule,
+        EveryVoiceModule.forRoot(environment.ttsConfig),
       ],
       declarations: [ConjugationTreeComponent],
       providers: [provideMockStore()],

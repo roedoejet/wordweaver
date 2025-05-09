@@ -1,4 +1,5 @@
 {
+  "": null,
   "ww": {
     "common": {
       "language": "Dans la langue du conjugueur",
@@ -28,6 +29,12 @@
         },
         "slogan": "La machine à mots WordWeaver UI tisse de beaux sites web de conjugaison.",
         "text": "<p>Insérer la description de votre projet ici.</p>"
+      },
+      "profile": {
+        "logout": "Déconnexion",
+        "title": "Bienvenue!",
+        "welcome": "Vous êtes connecté avec succès sous {{ name }}",
+        "welcome-no-auth": "Nous n'avons pas pu vous connecter. Veuillez réessayer."
       },
       "settings": {
         "advanced": "Paramètres avancés",
@@ -83,7 +90,9 @@
           "purple-light": "Violet clair",
           "title": "Thèmes"
         },
-        "title": "Paramètres"
+        "title": "Paramètres",
+        "welcome": null,
+        "welcome-no-auth": null
       },
       "tableviewer": {
         "dialog": {

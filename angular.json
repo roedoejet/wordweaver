@@ -21,6 +21,7 @@
             "stylePreprocessorOptions": {
               "includePaths": ["./node_modules"]
             },
+            "sourceMap": true,
             "outputPath": "dist/word-weaver",
             "index": "projects/word-weaver/src/index.html",
             "main": "projects/word-weaver/src/main.ts",
@@ -54,6 +55,18 @@
                 {
                   "replace": "projects/word-weaver/src/config/config.ts",
                   "with": "projects/word-weaver/src/config/config.fr.ts"
+                }
+              ]
+            },
+            "test": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/word-weaver/src/config/config.ts",
+                  "with": "projects/word-weaver/src/config/config.fr.ts"
+                },
+                {
+                  "replace": "projects/word-weaver/src/environments/environment.ts",
+                  "with": "projects/word-weaver/src/environments/environment.test.ts"
                 }
               ]
             },
@@ -122,6 +135,9 @@
           "configurations": {
             "fr": {
               "browserTarget": "word-weaver:build:fr"
+            },
+            "test": {
+              "browserTarget": "word-weaver:build:test"
             }
           }
         },

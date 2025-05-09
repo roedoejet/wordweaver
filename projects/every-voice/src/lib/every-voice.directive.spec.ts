@@ -21,7 +21,17 @@ describe("EveryVoiceDirective", () => {
     ]);
 
     TestBed.configureTestingModule({
-      imports: [EveryVoiceModule.forRoot({ apiUrl: "test", enableTTS: true })],
+      imports: [
+        EveryVoiceModule.forRoot({
+          apiUrl: "test",
+          enableTTS: true,
+          requiresAuth: false,
+          clientId: "",
+          audience: "",
+          middlewareEndpoint: "",
+          domain: "",
+        }),
+      ],
       declarations: [EveryVoiceDirective, TestHostComponent],
       providers: [
         { provide: EveryVoiceService, useValue: mockEveryVoiceService },

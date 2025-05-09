@@ -1,5 +1,7 @@
 import { ClipboardModule } from "@angular/cdk/clipboard";
 import { CommonModule } from "@angular/common";
+import { AuthButtonComponent } from "./auth/auth.component";
+import { UserProfileComponent } from "./profile/profile.component";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
@@ -82,7 +84,6 @@ import { DecapitalizePipe } from "./pipes/decapitalize/decapitalize";
 import { RtlSupportDirective } from "./rtl-support/rtl-support.directive";
 import { TableViewerDialogComponent } from "./tableviewer-dialog/tableviewer-dialog.component";
 import { TierComponent } from "./tier/tier.component";
-import { environment } from "../../environments/environment";
 
 @NgModule({
   imports: [
@@ -91,7 +92,7 @@ import { environment } from "../../environments/environment";
     ReactiveFormsModule,
     TranslateModule,
     // TTS support using the EveryVoice Angular module
-    EveryVoiceModule.forRoot(environment.ttsConfig),
+    EveryVoiceModule.forChild(),
     MatButtonModule,
     MatButtonToggleModule,
     MatSelectModule,
@@ -125,6 +126,8 @@ import { environment } from "../../environments/environment";
     ClipboardModule,
   ],
   declarations: [
+    AuthButtonComponent,
+    UserProfileComponent,
     LogoComponent,
     RtlSupportDirective,
     AnimateOnlyPipe,

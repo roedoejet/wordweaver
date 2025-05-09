@@ -4,10 +4,6 @@
   class="loader"
   [hidden]="!isLoading"
 ></mat-spinner>
-<button
-  mat-icon-button
-  (click)="onClick()"
-  [hidden]="!tts.enableTTS || isLoading"
->
+<button mat-icon-button (click)="onClick()" [hidden]="!isVisible || isLoading">
   <mat-icon>{{ hasError ? "error" : isPlaying ? stopIcon : icon }}</mat-icon>
 </button>
