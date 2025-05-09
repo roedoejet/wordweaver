@@ -18,7 +18,7 @@ export class EveryVoiceService {
   private enableTTS: boolean;
   private requiresAuth: boolean;
   private apiUrl: string;
-  private developmentBearerToken: string | undefined;
+  private bearerToken: string | undefined;
   private speakerID: string | undefined;
   private steps: number | undefined;
   private abortController: any | undefined;
@@ -38,7 +38,7 @@ export class EveryVoiceService {
       config?.enableTTS !== undefined
         ? config.enableTTS
         : config?.apiUrl?.length > 0; // Only enable TTS by default if apiUrl is defined
-    this.bearerToken = config?.bearerToken;
+    this.bearerToken = config?.developmentBearerToken;
     this.speakerID = config?.speakerID;
     this.steps = config?.steps;
     this.requiresAuth = config?.requiresAuth;
