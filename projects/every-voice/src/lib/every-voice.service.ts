@@ -20,7 +20,7 @@ export class EveryVoiceService {
   private apiUrl: string;
   private bearerToken: string | undefined;
   private speakerID: string | undefined;
-  private steps: number | undefined;
+  private diffusionSteps: number | undefined;
   private abortController: any | undefined;
   private audioPlayer: HTMLAudioElement | undefined;
   private middlewareEndpoint: string;
@@ -40,7 +40,7 @@ export class EveryVoiceService {
         : config?.apiUrl?.length > 0; // Only enable TTS by default if apiUrl is defined
     this.bearerToken = config?.developmentBearerToken;
     this.speakerID = config?.speakerID;
-    this.steps = config?.steps;
+    this.diffusionSteps = config?.diffusionSteps;
     this.requiresAuth = config?.requiresAuth;
     // If authentication is not required, then we set the default to true
     this.ttsEnabledAndAuthenticated$.next(this.enableTTS && !this.requiresAuth);
@@ -84,9 +84,18 @@ export class EveryVoiceService {
     };
     if (this.speakerID) {
       body.data.push(this.speakerID);
+    } else {
+      return throwError(
+        () => new Error("SpeakerID is required for synthesis.")
+      );
     }
-    if (this.steps) {
-      body.data.push(this.steps);
+    if (this.diffusionSteps) {
+      body.data.push(this.diffusionSteps);
+    } else {
+      return throwError(
+        () =>
+          new Error("The number of diffusion steps is required for synthesis.")
+      );
     }
 
     console.log("[DEBUG] Body: ", body);
