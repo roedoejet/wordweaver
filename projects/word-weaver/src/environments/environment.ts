@@ -15,7 +15,15 @@ const packageJson = require("../../../../package.json");
 
 export const everyVoiceConfig: EveryVoiceConfig = {
   enableTTS: true,
-  requiresAuth: false,
+  requiresAuth: true,
+  domain: "unbq-everyvoice.ca.auth0.com",
+  clientId: "7jLB2de2XqEGsAbXLEnUjB49P35r8gQH",
+  audience: "https://unbq.everyvoice.middleware.ca",
+  // apiUrl: "https://unbq-sgile-text-to-speech.hf.space/gradio_api/queue/",
+  // developmentBearerToken: "",
+  middlewareEndpoint: "http://localhost:3000/tts",
+  speakerID: "carl",
+  diffusionSteps: 3,
 };
 
 export const environment = {

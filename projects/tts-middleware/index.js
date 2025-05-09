@@ -1,13 +1,12 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import axios from 'axios';
 import { expressjwt } from "express-jwt";
 import jwksRsa from "jwks-rsa";
-import { Client } from "@gradio/client";
 
 dotenv.config();
 
-const client = await Client.connect(process.env.TTS_BACKEND_URL);
 const app = express();
 app.use(
   cors({
@@ -49,24 +48,16 @@ const checkJwt = expressjwt({
 });
 
 app.post("/tts", checkJwt, async (req, res) => {
-  const { text } = req.body;
   try {
     // Forward request to HuggingFace Gradio backend
-    // const response = await axios.post(process.env.TTS_BACKEND_URL, req.body);
-    const response = await client.predict("/synthesize", {
-      model_name: "multi",
-      text: text,
-      speed: 1,
-      voice_name: "Інна Гелевера",
-    });
-    // const response = await client.predict("/process", {
-    //     language: "English",
-    //     repo_id: "csukuangfj/kokoro-en-v0_19|11 speakers",
-    //     text: text,
-    //     sid: "0",
-    //     speed: 1.0,
-    // });
-    res.status(response.status).send(response.data);
+    const headers = {
+      "Content-Type": "application/json",
+      "Authorization": process.env.BEARER_TOKEN
+    };
+    const response = await axios.post(process.env.TTS_BACKEND_URL + 'join', req.body, { headers: headers, responseType: 'arraybuffer' });
+    console.log(response);
+    res.setHeader('Content-Type', 'audio/wav'); // Or whatever format it is
+    res.send(response.data);
   } catch (err) {
     console.error("TTS Backend Error:", err?.response?.data || err.message);
     res.status(err?.response?.status || 500).send({
