@@ -28,7 +28,7 @@ import { EveryVoiceModule } from "@everyvoice/every-voice";
     EveryVoiceModule.forRoot({
       apiUrl: "https://[INSTANCE].hf.space/gradio_api/queue/", // 👈 your TTS backend endpoint
       enableTTS: true, // 👈 set this to false if you want to disable your TTS in certain deployment environments. Note, if this is disabled, your EveryVoice components will not render and TTS will not be accessible from your application.
-      bearerToken: "[HF_TOKEN]", // 👈 OPTIONAL authentication token if required by your API. It will be treated as an Authorization Bearer token
+      developmentBearerToken: "[HF_TOKEN]", // 👈 OPTIONAL authentication token if required by your API. It will be treated as an Authorization Bearer token. IMPORTANT - this is for development only. You should store your environment variables in a secure location in production. Do not commit your access token to a public repo.
       speakerID: "[SPEAKER NAME]", // 👈 OPTIONAL speaker id.
       steps: 3, // 👈  OPTIONAL: number of diffusion steps
       requiresAuth: false, // 👈 set this to false if you do not require users to authenticate before using TTS. If you do, you will need to set up an Auth0 account. See below for more details.

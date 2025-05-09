@@ -18,7 +18,7 @@ export class EveryVoiceService {
   private enableTTS: boolean;
   private requiresAuth: boolean;
   private apiUrl: string;
-  private bearerToken: string | undefined;
+  private developmentBearerToken: string | undefined;
   private speakerID: string | undefined;
   private steps: number | undefined;
   private abortController: any | undefined;
