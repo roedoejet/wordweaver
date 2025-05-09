@@ -77,8 +77,9 @@ export class EveryVoiceComponent implements OnInit, OnDestroy {
         this.isPlaying = true;
         this.isLoading = true;
         this.cdr.detectChanges();
-        this.tts.playSound(this.textToGenerate).catch((error) => {
-          console.error(error);
+        this.tts.playSound$(this.textToGenerate).subscribe({
+          complete: () => console.log("Playback completed"),
+          error: (err) => console.error("Playback error:", err),
         });
       }
     } else {

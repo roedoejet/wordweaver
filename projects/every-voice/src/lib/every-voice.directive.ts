@@ -27,7 +27,10 @@ export class EveryVoiceDirective implements AfterViewInit, OnDestroy {
   @HostListener("click")
   onClick() {
     if (this.tts.ttsEnabledAndAuthenticated$.value && this.text) {
-      this.tts.playSound(this.text);
+      this.tts.playSound$(this.text).subscribe({
+        complete: () => console.log("Playback completed"),
+        error: (err) => console.error("Playback error:", err),
+      });
     }
   }
 

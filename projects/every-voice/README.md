@@ -138,8 +138,11 @@ import { EveryVoiceService } from "@everyvoice/every-voice";
 export class ExampleComponent {
   constructor(private tts: EveryVoiceService) {}
 
-  onClick(text: string): Promise<void> {
-    this.tts.playSound(text);
+  onClick(text: string): Observable<void> {
+    this.tts.playSound$(text).subscribe({
+      complete: () => console.log("Playback completed"),
+      error: (err) => console.error("Playback error:", err),
+    });
   }
 }
 ```

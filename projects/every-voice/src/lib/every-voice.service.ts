@@ -6,8 +6,8 @@ import {
   EveryVoiceConfig,
   EveryVoiceServiceStatus,
 } from "./every-voice.config";
-import { BehaviorSubject, Subject, Observable, from } from "rxjs";
-import { finalize, switchMap } from "rxjs/operators";
+import { BehaviorSubject, from, Subject, Observable, throwError } from "rxjs";
+import { catchError, finalize, map, switchMap, tap } from "rxjs/operators";
 import { AuthService } from "@auth0/auth0-angular";
 
 @Injectable()
@@ -62,19 +62,18 @@ export class EveryVoiceService {
   handleError(error: any) {
     console.error("Error:", error);
   }
-  async generateAudio(resolve, reject, text): Promise<string | undefined> {
+  generateAudioAndReturnURL$(text: string): Observable<string> {
     this.status$.next("GENERATING");
+
     const sessionHash = this.generateSessionHash();
-    //setup request
-    const header = new Headers({
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      "Content-Type": "application/json",
-    });
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    const header = new Headers({ "Content-Type": "application/json" });
     if (this.bearerToken) {
       header.append("Authorization", `Bearer ${this.bearerToken}`);
     }
-    const body = {
-      data: [],
+
+    const body: any = {
+      data: [text],
       // eslint-disable-next-line @typescript-eslint/naming-convention
       session_hash: sessionHash,
       // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -83,154 +82,188 @@ export class EveryVoiceService {
       event_data: null,
       trigger: null,
     };
-    body.data.push(text);
     if (this.speakerID) {
       body.data.push(this.speakerID);
-    } /*else {
-      this.status$.next("ERROR");
-      reject("Speaker ID is required");
-
-      return;
-    }*/
+    }
     if (this.steps) {
       body.data.push(this.steps);
-    } /*else {
-      this.status$.next("ERROR");
-      reject("Steps is required");
-      return;
-    }*/
+    }
+
     console.log("[DEBUG] Body: ", body);
     console.log("[DEBUG] Header: ", header);
-    // Send the request to the API
-    const response = await fetch(this.apiUrl + "join", {
-      method: "POST",
-      headers: header,
-      signal: this.abortController.signal,
-      body: JSON.stringify(body),
-    });
-    if (!response.ok) {
-      this.status$.next("ERROR");
-      reject("Error submitting audio generation request");
-      return;
-    }
-    const json = await response.json();
-    console.log("[DEBUG] Body: ", body, "Response:", json);
-    if (json && json.event_id && json.event_id.length > 0) {
-      console.log(
-        "[DEBUG] Audio generation successful with event ID:",
-        json.event_id
-      );
-      //get audio blob
-      const audioResponse = await fetch(
-        this.apiUrl + `data?session_hash=${sessionHash}`,
-        {
-          headers: header,
-          signal: this.abortController.signal,
-        }
-      );
-      if (!response.ok) {
-        this.status$.next("ERROR");
-        reject("Error getting audio generated url");
-        return;
-      }
-      const queue = (await audioResponse.text()).split("\n");
-      console.log("[DEBUG] queue", queue);
-      //look for url in queue
-      for (const line of queue) {
-        if (!line.includes("}")) {
-          continue;
-        }
 
-        const qjson = JSON.parse(line.substring(line.indexOf("{")).trim());
-        if (qjson.output) {
-          if (
-            qjson.output.data &&
-            qjson.output.data[0] &&
-            qjson.output.data[0].url
-          ) {
-            resolve(qjson.output.data[0].url);
-            return qjson.output.data[0].url;
-          } else {
-            this.status$.next("ERROR");
-            reject("Audio URL not found in response");
-            return;
+    return from(
+      fetch(this.apiUrl + "join", {
+        method: "POST",
+        headers: header,
+        signal: this.abortController.signal,
+        body: JSON.stringify(body),
+      })
+    ).pipe(
+      switchMap((response) => {
+        if (!response.ok) {
+          this.status$.next("ERROR");
+          return throwError(
+            () => new Error("Error submitting audio generation request")
+          );
+        }
+        return from(response.json());
+      }),
+      tap((json) => {
+        console.log("[DEBUG] Response from join:", json);
+      }),
+      switchMap((json) => {
+        if (!json?.event_id?.length) {
+          this.status$.next("ERROR");
+          return throwError(() => new Error("Missing event_id in response"));
+        }
+        return from(
+          fetch(`${this.apiUrl}data?session_hash=${sessionHash}`, {
+            headers: header,
+            signal: this.abortController.signal,
+          })
+        );
+      }),
+      switchMap((audioResponse) => {
+        if (!audioResponse.ok) {
+          this.status$.next("ERROR");
+          return throwError(
+            () => new Error("Error getting audio generated URL")
+          );
+        }
+        return from(audioResponse.text());
+      }),
+      map((rawText) => rawText.split("\n")),
+      map((lines) => {
+        for (const line of lines) {
+          if (!line.includes("}")) {
+            continue;
+          }
+          const qjson = JSON.parse(line.substring(line.indexOf("{")).trim());
+          const url = qjson?.output?.data?.[0]?.url;
+          if (url) {
+            return url;
           }
         }
-      }
-    }
+        this.status$.next("ERROR");
+        throw new Error("Audio URL not found in response");
+      }),
+      tap((url) => {
+        console.log("[DEBUG] Final Audio URL:", url);
+      }),
+      catchError((err) => {
+        this.status$.next("ERROR");
+        return throwError(() => err);
+      })
+    );
   }
-  playSound(text: string): Promise<void> {
-    return new Promise(async (resolve, reject) => {
-      if (this.enableTTS && text) {
-        console.log("[DEBUG] Text-to-Speech is enabled generating audio...");
 
-        if (this.abortController) {
-          this.abortController.abort();
-        }
-        if (this.audioPlayer) {
-          this.audioPlayer.pause();
-          this.audioPlayer = undefined;
-        }
-        // Create a new AbortController for this request
-        this.abortController = new AbortController();
+  playAudioFromURL$(audioURL: string): Observable<void> {
+    this.status$.next("LOADING");
+    this.audioPlayer = new Audio(audioURL);
+    return new Observable<void>((observer) => {
+      this.audioPlayer.onplaying = () => {
+        console.log("[DEBUG] Audio is playing");
+        this.status$.next("PLAYING");
+      };
 
-        const audioURL = await this.generateAudio(resolve, reject, text);
-        console.log("[DEBUG] Audio URL:", audioURL);
-        if (audioURL) {
-          this.status$.next("LOADING");
-          //play audio
-          this.audioPlayer = new Audio(audioURL);
-          this.audioPlayer.onplaying = () => {
-            console.log("[DEBUG] Audio is playing");
-            this.status$.next("PLAYING");
-          };
-          this.audioPlayer.onerror = (event) => {
-            console.error("Error playing audio:", event);
-            this.status$.next("ERROR");
-            reject(event);
-          };
-          this.audioPlayer.onabort = () => {
-            console.log("[DEBUG] Audio playback aborted");
-            this.status$.next("STOPPED");
-            this.abortController.abort();
-            reject("Audio playback aborted");
-          };
-          this.audioPlayer
-            .play()
-            .then(() => {
-              console.log("[DEBUG] Audio is playing");
-              this.audioPlayer.onended = () => {
-                this.status$.next("READY");
-                resolve();
-              };
-            })
-            .catch((error) => {
-              console.error("Error playing audio:", error);
-              this.status$.next("ERROR");
-              reject(error);
-            });
-          return;
-        } else {
-          reject("Audio URL not found in response");
-          return;
-        }
-      }
+      this.audioPlayer.onerror = (event) => {
+        console.error("Error playing audio:", event);
+        this.status$.next("ERROR");
+        observer.error(event);
+      };
+
+      this.audioPlayer.onabort = () => {
+        console.log("[DEBUG] Audio playback aborted");
+        this.status$.next("STOPPED");
+        this.abortController.abort();
+        observer.error(new Error("Audio playback aborted"));
+      };
+
+      this.audioPlayer.onended = () => {
+        console.log("[DEBUG] Audio playback ended");
+        this.status$.next("READY");
+        observer.next();
+        observer.complete();
+      };
+
+      this.audioPlayer.play().catch((error) => {
+        console.error("Error playing audio:", error);
+        this.status$.next("ERROR");
+        observer.error(error);
+      });
+
+      // Cleanup on unsubscribe
+      return () => {
+        this.audioPlayer?.pause();
+        this.audioPlayer = undefined;
+      };
     });
   }
 
-  playSoundWithDefaultTTS(text: string): Promise<object> {
-    return new Promise((resolve, reject) => {
-      if (this.ttsEnabledAndAuthenticated$.value) {
-        console.log(`Calling ${this.apiUrl} with text:`, text);
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.onend = () => {
-          resolve(() => {});
-        };
-        utterance.onerror = (event) => reject(event.error);
-        window.speechSynthesis.speak(utterance);
-      } else {
-        reject("Text-to-Speech is disabled");
-      }
+  playSound$(text: string): Observable<void> {
+    if (!this.ttsEnabledAndAuthenticated$.value || !text) {
+      return throwError(
+        () =>
+          new Error(
+            "TTS is disabled, you are not authenticated, or the text is empty"
+          )
+      );
+    }
+
+    console.log("[DEBUG] Text-to-Speech is enabled generating audio...");
+
+    // Cancel any existing playback or request
+    if (this.abortController) {
+      this.abortController.abort();
+    }
+    if (this.audioPlayer) {
+      this.audioPlayer.pause();
+      this.audioPlayer = undefined;
+    }
+
+    // Create a new AbortController
+    this.abortController = new AbortController();
+
+    return this.generateAudioAndReturnURL$(text).pipe(
+      switchMap((audioURL) => {
+        if (!audioURL) {
+          return throwError(() => new Error("Audio URL not found in response"));
+        }
+        return this.playAudioFromURL$(audioURL);
+      }),
+      catchError((error) => {
+        this.status$.next("ERROR");
+        return throwError(() => error);
+      })
+    );
+  }
+
+  playSoundWithDefaultTTS(text: string): Observable<void> {
+    if (!this.ttsEnabledAndAuthenticated$.value) {
+      return throwError(() => new Error("Text-to-Speech is disabled"));
+    }
+
+    return new Observable<void>((observer) => {
+      console.log(`Calling ${this.apiUrl} with text:`, text);
+
+      const utterance = new SpeechSynthesisUtterance(text);
+
+      utterance.onend = () => {
+        observer.next();
+        observer.complete();
+      };
+
+      utterance.onerror = (event) => {
+        observer.error(event.error);
+      };
+
+      window.speechSynthesis.speak(utterance);
+
+      // Cleanup logic if the observable is unsubscribed
+      return () => {
+        window.speechSynthesis.cancel();
+      };
     });
   }
 
@@ -244,6 +277,10 @@ export class EveryVoiceService {
     });
 
     return this.http.post(this.middlewareEndpoint, { text }, { headers }).pipe(
+      catchError((error) => {
+        this.status$.next("ERROR");
+        return throwError(() => error);
+      }),
       finalize(() => {
         this.loading$.next(false);
       })
