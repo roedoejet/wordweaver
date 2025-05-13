@@ -61,7 +61,17 @@
           </span>
 
           <span class="margin-right-20 desktop-only">|</span>
-
+          <button
+            class="nav-button"
+            routerLinkActive="active"
+            mat-icon-button
+            routerLink="profile"
+            *ngIf="requiresAuth"
+          >
+            <mat-icon>{{
+              (authService.isAuthenticated$ | async) ? "person" : "login"
+            }}</mat-icon>
+          </button>
           <button
             class="nav-button"
             routerLinkActive="active"

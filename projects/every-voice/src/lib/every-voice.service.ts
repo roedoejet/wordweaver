@@ -1,66 +1,80 @@
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+
 import { Inject, Injectable, Optional } from "@angular/core";
-import { EVERY_VOICE_CONFIG } from "./every-voice.token";
+import { AUTH0_INSTANCE, EVERY_VOICE_CONFIG } from "./every-voice.token";
 import {
   EveryVoiceConfig,
   EveryVoiceServiceStatus,
 } from "./every-voice.config";
-//import { Client } from "@gradio/client";
-import { Subject } from "rxjs";
+import { BehaviorSubject, from, Subject, Observable, throwError } from "rxjs";
+import { catchError, finalize, map, switchMap, tap } from "rxjs/operators";
+import { AuthService } from "@auth0/auth0-angular";
+
 @Injectable()
 export class EveryVoiceService {
   public status$: Subject<EveryVoiceServiceStatus>;
-  public enableTTS: boolean;
+  public ttsEnabledAndAuthenticated$ = new BehaviorSubject<boolean>(false);
+  public loading$ = new BehaviorSubject<boolean>(false);
+  private enableTTS: boolean;
+  private requiresAuth: boolean;
   private apiUrl: string;
   private bearerToken: string | undefined;
   private speakerID: string | undefined;
-  private steps: number | undefined;
+  private diffusionSteps: number | undefined;
   private abortController: any | undefined;
   private audioPlayer: HTMLAudioElement | undefined;
+  private middlewareEndpoint: string;
+
   constructor(
-    @Optional() @Inject(EVERY_VOICE_CONFIG) config: EveryVoiceConfig
+    @Optional() @Inject(EVERY_VOICE_CONFIG) config: EveryVoiceConfig,
+    @Optional() @Inject(AUTH0_INSTANCE) private authService: AuthService,
+    private http: HttpClient
   ) {
     this.status$ = new Subject<EveryVoiceServiceStatus>();
     this.status$.next("INITIALIZED");
-    this.apiUrl = config?.apiUrl ?? "https://default.api/tts";
+    this.apiUrl = config?.apiUrl;
+    this.middlewareEndpoint = config?.middlewareEndpoint;
     this.enableTTS =
       config?.enableTTS !== undefined
         ? config.enableTTS
         : config?.apiUrl?.length > 0; // Only enable TTS by default if apiUrl is defined
-    this.bearerToken = config?.bearerToken;
+    this.bearerToken = config?.developmentBearerToken;
     this.speakerID = config?.speakerID;
-    this.steps = config?.steps;
+    this.diffusionSteps = config?.diffusionSteps;
+    this.requiresAuth = config?.requiresAuth;
+    // If authentication is not required, then we set the default to true
+    this.ttsEnabledAndAuthenticated$.next(this.enableTTS && !this.requiresAuth);
     console.log("[DEBUG] initialized EveryVoiceService with config:", config);
     this.status$.next("READY");
-    //this.client = new Client(this.apiUrl); //TODO: check which version of Gradio Client can be compiled by this version of Angular
   }
-  generateSessionHash(): string {
-    let sessionHash = "";
-    const sessionHashLength = Math.floor(Math.random() * 32);
+
+  generateSessionHash(length: number = 32): string {
     const characters =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_";
-    for (let index = 0; index < sessionHashLength; index++) {
-      sessionHash += characters.charAt(
-        Math.floor(Math.random() * characters.length)
-      );
-    }
-    return sessionHash;
+    const charactersLength = characters.length;
+    const array = new Uint8Array(length);
+    crypto.getRandomValues(array); // cryptographically secure RNG
+
+    return Array.from(array, (byte) =>
+      characters.charAt(byte % charactersLength)
+    ).join("");
   }
   handleError(error: any) {
     console.error("Error:", error);
   }
-  async generateAudio(resolve, reject, text): Promise<string | undefined> {
+
+  generateAudioAndReturnURL$(text: string): Observable<string> {
     this.status$.next("GENERATING");
+
     const sessionHash = this.generateSessionHash();
-    //setup request
-    const header = new Headers({
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      "Content-Type": "application/json",
-    });
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    const header = new Headers({ "Content-Type": "application/json" });
     if (this.bearerToken) {
       header.append("Authorization", `Bearer ${this.bearerToken}`);
     }
-    const body = {
-      data: [],
+
+    const body: any = {
+      data: [text],
       // eslint-disable-next-line @typescript-eslint/naming-convention
       session_hash: sessionHash,
       // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -69,141 +83,302 @@ export class EveryVoiceService {
       event_data: null,
       trigger: null,
     };
-    body.data.push(text);
     if (this.speakerID) {
       body.data.push(this.speakerID);
-    } /*else {
-      this.status$.next("ERROR");
-      reject("Speaker ID is required");
+    } else {
+      return throwError(
+        () => new Error("SpeakerID is required for synthesis.")
+      );
+    }
+    if (this.diffusionSteps) {
+      body.data.push(this.diffusionSteps);
+    } else {
+      return throwError(
+        () =>
+          new Error("The number of diffusion steps is required for synthesis.")
+      );
+    }
 
-      return;
-    }*/
-    if (this.steps) {
-      body.data.push(this.steps);
-    } /*else {
-      this.status$.next("ERROR");
-      reject("Steps is required");
-      return;
-    }*/
     console.log("[DEBUG] Body: ", body);
     console.log("[DEBUG] Header: ", header);
-    // Send the request to the API
-    const response = await fetch(this.apiUrl + "join", {
-      method: "POST",
-      headers: header,
-      signal: this.abortController.signal,
-      body: JSON.stringify(body),
-    });
-    if (!response.ok) {
-      this.status$.next("ERROR");
-      reject("Error submitting audio generation request");
-      return;
-    }
-    const json = await response.json();
-    console.log("[DEBUG] Body: ", body, "Response:", json);
-    if (json && json.event_id && json.event_id.length > 0) {
-      console.log(
-        "[DEBUG] Audio generation successful with event ID:",
-        json.event_id
-      );
-      //get audio blob
-      const audioResponse = await fetch(
-        this.apiUrl + `data?session_hash=${sessionHash}`,
-        {
-          headers: header,
-          signal: this.abortController.signal,
-        }
-      );
-      if (!response.ok) {
-        this.status$.next("ERROR");
-        reject("Error getting audio generated url");
-        return;
-      }
-      const queue = (await audioResponse.text()).split("\n");
-      console.log("[DEBUG] queue", queue);
-      //look for url in queue
-      for (const line of queue) {
-        if (!line.includes("}")) {
-          continue;
-        }
 
-        const qjson = JSON.parse(line.substring(line.indexOf("{")).trim());
-        if (qjson.output) {
-          if (
-            qjson.output.data &&
-            qjson.output.data[0] &&
-            qjson.output.data[0].url
-          ) {
-            resolve(qjson.output.data[0].url);
-            return qjson.output.data[0].url;
-          } else {
-            this.status$.next("ERROR");
-            reject("Audio URL not found in response");
-            return;
+    return from(
+      fetch(new URL("/gradio_api/queue/join", this.apiUrl).href, {
+        method: "POST",
+        headers: header,
+        signal: this.abortController.signal, // note, signal is not supported by httpclient until Angular 17, so we use fetch.
+        body: JSON.stringify(body),
+      })
+    ).pipe(
+      switchMap((response) => {
+        if (!response.ok) {
+          this.status$.next("ERROR");
+          return throwError(
+            () => new Error("Error submitting audio generation request")
+          );
+        }
+        return from(response.json());
+      }),
+      tap((json) => {
+        console.log("[DEBUG] Response from join:", json);
+      }),
+      switchMap((json) => {
+        if (!json?.event_id?.length) {
+          this.status$.next("ERROR");
+          return throwError(() => new Error("Missing event_id in response"));
+        }
+        return from(
+          fetch(
+            new URL(
+              `/gradio_api/queue/data?session_hash=${sessionHash}`,
+              this.apiUrl
+            ).href,
+            {
+              headers: header,
+              signal: this.abortController.signal,
+            }
+          )
+        );
+      }),
+      switchMap((audioResponse) => {
+        if (!audioResponse.ok) {
+          this.status$.next("ERROR");
+          return throwError(
+            () => new Error("Error getting audio generated URL")
+          );
+        }
+        return from(audioResponse.text());
+      }),
+      map((rawText) => rawText.split("\n")),
+      map((lines) => {
+        for (const line of lines) {
+          if (!line.includes("}")) {
+            continue;
+          }
+          const qjson = JSON.parse(line.substring(line.indexOf("{")).trim());
+          const url = qjson?.output?.data?.[0]?.url;
+          if (url) {
+            return url;
           }
         }
-      }
+        this.status$.next("ERROR");
+        throw new Error("Audio URL not found in response");
+      }),
+      tap((url) => {
+        console.log("[DEBUG] Final Audio URL:", url);
+      }),
+      catchError((err) => {
+        this.status$.next("ERROR");
+        return throwError(() => err);
+      })
+    );
+  }
+
+  playAudioFromURL$(audioURL: string): Observable<void> {
+    this.status$.next("LOADING");
+    this.audioPlayer = new Audio(audioURL);
+    return new Observable<void>((observer) => {
+      this.audioPlayer.onplaying = () => {
+        console.log("[DEBUG] Audio is playing");
+        this.status$.next("PLAYING");
+      };
+
+      this.audioPlayer.onerror = (event) => {
+        console.error("Error playing audio:", event);
+        this.status$.next("ERROR");
+        observer.error(event);
+      };
+
+      this.audioPlayer.onabort = () => {
+        console.log("[DEBUG] Audio playback aborted");
+        this.status$.next("STOPPED");
+        this.abortController.abort();
+        observer.error(new Error("Audio playback aborted"));
+      };
+
+      this.audioPlayer.onended = () => {
+        console.log("[DEBUG] Audio playback ended");
+        this.status$.next("READY");
+        observer.next();
+        observer.complete();
+      };
+
+      this.audioPlayer.play().catch((error) => {
+        console.error("Error playing audio:", error);
+        this.status$.next("ERROR");
+        observer.error(error);
+      });
+
+      // Cleanup on unsubscribe
+      return () => {
+        this.audioPlayer?.pause();
+        this.audioPlayer = undefined;
+      };
+    });
+  }
+
+  playSound$(text: string): Observable<void> {
+    if (!this.ttsEnabledAndAuthenticated$.value || !text) {
+      return throwError(
+        () =>
+          new Error(
+            "TTS is disabled, you are not authenticated, or the text is empty"
+          )
+      );
+    }
+
+    console.log("[DEBUG] Text-to-Speech is enabled generating audio...");
+
+    // Cancel any existing playback or request
+    if (this.abortController) {
+      this.abortController.abort();
+    }
+    if (this.audioPlayer) {
+      this.audioPlayer.pause();
+      this.audioPlayer = undefined;
+    }
+
+    // Create a new AbortController
+    this.abortController = new AbortController();
+
+    if (!this.apiUrl && !this.middlewareEndpoint) {
+      // Default Browser TTS
+      return this.playSoundWithDefaultTTS$(text).pipe(
+        catchError((error) => {
+          this.status$.next("ERROR");
+          return throwError(() => error);
+        })
+      );
+    } else if (this.apiUrl && !this.middlewareEndpoint) {
+      // Call HF directly
+      return this.generateAudioAndReturnURL$(text).pipe(
+        switchMap((audioURL) => {
+          if (!audioURL) {
+            return throwError(
+              () => new Error("Audio URL not found in response")
+            );
+          }
+          return this.playAudioFromURL$(audioURL);
+        }),
+        catchError((error) => {
+          this.status$.next("ERROR");
+          return throwError(() => error);
+        })
+      );
+    } else if (this.middlewareEndpoint) {
+      // Call TTS Middleware
+
+      console.log("calling middleware");
+      // @ts-ignore
+      return this.playSoundWithTTSMiddleware$(text).pipe(
+        map((test) => {
+          console.log(test);
+          return test;
+        }),
+        catchError((error) => {
+          this.status$.next("ERROR");
+          return throwError(() => error);
+        })
+      );
     }
   }
-  playSound(text: string): Promise<void> {
-    return new Promise(async (resolve, reject) => {
-      if (this.enableTTS && text) {
-        console.log("[DEBUG] Text-to-Speech is enabled generating audio...");
 
-        if (this.abortController) {
-          this.abortController.abort();
-        }
-        if (this.audioPlayer) {
-          this.audioPlayer.pause();
-          this.audioPlayer = undefined;
-        }
-        // Create a new AbortController for this request
-        this.abortController = new AbortController();
+  playSoundWithDefaultTTS$(text: string): Observable<void> {
+    if (!this.ttsEnabledAndAuthenticated$.value) {
+      return throwError(() => new Error("Text-to-Speech is disabled"));
+    }
 
-        const audioURL = await this.generateAudio(resolve, reject, text);
-        console.log("[DEBUG] Audio URL:", audioURL);
-        if (audioURL) {
-          this.status$.next("LOADING");
-          //play audio
-          this.audioPlayer = new Audio(audioURL);
-          this.audioPlayer.onplaying = () => {
-            console.log("[DEBUG] Audio is playing");
-            this.status$.next("PLAYING");
-          };
-          this.audioPlayer.onerror = (event) => {
-            console.error("Error playing audio:", event);
-            this.status$.next("ERROR");
-            reject(event);
-          };
-          this.audioPlayer.onabort = () => {
-            console.log("[DEBUG] Audio playback aborted");
-            this.status$.next("STOPPED");
-            this.abortController.abort();
-            reject("Audio playback aborted");
-          };
-          this.audioPlayer
-            .play()
-            .then(() => {
-              console.log("[DEBUG] Audio is playing");
-              this.audioPlayer.onended = () => {
-                this.status$.next("READY");
-                resolve();
-              };
-            })
-            .catch((error) => {
-              console.error("Error playing audio:", error);
-              this.status$.next("ERROR");
-              reject(error);
-            });
-          return;
-        } else {
-          reject("Audio URL not found in response");
-          return;
-        }
-      } else {
-        reject("Text-to-Speech is disabled");
-      }
+    return new Observable<void>((observer) => {
+      console.log(`Calling ${this.apiUrl} with text:`, text);
+
+      const utterance = new SpeechSynthesisUtterance(text);
+
+      utterance.onend = () => {
+        observer.next();
+        observer.complete();
+      };
+
+      utterance.onerror = (event) => {
+        observer.error(event.error);
+      };
+
+      window.speechSynthesis.speak(utterance);
+
+      // Cleanup logic if the observable is unsubscribed
+      return () => {
+        window.speechSynthesis.cancel();
+      };
     });
+  }
+
+  sendTextToTTSMiddleware$(text: string, token: string): Observable<void> {
+    this.loading$.next(true);
+    const headers = new HttpHeaders({
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      Authorization: `Bearer ${token}`,
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      "Content-Type": "application/json",
+    });
+    const sessionHash = this.generateSessionHash();
+    const body: any = {
+      data: [text],
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      session_hash: sessionHash,
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      fn_index: 0,
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      event_data: null,
+      trigger: null,
+    };
+    if (this.speakerID) {
+      body.data.push(this.speakerID);
+    } else {
+      return throwError(
+        () => new Error("SpeakerID is required for synthesis.")
+      );
+    }
+    if (this.diffusionSteps) {
+      body.data.push(this.diffusionSteps);
+    } else {
+      return throwError(
+        () =>
+          new Error("The number of diffusion steps is required for synthesis.")
+      );
+    }
+    return this.http
+      .post(this.middlewareEndpoint, body, {
+        headers,
+        responseType: "blob",
+        observe: "response",
+      })
+      .pipe(
+        switchMap((response) => {
+          console.log(response);
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          const blob = new Blob([response.body!], {
+            type: "audio/wav",
+          });
+          const url = URL.createObjectURL(blob);
+          console.log(blob);
+          console.log(url);
+          return this.playAudioFromURL$(url);
+        }),
+        catchError((error) => {
+          this.status$.next("ERROR");
+          return throwError(() => error);
+        }),
+        finalize(() => {
+          this.loading$.next(false);
+        })
+      );
+  }
+
+  playSoundWithTTSMiddleware$(text): Observable<void> {
+    this.loading$.next(true);
+    console.log("calling playSoundWithTTSMiddleware");
+    return this.authService.getAccessTokenSilently().pipe(
+      switchMap((token) => this.sendTextToTTSMiddleware$(text, token)) // pass token to the next step
+    );
   }
 
   stop() {

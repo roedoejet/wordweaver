@@ -6,7 +6,8 @@ import {
   OnDestroy,
 } from "@angular/core";
 import { EveryVoiceService } from "../every-voice.service";
-import { BehaviorSubject, Subject, Subscription } from "rxjs";
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 
 @Component({
   selector: "lib-every-voice",
@@ -20,44 +21,50 @@ export class EveryVoiceComponent implements OnInit, OnDestroy {
   isPlaying: boolean;
   isLoading: boolean;
   hasError: boolean;
-
-  private subscription: Subscription;
-
+  unsubscribe$ = new Subject<void>();
+  isVisible = false;
   constructor(public tts: EveryVoiceService, private cdr: ChangeDetectorRef) {
     this.isLoading = false;
-    this.subscription = new Subscription();
-    this.subscription.add(
-      this.tts.status$.subscribe((status) => {
-        console.log("[DEBUG] tts status received", status);
 
-        if (status === "GENERATING" || status === "LOADING") {
-          this.isLoading = true;
-          this.isPlaying = false;
-          this.hasError = false;
-        } else if (status === "READY" || status === "PAUSED") {
-          this.isLoading = false;
-          this.isPlaying = false;
-          this.hasError = false;
-        } else if (status === "PLAYING") {
-          this.isLoading = false;
-          this.isPlaying = true;
-          this.hasError = false;
-        } else if (status === "ERROR") {
-          this.hasError = true;
-          this.isLoading = false;
-          this.isPlaying = false;
-        } else {
-          this.isLoading = false;
-        }
-        this.cdr.detectChanges();
-      })
-    );
+    this.tts.status$.pipe(takeUntil(this.unsubscribe$)).subscribe((status) => {
+      console.log("[DEBUG] tts status received", status);
+
+      if (status === "GENERATING" || status === "LOADING") {
+        this.isLoading = true;
+        this.isPlaying = false;
+        this.hasError = false;
+      } else if (status === "READY" || status === "PAUSED") {
+        this.isLoading = false;
+        this.isPlaying = false;
+        this.hasError = false;
+      } else if (status === "PLAYING") {
+        this.isLoading = false;
+        this.isPlaying = true;
+        this.hasError = false;
+      } else if (status === "ERROR") {
+        this.hasError = true;
+        this.isLoading = false;
+        this.isPlaying = false;
+      } else {
+        this.isLoading = false;
+      }
+      this.cdr.detectChanges();
+    });
   }
 
-  ngOnInit(): void {}
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+  ngOnInit(): void {
+    this.tts.ttsEnabledAndAuthenticated$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((ttsEnabled) => {
+        this.isVisible = ttsEnabled;
+      });
   }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
   onClick() {
     if (this.textToGenerate) {
       this.hasError = false;
@@ -70,8 +77,9 @@ export class EveryVoiceComponent implements OnInit, OnDestroy {
         this.isPlaying = true;
         this.isLoading = true;
         this.cdr.detectChanges();
-        this.tts.playSound(this.textToGenerate).catch((error) => {
-          console.error(error);
+        this.tts.playSound$(this.textToGenerate).subscribe({
+          complete: () => console.log("Playback completed"),
+          error: (err) => console.error("Playback error:", err),
         });
       }
     } else {

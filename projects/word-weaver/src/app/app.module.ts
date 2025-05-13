@@ -7,9 +7,13 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app/app.component";
 import { CoreModule } from "./core/core.module";
 import { SharedModule } from "./shared/shared.module";
+import { AUTH0_INSTANCE, EveryVoiceModule } from "@everyvoice/every-voice";
+import { AuthService } from "@auth0/auth0-angular";
 
 @NgModule({
   imports: [
+    // TTS support using the EveryVoice Angular module
+    EveryVoiceModule.forRoot(environment.ttsConfig),
     // angular
     BrowserAnimationsModule,
     BrowserModule,
@@ -30,5 +34,11 @@ import { SharedModule } from "./shared/shared.module";
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
+  providers: [
+    {
+      provide: AUTH0_INSTANCE,
+      useExisting: AuthService, // Use the existing instance
+    },
+  ],
 })
 export class AppModule {}

@@ -2,15 +2,21 @@ import { ModuleWithProviders, NgModule } from "@angular/core";
 import { EveryVoiceDirective } from "./every-voice.directive";
 import { EveryVoiceComponent } from "./every-voice/every-voice.component";
 import { MatButtonModule } from "@angular/material/button";
-import { MatIconModule } from "@angular/material/icon";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatIconModule } from "@angular/material/icon";
+import { CommonModule } from "@angular/common";
 import { EVERY_VOICE_CONFIG } from "./every-voice.token";
 import { EveryVoiceConfig } from "./every-voice.config";
 import { EveryVoiceService } from "./every-voice.service";
 
 @NgModule({
   declarations: [EveryVoiceDirective, EveryVoiceComponent],
-  imports: [MatButtonModule, MatIconModule, MatProgressSpinnerModule],
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+  ],
   exports: [EveryVoiceDirective, EveryVoiceComponent],
 })
 export class EveryVoiceModule {

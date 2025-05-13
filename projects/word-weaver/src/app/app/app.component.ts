@@ -5,7 +5,11 @@ import browser from "browser-detect";
 import { forkJoin, Observable, of } from "rxjs";
 import { take, map, catchError } from "rxjs/operators";
 import { META_DATA } from "../../config/config";
-import { environment as env } from "../../environments/environment";
+import {
+  environment as env,
+  environment,
+} from "../../environments/environment";
+import { AuthService } from "@auth0/auth0-angular";
 import {
   LocalStorageService,
   routeAnimations,
@@ -25,6 +29,7 @@ import {
   PronounService,
   ConjugationService,
 } from "../core/core.module";
+import { EveryVoiceService } from "@everyvoice/every-voice";
 
 // wraps an observable to see if the observable was a success or not
 const safeLoad = <T>(obs$: Observable<T>) =>
@@ -61,13 +66,16 @@ export class AppComponent implements OnInit {
   stickyHeader$: Observable<boolean>;
   language$: Observable<string>;
   theme$: Observable<string>;
+  requiresAuth: boolean;
   constructor(
     private store: Store,
     private storageService: LocalStorageService,
     private verbService: VerbService,
     private pronounService: PronounService,
     private optionService: OptionService,
-    private conjugationService: ConjugationService
+    private conjugationService: ConjugationService,
+    public tts: EveryVoiceService,
+    public authService: AuthService
   ) {}
 
   private static isIEorEdgeOrSafari() {
@@ -75,6 +83,14 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Authentication
+    this.requiresAuth = environment.ttsConfig.requiresAuth;
+    if (this.requiresAuth) {
+      this.authService.isAuthenticated$.subscribe((isAuthenticated) => {
+        this.tts.ttsEnabledAndAuthenticated$.next(isAuthenticated);
+      });
+    }
+
     this.storageService.testLocalStorage();
     if (AppComponent.isIEorEdgeOrSafari()) {
       this.store.dispatch(

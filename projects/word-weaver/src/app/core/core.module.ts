@@ -16,6 +16,7 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+
 import {
   FaIconLibrary,
   FontAwesomeModule,
@@ -78,6 +79,7 @@ import { TableviewerEffects } from "./tableviewer-selection/tableviewer-selectio
 import { ValidationService } from "./validation/validation.service";
 import { VerbService } from "./verb/verb.service";
 import { WordmakerEffects } from "./wordmaker-selection/wordmaker-selection.effects";
+import { provideAuth0 } from "@auth0/auth0-angular";
 
 export {
   routeAnimations,
@@ -200,6 +202,15 @@ export const httpLoaderFactory = (http: HttpClient) =>
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     { provide: ErrorHandler, useClass: AppErrorHandler },
     { provide: RouterStateSerializer, useClass: CustomSerializer },
+    provideAuth0({
+      domain: environment.ttsConfig.domain,
+      clientId: environment.ttsConfig.clientId,
+      authorizationParams: {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        redirect_uri: window.location.origin,
+        audience: environment.ttsConfig.audience,
+      },
+    }),
   ],
   exports: [
     // angular
