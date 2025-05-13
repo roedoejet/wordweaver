@@ -29,6 +29,12 @@
         "slogan": "WordWeaver UI weaves beautiful verb conjugation websites",
         "text": "<p>Here is where your text about the project should go.</p>"
       },
+      "profile": {
+        "logout": "Logout",
+        "title": "Welcome!",
+        "welcome": "You're successfully logged in as {{ name }}",
+        "welcome-no-auth": "Hm, we couldn't log you in. Please try logging in again."
+      },
       "settings": {
         "advanced": "Advanced",
         "analytics": "Analytics",
@@ -83,7 +89,9 @@
           "purple-light": "Light Purple",
           "title": "Themes"
         },
-        "title": "Settings"
+        "title": "Settings",
+        "welcome": null,
+        "welcome-no-auth": null
       },
       "tableviewer": {
         "dialog": {
