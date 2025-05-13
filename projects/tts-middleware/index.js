@@ -1,13 +1,13 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import axios from "axios";
 import { expressjwt } from "express-jwt";
 import jwksRsa from "jwks-rsa";
-import { Client } from "@gradio/client";
+import { EventSource } from "eventsource";
 
 dotenv.config();
 
-const client = await Client.connect(process.env.TTS_BACKEND_URL);
 const app = express();
 app.use(
   cors({
@@ -49,24 +49,84 @@ const checkJwt = expressjwt({
 });
 
 app.post("/tts", checkJwt, async (req, res) => {
-  const { text } = req.body;
   try {
     // Forward request to HuggingFace Gradio backend
-    // const response = await axios.post(process.env.TTS_BACKEND_URL, req.body);
-    const response = await client.predict("/synthesize", {
-      model_name: "multi",
-      text: text,
-      speed: 1,
-      voice_name: "Інна Гелевера",
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
+    };
+    const joinEndpoint = new URL(
+      "/gradio_api/queue/join",
+      process.env.TTS_BACKEND_URL
+    ).href;
+    const joinResponse = await axios.post(joinEndpoint, req.body, {
+      headers: headers,
     });
-    // const response = await client.predict("/process", {
-    //     language: "English",
-    //     repo_id: "csukuangfj/kokoro-en-v0_19|11 speakers",
-    //     text: text,
-    //     sid: "0",
-    //     speed: 1.0,
-    // });
-    res.status(response.status).send(response.data);
+    const eventId = joinResponse.data.event_id;
+    if (!eventId) {
+      throw new Error("No event_id returned from Gradio");
+    }
+    const eventStreamEndpoint = new URL(
+      `/gradio_api/queue/data?session_hash=${req.body["session_hash"]}`,
+      process.env.TTS_BACKEND_URL
+    ).href;
+    const eventStream = new EventSource(eventStreamEndpoint, {
+      fetch: (input, init) =>
+        fetch(input, {
+          ...init,
+          headers: {
+            ...init.headers,
+            Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
+          },
+        }),
+    });
+
+    let done = false;
+
+    eventStream.onmessage = async (event) => {
+      const data = JSON.parse(event.data);
+
+      // We only want this event_id
+      if (data.event_id !== eventId) {
+        return;
+      }
+      if (data.msg === "process_completed") {
+        done = true;
+        eventStream.close();
+        const filePath = data.output?.data?.[0]?.url;
+        if (!filePath || !filePath.startsWith(process.env.TTS_BACKEND_URL)) {
+          return res.status(500).json({ error: "Invalid audio path returned" });
+        }
+        // Step 3: Fetch the audio file and stream it to the client
+        const audioRes = await axios.get(filePath, {
+          responseType: "stream",
+          headers: { Authorization: `Bearer ${process.env.BEARER_TOKEN}` },
+        });
+        res.setHeader(
+          "Content-Type",
+          audioRes.headers["content-type"] || "audio/wav"
+        );
+        audioRes.data.pipe(res);
+      }
+
+      if (data.msg === "process_starts") {
+        console.log("TTS processing started...");
+      }
+
+      if (data.msg === "heartbeat") {
+        // Can be ignored or logged
+      }
+    };
+
+    eventStream.onerror = (err) => {
+      console.error("SSE error:", err);
+      if (!done) {
+        eventStream.close();
+        res
+          .status(500)
+          .json({ error: "Failed to connect to Gradio event stream" });
+      }
+    };
   } catch (err) {
     console.error("TTS Backend Error:", err?.response?.data || err.message);
     res.status(err?.response?.status || 500).send({

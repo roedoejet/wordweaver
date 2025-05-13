@@ -26,7 +26,7 @@ import { EveryVoiceModule } from "@everyvoice/every-voice";
 @NgModule({
   imports: [
     EveryVoiceModule.forRoot({
-      apiUrl: "https://[INSTANCE].hf.space/gradio_api/queue/", // 👈 your TTS backend endpoint
+      apiUrl: "https://[INSTANCE].hf.space", // 👈 your TTS backend endpoint
       enableTTS: true, // 👈 set this to false if you want to disable your TTS in certain deployment environments. Note, if this is disabled, your EveryVoice components will not render and TTS will not be accessible from your application.
       developmentBearerToken: "[HF_TOKEN]", // 👈 OPTIONAL authentication token if required by your API. It will be treated as an Authorization Bearer token. IMPORTANT - this is for development only. You should store your environment variables in a secure location in production. Do not commit your access token to a public repo.
       speakerID: "[SPEAKER NAME]", // 👈 OPTIONAL speaker id.
@@ -90,7 +90,7 @@ import { AuthService } from "@auth0/auth0-angular";
 @NgModule({
   imports: [
     EveryVoiceModule.forRoot({
-      apiUrl: "https://your.api/tts", // 👈 your TTS backend endpoint
+      apiUrl: "https://[INSTANCE].hf.space", // 👈 your TTS backend endpoint
       enableTTS: true, // 👈 set this to false if you want to disable your TTS in certain deployment environments. Note, if this is disabled, your EveryVoice components will not render and TTS will not be accessible from your application.
       requiresAuth: true, // 👈 set this to false if you do not require users to authenticate before using TTS. If you do, you will need to set up an Auth0 account. See below for more details.
       domain: "my-tenant.us.auth0.com", // 👈 example tenant domain from auth0
