@@ -48,12 +48,6 @@
             <img [src]="logo" />
             <ww-logo class="branding ui-button"></ww-logo>
           </span>
-          <mat-spinner
-            class="nav-button"
-            *ngIf="tts.loading$ | async"
-            color="accent"
-            [diameter]="20"
-          ></mat-spinner>
           <span class="d-none d-md-inline">
             <button
               mat-button
