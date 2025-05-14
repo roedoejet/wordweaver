@@ -5,10 +5,12 @@ import axios from "axios";
 import { expressjwt } from "express-jwt";
 import jwksRsa from "jwks-rsa";
 import { EventSource } from "eventsource";
+import https from "https";
 
 dotenv.config();
 
 const app = express();
+
 app.use(
   cors({
     origin: process.env.PERMITTED_ORIGIN, // should only allow localhost in dev, not in production
@@ -50,18 +52,20 @@ const checkJwt = expressjwt({
 
 app.post("/tts", checkJwt, async (req, res) => {
   try {
+    const keepAliveAgent = new https.Agent({ keepAlive: true });
+    const axiosInstance = axios.create({
+      httpsAgent: keepAliveAgent,
+      headers: {
+        // "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
+      },
+    });
     // Forward request to HuggingFace Gradio backend
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
-    };
     const joinEndpoint = new URL(
       "/gradio_api/queue/join",
       process.env.TTS_BACKEND_URL
     ).href;
-    const joinResponse = await axios.post(joinEndpoint, req.body, {
-      headers: headers,
-    });
+    const joinResponse = await axiosInstance.post(joinEndpoint, req.body);
     const eventId = joinResponse.data.event_id;
     if (!eventId) {
       throw new Error("No event_id returned from Gradio");
@@ -80,12 +84,10 @@ app.post("/tts", checkJwt, async (req, res) => {
           },
         }),
     });
-
     let done = false;
 
     eventStream.onmessage = async (event) => {
       const data = JSON.parse(event.data);
-
       // We only want this event_id
       if (data.event_id !== eventId) {
         return;
@@ -98,13 +100,13 @@ app.post("/tts", checkJwt, async (req, res) => {
           return res.status(500).json({ error: "Invalid audio path returned" });
         }
         // Step 3: Fetch the audio file and stream it to the client
-        const audioRes = await axios.get(filePath, {
+        const audioRes = await axiosInstance.get(filePath, {
           responseType: "stream",
-          headers: { Authorization: `Bearer ${process.env.BEARER_TOKEN}` },
         });
         res.setHeader(
           "Content-Type",
-          audioRes.headers["content-type"] || "audio/wav"
+          audioRes.headers["content-type"] ||
+            process.env.DEFAULT_AUDIO_CONTENT_TYPE
         );
         audioRes.data.pipe(res);
       }

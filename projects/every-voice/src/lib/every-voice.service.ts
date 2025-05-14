@@ -356,7 +356,7 @@ export class EveryVoiceService {
           console.log(response);
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           const blob = new Blob([response.body!], {
-            type: "audio/wav",
+            type: response.headers["content_type"] || "audio/mpeg",
           });
           const url = URL.createObjectURL(blob);
           console.log(blob);
