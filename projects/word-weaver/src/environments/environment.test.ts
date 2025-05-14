@@ -10,13 +10,16 @@ import { EveryVoiceConfig } from "@everyvoice/every-voice";
 const packageJson = require("../../../../package.json");
 
 export const everyVoiceConfig: EveryVoiceConfig = {
-  apiUrl: "default-system-tts",
+  apiUrl: "https://unbq-sgile-text-to-speech.hf.space",
   enableTTS: true,
   requiresAuth: true,
+  developmentBearerToken: "",
   middlewareEndpoint: "http://localhost:3000/tts",
   domain: "unbq-everyvoice.ca.auth0.com",
   clientId: "7jLB2de2XqEGsAbXLEnUjB49P35r8gQH",
   audience: "https://unbq.everyvoice.middleware.ca",
+  speakerID: "tina",
+  diffusionSteps: 3,
 };
 
 export const environment = {
