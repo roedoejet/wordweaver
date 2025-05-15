@@ -5,6 +5,7 @@ import { AUTH0_INSTANCE, EVERY_VOICE_CONFIG } from "./every-voice.token";
 import {
   EveryVoiceConfig,
   EveryVoiceServiceStatus,
+  EveryVoiceServiceMiddlewareInfoResponse,
 } from "./every-voice.config";
 import { BehaviorSubject, from, Subject, Observable, throwError } from "rxjs";
 import { catchError, finalize, map, switchMap, tap } from "rxjs/operators";
@@ -15,6 +16,7 @@ export class EveryVoiceService {
   public status$: Subject<EveryVoiceServiceStatus>;
   public ttsEnabledAndAuthenticated$ = new BehaviorSubject<boolean>(false);
   public loading$ = new BehaviorSubject<boolean>(false);
+  public speakers$ = new BehaviorSubject<string[]>([]);
   private enableTTS: boolean;
   private requiresAuth: boolean;
   private apiUrl: string;
@@ -44,6 +46,24 @@ export class EveryVoiceService {
     this.requiresAuth = config?.requiresAuth;
     // If authentication is not required, then we set the default to true
     this.ttsEnabledAndAuthenticated$.next(this.enableTTS && !this.requiresAuth);
+    if (
+      this.middlewareEndpoint ||
+      (this.apiUrl.startsWith("http") && this.enableTTS)
+    ) {
+      try {
+        this.setTTSOptions()?.subscribe((response) => {
+          this.speakers$.next(response.speakers || []);
+
+          this.speakerID = this.speakerID || response.defaultSpeaker;
+
+          this.diffusionSteps =
+            this.diffusionSteps || response.defaultDiffusionSteps;
+        });
+      } catch (err) {
+        console.error("[ERROR] Failed to set TTS options:", err);
+      }
+    }
+
     console.log("[DEBUG] initialized EveryVoiceService with config:", config);
     this.status$.next("READY");
   }
@@ -379,6 +399,106 @@ export class EveryVoiceService {
     return this.authService.getAccessTokenSilently().pipe(
       switchMap((token) => this.sendTextToTTSMiddleware$(text, token)) // pass token to the next step
     );
+  }
+
+  setTTSOptions(): Observable<EveryVoiceServiceMiddlewareInfoResponse> {
+    if (this.middlewareEndpoint) {
+      console.log("[DEBUG] getting middleware tts info");
+      return this.authService?.getAccessTokenSilently().pipe(
+        switchMap((token) => {
+          //console.log("[DEBUG]  middleware tts info token ", token);
+          const headers = new HttpHeaders({
+            // eslint-disable-next-line @typescript-eslint/naming-convention
+            Authorization: `Bearer ${token}`,
+            // eslint-disable-next-line @typescript-eslint/naming-convention
+            "Content-Type": "application/json",
+          });
+          return this.http
+            .get<EveryVoiceServiceMiddlewareInfoResponse>(
+              `${this.middlewareEndpoint}/info`,
+              {
+                headers,
+                responseType: "json",
+                observe: "response",
+              }
+            )
+            .pipe(
+              map((response) => {
+                console.log(
+                  "[DEBUG] middleware TTS API info set",
+                  response.body
+                );
+                return response.body;
+              }),
+              catchError((error) => {
+                console.log("[ERROR] middleware tts info", error);
+                this.status$.next("ERROR");
+                return throwError(() => error);
+              })
+            );
+        }) // pass token to the next step
+      );
+    } else if (this.apiUrl) {
+      console.log("[DEBUG] getting API tts info");
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      const header = new Headers({ "Content-Type": "application/json" });
+      if (this.bearerToken) {
+        header.append("Authorization", `Bearer ${this.bearerToken}`);
+      }
+      const url = new URL("/gradio_api/info", this.apiUrl).href;
+      return from(
+        fetch(url, {
+          method: "GET",
+          headers: header,
+        })
+      ).pipe(
+        switchMap(async (response) => {
+          if (!response.ok) {
+            this.status$.next("ERROR");
+            console.log("[ERROR] fetching API tts info", response.body);
+            throw new Error("Failed to fetch API tts info");
+          }
+
+          const infoResponse = await response.json();
+          const options: EveryVoiceServiceMiddlewareInfoResponse = {
+            speakers: [],
+            defaultDiffusionSteps: this.diffusionSteps,
+            defaultSpeaker: this.speakerID,
+          };
+          if (infoResponse["named_endpoints"]) {
+            const namedEndpoints = infoResponse["named_endpoints"];
+            if (namedEndpoints["/synthesize"]) {
+              const synthesizeEndPoint = namedEndpoints["/synthesize"];
+              if (synthesizeEndPoint["parameters"]) {
+                for (const parameter of synthesizeEndPoint["parameters"]) {
+                  switch (parameter["parameter_name"]) {
+                    case "voice":
+                      options.speakers = parameter["type"]["enum"];
+                      options.defaultSpeaker =
+                        this.speakerID || parameter["parameter_default"];
+                      break;
+                    case "lngsteps":
+                      options.defaultDiffusionSteps =
+                        this.diffusionSteps || parameter["parameter_default"];
+                      break;
+                  }
+                }
+
+                console.log("[DEBUG] api tts info", options);
+                return options;
+              }
+            }
+          }
+          throw new Error("API tts info not found in response");
+        }),
+        map((options) => options as EveryVoiceServiceMiddlewareInfoResponse),
+        catchError((error) => {
+          this.status$.next("ERROR");
+          console.log("[ERROR] getting API tts info", error);
+          return throwError(() => error);
+        })
+      );
+    }
   }
 
   stop() {
