@@ -19,3 +19,9 @@ export type EveryVoiceServiceStatus =
   | "STOPPED"
   | "PLAYING"
   | "PAUSED";
+
+export interface EveryVoiceServiceMiddlewareInfoResponse {
+  speakers: string[];
+  defaultSpeaker: string;
+  defaultDiffusionSteps: number;
+}

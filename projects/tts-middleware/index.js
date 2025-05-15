@@ -6,6 +6,7 @@ import { expressjwt } from "express-jwt";
 import jwksRsa from "jwks-rsa";
 import { EventSource } from "eventsource";
 import https from "https";
+import { URL } from "url";
 
 dotenv.config();
 
@@ -14,7 +15,7 @@ const app = express();
 app.use(
   cors({
     origin: process.env.PERMITTED_ORIGIN, // should only allow localhost in dev, not in production
-    methods: ["POST"],
+    methods: ["POST", "GET"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
@@ -132,6 +133,59 @@ app.post("/tts", checkJwt, async (req, res) => {
   } catch (err) {
     console.error("TTS Backend Error:", err?.response?.data || err.message);
     res.status(err?.response?.status || 500).send({
+      error: "Failed to reach TTS backend",
+      details: err?.response?.data || err.message,
+    });
+  }
+});
+app.get("/tts/info", checkJwt, async (req, res) => {
+  try {
+    // Forward request to HuggingFace Gradio backend
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
+    };
+    const infoEndpoint = new URL(
+      "/gradio_api/info",
+      process.env.TTS_BACKEND_URL
+    ).href;
+    //console.log(infoEndpoint, `Bearer ${process.env.BEARER_TOKEN}`, req.body);
+    const infoResponse = await axios.get(infoEndpoint, {
+      headers: headers,
+    });
+
+    //console.log("response", infoResponse.data);
+    let speakers = [];
+    let defaultSpeaker = "";
+    let defaultDiffusionSteps = 3;
+    if (infoResponse.data["named_endpoints"]) {
+      const named_endpoints = infoResponse.data["named_endpoints"];
+      if (named_endpoints["/synthesize"]) {
+        const synthesizeEndPoint = named_endpoints["/synthesize"];
+        if (synthesizeEndPoint["parameters"]) {
+          for (const parameter of synthesizeEndPoint["parameters"]) {
+            switch (parameter["parameter_name"]) {
+              case "voice":
+                speakers = parameter["type"]["enum"];
+                defaultSpeaker = parameter["parameter_default"];
+                break;
+              case "lngsteps":
+                defaultDiffusionSteps = parameter["parameter_default"];
+                break;
+            }
+          }
+        }
+      }
+    }
+    res.json({
+      speakers,
+      defaultSpeaker,
+      defaultDiffusionSteps,
+    });
+  } catch (err) {
+    console.error("TTS Backend Error:", err?.response?.data || err.message);
+    res.status(err?.response?.status || 500).send({
+      url: err.response?.URL,
       error: "Failed to reach TTS backend",
       details: err?.response?.data || err.message,
     });
