@@ -23,7 +23,7 @@ export class OptionService {
     this.options$ = this.store.pipe(
       select(selectSettingsState),
       switchMap((settings: SettingsState) =>
-        this.http.get<Option[]>(settings.baseUrl + this.path)
+        this.http.get<Option[]>(settings?.baseUrl + this.path)
       ),
       retry(2),
       shareReplay(1),

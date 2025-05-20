@@ -93,7 +93,7 @@ export class DownloadDialogComponent implements OnInit {
             };
             return this.http
               .post(
-                appSettings.baseUrl +
+                appSettings?.baseUrl +
                   `files?file-type=${this.form.controls.ftype.value}&` +
                   queryArgs.toString(),
                 { tiers, settings },
