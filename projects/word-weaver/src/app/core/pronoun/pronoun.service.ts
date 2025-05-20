@@ -24,7 +24,7 @@ export class PronounService {
     this.pronouns$ = this.store.pipe(
       select(selectSettingsState),
       switchMap((settings: SettingsState) =>
-        this.http.get<Pronoun[]>(settings.baseUrl + this.path)
+        this.http.get<Pronoun[]>(settings?.baseUrl + this.path)
       ),
       retry(2),
       shareReplay(1),
