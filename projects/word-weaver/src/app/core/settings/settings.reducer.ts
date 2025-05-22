@@ -16,6 +16,8 @@ import {
   actionSettingsChangeTestApi,
   actionSettingsChangeTheme,
   actionSettingsChangeThemeColors,
+  actionSettingsChangeTtsDiffusionSteps,
+  actionSettingsChangeTtsSpeaker,
 } from "./settings.actions";
 import { NIGHT_MODE_THEME, SettingsState } from "./settings.model";
 
@@ -38,6 +40,10 @@ const initialBaseState: SettingsState = {
   level: environment.config.level,
   highlight: environment.config.highlight,
   hour: new Date().getHours(),
+  ttsSettings: {
+    diffusionSteps: environment.ttsConfig.diffusionSteps,
+    speaker: environment.ttsConfig.speakerID,
+  },
 };
 
 export const initialState: SettingsState = {
@@ -73,6 +79,20 @@ const reducer = createReducer(
     colors: {
       ...state.colors,
       ...{ primary: action.primary, accent: action.accent },
+    },
+  })),
+  on(actionSettingsChangeTtsDiffusionSteps, (state, action) => ({
+    ...state,
+    ttsSettings: {
+      ...state.ttsSettings,
+      ...{ diffusionSteps: action.diffusionSteps },
+    },
+  })),
+  on(actionSettingsChangeTtsSpeaker, (state, action) => ({
+    ...state,
+    ttsSettings: {
+      ...state.ttsSettings,
+      ...{ speaker: action.speaker },
     },
   })),
   on(actionSettingsChangeHighlight, (state, action) => {

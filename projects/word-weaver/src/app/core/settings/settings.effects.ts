@@ -30,6 +30,8 @@ import {
   actionSettingsChangeStickyHeader,
   actionSettingsChangeTestApi,
   actionSettingsChangeTheme,
+  actionSettingsChangeTtsDiffusionSteps,
+  actionSettingsChangeTtsSpeaker,
 } from "./settings.actions";
 import { State } from "./settings.model";
 import {
@@ -38,8 +40,10 @@ import {
   selectPageAnimations,
   selectSettingsAnalytics,
   selectSettingsLanguage,
+  selectTtsSpeaker,
 } from "./settings.selectors";
 import { NotificationService } from "../core.module";
+import { EveryVoiceService } from "@everyvoice/every-voice";
 
 export const SETTINGS_KEY = "SETTINGS";
 
@@ -56,8 +60,21 @@ export class SettingsEffects {
     private localStorageService: LocalStorageService,
     private animationsService: AnimationsService,
     private translateService: TranslateService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private tts: EveryVoiceService
   ) {}
+
+  changeTtsSpeaker = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(actionSettingsChangeTtsSpeaker),
+        withLatestFrom(this.store.pipe(select(selectTtsSpeaker))),
+        tap(([action, speaker]) => {
+          this.tts.speakerID = speaker;
+        })
+      ),
+    { dispatch: false }
+  );
 
   changeHour = createEffect(() =>
     merge(
@@ -116,7 +133,9 @@ export class SettingsEffects {
           actionSettingsChangeTestApi,
           actionSettingsChangeLevel,
           actionSettingsChangeHighlight,
-          actionSettingsChangeTheme
+          actionSettingsChangeTheme,
+          actionSettingsChangeTtsDiffusionSteps,
+          actionSettingsChangeTtsSpeaker
         ),
         withLatestFrom(this.store.pipe(select(selectSettingsState))),
         tap(([action, settings]) =>

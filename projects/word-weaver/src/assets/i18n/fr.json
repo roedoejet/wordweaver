@@ -1,5 +1,4 @@
 {
-  "": null,
   "ww": {
     "common": {
       "language": "Dans la langue du conjugueur",
@@ -65,7 +64,8 @@
             "title": "Couches à afficher",
             "translation": "Traduction"
           },
-          "title": "Paramètres généraux"
+          "title": "Paramètres généraux",
+          "ttsPlaceholder": "Voix"
         },
         "night-mode": "Mode jour/nuit automatique (de 21 h à 7 h)",
         "notifications": {

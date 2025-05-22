@@ -67,6 +67,29 @@
             </mat-select>
           </mat-form-field>
         </div>
+        <div
+          class="icon-form-field"
+          *ngIf="tts.ttsEnabledAndAuthenticated$ | async"
+        >
+          <mat-icon color="accent"> record_voice_over </mat-icon>
+          <mat-form-field class="control">
+            <mat-select
+              [placeholder]="
+                'ww.pages.settings.general.ttsPlaceholder' | translate
+              "
+              [ngModel]="settings.ttsSettings.speaker"
+              (selectionChange)="onTtsSpeakerChange($event)"
+              name="speaker"
+            >
+              <mat-option
+                *ngFor="let s of this.tts.speakers$ | async"
+                [value]="s"
+              >
+                {{ s }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
         <div class="icon-form-field">
           <mat-icon color="accent">
             <fa-icon icon="bars" color="accent"></fa-icon>

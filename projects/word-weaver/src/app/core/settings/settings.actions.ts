@@ -65,6 +65,17 @@ export const actionSettingsChangeAnimationsElements = createAction(
   "[Settings] Change Animations Elements",
   props<{ elementsAnimations: boolean }>()
 );
+
+export const actionSettingsChangeTtsDiffusionSteps = createAction(
+  "[Settings] Change TTS Settings",
+  props<{ diffusionSteps: number }>()
+);
+
+export const actionSettingsChangeTtsSpeaker = createAction(
+  "[Settings] Change TTS Speaker",
+  props<{ speaker: string }>()
+);
+
 export const actionSettingsChangeHour = createAction(
   "[Settings] Change Hours",
   props<{ hour: number }>()

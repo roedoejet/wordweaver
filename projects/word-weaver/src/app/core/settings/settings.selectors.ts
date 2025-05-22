@@ -62,6 +62,16 @@ export const selectHour = createSelector(
   (settings) => settings.hour
 );
 
+export const selectTtsSettings = createSelector(
+  selectSettings,
+  (settings) => settings.ttsSettings
+);
+
+export const selectTtsSpeaker = createSelector(
+  selectSettings,
+  (settings) => settings.ttsSettings.speaker
+);
+
 export const selectIsNightHour = createSelector(
   selectAutoNightMode,
   selectHour,
