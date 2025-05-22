@@ -57,7 +57,7 @@ export class EveryVoiceService {
     this.ttsEnabledAndAuthenticated$
       .pipe(
         switchMap((isAuthenticated) => {
-          if (isAuthenticated) {
+          if (isAuthenticated && this.requiresAuth) {
             return this.setTTSOptions().pipe(
               tap((response) => {
                 this.speakers$.next(response.speakers || []);

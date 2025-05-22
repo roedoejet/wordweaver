@@ -69,7 +69,10 @@
         </div>
         <div
           class="icon-form-field"
-          *ngIf="tts.ttsEnabledAndAuthenticated$ | async"
+          *ngIf="
+            (tts.ttsEnabledAndAuthenticated$ | async) &&
+            (this.tts.speakers$ | async)?.length > 0
+          "
         >
           <mat-icon color="accent"> record_voice_over </mat-icon>
           <mat-form-field class="control">
