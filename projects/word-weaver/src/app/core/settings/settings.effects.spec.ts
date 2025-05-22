@@ -16,6 +16,7 @@ import {
 import { SettingsEffects, SETTINGS_KEY } from "./settings.effects";
 import { SettingsState, NIGHT_MODE_THEME } from "./settings.model";
 import { actionSettingsChangeTheme } from "./settings.actions";
+import { EveryVoiceService } from "@everyvoice/every-voice";
 
 const scheduler = new TestScheduler((actual, expected) => {
   // @ts-ignore
@@ -29,6 +30,7 @@ describe("SettingsEffects", () => {
   let animationsService: jasmine.SpyObj<AnimationsService>;
   let translateService: jasmine.SpyObj<TranslateService>;
   let notificationService: jasmine.SpyObj<NotificationService>;
+  let tts: jasmine.SpyObj<EveryVoiceService>;
   let store: jasmine.SpyObj<Store<AppState>>;
 
   beforeEach(() => {
@@ -52,6 +54,7 @@ describe("SettingsEffects", () => {
     ]);
     translateService = jasmine.createSpyObj("TranslateService", ["use"]);
     notificationService = jasmine.createSpyObj("NotificationService", ["use"]);
+    tts = jasmine.createSpyObj("EveryVoiceService", ["use"]);
     store = jasmine.createSpyObj("store", ["pipe"]);
   });
 
@@ -92,7 +95,8 @@ describe("SettingsEffects", () => {
         localStorageService,
         animationsService,
         translateService,
-        notificationService
+        notificationService,
+        tts
       );
 
       effect.persistSettings.subscribe(() => {

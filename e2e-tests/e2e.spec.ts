@@ -15,14 +15,13 @@ test("navigate to tableviewer", async ({ page }) => {
   await expect(page.url()).toContain("tableviewer");
 });
 
-// TODO: For some reason this is broken in CI.
-// test("get started link", async ({ page }) => {
-//   await page.goto(HOME + "/wordmaker");
+test("get started link", async ({ page }) => {
+  await page.goto(HOME + "/wordmaker");
 
-//   await expect(page.url()).toContain("wordmaker");
+  await expect(page.url()).toContain("wordmaker");
 
-//   // Click the get started link.
-//   await page.getByTestId("start").click();
+  // Click the get started link.
+  await page.getByTestId("start").click();
 
-//   await expect(page.url()).toContain("stepper");
-// });
+  await expect(page.url()).toContain("stepper");
+});
