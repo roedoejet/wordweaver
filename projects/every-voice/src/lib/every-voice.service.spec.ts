@@ -16,7 +16,7 @@ describe("EveryVoiceService", () => {
       imports: [
         EveryVoiceModule.forRoot({
           apiUrl: "test",
-          enableTTS: true,
+          enableTTS: false,
           requiresAuth: false,
           clientId: "",
           audience: "",
