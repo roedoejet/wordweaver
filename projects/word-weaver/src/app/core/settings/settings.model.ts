@@ -27,6 +27,10 @@ export interface SettingsState {
     primary: string;
     accent: string;
   };
+  ttsSettings?: {
+    diffusionSteps?: number;
+    speaker?: string;
+  };
 }
 
 export interface State extends AppState {

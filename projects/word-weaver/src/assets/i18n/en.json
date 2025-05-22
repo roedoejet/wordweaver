@@ -64,7 +64,8 @@
             "title": "Display Tiers",
             "translation": "Translation"
           },
-          "title": "General"
+          "title": "General",
+          "ttsPlaceholder": "TTS Voice"
         },
         "night-mode": "Auto night mode (from 21:00 to 7:00)",
         "notifications": {

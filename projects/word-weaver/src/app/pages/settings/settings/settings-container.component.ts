@@ -21,10 +21,12 @@ import {
   actionSettingsChangeStickyHeader,
   actionSettingsChangeTestApi,
   actionSettingsChangeTheme,
+  actionSettingsChangeTtsSpeaker,
 } from "../../../core/settings/settings.actions";
 import { SettingsState, State } from "../../../core/settings/settings.model";
 import { selectSettings } from "../../../core/settings/settings.selectors";
 import { environment } from "../../../../environments/environment";
+import { EveryVoiceService } from "@everyvoice/every-voice";
 
 @Component({
   selector: "ww-settings",
@@ -74,11 +76,10 @@ export class SettingsContainerComponent implements OnDestroy, OnInit {
   }));
   showInstall = false;
   unsubscribe$ = new Subject<void>();
-  constructor(private store: Store<State>) {}
+  constructor(private store: Store<State>, public tts: EveryVoiceService) {}
 
   ngOnInit() {
     this.settings$ = this.store.pipe(select(selectSettings));
-    this.settings$.subscribe((settings) => console.log(settings));
     // this.deferredPrompt$ = fromEvent(window, "beforeinstallprompt").pipe(
     //   takeUntil(this.unsubscribe$),
     //   map(e => {
@@ -116,6 +117,10 @@ export class SettingsContainerComponent implements OnDestroy, OnInit {
 
   onAutoNightModeToggle({ checked: autoNightMode }) {
     this.store.dispatch(actionSettingsChangeAutoNightMode({ autoNightMode }));
+  }
+
+  onTtsSpeakerChange({ value: speaker }) {
+    this.store.dispatch(actionSettingsChangeTtsSpeaker({ speaker }));
   }
 
   onStickyHeaderToggle({ checked: stickyHeader }) {
