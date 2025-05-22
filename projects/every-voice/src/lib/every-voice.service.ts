@@ -7,7 +7,14 @@ import {
   EveryVoiceServiceStatus,
   EveryVoiceServiceMiddlewareInfoResponse,
 } from "./every-voice.config";
-import { BehaviorSubject, from, Subject, Observable, throwError } from "rxjs";
+import {
+  BehaviorSubject,
+  from,
+  Subject,
+  Observable,
+  throwError,
+  of,
+} from "rxjs";
 import { catchError, finalize, map, switchMap, tap } from "rxjs/operators";
 import { AuthService } from "@auth0/auth0-angular";
 
@@ -17,12 +24,12 @@ export class EveryVoiceService {
   public ttsEnabledAndAuthenticated$ = new BehaviorSubject<boolean>(false);
   public loading$ = new BehaviorSubject<boolean>(false);
   public speakers$ = new BehaviorSubject<string[]>([]);
+  public speakerID: string | undefined;
+  public diffusionSteps: number | undefined;
   private enableTTS: boolean;
   private requiresAuth: boolean;
   private apiUrl: string;
   private bearerToken: string | undefined;
-  private speakerID: string | undefined;
-  private diffusionSteps: number | undefined;
   private abortController: any | undefined;
   private audioPlayer: HTMLAudioElement | undefined;
   private middlewareEndpoint: string;
@@ -46,24 +53,31 @@ export class EveryVoiceService {
     this.requiresAuth = config?.requiresAuth;
     // If authentication is not required, then we set the default to true
     this.ttsEnabledAndAuthenticated$.next(this.enableTTS && !this.requiresAuth);
-    if (
-      this.middlewareEndpoint ||
-      (this.apiUrl.startsWith("http") && this.enableTTS)
-    ) {
-      try {
-        this.setTTSOptions()?.subscribe((response) => {
-          this.speakers$.next(response.speakers || []);
+    // If tts enabled and authenticated, then look for fetch and set the tts options
+    this.ttsEnabledAndAuthenticated$
+      .pipe(
+        switchMap((isAuthenticated) => {
+          if (isAuthenticated) {
+            return this.setTTSOptions().pipe(
+              tap((response) => {
+                this.speakers$.next(response.speakers || []);
 
-          this.speakerID = this.speakerID || response.defaultSpeaker;
+                this.speakerID = this.speakerID || response.defaultSpeaker;
 
-          this.diffusionSteps =
-            this.diffusionSteps || response.defaultDiffusionSteps;
-        });
-      } catch (err) {
-        console.error("[ERROR] Failed to set TTS options:", err);
-      }
-    }
-
+                this.diffusionSteps =
+                  this.diffusionSteps || response.defaultDiffusionSteps;
+              })
+            );
+          } else {
+            return of(isAuthenticated);
+          }
+        }),
+        catchError((err) => {
+          console.error("[ERROR] Failed to set TTS options:", err);
+          return throwError(err);
+        })
+      )
+      .subscribe();
     console.log("[DEBUG] initialized EveryVoiceService with config:", config);
     this.status$.next("READY");
   }
