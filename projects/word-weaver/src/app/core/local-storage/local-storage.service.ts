@@ -29,7 +29,11 @@ const slugify = (str: string) => {
   return str;
 };
 
-const APP_PREFIX = "ww-" + slugify(environment.base) + slugify(CONFIG_NAME);
+const APP_PREFIX =
+  "ww-" +
+  slugify(environment.base) +
+  slugify(CONFIG_NAME) +
+  slugify(environment.versions.app);
 
 @Injectable({
   providedIn: "root",
