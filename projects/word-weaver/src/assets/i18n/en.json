@@ -3,6 +3,10 @@
     "common": {
       "language": "Sample Language",
       "notifications": {
+        "auth": {
+          "login-failed": "Sorry, login failed, please try again.",
+          "verification-required": "Please check your inbox and verify your email address before continuing."
+        },
         "error": {
           "dev": "Hm, something went wrong, please check the console.",
           "general": "Whoops, an error occured."

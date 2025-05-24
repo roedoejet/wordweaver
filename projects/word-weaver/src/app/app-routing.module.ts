@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
 import { AuthGuard } from "@auth0/auth0-angular";
 import { UserProfileComponent } from "./shared/profile/profile.component";
+import { AuthCallbackComponent } from "./shared/auth/auth-callback.component";
 
 const routes: Routes = [
   {
@@ -37,6 +38,10 @@ const routes: Routes = [
       import("./pages/tableviewer/tableviewer.module").then(
         (m) => m.TableviewerModule
       ),
+  },
+  {
+    path: "auth-callback", // Handle Auth0 redirect with errors here
+    component: AuthCallbackComponent,
   },
   {
     path: "**",
