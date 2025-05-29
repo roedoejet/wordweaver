@@ -3,6 +3,10 @@
     "common": {
       "language": "Dans la langue du conjugueur",
       "notifications": {
+        "auth": {
+          "login-failed": "Désolé, la connexion a échoué. Veuillez réessayer.",
+          "verification-required": "Veuillez vérifier votre adresse e-mail avant de continuer."
+        },
         "error": {
           "dev": "Désolé, un problème est survenu, prière de vérifier la console.",
           "general": "Oups, une erreur s'est produite."

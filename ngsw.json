@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1747959361950,
+  "timestamp": 1748556557634,
   "index": "/wordweaver/index.html",
   "assetGroups": [
     {
@@ -19,7 +19,7 @@
         "/wordweaver/common.4f1e8e2e97092549.js",
         "/wordweaver/favicon.ico",
         "/wordweaver/index.html",
-        "/wordweaver/main.f2d3bd2da5c125ff.js",
+        "/wordweaver/main.f1a5911a6e9f34e5.js",
         "/wordweaver/manifest.webmanifest",
         "/wordweaver/polyfills.c29b11413222dc4e.js",
         "/wordweaver/runtime.b515a3772cd0ff35.js",
@@ -98,8 +98,8 @@
     "/wordweaver/assets/data/fr/v1/pronouns.json.gz": "0b79acabb17990c90404b6728fde484299e557f5",
     "/wordweaver/assets/data/fr/v1/verbs.json": "de12dc6eff0959fab4f67465b51f7aeb04dc1bdb",
     "/wordweaver/assets/data/fr/v1/verbs.json.gz": "bd5035aaaba58f842a59abf6358e26d756b61724",
-    "/wordweaver/assets/i18n/en.json": "ae4532c324fd1e361391d1fab89d51e65652f496",
-    "/wordweaver/assets/i18n/fr.json": "3542c7437fb3b4e9495781a5d73fe3a8a61a5cc8",
+    "/wordweaver/assets/i18n/en.json": "d813893e4d2b8df0f4b7d72e4080fd0391a8a6fc",
+    "/wordweaver/assets/i18n/fr.json": "efe5eb015222d4f6f561aad42863e8cc60a6ff00",
     "/wordweaver/assets/i18n/readme.md": "da33894197bd255b6130b4522c20a548851891b5",
     "/wordweaver/assets/icons/android-chrome-512x512.png": "f8df654b6b6dce12ba37b2c70370c97b40cb628d",
     "/wordweaver/assets/icons/apple-icon-120.png": "d226aecab08f894bcfc6a94012764f1a82e0c4fe",
@@ -132,8 +132,8 @@
     "/wordweaver/assets/logo.svg": "36da0c3ab640822a03e396813ff976ad066c1bf2",
     "/wordweaver/common.4f1e8e2e97092549.js": "875fca1054a53037c7f4cc7f003be68db73e7537",
     "/wordweaver/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
-    "/wordweaver/index.html": "a676f55cfa0dd7578951d478e08e3cc4743ab1af",
-    "/wordweaver/main.f2d3bd2da5c125ff.js": "d02bec901e530fea70e52907f8d8bc0cfe0939de",
+    "/wordweaver/index.html": "7a7a51ce25a0fec8990d5e90e1c847930b158afa",
+    "/wordweaver/main.f1a5911a6e9f34e5.js": "9a49af51378b11b6a786563e1a0edb2e5b1ae523",
     "/wordweaver/manifest.webmanifest": "2e2ceff7d5713d23b6922cd5e0708db086522291",
     "/wordweaver/polyfills.c29b11413222dc4e.js": "8f2575d92954f5396f430edc6a67878c89fa2a2e",
     "/wordweaver/runtime.b515a3772cd0ff35.js": "49c5ed3a320ba08227843f06fc18658d68946e9d",
