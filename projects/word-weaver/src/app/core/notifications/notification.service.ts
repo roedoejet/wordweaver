@@ -75,7 +75,7 @@ export class NotificationService {
       ...this.config,
       ...{
         panelClass: "error-notification-overlay",
-        duration: 3000,
+        duration: 15000,
         verticalPosition: "bottom",
       },
     };
