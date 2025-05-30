@@ -8,12 +8,15 @@ import { Option } from "../../../config/config";
 import { selectSettingsState } from "../core.state";
 import { SettingsState } from "../settings/settings.model";
 import { environment } from "../../../environments/environment";
+import { DATA_MANIFEST } from "../../data-manifest";
 
 @Injectable({
   providedIn: "root",
 })
 export class OptionService {
-  path = environment.usePrecompressedData ? "options.json.gz" : "options.json";
+  path = environment.usePrecompressedData
+    ? DATA_MANIFEST["options"]
+    : "options.json";
   options;
   options$: Observable<Option[]>;
   optionsByType$: Observable<object[]>;

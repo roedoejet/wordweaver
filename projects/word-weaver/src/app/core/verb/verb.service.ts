@@ -8,13 +8,16 @@ import { Verb } from "../../../config/config";
 import { selectSettingsState } from "../core.state";
 import { SettingsState } from "../settings/settings.model";
 import { environment } from "../../../environments/environment";
+import { DATA_MANIFEST } from "../../data-manifest";
 
 @Injectable({
   providedIn: "root",
 })
 export class VerbService {
   verbs: Verb[];
-  path = environment.usePrecompressedData ? "verbs.json.gz" : "verbs.json";
+  path = environment.usePrecompressedData
+    ? DATA_MANIFEST["verbs"]
+    : "verbs.json";
   verbs$: Observable<Verb[]>;
   random$: Observable<Verb>;
   suppressError = true;

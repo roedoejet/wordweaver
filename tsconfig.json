@@ -13,8 +13,10 @@
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "importHelpers": true,
-    "module": "es2020",
-    "target": "es2020",
+    "module": "ESNext",
+    "target": "ES2020",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
     "typeRoots": ["node_modules/@types"],
     "lib": ["es2018", "dom"]
   },

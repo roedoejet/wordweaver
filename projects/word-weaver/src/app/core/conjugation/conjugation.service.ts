@@ -17,6 +17,7 @@ import { SettingsState } from "../settings/settings.model";
 import { TableviewerState } from "../tableviewer-selection/tableviewer-selection.model";
 import { WordmakerState } from "../wordmaker-selection/wordmaker-selection.model";
 import { environment } from "../../../environments/environment";
+import { DATA_MANIFEST } from "../../data-manifest";
 
 @Injectable({
   providedIn: "root",
@@ -26,7 +27,7 @@ export class ConjugationService {
   conjugations$: Observable<Conjugations>;
   random$: Observable<ConjugationObject>;
   path = environment.usePrecompressedData
-    ? "conjugations.json.gz"
+    ? DATA_MANIFEST["conjugations"]
     : "conjugations.json";
   suppressError = true;
   constructor(private http: HttpClient, private store: Store) {

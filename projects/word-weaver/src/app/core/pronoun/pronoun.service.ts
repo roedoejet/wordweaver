@@ -8,13 +8,14 @@ import { Pronoun } from "../../../config/config";
 import { selectSettingsState } from "../core.state";
 import { SettingsState } from "../settings/settings.model";
 import { environment } from "../../../environments/environment";
+import { DATA_MANIFEST } from "../../data-manifest";
 
 @Injectable({
   providedIn: "root",
 })
 export class PronounService {
   path = environment.usePrecompressedData
-    ? "pronouns.json.gz"
+    ? DATA_MANIFEST["pronouns"]
     : "pronouns.json";
   pronouns: Pronoun[];
   pronouns$: Observable<Pronoun[]>;

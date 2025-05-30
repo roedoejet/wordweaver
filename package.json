@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "WordWeaver",
   "homepage": "https://github.com/roedoejet/wordweaver",
+  "type": "module",
   "author": {
     "name": "Aidan Pine",
     "email": "aidan.pine@nrc-cnrc.gc.ca"
@@ -21,7 +22,9 @@
   "private": true,
   "scripts": {
     "ng": "ng",
+    "prestart": "ts-node ./scripts/hash-assets.ts",
     "start": "ng serve --open",
+    "prebuild": "ts-node ./scripts/hash-assets.ts",
     "build": "ng build every-voice && ng build",
     "build-ev": "ng build every-voice",
     "build-toy": "ng build --outputPath ./dist_toy",
