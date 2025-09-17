@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1748556557634,
+  "timestamp": 1758144572972,
   "index": "/wordweaver/index.html",
   "assetGroups": [
     {
@@ -132,7 +132,7 @@
     "/wordweaver/assets/logo.svg": "36da0c3ab640822a03e396813ff976ad066c1bf2",
     "/wordweaver/common.4f1e8e2e97092549.js": "875fca1054a53037c7f4cc7f003be68db73e7537",
     "/wordweaver/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
-    "/wordweaver/index.html": "7a7a51ce25a0fec8990d5e90e1c847930b158afa",
+    "/wordweaver/index.html": "497787b9cfa91a93a71464394cbaf72e9166ea13",
     "/wordweaver/main.f1a5911a6e9f34e5.js": "9a49af51378b11b6a786563e1a0edb2e5b1ae523",
     "/wordweaver/manifest.webmanifest": "2e2ceff7d5713d23b6922cd5e0708db086522291",
     "/wordweaver/polyfills.c29b11413222dc4e.js": "8f2575d92954f5396f430edc6a67878c89fa2a2e",
