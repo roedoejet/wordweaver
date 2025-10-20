@@ -98,7 +98,7 @@
     "@ngrx/store-devtools": "^14.3.3",
     "@ngx-translate/core": "12.0.0",
     "@ngx-translate/http-loader": "4.0.0",
-    "@playwright/test": "^1.39.0",
+    "@playwright/test": "^1.56.1",
     "@types/echarts": "^4.4.4",
     "@types/file-saver-es": "^2.0.1",
     "@types/jasmine": "3.3.16",
