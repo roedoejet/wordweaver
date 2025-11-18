@@ -238,10 +238,11 @@ export class TableviewerConjPanelComponent
         return this.translate.instant("ww-data.options.items." + rowOrCol);
       } else if (gridState.gridOrder[dataType] === "pn") {
         if (rowOrCol.indexOf("→") > -1) {
+          const pns = rowOrCol.split("→");
           return (
-            this.translate.instant("ww-data.pronouns.agents." + rowOrCol) +
+            this.translate.instant("ww-data.pronouns.agents." + pns[0].trim()) +
             " → " +
-            this.translate.instant("ww-data.pronouns.patients." + rowOrCol)
+            this.translate.instant("ww-data.pronouns.patients." + pns[1].trim())
           );
         } else {
           return this.translate.instant("ww-data.pronouns.agents." + rowOrCol);
