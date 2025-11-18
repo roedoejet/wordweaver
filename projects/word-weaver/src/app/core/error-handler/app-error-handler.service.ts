@@ -19,7 +19,9 @@ export class AppErrorHandler extends ErrorHandler {
   handleError(error: Error | HttpErrorResponse) {
     let displayMessage;
 
-    if (!environment.production) {
+    if ((error as any).__customMessage__) {
+      displayMessage = marker((error as any).__customMessage__);
+    } else if (!environment.production) {
       displayMessage = marker("ww.common.notifications.error.dev");
     } else {
       displayMessage = marker("ww.common.notifications.error.general");
