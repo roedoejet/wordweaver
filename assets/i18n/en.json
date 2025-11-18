@@ -9,7 +9,8 @@
         },
         "error": {
           "dev": "Hm, something went wrong, please check the console.",
-          "general": "Whoops, an error occured."
+          "general": "Whoops, an error occured.",
+          "ttsUnavailable": "Sorry, the text-to-speech service is sleeping. We'll wake it up, please try again in 3 to 4 minutes."
         }
       },
       "title": "WordWeaver UI",

@@ -9,7 +9,8 @@
         },
         "error": {
           "dev": "Désolé, un problème est survenu, prière de vérifier la console.",
-          "general": "Oups, une erreur s'est produite."
+          "general": "Oups, une erreur s'est produite.",
+          "ttsUnavailable": "Désolé, le service de synthèse vocale est actuellement indisponible. Il sera bientôt de nouveau opérationnel. Veuillez réessayer dans 3 à 4 minutes."
         }
       },
       "title": "WordWeaver UI",
