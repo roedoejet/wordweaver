@@ -12,9 +12,23 @@ dotenv.config();
 
 const app = express();
 
+const permittedOrigins = (process.env.PERMITTED_ORIGINS || "")
+  .split(",")
+  .map((o) => o.trim())
+  .filter(Boolean);
+
 app.use(
   cors({
-    origin: process.env.PERMITTED_ORIGIN, // should only allow localhost in dev, not in production
+    origin: function (origin, callback) {
+      // no origin = same-origin or curl → allow
+      if (!origin) return callback(null, true);
+
+      if (permittedOrigins.includes(origin)) {
+        return callback(null, true);
+      } else {
+        return callback(new Error("Not allowed by CORS"));
+      }
+    }, // should only allow localhost in dev, not in production
     methods: ["POST", "GET"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
@@ -25,15 +39,17 @@ app.use((req, res, next) => {
   const origin = req.get("Origin") || "";
   const referer = req.get("Referer") || "";
 
-  const allowedOrigin = process.env.PERMITTED_ORIGIN;
-
-  if (
-    origin &&
-    origin !== allowedOrigin &&
-    referer &&
-    !referer.startsWith(allowedOrigin)
-  ) {
+  // Check origin
+  if (origin && !permittedOrigins.includes(origin)) {
     return res.status(403).json({ error: "Forbidden: Invalid origin" });
+  }
+
+  // Check referer starts with one of the allowed origins
+  if (referer) {
+    const refererAllowed = permittedOrigins.some((o) => referer.startsWith(o));
+    if (!refererAllowed) {
+      return res.status(403).json({ error: "Forbidden: Invalid referer" });
+    }
   }
 
   next();
