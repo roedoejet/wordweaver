@@ -158,7 +158,7 @@ export class ConjugationTreeComponent implements OnDestroy, OnInit {
       const isLeaf = !nodeData.children || nodeData.children.length === 0;
 
       if (isLeaf) {
-        this.tts.playSound$(nodeData.name).subscribe({
+        this.tts.playSound$(nodeData.name, nodeData.name).subscribe({
           complete: () => console.log("Playback completed"),
           error: (err) => console.error("Playback error:", err),
         });

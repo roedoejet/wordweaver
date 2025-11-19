@@ -5,6 +5,7 @@ import {
   Input,
   Renderer2,
   OnDestroy,
+  OnInit,
   AfterViewInit,
 } from "@angular/core";
 import { EveryVoiceService } from "./every-voice.service";
@@ -14,10 +15,11 @@ import { takeUntil } from "rxjs/operators";
 @Directive({
   selector: "[libEveryVoice]",
 })
-export class EveryVoiceDirective implements AfterViewInit, OnDestroy {
+export class EveryVoiceDirective implements AfterViewInit, OnDestroy, OnInit {
   @Input("libEveryVoice") text!: string;
 
   unsubscribe$ = new Subject<void>();
+  audioId: string;
   constructor(
     private tts: EveryVoiceService,
     private el: ElementRef,
@@ -27,11 +29,15 @@ export class EveryVoiceDirective implements AfterViewInit, OnDestroy {
   @HostListener("click")
   onClick() {
     if (this.tts.ttsEnabledAndAuthenticated$.value && this.text) {
-      this.tts.playSound$(this.text).subscribe({
+      this.tts.playSound$(this.audioId, this.text).subscribe({
         complete: () => console.log("Playback completed"),
         error: (err) => console.error("Playback error:", err),
       });
     }
+  }
+
+  ngOnInit(): void {
+    this.audioId = crypto.randomUUID();
   }
 
   ngOnDestroy(): void {

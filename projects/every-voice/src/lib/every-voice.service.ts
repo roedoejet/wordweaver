@@ -20,7 +20,7 @@ import { AuthService } from "@auth0/auth0-angular";
 
 @Injectable()
 export class EveryVoiceService {
-  public status$: Subject<EveryVoiceServiceStatus>;
+  public status$: Subject<{ id: string; status: EveryVoiceServiceStatus }>;
   public ttsEnabledAndAuthenticated$ = new BehaviorSubject<boolean>(false);
   public loading$ = new BehaviorSubject<boolean>(false);
   public speakers$ = new BehaviorSubject<string[]>([]);
@@ -33,14 +33,18 @@ export class EveryVoiceService {
   private abortController: any | undefined;
   private audioPlayer: HTMLAudioElement | undefined;
   private middlewareEndpoint: string;
+  private activeUtteranceId: string | null = null;
 
   constructor(
     @Optional() @Inject(EVERY_VOICE_CONFIG) config: EveryVoiceConfig,
     @Optional() @Inject(AUTH0_INSTANCE) private authService: AuthService,
     private http: HttpClient
   ) {
-    this.status$ = new Subject<EveryVoiceServiceStatus>();
-    this.status$.next("INITIALIZED");
+    this.status$ = new Subject<{
+      id: string;
+      status: EveryVoiceServiceStatus;
+    }>();
+    this.status$.next({ id: "all", status: "INITIALIZED" });
     this.apiUrl = config?.apiUrl;
     this.middlewareEndpoint = config?.middlewareEndpoint;
     this.enableTTS =
@@ -79,7 +83,7 @@ export class EveryVoiceService {
       )
       .subscribe();
     console.log("[DEBUG] initialized EveryVoiceService with config:", config);
-    this.status$.next("READY");
+    this.status$.next({ id: "all", status: "READY" });
   }
 
   generateSessionHash(length: number = 32): string {
@@ -97,8 +101,11 @@ export class EveryVoiceService {
     console.error("Error:", error);
   }
 
-  generateAudioAndReturnURL$(text: string): Observable<string> {
-    this.status$.next("GENERATING");
+  generateAudioAndReturnURL$(
+    audioId: string,
+    text: string
+  ): Observable<string> {
+    this.status$.next({ id: audioId, status: "GENERATING" });
 
     const sessionHash = this.generateSessionHash();
     // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -146,7 +153,7 @@ export class EveryVoiceService {
     ).pipe(
       switchMap((response) => {
         if (!response.ok) {
-          this.status$.next("ERROR");
+          this.status$.next({ id: audioId, status: "ERROR" });
           return throwError(
             () => new Error("Error submitting audio generation request")
           );
@@ -158,7 +165,7 @@ export class EveryVoiceService {
       }),
       switchMap((json) => {
         if (!json?.event_id?.length) {
-          this.status$.next("ERROR");
+          this.status$.next({ id: audioId, status: "ERROR" });
           return throwError(() => new Error("Missing event_id in response"));
         }
         return from(
@@ -176,7 +183,7 @@ export class EveryVoiceService {
       }),
       switchMap((audioResponse) => {
         if (!audioResponse.ok) {
-          this.status$.next("ERROR");
+          this.status$.next({ id: audioId, status: "ERROR" });
           return throwError(
             () => new Error("Error getting audio generated URL")
           );
@@ -195,51 +202,63 @@ export class EveryVoiceService {
             return url;
           }
         }
-        this.status$.next("ERROR");
+        this.status$.next({ id: this.activeUtteranceId, status: "ERROR" });
         throw new Error("Audio URL not found in response");
       }),
       tap((url) => {
         console.log("[DEBUG] Final Audio URL:", url);
       }),
       catchError((err) => {
-        this.status$.next("ERROR");
+        this.status$.next({ id: this.activeUtteranceId, status: "ERROR" });
         return throwError(() => err);
       })
     );
   }
 
-  playAudioFromURL$(audioURL: string): Observable<void> {
-    this.status$.next("LOADING");
+  playAudioFromURL$(audioId: string, audioURL: string): Observable<void> {
+    this.status$.next({ id: audioId, status: "LOADING" });
     this.audioPlayer = new Audio(audioURL);
     return new Observable<void>((observer) => {
       this.audioPlayer.onplaying = () => {
+        if (this.activeUtteranceId !== audioId) {
+          return;
+        }
         console.log("[DEBUG] Audio is playing");
-        this.status$.next("PLAYING");
+        this.status$.next({ id: audioId, status: "PLAYING" });
       };
 
       this.audioPlayer.onerror = (event) => {
+        if (this.activeUtteranceId !== audioId) {
+          return;
+        }
         console.error("Error playing audio:", event);
-        this.status$.next("ERROR");
+        this.status$.next({ id: audioId, status: "ERROR" });
         observer.error(event);
       };
 
       this.audioPlayer.onabort = () => {
+        if (this.activeUtteranceId !== audioId) {
+          return;
+        }
         console.log("[DEBUG] Audio playback aborted");
-        this.status$.next("STOPPED");
+        this.status$.next({ id: audioId, status: "STOPPED" });
         this.abortController.abort();
         observer.error(new Error("Audio playback aborted"));
       };
 
       this.audioPlayer.onended = () => {
+        if (this.activeUtteranceId !== audioId) {
+          return;
+        }
         console.log("[DEBUG] Audio playback ended");
-        this.status$.next("READY");
+        this.status$.next({ id: audioId, status: "READY" });
         observer.next();
         observer.complete();
       };
 
       this.audioPlayer.play().catch((error) => {
         console.error("Error playing audio:", error);
-        this.status$.next("ERROR");
+        this.status$.next({ id: audioId, status: "ERROR" });
         observer.error(error);
       });
 
@@ -251,7 +270,8 @@ export class EveryVoiceService {
     });
   }
 
-  playSound$(text: string): Observable<void> {
+  playSound$(audioId: string, text: string): Observable<void> {
+    this.activeUtteranceId = audioId;
     if (!this.ttsEnabledAndAuthenticated$.value || !text) {
       return throwError(
         () =>
@@ -277,25 +297,25 @@ export class EveryVoiceService {
 
     if (!this.apiUrl && !this.middlewareEndpoint) {
       // Default Browser TTS
-      return this.playSoundWithDefaultTTS$(text).pipe(
+      return this.playSoundWithDefaultTTS$(audioId, text).pipe(
         catchError((error) => {
-          this.status$.next("ERROR");
+          this.status$.next({ id: audioId, status: "ERROR" });
           return throwError(() => error);
         })
       );
     } else if (this.apiUrl && !this.middlewareEndpoint) {
       // Call HF directly
-      return this.generateAudioAndReturnURL$(text).pipe(
+      return this.generateAudioAndReturnURL$(audioId, text).pipe(
         switchMap((audioURL) => {
           if (!audioURL) {
             return throwError(
               () => new Error("Audio URL not found in response")
             );
           }
-          return this.playAudioFromURL$(audioURL);
+          return this.playAudioFromURL$(audioId, audioURL);
         }),
         catchError((error) => {
-          this.status$.next("ERROR");
+          this.status$.next({ id: audioId, status: "ERROR" });
           return throwError(() => error);
         })
       );
@@ -304,21 +324,22 @@ export class EveryVoiceService {
 
       console.log("calling middleware");
       // @ts-ignore
-      return this.playSoundWithTTSMiddleware$(text).pipe(
+      return this.playSoundWithTTSMiddleware$(audioId, text).pipe(
         map((test) => {
           console.log(test);
           return test;
         }),
         catchError((error) => {
-          this.status$.next("ERROR");
+          this.status$.next({ id: audioId, status: "ERROR" });
           return throwError(() => error);
         })
       );
     }
   }
 
-  playSoundWithDefaultTTS$(text: string): Observable<void> {
+  playSoundWithDefaultTTS$(audioId, text: string): Observable<void> {
     if (!this.ttsEnabledAndAuthenticated$.value) {
+      this.status$.next({ id: audioId, status: "ERROR" });
       return throwError(() => new Error("Text-to-Speech is disabled"));
     }
 
@@ -328,14 +349,23 @@ export class EveryVoiceService {
       const utterance = new SpeechSynthesisUtterance(text);
 
       utterance.onend = () => {
+        if (this.activeUtteranceId !== audioId) {
+          return;
+        }
+        this.status$.next({ id: audioId, status: "STOPPED" });
+        this.status$.next({ id: audioId, status: "READY" });
         observer.next();
         observer.complete();
       };
 
       utterance.onerror = (event) => {
+        if (this.activeUtteranceId !== audioId) {
+          return;
+        }
         observer.error(event.error);
+        this.status$.next({ id: audioId, status: "ERROR" });
       };
-
+      this.status$.next({ id: audioId, status: "PLAYING" });
       window.speechSynthesis.speak(utterance);
 
       // Cleanup logic if the observable is unsubscribed
@@ -345,7 +375,11 @@ export class EveryVoiceService {
     });
   }
 
-  sendTextToTTSMiddleware$(text: string, token: string): Observable<void> {
+  sendTextToTTSMiddleware$(
+    audioId: string,
+    text: string,
+    token: string
+  ): Observable<void> {
     this.loading$.next(true);
     const headers = new HttpHeaders({
       // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -395,10 +429,10 @@ export class EveryVoiceService {
           const url = URL.createObjectURL(blob);
           console.log(blob);
           console.log(url);
-          return this.playAudioFromURL$(url);
+          return this.playAudioFromURL$(audioId, url);
         }),
         catchError((error) => {
-          this.status$.next("ERROR");
+          this.status$.next({ id: audioId, status: "ERROR" });
           return throwError(() => error);
         }),
         finalize(() => {
@@ -407,11 +441,11 @@ export class EveryVoiceService {
       );
   }
 
-  playSoundWithTTSMiddleware$(text): Observable<void> {
+  playSoundWithTTSMiddleware$(audioId, text): Observable<void> {
     this.loading$.next(true);
     console.log("calling playSoundWithTTSMiddleware");
     return this.authService.getAccessTokenSilently().pipe(
-      switchMap((token) => this.sendTextToTTSMiddleware$(text, token)) // pass token to the next step
+      switchMap((token) => this.sendTextToTTSMiddleware$(audioId, text, token)) // pass token to the next step
     );
   }
 
@@ -446,7 +480,10 @@ export class EveryVoiceService {
               }),
               catchError((error) => {
                 console.log("[ERROR] middleware tts info", error);
-                this.status$.next("ERROR");
+                this.status$.next({
+                  id: this.activeUtteranceId,
+                  status: "ERROR",
+                });
                 return throwError(() => error);
               })
             );
@@ -468,7 +505,7 @@ export class EveryVoiceService {
       ).pipe(
         switchMap(async (response) => {
           if (!response.ok) {
-            this.status$.next("ERROR");
+            this.status$.next({ id: this.activeUtteranceId, status: "ERROR" });
             console.log("[ERROR] fetching API tts info", response.body);
             throw new Error("Failed to fetch API tts info");
           }
@@ -507,7 +544,7 @@ export class EveryVoiceService {
         }),
         map((options) => options as EveryVoiceServiceMiddlewareInfoResponse),
         catchError((error) => {
-          this.status$.next("ERROR");
+          this.status$.next({ id: this.activeUtteranceId, status: "ERROR" });
           console.log("[ERROR] getting API tts info", error);
           return throwError(() => error);
         })
@@ -516,18 +553,10 @@ export class EveryVoiceService {
   }
 
   stop() {
-    this.status$.next("STOPPED");
+    this.status$.next({ id: this.activeUtteranceId, status: "STOPPED" });
     this.abortController?.abort();
     this.audioPlayer?.pause();
     this.audioPlayer = undefined;
-    this.status$.next("READY");
-  }
-  pause() {
-    this.audioPlayer?.pause();
-    this.status$.next("PAUSED");
-  }
-  resume() {
-    this.audioPlayer?.play();
-    this.status$.next("PLAYING");
+    this.status$.next({ id: this.activeUtteranceId, status: "READY" });
   }
 }
