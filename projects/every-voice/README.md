@@ -75,7 +75,7 @@ If you want the TTS service to only be accessible by authenticated users, you ne
 
 4. Add Allowed URLs
    In the app settings, configure:
-   - Allowed Callback URLs – e.g., https://<your_web_application>
+   - Allowed Callback URLs – e.g., https://<your_web_application>,https://<your_web_application>/auth-callback 👈 NOTE you also need to add an /auth-callback path here.
    - Allowed Logout URLs – e.g., https://<your_web_application>
    - Allowed Web Origins – e.g., https://<your_web_application>
 
